@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'leaflet/dist/leaflet.css';
+
+@layer base {
+  :root {
+    --vigil-ink: #0f172a;
+    --vigil-blue: #2563eb;
+    --vigil-blue-light: #eff6ff;
+    --vigil-cloud: #f8fafc;
+    --vigil-muted: #94a3b8;
+    --status-missing: #dc2626;
+    --status-missing-bg: #fef2f2;
+    --status-alive: #16a34a;
+    --status-alive-bg: #f0fdf4;
+    --status-deceased: #475569;
+    --status-deceased-bg: #f1f5f9;
+    --status-unverified: #d97706;
+    --status-unverified-bg: #fffbeb;
+    --seismic-minor: #22c55e;
+    --seismic-light: #f59e0b;
+    --seismic-moderate: #f97316;
+    --seismic-strong: #ef4444;
+    --seismic-major: #7c3aed;
+  }
+
+  .dark {
+    --vigil-ink: #f1f5f9;
+    --vigil-cloud: #111827;
+    --vigil-muted: #9ca3af;
+    background-color: #0a0f1e;
+    color: #f1f5f9;
+  }
+
+  body {
+    @apply bg-vigil-cloud text-slate-700 antialiased;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.status-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.status-pulse-ring-delayed {
+  animation: pulse-ring 2s ease-out 0.6s infinite;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--vigil-cloud) 25%, #e2e8f0 50%, var(--vigil-cloud) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-pulse-ring,
+  .status-pulse-ring-delayed {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .skeleton {
+    animation: none;
+  }
+}

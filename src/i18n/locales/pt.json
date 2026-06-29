@@ -1,0 +1,228 @@
+﻿{
+    "nav":  {
+                "search":  "Search Missing Persons",
+                "report":  "Report Missing Person",
+                "needHelp":  "I Need Help",
+                "volunteers":  "Volunteers",
+                "organizations":  "Organizations",
+                "donate":  "Donate",
+                "news":  "Official Updates",
+                "map":  "Crisis Map",
+                "privacy":  "Privacy Policy",
+                "terms":  "Terms of Use"
+            },
+    "banner":  {
+                   "emergency":  "Emergency:",
+                   "hotline":  "0800-RESCATE",
+                   "hotlineNumber":  "0800-7372282",
+                   "officialApp":  "VenApp",
+                   "interpreters":  "Interpreters"
+               },
+    "missing":  {
+                    "title":  "Missing Persons",
+                    "subtitle":  "Search or report a missing person",
+                    "search":  {
+                                   "placeholder":  "Search by name...",
+                                   "button":  "Search",
+                                   "noResults":  "No results found. Try a different name.",
+                                   "loading":  "Searching...",
+                                   "resultsCount":  "{{count}} results found"
+                               },
+                    "status":  {
+                                   "missing":  "Missing",
+                                   "found_alive":  "Found â€” Alive",
+                                   "found_deceased":  "Found â€” Deceased",
+                                   "unverified":  "Unverified"
+                               },
+                    "form":  {
+                                 "title":  "Report a Missing Person",
+                                 "name":  "Full Name",
+                                 "namePlaceholder":  "First and last name",
+                                 "age":  "Age",
+                                 "gender":  "Gender",
+                                 "genderOptions":  {
+                                                       "male":  "Male",
+                                                       "female":  "Female",
+                                                       "other":  "Other",
+                                                       "unknown":  "Unknown"
+                                                   },
+                                 "photo":  "Photo (recommended)",
+                                 "photoHelp":  "Clear photo helps identification. Max 5MB.",
+                                 "lastSeen":  "Last Known Location",
+                                 "lastSeenPlaceholder":  "City, neighborhood, address...",
+                                 "lastSeenDate":  "Date Last Seen",
+                                 "notes":  "Additional Details",
+                                 "notesPlaceholder":  "Clothing, physical description, identifiers...",
+                                 "contactName":  "Your Name (Reporter)",
+                                 "contactPhone":  "Your Phone",
+                                 "contactWhatsApp":  "Your WhatsApp",
+                                 "contactPrivacyNote":  "Your contact info is NEVER shown publicly. All contact routed through Vigil.",
+                                 "consent":  "I consent to Vigil storing this information to help locate this person",
+                                 "accuracy":  "I confirm this information is accurate to the best of my knowledge",
+                                 "submit":  "Submit Report",
+                                 "submitting":  "Submitting...",
+                                 "success":  "Report submitted. You will be notified if there is a match.",
+                                 "error":  "Submission failed. Please try again."
+                             },
+                    "card":  {
+                                 "lastSeen":  "Last seen:",
+                                 "reportedBy":  "Reported via:",
+                                 "verified":  "Verified",
+                                 "unverified":  "Unverified",
+                                 "contact":  "Request Contact",
+                                 "flag":  "Flag as incorrect",
+                                 "markFound":  "Mark as Found",
+                                 "daysAgo":  "{{count}} days ago",
+                                 "hoursAgo":  "{{count}} hours ago",
+                                 "justNow":  "Just now"
+                             }
+                },
+    "map":  {
+                "title":  "Crisis Map",
+                "layers":  {
+                               "aftershocks":  "Aftershocks (USGS)",
+                               "needs":  "Needs",
+                               "resources":  "Resources Available",
+                               "shelters":  "Shelters",
+                               "hospitals":  "Hospitals",
+                               "rescueZones":  "Rescue Zones",
+                               "collection":  "Collection Points"
+                           },
+                "magnitude":  "Magnitude",
+                "depth":  "Depth",
+                "addMarker":  "Add to Map",
+                "markerTypes":  {
+                                    "need":  "I Need Help Here",
+                                    "resource":  "Resource Available",
+                                    "shelter":  "Shelter",
+                                    "hospital":  "Medical Attention",
+                                    "danger":  "Danger Zone",
+                                    "rescue_zone":  "Active Rescue Zone",
+                                    "collection_point":  "Collection Point"
+                                },
+                "categories":  {
+                                   "food":  "Food",
+                                   "water":  "Water",
+                                   "medical":  "Medical",
+                                   "rescue":  "Rescue",
+                                   "shelter":  "Shelter",
+                                   "clothing":  "Clothing",
+                                   "comms":  "Communications",
+                                   "power":  "Power/Generator",
+                                   "transport":  "Transportation",
+                                   "other":  "Other"
+                               },
+                "urgent":  "URGENT",
+                "verified":  "Verified",
+                "lastUpdate":  "Last updated: {{time}}"
+            },
+    "volunteers":  {
+                       "title":  "Volunteer Registration",
+                       "subtitle":  "Register your skills to be matched with organizations",
+                       "skills":  {
+                                      "medical":  "Medical / First Aid",
+                                      "rescue":  "Search \u0026 Rescue",
+                                      "logistics":  "Logistics",
+                                      "translation":  "Translation / Interpretation",
+                                      "tech":  "Technology",
+                                      "construction":  "Construction / Engineering",
+                                      "drone":  "Drone Operation",
+                                      "legal":  "Legal Aid",
+                                      "psych":  "Psychological Support",
+                                      "communications":  "Communications / Media"
+                                  },
+                       "availability":  {
+                                            "immediate":  "Available Immediately (On-Site)",
+                                            "this_week":  "Available This Week",
+                                            "remote_only":  "Remote Only",
+                                            "on_request":  "On Request"
+                                        },
+                       "form":  {
+                                    "name":  "Full Name",
+                                    "skills":  "Your Skills (select all that apply)",
+                                    "languages":  "Languages Spoken",
+                                    "location":  "Your Current Location",
+                                    "availability":  "Availability",
+                                    "phone":  "Phone",
+                                    "whatsapp":  "WhatsApp",
+                                    "email":  "Email",
+                                    "privacyNote":  "Contact info shared only with matched organizations, never publicly.",
+                                    "submit":  "Register as Volunteer",
+                                    "success":  "Thank you. You will be contacted when matched.",
+                                    "error":  "Registration failed. Please try again."
+                                }
+                   },
+    "organizations":  {
+                          "title":  "Organizations \u0026 Teams",
+                          "subtitle":  "Verified organizations responding to the crisis",
+                          "types":  {
+                                        "rescue":  "Search \u0026 Rescue",
+                                        "medical":  "Medical",
+                                        "food":  "Food \u0026 Water",
+                                        "shelter":  "Shelter",
+                                        "translation":  "Translation",
+                                        "tech":  "Technology",
+                                        "government":  "Government",
+                                        "diaspora":  "Diaspora Group",
+                                        "donation":  "Donations",
+                                        "legal":  "Legal Aid"
+                                    },
+                          "donate":  "Donate",
+                          "website":  "Website",
+                          "contact":  "Contact",
+                          "verified":  "Verified Organization",
+                          "register":  "Register Your Organization",
+                          "registerNote":  "Organizations require manual verification before appearing publicly. Allow 24-48 hours."
+                      },
+    "donate":  {
+                   "title":  "How to Help",
+                   "note":  "Vigil does not process donations directly. All links go to verified organizations.",
+                   "international":  "International Transfers",
+                   "local":  "Local Venezuela Support",
+                   "goods":  "Donate Goods",
+                   "time":  "Donate Your Time"
+               },
+    "news":  {
+                 "title":  "Official Updates",
+                 "subtitle":  "Verified information from OCHA, ReliefWeb, UNICEF and official sources",
+                 "source":  "Source:",
+                 "readMore":  "Read full report",
+                 "lastUpdated":  "Last updated: {{time}}",
+                 "disclaimer":  "All content from official humanitarian sources. Vigil does not edit these reports."
+             },
+    "common":  {
+                   "loading":  "Loading...",
+                   "error":  "An error occurred. Please try again.",
+                   "retry":  "Retry",
+                   "close":  "Close",
+                   "back":  "Back",
+                   "save":  "Save",
+                   "cancel":  "Cancel",
+                   "confirm":  "Confirm",
+                   "yes":  "Yes",
+                   "no":  "No",
+                   "required":  "Required",
+                   "optional":  "Optional",
+                   "share":  "Share",
+                   "copyLink":  "Copy Link",
+                   "linkCopied":  "Link copied",
+                   "flag":  "Flag as incorrect",
+                   "flagReason":  "Why are you flagging this?",
+                   "flagSubmit":  "Submit Flag",
+                   "flagSuccess":  "Thank you. Our team will review this.",
+                   "notFound":  "Not found",
+                   "noData":  "No data available",
+                   "poweredBy":  "Vigil â€” Open source humanitarian platform",
+                   "language":  "Language"
+               },
+    "privacy":  {
+                    "shortNotice":  "Your contact info is never shown publicly. We do not share data with the Venezuelan government.",
+                    "learnMore":  "Privacy Policy"
+                },
+    "footer":  {
+                   "madeFor":  "Built for the people of Venezuela",
+                   "openSource":  "Open source â€” MIT License",
+                   "notEmergency":  "Vigil is NOT an emergency service. For immediate rescue call: {{hotline}}"
+               },
+    "_machineTranslationPending":  true
+}

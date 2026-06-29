@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Allow: /buscar
+Allow: /reportar
+Allow: /necesito-ayuda
+Allow: /voluntarios
+Allow: /organizaciones
+Allow: /donaciones
+Allow: /noticias
+Allow: /privacidad
+Allow: /terminos
+
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: Googlebot
+Allow: /api/pfif
+
+Sitemap: https://vigil.youtheway.org/sitemap.xml
