@@ -13,6 +13,7 @@
     "info": "Informazioni",
     "activeTeam": "Squadra Attiva",
     "calendar": "Calendario",
+    "wall": "Muro",
     "collectionPoint": "Punto di Raccolta",
     "privacy": "Informativa sulla Privacy",
     "terms": "Termini di Utilizzo",
@@ -41,8 +42,7 @@
   "banner": {
     "emergency": "Emergenza:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
-    "interpreters": "Interpreti"
+    "hotlineNumber": "0800-7372282"
   },
   "missing": {
     "title": "Persone Scomparse",
@@ -273,6 +273,11 @@
   "news": {
     "title": "Aggiornamenti Ufficiali",
     "subtitle": "Informazioni verificate da OCHA, ReliefWeb, UNICEF e fonti ufficiali",
+    "officialTier": "Fonti ufficiali (verificate)",
+    "officialTierNote": "ReliefWeb, OCHA, GDACS e agenzie umanitarie",
+    "rssTier": "Stampa venezuelana (non verificata)",
+    "rssDisclaimer": "Queste notizie provengono da media indipendenti. Vigil non ne verifica il contenuto.",
+    "rssEmpty": "Nessuna notizia disponibile al momento.",
     "source": "Fonte:",
     "readMore": "Leggi il rapporto completo",
     "lastUpdated": "Ultimo aggiornamento: {{time}}",
@@ -462,6 +467,14 @@
     "subtitle": "Aggiornamento automatico ogni 5 minuti",
     "manualStats": "Verificato manualmente — ultimo controllo: {{date}}",
     "officialUpdates": "Aggiornamenti ufficiali (ReliefWeb)",
+    "gdacs": {
+      "title": "Avvisi GDACS (ONU/UE)",
+      "subtitle": "Sistema globale di allerta e coordinamento dei disastri — verifica indipendente",
+      "empty": "Nessun avviso GDACS attivo per il Venezuela."
+    },
+    "rssTier": "Stampa venezuelana (non verificata)",
+    "rssDisclaimer": "Queste notizie provengono da media indipendenti. Vigil non ne verifica il contenuto.",
+    "rssEmpty": "Nessuna notizia disponibile al momento.",
     "noReports": "Nessun rapporto disponibile al momento.",
     "infraLive": "Aggiornamenti in tempo reale da Supabase",
     "infraEmpty": "Nessun dato di infrastruttura. L'amministratore può aggiornare in Supabase Studio.",
@@ -653,6 +666,30 @@
       "submitting": "Registrazione in corso...",
       "success": "Punto di raccolta registrato.",
       "error": "Registrazione non riuscita."
+    }
+  },
+  "wall": {
+    "title": "Muro comunitario",
+    "subtitle": "Messaggi pubblici della comunità — niente chat né risposte",
+    "unverifiedNote": "Tutti i messaggi sono non verificati fino alla revisione.",
+    "writeMessage": "Scrivi un messaggio",
+    "empty": "Nessun messaggio ancora. Sii il primo a pubblicare.",
+    "categories": {
+      "general": "Generale",
+      "aviso": "Avviso",
+      "solidaridad": "Solidarietà",
+      "pregunta": "Domanda"
+    },
+    "form": {
+      "authorName": "Il tuo nome",
+      "category": "Categoria",
+      "message": "Messaggio",
+      "charLimit": "{count}/300 caratteri",
+      "location": "Luogo",
+      "locationPlaceholder": "Es. Caracas, La Guaira",
+      "submit": "Pubblica messaggio",
+      "success": "Messaggio pubblicato.",
+      "error": "Pubblicazione non riuscita. Riprova."
     }
   }
 }

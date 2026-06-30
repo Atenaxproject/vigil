@@ -24,10 +24,30 @@ interface OfficialReport {
   source: string
 }
 
+interface GDACSEvent {
+  title: string
+  alertLevel: string
+  eventType: string
+  date: string
+  url: string
+  lat: number | null
+  lng: number | null
+  severity: number | null
+}
+
+interface RssNewsItem {
+  source: string
+  title: string
+  link: string
+  pubDate: string
+  contentSnippet: string
+}
+
 interface LiveInfoResponse {
   lastUpdated: string
   recentSignificantQuakes: LiveQuake[]
   officialReports: OfficialReport[]
+  gdacsEvents?: GDACSEvent[]
 }
 
 const STATS_VERIFIED_DATE = '2026-06-29'
@@ -36,6 +56,7 @@ export function InformacionLive() {
   const t = useTranslations('liveInfo')
   const tc = useTranslations('crisisInfo')
   const [liveData, setLiveData] = useState<LiveInfoResponse | null>(null)
+  const [rssItems, setRssItems] = useState<RssNewsItem[]>([])
   const [infra, setInfra] = useState<InfrastructureStatus[]>([])
   const [loading, setLoading] = useState(true)
   const [clock, setClock] = useState(Date.now())
@@ -47,9 +68,16 @@ export function InformacionLive() {
 
   const fetchLive = useCallback(async () => {
     try {
-      const res = await fetch('/api/live-info')
-      if (res.ok) {
-        setLiveData(await res.json())
+      const [liveRes, rssRes] = await Promise.all([
+        fetch('/api/live-info'),
+        fetch('/api/news-rss'),
+      ])
+      if (liveRes.ok) {
+        setLiveData(await liveRes.json())
+      }
+      if (rssRes.ok) {
+        const rssData = (await rssRes.json()) as { items?: RssNewsItem[] }
+        setRssItems(rssData.items ?? [])
       }
     } catch {
       /* keep previous data */
@@ -124,6 +152,12 @@ export function InformacionLive() {
   ]
 
   const officialSources = CRISIS_CONFIG.partnerLinks.filter((p) => p.type !== 'sister-platform')
+
+  const gdacsAlertColor = (level: string) => {
+    if (level === 'Red') return 'text-status-missing'
+    if (level === 'Orange') return 'text-status-unverified'
+    return 'text-status-alive'
+  }
   const sisterPlatforms = CRISIS_CONFIG.partnerLinks.filter((p) => p.type === 'sister-platform')
 
   const metricLabel = (metric: string) => {
@@ -190,6 +224,37 @@ export function InformacionLive() {
       </section>
 
       <section className="mt-10">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('gdacs.title')}</h2>
+        <p className="mt-1 text-[13px] text-vigil-muted">{t('gdacs.subtitle')}</p>
+        {loading && <div className="skeleton mt-4 h-24 rounded-card" />}
+        {!loading && (liveData?.gdacsEvents?.length ?? 0) === 0 && (
+          <p className="mt-3 text-[16px] text-vigil-muted">{t('gdacs.empty')}</p>
+        )}
+        <div className="mt-4 space-y-3">
+          {liveData?.gdacsEvents?.map((event) => (
+            <a
+              key={`${event.url}-${event.date}`}
+              href={event.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-[16px] font-medium text-vigil-ink">{event.title}</p>
+                <span className={`font-mono text-[13px] font-semibold ${gdacsAlertColor(event.alertLevel)}`}>
+                  {event.alertLevel}
+                </span>
+              </div>
+              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                GDACS · {event.severity != null ? `M${event.severity}` : event.eventType} ·{' '}
+                {event.date ? new Date(event.date).toLocaleDateString(locale) : '—'}
+              </p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{t('officialUpdates')}</h2>
         {loading && <div className="skeleton mt-4 h-24 rounded-card" />}
         {!loading && (liveData?.officialReports.length ?? 0) === 0 && (
@@ -207,6 +272,32 @@ export function InformacionLive() {
               <p className="text-[16px] font-medium text-vigil-ink">{report.title}</p>
               <p className="mt-1 font-mono text-[13px] text-vigil-muted">
                 {report.source} · {new Date(report.date).toLocaleDateString(locale)}
+              </p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10 border-t border-slate-200 pt-8">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('rssTier')}</h2>
+        <p className="mt-1 text-[13px] text-status-unverified">{t('rssDisclaimer')}</p>
+        {loading && <div className="skeleton mt-4 h-24 rounded-card" />}
+        {!loading && rssItems.length === 0 && (
+          <p className="mt-3 text-[16px] text-vigil-muted">{t('rssEmpty')}</p>
+        )}
+        <div className="mt-4 space-y-3">
+          {rssItems.slice(0, 8).map((item) => (
+            <a
+              key={`${item.source}-${item.link}`}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
+            >
+              <p className="text-[16px] font-medium text-vigil-ink">{item.title}</p>
+              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                {item.source}
+                {item.pubDate && ` · ${new Date(item.pubDate).toLocaleDateString(locale)}`}
               </p>
             </a>
           ))}

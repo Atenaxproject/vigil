@@ -13,6 +13,7 @@
     "info": "Information",
     "activeTeam": "Active Team",
     "calendar": "Calendar",
+    "wall": "Wall",
     "collectionPoint": "Collection Point",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
@@ -41,8 +42,7 @@
   "banner": {
     "emergency": "Emergency:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
-    "interpreters": "Interpreters"
+    "hotlineNumber": "0800-7372282"
   },
   "missing": {
     "title": "Missing Persons",
@@ -273,6 +273,11 @@
   "news": {
     "title": "Official Updates",
     "subtitle": "Verified information from OCHA, ReliefWeb, UNICEF and official sources",
+    "officialTier": "Official Sources (verified)",
+    "officialTierNote": "ReliefWeb, OCHA, GDACS and humanitarian agencies",
+    "rssTier": "Venezuelan Press (unverified)",
+    "rssDisclaimer": "These stories come from independent media. Vigil does not verify their content.",
+    "rssEmpty": "No news available at this time.",
     "source": "Source:",
     "readMore": "Read full report",
     "lastUpdated": "Last updated: {time}",
@@ -462,6 +467,14 @@
     "subtitle": "Auto-refreshes every 5 minutes",
     "manualStats": "Manually verified — last check: {date}",
     "officialUpdates": "Official updates (ReliefWeb)",
+    "gdacs": {
+      "title": "GDACS Alerts (UN/EU)",
+      "subtitle": "Global Disaster Alert and Coordination System — independent verification",
+      "empty": "No active GDACS alerts for Venezuela."
+    },
+    "rssTier": "Venezuelan Press (unverified)",
+    "rssDisclaimer": "These stories come from independent media. Vigil does not verify their content.",
+    "rssEmpty": "No news available at this time.",
     "noReports": "No reports available at this time.",
     "infraLive": "Real-time updates from Supabase",
     "infraEmpty": "No infrastructure data. Admin can update in Supabase Studio.",
@@ -653,6 +666,30 @@
       "submitting": "Registering...",
       "success": "Collection point registered.",
       "error": "Failed to register."
+    }
+  },
+  "wall": {
+    "title": "Community Wall",
+    "subtitle": "Public community messages — no chat or replies",
+    "unverifiedNote": "All messages are unverified until reviewed.",
+    "writeMessage": "Write a message",
+    "empty": "No messages yet. Be the first to post.",
+    "categories": {
+      "general": "General",
+      "aviso": "Announcement",
+      "solidaridad": "Solidarity",
+      "pregunta": "Question"
+    },
+    "form": {
+      "authorName": "Your name",
+      "category": "Category",
+      "message": "Message",
+      "charLimit": "{count}/300 characters",
+      "location": "Location",
+      "locationPlaceholder": "E.g. Caracas, La Guaira",
+      "submit": "Post message",
+      "success": "Message posted.",
+      "error": "Failed to post. Please try again."
     }
   }
 }

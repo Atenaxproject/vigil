@@ -13,6 +13,7 @@
     "info": "Información",
     "activeTeam": "Equipo Activo",
     "calendar": "Calendario",
+    "wall": "Muro",
     "collectionPoint": "Punto de Acopio",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Uso",
@@ -41,8 +42,7 @@
   "banner": {
     "emergency": "Emergencias:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
-    "interpreters": "Intérpretes"
+    "hotlineNumber": "0800-7372282"
   },
   "missing": {
     "title": "Personas Desaparecidas",
@@ -273,6 +273,11 @@
   "news": {
     "title": "Actualizaciones Oficiales",
     "subtitle": "Información verificada de OCHA, ReliefWeb, UNICEF y fuentes oficiales",
+    "officialTier": "Fuentes Oficiales (verificadas)",
+    "officialTierNote": "ReliefWeb, OCHA, GDACS y organismos humanitarios",
+    "rssTier": "Prensa Venezolana (no verificado)",
+    "rssDisclaimer": "Estas noticias provienen de medios independientes. Vigil no verifica su contenido.",
+    "rssEmpty": "No hay noticias disponibles en este momento.",
     "source": "Fuente:",
     "readMore": "Leer informe completo",
     "lastUpdated": "Actualizado: {time}",
@@ -462,6 +467,14 @@
     "subtitle": "Actualizaciones automáticas cada 5 minutos",
     "manualStats": "Actualizado manualmente — última verificación: {date}",
     "officialUpdates": "Actualizaciones oficiales (ReliefWeb)",
+    "gdacs": {
+      "title": "Alertas GDACS (ONU/UE)",
+      "subtitle": "Sistema Global de Alerta y Coordinación de Desastres — verificación independiente",
+      "empty": "No hay alertas GDACS activas para Venezuela."
+    },
+    "rssTier": "Prensa Venezolana (no verificado)",
+    "rssDisclaimer": "Estas noticias provienen de medios independientes. Vigil no verifica su contenido.",
+    "rssEmpty": "No hay noticias disponibles en este momento.",
     "noReports": "No hay reportes disponibles en este momento.",
     "infraLive": "Actualización en tiempo real desde Supabase",
     "infraEmpty": "Sin datos de infraestructura. Orlando puede actualizar en Supabase Studio.",
@@ -653,6 +666,30 @@
       "submitting": "Registrando...",
       "success": "Punto de acopio registrado.",
       "error": "Error al registrar."
+    }
+  },
+  "wall": {
+    "title": "Muro Comunitario",
+    "subtitle": "Mensajes públicos de la comunidad — sin chat ni respuestas",
+    "unverifiedNote": "Todos los mensajes son no verificados hasta revisión.",
+    "writeMessage": "Escribir un mensaje",
+    "empty": "Aún no hay mensajes. Sé el primero en escribir.",
+    "categories": {
+      "general": "General",
+      "aviso": "Aviso",
+      "solidaridad": "Solidaridad",
+      "pregunta": "Pregunta"
+    },
+    "form": {
+      "authorName": "Tu nombre",
+      "category": "Categoría",
+      "message": "Mensaje",
+      "charLimit": "{count}/300 caracteres",
+      "location": "Ubicación",
+      "locationPlaceholder": "Ej: Caracas, La Guaira",
+      "submit": "Publicar mensaje",
+      "success": "Mensaje publicado.",
+      "error": "Error al publicar. Intenta de nuevo."
     }
   }
 }

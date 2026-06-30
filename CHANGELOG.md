@@ -4,6 +4,27 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (RSS/GDACS + community wall)
+
+### Added
+- **GDACS disaster alerts** — `src/lib/gdacs.ts` integrated into `/api/live-info`;
+  GDACS (UN/EU) earthquake alerts shown on `/informacion` as independent
+  verification alongside USGS and ReliefWeb.
+- **RSS news aggregation** — `rss-parser` + `src/lib/rss.ts` with El Nacional,
+  Efecto Cocuyo, and Prodavinci (Infobae Venezuela feed returned 404 at deploy
+  time). Secondary tier on `/noticias` and `/informacion`, clearly labeled
+  unverified. `/api/news-rss` route with 30-minute cache.
+- **Community wall (Muro Comunitario)** — `supabase/migrations/007_community_wall.sql`,
+  `/muro` page, `/api/community-wall/submit` and `/flag` routes, real-time
+  feed, category badges, flag button (3 flags auto-hides). Rate limit: 5/hour/IP.
+  Navigation entry between Calendario and Punto de Acopio. i18n in all 8 locales.
+
+### Changed
+- **Emergency banner** — removed Intérpretes link from sticky header; Cruz Roja
+  and hotline unchanged. Removed `banner.interpreters` i18n keys.
+- **Docs** — archived `26-rss-gdacs-community-wall.md`; removed root
+  `CURSOR-RSS-GDACS-COMMUNITY-WALL.md` stub.
+
 ## [Unreleased] — 2026-06-30 (report button beside search)
 
 ### Added

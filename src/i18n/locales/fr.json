@@ -13,6 +13,7 @@
     "info": "Informations",
     "activeTeam": "Équipe active",
     "calendar": "Calendrier",
+    "wall": "Mur",
     "collectionPoint": "Point de collecte",
     "privacy": "Politique de confidentialité",
     "terms": "Conditions d'utilisation",
@@ -41,8 +42,7 @@
   "banner": {
     "emergency": "Urgence :",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
-    "interpreters": "Interprètes"
+    "hotlineNumber": "0800-7372282"
   },
   "missing": {
     "title": "Personnes disparues",
@@ -273,6 +273,11 @@
   "news": {
     "title": "Mises à jour officielles",
     "subtitle": "Informations vérifiées provenant de l'OCHA, ReliefWeb, l'UNICEF et des sources officielles",
+    "officialTier": "Sources officielles (vérifiées)",
+    "officialTierNote": "ReliefWeb, OCHA, GDACS et agences humanitaires",
+    "rssTier": "Presse vénézuélienne (non vérifiée)",
+    "rssDisclaimer": "Ces articles proviennent de médias indépendants. Vigil ne vérifie pas leur contenu.",
+    "rssEmpty": "Aucune actualité disponible pour le moment.",
     "source": "Source :",
     "readMore": "Lire le rapport complet",
     "lastUpdated": "Dernière mise à jour : {{time}}",
@@ -462,6 +467,14 @@
     "subtitle": "Actualisation automatique toutes les 5 minutes",
     "manualStats": "Vérifiés manuellement — dernier contrôle : {{date}}",
     "officialUpdates": "Mises à jour officielles (ReliefWeb)",
+    "gdacs": {
+      "title": "Alertes GDACS (ONU/UE)",
+      "subtitle": "Système mondial d'alerte et de coordination des catastrophes — vérification indépendante",
+      "empty": "Aucune alerte GDACS active pour le Venezuela."
+    },
+    "rssTier": "Presse vénézuélienne (non vérifiée)",
+    "rssDisclaimer": "Ces articles proviennent de médias indépendants. Vigil ne vérifie pas leur contenu.",
+    "rssEmpty": "Aucune actualité disponible pour le moment.",
     "noReports": "Aucun rapport disponible pour le moment.",
     "infraLive": "Mises à jour en temps réel depuis Supabase",
     "infraEmpty": "Aucune donnée d'infrastructure. L'administrateur peut mettre à jour dans Supabase Studio.",
@@ -653,6 +666,30 @@
       "submitting": "Enregistrement en cours...",
       "success": "Point de collecte enregistré.",
       "error": "Échec de l'enregistrement."
+    }
+  },
+  "wall": {
+    "title": "Mur communautaire",
+    "subtitle": "Messages publics de la communauté — pas de chat ni de réponses",
+    "unverifiedNote": "Tous les messages sont non vérifiés jusqu'à examen.",
+    "writeMessage": "Écrire un message",
+    "empty": "Pas encore de messages. Soyez le premier à publier.",
+    "categories": {
+      "general": "Général",
+      "aviso": "Avis",
+      "solidaridad": "Solidarité",
+      "pregunta": "Question"
+    },
+    "form": {
+      "authorName": "Votre nom",
+      "category": "Catégorie",
+      "message": "Message",
+      "charLimit": "{count}/300 caractères",
+      "location": "Lieu",
+      "locationPlaceholder": "Ex. : Caracas, La Guaira",
+      "submit": "Publier le message",
+      "success": "Message publié.",
+      "error": "Échec de la publication. Veuillez réessayer."
     }
   }
 }

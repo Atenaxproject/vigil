@@ -13,6 +13,7 @@
     "info": "Informationen",
     "activeTeam": "Aktive Teams",
     "calendar": "Kalender",
+    "wall": "Mauer",
     "collectionPoint": "Sammelstelle",
     "privacy": "Datenschutzrichtlinie",
     "terms": "Nutzungsbedingungen",
@@ -41,8 +42,7 @@
   "banner": {
     "emergency": "Notfall:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
-    "interpreters": "Dolmetscher"
+    "hotlineNumber": "0800-7372282"
   },
   "missing": {
     "title": "Vermisste Personen",
@@ -273,6 +273,11 @@
   "news": {
     "title": "Offizielle Meldungen",
     "subtitle": "Verifizierte Informationen von OCHA, ReliefWeb, UNICEF und offiziellen Quellen",
+    "officialTier": "Offizielle Quellen (verifiziert)",
+    "officialTierNote": "ReliefWeb, OCHA, GDACS und humanitäre Organisationen",
+    "rssTier": "Venezolanische Presse (nicht verifiziert)",
+    "rssDisclaimer": "Diese Nachrichten stammen von unabhängigen Medien. Vigil überprüft den Inhalt nicht.",
+    "rssEmpty": "Derzeit keine Nachrichten verfügbar.",
     "source": "Quelle:",
     "readMore": "Vollständigen Bericht lesen",
     "lastUpdated": "Zuletzt aktualisiert: {{time}}",
@@ -462,6 +467,14 @@
     "subtitle": "Aktualisierung alle 5 Minuten",
     "manualStats": "Manuell verifiziert — letzte Überprüfung: {{date}}",
     "officialUpdates": "Offizielle Meldungen (ReliefWeb)",
+    "gdacs": {
+      "title": "GDACS-Warnungen (UN/EU)",
+      "subtitle": "Globales Katastrophenwarn- und Koordinationssystem — unabhängige Verifizierung",
+      "empty": "Keine aktiven GDACS-Warnungen für Venezuela."
+    },
+    "rssTier": "Venezolanische Presse (nicht verifiziert)",
+    "rssDisclaimer": "Diese Nachrichten stammen von unabhängigen Medien. Vigil überprüft den Inhalt nicht.",
+    "rssEmpty": "Derzeit keine Nachrichten verfügbar.",
     "noReports": "Derzeit keine Berichte verfügbar.",
     "infraLive": "Echtzeit-Updates von Supabase",
     "infraEmpty": "Keine Infrastrukturdaten. Admin kann in Supabase Studio aktualisieren.",
@@ -653,6 +666,30 @@
       "submitting": "Wird registriert...",
       "success": "Sammelstelle registriert.",
       "error": "Registrierung fehlgeschlagen."
+    }
+  },
+  "wall": {
+    "title": "Community-Mauer",
+    "subtitle": "Öffentliche Community-Nachrichten — kein Chat oder Antworten",
+    "unverifiedNote": "Alle Nachrichten sind bis zur Überprüfung unverifiziert.",
+    "writeMessage": "Nachricht schreiben",
+    "empty": "Noch keine Nachrichten. Seien Sie der Erste.",
+    "categories": {
+      "general": "Allgemein",
+      "aviso": "Hinweis",
+      "solidaridad": "Solidarität",
+      "pregunta": "Frage"
+    },
+    "form": {
+      "authorName": "Ihr Name",
+      "category": "Kategorie",
+      "message": "Nachricht",
+      "charLimit": "{count}/300 Zeichen",
+      "location": "Ort",
+      "locationPlaceholder": "z. B. Caracas, La Guaira",
+      "submit": "Nachricht veröffentlichen",
+      "success": "Nachricht veröffentlicht.",
+      "error": "Veröffentlichung fehlgeschlagen. Bitte erneut versuchen."
     }
   }
 }

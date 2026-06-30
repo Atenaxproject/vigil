@@ -13,6 +13,7 @@
     "info": "信息",
     "activeTeam": "活跃队伍",
     "calendar": "日历",
+    "wall": "社区墙",
     "collectionPoint": "物资收集点",
     "privacy": "隐私政策",
     "terms": "使用条款",
@@ -41,8 +42,7 @@
   "banner": {
     "emergency": "紧急情况:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
-    "interpreters": "翻译员"
+    "hotlineNumber": "0800-7372282"
   },
   "missing": {
     "title": "失踪人员",
@@ -273,6 +273,11 @@
   "news": {
     "title": "官方更新",
     "subtitle": "来自 OCHA、ReliefWeb、UNICEF 和官方来源的已验证信息",
+    "officialTier": "官方来源（已验证）",
+    "officialTierNote": "ReliefWeb、OCHA、GDACS 及人道主义机构",
+    "rssTier": "委内瑞拉媒体（未验证）",
+    "rssDisclaimer": "这些新闻来自独立媒体。Vigil 不验证其内容。",
+    "rssEmpty": "目前没有可用新闻。",
     "source": "来源：",
     "readMore": "阅读完整报告",
     "lastUpdated": "最后更新：{{time}}",
@@ -462,6 +467,14 @@
     "subtitle": "每 5 分钟自动刷新",
     "manualStats": "手动验证 — 最后检查：{{date}}",
     "officialUpdates": "官方更新（ReliefWeb）",
+    "gdacs": {
+      "title": "GDACS 警报（联合国/欧盟）",
+      "subtitle": "全球灾害预警与协调系统 — 独立验证",
+      "empty": "委内瑞拉目前没有活跃的 GDACS 警报。"
+    },
+    "rssTier": "委内瑞拉媒体（未验证）",
+    "rssDisclaimer": "这些新闻来自独立媒体。Vigil 不验证其内容。",
+    "rssEmpty": "目前没有可用新闻。",
     "noReports": "此时无可用报告。",
     "infraLive": "来自 Supabase 的实时更新",
     "infraEmpty": "无基础设施数据。管理员可在 Supabase Studio 中更新。",
@@ -653,6 +666,30 @@
       "submitting": "注册中...",
       "success": "物资收集点已注册。",
       "error": "注册失败。"
+    }
+  },
+  "wall": {
+    "title": "社区墙",
+    "subtitle": "社区公开留言 — 无聊天或回复功能",
+    "unverifiedNote": "所有留言在审核前均为未验证状态。",
+    "writeMessage": "写留言",
+    "empty": "暂无留言。成为第一个发帖的人。",
+    "categories": {
+      "general": "一般",
+      "aviso": "公告",
+      "solidaridad": "声援",
+      "pregunta": "提问"
+    },
+    "form": {
+      "authorName": "您的姓名",
+      "category": "类别",
+      "message": "留言",
+      "charLimit": "{count}/300 字符",
+      "location": "位置",
+      "locationPlaceholder": "例如：加拉加斯、拉瓜伊拉",
+      "submit": "发布留言",
+      "success": "留言已发布。",
+      "error": "发布失败。请重试。"
     }
   }
 }

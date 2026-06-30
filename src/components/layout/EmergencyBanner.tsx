@@ -28,14 +28,6 @@ export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
         {t('hotline')} ({t('hotlineNumber')})
       </a>
       <Link
-        href="https://interp-aid.lovable.app"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="shrink-0 rounded border border-blue-700 px-2 py-0.5 text-blue-300 hover:bg-slate-800"
-      >
-        {t('interpreters')}
-      </Link>
-      <Link
         href="https://cruzrojavenezolana.org"
         target="_blank"
         rel="noopener noreferrer"

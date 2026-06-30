@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { getGDACSEvents } from '@/lib/gdacs'
 
 export const revalidate = 300
 
@@ -19,7 +20,7 @@ interface ReliefWebReport {
 export async function GET() {
   const { mapBounds, crisisDate } = CRISIS_CONFIG
 
-  const [usgsRes, reliefwebRes] = await Promise.allSettled([
+  const [usgsRes, reliefwebRes, gdacsEvents] = await Promise.allSettled([
     fetch(
       `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson` +
         `&minlatitude=${mapBounds.minLat}&maxlatitude=${mapBounds.maxLat}` +
@@ -33,6 +34,7 @@ export async function GET() {
         `&fields[include][]=title&fields[include][]=date&fields[include][]=url&fields[include][]=source`,
       { next: { revalidate: 300 } }
     ),
+    getGDACSEvents(),
   ])
 
   let usgs: { features?: UsgsFeature[] } | null = null
@@ -45,8 +47,12 @@ export async function GET() {
     reliefweb = await reliefwebRes.value.json()
   }
 
+  const gdacs =
+    gdacsEvents.status === 'fulfilled' ? gdacsEvents.value : []
+
   return NextResponse.json({
     lastUpdated: new Date().toISOString(),
+    gdacsEvents: gdacs,
     recentSignificantQuakes:
       usgs?.features?.map((f) => ({
         magnitude: f.properties.mag,

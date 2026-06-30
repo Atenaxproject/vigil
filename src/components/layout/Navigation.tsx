@@ -21,6 +21,7 @@ import {
   Shield,
   Calendar,
   Package,
+  MessageSquare,
   X,
   PanelLeftClose,
   PanelLeftOpen,
@@ -44,6 +45,7 @@ type NavLabelKey =
   | 'info'
   | 'activeTeam'
   | 'calendar'
+  | 'wall'
   | 'collectionPoint'
 
 const navItems: Array<{
@@ -59,6 +61,7 @@ const navItems: Array<{
   { href: '/reportar', labelKey: 'report', shortKey: 'reportShort', icon: FilePlus, center: true },
   { href: '/necesito-ayuda', labelKey: 'needHelp', shortKey: 'needHelpShort', icon: HandHelping },
   { href: '/calendario', labelKey: 'calendar', icon: Calendar, more: true },
+  { href: '/muro', labelKey: 'wall', icon: MessageSquare, more: true },
   { href: '/punto-de-acopio', labelKey: 'collectionPoint', icon: Package, more: true },
   { href: '/intercambio', labelKey: 'exchange', icon: ArrowLeftRight, more: true },
   { href: '/voluntarios', labelKey: 'volunteers', icon: Users, more: true },

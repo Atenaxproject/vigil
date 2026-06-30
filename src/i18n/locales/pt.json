@@ -13,6 +13,7 @@
     "info": "Informações",
     "activeTeam": "Equipe Ativa",
     "calendar": "Calendário",
+    "wall": "Muro",
     "collectionPoint": "Ponto de Coleta",
     "privacy": "Política de Privacidade",
     "terms": "Termos de Uso",
@@ -41,8 +42,7 @@
   "banner": {
     "emergency": "Emergência:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
-    "interpreters": "Intérpretes"
+    "hotlineNumber": "0800-7372282"
   },
   "missing": {
     "title": "Pessoas Desaparecidas",
@@ -273,6 +273,11 @@
   "news": {
     "title": "Atualizações Oficiais",
     "subtitle": "Informações verificadas de OCHA, ReliefWeb, UNICEF e fontes oficiais",
+    "officialTier": "Fontes Oficiais (verificadas)",
+    "officialTierNote": "ReliefWeb, OCHA, GDACS e agências humanitárias",
+    "rssTier": "Imprensa Venezuelana (não verificado)",
+    "rssDisclaimer": "Estas notícias vêm de mídia independente. O Vigil não verifica o conteúdo.",
+    "rssEmpty": "Nenhuma notícia disponível no momento.",
     "source": "Fonte:",
     "readMore": "Ler relatório completo",
     "lastUpdated": "Última atualização: {{time}}",
@@ -462,6 +467,14 @@
     "subtitle": "Auto-atualiza a cada 5 minutos",
     "manualStats": "Verificado manualmente — última verificação: {{date}}",
     "officialUpdates": "Atualizações oficiais (ReliefWeb)",
+    "gdacs": {
+      "title": "Alertas GDACS (ONU/UE)",
+      "subtitle": "Sistema Global de Alerta e Coordenação de Desastres — verificação independente",
+      "empty": "Nenhum alerta GDACS ativo para a Venezuela."
+    },
+    "rssTier": "Imprensa Venezuelana (não verificado)",
+    "rssDisclaimer": "Estas notícias vêm de mídia independente. O Vigil não verifica o conteúdo.",
+    "rssEmpty": "Nenhuma notícia disponível no momento.",
     "noReports": "Nenhum relatório disponível no momento.",
     "infraLive": "Atualizações em tempo real do Supabase",
     "infraEmpty": "Sem dados de infraestrutura. Admin pode atualizar no Supabase Studio.",
@@ -653,6 +666,30 @@
       "submitting": "Registrando...",
       "success": "Ponto de coleta registrado.",
       "error": "Falha ao registrar."
+    }
+  },
+  "wall": {
+    "title": "Muro Comunitário",
+    "subtitle": "Mensagens públicas da comunidade — sem chat nem respostas",
+    "unverifiedNote": "Todas as mensagens são não verificadas até revisão.",
+    "writeMessage": "Escrever uma mensagem",
+    "empty": "Ainda não há mensagens. Seja o primeiro a publicar.",
+    "categories": {
+      "general": "Geral",
+      "aviso": "Aviso",
+      "solidaridad": "Solidariedade",
+      "pregunta": "Pergunta"
+    },
+    "form": {
+      "authorName": "Seu nome",
+      "category": "Categoria",
+      "message": "Mensagem",
+      "charLimit": "{count}/300 caracteres",
+      "location": "Localização",
+      "locationPlaceholder": "Ex: Caracas, La Guaira",
+      "submit": "Publicar mensagem",
+      "success": "Mensagem publicada.",
+      "error": "Erro ao publicar. Tente novamente."
     }
   }
 }

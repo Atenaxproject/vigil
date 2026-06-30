@@ -330,3 +330,14 @@ export interface MissingPersonNote {
   message: string
   created_at: string
 }
+
+export type CommunityWallCategory = 'general' | 'aviso' | 'solidaridad' | 'pregunta'
+
+export interface CommunityWallMessage {
+  id: string
+  author_name: string
+  message: string
+  category: CommunityWallCategory
+  location_label: string | null
+  created_at: string
+}
