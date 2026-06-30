@@ -4,6 +4,27 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (map accessible list toggle — closeable)
+
+### Fixed
+- **"Ver como lista" could open but not close** — On desktop the right column has a
+  fixed height (`lg:h-[calc(100vh-44px-120px)]`) and the map's `.map-wrapper` is
+  forced to `min-h-[400px]`. When the accessible list expanded, the map overflowed
+  its flex cell and (being a `position:relative; z-index:0` layer) painted on top
+  of the in-flow list `<section>`, intercepting the close click on the toggle
+  (`elementFromPoint` over the toggle resolved to the Leaflet map div). The list
+  `<section>` is now `relative z-10` so its toggle always paints above the map and
+  stays clickable in both states (`src/components/map/MapAccessibleList.tsx`).
+- **Open list could overflow the footer** — The right column is now
+  `lg:overflow-y-auto` so a long expanded list scrolls within the column instead of
+  bleeding past the bounded section (preserves the prior footer-overlap fix)
+  (`src/app/page.tsx`).
+
+### Added
+- **List disclosure a11y hardening** — toggle now exposes `aria-controls` linking to
+  the panel, `Escape` closes the open list and restores focus to the toggle
+  (`src/components/map/MapAccessibleList.tsx`).
+
 ## [Unreleased] — 2026-06-30 (map/footer overlap — real fix)
 
 ### Fixed

@@ -24,7 +24,7 @@ export default async function HomePage() {
         <MissingPersonSearch initialResults={recent} />
         <RecentMissingFeed initialRecords={recent} />
       </section>
-      <section className="flex w-full min-w-0 flex-col gap-3 p-4 lg:w-[60%] lg:min-h-0">
+      <section className="flex w-full min-w-0 flex-col gap-3 p-4 lg:w-[60%] lg:min-h-0 lg:overflow-y-auto">
         <AftershockAlert events={events} />
         {/*
           Map cell must fill ONLY the space left after its siblings (AftershockAlert +

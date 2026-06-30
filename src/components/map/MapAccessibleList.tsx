@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import type { MapMarker, SeismicEvent } from '@/types/vigil.types'
@@ -12,6 +12,8 @@ interface MapAccessibleListProps {
 export function MapAccessibleList({ markers, events = [] }: MapAccessibleListProps) {
   const t = useTranslations('map')
   const [open, setOpen] = useState(false)
+  const panelId = useId()
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   const needs = markers.filter((m) => m.type === 'need' && m.status === 'active')
   const resources = markers.filter((m) => m.type === 'resource' && m.status === 'active')
@@ -21,11 +23,25 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
   const hasContent = needs.length > 0 || resources.length > 0 || collection.length > 0 || significantEvents.length > 0
 
   return (
-    <section aria-label={t('listHeading')} className="rounded-card border border-slate-200 bg-white">
+    <section
+      aria-label={t('listHeading')}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape' && open) {
+          setOpen(false)
+          toggleRef.current?.focus()
+        }
+      }}
+      // relative z-10 keeps the toggle above the Leaflet map: the map wrapper is a
+      // positioned (z-index:0) layer, which would otherwise paint over this static
+      // section and intercept the close click when the open panel overlaps the map.
+      className="relative z-10 rounded-card border border-slate-200 bg-white"
+    >
       <button
+        ref={toggleRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
+        aria-controls={panelId}
         className="flex min-h-[44px] w-full items-center justify-between gap-2 px-4 py-2 text-left text-[16px] font-medium text-vigil-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
       >
         <span>{open ? t('hideList') : t('viewAsList')}</span>
@@ -33,7 +49,7 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
       </button>
 
       {open && (
-        <div className="border-t border-slate-200 px-4 py-3 text-[16px] text-slate-700">
+        <div id={panelId} className="border-t border-slate-200 px-4 py-3 text-[16px] text-slate-700">
           {!hasContent && <p className="text-vigil-muted">{t('listEmpty')}</p>}
 
           {significantEvents.length > 0 && (
