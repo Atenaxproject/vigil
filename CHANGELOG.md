@@ -4,6 +4,27 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (PWA, map layers, docs cleanup)
+
+### Added
+- **PWA install UX** — iOS Safari dismissible install banner (`IOSInstallBanner`,
+  sessionStorage); Android/Chrome native install via `beforeinstallprompt` in Más
+  menu (`PwaInstallButton`, `usePwaInstall`); `src/lib/pwa-install.ts` helpers.
+- **PWA icons** — `public/icons/icon-{72,192,512}x*.png` for manifest and
+  `metadata.icons.apple` in `layout.tsx`.
+- **Retractable desktop map layers** — panel defaults open on `lg+`, close button
+  + Layers reopen control; preference in `localStorage` (`vigil-map-layers-open`);
+  `aria-expanded` / `aria-controls`; i18n `map.layers.showLayers` / `hideLayers`.
+- **i18n** — `pwa.install`, `pwa.iosBanner.*` in all 8 locales.
+- **docs/build-process** — `19-pwa-nav-security-final.md`; root `CURSOR-*` stubs
+  removed after archive verification.
+
+### Fixed
+- **Security verification** — confirmed `SUPABASE_SERVICE_ROLE_KEY` and
+  `ANTHROPIC_API_KEY` only in server-only modules; zero matches in `.next/static/`.
+- **Bottom nav** — verified `.mobile-bottom-nav` border/shadow/opaque surface in
+  `globals.css` (from session 17).
+
 ## [Unreleased] — 2026-06-30 (sidebar + desktop a11y)
 
 ### Added

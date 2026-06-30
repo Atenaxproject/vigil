@@ -41,6 +41,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `16-viewport-fix-and-proof.md` — viewport meta fix and device-proof verification
 - `17-accessibility-and-menu-fix.md` — type-scale accessibility revision, Más bottom-sheet, feedback widget fix, bottom-nav definition
 - `18-desktop-accessibility.md` — desktop WCAG AA pass: skip link, focus-visible, ARIA, map list alternative, collapsible sidebar
+- `19-pwa-nav-security-final.md` — PWA install UX (iOS banner, Android prompt), bottom-nav definition, critical security gate
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
@@ -48,17 +49,14 @@ Sequential prompts/specs used to construct Vigil (historical record):
 
 ## Root stubs
 
-These files remain at the repository root as thin pointers for Cursor `@` mentions
-and workspace rules; canonical content lives under `docs/`:
+These files remain at the repository root as thin pointers for Cursor workspace rules
+and common doc links; canonical content lives under `docs/`:
 
 - `CLAUDE.md` → `architecture/CLAUDE.md`
 - `DEPLOYMENT.md` → `architecture/DEPLOYMENT.md`
-- `CURSOR-LAUNCH-READY.md` → `build-process/12-launch-ready.md`
-- `CURSOR-MOBILE-REBUILD-AND-TRANSLATIONS.md` → `build-process/13-mobile-rebuild-and-translations.md`
-- `CURSOR-CONFIRMED-MOBILE-BUGS.md` → `build-process/14-confirmed-mobile-bugs.md`
-- `CURSOR-DEEP-INVESTIGATION-FINAL.md` → `build-process/15-deep-investigation-final.md`
-- `CURSOR-ACCESSIBILITY-AND-MENU-FIX.md` → `build-process/17-accessibility-and-menu-fix.md`
-- `CURSOR-DESKTOP-ACCESSIBILITY.md` → `build-process/18-desktop-accessibility.md`
+
+Historical `CURSOR-*.md` convenience stubs were removed from the root after their
+full content was archived under `docs/build-process/`.
 
 ## For Contributors
 
