@@ -53,7 +53,7 @@ One config file change redeploys the whole platform for **any country, any disas
 
 ## Documentation
 
-Full build process and architecture decisions: [`/docs`](./docs)
+Full build process and architecture decisions: [`/docs`](./docs) — deployment guide: [`docs/architecture/DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md)
 
 ---
 

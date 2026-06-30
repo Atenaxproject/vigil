@@ -1631,7 +1631,7 @@ See [Privacy Policy](https://vigil.app/privacidad).
 
 Change one file: `src/config/crisis.config.ts`  
 Update country bounds, emergency numbers, partner links, and deploy.  
-Full deployment guide: [DEPLOYMENT.md](./DEPLOYMENT.md)
+Full deployment guide: [DEPLOYMENT.md](../architecture/DEPLOYMENT.md)
 
 ## Built By
 

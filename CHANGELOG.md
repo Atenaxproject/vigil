@@ -25,9 +25,11 @@ All notable changes to Vigil are documented here. Format loosely follows
   (Haiku); script now strips markdown fences and supports per-locale CLI args.
 - **README banner** — `docs/assets/vigil-banner.svg` and shields.io badges in header.
 - **docs/build-process** — `12-launch-ready.md`, `13-mobile-rebuild-and-translations.md`,
-  `14-confirmed-mobile-bugs.md`; root `CURSOR-*.md` stubs point to docs.
+  `14-confirmed-mobile-bugs.md`, `15-deep-investigation-final.md`; root `CURSOR-*.md` stubs point to docs.
 
 ### Changed
+- **docs/** — moved root `DEPLOYMENT.md` to `docs/architecture/DEPLOYMENT.md`; root stub
+  retained; `docs/README.md` index updated with architecture and stub inventory.
 - **PWA manifest** — `background_color` `#F8FAFC`, `theme_color` `#0F172A` (light only).
 
 ## [Unreleased] — 2026-06-30 (earlier)
