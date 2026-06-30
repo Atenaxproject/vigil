@@ -4,6 +4,29 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (TestFlight QA + legal/z-index)
+
+### Added
+- **docs/build-process** — `20-testflight-full-qa.md`, `21-legal-links-zindex-fix.md`;
+  root `CURSOR-*` stubs removed after archive verification.
+
+### Fixed
+- **Desktop sidebar** — widened expanded width from 240px (`w-60`) to 280px (`w-[280px]`);
+  removed `truncate` on nav labels so longest Spanish label ("Actualizaciones Oficiales")
+  renders on one line at 16px; collapsed icon-only mode unchanged.
+- **Map z-index bleed** — `.map-wrapper` with `isolation: isolate` on `CrisisMap` outer div
+  so Leaflet panes cannot overlap footer "Contacto" link.
+- **CRITICAL RLS** — dropped `public_read_missing` policy on `missing_persons`; public reads
+  must use `public_missing_persons` view only (`006_missing_persons_rls_fix.sql` applied).
+  Notes API existence check now queries `public_missing_persons`.
+- **Legal links** — verified `/privacidad`, `/terminos`, `/privacy`, `/terms` return 200;
+  footer uses locale-aware `Link` paths and `CRISIS_CONFIG.legal.contactEmail` mailto.
+
+### Security (verified)
+- Anon-key direct `missing_persons` contact field query now returns `[]` (was leaking phone).
+- Rate limit (5/hr missing-person submit), coordinate bounds, org approval gate: pass.
+- `SUPABASE_SERVICE_ROLE_KEY` / `ANTHROPIC_API_KEY`: server-only modules only.
+
 ## [Unreleased] — 2026-06-30 (PWA, map layers, docs cleanup)
 
 ### Added

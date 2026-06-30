@@ -65,6 +65,13 @@
   z-index: 0;
 }
 
+/* Contain Leaflet's internal stacking so tiles/markers/controls never bleed over footer */
+.map-wrapper {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
 /*
  * Mobile bottom navigation — clear visual separation from scrolling content.
  * Solid (opaque) surface so page content never shows through while scrolling;

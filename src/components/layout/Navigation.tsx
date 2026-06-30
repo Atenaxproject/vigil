@@ -156,7 +156,7 @@ export function Navigation() {
         className={cn(
           'hidden shrink-0 flex-col border-r border-slate-200 bg-white lg:flex',
           'transition-[width] duration-200 ease-out motion-reduce:transition-none',
-          collapsed ? 'w-16' : 'w-60'
+          collapsed ? 'w-16' : 'w-[280px]'
         )}
         data-sidebar-ready={sidebarReady ? 'true' : 'false'}
       >
@@ -203,7 +203,9 @@ export function Navigation() {
                 )}
               >
                 <Icon className="h-5 w-5 shrink-0" aria-hidden />
-                <span className={cn('truncate', collapsed && 'sr-only')}>{label}</span>
+                <span className={cn(collapsed && 'sr-only', !collapsed && 'whitespace-nowrap')}>
+                  {label}
+                </span>
               </Link>
             )
           })}

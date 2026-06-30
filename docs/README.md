@@ -42,6 +42,8 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `17-accessibility-and-menu-fix.md` — type-scale accessibility revision, Más bottom-sheet, feedback widget fix, bottom-nav definition
 - `18-desktop-accessibility.md` — desktop WCAG AA pass: skip link, focus-visible, ARIA, map list alternative, collapsible sidebar
 - `19-pwa-nav-security-final.md` — PWA install UX (iOS banner, Android prompt), bottom-nav definition, critical security gate
+- `20-testflight-full-qa.md` — sidebar width fix, full functional TestFlight QA, RLS security audit
+- `21-legal-links-zindex-fix.md` — legal page links verification, map z-index bleed fix (`isolation: isolate`)
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

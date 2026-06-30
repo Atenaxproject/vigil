@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
 
     const { data: person } = await supabase
-      .from('missing_persons')
+      .from('public_missing_persons')
       .select('id')
       .eq('id', body.missing_person_id)
       .eq('flagged', false)
