@@ -52,9 +52,18 @@ One config file change redeploys the whole platform for **any country, any disas
 - 🏢 **Organization Directory** — Verified NGOs, rescue teams, and diaspora groups with donation links (admin-approved before display).
 - 🛡️ **Admin Dashboard** — Protected by Supabase Auth (email/phone OTP) and an email allowlist (`VIGIL_ADMIN_EMAILS`).
 - 📡 **Official Updates** — ReliefWeb + OCHA/HDX feeds, labeled and unedited.
+- 📬 **Official Contact** — `vigil@youtheway.org` (general) and `vigil.support@youtheway.org` (feedback/support), routed via Cloudflare Email Routing.
 - 🚨 **Emergency Banner** — Always-visible hotline (0800-RESCATE), Intérpretes, and Cruz Roja links — government-operated intake tools intentionally excluded.
 - 🌐 **8 Languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian.
-- 📱 **PWA / Offline-first** — Designed to work at 2G speeds with skeleton loading and a calm degraded state when live data is unavailable.
+- 📱 **PWA / Offline-first** — Service worker with runtime caching (Supabase network-first, USGS/ReliefWeb stale-while-revalidate), offline fallback page, form submission queue, and a “showing saved data” banner when offline.
+
+### Coming soon
+
+| Feature | Status |
+|---|---|
+| **Resend feedback email alerts** | Coded — requires `RESEND_API_KEY` in Vercel + `youtheway.org` domain verification in Resend |
+| **Push notifications (mag 4.0+ aftershocks)** | Planned — PWA install + notification permission flow |
+| **Screenshots in README** | Planned — add to `public/screenshots/` |
 
 ---
 
@@ -107,6 +116,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key   # server-only, never exposed
 ANTHROPIC_API_KEY=your_anthropic_key              # optional, for AI features
+RESEND_API_KEY=your_resend_key                    # optional, feedback email alerts
 VIGIL_ADMIN_SECRET=generate_a_strong_random_secret
 VIGIL_ADMIN_EMAILS=orlando@atenaxproject.com
 ```
@@ -141,6 +151,15 @@ Privacy is architecture, not an afterthought:
 - Right-to-erasure and data-retention windows are built into the schema.
 
 See the [Privacy Policy](https://vigil.youtheway.org/privacidad) and [Terms](https://vigil.youtheway.org/terminos).
+
+---
+
+## Built By
+
+Made with hope and love for Venezuela 🇻🇪
+
+[Orlando Toro](https://atenaxproject.com) — Founder, Bbluestudios LLC  
+For the people of Venezuela. For anyone who needs it next.
 
 ---
 

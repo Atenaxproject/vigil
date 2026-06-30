@@ -38,5 +38,12 @@ next-env.d.ts
 # vigil
 build.log
 
+# PWA service worker (generated at build)
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/swe-worker-*.js
+public/fallback-*.js
+
 .vercel
 .env*

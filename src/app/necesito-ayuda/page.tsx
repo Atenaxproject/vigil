@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { queueSubmission } from '@/lib/offline-queue'
 
 const schema = z.object({
   type: z.enum(['need', 'resource']),
@@ -47,6 +48,12 @@ export default function NecesitoAyudaPage() {
   async function onSubmit(data: FormValues) {
     setSubmitting(true)
     try {
+      if (!navigator.onLine) {
+        queueSubmission('map-marker', data)
+        toast.success(t('queuedOffline'))
+        return
+      }
+
       const res = await fetch('/api/map-markers/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

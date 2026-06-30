@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
 import { sanitizeText } from '@/lib/security/validate'
+import { notifyNewFeedback } from '@/lib/email/notify'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,6 +27,17 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       return NextResponse.json({ error: 'Error al enviar' }, { status: 500 })
+    }
+
+    try {
+      await notifyNewFeedback({
+        category: body.category,
+        message: body.message,
+        contact_email: body.contact_email || undefined,
+        page_context: body.page_context,
+      })
+    } catch (emailError) {
+      console.error('Feedback email notification failed:', emailError)
     }
 
     return NextResponse.json({ success: true })

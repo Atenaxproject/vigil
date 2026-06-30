@@ -1,4 +1,50 @@
 const createNextIntlPlugin = require('next-intl/plugin')
+const withPWA = require('@ducanh2912/next-pwa').default({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+  fallbacks: {
+    document: '/offline',
+  },
+  workboxOptions: {
+    runtimeCaching: [
+      {
+        urlPattern: /^https:\/\/.*\.supabase\.co\/.*/i,
+        handler: 'NetworkFirst',
+        options: {
+          cacheName: 'supabase-api',
+          networkTimeoutSeconds: 3,
+          expiration: { maxEntries: 50, maxAgeSeconds: 300 },
+        },
+      },
+      {
+        urlPattern: /^https:\/\/earthquake\.usgs\.gov\/.*/i,
+        handler: 'StaleWhileRevalidate',
+        options: {
+          cacheName: 'usgs-data',
+          expiration: { maxAgeSeconds: 300 },
+        },
+      },
+      {
+        urlPattern: /^https:\/\/api\.reliefweb\.int\/.*/i,
+        handler: 'StaleWhileRevalidate',
+        options: {
+          cacheName: 'reliefweb-data',
+          expiration: { maxAgeSeconds: 3600 },
+        },
+      },
+      {
+        urlPattern: /\.(?:png|jpg|jpeg|svg|webp)$/i,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'images',
+          expiration: { maxEntries: 100, maxAgeSeconds: 604800 },
+        },
+      },
+    ],
+  },
+})
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
@@ -41,4 +87,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withNextIntl(nextConfig)
+module.exports = withPWA(withNextIntl(nextConfig))

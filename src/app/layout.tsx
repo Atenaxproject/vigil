@@ -9,6 +9,8 @@ import { EmergencyBanner } from '@/components/layout/EmergencyBanner'
 import { Navigation } from '@/components/layout/Navigation'
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { FeedbackWidget } from '@/components/feedback/FeedbackWidget'
+import { NetworkStatusBanner } from '@/components/layout/NetworkStatusBanner'
+import { OfflineQueueProvider } from '@/components/providers/OfflineQueueProvider'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { countAlertEvents, getVenezuelaSeismicEvents } from '@/lib/usgs'
 import './globals.css'
@@ -48,10 +50,29 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 </p>
                 <LanguageSwitcher />
               </header>
+              <NetworkStatusBanner />
               <main className="flex-1 pb-20 md:pb-0">{children}</main>
               <footer className="border-t border-slate-200 bg-white px-4 py-6 text-center text-[11px] text-vigil-muted">
                 <p>{t('madeFor')}</p>
                 <p className="mt-1">{t('openSource')}</p>
+                <a
+                  href={`mailto:${CRISIS_CONFIG.legal.contactEmail}`}
+                  className="mt-2 inline-block text-vigil-muted transition-colors hover:text-vigil-blue"
+                >
+                  {t('contact')}
+                </a>
+                <p className="mt-3">{t('credits')} 🇻🇪</p>
+                <p className="mt-1">
+                  {t('creditsByPrefix')}{' '}
+                  <a
+                    href="https://atenaxproject.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-vigil-muted transition-colors hover:text-vigil-blue"
+                  >
+                    {t('creditsByLink')}
+                  </a>
+                </p>
                 <p className="mt-2 text-slate-500">
                   {t('notEmergency', { hotline: CRISIS_CONFIG.emergency.hotlineLabel })}
                 </p>
@@ -59,6 +80,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           </div>
           <Toaster position="top-center" />
+          <OfflineQueueProvider />
           <FeedbackWidget />
         </NextIntlClientProvider>
       </body>

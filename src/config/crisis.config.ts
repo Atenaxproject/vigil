@@ -55,7 +55,8 @@ export const CRISIS_CONFIG = {
   legal: {
     operator: 'Bbluestudios LLC',
     operatorLocation: 'Greenacres, Florida, USA',
-    contactEmail: 'vigil@atenaxproject.com',
+    contactEmail: 'vigil@youtheway.org',
+    supportEmail: 'vigil.support@youtheway.org',
     privacyPolicyVersion: '1.0.0',
     tosVersion: '1.0.0',
     governingLaw: 'Florida, United States',

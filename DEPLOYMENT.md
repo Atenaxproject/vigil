@@ -108,6 +108,7 @@ Add the following to the Vercel project under **Settings → Environment Variabl
 | `VIGIL_ADMIN_SECRET` | ✅ | Strong random string (rate-limit IP hashing) |
 | `VIGIL_ADMIN_EMAILS` | ✅ | Comma-separated admin allowlist |
 | `ANTHROPIC_API_KEY` | optional | Enables translation / dedup / matching |
+| `RESEND_API_KEY` | optional | Sends feedback alert emails to `vigil.support@youtheway.org` via Resend |
 
 > **Until real values are set, production renders without crashing** (static pages,
 > the USGS map, and forms all work) but live data sections show a calm empty state.
@@ -129,6 +130,28 @@ vercel deploy --prod
    (proxied / orange cloud for DDoS protection).
 3. Set Supabase **Auth → URL Configuration → Site URL** to
    `https://vigil.youtheway.org` and add `/auth/callback` to redirect URLs.
+
+### 10. Resend (feedback email alerts — optional)
+
+Feedback is always saved in Supabase. To also receive email alerts at
+`vigil.support@youtheway.org` when someone submits the feedback widget:
+
+1. Create an account at [resend.com](https://resend.com) and add an API key.
+2. In Resend → **Domains**, add `youtheway.org` and add the DKIM/SPF DNS records
+   Resend provides to Cloudflare DNS for `youtheway.org`.
+3. Add `RESEND_API_KEY` to Vercel environment variables (Production) and redeploy.
+4. Test by submitting feedback on the live site — you should receive an email at
+   `vigil.support@youtheway.org`.
+
+> Without `RESEND_API_KEY`, feedback still works; only the email notification is skipped.
+
+### 11. Cloudflare Email Routing (already configured)
+
+- `vigil@youtheway.org` — general contact, partnerships, public-facing
+- `vigil.support@youtheway.org` — feedback and support
+
+These addresses receive mail via Cloudflare Email Routing. Resend is only needed
+for **outbound** automated notifications (feedback alerts).
 
 ---
 

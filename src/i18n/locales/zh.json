@@ -240,6 +240,8 @@
     "loading": "Loading...",
     "error": "An error occurred. Please try again.",
     "errorHint": "加载此部分时出现问题。您可以重试。",
+    "cachedData": "Offline — showing saved data",
+    "queueSynced": "{count, plural, one {# report synced} other {# reports synced}}",
     "retry": "Retry",
     "close": "Close",
     "back": "Back",
@@ -269,6 +271,10 @@
   "footer": {
     "madeFor": "Built for the people of Venezuela",
     "openSource": "Open source — MIT License",
+    "contact": "Contact",
+    "credits": "Made with hope and love for Venezuela",
+    "creditsByPrefix": "A project by Orlando Toro —",
+    "creditsByLink": "Atenax Project",
     "notEmergency": "Vigil is NOT an emergency service. For immediate rescue call: {hotline}"
   },
   "exchange": {

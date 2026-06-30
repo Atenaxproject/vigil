@@ -7,6 +7,21 @@ All notable changes to Vigil are documented here. Format loosely follows
 ## [Unreleased] — 2026-06-29
 
 ### Added
+- **Official email integration** — `vigil@youtheway.org` and `vigil.support@youtheway.org` in `crisis.config.ts`; footer contact link; Resend-powered feedback notifications (`src/lib/email/notify.ts`).
+- **PWA runtime caching** — `@ducanh2912/next-pwa` with network-first Supabase, stale-while-revalidate USGS/ReliefWeb, cache-first images, and `/offline` fallback page.
+- **Offline form queue** — missing-person and map-marker submissions queue in `localStorage` and flush on reconnect (`src/lib/offline-queue.ts`).
+- **Network status banner** — “showing saved data” indicator when offline.
+- **Footer credits** — “Made with hope and love for Venezuela” + Atenax Project link (ES/EN i18n).
+- `RESEND_API_KEY` in `.env.example`.
+
+### Changed
+- Removed unused `framer-motion` dependency.
+- **README**: official contact emails, PWA details, Built By section, Coming soon table (Resend alerts, push notifications, screenshots).
+- **DEPLOYMENT**: Resend setup steps and `RESEND_API_KEY` in Vercel env table.
+
+## [Unreleased] — 2026-06-29 (prior)
+
+### Added
 - **Live information hub** (`/informacion`) — auto-refreshing USGS + ReliefWeb feeds, manual crisis stats, realtime `infrastructure_status` from Supabase.
 - **`/api/live-info`** — aggregates USGS significant quakes and ReliefWeb reports (5-minute cache).
 - **Rescuer safety presence** (`/equipo-activo`) — field check-in, SOS button, 4-hour auto-expire, map layer "Equipos Activos".

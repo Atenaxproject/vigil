@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { Lock } from 'lucide-react'
+import { queueSubmission } from '@/lib/offline-queue'
 
 const formSchema = z.object({
   full_name: z.string().min(2).max(200),
@@ -40,6 +41,13 @@ export function MissingPersonForm() {
   async function onSubmit(data: FormValues) {
     setSubmitting(true)
     try {
+      if (!navigator.onLine) {
+        queueSubmission('missing-person', data)
+        toast.success(t('queuedOffline'))
+        reset()
+        return
+      }
+
       const res = await fetch('/api/missing-persons/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
