@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
 import { isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 export const dynamic = 'force-dynamic'
 
@@ -60,7 +61,7 @@ export async function POST(request: NextRequest) {
         urgent: body.urgent,
         status: 'active',
       })
-      .select('id, entry_type, category, title, status, created_at')
+      .select('id, entry_type, category, title, status, created_at, claim_token')
       .single()
 
     if (error) {
@@ -81,7 +82,9 @@ export async function POST(request: NextRequest) {
       matchCount = count ?? 0
     }
 
-    return NextResponse.json({ success: true, record: data, matchCount })
+    const claimUrl = `${CRISIS_CONFIG.siteUrl}/mi-intercambio/${data.claim_token}`
+
+    return NextResponse.json({ success: true, record: data, matchCount, claimUrl })
   } catch {
     return NextResponse.json({ error: 'Datos inválidos' }, { status: 400 })
   }

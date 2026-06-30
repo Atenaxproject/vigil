@@ -56,11 +56,17 @@ One config file change redeploys the whole platform for **any country, any disas
 - 🚨 **Emergency Banner** — Always-visible hotline (0800-RESCATE), Intérpretes, and Cruz Roja links — government-operated intake tools intentionally excluded.
 - 🌐 **8 Languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian.
 - 📱 **PWA / Offline-first** — Service worker with runtime caching (Supabase network-first, USGS/ReliefWeb stale-while-revalidate), offline fallback page, form submission queue, and a “showing saved data” banner when offline.
+- 📝 **Public notes & claim links** — Google Person Finder–style sightings on missing persons; passwordless private `/mi-reporte/{token}` and `/mi-intercambio/{token}` management pages.
+- 📦 **Collection points** — Citizen self-registration for donation drop-offs on the crisis map (`/punto-de-acopio`).
+- 📅 **Events calendar** — Lightweight date-grouped list of donation drives, volunteer meetups, and distributions (`/calendario`), with Venezuela timezone labels.
+- 🌤️ **Weather & time bar** — Open-Meteo ambient bar (Caracas + La Guaira) below the emergency banner; no API key required.
 
 ### Coming soon
 
 | Feature | Status |
 |---|---|
+| **Migration `005_notes_claims_calendar.sql`** | Coded — run in Supabase SQL Editor to enable notes, claim tokens, events, and collection-point fields |
+| **Claim-link email on submit** | Coded — requires `RESEND_API_KEY` + `youtheway.org` domain verification in Resend |
 | **Resend feedback email alerts** | Coded — requires `RESEND_API_KEY` in Vercel + `youtheway.org` domain verification in Resend |
 | **Push notifications (mag 4.0+ aftershocks)** | Planned — PWA install + notification permission flow |
 | **Screenshots in README** | Planned — add to `public/screenshots/` |

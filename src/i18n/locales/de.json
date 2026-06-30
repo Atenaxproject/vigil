@@ -13,7 +13,9 @@
     "info": "Information",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
-    "activeTeam": "Active Team"
+    "activeTeam": "Active Team",
+    "calendar": "Calendar",
+    "collectionPoint": "Collection Point"
   },
   "banner": {
     "emergency": "Emergency:",
@@ -65,7 +67,9 @@
       "submit": "Submit Report",
       "submitting": "Submitting...",
       "success": "Report submitted. You will be notified if there is a match.",
-      "error": "Submission failed. Please try again."
+      "error": "Submission failed. Please try again.",
+      "contactEmail": "Your email (optional)",
+      "contactEmailHelp": "If provided, we'll email you a private link to manage your report."
     },
     "card": {
       "lastSeen": "Last seen:",
@@ -468,5 +472,124 @@
     "sosSent": "SOS alert sent",
     "signOff": "End shift",
     "signedOff": "Presence closed"
+  },
+  "notes": {
+    "title": "Updates & sightings",
+    "addUpdate": "Add update",
+    "empty": "No updates yet.",
+    "types": {
+      "sighting": "Sighting",
+      "status_update": "Status update",
+      "encouragement": "Encouragement",
+      "correction": "Correction"
+    },
+    "form": {
+      "authorName": "Your name",
+      "noteType": "Note type",
+      "message": "Message",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "success": "Update posted.",
+      "error": "Failed to submit."
+    }
+  },
+  "claim": {
+    "successTitle": "Your report was submitted successfully.",
+    "saveLink": "Save this link to manage your report and view updates:",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied",
+    "copyError": "Could not copy",
+    "privateWarning": "This link is private. Only you should have it.",
+    "dismiss": "Continue",
+    "privatePage": "Private page — do not share this link.",
+    "notFound": "Report not found or invalid link.",
+    "exchangeNotFound": "Listing not found.",
+    "backToSearch": "Back to search",
+    "backToExchange": "Back to exchange",
+    "updateStatus": "Update status",
+    "updateNotes": "Notes / description",
+    "saveChanges": "Save changes",
+    "saving": "Saving...",
+    "saved": "Changes saved.",
+    "saveError": "Failed to save.",
+    "contactInbox": "Contact requests",
+    "noContactRequests": "No requests yet.",
+    "markAllViewed": "Mark all as viewed"
+  },
+  "weather": {
+    "venezuela": "Venezuela",
+    "rain": "rain"
+  },
+  "calendar": {
+    "title": "Events Calendar",
+    "subtitle": "Donation drives, volunteer meetups, and distributions",
+    "addEvent": "Add event",
+    "empty": "No upcoming events.",
+    "organizer": "Organizer",
+    "filters": {
+      "all": "All"
+    },
+    "categories": {
+      "donation_drive": "Collection",
+      "volunteer_meetup": "Volunteer Meetup",
+      "distribution": "Distribution",
+      "info_session": "Information",
+      "memorial": "Memorial",
+      "other": "Other"
+    },
+    "form": {
+      "title": "New event",
+      "eventTitle": "Title",
+      "category": "Category",
+      "startsAt": "Start",
+      "endsAt": "End (optional)",
+      "location": "Location",
+      "description": "Description",
+      "organizer": "Organizer",
+      "contact": "Contact (private)",
+      "contactNote": "Contact is never shown publicly.",
+      "submit": "Publish event",
+      "submitting": "Publishing...",
+      "success": "Event published.",
+      "error": "Failed to publish.",
+      "cancel": "Close"
+    }
+  },
+  "collectionPoint": {
+    "title": "Register Collection Point",
+    "subtitle": "Organizing a donation drop-off? Register it to appear on the map.",
+    "backToMap": "Back to map",
+    "boundsNote": "Only locations within {country} are accepted.",
+    "map": {
+      "organizer": "Organizer",
+      "contactViaVigil": "Contact via Vigil"
+    },
+    "accepts": {
+      "food": "Food",
+      "water": "Water",
+      "clothing": "Clothing",
+      "medicine": "Medicine",
+      "hygiene": "Hygiene",
+      "tools": "Tools",
+      "other": "Other"
+    },
+    "form": {
+      "title": "Collection point name",
+      "organizer": "Organizer (your name or group)",
+      "location": "Location (address or reference)",
+      "accepts": "What do you accept?",
+      "hours": "Hours",
+      "hoursPlaceholder": "Mon–Fri 9am–5pm",
+      "contact": "Contact",
+      "contactNote": "Your contact is never shown publicly.",
+      "gpsOk": "GPS location detected",
+      "gpsPending": "Waiting for GPS location…",
+      "gpsRequired": "GPS location within Venezuela is required.",
+      "categoriesRequired": "Select at least one category.",
+      "submit": "Register point",
+      "submitting": "Registering...",
+      "success": "Collection point registered.",
+      "error": "Failed to register."
+    }
   }
 }

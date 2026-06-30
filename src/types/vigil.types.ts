@@ -116,6 +116,9 @@ export interface MapMarker {
   verified: boolean
   source: string
   created_at: string
+  hours_schedule?: string | null
+  accepts_categories?: string[]
+  organizer_name?: string | null
 }
 
 export interface Organization {
@@ -291,5 +294,39 @@ export interface FeedbackItem {
   page_context: string | null
   status: FeedbackStatus
   admin_notes: string | null
+  created_at: string
+}
+
+export type EventCategory =
+  | 'donation_drive'
+  | 'volunteer_meetup'
+  | 'distribution'
+  | 'info_session'
+  | 'memorial'
+  | 'other'
+
+export interface VigilEvent {
+  id: string
+  title: string
+  description: string | null
+  category: EventCategory | null
+  starts_at: string
+  ends_at: string | null
+  location_label: string
+  lat: number | null
+  lng: number | null
+  organizer_name: string | null
+  verified: boolean
+  created_at: string
+}
+
+export type MissingPersonNoteType = 'sighting' | 'status_update' | 'encouragement' | 'correction'
+
+export interface MissingPersonNote {
+  id: string
+  missing_person_id: string
+  author_name: string
+  note_type: MissingPersonNoteType
+  message: string
   created_at: string
 }

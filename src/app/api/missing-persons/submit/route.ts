@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
 import { getClientIp, hashIp, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import { notifyClaimLink } from '@/lib/email/notify'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,6 +19,7 @@ const schema = z.object({
   contact_name: z.string().min(2).max(200),
   contact_phone: z.string().max(25).optional(),
   contact_whatsapp: z.string().max(25).optional(),
+  contact_email: z.string().email().max(200).optional().or(z.literal('')),
   consent_given: z.literal(true),
   data_accuracy_confirmed: z.literal(true),
 })
@@ -48,20 +51,31 @@ export async function POST(request: NextRequest) {
         contact_name: sanitizeText(body.contact_name),
         contact_phone: body.contact_phone ? sanitizePhone(body.contact_phone) : null,
         contact_whatsapp: body.contact_whatsapp ? sanitizePhone(body.contact_whatsapp) : null,
+        contact_email: body.contact_email ? sanitizeText(body.contact_email) : null,
         consent_given: true,
         data_accuracy_confirmed: true,
         consent_timestamp: new Date().toISOString(),
         reporter_ip_hash: ipHash,
         source: 'web',
       })
-      .select('id, full_name, status, created_at')
+      .select('id, full_name, status, created_at, claim_token')
       .single()
 
     if (error) {
       return NextResponse.json({ error: 'Error al guardar' }, { status: 500 })
     }
 
-    return NextResponse.json({ success: true, record: data })
+    const claimUrl = `${CRISIS_CONFIG.siteUrl}/mi-reporte/${data.claim_token}`
+    if (body.contact_email) {
+      void notifyClaimLink({
+        to: body.contact_email,
+        personName: data.full_name,
+        claimUrl,
+        type: 'missing_person',
+      })
+    }
+
+    return NextResponse.json({ success: true, record: data, claimUrl })
   } catch {
     return NextResponse.json({ error: 'Datos inválidos' }, { status: 400 })
   }

@@ -41,3 +41,35 @@ export async function notifyNewFeedback(feedback: {
     console.error('Failed to send feedback notification:', error)
   }
 }
+
+export async function notifyClaimLink(params: {
+  to: string
+  personName: string
+  claimUrl: string
+  type: 'missing_person' | 'resource_exchange'
+}) {
+  if (!process.env.RESEND_API_KEY) return
+
+  const resend = new Resend(process.env.RESEND_API_KEY)
+  const subject =
+    params.type === 'missing_person'
+      ? `[Vigil] Enlace privado para gestionar reporte de ${params.personName}`
+      : `[Vigil] Enlace privado para gestionar tu publicación`
+
+  try {
+    await resend.emails.send({
+      from: `Vigil <${CRISIS_CONFIG.legal.contactEmail}>`,
+      to: params.to,
+      subject,
+      html: `
+        <h2>Tu enlace privado de Vigil</h2>
+        <p>Guarda este enlace para gestionar tu reporte y ver actualizaciones:</p>
+        <p><a href="${escapeHtml(params.claimUrl)}">${escapeHtml(params.claimUrl)}</a></p>
+        <p><strong>⚠️ Este enlace es privado. Solo tú deberías tenerlo.</strong></p>
+        <p>Si no enviaste este reporte, ignora este correo.</p>
+      `,
+    })
+  } catch (error) {
+    console.error('Failed to send claim link email:', error)
+  }
+}

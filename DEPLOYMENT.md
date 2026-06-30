@@ -34,10 +34,12 @@ Open **SQL Editor** in the Supabase dashboard and run, in order:
 2. `supabase/migrations/002_auth_setup.sql`
 3. `supabase/migrations/002_resource_exchange.sql`
 4. `supabase/migrations/003_volunteer_enhancements.sql`
+5. `supabase/migrations/004_golive_features.sql`
+6. `supabase/migrations/005_notes_claims_calendar.sql`
 
 Then seed verified launch data:
 
-5. `supabase/seeds/001_real_data.sql`
+7. `supabase/seeds/001_real_data.sql`
 
 **Option B — Supabase CLI (linked project)**
 
@@ -91,9 +93,11 @@ Use **app_metadata**, never `user_metadata`, for authorization (user_metadata is
 In **Database → Replication**, enable Realtime for:
 
 - `missing_persons`
+- `missing_person_notes`
 - `map_markers`
 - `needs_offers`
 - `resource_exchange`
+- `events`
 
 ### 7. Vercel environment variables
 
@@ -151,7 +155,13 @@ Feedback is always saved in Supabase. To also receive email alerts at
 - `vigil.support@youtheway.org` — feedback and support
 
 These addresses receive mail via Cloudflare Email Routing. Resend is only needed
-for **outbound** automated notifications (feedback alerts).
+for **outbound** automated notifications (feedback alerts, claim-link emails on
+missing-person submit when `contact_email` is provided).
+
+### 12. Open-Meteo weather (no setup required)
+
+The weather/time bar uses [Open-Meteo](https://open-meteo.com) — free, no API key.
+Data is cached for 30 minutes server-side. No environment variables needed.
 
 ---
 

@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { formatDistanceToNow } from 'date-fns'
 import { es, enUS } from 'date-fns/locale'
 import { useLocale, useTranslations } from 'next-intl'
@@ -33,7 +34,8 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
     : t('card.justNow')
 
   return (
-    <article className="relative rounded-card border border-slate-200 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+    <Link href={`/buscar/${person.id}`} className="block">
+    <article className="relative rounded-card border border-slate-200 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-colors hover:border-slate-300">
       <div className="absolute right-4 top-4">
         <StatusBadge status={person.status} label={t(`status.${person.status}`)} />
       </div>
@@ -70,7 +72,11 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
           <FlagButton />
           <button
             type="button"
-            onClick={() => onContact?.(person.id)}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              onContact?.(person.id)
+            }}
             className="rounded-input bg-vigil-blue px-3 py-1.5 text-[11px] font-medium text-white hover:bg-blue-700"
           >
             {t('card.contact')}
@@ -78,5 +84,6 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
         </div>
       </footer>
     </article>
+    </Link>
   )
 }

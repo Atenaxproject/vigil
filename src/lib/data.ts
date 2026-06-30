@@ -42,7 +42,9 @@ export async function getMapMarkers(): Promise<MapMarker[]> {
     const supabase = await createClient()
     const { data, error } = await supabase
       .from('map_markers')
-      .select('id, type, category, title, description, lat, lng, urgent, status, verified, source, created_at')
+      .select(
+        'id, type, category, title, description, lat, lng, urgent, status, verified, source, created_at, hours_schedule, accepts_categories, organizer_name'
+      )
       .eq('status', 'active')
       .eq('flagged', false)
       .limit(200)

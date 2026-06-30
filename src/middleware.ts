@@ -16,6 +16,9 @@ const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/feedback/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/rescuer-presence/submit': { max: 10, windowMs: 60 * 60 * 1000 },
   '/api/rescuer-presence/checkin': { max: 20, windowMs: 60 * 60 * 1000 },
+  '/api/missing-persons/notes': { max: 20, windowMs: 60 * 60 * 1000 },
+  '/api/events': { max: 10, windowMs: 60 * 60 * 1000 },
+  '/api/collection-points/submit': { max: 5, windowMs: 60 * 60 * 1000 },
 }
 
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>()

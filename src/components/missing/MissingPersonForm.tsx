@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { Lock } from 'lucide-react'
+import { ClaimLinkSuccess } from '@/components/ui/ClaimLinkSuccess'
 import { queueSubmission } from '@/lib/offline-queue'
 
 const formSchema = z.object({
@@ -19,6 +20,7 @@ const formSchema = z.object({
   contact_name: z.string().min(2).max(200),
   contact_phone: z.string().max(25).optional(),
   contact_whatsapp: z.string().max(25).optional(),
+  contact_email: z.string().email().max(200).optional().or(z.literal('')),
   consent_given: z.literal(true),
   data_accuracy_confirmed: z.literal(true),
 })
@@ -28,6 +30,7 @@ type FormValues = z.infer<typeof formSchema>
 export function MissingPersonForm() {
   const t = useTranslations('missing.form')
   const [submitting, setSubmitting] = useState(false)
+  const [claimUrl, setClaimUrl] = useState<string | null>(null)
 
   const {
     register,
@@ -53,14 +56,32 @@ export function MissingPersonForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
+      const json = (await res.json()) as { claimUrl?: string }
       if (!res.ok) throw new Error('submit failed')
-      toast.success(t('success'))
-      reset()
+      if (json.claimUrl) {
+        setClaimUrl(json.claimUrl)
+      } else {
+        toast.success(t('success'))
+        reset()
+      }
     } catch {
       toast.error(t('error'))
     } finally {
       setSubmitting(false)
     }
+  }
+
+  if (claimUrl) {
+    return (
+      <ClaimLinkSuccess
+        claimUrl={claimUrl}
+        subtitle={t('success')}
+        onDismiss={() => {
+          setClaimUrl(null)
+          reset()
+        }}
+      />
+    )
   }
 
   const inputClass =
@@ -146,6 +167,14 @@ export function MissingPersonForm() {
           </label>
           <input id="contact_whatsapp" type="tel" {...register('contact_whatsapp')} className={inputClass} />
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="contact_email" className={labelClass}>
+          {t('contactEmail')}
+        </label>
+        <input id="contact_email" type="email" {...register('contact_email')} className={inputClass} />
+        <p className="mt-1 text-[11px] text-vigil-muted">{t('contactEmailHelp')}</p>
       </div>
 
       <p className="flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[11px] text-amber-800">

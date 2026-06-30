@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import { Toaster } from 'react-hot-toast'
 import { EmergencyBanner } from '@/components/layout/EmergencyBanner'
+import { WeatherBar } from '@/components/layout/WeatherBar'
 import { Navigation } from '@/components/layout/Navigation'
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { FeedbackWidget } from '@/components/feedback/FeedbackWidget'
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-screen font-sans">
         <NextIntlClientProvider messages={messages}>
           <EmergencyBanner aftershockCount={alertCount} />
+          <WeatherBar />
           <div className="flex min-h-[calc(100vh-44px)]">
             <Navigation />
             <div className="flex min-w-0 flex-1 flex-col">

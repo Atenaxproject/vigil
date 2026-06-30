@@ -18,6 +18,8 @@ import {
   Info,
   HelpCircle,
   Shield,
+  Calendar,
+  Package,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -34,6 +36,8 @@ type NavLabelKey =
   | 'howToHelp'
   | 'info'
   | 'activeTeam'
+  | 'calendar'
+  | 'collectionPoint'
 
 const navItems: Array<{
   href: string
@@ -46,6 +50,8 @@ const navItems: Array<{
   { href: '/buscar', labelKey: 'search', icon: Search },
   { href: '/reportar', labelKey: 'report', icon: FilePlus, center: true },
   { href: '/necesito-ayuda', labelKey: 'needHelp', icon: HandHelping },
+  { href: '/calendario', labelKey: 'calendar', icon: Calendar, more: true },
+  { href: '/punto-de-acopio', labelKey: 'collectionPoint', icon: Package, more: true },
   { href: '/intercambio', labelKey: 'exchange', icon: ArrowLeftRight, more: true },
   { href: '/voluntarios', labelKey: 'volunteers', icon: Users, more: true },
   { href: '/organizaciones', labelKey: 'organizations', icon: Building2, more: true },

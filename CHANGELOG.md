@@ -7,6 +7,23 @@ All notable changes to Vigil are documented here. Format loosely follows
 ## [Unreleased] — 2026-06-29
 
 ### Added
+- **Public notes system** — `missing_person_notes` table, realtime thread on `/buscar/[id]`, API at `/api/missing-persons/notes`.
+- **Claim-token management** — passwordless `/mi-reporte/{token}` and `/mi-intercambio/{token}` pages; claim links shown on submit with copy button.
+- **Collection point registration** — `/punto-de-acopio` form → `map_markers` with hours, categories, organizer; amber markers on crisis map.
+- **Events calendar** — `/calendario` lightweight list view with category filters, realtime updates, Venezuela timezone labels.
+- **Weather + time bar** — `/api/weather` (Open-Meteo, free) + slim ambient bar below emergency banner.
+- Migration `005_notes_claims_calendar.sql` — claim tokens, notes, events, collection-point fields, contact-request `viewed` flag.
+- Nav entries: Calendario, Punto de Acopio (desktop sidebar + mobile Más menu).
+- i18n keys for notes, claim, weather, calendar, collectionPoint (8 locales).
+
+### Changed
+- **README**: new features listed; Coming soon table updated for migration + Resend claim emails.
+- **DEPLOYMENT**: migration 005 step, Realtime tables list, Open-Meteo note (no env var).
+- **Missing person submit** — returns `claimUrl`; optional `contact_email` triggers Resend claim link when configured.
+
+## [Unreleased] — 2026-06-29 (prior)
+
+### Added
 - **Official email integration** — `vigil@youtheway.org` and `vigil.support@youtheway.org` in `crisis.config.ts`; footer contact link; Resend-powered feedback notifications (`src/lib/email/notify.ts`).
 - **PWA runtime caching** — `@ducanh2912/next-pwa` with network-first Supabase, stale-while-revalidate USGS/ReliefWeb, cache-first images, and `/offline` fallback page.
 - **Offline form queue** — missing-person and map-marker submissions queue in `localStorage` and flush on reconnect (`src/lib/offline-queue.ts`).

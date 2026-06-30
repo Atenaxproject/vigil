@@ -9,6 +9,7 @@ export interface MapLayerState {
   shelters: boolean
   hospitals: boolean
   activeTeams: boolean
+  collection: boolean
 }
 
 interface MapLayersProps {
@@ -24,6 +25,7 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
     { key: 'needs', label: t('needs') },
     { key: 'resources', label: t('resources') },
     { key: 'activeTeams', label: t('activeTeams') },
+    { key: 'collection', label: t('collection') },
     { key: 'shelters', label: t('shelters') },
     { key: 'hospitals', label: t('hospitals') },
   ]

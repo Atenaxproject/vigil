@@ -19,6 +19,7 @@ import {
   X,
 } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { ClaimLinkSuccess } from '@/components/ui/ClaimLinkSuccess'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import type {
@@ -66,6 +67,7 @@ export default function IntercambioPage() {
   const [showForm, setShowForm] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [contactEntry, setContactEntry] = useState<PublicResourceExchange | null>(null)
+  const [claimUrl, setClaimUrl] = useState<string | null>(null)
   const [locale, setLocale] = useState('es')
 
   useEffect(() => {
@@ -172,6 +174,8 @@ export default function IntercambioPage() {
 
       if (entryType === 'requesting' && data.matchCount > 0) {
         toast.success(t('form.matchSuggestion', { count: data.matchCount }))
+      } else if (data.claimUrl) {
+        setClaimUrl(data.claimUrl as string)
       } else {
         toast.success(t('form.success'))
       }
@@ -212,6 +216,11 @@ export default function IntercambioPage() {
 
   return (
     <div className="mx-auto max-w-3xl p-4 pb-24">
+      {claimUrl && (
+        <div className="mb-6">
+          <ClaimLinkSuccess claimUrl={claimUrl} onDismiss={() => setClaimUrl(null)} />
+        </div>
+      )}
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">

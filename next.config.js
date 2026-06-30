@@ -67,7 +67,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://*.supabase.co https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com",
-              "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.tile.openstreetmap.org https://earthquake.usgs.gov https://api.reliefweb.int https://api.anthropic.com https://data.humdata.org",
+              "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.tile.openstreetmap.org https://earthquake.usgs.gov https://api.reliefweb.int https://api.anthropic.com https://data.humdata.org https://api.open-meteo.com",
               "frame-ancestors 'none'",
             ].join('; '),
           },
