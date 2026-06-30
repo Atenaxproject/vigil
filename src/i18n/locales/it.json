@@ -27,7 +27,7 @@
       "button": "Search",
       "noResults": "No results found. Try a different name.",
       "loading": "Searching...",
-      "resultsCount": "{{count}} results found"
+      "resultsCount": "{count} results found"
     },
     "status": {
       "missing": "Missing",
@@ -73,8 +73,8 @@
       "contact": "Request Contact",
       "flag": "Flag as incorrect",
       "markFound": "Mark as Found",
-      "daysAgo": "{{count}} days ago",
-      "hoursAgo": "{{count}} hours ago",
+      "daysAgo": "{count} days ago",
+      "hoursAgo": "{count} hours ago",
       "justNow": "Just now"
     }
   },
@@ -115,7 +115,7 @@
     },
     "urgent": "URGENT",
     "verified": "Verified",
-    "lastUpdate": "Last updated: {{time}}"
+    "lastUpdate": "Last updated: {time}"
   },
   "volunteers": {
     "title": "Volunteer Registration",
@@ -230,7 +230,7 @@
     "subtitle": "Verified information from OCHA, ReliefWeb, UNICEF and official sources",
     "source": "Source:",
     "readMore": "Read full report",
-    "lastUpdated": "Last updated: {{time}}",
+    "lastUpdated": "Last updated: {time}",
     "disclaimer": "All content from official humanitarian sources. Vigil does not edit these reports."
   },
   "common": {
@@ -266,7 +266,7 @@
   "footer": {
     "madeFor": "Built for the people of Venezuela",
     "openSource": "Open source — MIT License",
-    "notEmergency": "Vigil is NOT an emergency service. For immediate rescue call: {{hotline}}"
+    "notEmergency": "Vigil is NOT an emergency service. For immediate rescue call: {hotline}"
   },
   "exchange": {
     "title": "Resource Exchange",
@@ -317,7 +317,7 @@
       "submitting": "Posting...",
       "success": "Listing posted.",
       "error": "Failed to post.",
-      "matchSuggestion": "{{count}} people are offering something similar"
+      "matchSuggestion": "{count} people are offering something similar"
     }
   },
   "howToHelp": {
