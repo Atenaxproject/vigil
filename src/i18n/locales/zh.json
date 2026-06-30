@@ -20,7 +20,14 @@
     "mapShort": "地图",
     "searchShort": "搜索",
     "reportShort": "上报",
-    "needHelpShort": "帮助"
+    "needHelpShort": "帮助",
+    "collapseMenu": "收起菜单",
+    "expandMenu": "展开菜单",
+    "desktopNav": "主导航",
+    "mobileNav": "移动导航"
+  },
+  "a11y": {
+    "skipToContent": "跳到主要内容"
   },
   "banner": {
     "emergency": "紧急情况:",
@@ -92,6 +99,12 @@
   },
   "map": {
     "title": "危机地图",
+    "viewAsList": "以列表查看",
+    "hideList": "隐藏列表",
+    "listHeading": "地图文字内容",
+    "listEmpty": "地图上暂无活动标记。",
+    "zoomIn": "放大地图",
+    "zoomOut": "缩小地图",
     "layers": {
       "title": "地图图层",
       "toggleLayers": "图层",

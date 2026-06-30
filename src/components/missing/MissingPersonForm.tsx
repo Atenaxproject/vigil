@@ -29,6 +29,7 @@ type FormValues = z.infer<typeof formSchema>
 
 export function MissingPersonForm() {
   const t = useTranslations('missing.form')
+  const tCommon = useTranslations('common')
   const [submitting, setSubmitting] = useState(false)
   const [claimUrl, setClaimUrl] = useState<string | null>(null)
 
@@ -89,15 +90,27 @@ export function MissingPersonForm() {
   const labelClass = 'block text-[13px] font-medium text-slate-600'
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4" noValidate>
       <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
 
       <div>
         <label htmlFor="full_name" className={labelClass}>
           {t('name')} *
         </label>
-        <input id="full_name" {...register('full_name')} className={inputClass} placeholder={t('namePlaceholder')} />
-        {errors.full_name && <p className="mt-1 text-[13px] text-status-missing">Required</p>}
+        <input
+          id="full_name"
+          {...register('full_name')}
+          className={inputClass}
+          placeholder={t('namePlaceholder')}
+          aria-required="true"
+          aria-invalid={!!errors.full_name}
+          aria-describedby={errors.full_name ? 'full_name-error' : undefined}
+        />
+        {errors.full_name && (
+          <p id="full_name-error" role="alert" className="mt-1 text-[13px] text-status-missing">
+            {tCommon('required')}
+          </p>
+        )}
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -130,7 +143,15 @@ export function MissingPersonForm() {
           {...register('last_seen_location')}
           className={inputClass}
           placeholder={t('lastSeenPlaceholder')}
+          aria-required="true"
+          aria-invalid={!!errors.last_seen_location}
+          aria-describedby={errors.last_seen_location ? 'last_seen_location-error' : undefined}
         />
+        {errors.last_seen_location && (
+          <p id="last_seen_location-error" role="alert" className="mt-1 text-[13px] text-status-missing">
+            {tCommon('required')}
+          </p>
+        )}
       </div>
 
       <div>
@@ -151,7 +172,23 @@ export function MissingPersonForm() {
         <label htmlFor="contact_name" className={labelClass}>
           {t('contactName')} *
         </label>
-        <input id="contact_name" {...register('contact_name')} className={inputClass} />
+        <input
+          id="contact_name"
+          {...register('contact_name')}
+          className={inputClass}
+          aria-required="true"
+          aria-invalid={!!errors.contact_name}
+          aria-describedby={
+            errors.contact_name
+              ? 'contact_name-error'
+              : 'contact-privacy-note'
+          }
+        />
+        {errors.contact_name && (
+          <p id="contact_name-error" role="alert" className="mt-1 text-[13px] text-status-missing">
+            {tCommon('required')}
+          </p>
+        )}
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -159,13 +196,25 @@ export function MissingPersonForm() {
           <label htmlFor="contact_phone" className={labelClass}>
             {t('contactPhone')}
           </label>
-          <input id="contact_phone" type="tel" {...register('contact_phone')} className={inputClass} />
+          <input
+            id="contact_phone"
+            type="tel"
+            {...register('contact_phone')}
+            className={inputClass}
+            aria-describedby="contact-privacy-note"
+          />
         </div>
         <div>
           <label htmlFor="contact_whatsapp" className={labelClass}>
             {t('contactWhatsApp')}
           </label>
-          <input id="contact_whatsapp" type="tel" {...register('contact_whatsapp')} className={inputClass} />
+          <input
+            id="contact_whatsapp"
+            type="tel"
+            {...register('contact_whatsapp')}
+            className={inputClass}
+            aria-describedby="contact-privacy-note"
+          />
         </div>
       </div>
 
@@ -173,23 +222,58 @@ export function MissingPersonForm() {
         <label htmlFor="contact_email" className={labelClass}>
           {t('contactEmail')}
         </label>
-        <input id="contact_email" type="email" {...register('contact_email')} className={inputClass} />
-        <p className="mt-1 text-[13px] text-vigil-muted">{t('contactEmailHelp')}</p>
+        <input
+          id="contact_email"
+          type="email"
+          {...register('contact_email')}
+          className={inputClass}
+          aria-describedby="contact_email-help contact-privacy-note"
+        />
+        <p id="contact_email-help" className="mt-1 text-[13px] text-vigil-muted">
+          {t('contactEmailHelp')}
+        </p>
       </div>
 
-      <p className="flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[13px] text-amber-800">
+      <p
+        id="contact-privacy-note"
+        className="flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[13px] text-amber-800"
+      >
         <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
         {t('contactPrivacyNote')}
       </p>
 
       <label className="flex items-start gap-2 text-[16px]">
-        <input type="checkbox" {...register('consent_given')} className="mt-1" />
+        <input
+          type="checkbox"
+          {...register('consent_given')}
+          className="mt-1"
+          aria-required="true"
+          aria-invalid={!!errors.consent_given}
+          aria-describedby={errors.consent_given ? 'consent-error' : undefined}
+        />
         {t('consent')} *
       </label>
+      {errors.consent_given && (
+        <p id="consent-error" role="alert" className="text-[13px] text-status-missing">
+          {tCommon('required')}
+        </p>
+      )}
       <label className="flex items-start gap-2 text-[16px]">
-        <input type="checkbox" {...register('data_accuracy_confirmed')} className="mt-1" />
+        <input
+          type="checkbox"
+          {...register('data_accuracy_confirmed')}
+          className="mt-1"
+          aria-required="true"
+          aria-invalid={!!errors.data_accuracy_confirmed}
+          aria-describedby={errors.data_accuracy_confirmed ? 'accuracy-error' : undefined}
+        />
         {t('accuracy')} *
       </label>
+      {errors.data_accuracy_confirmed && (
+        <p id="accuracy-error" role="alert" className="text-[13px] text-status-missing">
+          {tCommon('required')}
+        </p>
+      )}
 
       <button
         type="submit"

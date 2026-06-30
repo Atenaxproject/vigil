@@ -20,7 +20,14 @@
     "mapShort": "Карта",
     "searchShort": "Поиск",
     "reportShort": "Сообщить",
-    "needHelpShort": "Помощь"
+    "needHelpShort": "Помощь",
+    "collapseMenu": "Свернуть меню",
+    "expandMenu": "Развернуть меню",
+    "desktopNav": "Основная навигация",
+    "mobileNav": "Мобильная навигация"
+  },
+  "a11y": {
+    "skipToContent": "Перейти к основному содержимому"
   },
   "banner": {
     "emergency": "Экстренный случай:",
@@ -92,6 +99,12 @@
   },
   "map": {
     "title": "Карта кризиса",
+    "viewAsList": "Показать списком",
+    "hideList": "Скрыть список",
+    "listHeading": "Содержимое карты текстом",
+    "listEmpty": "На карте нет активных меток.",
+    "zoomIn": "Приблизить карту",
+    "zoomOut": "Отдалить карту",
     "layers": {
       "title": "Слои карты",
       "toggleLayers": "Слои",

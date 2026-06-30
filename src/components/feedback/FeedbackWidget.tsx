@@ -130,7 +130,7 @@ export function FeedbackWidget() {
                   ref={closeButtonRef}
                   type="button"
                   onClick={close}
-                  className="rounded p-1 text-vigil-muted hover:bg-vigil-cloud"
+                  className="rounded p-1 text-vigil-muted hover:bg-vigil-cloud focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
                   aria-label={t('close')}
                 >
                   <X className="h-4 w-4" />
@@ -140,7 +140,7 @@ export function FeedbackWidget() {
               {sent ? (
                 <p className="mt-4 text-[16px] text-slate-600">{t('success')}</p>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+                <form onSubmit={handleSubmit} className="mt-4 space-y-4" noValidate>
                   <div className="flex flex-wrap gap-2">
                     {CATEGORIES.map(({ key, emoji }) => (
                       <button
@@ -169,6 +169,7 @@ export function FeedbackWidget() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       required
+                      aria-required="true"
                       className="mt-1 w-full resize-y rounded-input border border-slate-200 bg-vigil-cloud px-3 py-2 text-[16px]"
                     />
                   </div>

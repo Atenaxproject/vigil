@@ -38,6 +38,11 @@
   body {
     @apply bg-vigil-cloud text-slate-700 antialiased;
   }
+
+  *:focus-visible {
+    outline: 2px solid var(--vigil-blue);
+    outline-offset: 2px;
+  }
 }
 
 /*

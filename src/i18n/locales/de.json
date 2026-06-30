@@ -20,7 +20,14 @@
     "mapShort": "Karte",
     "searchShort": "Suchen",
     "reportShort": "Melden",
-    "needHelpShort": "Hilfe"
+    "needHelpShort": "Hilfe",
+    "collapseMenu": "Menü einklappen",
+    "expandMenu": "Menü ausklappen",
+    "desktopNav": "Hauptnavigation",
+    "mobileNav": "Mobile Navigation"
+  },
+  "a11y": {
+    "skipToContent": "Zum Hauptinhalt springen"
   },
   "banner": {
     "emergency": "Notfall:",
@@ -92,6 +99,12 @@
   },
   "map": {
     "title": "Krisenkarte",
+    "viewAsList": "Als Liste anzeigen",
+    "hideList": "Liste ausblenden",
+    "listHeading": "Karteninhalt als Text",
+    "listEmpty": "Keine aktiven Markierungen auf der Karte.",
+    "zoomIn": "Karte vergrößern",
+    "zoomOut": "Karte verkleinern",
     "layers": {
       "title": "Kartenebenen",
       "toggleLayers": "Ebenen",

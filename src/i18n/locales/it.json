@@ -20,7 +20,14 @@
     "mapShort": "Mappa",
     "searchShort": "Cerca",
     "reportShort": "Segnala",
-    "needHelpShort": "Aiuto"
+    "needHelpShort": "Aiuto",
+    "collapseMenu": "Comprimi menu",
+    "expandMenu": "Espandi menu",
+    "desktopNav": "Navigazione principale",
+    "mobileNav": "Navigazione mobile"
+  },
+  "a11y": {
+    "skipToContent": "Vai al contenuto principale"
   },
   "banner": {
     "emergency": "Emergenza:",
@@ -92,6 +99,12 @@
   },
   "map": {
     "title": "Mappa della Crisi",
+    "viewAsList": "Visualizza come elenco",
+    "hideList": "Nascondi elenco",
+    "listHeading": "Contenuto della mappa in testo",
+    "listEmpty": "Nessun marcatore attivo sulla mappa.",
+    "zoomIn": "Ingrandisci mappa",
+    "zoomOut": "Riduci mappa",
     "layers": {
       "title": "Livelli mappa",
       "toggleLayers": "Livelli",

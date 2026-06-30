@@ -72,14 +72,19 @@ export default function NecesitoAyudaPage() {
     'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px]'
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4" noValidate>
       <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('markerTypes.need')}</h1>
 
       <div>
         <label htmlFor="title" className="text-[13px] font-medium text-slate-600">
           Título *
         </label>
-        <input id="title" {...register('title')} className={inputClass} required />
+        <input
+          id="title"
+          {...register('title')}
+          className={inputClass}
+          aria-required="true"
+        />
       </div>
 
       <div>

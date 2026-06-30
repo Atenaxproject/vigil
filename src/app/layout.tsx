@@ -10,6 +10,7 @@ import { Toaster } from 'react-hot-toast'
 import { EmergencyBanner } from '@/components/layout/EmergencyBanner'
 import { WeatherBar } from '@/components/layout/WeatherBar'
 import { Navigation } from '@/components/layout/Navigation'
+import { SkipToContent } from '@/components/layout/SkipToContent'
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { FeedbackWidget } from '@/components/feedback/FeedbackWidget'
 import { NetworkStatusBanner } from '@/components/layout/NetworkStatusBanner'
@@ -61,6 +62,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       style={{ colorScheme: 'light' }}
     >
       <body className="min-h-screen font-sans">
+        <SkipToContent />
         <NextIntlClientProvider messages={messages}>
           <EmergencyBanner aftershockCount={alertCount} />
           <WeatherBar />
@@ -74,7 +76,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <LanguageSwitcher />
               </header>
               <NetworkStatusBanner />
-              <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-0">
+              <main
+                id="main-content"
+                tabIndex={-1}
+                className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-0"
+              >
                 {children}
               </main>
               <footer className="bg-[color:var(--vigil-surface)] text-[13px] text-[color:var(--vigil-muted)]">

@@ -36,6 +36,10 @@ const RescuerPresenceLayer = dynamic(
   () => import('@/components/map/RescuerPresenceLayer').then((m) => m.RescuerPresenceLayer),
   { ssr: false }
 )
+const MapZoomControls = dynamic(
+  () => import('@/components/map/MapZoomControls').then((m) => m.MapZoomControls),
+  { ssr: false }
+)
 
 interface CrisisMapProps {
   events?: SeismicEvent[]
@@ -74,6 +78,7 @@ export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisM
         zoom={defaultZoom}
         minZoom={minZoom}
         maxZoom={maxZoom}
+        zoomControl={false}
         className="h-full min-h-[240px] w-full lg:min-h-[400px]"
         scrollWheelZoom
       >
@@ -88,6 +93,7 @@ export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisM
         {layers.shelters && <ShelterLayer markers={markers} />}
         {layers.hospitals && <HospitalLayer markers={markers} />}
         {layers.activeTeams && <RescuerPresenceLayer presence={rescuerPresence} />}
+        <MapZoomControls />
       </MapContainer>
     </div>
   )

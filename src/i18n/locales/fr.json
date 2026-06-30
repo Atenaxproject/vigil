@@ -20,7 +20,14 @@
     "mapShort": "Carte",
     "searchShort": "Chercher",
     "reportShort": "Signaler",
-    "needHelpShort": "Aide"
+    "needHelpShort": "Aide",
+    "collapseMenu": "Réduire le menu",
+    "expandMenu": "Développer le menu",
+    "desktopNav": "Navigation principale",
+    "mobileNav": "Navigation mobile"
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu principal"
   },
   "banner": {
     "emergency": "Urgence :",
@@ -92,6 +99,12 @@
   },
   "map": {
     "title": "Carte de crise",
+    "viewAsList": "Voir en liste",
+    "hideList": "Masquer la liste",
+    "listHeading": "Contenu de la carte en texte",
+    "listEmpty": "Aucun marqueur actif sur la carte.",
+    "zoomIn": "Zoom avant",
+    "zoomOut": "Zoom arrière",
     "layers": {
       "title": "Couches de carte",
       "toggleLayers": "Couches",

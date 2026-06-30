@@ -21,6 +21,7 @@ interface MapLayersProps {
 
 export function MapLayers({ layers, onChange }: MapLayersProps) {
   const t = useTranslations('map.layers')
+  const tCommon = useTranslations('common')
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const toggles: Array<{ key: keyof MapLayerState; label: string }> = [
@@ -55,7 +56,7 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
       {/* Mobile: floating trigger button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/95 shadow-sm backdrop-blur lg:hidden"
+        className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/95 shadow-sm backdrop-blur focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40 lg:hidden"
         aria-label={t('toggleLayers')}
       >
         <Layers className="h-5 w-5 text-slate-600" />
@@ -75,8 +76,8 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
               <span className="text-[16px] font-semibold text-slate-700">{t('title')}</span>
               <button
                 onClick={() => setMobileOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-slate-100"
-                aria-label="Cerrar"
+                className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+                aria-label={tCommon('close')}
               >
                 <X className="h-4 w-4 text-slate-500" />
               </button>
