@@ -71,7 +71,7 @@ export function Navigation() {
 
   return (
     <>
-      <aside className="hidden w-60 shrink-0 border-r border-slate-200 bg-white md:flex md:flex-col">
+      <aside className="hidden w-60 shrink-0 border-r border-slate-200 bg-white lg:flex lg:flex-col">
         <div className="border-b border-slate-200 px-4 py-5">
           <Link href="/" className="font-display text-lg font-bold tracking-tight text-vigil-ink">
             Vigil
@@ -102,7 +102,7 @@ export function Navigation() {
       </aside>
 
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 flex items-end justify-around border-t border-slate-200 bg-white px-2 pb-[env(safe-area-inset-bottom)] pt-2 md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-50 flex items-end justify-around border-t border-slate-200 bg-white px-2 pb-[env(safe-area-inset-bottom)] pt-2 lg:hidden"
         aria-label="Mobile"
       >
         {primaryMobile.map((item) => {
@@ -140,7 +140,7 @@ export function Navigation() {
         <details className="relative flex flex-1 flex-col items-center">
           <summary className="flex min-h-[44px] cursor-pointer list-none flex-col items-center justify-center gap-0.5 text-[10px] text-vigil-muted">
             <MoreHorizontal className="h-5 w-5" />
-            Más
+            {t('more')}
           </summary>
           <div className="absolute bottom-full mb-2 max-h-64 w-48 overflow-y-auto rounded-card border border-slate-200 bg-white p-2 shadow-sm">
             {moreItems.map((item) => {

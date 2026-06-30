@@ -64,12 +64,12 @@ export function WeatherBar() {
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
-        className="flex w-full items-center justify-between gap-2 md:cursor-default md:pointer-events-none"
+        className="flex w-full items-center justify-between gap-2 lg:cursor-default lg:pointer-events-none"
         aria-expanded={expanded}
       >
         <span className="truncate">
           🕐 {t('venezuela')}: {time}
-          <span className={cn('md:inline', expanded ? 'inline' : 'hidden')}>
+          <span className={cn('lg:inline', expanded ? 'inline' : 'hidden')}>
             {data?.locations.map((loc) => (
               <span key={loc.name}>
                 {' '}
@@ -81,7 +81,7 @@ export function WeatherBar() {
             ))}
           </span>
         </span>
-        <span className="shrink-0 md:hidden">
+        <span className="shrink-0 lg:hidden">
           {expanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
         </span>
       </button>

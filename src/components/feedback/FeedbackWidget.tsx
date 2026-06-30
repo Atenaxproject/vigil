@@ -91,7 +91,7 @@ export function FeedbackWidget() {
           setOpen(true)
           setSent(false)
         }}
-        className="fixed bottom-20 right-4 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-vigil-blue shadow-sm md:bottom-6"
+        className="fixed bottom-20 right-4 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-vigil-blue shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40 lg:bottom-6"
         aria-label={t('open')}
       >
         <MessageCircle className="h-5 w-5" />

@@ -15,14 +15,16 @@ export default async function HomePage() {
   ])
 
   return (
-    <div className="flex h-[calc(100vh-44px-120px)] flex-col lg:flex-row">
-      <section className="flex w-full flex-col border-r border-slate-200 bg-white lg:w-[40%]">
+    <div className="flex flex-col lg:h-[calc(100vh-44px-120px)] lg:flex-row">
+      <section className="flex w-full flex-col border-b border-slate-200 bg-white lg:w-[40%] lg:border-b-0 lg:border-r">
         <MissingPersonSearch initialResults={recent} />
         <RecentMissingFeed initialRecords={recent} />
       </section>
-      <section className="flex w-full flex-col gap-3 p-4 lg:w-[60%]">
+      <section className="flex w-full flex-col gap-3 p-4 lg:w-[60%] lg:min-h-0">
         <AftershockAlert events={events} />
-        <CrisisMap events={events} markers={markers} />
+        <div className="h-[min(45vh,360px)] shrink-0 lg:h-full lg:min-h-[400px]">
+          <CrisisMap events={events} markers={markers} />
+        </div>
       </section>
     </div>
   )

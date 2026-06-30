@@ -63,18 +63,18 @@ export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisM
   const { centerLat, centerLng, defaultZoom, minZoom, maxZoom } = CRISIS_CONFIG.mapBounds
 
   if (!mounted) {
-    return <div className="skeleton h-full min-h-[400px] w-full rounded-card" />
+    return <div className="skeleton h-full min-h-[240px] w-full rounded-card lg:min-h-[400px]" />
   }
 
   return (
-    <div className="relative h-full min-h-[400px] w-full overflow-hidden rounded-card border border-slate-200">
+    <div className="relative h-full min-h-[240px] w-full overflow-hidden rounded-card border border-slate-200 lg:min-h-[400px]">
       <MapLayers layers={layers} onChange={setLayers} />
       <MapContainer
         center={[centerLat, centerLng]}
         zoom={defaultZoom}
         minZoom={minZoom}
         maxZoom={maxZoom}
-        className="h-full min-h-[400px] w-full"
+        className="h-full min-h-[240px] w-full lg:min-h-[400px]"
         scrollWheelZoom
       >
         <TileLayer

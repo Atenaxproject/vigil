@@ -1,5 +1,9 @@
 <div align="center">
 
+<p align="center">
+  <img src="docs/assets/vigil-banner.svg" alt="Vigil — We stand watch when it matters most" width="100%" />
+</p>
+
 # Vigil
 
 ### We stand watch when it matters most.
@@ -8,17 +12,21 @@ A unified, open-source humanitarian crisis platform — real-time missing person
 
 <br />
 
-[![Next.js 14](https://img.shields.io/badge/Next.js-14-000000?logo=next.js&logoColor=white)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20Realtime-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#license)
-[![Deploy on Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com)
-[![PWA](https://img.shields.io/badge/PWA-offline--first-5A0FC8?logo=pwa&logoColor=white)](#performance)
+![License](https://img.shields.io/badge/license-MIT-2563EB)
+![Next.js](https://img.shields.io/badge/Next.js-14-0F172A)
+![Supabase](https://img.shields.io/badge/Supabase-Realtime-3ECF8E)
+![PWA](https://img.shields.io/badge/PWA-Ready-2563EB)
+![Languages](https://img.shields.io/badge/Languages-8-2563EB)
 
 <br />
 
-**🌐 Live:** [vigil.youtheway.org](https://vigil.youtheway.org) &nbsp;·&nbsp; **📦 Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil) &nbsp;·&nbsp; **🚨 Deployment:** Venezuela 2026 Earthquake Response
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Deploy on Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com)
+
+<br />
+
+**Live now:** [vigil.youtheway.org](https://vigil.youtheway.org) &nbsp;·&nbsp; **📦 Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil) &nbsp;·&nbsp; **🚨 Deployment:** Venezuela 2026 Earthquake Response
 
 </div>
 

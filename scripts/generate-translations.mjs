@@ -14,13 +14,21 @@ const LANGUAGES = {
   ru: 'Russian — for Russian rescue and medical teams',
 }
 
+const requested = process.argv.slice(2)
+const targets = requested.length > 0 ? requested : Object.keys(LANGUAGES)
+
 const sourceEn = JSON.parse(readFileSync('./src/i18n/locales/en.json', 'utf-8'))
 
-for (const [code, description] of Object.entries(LANGUAGES)) {
+for (const code of targets) {
+  const description = LANGUAGES[code]
+  if (!description) {
+    console.warn(`Skipping unknown locale: ${code}`)
+    continue
+  }
   console.log(`Translating to ${code}...`)
   const response = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 4096,
+    max_tokens: 16384,
     messages: [
       {
         role: 'user',
@@ -42,7 +50,11 @@ ${JSON.stringify(sourceEn, null, 2)}`,
   })
 
   try {
-    const text = response.content[0].text.trim()
+    let text = response.content[0].text.trim()
+    // Haiku sometimes wraps JSON in markdown fences despite instructions
+    if (text.startsWith('```')) {
+      text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '')
+    }
     const parsed = JSON.parse(text)
     writeFileSync(`./src/i18n/locales/${code}.json`, JSON.stringify(parsed, null, 2))
     console.log(`✓ ${code}.json written`)

@@ -25,6 +25,9 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `09-mobile-darkmode-fix.md` — force light mode, mobile responsive audit
 - `10-footer-hierarchy-fix.md` — footer visual hierarchy restructure
 - `11-docs-and-status.md` — documentation organization + status report
+- `12-launch-ready.md` — pre-launch QA, README banner, domain sweep
+- `13-mobile-rebuild-and-translations.md` — dark mode removal, mobile audit, i18n generation
+- `14-confirmed-mobile-bugs.md` — landscape layout breakpoint + confirmed iPhone fixes
 - `AGENTS.md` — agent operating notes
 
 ## For Contributors

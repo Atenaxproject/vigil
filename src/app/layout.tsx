@@ -71,7 +71,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <LanguageSwitcher />
               </header>
               <NetworkStatusBanner />
-              <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
+              <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-0">
                 {children}
               </main>
               <footer className="bg-[color:var(--vigil-surface)] text-[11px] text-[color:var(--vigil-muted)]">

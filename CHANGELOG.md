@@ -7,6 +7,32 @@ All notable changes to Vigil are documented here. Format loosely follows
 ## [Unreleased] — 2026-06-30
 
 ### Fixed
+- **Mobile landscape layout** — raised mobile/desktop breakpoint from `md` (768px)
+  to `lg` (1024px) so phone landscape keeps bottom nav instead of desktop sidebar
+  (`Navigation`, `layout`, `WeatherBar`, `FeedbackWidget`).
+- **Dark mode fully removed** — deleted `.dark` CSS block from `globals.css`; zero
+  `dark:` Tailwind classes remain; `darkMode: 'class'` in Tailwind (OS dark mode
+  cannot trigger styles).
+- **Home map in landscape** — mobile map uses `min(45vh,360px)` height instead of
+  fixed viewport calc; `CrisisMap` min-height 240px on mobile.
+- **Emergency banner** — `flex-wrap` so hotline button no longer overlaps map.
+- **Map layer panel** — viewport-aware width `min(280px, calc(100vw - 24px))`.
+- **Accessibility** — focus rings on layer checkboxes and feedback button; `nav.more`
+  i18n key for mobile "More" menu.
+
+### Added
+- **Real translations** — generated pt/fr/it/zh/de/ru via `scripts/generate-translations.mjs`
+  (Haiku); script now strips markdown fences and supports per-locale CLI args.
+- **README banner** — `docs/assets/vigil-banner.svg` and shields.io badges in header.
+- **docs/build-process** — `12-launch-ready.md`, `13-mobile-rebuild-and-translations.md`,
+  `14-confirmed-mobile-bugs.md`; root `CURSOR-*.md` stubs point to docs.
+
+### Changed
+- **PWA manifest** — `background_color` `#F8FAFC`, `theme_color` `#0F172A` (light only).
+
+## [Unreleased] — 2026-06-30 (earlier)
+
+### Fixed
 - **Dark mode** — forced light as the true default. Declared `color-scheme: light`
   in `globals.css` and via a Next `viewport` export (`<meta name="color-scheme">`)
   plus inline `style` on `<html>`, stopping Chrome Auto Dark Theme (Android) from

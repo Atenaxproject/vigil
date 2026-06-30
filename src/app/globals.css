@@ -30,18 +30,6 @@
     --seismic-major: #7c3aed;
   }
 
-  .dark {
-    color-scheme: dark;
-    --vigil-ink: #f1f5f9;
-    --vigil-surface: #111827;
-    --vigil-cloud: #111827;
-    --vigil-border: #374151;
-    --vigil-body: #cbd5e1;
-    --vigil-muted: #9ca3af;
-    background-color: #0a0f1e;
-    color: #f1f5f9;
-  }
-
   html,
   body {
     overflow-x: hidden;

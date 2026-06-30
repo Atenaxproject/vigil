@@ -14,7 +14,7 @@ export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
 
   return (
     <div
-      className="sticky top-0 z-[100] flex h-11 items-center gap-3 overflow-x-auto border-b border-slate-800 bg-vigil-ink px-4 text-xs text-slate-200"
+      className="sticky top-0 z-[100] flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-slate-800 bg-vigil-ink px-4 py-2 text-xs text-slate-200"
       role="banner"
     >
       <AlertTriangle className="h-4 w-4 shrink-0 text-amber-400" aria-hidden />

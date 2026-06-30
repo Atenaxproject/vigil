@@ -1,5 +1,5 @@
 {
-  "nav": { "search": "Buscar Persona", "report": "Reportar Desaparecido", "needHelp": "Necesito Ayuda", "volunteers": "Voluntarios", "organizations": "Organizaciones", "donate": "Donar", "news": "Actualizaciones Oficiales", "map": "Mapa de Crisis", "exchange": "Intercambio", "howToHelp": "Cómo Ayudar", "info": "Información", "activeTeam": "Equipo Activo", "calendar": "Calendario", "collectionPoint": "Punto de Acopio", "privacy": "Política de Privacidad", "terms": "Términos de Uso" },
+  "nav": { "search": "Buscar Persona", "report": "Reportar Desaparecido", "needHelp": "Necesito Ayuda", "volunteers": "Voluntarios", "organizations": "Organizaciones", "donate": "Donar", "news": "Actualizaciones Oficiales", "map": "Mapa de Crisis", "exchange": "Intercambio", "howToHelp": "Cómo Ayudar", "info": "Información", "activeTeam": "Equipo Activo", "calendar": "Calendario", "collectionPoint": "Punto de Acopio", "privacy": "Política de Privacidad", "terms": "Términos de Uso", "more": "Más" },
   "banner": { "emergency": "Emergencias:", "hotline": "0800-RESCATE", "hotlineNumber": "0800-7372282", "interpreters": "Intérpretes" },
   "missing": {
     "title": "Personas Desaparecidas", "subtitle": "Busca o reporta una persona desaparecida",

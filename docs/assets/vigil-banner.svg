@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="title desc">
+  <title id="title">Vigil</title>
+  <desc id="desc">We stand watch when it matters most</desc>
+  <rect width="1280" height="320" fill="#0F172A"/>
+  <line x1="540" y1="200" x2="740" y2="200" stroke="#DC2626" stroke-width="2" opacity="0.6"/>
+  <text x="640" y="145" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="700" fill="#FFFFFF">Vigil<tspan fill="#2563EB">.</tspan></text>
+  <text x="640" y="210" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" fill="#94A3B8">We stand watch when it matters most</text>
+</svg>

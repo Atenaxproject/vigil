@@ -4,8 +4,8 @@
   "description": "Unified humanitarian crisis platform. Missing persons, crisis map, volunteer coordination.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#DC2626",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0F172A",
   "orientation": "portrait-primary",
   "icons": [
     { "src": "/icons/icon-72x72.png", "sizes": "72x72", "type": "image/png" },

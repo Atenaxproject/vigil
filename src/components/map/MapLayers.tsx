@@ -31,14 +31,14 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
   ]
 
   return (
-    <div className="absolute right-3 top-3 z-10 max-w-[200px] rounded-card border border-slate-200 bg-white/95 p-2 shadow-sm backdrop-blur">
+    <div className="absolute right-3 top-3 z-10 w-[min(280px,calc(100vw-24px))] max-w-[calc(100vw-24px)] rounded-card border border-slate-200 bg-white/95 p-2 shadow-sm backdrop-blur">
       {toggles.map(({ key, label }) => (
         <label key={key} className="flex min-h-[36px] cursor-pointer items-center gap-2 px-2 text-[11px]">
           <input
             type="checkbox"
             checked={layers[key]}
             onChange={(e) => onChange({ ...layers, [key]: e.target.checked })}
-            className="rounded"
+            className="h-4 w-4 shrink-0 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
           />
           {label}
         </label>
