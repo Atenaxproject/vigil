@@ -1,12 +1,16 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { Search } from 'lucide-react'
+import { ExternalLink, Search } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
+
+const sisterPlatforms = CRISIS_CONFIG.partnerLinks.filter((link) => link.type === 'sister-platform')
 
 interface MissingPersonSearchProps {
   initialResults?: PublicMissingPerson[]
@@ -100,7 +104,33 @@ export function MissingPersonSearch({ initialResults = [] }: MissingPersonSearch
       <div className="flex-1 space-y-3 overflow-y-auto p-4">
         {loading && <div className="skeleton h-24 rounded-card" />}
         {!loading && searched && results.length === 0 && (
-          <p className="text-center text-[16px] text-vigil-muted">{t('search.noResults')}</p>
+          <div className="rounded-card border border-slate-200 bg-vigil-cloud p-6 text-center">
+            <p className="text-[16px] font-medium text-vigil-ink">{t('search.noResultsTitle')}</p>
+            <p className="mt-4 text-[16px] text-vigil-body">{t('search.sisterPlatformsIntro')}</p>
+            <ul className="mt-3 space-y-2">
+              {sisterPlatforms.map((platform) => (
+                <li key={platform.url}>
+                  <a
+                    href={platform.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-1 text-[16px] text-vigil-blue hover:underline"
+                  >
+                    {platform.name}
+                    <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+                    <span className="sr-only">({t('search.externalLink')})</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-[16px] text-vigil-muted">{t('search.sisterPlatformsReport')}</p>
+            <Link
+              href="/reportar"
+              className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-input bg-vigil-blue px-5 text-[16px] font-medium text-white"
+            >
+              {t('search.reportCta')}
+            </Link>
+          </div>
         )}
         {!loading && results.length > 0 && (
           <p className="text-[13px] text-vigil-muted">

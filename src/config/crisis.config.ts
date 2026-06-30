@@ -37,6 +37,18 @@ export const CRISIS_CONFIG = {
     { name: 'UNICEF Venezuela', url: 'https://www.unicef.org/venezuela', type: 'official' as const },
     { name: 'Cruz Roja Venezolana', url: 'https://cruzrojavenezolana.org', type: 'ngo' as const },
     { name: 'HDX — Datos Humanitarios', url: 'https://data.humdata.org/group/ven', type: 'data' as const },
+    {
+      name: 'Venezuela Te Busca',
+      url: 'https://venezuelatebusca.com',
+      type: 'sister-platform' as const,
+      slug: 'venezuelaTeBusca' as const,
+    },
+    {
+      name: 'Desaparecidos Terremoto Venezuela',
+      url: 'https://desaparecidosterremotovenezuela.com',
+      type: 'sister-platform' as const,
+      slug: 'desaparecidosTerremoto' as const,
+    },
   ],
 
   seismic: {
@@ -65,4 +77,4 @@ export const CRISIS_CONFIG = {
 } as const
 
 export type SupportedLang = (typeof CRISIS_CONFIG.supportedLangs)[number]
-export type PartnerLinkType = 'translation' | 'official' | 'ngo' | 'data'
+export type PartnerLinkType = 'translation' | 'official' | 'ngo' | 'data' | 'sister-platform'

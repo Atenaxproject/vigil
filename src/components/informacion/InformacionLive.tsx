@@ -113,7 +113,8 @@ export function InformacionLive() {
     { label: 'OCHA Venezuela', value: '@OCHAVenezuela', source: 'X / Twitter' },
   ]
 
-  const sources = CRISIS_CONFIG.partnerLinks.map((p) => ({ name: p.name, url: p.url }))
+  const officialSources = CRISIS_CONFIG.partnerLinks.filter((p) => p.type !== 'sister-platform')
+  const sisterPlatforms = CRISIS_CONFIG.partnerLinks.filter((p) => p.type === 'sister-platform')
 
   const metricLabel = (metric: string) => {
     const key = metric as 'electricity' | 'water' | 'roads' | 'airport' | 'telecom' | 'fuel'
@@ -246,9 +247,41 @@ export function InformacionLive() {
       </section>
 
       <section className="mt-10">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('sisterPlatforms.title')}</h2>
+        <p className="mt-1 text-[13px] text-vigil-muted">{tc('sisterPlatforms.approximateNote')}</p>
+        <div className="mt-4 space-y-3">
+          {sisterPlatforms.map((platform) => {
+            const slug =
+              'slug' in platform && platform.slug
+                ? platform.slug
+                : 'venezuelaTeBusca'
+            const descriptionKey =
+              slug === 'desaparecidosTerremoto'
+                ? 'sisterPlatforms.desaparecidosTerremoto'
+                : 'sisterPlatforms.venezuelaTeBusca'
+            return (
+              <a
+                key={platform.url}
+                href={platform.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
+              >
+                <p className="flex items-center gap-1 text-[16px] font-medium text-vigil-blue">
+                  {platform.name}
+                  <ExternalLink className="h-3 w-3 shrink-0" aria-hidden />
+                </p>
+                <p className="mt-1 text-[16px] text-vigil-body">{tc(descriptionKey)}</p>
+              </a>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('sources.title')}</h2>
         <div className="mt-4 space-y-2">
-          {sources.map((src) => (
+          {officialSources.map((src) => (
             <a
               key={src.url}
               href={src.url}

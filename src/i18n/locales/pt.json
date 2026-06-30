@@ -51,6 +51,11 @@
       "placeholder": "Buscar por nome...",
       "button": "Buscar",
       "noResults": "Nenhum resultado encontrado. Tente outro nome.",
+      "noResultsTitle": "Ainda não encontramos esta pessoa no Vigil.",
+      "sisterPlatformsIntro": "Você também pode buscar nestas plataformas irmãs:",
+      "sisterPlatformsReport": "Por favor, considere reportar aqui também — cada reporte ajuda.",
+      "reportCta": "Reportar Desaparecido",
+      "externalLink": "abre em nova aba",
       "loading": "Buscando...",
       "resultsCount": "{{count}} resultados encontrados"
     },
@@ -428,6 +433,12 @@
       "title": "Linhas de emergência verificadas",
       "rescate": "0800-RESCATE",
       "redCross": "Cruz Vermelha Venezuelana"
+    },
+    "sisterPlatforms": {
+      "title": "Plataformas irmãs (cidadãs)",
+      "approximateNote": "Números aproximados — não sincronizados em tempo real com o Vigil",
+      "venezuelaTeBusca": "Plataforma cidadã para buscar pessoas desaparecidas na Venezuela.",
+      "desaparecidosTerremoto": "Plataforma cidadã com mais de 35.000 casos ativos reportados (número aproximado, pode estar desatualizado)."
     },
     "sources": {
       "title": "Fontes confiáveis para seguir"

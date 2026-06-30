@@ -51,6 +51,11 @@
       "placeholder": "按姓名搜索...",
       "button": "搜索",
       "noResults": "未找到结果。请尝试不同的名字。",
+      "noResultsTitle": "我们尚未在 Vigil 上找到此人。",
+      "sisterPlatformsIntro": "您也可以在这些姊妹平台上搜索：",
+      "sisterPlatformsReport": "也请考虑在此举报——每一份报告都有帮助。",
+      "reportCta": "报告失踪人员",
+      "externalLink": "在新标签页中打开",
       "loading": "搜索中...",
       "resultsCount": "找到 {{count}} 条结果"
     },
@@ -428,6 +433,12 @@
       "title": "已验证的紧急热线",
       "rescate": "0800-RESCATE",
       "redCross": "委内瑞拉红十字会"
+    },
+    "sisterPlatforms": {
+      "title": "姊妹平台（民间运营）",
+      "approximateNote": "数据为近似值——未与 Vigil 实时同步",
+      "venezuelaTeBusca": "民间运营的委内瑞拉失踪人员搜索平台。",
+      "desaparecidosTerremoto": "民间运营平台，报告有超过 35,000 个活跃案例（近似数字，可能已过时）。"
     },
     "sources": {
       "title": "可靠来源"

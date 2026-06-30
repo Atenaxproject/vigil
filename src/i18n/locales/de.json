@@ -51,6 +51,11 @@
       "placeholder": "Nach Name suchen...",
       "button": "Suchen",
       "noResults": "Keine Ergebnisse gefunden. Bitte versuchen Sie einen anderen Namen.",
+      "noResultsTitle": "Wir haben diese Person auf Vigil noch nicht gefunden.",
+      "sisterPlatformsIntro": "Sie können auch auf diesen Schwesterplattformen suchen:",
+      "sisterPlatformsReport": "Bitte erwägen Sie auch hier eine Meldung — jede Meldung hilft.",
+      "reportCta": "Vermisste Person melden",
+      "externalLink": "öffnet in neuem Tab",
       "loading": "Wird gesucht...",
       "resultsCount": "{{count}} Ergebnisse gefunden"
     },
@@ -428,6 +433,12 @@
       "title": "Verifizierte Notfallnummern",
       "rescate": "0800-RESCATE",
       "redCross": "Venezolanisches Rotes Kreuz"
+    },
+    "sisterPlatforms": {
+      "title": "Schwesterplattformen (bürgerlich)",
+      "approximateNote": "Ungefähre Zahlen — nicht live mit Vigil synchronisiert",
+      "venezuelaTeBusca": "Bürgerliche Plattform zur Suche nach Vermissten in Venezuela.",
+      "desaparecidosTerremoto": "Bürgerliche Plattform mit über 35.000 gemeldeten aktiven Fällen (ungefähre Zahl, möglicherweise veraltet)."
     },
     "sources": {
       "title": "Zuverlässige Quellen zum Folgen"
