@@ -4,6 +4,37 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (sidebar + desktop a11y)
+
+### Added
+- **Collapsible desktop sidebar** — `lg+` sidebar toggles between 240px (icon +
+  label) and 64px (icon-only) via bottom chevron control; preference persisted
+  in `localStorage` (`vigil-sidebar-collapsed`); main content reflows in flex
+  layout; `aria-expanded`, i18n labels, tooltips/`aria-label` on collapsed nav
+  items (`Navigation`).
+- **Skip-to-content link** — first focusable element in `<body>`, targets
+  `#main-content` (`SkipToContent`, `layout.tsx`).
+- **Map text alternative** — collapsible “Ver como lista” section listing
+  aftershocks, needs, resources, and collection points as plain text
+  (`MapAccessibleList`, homepage).
+- **Custom map zoom controls** — keyboard-accessible +/- buttons with
+  `aria-label`; Leaflet default zoom disabled (`MapZoomControls`, `CrisisMap`).
+- **i18n** — `nav.collapseMenu` / `nav.expandMenu` / `nav.desktopNav` /
+  `nav.mobileNav`, `a11y.skipToContent`, `map.viewAsList` / `map.zoomIn` / etc.
+  in all 8 locales.
+- **docs/build-process** — `18-desktop-accessibility.md`; root
+  `CURSOR-DESKTOP-ACCESSIBILITY.md` stub; `docs/README.md` index updated.
+
+### Fixed
+- **Desktop accessibility (WCAG AA)** — global `*:focus-visible` outline in
+  `globals.css`; distinguishing `aria-label` on desktop vs mobile nav; sr-only
+  `h1` on `/` and `/buscar`; `main#main-content` landmark with `tabIndex={-1}`;
+  form `aria-required` / `aria-describedby` / `role="alert"` errors on report
+  form and feedback widget; MapLayers close button i18n; Más button
+  `aria-label`; icon-only control focus rings audited.
+- **Duplicate nav a11y tree** — confirmed `hidden` / `lg:hidden` display:none
+  hiding (not opacity/invisible).
+
 ## [Unreleased] — 2026-06-30 (accessibility & menu)
 
 ### Fixed

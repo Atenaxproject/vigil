@@ -40,6 +40,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `15-deep-investigation-final.md` — proof-required mobile investigation and viewport audit
 - `16-viewport-fix-and-proof.md` — viewport meta fix and device-proof verification
 - `17-accessibility-and-menu-fix.md` — type-scale accessibility revision, Más bottom-sheet, feedback widget fix, bottom-nav definition
+- `18-desktop-accessibility.md` — desktop WCAG AA pass: skip link, focus-visible, ARIA, map list alternative, collapsible sidebar
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
@@ -57,6 +58,7 @@ and workspace rules; canonical content lives under `docs/`:
 - `CURSOR-CONFIRMED-MOBILE-BUGS.md` → `build-process/14-confirmed-mobile-bugs.md`
 - `CURSOR-DEEP-INVESTIGATION-FINAL.md` → `build-process/15-deep-investigation-final.md`
 - `CURSOR-ACCESSIBILITY-AND-MENU-FIX.md` → `build-process/17-accessibility-and-menu-fix.md`
+- `CURSOR-DESKTOP-ACCESSIBILITY.md` → `build-process/18-desktop-accessibility.md`
 
 ## For Contributors
 
