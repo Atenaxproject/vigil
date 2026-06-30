@@ -52,7 +52,16 @@
  * forms its own stacking context and all its internal panes/controls stay
  * confined below page-level overlays.
  *
- *   0    .leaflet-container (map base; internal panes/controls contained here)
+ * NOTE on the footer/legal bar: .map-wrapper is position:relative (it positions
+ * the absolutely-placed layer toggle + zoom controls), so it paints in the
+ * "positioned" layer — ABOVE in-flow, non-positioned siblings like the footer.
+ * The real footer overlap was geometric (the map cell used to overflow its
+ * bounded layout cell — see src/app/page.tsx, now flex-1). As defense-in-depth
+ * the footer is position:relative; z-index:1 so it always paints above the
+ * map's z-0 stacking context even if any future bleed occurs.
+ *
+ *   0    .leaflet-container / .map-wrapper (map base; internal panes/controls contained here)
+ *   1    footer / legal bar (sits above the map's z-0 stacking context)
  *   10   map layer toggle control (sits inside the map panel)
  *   40   feedback floating button
  *   50   mobile bottom navigation

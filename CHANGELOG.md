@@ -4,6 +4,24 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (map/footer overlap — real fix)
+
+### Fixed
+- **Crisis map overlapping footer (root cause)** — On desktop the map cell used
+  `lg:h-full` (100% of its flex-column section) while sharing that section with
+  `AftershockAlert` + `MapAccessibleList` siblings plus padding/gaps. The map
+  therefore overflowed its bounded grid cell (`lg:h-[calc(100vh-44px-120px)]`)
+  and, because `.map-wrapper` is `position:relative; z-index:0` (a positioned
+  layer), painted on top of the in-flow footer/legal bar. The prior
+  `isolation: isolate` patch could not help because the overlap was geometric
+  height-bleed, not a pure stacking issue. Map cell is now `lg:flex-1` so it
+  fills only the space left after its siblings, keeping the section bounded and
+  the footer in normal flow below (`src/app/page.tsx`).
+- **Defense-in-depth stacking** — footer/legal bar is now `position:relative;
+  z-index:1` so it always paints above the map's `z-0` stacking context even if
+  any future bleed occurs (`src/app/layout.tsx`); z-index scale comment updated
+  in `src/app/globals.css`.
+
 ## [Unreleased] — 2026-06-30 (README & metadata polish)
 
 ### Added

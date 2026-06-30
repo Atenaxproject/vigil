@@ -24,9 +24,16 @@ export default async function HomePage() {
         <MissingPersonSearch initialResults={recent} />
         <RecentMissingFeed initialRecords={recent} />
       </section>
-      <section className="flex w-full flex-col gap-3 p-4 lg:w-[60%] lg:min-h-0">
+      <section className="flex w-full min-w-0 flex-col gap-3 p-4 lg:w-[60%] lg:min-h-0">
         <AftershockAlert events={events} />
-        <div className="h-[min(45vh,360px)] shrink-0 lg:h-full lg:min-h-[400px]">
+        {/*
+          Map cell must fill ONLY the space left after its siblings (AftershockAlert +
+          MapAccessibleList). On desktop it uses flex-1 (not h-full): h-full = 100% of the
+          section, which — combined with the sibling alert/list + padding/gaps — overflowed
+          the bounded grid cell and bled the map over the footer. flex-1 keeps the section
+          bounded so the footer always sits below the map in normal flow.
+        */}
+        <div className="h-[min(45vh,360px)] shrink-0 lg:h-auto lg:min-h-[280px] lg:flex-1">
           <CrisisMap events={events} markers={markers} />
         </div>
         <MapAccessibleList markers={markers} events={events} />

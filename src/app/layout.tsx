@@ -87,7 +87,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               >
                 {children}
               </main>
-              <footer className="bg-[color:var(--vigil-surface)] text-[13px] text-[color:var(--vigil-muted)]">
+              <footer className="relative z-[1] bg-[color:var(--vigil-surface)] text-[13px] text-[color:var(--vigil-muted)]">
                 {/* Group 1 — Open source / legal */}
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-t border-[color:var(--vigil-border)] px-4 py-4 text-center">
                   <Link
