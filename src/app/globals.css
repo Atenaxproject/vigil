@@ -39,6 +39,26 @@
   }
 }
 
+/*
+ * Z-INDEX SCALE — keep overlays sane and always above the Leaflet map.
+ * Leaflet panes default to z-index 200–700 and its controls to ~1000, which
+ * can otherwise cover our modals. We pin .leaflet-container to z-index 0 so it
+ * forms its own stacking context and all its internal panes/controls stay
+ * confined below page-level overlays.
+ *
+ *   0    .leaflet-container (map base; internal panes/controls contained here)
+ *   10   map layer toggle control (sits inside the map panel)
+ *   40   feedback floating button
+ *   50   mobile bottom navigation
+ *   60   page modals (intercambio, voluntarios, calendar)
+ *   100  emergency banner (sticky) + weather bar
+ *   999  modal backdrop (feedback — rendered via portal to document.body)
+ *   1000 modal panel (feedback)
+ */
+.leaflet-container {
+  z-index: 0;
+}
+
 @keyframes pulse-ring {
   0% {
     transform: scale(1);

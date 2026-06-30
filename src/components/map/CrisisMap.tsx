@@ -24,6 +24,14 @@ const CollectionPointLayer = dynamic(
   () => import('@/components/map/CollectionPointLayer').then((m) => m.CollectionPointLayer),
   { ssr: false }
 )
+const ShelterLayer = dynamic(
+  () => import('@/components/map/ShelterLayer').then((m) => m.ShelterLayer),
+  { ssr: false }
+)
+const HospitalLayer = dynamic(
+  () => import('@/components/map/HospitalLayer').then((m) => m.HospitalLayer),
+  { ssr: false }
+)
 const RescuerPresenceLayer = dynamic(
   () => import('@/components/map/RescuerPresenceLayer').then((m) => m.RescuerPresenceLayer),
   { ssr: false }
@@ -77,6 +85,8 @@ export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisM
         {layers.needs && <NeedsLayer markers={markers} />}
         {layers.resources && <ResourceLayer markers={markers} />}
         {layers.collection && <CollectionPointLayer markers={markers} />}
+        {layers.shelters && <ShelterLayer markers={markers} />}
+        {layers.hospitals && <HospitalLayer markers={markers} />}
         {layers.activeTeams && <RescuerPresenceLayer presence={rescuerPresence} />}
       </MapContainer>
     </div>

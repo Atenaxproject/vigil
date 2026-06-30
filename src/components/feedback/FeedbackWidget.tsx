@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { MessageCircle, X } from 'lucide-react'
@@ -19,12 +20,42 @@ const CATEGORIES: Array<{ key: FeedbackCategory; emoji: string }> = [
 export function FeedbackWidget() {
   const t = useTranslations('feedback')
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState<FeedbackCategory>('bug')
   const [message, setMessage] = useState('')
   const [email, setEmail] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [sent, setSent] = useState(false)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const close = useCallback(() => setOpen(false), [])
+
+  // Escape to close + lock body scroll while open + focus management
+  useEffect(() => {
+    if (!open) return
+
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    closeButtonRef.current?.focus()
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = originalOverflow
+      previouslyFocused?.focus?.()
+    }
+  }, [open, close])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -66,90 +97,101 @@ export function FeedbackWidget() {
         <MessageCircle className="h-5 w-5" />
       </button>
 
-      {open && (
-        <div className="fixed inset-0 z-[200] flex items-end justify-center bg-black/30 p-4 md:items-center">
+      {mounted &&
+        open &&
+        createPortal(
           <div
-            className="w-full max-w-md rounded-card border border-slate-200 bg-white p-4 shadow-lg"
-            role="dialog"
-            aria-labelledby="feedback-title"
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 p-4"
+            onMouseDown={(e) => {
+              if (e.target === e.currentTarget) close()
+            }}
           >
-            <div className="flex items-center justify-between">
-              <h2 id="feedback-title" className="text-[15px] font-semibold text-vigil-ink">
-                {t('title')}
-              </h2>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="rounded p-1 text-vigil-muted hover:bg-vigil-cloud"
-                aria-label={t('close')}
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            {sent ? (
-              <p className="mt-4 text-[13px] text-slate-600">{t('success')}</p>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-                <div className="flex flex-wrap gap-2">
-                  {CATEGORIES.map(({ key, emoji }) => (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setCategory(key)}
-                      className={cn(
-                        'min-h-[36px] rounded-full border px-3 text-[12px]',
-                        category === key
-                          ? 'border-vigil-blue bg-vigil-blue-light text-vigil-blue'
-                          : 'border-slate-200 text-slate-600'
-                      )}
-                    >
-                      {emoji} {t(`categories.${key}`)}
-                    </button>
-                  ))}
-                </div>
-
-                <div>
-                  <label htmlFor="feedback-message" className="text-[11px] font-medium text-slate-600">
-                    {t('message')}
-                  </label>
-                  <textarea
-                    id="feedback-message"
-                    rows={4}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                    className="mt-1 w-full rounded-input border border-slate-200 bg-vigil-cloud px-3 py-2 text-[13px]"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="feedback-email" className="text-[11px] font-medium text-slate-600">
-                    {t('email')}
-                  </label>
-                  <input
-                    id="feedback-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px]"
-                  />
-                </div>
-
-                <p className="text-[11px] text-vigil-muted">{t('supportEmail')}</p>
-
+            <div
+              ref={panelRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="feedback-title"
+              className="relative z-[1000] flex max-h-[90vh] w-full max-w-[400px] flex-col overflow-y-auto rounded-card border border-slate-200 bg-white p-5 shadow-lg"
+            >
+              <div className="flex items-center justify-between">
+                <h2 id="feedback-title" className="text-[15px] font-semibold text-vigil-ink">
+                  {t('title')}
+                </h2>
                 <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[13px] font-medium text-white disabled:opacity-50"
+                  ref={closeButtonRef}
+                  type="button"
+                  onClick={close}
+                  className="rounded p-1 text-vigil-muted hover:bg-vigil-cloud"
+                  aria-label={t('close')}
                 >
-                  {submitting ? t('submitting') : t('submit')}
+                  <X className="h-4 w-4" />
                 </button>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
+              </div>
+
+              {sent ? (
+                <p className="mt-4 text-[13px] text-slate-600">{t('success')}</p>
+              ) : (
+                <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+                  <div className="flex flex-wrap gap-2">
+                    {CATEGORIES.map(({ key, emoji }) => (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => setCategory(key)}
+                        className={cn(
+                          'min-h-[36px] rounded-full border px-3 text-[12px]',
+                          category === key
+                            ? 'border-vigil-blue bg-vigil-blue-light text-vigil-blue'
+                            : 'border-slate-200 text-slate-600'
+                        )}
+                      >
+                        {emoji} {t(`categories.${key}`)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div>
+                    <label htmlFor="feedback-message" className="text-[11px] font-medium text-slate-600">
+                      {t('message')}
+                    </label>
+                    <textarea
+                      id="feedback-message"
+                      rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                      className="mt-1 w-full resize-y rounded-input border border-slate-200 bg-vigil-cloud px-3 py-2 text-[13px]"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="feedback-email" className="text-[11px] font-medium text-slate-600">
+                      {t('email')}
+                    </label>
+                    <input
+                      id="feedback-email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="mt-1 min-h-[44px] w-full rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px]"
+                    />
+                  </div>
+
+                  <p className="text-[11px] text-vigil-muted">{t('supportEmail')}</p>
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="min-h-[44px] w-full rounded-input bg-vigil-blue px-4 text-[13px] font-medium text-white disabled:opacity-50"
+                  >
+                    {submitting ? t('submitting') : t('submit')}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>,
+          document.body
+        )}
     </>
   )
 }
