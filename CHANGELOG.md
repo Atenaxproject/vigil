@@ -4,6 +4,16 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (report button beside search)
+
+### Added
+- **Reportar button beside missing-persons search** — `MissingPersonSearch`
+  now renders a primary "Reportar" CTA (Lucide `UserPlus`) immediately beside
+  the search input, linking to `/reportar`. Responsive: side-by-side on ≥640px,
+  stacked full-width below the search on mobile. Reuses the existing
+  `nav.reportShort` i18n key (all 8 locales); keyboard-focusable with visible
+  focus ring and 44px touch target.
+
 ## [Unreleased] — 2026-06-30 (resources seed + sister platforms)
 
 ### Added
