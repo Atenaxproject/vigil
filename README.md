@@ -8,7 +8,7 @@ all organized around a shared real-time crisis map.
 
 **Currently deployed for: Venezuela 2026 Earthquake Response**
 
-**Production URL:** https://vigil.youtheway.org
+**Production URL:** https://vigil.youthewave.org
 
 ---
 
