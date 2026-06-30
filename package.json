@@ -1,7 +1,15 @@
 {
   "name": "vigil",
   "version": "0.1.0",
-  "description": "Vigil — Unified humanitarian crisis platform. Real-time missing persons, crisis mapping, volunteer coordination, and verified information for disaster response.",
+  "description": "Vigil — Open-source humanitarian crisis platform. Real-time missing persons, crisis map, resource exchange, volunteer coordination. Live at vigil.youthewave.org.",
+  "homepage": "https://vigil.youthewave.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Atenaxproject/vigil.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Atenaxproject/vigil/issues"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",

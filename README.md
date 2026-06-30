@@ -10,23 +10,31 @@
 
 A unified, open-source humanitarian crisis platform — real-time missing persons, crisis mapping, resource exchange, and volunteer coordination in one accessible interface.
 
-<br />
-
-![License](https://img.shields.io/badge/license-MIT-2563EB)
-![Next.js](https://img.shields.io/badge/Next.js-14-0F172A)
-![Supabase](https://img.shields.io/badge/Supabase-Realtime-3ECF8E)
-![PWA](https://img.shields.io/badge/PWA-Ready-2563EB)
-![Languages](https://img.shields.io/badge/Languages-8-2563EB)
+**Live deployment:** Venezuela 2026 Earthquake Response · June 24, 2026 onward
 
 <br />
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Live Demo](https://img.shields.io/badge/Live-vigil.youthewave.org-2563EB?style=for-the-badge)](https://vigil.youthewave.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge)](./LICENSE)
+
+<br />
+
+![Next.js 14](https://img.shields.io/badge/Next.js-14-0F172A?logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Realtime-3ECF8E?logo=supabase&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-Offline--ready-2563EB)
+![i18n](https://img.shields.io/badge/Languages-8-2563EB)
+![WCAG](https://img.shields.io/badge/WCAG-AA-06B6D4)
+
+<br />
+
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Leaflet](https://img.shields.io/badge/Map-Leaflet-199900?logo=leaflet&logoColor=white)](https://leafletjs.com)
 [![Deploy on Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com)
 
 <br />
 
-**Live now:** [vigil.youthewave.org](https://vigil.youthewave.org) &nbsp;·&nbsp; **📦 Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil) &nbsp;·&nbsp; **🚨 Deployment:** Venezuela 2026 Earthquake Response
+**[vigil.youthewave.org](https://vigil.youthewave.org)** &nbsp;·&nbsp; **[github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)**
 
 </div>
 
@@ -42,134 +50,123 @@ One config file change redeploys the whole platform for **any country, any disas
 
 | Group | What they do on Vigil |
 |---|---|
-| 🆘 **Rescue teams** | Read the crisis map, find active rescue zones, locate needs |
-| 🤝 **Volunteers** | Register skills, get matched with organizations |
-| 🧍 **Victims** | Report needs, drop a help pin, find shelter & resources |
-| 🌎 **Diaspora** | Search for missing family across a real-time board |
+| 🆘 **Rescue teams** | Crisis map, active rescue zones, field presence check-in, locate needs |
+| 🤝 **Volunteers** | Register skills, browse the marketplace, get matched with organizations |
+| 🧍 **Victims** | Report needs, drop a help pin, find shelter and resources |
+| 🌎 **Diaspora** | Search for missing family on a real-time board with public notes |
 | 💛 **Donors** | Reach verified organizations with direct donation links |
 | 🏢 **Organizations** | List services, receive volunteers, coordinate response |
 
 ---
 
-## Documentation
+## Screenshots
 
-Full build process and architecture decisions: [`/docs`](./docs) — deployment guide: [`docs/architecture/DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md)
+Production captures from [vigil.youthewave.org](https://vigil.youthewave.org). Refresh with `node scripts/visual-check.mjs`.
+
+| iPhone portrait | Desktop (sidebar + map layers) |
+|---|---|
+| <img src="screenshots/iphone-portrait.png" alt="Vigil on iPhone — mobile bottom nav and crisis map" width="390" /> | <img src="screenshots/desktop.png" alt="Vigil on desktop — collapsible sidebar and retractable map layers panel" width="720" /> |
+
+| iPad portrait | iPhone landscape |
+|---|---|
+| <img src="screenshots/ipad-portrait.png" alt="Vigil on iPad" width="384" /> | <img src="screenshots/iphone-landscape.png" alt="Vigil on iPhone landscape" width="422" /> |
 
 ---
 
-## Features
+## What's live now
 
-What is built and deployed today at [vigil.youthewave.org](https://vigil.youthewave.org).
-Features that need optional API keys (e.g. Resend) degrade gracefully when
-unconfigured — they do not crash the app.
+Verified against source and production as of **2026-06-30**. Optional integrations degrade gracefully when API keys are missing — they never crash the app.
 
 ### Core crisis tools
 
-- 🔍 **Missing persons board** — Search (`/buscar`), report (`/reportar`), realtime feed on home. Public notes & sightings thread on `/buscar/[id]`. Contact info never shown publicly. [PFIF](https://github.com/google/personfinder) export at `/api/pfif`.
-- 🗺️ **Crisis map** — USGS aftershocks (no API key), community needs/resources, shelters, hospitals, collection points, and active rescue teams on Leaflet + OpenStreetMap.
-- 📦 **Collection points** — Citizen registration at `/punto-de-acopio` → amber map markers (16 seeded markers on production map).
-- 🔁 **Resource exchange** — Offer or request goods, shelter, transport, skills, and equipment (`/intercambio`).
-- 🦺 **Volunteer marketplace** — Register skills and browse available volunteers (`/voluntarios`).
-- 🆘 **I need help** — Drop a need pin on the map (`/necesito-ayuda`).
+| Feature | Route | Notes |
+|---|---|---|
+| **Missing persons board** | `/buscar`, `/reportar` | Realtime feed on home; contact info never shown publicly |
+| **Person detail + public notes** | `/buscar/[id]` | Sightings thread; privacy-preserving contact flow |
+| **PFIF export** | `/api/pfif` | [Google Person Finder](https://github.com/google/personfinder) XML interoperability |
+| **Claim-token inbox** | `/mi-reporte/[token]`, `/mi-intercambio/[token]` | Passwordless management; claim URL on submit |
+| **Crisis map** | `/` | USGS aftershocks, needs, resources, shelters, hospitals, collection points, active rescue teams |
+| **Retractable map layers** | `/` (desktop) | Collapsible panel on `lg+`; preference in `localStorage` |
+| **Collection points** | `/punto-de-acopio` | Citizen registration → amber map markers |
+| **Resource exchange** | `/intercambio` | Offer or request goods, shelter, transport, skills, equipment |
+| **Volunteer marketplace** | `/voluntarios` | Skills registration and directory |
+| **I need help** | `/necesito-ayuda` | Drop a need pin on the map |
 
 ### Information & coordination
 
-- 📡 **Official updates** — ReliefWeb feed on `/noticias` (live, no key required).
-- 📊 **Live information hub** — USGS significant quakes, ReliefWeb reports, manual crisis stats, and realtime infrastructure status (`/informacion`).
-- 📅 **Events calendar** — `/calendario` with category filters and Venezuela timezone labels (realtime on `events`).
-- 🛡️ **Rescuer safety presence** — Field check-in, SOS, 4-hour auto-expire, map layer (`/equipo-activo`).
-- 💛 **How to help** — 18 verified donation organizations from production Supabase seed (`/como-ayudar`).
-- 🏢 **Partner links** — Curated NGOs and official sources from `crisis.config.ts` (`/organizaciones`).
-- 🌤️ **Weather & time bar** — Open-Meteo bar below emergency banner (no API key).
+| Feature | Route | Notes |
+|---|---|---|
+| **Live information hub** | `/informacion` | USGS significant quakes, ReliefWeb, manual stats, infrastructure status |
+| **Official updates** | `/noticias` | ReliefWeb feed (no API key) |
+| **Events calendar** | `/calendario` | Category filters, Venezuela timezone labels |
+| **Rescuer field presence** | `/equipo-activo` | Check-in, SOS, 4-hour auto-expire, map layer |
+| **How to help** | `/como-ayudar` | 18 verified donation orgs from production seed |
+| **Partner links** | `/organizaciones` | Curated NGOs from `crisis.config.ts` |
+| **Weather & time bar** | all pages | Open-Meteo below emergency banner (no API key) |
 
 ### Trust, access & resilience
 
 - 🚨 **Emergency banner** — Always-visible hotline (0800-RESCATE), Intérpretes, Cruz Roja. Government-operated intake tools intentionally excluded.
 - 📬 **Official contact** — `vigil@youthewave.org` and `vigil.support@youthewave.org` via Cloudflare Email Routing.
 - 💬 **Feedback widget** — Floating support button on all pages; admin review at `/admin/feedback`.
-- 🔗 **Claim-token inbox** — Passwordless `/mi-reporte/{token}` and `/mi-intercambio/{token}`; claim URL shown on submit.
-- 🔐 **Admin auth** — Supabase OTP login + `VIGIL_ADMIN_EMAILS` allowlist. Main `/admin` panel is a stub — use Supabase Studio for moderation queue today.
-- 🌐 **8 languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian.
-- 📱 **PWA / offline-first** — Service worker caching, `/offline` fallback, offline form queue, network-status banner.
+- 🔐 **Admin auth** — Supabase OTP + `VIGIL_ADMIN_EMAILS` allowlist.
+- 🌐 **8 languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian (machine-translated locales).
+- 📱 **PWA / offline-first** — Service worker, `/offline` fallback, offline form queue, network-status banner.
+- 📲 **PWA install UX** — iOS Safari dismissible install banner; Android/Chrome native install via Más menu.
 - ⚖️ **Legal pages** — Privacy Policy and Terms in Spanish (`/privacidad`, `/terminos`) and English (`/privacy`, `/terms`).
 
-### Optional integrations
+### Desktop UX & accessibility
 
-These ship in the codebase but need an API key or external service before they work in production:
+- **Collapsible sidebar** — `lg+` toggles between **280px** (icon + label) and **64px** (icon-only); preference in `localStorage`.
+- **Skip-to-content link** — First focusable element; targets `#main-content`.
+- **WCAG AA type scale** — 16px body floor, contrast-safe muted tokens.
+- **Map accessible list** — Collapsible “Ver como lista” text alternative for map markers.
+- **Keyboard map controls** — Custom zoom +/- with `aria-label`; Leaflet default zoom disabled.
+- **Focus-visible rings** — Global outline audit across nav, forms, and icon buttons.
 
-- ✉️ **Resend email alerts** — Feedback notifications and claim-link emails on submit (needs `RESEND_API_KEY` + `youthewave.org` verified in Resend).
+### Security & data protection
 
-### Coming soon
+Privacy is architecture, not an afterthought:
+
+- **Contact information is never displayed publicly.** All contact routes through Vigil's internal request flow.
+- **RLS hardening (migration 006)** — Dropped `public_read_missing` on `missing_persons`; public reads use `public_missing_persons` view only. Anon-key direct contact queries return empty.
+- **Rate limiting** — Per-IP limits on API routes via edge middleware.
+- **Coordinate bounds validation** — Submissions outside crisis map bounds rejected.
+- **IP hashing** — Stored as salted SHA-256 only; never in clear text.
+- **Server key isolation** — `SUPABASE_SERVICE_ROLE_KEY` and `ANTHROPIC_API_KEY` in server-only modules; zero matches in client bundles.
+- **Government exclusion** — Venezuelan government data sharing explicitly prohibited; VenApp not linked.
+
+See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](https://vigil.youthewave.org/terminos).
+
+---
+
+## Coming soon
 
 | Feature | Status |
 |---|---|
-| **Full organization directory UI** | Schema + seed exist; `/organizaciones` shows partner links only — Supabase org cards not wired yet |
-| **Admin moderation dashboard** | Auth works; full queue UI not built — use Supabase Studio |
-| **HDX dataset feed** | `src/lib/hdx.ts` exists; not surfaced on any page yet |
-| **AI translation / dedup / matching** | Library code in `src/lib/ai/`; not wired to submit flows or cron |
-| **WhatsApp / Telegram intake** | Discussed in architecture docs; no webhook handlers built |
-| **Push notifications (mag 4.0+ aftershocks)** | Planned — PWA notification permission flow |
-| **Screenshots in README** | Playwright captures in `screenshots/` (iphone-portrait, iphone-landscape, ipad-portrait, desktop) |
+| **Push notifications** | Planned — PWA permission flow for M4.0+ aftershocks |
+| **WhatsApp / Telegram intake** | Architecture documented; no webhook handlers yet |
+| **Full organization directory UI** | Schema + seed exist; `/organizaciones` shows partner links only |
+| **Admin moderation dashboard** | Auth works; use Supabase Studio for queue today |
+| **HDX dataset feed** | `src/lib/hdx.ts` exists; not surfaced on any page |
+| **AI translation / dedup / matching** | `src/lib/ai/` library code; not wired to submit flows |
+| **Resend outbound email** | Code in `src/lib/email/`; needs `RESEND_API_KEY` + `youthewave.org` verified in Resend |
 
 ---
 
-## Project Status
+## Documentation
 
-Verified against current source code and live production site as of 2026-06-30.
-
-### ✅ Live Now
-
-- Missing persons search, report, detail page (`/buscar`, `/reportar`, `/buscar/[id]`)
-- Crisis map — USGS aftershocks, needs, resources, shelters, hospitals, collection points, active teams
-- Claim-token private management pages (`/mi-reporte/[token]`, `/mi-intercambio/[token]`)
-- Resource exchange (`/intercambio`)
-- Volunteer registration and directory (`/voluntarios`)
-- Collection point registration (`/punto-de-acopio`)
-- Events calendar (`/calendario`)
-- Rescuer field presence / SOS (`/equipo-activo`)
-- Live information hub — seismic status, ReliefWeb feed, infrastructure metrics (`/informacion`)
-- Official updates feed — ReliefWeb (`/noticias`)
-- How to help — 18 verified donation orgs from Supabase seed (`/como-ayudar`)
-- Emergency banner — 0800-RESCATE, Intérpretes, Cruz Roja (always visible, non-dismissible)
-- Weather + time bar — Open-Meteo (no API key)
-- Feedback widget — all pages; admin review at `/admin/feedback`
-- 8-language i18n — Spanish default; EN, PT, FR, IT, ZH, DE, RU
-- PWA — service worker, offline fallback, offline form queue, network-status banner
-- Privacy Policy + Terms — Spanish and English
-- Admin auth — Supabase OTP + `VIGIL_ADMIN_EMAILS` allowlist
-- Mobile viewport fix — `width: device-width` + `initialScale: 1` deployed 2026-06-30
-- Map layer panel — collapsible bottom-sheet on mobile, floating panel on desktop
-
-### 🔧 In Progress (code present, needs config)
-
-- **Resend email** — code in `src/lib/email.ts`; needs `RESEND_API_KEY` + `youthewave.org` verified domain in Resend dashboard
-- **PFIF export** — `src/lib/pfif.ts` exists; API route at `/api/pfif` not yet created
-- **Claude Haiku AI** — translation/dedup/matching code in `src/lib/ai/`; not wired to submit flows or cron; needs `ANTHROPIC_API_KEY`
-- **WhatsApp/Telegram intake** — documented in architecture; no webhook handlers built yet
-
-### 🔜 Coming Soon
-
-- Full organization directory with Supabase-backed cards (`/organizaciones` shows partner links only today)
-- Admin moderation queue UI (use Supabase Studio in the meantime)
-- HDX dataset feed (`src/lib/hdx.ts` exists but not surfaced on any page)
-- Push notifications for M4.0+ aftershocks (PWA permission flow not yet built)
+| Resource | Description |
+|---|---|
+| [`docs/README.md`](./docs/README.md) | Documentation index |
+| [`docs/architecture/CLAUDE.md`](./docs/architecture/CLAUDE.md) | Tech stack, constraints, agent instructions |
+| [`docs/architecture/DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) | UI tokens, typography, component rules |
+| [`docs/architecture/DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md) | Supabase, Vercel, DNS, Resend, local dev |
+| [`docs/build-process/`](./docs/build-process/) | Sequential build prompts (historical record) |
 
 ---
 
-## Screenshots
-
-Playwright visual captures of the live production site (`https://vigil.youthewave.org`) are in `screenshots/` — run `node scripts/visual-check.mjs` to refresh them.
-
-| Viewport | File | Notes |
-|---|---|---|
-| iPhone portrait 390×844 | `screenshots/iphone-portrait.png` | Mobile bottom-nav, layers icon button visible |
-| iPhone landscape 844×390 | `screenshots/iphone-landscape.png` | Landscape header + nav |
-| iPad portrait 768×1024 | `screenshots/ipad-portrait.png` | Tablet layout, bottom-nav at 768px |
-| Desktop 1440×900 | `screenshots/desktop.png` | Sidebar, three-column layout, layer panel open |
-
----
-
-## Tech Stack
+## Tech stack
 
 | Layer | Choice | Notes |
 |---|---|---|
@@ -178,14 +175,15 @@ Playwright visual captures of the live production site (`https://vigil.youthewav
 | Database | **Supabase** (Postgres + Realtime) | Row-level security, live subscriptions |
 | Auth | **Supabase Auth** | Email/phone OTP, admin allowlist |
 | Map | **Leaflet + OpenStreetMap** | Free, Venezuela-locked bounds |
-| Styling | **Tailwind CSS** | Tokens from [`docs/architecture/DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) |
+| Styling | **Tailwind CSS** | Tokens from [`DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) |
 | i18n | **next-intl** | 8 locales, Spanish-first |
-| AI | **Claude (Haiku)** | Translation, dedup, match suggestions |
-| Hosting | **Vercel** + **Cloudflare** | Edge network, DDoS protection |
+| AI | **Claude (Haiku)** | Translation, dedup, match suggestions (optional) |
+| Email | **Resend** | Feedback alerts (optional) |
+| Hosting | **Vercel** + **Cloudflare** | Edge network, DDoS protection, email routing |
 
 ---
 
-## Quick Start
+## Quick start
 
 ```bash
 # 1. Install
@@ -198,10 +196,7 @@ cp .env.example .env.local   # then fill in your keys (see below)
 npm run dev                  # http://localhost:3000
 ```
 
-The app runs **without** a configured Supabase instance: static pages render, the
-USGS crisis map loads (USGS is public), and live-data sections show a calm empty
-state instead of crashing. Add Supabase keys to enable the missing-persons board,
-resource exchange, and volunteer directory.
+The app runs **without** a configured Supabase instance: static pages render, the USGS crisis map loads, and live-data sections show a calm empty state instead of crashing.
 
 ### Environment variables
 
@@ -215,12 +210,11 @@ VIGIL_ADMIN_SECRET=generate_a_strong_random_secret
 VIGIL_ADMIN_EMAILS=orlando@atenaxproject.com
 ```
 
-> Never commit `.env.local`. See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for full setup,
-> migrations, and DNS steps.
+> Never commit `.env.local`. See [`DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md) for migrations and DNS.
 
 ---
 
-## Deploy Your Own Crisis Instance
+## Deploy your own crisis instance
 
 Vigil is a **template**. To deploy for a different country or disaster, change one file:
 
@@ -228,27 +222,11 @@ Vigil is a **template**. To deploy for a different country or disaster, change o
 src/config/crisis.config.ts
 ```
 
-Update country bounds, emergency hotline, partner links, languages, and seismic
-query — then redeploy. Everything else (UI, schema, data protection, i18n) adapts
-automatically. Full guide in [`DEPLOYMENT.md`](./DEPLOYMENT.md).
+Update country bounds, emergency hotline, partner links, languages, and seismic query — then redeploy. Full guide in [`DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md).
 
 ---
 
-## Data Protection
-
-Privacy is architecture, not an afterthought:
-
-- **Contact information is never displayed publicly.** All contact is routed through Vigil's internal request flow; submitters choose whether to respond.
-- **The Venezuelan government is explicitly excluded** from any data sharing. Government-operated intake apps (e.g. VenApp) are not linked or promoted.
-- IPs are stored only as salted SHA-256 hashes — never in clear text.
-- Row-level security, coordinate bounds validation, and per-IP rate limiting guard the API.
-- Right-to-erasure and data-retention windows are built into the schema.
-
-See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](https://vigil.youthewave.org/terminos).
-
----
-
-## Built By
+## Built by
 
 Made with hope and love for Venezuela 🇻🇪
 
@@ -257,24 +235,17 @@ For the people of Venezuela. For anyone who needs it next.
 
 ---
 
-## Contributors & Acknowledgments
+## Contributors & acknowledgments
 
-**Human:** Orlando Toro ([@Orlando7oro](https://github.com/Orlando7oro)) — Founder, architect, operator
+| Role | Who |
+|---|---|
+| **Human** | [Orlando Toro](https://github.com/Orlando7oro) — Founder, architect, operator |
+| **AI co-architect** | Claude (Anthropic) — Strategic co-design, system architecture, database schema, data protection, i18n, design system, legal documents |
+| **AI build agent** | Cursor Agent — Code generation and file implementation |
 
-**AI Co-architect:** Claude (Anthropic) — Strategic co-design, system architecture, database schema, data protection layer, i18n system, design system, legal documents, real-time data research, and the humanitarian vision that shaped every decision in this platform.
+**Humanitarian tech partners (methodology):** [Ushahidi](https://ushahidi.com) · [Google Person Finder](https://google.org/personfinder) · [Los Topos](https://www.lostopos.org) · [OCHA](https://www.unocha.org)
 
-**AI Build Agent:** Cursor Agent — Code generation and file implementation
-
-**Humanitarian Tech Partners (applied methodology):**
-- [Ushahidi](https://ushahidi.com) — Crisis mapping methodology reference
-- [Google Person Finder](https://google.org/personfinder) — PFIF standard for missing persons interoperability
-- [Los Topos](https://www.lostopos.org) — Mexico's legendary rescue team that inspired the volunteer skills system
-- [OCHA](https://www.unocha.org) — Humanitarian coordination framework
-
-**Real-time Data Sources:**
-- [USGS Earthquake Hazards Program](https://earthquake.usgs.gov) — Seismic data
-- [ReliefWeb](https://reliefweb.int) — Official situation reports
-- [HDX — Humanitarian Data Exchange](https://data.humdata.org) — Crisis datasets
+**Real-time data sources:** [USGS](https://earthquake.usgs.gov) · [ReliefWeb](https://reliefweb.int) · [HDX](https://data.humdata.org)
 
 **For Venezuela. For whoever needs it next.**
 
@@ -282,5 +253,4 @@ For the people of Venezuela. For anyone who needs it next.
 
 ## License
 
-**MIT License** — Free to use, modify, and deploy for humanitarian purposes.
-Commercial use of the data is prohibited. See [Terms](https://vigil.youthewave.org/terminos).
+**MIT License** — Free to use, modify, and deploy for humanitarian purposes. Commercial use of the data is prohibited. See [Terms](https://vigil.youthewave.org/terminos).

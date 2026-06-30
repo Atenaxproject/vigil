@@ -1,5 +1,7 @@
 # Vigil Documentation
 
+**Live:** [vigil.youthewave.org](https://vigil.youthewave.org) · **Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)
+
 This folder contains the architecture decisions, build process, and
 development prompts used to create Vigil. Kept public intentionally —
 if you're deploying Vigil for a different crisis or contributing code,

@@ -4,6 +4,24 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (README & metadata polish)
+
+### Added
+- **README** — Remarkable GitHub landing: live-demo badges, embedded production
+  screenshots, consolidated Live vs Coming soon tables, security/RLS section,
+  desktop a11y + collapsible sidebar (280px/64px), retractable map layers, PWA
+  install UX, PFIF export marked live at `/api/pfif`.
+- **screenshots/** — Playwright production captures (iPhone, iPad, desktop).
+
+### Changed
+- **GitHub repo metadata** — Description, homepage (`https://vigil.youthewave.org`),
+  and topics refreshed to match current feature set.
+- **docs/README.md** — Index verified against build-process archive.
+
+### Verified
+- **Domain typo sweep** — Zero functional `youtheway` references remain in
+  committed code; intentional historical notes in docs only.
+
 ## [Unreleased] — 2026-06-30 (TestFlight QA + legal/z-index)
 
 ### Added
