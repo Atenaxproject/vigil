@@ -3,86 +3,83 @@
 
 ---
 
-> **Source note.** No standalone `CURSOR-*FOOTER*` prompt existed in the repo or
-> in the captured agent transcripts — the original footer instruction was an
-> attachment that was not persisted. This file reconstructs the intent from
-> `docs/architecture/DESIGN-SYSTEM.md`, the existing footer in
-> `src/app/layout.tsx`, the credits spec in `04-pwa-and-credits.md`, and the
-> resume task brief ("footer hierarchy — emergency disclaimer, hotline, credits
-> (Orlando + Claude + Cursor), legal/privacy links, open source line").
-
 Read @docs/architecture/DESIGN-SYSTEM.md before starting.
 
 ## Problem
 
-The footer renders everything at one flat visual weight (all `text-[11px]`
-muted, centered), in an order that buries the most safety-critical line:
+The footer currently renders three logical groups (open source/legal, credits,
+emergency disclaimer) in flat uniform gray — hard to scan. There is no visual
+separation between groups, the "Atenax Project" link is indistinguishable from
+plain text, the safety-critical disclaimer reads at the same low weight as
+everything else, and there is an awkward whitespace gap between "Contacto" and
+"Hecho con esperanza…".
 
-```
-Built for the people of Venezuela
-Open source — MIT License
-Contact
-Made with hope and love for Venezuela 🇻🇪
-A project by Orlando Toro — Atenax Project
-Vigil is NOT an emergency service. For immediate rescue call: 0800-RESCATE
-```
+## Required changes (apply these exact requirements)
 
-The "NOT an emergency service" disclaimer + hotline is the single most important
-thing in the footer in a crisis context, yet it sits last and smallest. There is
-no legal/privacy linking, and the build attribution (Claude + Cursor) is missing.
-
-## Required hierarchy (top → bottom)
-
-1. **Tier 1 — Safety disclaimer (most prominent).** The "Vigil is NOT an
-   emergency service" sentence in body weight (`13px`, `--vigil-body`), in its
-   own bordered/tinted block, with the emergency hotline as a large, tappable
-   `tel:` button (red `--status-missing`, mono, ≥44px touch target).
-2. **Tier 2 — Credits (understated, centered).** "Made with hope and love for
-   Venezuela 🇻🇪", then "A project by Orlando Toro — Atenax Project"
-   (Atenax = link to `https://atenaxproject.com`, blue on hover only), then a
-   quiet build line: "Built with Claude + Cursor".
-3. **Tier 3 — Legal / meta (smallest).** A wrapping `·`-separated row:
-   Privacy Policy · Terms of Use · Contact · Open source — MIT License ·
-   Built for the people of Venezuela.
+1. **Group separation:** add a thin top border (1px, `--vigil-border`) above each
+   of the three groups, with consistent 16px vertical spacing between groups.
+2. **"Atenax Project" link:** style it in `--vigil-blue` with underline on hover
+   so it's clearly a link (currently indistinguishable).
+3. **Safety-critical line** ("Vigil NO es un servicio de emergencias…"): give it
+   slightly more weight than surrounding footer text — use `--vigil-body` color
+   (not muted), and add a small warning/info icon (Lucide, e.g. `AlertTriangle`
+   or `Info`, 16px) before it. Do NOT make it loud — still quiet per
+   DESIGN-SYSTEM.
+4. **Spacing:** remove the awkward whitespace gap between "Contacto" and "Hecho
+   con esperanza…"; make inter-group spacing intentional and consistent
+   (16–20px).
 
 ## Rules
 
-- Caption text stays `11px` minimum (DESIGN-SYSTEM typography floor).
-- One blue only (`--vigil-blue`) for interactive hover; red only for the hotline.
-- Legal links must be locale-aware: ES → `/privacidad`, `/terminos`;
-  other locales → `/privacy`, `/terms` (pages already exist).
-- Reuse existing i18n keys `nav.privacy` / `nav.terms` for the link labels.
-- All footer strings remain translatable (ES + EN authored; other 6 locales
-  inherit the existing English placeholders already present in their files).
-- Touch targets ≥44px on the tappable elements (hotline + legal links).
-
-## i18n
-
-Add one new key to `footer` in every locale (`es` translated, others EN):
-
-```json
-"footer": { ..., "builtWith": "Built with Claude + Cursor" }
-```
-- `es`: `"Construido con Claude + Cursor"`
+- Keep it minimal and quiet per DESIGN-SYSTEM.md — clarity and hierarchy, not
+  decoration.
+- Maintain dark mode correctness (use the dark tokens).
+- i18n: any new strings authored in ES + EN and merged as placeholders to the
+  other locales.
+- Accessibility: the icon is decorative (`aria-hidden`); the link has
+  discernible text.
+- Caption text stays `11px` minimum (DESIGN-SYSTEM typography floor); one blue
+  only (`--vigil-blue`) for interactive elements.
 
 ## Implementation notes (resolved 2026-06-30)
 
-Footer lives **inline in `src/app/layout.tsx`** (there is no `Footer.tsx`).
-Implemented the three-tier structure there:
-- Tier 1 block uses `bg-vigil-cloud` with the disclaimer in `text-[13px]` and a
-  red `tel:` hotline button (`min-h-[44px]`, `font-mono`).
-- Tier 2 credits keep Atenax as an external link; added `footer.builtWith`.
-- Tier 3 is a `flex-wrap` row of locale-aware `next/link` legal links + contact
-  + open-source line, separated by muted `·`.
-- Added `import Link from 'next/link'` and a second `getTranslations('nav')`
-  call for the Privacy/Terms labels.
+The footer lives **inline in `src/app/layout.tsx`** (there is no `Footer.tsx`).
+The earlier reconstruction of this doc proposed a loud, red `tel:` hotline
+button as a prominent first tier; that contradicted the actual intent ("quiet,
+not loud"). This pass replaced that with Orlando's real requirements above.
+
+What changed:
+
+- **Design tokens.** Added `--vigil-border`, `--vigil-body`, and
+  `--vigil-surface` to `:root` in `src/app/globals.css`, each with a `.dark`
+  override (`#374151`, `#cbd5e1`, `#111827`) so the footer is dark-mode correct.
+  (`--vigil-muted` already had a dark override.)
+- **Group separation (#1).** The footer now stacks three groups — open
+  source/legal, credits, emergency disclaimer — each with a `1px` top border in
+  `--vigil-border` and uniform `py-4` (16px) padding, giving consistent,
+  intentional spacing and a clear scan order.
+- **Atenax link (#2).** "Atenax Project" is now `text-vigil-blue` with
+  `hover:underline` (was muted, blue only on hover) so it reads as a link.
+- **Safety line (#3).** The "Vigil NO es un servicio de emergencias…" line uses
+  `--vigil-body` (not muted) at `font-medium`, prefixed by a 16px Lucide
+  `AlertTriangle` icon (`aria-hidden`, `--vigil-body` tint). It is heavier than
+  surrounding caption text but stays quiet — no red, no button. The always-on,
+  tappable hotline lives in the sticky `EmergencyBanner`, so the footer does not
+  duplicate it as a loud control.
+- **Spacing (#4).** The previous tinted/red first tier and uneven `py-5` credit
+  block were removed; all three groups share `py-4`, eliminating the awkward gap
+  between "Contacto" and "Hecho con esperanza…".
+
+No new i18n keys were required — the footer reuses existing `footer.*` and
+`nav.*` keys, which are already present (ES + EN authored, other six locales
+inherit placeholders).
 
 ## Commit
 
-Combined with the mobile/dark-mode fix in a single commit:
+Combined with the Part A mobile/dark-mode verification in a single commit:
 
 ```bash
 git add -A
-git commit -m "fix: mobile dark mode and footer hierarchy; docs: add build-process 09-10"
+git commit -m "fix: footer visual hierarchy; docs: update build-process 10-footer-hierarchy-fix"
 git push origin main
 ```

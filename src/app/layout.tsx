@@ -5,6 +5,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
+import { AlertTriangle } from 'lucide-react'
 import { Toaster } from 'react-hot-toast'
 import { EmergencyBanner } from '@/components/layout/EmergencyBanner'
 import { WeatherBar } from '@/components/layout/WeatherBar'
@@ -73,39 +74,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
                 {children}
               </main>
-              <footer className="border-t border-slate-200 bg-white text-[11px] text-vigil-muted">
-                {/* Tier 1 — Safety disclaimer (most prominent) */}
-                <div className="border-b border-slate-200 bg-vigil-cloud px-4 py-4 text-center">
-                  <p className="text-[13px] font-medium leading-relaxed text-slate-700">
-                    {t('notEmergency', { hotline: CRISIS_CONFIG.emergency.hotlineLabel })}
-                  </p>
-                  <a
-                    href={`tel:${CRISIS_CONFIG.emergency.hotline}`}
-                    className="mt-2 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-badge bg-status-missing px-5 font-mono text-sm font-bold text-white transition-opacity hover:opacity-90"
-                  >
-                    {CRISIS_CONFIG.emergency.hotlineLabel} · {CRISIS_CONFIG.emergency.hotline}
-                  </a>
-                </div>
-
-                {/* Tier 2 — Credits (understated) */}
-                <div className="px-4 py-5 text-center">
-                  <p className="text-[13px] text-slate-600">{t('credits')} 🇻🇪</p>
-                  <p className="mt-1">
-                    {t('creditsByPrefix')}{' '}
-                    <a
-                      href="https://atenaxproject.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-colors hover:text-vigil-blue"
-                    >
-                      {t('creditsByLink')}
-                    </a>
-                  </p>
-                  <p className="mt-1 text-vigil-muted">{t('builtWith')}</p>
-                </div>
-
-                {/* Tier 3 — Legal / meta */}
-                <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-t border-slate-200 px-4 py-4 text-center">
+              <footer className="bg-[color:var(--vigil-surface)] text-[11px] text-[color:var(--vigil-muted)]">
+                {/* Group 1 — Open source / legal */}
+                <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-t border-[color:var(--vigil-border)] px-4 py-4 text-center">
                   <Link
                     href={privacyHref}
                     className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
@@ -130,6 +101,31 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   <span>{t('openSource')}</span>
                   <span aria-hidden="true">·</span>
                   <span>{t('madeFor')}</span>
+                </div>
+
+                {/* Group 2 — Credits */}
+                <div className="border-t border-[color:var(--vigil-border)] px-4 py-4 text-center">
+                  <p className="text-[13px] text-[color:var(--vigil-body)]">{t('credits')} 🇻🇪</p>
+                  <p className="mt-1">
+                    {t('creditsByPrefix')}{' '}
+                    <a
+                      href="https://atenaxproject.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-vigil-blue underline-offset-2 transition-colors hover:underline"
+                    >
+                      {t('creditsByLink')}
+                    </a>
+                  </p>
+                  <p className="mt-1">{t('builtWith')}</p>
+                </div>
+
+                {/* Group 3 — Emergency disclaimer (quiet, but scannable) */}
+                <div className="border-t border-[color:var(--vigil-border)] px-4 py-4">
+                  <p className="flex items-center justify-center gap-2 text-center text-[13px] font-medium text-[color:var(--vigil-body)]">
+                    <AlertTriangle className="h-4 w-4 shrink-0 text-[color:var(--vigil-body)]" aria-hidden="true" />
+                    <span>{t('notEmergency', { hotline: CRISIS_CONFIG.emergency.hotlineLabel })}</span>
+                  </p>
                 </div>
               </footer>
             </div>

@@ -10,7 +10,10 @@
     --vigil-ink: #0f172a;
     --vigil-blue: #2563eb;
     --vigil-blue-light: #eff6ff;
+    --vigil-surface: #ffffff;
     --vigil-cloud: #f8fafc;
+    --vigil-border: #e2e8f0;
+    --vigil-body: #334155;
     --vigil-muted: #94a3b8;
     --status-missing: #dc2626;
     --status-missing-bg: #fef2f2;
@@ -30,7 +33,10 @@
   .dark {
     color-scheme: dark;
     --vigil-ink: #f1f5f9;
+    --vigil-surface: #111827;
     --vigil-cloud: #111827;
+    --vigil-border: #374151;
+    --vigil-body: #cbd5e1;
     --vigil-muted: #9ca3af;
     background-color: #0a0f1e;
     color: #f1f5f9;

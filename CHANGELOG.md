@@ -14,11 +14,21 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **Mobile layout** — `<main>` bottom padding now `calc(5rem + safe-area-inset)`
   so content never hides behind the bottom nav on notched devices; added
   `overflow-x: hidden` on `html, body` to prevent page-level horizontal scroll.
-- **Footer hierarchy** — restructured the inline footer in `layout.tsx` into three
-  tiers: (1) prominent "not an emergency service" disclaimer + tappable red hotline
-  button, (2) credits (Orlando / Atenax + new "Built with Claude + Cursor" line),
-  (3) locale-aware legal row (Privacy · Terms · Contact · Open source). Added
-  `footer.builtWith` to all 8 locales (ES translated).
+- **Footer hierarchy** — reworked the inline footer in `layout.tsx` into three
+  clearly separated, quiet groups (open source/legal · credits · emergency
+  disclaimer), each with a 1px `--vigil-border` top border and consistent 16px
+  spacing. The "Atenax Project" link is now `--vigil-blue` with hover underline;
+  the "not an emergency service" line uses `--vigil-body` weight with a 16px
+  Lucide `AlertTriangle` icon (decorative, `aria-hidden`) instead of a loud red
+  hotline button (tap-to-call already lives in the sticky EmergencyBanner). Added
+  design tokens `--vigil-border`, `--vigil-body`, `--vigil-surface` to
+  `globals.css` with `.dark` overrides for dark-mode-correct footer styling. No
+  new i18n keys (reuses existing `footer.*` / `nav.*`).
+- **Mobile + dark mode (verified)** — re-audited Part A: `color-scheme: light` on
+  `:root` (+ `.dark` → `dark`), the `viewport` `colorScheme` export, the inline
+  `<html style={{ colorScheme: 'light' }}>`, the `calc(... + safe-area-inset)`
+  main padding, `overflow-x: hidden`, and ≥44px nav touch targets were all
+  already in place — no code gaps found.
 
 ### Changed
 - **docs/build-process** — added `09-mobile-darkmode-fix.md` (moved from root
