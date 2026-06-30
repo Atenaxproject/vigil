@@ -60,9 +60,12 @@ export const CRISIS_CONFIG = {
     centerLat: 10.4,  centerLng: -66.9,
     defaultZoom: 7
   },
-  emergencyHotline: '0800-7372282',    // 0800-RESCATE
-  officialApp: 'VenApp',
-  officialHotlineLabel: '0800-RESCATE',
+  emergency: {
+    hotline: '0800-7372282',
+    hotlineLabel: '0800-RESCATE',
+    // VenApp intentionally excluded — see Vigil Privacy Policy section on
+    // government data non-cooperation. VenApp has documented human rights concerns.
+  },
   partnerLinks: [
     { name: 'Red de Intérpretes', url: 'https://interp-aid.lovable.app', type: 'translation' },
     { name: 'ReliefWeb Venezuela', url: 'https://reliefweb.int/country/ven', type: 'official' },
@@ -78,6 +81,8 @@ export const CRISIS_CONFIG = {
   }
 }
 ```
+
+**VenApp exclusion:** The Venezuelan government app VenApp is intentionally omitted from `partnerLinks` and the emergency banner. Vigil does not link to or promote government-operated intake tools — consistent with our Privacy Policy commitment not to share user data with the Venezuelan government and documented human rights concerns around VenApp.
 
 ---
 
@@ -437,7 +442,7 @@ The system is designed to be self-regulating:
 
 **Emergency Banner (always visible, cannot be dismissed):**
 ```
-🚨  Emergencias Venezuela: 0800-RESCATE (0800-7372282)  |  VenApp  |  Cruz Roja
+🚨  Emergencias Venezuela: 0800-RESCATE (0800-7372282)  |  Intérpretes  |  Cruz Roja
 ```
 
 ---
@@ -521,7 +526,7 @@ Execute in this exact order:
 3. Create src/config/crisis.config.ts with the exact config from CLAUDE.md
 4. Create src/types/vigil.types.ts with TypeScript interfaces for all database tables
 5. Create the layout.tsx with:
-   - EmergencyBanner component (always visible, hotline 0800-7372282 + VenApp link)
+   - EmergencyBanner component (always visible, hotline 0800-7372282, Intérpretes + Cruz Roja links)
    - Navigation with links to: Buscar persona / Reportar / Necesito ayuda / Voluntarios / Organizaciones / Donar / Noticias
    - LanguageSwitcher (ES default)
 6. Create the home page (/) with:

@@ -230,8 +230,8 @@ export const CRISIS_CONFIG = {
   emergency: {
     hotline: '0800-7372282',
     hotlineLabel: '0800-RESCATE',
-    officialApp: 'VenApp',
-    officialAppUrl: 'https://venapp.gob.ve',
+    // VenApp intentionally excluded — see Vigil Privacy Policy section on
+    // government data non-cooperation. VenApp has documented human rights concerns.
   },
 
   partnerLinks: [
@@ -1014,7 +1014,7 @@ GENSCRIPT
 cat > src/i18n/locales/en.json << 'ENFILE'
 {
   "nav": { "search": "Search Missing Persons", "report": "Report Missing Person", "needHelp": "I Need Help", "volunteers": "Volunteers", "organizations": "Organizations", "donate": "Donate", "news": "Official Updates", "map": "Crisis Map", "privacy": "Privacy Policy", "terms": "Terms of Use" },
-  "banner": { "emergency": "Emergency:", "hotline": "0800-RESCATE", "hotlineNumber": "0800-7372282", "officialApp": "VenApp", "interpreters": "Interpreters" },
+  "banner": { "emergency": "Emergency:", "hotline": "0800-RESCATE", "hotlineNumber": "0800-7372282", "interpreters": "Interpreters" },
   "missing": {
     "title": "Missing Persons", "subtitle": "Search or report a missing person",
     "search": { "placeholder": "Search by name...", "button": "Search", "noResults": "No results found. Try a different name.", "loading": "Searching...", "resultsCount": "{{count}} results found" },
@@ -1039,7 +1039,7 @@ ENFILE
 cat > src/i18n/locales/es.json << 'ESFILE'
 {
   "nav": { "search": "Buscar Persona", "report": "Reportar Desaparecido", "needHelp": "Necesito Ayuda", "volunteers": "Voluntarios", "organizations": "Organizaciones", "donate": "Donar", "news": "Actualizaciones Oficiales", "map": "Mapa de Crisis", "privacy": "Política de Privacidad", "terms": "Términos de Uso" },
-  "banner": { "emergency": "Emergencias:", "hotline": "0800-RESCATE", "hotlineNumber": "0800-7372282", "officialApp": "VenApp", "interpreters": "Intérpretes" },
+  "banner": { "emergency": "Emergencias:", "hotline": "0800-RESCATE", "hotlineNumber": "0800-7372282", "interpreters": "Intérpretes" },
   "missing": {
     "title": "Personas Desaparecidas", "subtitle": "Busca o reporta una persona desaparecida",
     "search": { "placeholder": "Buscar por nombre...", "button": "Buscar", "noResults": "Sin resultados. Prueba con otro nombre.", "loading": "Buscando...", "resultsCount": "{{count}} resultados encontrados" },
