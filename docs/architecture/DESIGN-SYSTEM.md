@@ -26,15 +26,15 @@ Where it matters = the status system. That's where Vigil expresses itself.
 - `Inter` — all body text, labels, UI chrome. The universal legibility font.
 - `Geist Mono` — timestamps, coordinates, IDs, technical data.
 
-**Scale:**
+**Scale (v1.1 — accessibility revision; minimum floor raised to 13px):**
 ```
-Display:  32px / 700 / tracking -0.02em  → Emergency hotline, hero numbers
-H1:       24px / 600 / tracking -0.01em  → Page titles
-H2:       18px / 600                      → Section titles  
-H3:       15px / 500                      → Card titles, names
-Body:     13px / 400 / leading 1.6       → Descriptions, notes
-Caption:  11px / 400 / leading 1.5       → Meta, timestamps, sources
-Mono:     12px / 400                      → Coordinates, IDs, codes
+Display:  34px / 700 / tracking -0.02em  → Emergency hotline, hero numbers
+H1:       26px / 600 / tracking -0.01em  → Page titles
+H2:       20px / 600                      → Section titles  
+H3:       17px / 500                      → Card titles, names
+Body:     16px / 400 / leading 1.6       → Descriptions, notes (primary reading text)
+Caption:  13px / 400 / leading 1.5       → Meta, timestamps, sources (minimum floor)
+Mono:     13px / 400                      → Coordinates, IDs, codes
 ```
 
 ---
@@ -53,7 +53,7 @@ Mono:     12px / 400                      → Coordinates, IDs, codes
 --vigil-surface:     #FFFFFF   /* Primary background */
 --vigil-cloud:       #F8FAFC   /* Secondary surfaces, input backgrounds */
 --vigil-border:      #E2E8F0   /* All borders — 0.5px only */
---vigil-muted:       #94A3B8   /* Secondary text, icons at rest */
+--vigil-muted:       #64748B   /* Secondary text, icons at rest — WCAG AA ~4.6:1 on white */
 --vigil-body:        #334155   /* Body text */
 --vigil-heading:     #0F172A   /* Heading text */
 ```
@@ -285,7 +285,7 @@ theme: {
         blue:    '#2563EB',
         'blue-light': '#EFF6FF',
         cloud:   '#F8FAFC',
-        muted:   '#94A3B8',
+        muted:   '#64748B',
       },
       status: {
         missing:         '#DC2626',
@@ -330,7 +330,7 @@ theme: {
 - More than one blue (--vigil-blue is the only interactive color)
 - Red outside of status-missing and danger buttons
 - Animations not in the approved list above
-- Font sizes below 11px
+- Font sizes below 13px
 - Anything that takes longer than 3 seconds to load on 3G
 
 ---

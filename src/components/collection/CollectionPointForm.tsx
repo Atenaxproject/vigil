@@ -85,45 +85,45 @@ export function CollectionPointForm() {
   }
 
   const inputClass =
-    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
+    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
 
   return (
     <div className="mx-auto max-w-xl p-4 pb-24">
-      <Link href="/" className="inline-flex items-center gap-1 text-[13px] text-vigil-blue">
+      <Link href="/" className="inline-flex items-center gap-1 text-[16px] text-vigil-blue">
         <ArrowLeft className="h-4 w-4" />
         {t('backToMap')}
       </Link>
       <div className="mt-4 flex items-center gap-2">
         <Package className="h-6 w-6 text-amber-600" aria-hidden />
-        <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('title')}</h1>
+        <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
       </div>
-      <p className="mt-2 text-[13px] text-vigil-muted">{t('subtitle')}</p>
+      <p className="mt-2 text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         <div>
-          <label htmlFor="cp-title" className="block text-[11px] font-medium text-slate-600">
+          <label htmlFor="cp-title" className="block text-[13px] font-medium text-slate-600">
             {t('form.title')} *
           </label>
           <input id="cp-title" name="title" required className={inputClass} />
         </div>
         <div>
-          <label htmlFor="cp-organizer" className="block text-[11px] font-medium text-slate-600">
+          <label htmlFor="cp-organizer" className="block text-[13px] font-medium text-slate-600">
             {t('form.organizer')} *
           </label>
           <input id="cp-organizer" name="organizer_name" required className={inputClass} />
         </div>
         <div>
-          <label htmlFor="cp-location" className="block text-[11px] font-medium text-slate-600">
+          <label htmlFor="cp-location" className="block text-[13px] font-medium text-slate-600">
             {t('form.location')} *
           </label>
           <input id="cp-location" name="location_description" required className={inputClass} />
-          <p className="mt-1 flex items-center gap-1 text-[11px] text-vigil-muted">
+          <p className="mt-1 flex items-center gap-1 text-[13px] text-vigil-muted">
             <MapPin className="h-3 w-3" />
             {lat !== null ? t('form.gpsOk') : t('form.gpsPending')}
           </p>
         </div>
         <fieldset>
-          <legend className="text-[11px] font-medium text-slate-600">{t('form.accepts')} *</legend>
+          <legend className="text-[13px] font-medium text-slate-600">{t('form.accepts')} *</legend>
           <div className="mt-2 flex flex-wrap gap-2">
             {ACCEPTS_OPTIONS.map(({ value, labelKey }) => (
               <button
@@ -131,7 +131,7 @@ export function CollectionPointForm() {
                 type="button"
                 onClick={() => toggleCategory(value)}
                 className={cn(
-                  'rounded-badge border px-3 py-1.5 text-[11px] font-medium',
+                  'rounded-badge border px-3 py-1.5 text-[13px] font-medium',
                   selected.includes(value)
                     ? 'border-amber-500 bg-amber-50 text-amber-800'
                     : 'border-slate-200 bg-white text-slate-600'
@@ -143,7 +143,7 @@ export function CollectionPointForm() {
           </div>
         </fieldset>
         <div>
-          <label htmlFor="cp-hours" className="block text-[11px] font-medium text-slate-600">
+          <label htmlFor="cp-hours" className="block text-[13px] font-medium text-slate-600">
             {t('form.hours')} *
           </label>
           <input
@@ -155,22 +155,22 @@ export function CollectionPointForm() {
           />
         </div>
         <div>
-          <label htmlFor="cp-contact" className="block text-[11px] font-medium text-slate-600">
+          <label htmlFor="cp-contact" className="block text-[13px] font-medium text-slate-600">
             {t('form.contact')} *
           </label>
           <input id="cp-contact" name="contact" type="tel" required className={inputClass} />
-          <p className="mt-1 text-[11px] text-vigil-muted">{t('form.contactNote')}</p>
+          <p className="mt-1 text-[13px] text-vigil-muted">{t('form.contactNote')}</p>
         </div>
         <button
           type="submit"
           disabled={submitting || lat === null}
-          className="min-h-[44px] w-full rounded-input bg-vigil-blue text-[13px] font-medium text-white disabled:opacity-50"
+          className="min-h-[44px] w-full rounded-input bg-vigil-blue text-[16px] font-medium text-white disabled:opacity-50"
         >
           {submitting ? t('form.submitting') : t('form.submit')}
         </button>
       </form>
 
-      <p className="mt-4 text-[11px] text-vigil-muted">
+      <p className="mt-4 text-[13px] text-vigil-muted">
         {t('boundsNote', { country: CRISIS_CONFIG.country })}
       </p>
     </div>

@@ -153,12 +153,12 @@ export default function VoluntariosPage() {
   }
 
   const inputClass =
-    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
+    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
 
   return (
     <div className="mx-auto max-w-3xl p-4 pb-24">
-      <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('title')}</h1>
-      <p className="mt-1 text-[13px] text-vigil-muted">{t('subtitle')}</p>
+      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
+      <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
       <div className="mt-6 flex rounded-input border border-slate-200 bg-vigil-cloud p-1">
         {(['directory', 'register'] as const).map((mode) => (
@@ -167,7 +167,7 @@ export default function VoluntariosPage() {
             type="button"
             onClick={() => setTab(mode)}
             className={cn(
-              'flex-1 min-h-[44px] rounded-input text-[13px] font-medium',
+              'flex-1 min-h-[44px] rounded-input text-[16px] font-medium',
               tab === mode ? 'bg-white text-vigil-blue shadow-sm' : 'text-vigil-muted'
             )}
           >
@@ -179,12 +179,12 @@ export default function VoluntariosPage() {
       {tab === 'directory' && (
         <>
           <section className="mt-6">
-            <h2 className="text-[18px] font-semibold text-vigil-ink">{td('featuredTitle')}</h2>
+            <h2 className="text-[20px] font-semibold text-vigil-ink">{td('featuredTitle')}</h2>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {FEATURED_KEYS.map((key) => (
                 <div
                   key={key}
-                  className="rounded-card border border-slate-200 bg-vigil-cloud px-3 py-2 text-[13px] text-slate-700"
+                  className="rounded-card border border-slate-200 bg-vigil-cloud px-3 py-2 text-[16px] text-slate-700"
                 >
                   {td(`featured.${key}`)}
                 </div>
@@ -200,7 +200,7 @@ export default function VoluntariosPage() {
                 value={skillFilter}
                 onChange={(e) => setSkillFilter(e.target.value)}
                 placeholder={td('searchSkill')}
-                className="w-full min-h-[44px] rounded-input border border-slate-200 bg-white py-2 pl-10 pr-3 text-[13px]"
+                className="w-full min-h-[44px] rounded-input border border-slate-200 bg-white py-2 pl-10 pr-3 text-[16px]"
               />
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -209,14 +209,14 @@ export default function VoluntariosPage() {
                 value={langFilter}
                 onChange={(e) => setLangFilter(e.target.value)}
                 placeholder={td('searchLanguage')}
-                className="min-h-[44px] rounded-input border border-slate-200 bg-white px-3 text-[13px]"
+                className="min-h-[44px] rounded-input border border-slate-200 bg-white px-3 text-[16px]"
               />
               <input
                 type="search"
                 value={locationFilter}
                 onChange={(e) => setLocationFilter(e.target.value)}
                 placeholder={td('searchLocation')}
-                className="min-h-[44px] rounded-input border border-slate-200 bg-white px-3 text-[13px]"
+                className="min-h-[44px] rounded-input border border-slate-200 bg-white px-3 text-[16px]"
               />
             </div>
           </div>
@@ -224,7 +224,7 @@ export default function VoluntariosPage() {
           <div className="mt-6 space-y-3">
             {loading && <div className="skeleton h-24 rounded-card" />}
             {!loading && filtered.length === 0 && (
-              <p className="py-8 text-center text-[13px] text-vigil-muted">{td('noResults')}</p>
+              <p className="py-8 text-center text-[16px] text-vigil-muted">{td('noResults')}</p>
             )}
             {filtered.map((v) => (
               <article key={v.id} className="rounded-card border border-slate-200 bg-white p-4">
@@ -233,30 +233,30 @@ export default function VoluntariosPage() {
                     <Users className="h-5 w-5 text-vigil-blue" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-[15px] font-medium text-vigil-ink">{v.display_name}</h3>
+                    <h3 className="text-[17px] font-medium text-vigil-ink">{v.display_name}</h3>
                     {v.location_city && (
-                      <p className="text-[11px] text-vigil-muted">{v.location_city}</p>
+                      <p className="text-[13px] text-vigil-muted">{v.location_city}</p>
                     )}
                     <div className="mt-2 flex flex-wrap gap-1">
                       {v.skills.map((s) => (
                         <span
                           key={s}
-                          className="rounded-badge bg-vigil-blue-light px-2 py-0.5 text-[11px] text-vigil-blue"
+                          className="rounded-badge bg-vigil-blue-light px-2 py-0.5 text-[13px] text-vigil-blue"
                         >
                           {t(`skills.${s}`)}
                         </span>
                       ))}
                     </div>
                     {v.languages.length > 0 && (
-                      <p className="mt-2 text-[11px] text-vigil-muted">
+                      <p className="mt-2 text-[13px] text-vigil-muted">
                         {td('languages')}: {v.languages.join(', ')}
                       </p>
                     )}
                     {v.specialization && (
-                      <p className="mt-1 line-clamp-2 text-[11px] text-slate-600">{v.specialization}</p>
+                      <p className="mt-1 line-clamp-2 text-[13px] text-slate-600">{v.specialization}</p>
                     )}
                     {v.availability && (
-                      <p className="mt-1 text-[11px] font-medium text-slate-700">
+                      <p className="mt-1 text-[13px] font-medium text-slate-700">
                         {t(`availability.${v.availability}`)}
                       </p>
                     )}
@@ -266,7 +266,7 @@ export default function VoluntariosPage() {
                   <button
                     type="button"
                     onClick={() => setContactVolunteer(v)}
-                    className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[13px] font-medium text-white"
+                    className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[16px] font-medium text-white"
                   >
                     {td('connect')}
                   </button>
@@ -280,16 +280,16 @@ export default function VoluntariosPage() {
       {tab === 'register' && (
         <form onSubmit={handleRegister} className="mt-6 space-y-4">
           <div>
-            <label htmlFor="name" className="text-[11px] font-medium">
+            <label htmlFor="name" className="text-[13px] font-medium">
               {tf('name')} *
             </label>
             <input id="name" name="name" required className={inputClass} />
           </div>
           <div>
-            <span className="text-[11px] font-medium">{tf('skills')} *</span>
+            <span className="text-[13px] font-medium">{tf('skills')} *</span>
             <div className="mt-2 flex flex-wrap gap-2">
               {SKILLS.map((skill) => (
-                <label key={skill} className="flex items-center gap-1 text-[11px]">
+                <label key={skill} className="flex items-center gap-1 text-[13px]">
                   <input type="checkbox" name="skills" value={skill} className="rounded" />
                   {t(`skills.${skill}`)}
                 </label>
@@ -297,7 +297,7 @@ export default function VoluntariosPage() {
             </div>
           </div>
           <div>
-            <label htmlFor="languages" className="text-[11px] font-medium">
+            <label htmlFor="languages" className="text-[13px] font-medium">
               {tf('languages')} *
             </label>
             <input
@@ -309,13 +309,13 @@ export default function VoluntariosPage() {
             />
           </div>
           <div>
-            <label htmlFor="location" className="text-[11px] font-medium">
+            <label htmlFor="location" className="text-[13px] font-medium">
               {tf('location')} *
             </label>
             <input id="location" name="location" required className={inputClass} />
           </div>
           <div>
-            <label htmlFor="availability" className="text-[11px] font-medium">
+            <label htmlFor="availability" className="text-[13px] font-medium">
               {tf('availability')} *
             </label>
             <select id="availability" name="availability" required className={inputClass}>
@@ -329,7 +329,7 @@ export default function VoluntariosPage() {
             </select>
           </div>
           <div>
-            <label htmlFor="specialization" className="text-[11px] font-medium">
+            <label htmlFor="specialization" className="text-[13px] font-medium">
               {tf('specialization')}
             </label>
             <textarea
@@ -342,49 +342,49 @@ export default function VoluntariosPage() {
             />
           </div>
           <div>
-            <span className="text-[11px] font-medium">{tf('equipment')}</span>
+            <span className="text-[13px] font-medium">{tf('equipment')}</span>
             <div className="mt-2 flex flex-wrap gap-2">
               {EQUIPMENT_OPTIONS.map((eq) => (
-                <label key={eq} className="flex items-center gap-1 text-[11px]">
+                <label key={eq} className="flex items-center gap-1 text-[13px]">
                   <input type="checkbox" name="equipment" value={eq} className="rounded" />
                   {tf(`equipmentOptions.${eq}`)}
                 </label>
               ))}
             </div>
           </div>
-          <label className="flex items-center gap-2 text-[13px]">
+          <label className="flex items-center gap-2 text-[16px]">
             <input type="checkbox" name="remote_available" className="rounded" />
             {tf('remoteAvailable')}
           </label>
           <div>
-            <label htmlFor="verification_url" className="text-[11px] font-medium">
+            <label htmlFor="verification_url" className="text-[13px] font-medium">
               {tf('verificationUrl')}
             </label>
             <input id="verification_url" name="verification_url" type="url" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="phone" className="text-[11px] font-medium">
+            <label htmlFor="phone" className="text-[13px] font-medium">
               {tf('phone')}
             </label>
             <input id="phone" name="phone" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="whatsapp" className="text-[11px] font-medium">
+            <label htmlFor="whatsapp" className="text-[13px] font-medium">
               {tf('whatsapp')}
             </label>
             <input id="whatsapp" name="whatsapp" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="email" className="text-[11px] font-medium">
+            <label htmlFor="email" className="text-[13px] font-medium">
               {tf('email')}
             </label>
             <input id="email" name="email" type="email" className={inputClass} />
           </div>
-          <label className="flex items-center gap-2 text-[13px]">
+          <label className="flex items-center gap-2 text-[16px]">
             <input type="checkbox" name="public_display" defaultChecked className="rounded" />
             {tf('publicDisplay')}
           </label>
-          <p className="flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[11px] text-amber-900">
+          <p className="flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[13px] text-amber-900">
             <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             {tf('privacyNote')}
           </p>
@@ -402,34 +402,34 @@ export default function VoluntariosPage() {
         <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 p-4 sm:items-center">
           <div className="w-full max-w-md rounded-card bg-white p-6 shadow-sm">
             <div className="flex items-center justify-between">
-              <h2 className="font-display text-lg font-semibold">{td('contactTitle')}</h2>
+              <h2 className="font-display text-[20px] font-semibold">{td('contactTitle')}</h2>
               <button type="button" onClick={() => setContactVolunteer(null)} aria-label="Cerrar">
                 <X className="h-5 w-5 text-vigil-muted" />
               </button>
             </div>
-            <p className="mt-2 text-[13px] text-vigil-muted">{contactVolunteer.display_name}</p>
+            <p className="mt-2 text-[16px] text-vigil-muted">{contactVolunteer.display_name}</p>
             <form onSubmit={handleContact} className="mt-4 space-y-4">
               <div>
-                <label htmlFor="vcr-name" className="text-[11px] font-medium">
+                <label htmlFor="vcr-name" className="text-[13px] font-medium">
                   {td('yourName')} *
                 </label>
                 <input id="vcr-name" name="requester_name" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="vcr-phone" className="text-[11px] font-medium">
+                <label htmlFor="vcr-phone" className="text-[13px] font-medium">
                   {td('yourPhone')} *
                 </label>
                 <input id="vcr-phone" name="requester_phone" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="vcr-msg" className="text-[11px] font-medium">
+                <label htmlFor="vcr-msg" className="text-[13px] font-medium">
                   {td('message')}
                 </label>
                 <textarea id="vcr-msg" name="message" rows={3} className={inputClass} />
               </div>
               <button
                 type="submit"
-                className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[13px] font-medium text-white"
+                className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[16px] font-medium text-white"
               >
                 {td('connect')}
               </button>

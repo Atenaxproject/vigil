@@ -17,8 +17,8 @@ export default async function AdminPage() {
     <div className="mx-auto max-w-xl p-8">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="font-display text-2xl font-semibold text-vigil-ink">Admin</h1>
-          <p className="mt-2 text-[13px] text-vigil-muted">
+          <h1 className="font-display text-[26px] font-semibold text-vigil-ink">Admin</h1>
+          <p className="mt-2 text-[16px] text-vigil-muted">
             Panel de moderación — sesión activa como {user.email}
           </p>
         </div>

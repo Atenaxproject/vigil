@@ -16,7 +16,11 @@
     "collectionPoint": "物资收集点",
     "privacy": "隐私政策",
     "terms": "使用条款",
-    "more": "更多"
+    "more": "更多",
+    "mapShort": "地图",
+    "searchShort": "搜索",
+    "reportShort": "上报",
+    "needHelpShort": "帮助"
   },
   "banner": {
     "emergency": "紧急情况:",

@@ -94,7 +94,7 @@ export function ClaimManageClient({ token }: ClaimManageClientProps) {
   if (!data) {
     return (
       <div className="mx-auto max-w-xl p-8 text-center">
-        <p className="text-[13px] text-vigil-muted">{t('notFound')}</p>
+        <p className="text-[16px] text-vigil-muted">{t('notFound')}</p>
         <Link href="/buscar" className="mt-4 inline-block text-vigil-blue underline">
           {t('backToSearch')}
         </Link>
@@ -106,24 +106,24 @@ export function ClaimManageClient({ token }: ClaimManageClientProps) {
 
   return (
     <div className="mx-auto max-w-2xl p-4 pb-24">
-      <p className="text-[11px] text-vigil-muted">{t('privatePage')}</p>
+      <p className="text-[13px] text-vigil-muted">{t('privatePage')}</p>
       <div className="mt-4 rounded-card border border-slate-200 bg-white p-4">
         <div className="flex items-start justify-between gap-4">
           <h1 className="font-display text-xl font-semibold text-vigil-ink">{data.person.full_name}</h1>
           <StatusBadge status={data.person.status} label={tm(`status.${data.person.status}`)} />
         </div>
-        <p className="mt-2 text-[13px] text-slate-600">{data.person.last_seen_location}</p>
+        <p className="mt-2 text-[16px] text-slate-600">{data.person.last_seen_location}</p>
 
         <div className="mt-6 space-y-4 border-t border-slate-100 pt-4">
           <div>
-            <label htmlFor="claim-status" className="block text-[11px] font-medium text-slate-600">
+            <label htmlFor="claim-status" className="block text-[13px] font-medium text-slate-600">
               {t('updateStatus')}
             </label>
             <select
               id="claim-status"
               value={status}
               onChange={(e) => setStatus(e.target.value as MissingPersonStatus)}
-              className="mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px]"
+              className="mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px]"
             >
               <option value="missing">{tm('status.missing')}</option>
               <option value="found_alive">{tm('status.found_alive')}</option>
@@ -132,7 +132,7 @@ export function ClaimManageClient({ token }: ClaimManageClientProps) {
             </select>
           </div>
           <div>
-            <label htmlFor="claim-notes" className="block text-[11px] font-medium text-slate-600">
+            <label htmlFor="claim-notes" className="block text-[13px] font-medium text-slate-600">
               {t('updateNotes')}
             </label>
             <textarea
@@ -140,14 +140,14 @@ export function ClaimManageClient({ token }: ClaimManageClientProps) {
               rows={3}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="mt-1 w-full rounded-input border border-slate-200 bg-vigil-cloud px-3 py-2 text-[13px]"
+              className="mt-1 w-full rounded-input border border-slate-200 bg-vigil-cloud px-3 py-2 text-[16px]"
             />
           </div>
           <button
             type="button"
             onClick={saveUpdates}
             disabled={saving}
-            className="min-h-[44px] rounded-input bg-vigil-blue px-4 text-[13px] font-medium text-white disabled:opacity-50"
+            className="min-h-[44px] rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white disabled:opacity-50"
           >
             {saving ? t('saving') : t('saveChanges')}
           </button>
@@ -156,19 +156,19 @@ export function ClaimManageClient({ token }: ClaimManageClientProps) {
 
       <section className="mt-8">
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-lg font-semibold text-vigil-ink">{t('contactInbox')}</h2>
+          <h2 className="font-display text-[20px] font-semibold text-vigil-ink">{t('contactInbox')}</h2>
           {unviewedIds.length > 0 && (
             <button
               type="button"
               onClick={() => markViewed(unviewedIds)}
-              className="text-[11px] text-vigil-blue underline"
+              className="text-[13px] text-vigil-blue underline"
             >
               {t('markAllViewed')}
             </button>
           )}
         </div>
         {data.contactRequests.length === 0 ? (
-          <p className="mt-3 text-[13px] text-vigil-muted">{t('noContactRequests')}</p>
+          <p className="mt-3 text-[16px] text-vigil-muted">{t('noContactRequests')}</p>
         ) : (
           <div className="mt-3 space-y-3">
             {data.contactRequests.map((req) => (
@@ -176,11 +176,11 @@ export function ClaimManageClient({ token }: ClaimManageClientProps) {
                 key={req.id}
                 className={`rounded-card border p-3 ${req.viewed ? 'border-slate-200 bg-white' : 'border-blue-200 bg-blue-50'}`}
               >
-                <p className="text-[13px] font-medium text-vigil-ink">{req.requester_name}</p>
-                <p className="text-[11px] text-vigil-muted">
+                <p className="text-[16px] font-medium text-vigil-ink">{req.requester_name}</p>
+                <p className="text-[13px] text-vigil-muted">
                   {req.requester_relationship} · {req.requester_phone}
                 </p>
-                {req.message && <p className="mt-2 text-[13px] text-slate-600">{req.message}</p>}
+                {req.message && <p className="mt-2 text-[16px] text-slate-600">{req.message}</p>}
               </article>
             ))}
           </div>

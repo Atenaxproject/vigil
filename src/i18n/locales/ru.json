@@ -16,7 +16,11 @@
     "collectionPoint": "Пункты сбора",
     "privacy": "Политика приватности",
     "terms": "Условия использования",
-    "more": "Ещё"
+    "more": "Ещё",
+    "mapShort": "Карта",
+    "searchShort": "Поиск",
+    "reportShort": "Сообщить",
+    "needHelpShort": "Помощь"
   },
   "banner": {
     "emergency": "Экстренный случай:",

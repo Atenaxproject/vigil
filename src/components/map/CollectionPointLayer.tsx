@@ -24,22 +24,22 @@ export function CollectionPointLayer({ markers }: CollectionPointLayerProps) {
           <Popup>
             <strong>{marker.title}</strong>
             {marker.organizer_name && (
-              <p className="text-[11px] text-slate-600">
+              <p className="text-[13px] text-slate-600">
                 {t('map.organizer')}: {marker.organizer_name}
               </p>
             )}
             {marker.hours_schedule && (
-              <p className="text-[11px] text-slate-600">
+              <p className="text-[13px] text-slate-600">
                 {t('form.hours')}: {marker.hours_schedule}
               </p>
             )}
             {marker.accepts_categories && marker.accepts_categories.length > 0 && (
-              <p className="text-[11px] text-slate-600">
+              <p className="text-[13px] text-slate-600">
                 {t('form.accepts')}: {marker.accepts_categories.join(', ')}
               </p>
             )}
             {marker.description && <p className="text-sm">{marker.description}</p>}
-            <p className="mt-2 text-[11px] text-vigil-blue">{t('map.contactViaVigil')}</p>
+            <p className="mt-2 text-[13px] text-vigil-blue">{t('map.contactViaVigil')}</p>
           </Popup>
         </CircleMarker>
       ))}

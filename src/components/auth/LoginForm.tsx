@@ -186,7 +186,7 @@ export function LoginForm() {
                 placeholder="+58 412 1234567"
                 className="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-vigil-blue focus:outline-none focus:ring-1 focus:ring-vigil-blue"
               />
-              <p className="mt-1 text-xs text-vigil-muted">Incluya código de país (ej. +58)</p>
+              <p className="mt-1 text-[13px] text-vigil-muted">Incluya código de país (ej. +58)</p>
             </div>
           )}
 
@@ -250,7 +250,7 @@ export function LoginForm() {
         </form>
       )}
 
-      <p className="mt-6 text-center text-xs text-vigil-muted">
+      <p className="mt-6 text-center text-[13px] text-vigil-muted">
         Sin contraseñas — solo verificación por código. Sus datos están protegidos.
       </p>
     </div>

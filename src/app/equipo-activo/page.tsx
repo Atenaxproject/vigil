@@ -115,19 +115,19 @@ export default function EquipoActivoPage() {
   }, [active, t])
 
   const inputClass =
-    'mt-1 w-full min-h-[48px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[15px]'
+    'mt-1 w-full min-h-[48px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[17px]'
 
   if (active) {
     return (
       <div className="mx-auto max-w-lg space-y-4 p-4 pb-24">
-        <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('checkedInTitle')}</h1>
-        <p className="text-[15px] text-slate-600">{active.display_name}</p>
+        <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('checkedInTitle')}</h1>
+        <p className="text-[17px] text-slate-600">{active.display_name}</p>
 
         <button
           type="button"
           onClick={() => void checkIn('needs_assistance')}
           disabled={submitting}
-          className="w-full min-h-[56px] rounded-input bg-status-missing text-lg font-bold text-white disabled:opacity-50"
+          className="w-full min-h-[56px] rounded-input bg-status-missing text-[20px] font-bold text-white disabled:opacity-50"
         >
           {t('sos')}
         </button>
@@ -136,7 +136,7 @@ export default function EquipoActivoPage() {
           type="button"
           onClick={() => void checkIn('checked_in')}
           disabled={submitting}
-          className="w-full min-h-[48px] rounded-input bg-vigil-blue text-[15px] font-medium text-white disabled:opacity-50"
+          className="w-full min-h-[48px] rounded-input bg-vigil-blue text-[17px] font-medium text-white disabled:opacity-50"
         >
           {t('checkin')}
         </button>
@@ -145,7 +145,7 @@ export default function EquipoActivoPage() {
           type="button"
           onClick={() => void checkIn('signed_off')}
           disabled={submitting}
-          className="w-full min-h-[44px] rounded-input border border-slate-200 text-[13px] text-slate-600"
+          className="w-full min-h-[44px] rounded-input border border-slate-200 text-[16px] text-slate-600"
         >
           {t('signOff')}
         </button>
@@ -155,11 +155,11 @@ export default function EquipoActivoPage() {
 
   return (
     <div className="mx-auto max-w-lg space-y-4 p-4 pb-24">
-      <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('title')}</h1>
-      <p className="text-[13px] text-vigil-muted">{t('subtitle')}</p>
+      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
+      <p className="text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
       <div>
-        <label htmlFor="display-name" className="text-[11px] font-medium text-slate-600">
+        <label htmlFor="display-name" className="text-[13px] font-medium text-slate-600">
           {t('name')} *
         </label>
         <input
@@ -172,14 +172,14 @@ export default function EquipoActivoPage() {
       </div>
 
       <div>
-        <label htmlFor="team" className="text-[11px] font-medium text-slate-600">
+        <label htmlFor="team" className="text-[13px] font-medium text-slate-600">
           {t('team')}
         </label>
         <input id="team" value={teamOrOrg} onChange={(e) => setTeamOrOrg(e.target.value)} className={inputClass} />
       </div>
 
       <div>
-        <label htmlFor="type" className="text-[11px] font-medium text-slate-600">
+        <label htmlFor="type" className="text-[13px] font-medium text-slate-600">
           {t('type')}
         </label>
         <select
@@ -195,30 +195,30 @@ export default function EquipoActivoPage() {
         </select>
       </div>
 
-      <button type="button" onClick={useMyLocation} className="text-[15px] text-vigil-blue underline">
+      <button type="button" onClick={useMyLocation} className="text-[17px] text-vigil-blue underline">
         {t('useGps')}
       </button>
 
       <div>
-        <label htmlFor="notes" className="text-[11px] font-medium text-slate-600">
+        <label htmlFor="notes" className="text-[13px] font-medium text-slate-600">
           {t('notes')}
         </label>
         <textarea id="notes" rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} className={inputClass} />
       </div>
 
       <div>
-        <label htmlFor="phone" className="text-[11px] font-medium text-slate-600">
+        <label htmlFor="phone" className="text-[13px] font-medium text-slate-600">
           {t('phone')}
         </label>
         <input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} />
-        <p className="mt-1 text-[11px] text-vigil-muted">{t('phonePrivate')}</p>
+        <p className="mt-1 text-[13px] text-vigil-muted">{t('phonePrivate')}</p>
       </div>
 
       <button
         type="button"
         onClick={() => void register()}
         disabled={submitting || !displayName.trim()}
-        className="w-full min-h-[52px] rounded-input bg-vigil-blue text-[15px] font-medium text-white disabled:opacity-50"
+        className="w-full min-h-[52px] rounded-input bg-vigil-blue text-[17px] font-medium text-white disabled:opacity-50"
       >
         {submitting ? t('submitting') : t('register')}
       </button>

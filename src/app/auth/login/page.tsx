@@ -9,7 +9,7 @@ export const metadata = {
 export default function LoginPage() {
   return (
     <div className="mx-auto max-w-lg px-4 py-12">
-      <h1 className="font-display text-2xl font-semibold text-vigil-ink">Iniciar sesión</h1>
+      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">Iniciar sesión</h1>
       <p className="mt-2 text-sm text-vigil-muted">
         Verificación por correo o SMS. No se requiere contraseña.
       </p>

@@ -115,16 +115,16 @@ export function MissingPersonNotes({ personId }: MissingPersonNotesProps) {
   }
 
   const inputClass =
-    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
+    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
 
   return (
     <section className="mt-8 border-t border-slate-200 pt-6">
       <div className="flex items-center justify-between gap-4">
-        <h2 className="font-display text-lg font-semibold text-vigil-ink">{t('title')}</h2>
+        <h2 className="font-display text-[20px] font-semibold text-vigil-ink">{t('title')}</h2>
         <button
           type="button"
           onClick={() => setShowForm((v) => !v)}
-          className="rounded-input bg-vigil-blue px-3 py-1.5 text-[11px] font-medium text-white"
+          className="rounded-input bg-vigil-blue px-3 py-1.5 text-[13px] font-medium text-white"
         >
           {t('addUpdate')}
         </button>
@@ -133,7 +133,7 @@ export function MissingPersonNotes({ personId }: MissingPersonNotesProps) {
       {showForm && (
         <form onSubmit={handleSubmit} className="mt-4 space-y-3 rounded-card border border-slate-200 bg-vigil-cloud p-4">
           <div>
-            <label htmlFor="note-author" className="block text-[11px] font-medium text-slate-600">
+            <label htmlFor="note-author" className="block text-[13px] font-medium text-slate-600">
               {t('form.authorName')} *
             </label>
             <input
@@ -145,7 +145,7 @@ export function MissingPersonNotes({ personId }: MissingPersonNotesProps) {
             />
           </div>
           <div>
-            <label htmlFor="note-type" className="block text-[11px] font-medium text-slate-600">
+            <label htmlFor="note-type" className="block text-[13px] font-medium text-slate-600">
               {t('form.noteType')}
             </label>
             <select
@@ -162,7 +162,7 @@ export function MissingPersonNotes({ personId }: MissingPersonNotesProps) {
             </select>
           </div>
           <div>
-            <label htmlFor="note-message" className="block text-[11px] font-medium text-slate-600">
+            <label htmlFor="note-message" className="block text-[13px] font-medium text-slate-600">
               {t('form.message')} *
             </label>
             <textarea
@@ -177,7 +177,7 @@ export function MissingPersonNotes({ personId }: MissingPersonNotesProps) {
           <button
             type="submit"
             disabled={submitting}
-            className="min-h-[44px] w-full rounded-input bg-vigil-blue text-[13px] font-medium text-white disabled:opacity-50"
+            className="min-h-[44px] w-full rounded-input bg-vigil-blue text-[16px] font-medium text-white disabled:opacity-50"
           >
             {submitting ? t('form.submitting') : t('form.submit')}
           </button>
@@ -187,25 +187,25 @@ export function MissingPersonNotes({ personId }: MissingPersonNotesProps) {
       <div className="mt-4 space-y-3">
         {loading && <div className="skeleton h-16 rounded-card" />}
         {!loading && notes.length === 0 && (
-          <p className="text-center text-[13px] text-vigil-muted">{t('empty')}</p>
+          <p className="text-center text-[16px] text-vigil-muted">{t('empty')}</p>
         )}
         {notes.map((note) => (
           <article key={note.id} className="rounded-card border border-slate-200 bg-white p-3">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[13px] font-medium text-vigil-ink">{note.author_name}</span>
+              <span className="text-[16px] font-medium text-vigil-ink">{note.author_name}</span>
               <span
                 className={cn(
-                  'rounded-badge border px-2 py-0.5 text-[10px] font-medium',
+                  'rounded-badge border px-2 py-0.5 text-[13px] font-medium',
                   NOTE_TYPE_STYLES[note.note_type]
                 )}
               >
                 {t(`types.${note.note_type}`)}
               </span>
-              <time className="ml-auto font-mono text-[11px] text-vigil-muted">
+              <time className="ml-auto font-mono text-[13px] text-vigil-muted">
                 {formatDistanceToNow(new Date(note.created_at), { addSuffix: true, locale: dateLocale })}
               </time>
             </div>
-            <p className="mt-2 text-[13px] leading-relaxed text-slate-600">{note.message}</p>
+            <p className="mt-2 text-[16px] leading-relaxed text-slate-600">{note.message}</p>
           </article>
         ))}
       </div>

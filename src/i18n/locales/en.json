@@ -1,5 +1,5 @@
 {
-  "nav": { "search": "Search Missing Persons", "report": "Report Missing Person", "needHelp": "I Need Help", "volunteers": "Volunteers", "organizations": "Organizations", "donate": "Donate", "news": "Official Updates", "map": "Crisis Map", "exchange": "Exchange", "howToHelp": "How to Help", "info": "Information", "activeTeam": "Active Team", "calendar": "Calendar", "collectionPoint": "Collection Point", "privacy": "Privacy Policy", "terms": "Terms of Use", "more": "More" },
+  "nav": { "search": "Search Missing Persons", "report": "Report Missing Person", "needHelp": "I Need Help", "volunteers": "Volunteers", "organizations": "Organizations", "donate": "Donate", "news": "Official Updates", "map": "Crisis Map", "exchange": "Exchange", "howToHelp": "How to Help", "info": "Information", "activeTeam": "Active Team", "calendar": "Calendar", "collectionPoint": "Collection Point", "privacy": "Privacy Policy", "terms": "Terms of Use", "more": "More", "mapShort": "Map", "searchShort": "Search", "reportShort": "Report", "needHelpShort": "Help" },
   "banner": { "emergency": "Emergency:", "hotline": "0800-RESCATE", "hotlineNumber": "0800-7372282", "interpreters": "Interpreters" },
   "missing": {
     "title": "Missing Persons", "subtitle": "Search or report a missing person",

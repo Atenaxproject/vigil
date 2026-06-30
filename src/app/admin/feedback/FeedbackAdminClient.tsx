@@ -65,9 +65,9 @@ export function FeedbackAdminClient() {
           value={secret}
           onChange={(e) => setSecret(e.target.value)}
           placeholder="VIGIL_ADMIN_SECRET"
-          className="w-full min-h-[44px] rounded-input border border-slate-200 px-3 text-[13px]"
+          className="w-full min-h-[44px] rounded-input border border-slate-200 px-3 text-[16px]"
         />
-        {error && <p className="text-[13px] text-status-missing">{error}</p>}
+        {error && <p className="text-[16px] text-status-missing">{error}</p>}
         <button type="submit" className="w-full min-h-[44px] rounded-input bg-vigil-blue text-white">
           Entrar
         </button>
@@ -77,19 +77,19 @@ export function FeedbackAdminClient() {
 
   return (
     <div className="mx-auto max-w-3xl p-6">
-      <h1 className="font-display text-2xl font-semibold text-vigil-ink">Feedback ({items.length})</h1>
-      {loading && <p className="mt-4 text-[13px] text-vigil-muted">Cargando...</p>}
+      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">Feedback ({items.length})</h1>
+      {loading && <p className="mt-4 text-[16px] text-vigil-muted">Cargando...</p>}
       <div className="mt-6 space-y-4">
         {items.map((item) => (
           <div key={item.id} className="rounded-card border border-slate-200 bg-white p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="font-mono text-[11px] text-vigil-muted">
+              <span className="font-mono text-[13px] text-vigil-muted">
                 {item.category} · {new Date(item.created_at).toLocaleString()}
               </span>
               <select
                 value={item.status}
                 onChange={(e) => void updateStatus(item.id, e.target.value as FeedbackStatus)}
-                className="rounded-input border border-slate-200 px-2 py-1 text-[12px]"
+                className="rounded-input border border-slate-200 px-2 py-1 text-[13px]"
               >
                 <option value="new">new</option>
                 <option value="reviewing">reviewing</option>
@@ -97,12 +97,12 @@ export function FeedbackAdminClient() {
                 <option value="wont_fix">wont_fix</option>
               </select>
             </div>
-            <p className="mt-2 text-[13px] text-slate-700">{item.message}</p>
+            <p className="mt-2 text-[16px] text-slate-700">{item.message}</p>
             {item.page_context && (
-              <p className="mt-1 font-mono text-[11px] text-vigil-muted">Página: {item.page_context}</p>
+              <p className="mt-1 font-mono text-[13px] text-vigil-muted">Página: {item.page_context}</p>
             )}
             {item.contact_email && (
-              <p className="mt-1 text-[11px] text-vigil-muted">Email: {item.contact_email}</p>
+              <p className="mt-1 text-[13px] text-vigil-muted">Email: {item.contact_email}</p>
             )}
           </div>
         ))}

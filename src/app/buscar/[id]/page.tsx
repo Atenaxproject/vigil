@@ -25,7 +25,7 @@ export default async function MissingPersonDetailPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-2xl p-4 pb-24">
-      <Link href="/buscar" className="text-[13px] text-vigil-blue underline">
+      <Link href="/buscar" className="text-[16px] text-vigil-blue underline">
         ← {t('title')}
       </Link>
       <article className="mt-4 rounded-card border border-slate-200 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
@@ -33,26 +33,26 @@ export default async function MissingPersonDetailPage({ params }: PageProps) {
           <h1 className="font-display text-xl font-semibold text-vigil-ink">{person.full_name}</h1>
           <StatusBadge status={person.status} label={t(`status.${person.status}`)} />
         </div>
-        <dl className="mt-4 space-y-2 text-[13px]">
+        <dl className="mt-4 space-y-2 text-[16px]">
           {person.age && (
             <div>
-              <dt className="text-[11px] text-vigil-muted">{t('form.age')}</dt>
+              <dt className="text-[13px] text-vigil-muted">{t('form.age')}</dt>
               <dd>{person.age}</dd>
             </div>
           )}
           {person.gender && (
             <div>
-              <dt className="text-[11px] text-vigil-muted">{t('form.gender')}</dt>
+              <dt className="text-[13px] text-vigil-muted">{t('form.gender')}</dt>
               <dd>{t(`form.genderOptions.${person.gender as 'male'}`)}</dd>
             </div>
           )}
           <div>
-            <dt className="text-[11px] text-vigil-muted">{t('form.lastSeen')}</dt>
+            <dt className="text-[13px] text-vigil-muted">{t('form.lastSeen')}</dt>
             <dd>{person.last_seen_location}</dd>
           </div>
           {person.notes && (
             <div>
-              <dt className="text-[11px] text-vigil-muted">{t('form.notes')}</dt>
+              <dt className="text-[13px] text-vigil-muted">{t('form.notes')}</dt>
               <dd className="text-slate-600">{person.notes}</dd>
             </div>
           )}

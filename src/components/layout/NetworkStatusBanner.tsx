@@ -23,7 +23,7 @@ export function NetworkStatusBanner() {
   return (
     <div
       role="status"
-      className="border-b border-amber-200 bg-status-unverified-bg px-4 py-2 text-center text-[11px] text-amber-900"
+      className="border-b border-amber-200 bg-status-unverified-bg px-4 py-2 text-center text-[13px] text-amber-900"
     >
       {t('cachedData')}
     </div>

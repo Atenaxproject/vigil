@@ -16,7 +16,11 @@
     "collectionPoint": "Sammelstelle",
     "privacy": "Datenschutzrichtlinie",
     "terms": "Nutzungsbedingungen",
-    "more": "Weitere"
+    "more": "Weitere",
+    "mapShort": "Karte",
+    "searchShort": "Suchen",
+    "reportShort": "Melden",
+    "needHelpShort": "Hilfe"
   },
   "banner": {
     "emergency": "Notfall:",

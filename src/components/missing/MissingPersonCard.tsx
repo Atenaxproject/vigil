@@ -48,23 +48,23 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
         </div>
         <div className="min-w-0 flex-1 pr-16">
           <h3 className="text-[14px] font-medium text-vigil-ink">{person.full_name}</h3>
-          <p className="mt-0.5 text-[11px] text-vigil-muted">
+          <p className="mt-0.5 text-[13px] text-vigil-muted">
             {[person.gender, person.age ? `${person.age}` : null, person.last_seen_location]
               .filter(Boolean)
               .join(' · ')}
           </p>
-          <p className="mt-1 text-[11px] font-medium text-slate-600">
+          <p className="mt-1 text-[13px] font-medium text-slate-600">
             {t('card.lastSeen')} <span className="font-normal">{timeAgo}</span>
           </p>
           {person.notes && (
-            <p className="mt-1 line-clamp-2 text-[11px] text-slate-500">{person.notes}</p>
+            <p className="mt-1 line-clamp-2 text-[13px] text-slate-500">{person.notes}</p>
           )}
         </div>
       </div>
       <footer className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
         <div className="flex items-center gap-2">
           {person.verified ? <VerifiedBadge /> : <UnverifiedBadge />}
-          <span className="text-[11px] text-vigil-muted">
+          <span className="text-[13px] text-vigil-muted">
             {t('card.reportedBy')} {person.source}
           </span>
         </div>
@@ -77,7 +77,7 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
               e.stopPropagation()
               onContact?.(person.id)
             }}
-            className="rounded-input bg-vigil-blue px-3 py-1.5 text-[11px] font-medium text-white hover:bg-blue-700"
+            className="rounded-input bg-vigil-blue px-3 py-1.5 text-[13px] font-medium text-white hover:bg-blue-700"
           >
             {t('card.contact')}
           </button>

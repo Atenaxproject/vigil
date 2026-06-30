@@ -68,7 +68,7 @@ export function ExchangeClaimClient({ token }: ExchangeClaimClientProps) {
   if (!data) {
     return (
       <div className="mx-auto max-w-xl p-8 text-center">
-        <p className="text-[13px] text-vigil-muted">{t('exchangeNotFound')}</p>
+        <p className="text-[16px] text-vigil-muted">{t('exchangeNotFound')}</p>
         <Link href="/intercambio" className="mt-4 inline-block text-vigil-blue underline">
           {t('backToExchange')}
         </Link>
@@ -80,32 +80,32 @@ export function ExchangeClaimClient({ token }: ExchangeClaimClientProps) {
 
   return (
     <div className="mx-auto max-w-2xl p-4 pb-24">
-      <p className="text-[11px] text-vigil-muted">{t('privatePage')}</p>
+      <p className="text-[13px] text-vigil-muted">{t('privatePage')}</p>
       <article className="mt-4 rounded-card border border-slate-200 bg-white p-4">
         <h1 className="font-display text-xl font-semibold text-vigil-ink">{data.entry.title}</h1>
-        <p className="mt-1 text-[11px] text-vigil-muted">
+        <p className="mt-1 text-[13px] text-vigil-muted">
           {te(`tabs.${data.entry.entry_type as 'offering' | 'requesting'}`)} ·{' '}
           {te(`categories.${data.entry.category as 'goods'}`)}
         </p>
-        <p className="mt-2 text-[13px] text-slate-600">{data.entry.description}</p>
-        <p className="mt-1 text-[11px] text-vigil-muted">{data.entry.location}</p>
+        <p className="mt-2 text-[16px] text-slate-600">{data.entry.description}</p>
+        <p className="mt-1 text-[13px] text-vigil-muted">{data.entry.location}</p>
       </article>
 
       <section className="mt-8">
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-lg font-semibold text-vigil-ink">{t('contactInbox')}</h2>
+          <h2 className="font-display text-[20px] font-semibold text-vigil-ink">{t('contactInbox')}</h2>
           {unviewedIds.length > 0 && (
             <button
               type="button"
               onClick={() => markViewed(unviewedIds)}
-              className="text-[11px] text-vigil-blue underline"
+              className="text-[13px] text-vigil-blue underline"
             >
               {t('markAllViewed')}
             </button>
           )}
         </div>
         {data.contactRequests.length === 0 ? (
-          <p className="mt-3 text-[13px] text-vigil-muted">{t('noContactRequests')}</p>
+          <p className="mt-3 text-[16px] text-vigil-muted">{t('noContactRequests')}</p>
         ) : (
           <div className="mt-3 space-y-3">
             {data.contactRequests.map((req) => (
@@ -113,9 +113,9 @@ export function ExchangeClaimClient({ token }: ExchangeClaimClientProps) {
                 key={req.id}
                 className={`rounded-card border p-3 ${req.viewed ? 'border-slate-200 bg-white' : 'border-blue-200 bg-blue-50'}`}
               >
-                <p className="text-[13px] font-medium text-vigil-ink">{req.requester_name}</p>
-                <p className="text-[11px] text-vigil-muted">{req.requester_phone}</p>
-                {req.message && <p className="mt-2 text-[13px] text-slate-600">{req.message}</p>}
+                <p className="text-[16px] font-medium text-vigil-ink">{req.requester_name}</p>
+                <p className="text-[13px] text-vigil-muted">{req.requester_phone}</p>
+                {req.message && <p className="mt-2 text-[16px] text-slate-600">{req.message}</p>}
               </article>
             ))}
           </div>

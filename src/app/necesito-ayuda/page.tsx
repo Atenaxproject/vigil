@@ -69,21 +69,21 @@ export default function NecesitoAyudaPage() {
   }
 
   const inputClass =
-    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px]'
+    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px]'
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4">
-      <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('markerTypes.need')}</h1>
+      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('markerTypes.need')}</h1>
 
       <div>
-        <label htmlFor="title" className="text-[11px] font-medium text-slate-600">
+        <label htmlFor="title" className="text-[13px] font-medium text-slate-600">
           Título *
         </label>
         <input id="title" {...register('title')} className={inputClass} required />
       </div>
 
       <div>
-        <label htmlFor="category" className="text-[11px] font-medium text-slate-600">
+        <label htmlFor="category" className="text-[13px] font-medium text-slate-600">
           Categoría
         </label>
         <select id="category" {...register('category')} className={inputClass}>
@@ -96,7 +96,7 @@ export default function NecesitoAyudaPage() {
       </div>
 
       <div>
-        <label htmlFor="description" className="text-[11px] font-medium text-slate-600">
+        <label htmlFor="description" className="text-[13px] font-medium text-slate-600">
           Descripción
         </label>
         <textarea id="description" rows={3} {...register('description')} className={inputClass} />
@@ -104,24 +104,24 @@ export default function NecesitoAyudaPage() {
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label htmlFor="lat" className="text-[11px] font-medium text-slate-600">
+          <label htmlFor="lat" className="text-[13px] font-medium text-slate-600">
             Lat
           </label>
           <input id="lat" type="number" step="any" {...register('lat', { valueAsNumber: true })} className={inputClass} />
         </div>
         <div>
-          <label htmlFor="lng" className="text-[11px] font-medium text-slate-600">
+          <label htmlFor="lng" className="text-[13px] font-medium text-slate-600">
             Lng
           </label>
           <input id="lng" type="number" step="any" {...register('lng', { valueAsNumber: true })} className={inputClass} />
         </div>
       </div>
 
-      <button type="button" onClick={useMyLocation} className="text-[13px] text-vigil-blue underline">
+      <button type="button" onClick={useMyLocation} className="text-[16px] text-vigil-blue underline">
         Usar mi ubicación
       </button>
 
-      <label className="flex items-center gap-2 text-[13px]">
+      <label className="flex items-center gap-2 text-[16px]">
         <input type="checkbox" {...register('urgent')} />
         {t('urgent')}
       </label>

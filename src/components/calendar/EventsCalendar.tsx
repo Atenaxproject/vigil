@@ -134,7 +134,7 @@ export function EventsCalendar() {
   }
 
   const inputClass =
-    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
+    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
 
   return (
     <div className="mx-auto max-w-2xl p-4 pb-24">
@@ -142,14 +142,14 @@ export function EventsCalendar() {
         <div>
           <div className="flex items-center gap-2">
             <Calendar className="h-6 w-6 text-vigil-blue" aria-hidden />
-            <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('title')}</h1>
+            <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
           </div>
-          <p className="mt-1 text-[13px] text-vigil-muted">{t('subtitle')}</p>
+          <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
         </div>
         <button
           type="button"
           onClick={() => setShowForm(true)}
-          className="inline-flex min-h-[44px] items-center gap-1 rounded-input bg-vigil-blue px-3 text-[13px] font-medium text-white"
+          className="inline-flex min-h-[44px] items-center gap-1 rounded-input bg-vigil-blue px-3 text-[16px] font-medium text-white"
         >
           <Plus className="h-4 w-4" />
           {t('addEvent')}
@@ -163,7 +163,7 @@ export function EventsCalendar() {
             type="button"
             onClick={() => setFilter(cat)}
             className={cn(
-              'rounded-badge border px-3 py-1 text-[11px] font-medium transition-colors',
+              'rounded-badge border px-3 py-1 text-[13px] font-medium transition-colors',
               filter === cat
                 ? 'border-vigil-blue bg-vigil-blue-light text-vigil-blue'
                 : 'border-slate-200 bg-white text-slate-600 hover:bg-vigil-cloud'
@@ -181,20 +181,20 @@ export function EventsCalendar() {
             className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-card bg-white p-4 shadow-sm"
           >
             <div className="flex items-center justify-between">
-              <h2 className="font-display text-lg font-semibold">{t('form.title')}</h2>
+              <h2 className="font-display text-[20px] font-semibold">{t('form.title')}</h2>
               <button type="button" onClick={() => setShowForm(false)} aria-label={t('form.cancel')}>
                 <X className="h-5 w-5 text-vigil-muted" />
               </button>
             </div>
             <div className="mt-4 space-y-3">
               <div>
-                <label htmlFor="event-title" className="block text-[11px] font-medium text-slate-600">
+                <label htmlFor="event-title" className="block text-[13px] font-medium text-slate-600">
                   {t('form.eventTitle')} *
                 </label>
                 <input id="event-title" name="title" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="event-category" className="block text-[11px] font-medium text-slate-600">
+                <label htmlFor="event-category" className="block text-[13px] font-medium text-slate-600">
                   {t('form.category')} *
                 </label>
                 <select id="event-category" name="category" required className={inputClass} defaultValue="donation_drive">
@@ -206,47 +206,47 @@ export function EventsCalendar() {
                 </select>
               </div>
               <div>
-                <label htmlFor="event-starts" className="block text-[11px] font-medium text-slate-600">
+                <label htmlFor="event-starts" className="block text-[13px] font-medium text-slate-600">
                   {t('form.startsAt')} *
                 </label>
                 <input id="event-starts" name="starts_at" type="datetime-local" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="event-ends" className="block text-[11px] font-medium text-slate-600">
+                <label htmlFor="event-ends" className="block text-[13px] font-medium text-slate-600">
                   {t('form.endsAt')}
                 </label>
                 <input id="event-ends" name="ends_at" type="datetime-local" className={inputClass} />
               </div>
               <div>
-                <label htmlFor="event-location" className="block text-[11px] font-medium text-slate-600">
+                <label htmlFor="event-location" className="block text-[13px] font-medium text-slate-600">
                   {t('form.location')} *
                 </label>
                 <input id="event-location" name="location_label" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="event-desc" className="block text-[11px] font-medium text-slate-600">
+                <label htmlFor="event-desc" className="block text-[13px] font-medium text-slate-600">
                   {t('form.description')}
                 </label>
                 <textarea id="event-desc" name="description" rows={2} className={inputClass} />
               </div>
               <div>
-                <label htmlFor="event-organizer" className="block text-[11px] font-medium text-slate-600">
+                <label htmlFor="event-organizer" className="block text-[13px] font-medium text-slate-600">
                   {t('form.organizer')}
                 </label>
                 <input id="event-organizer" name="organizer_name" className={inputClass} />
               </div>
               <div>
-                <label htmlFor="event-contact" className="block text-[11px] font-medium text-slate-600">
+                <label htmlFor="event-contact" className="block text-[13px] font-medium text-slate-600">
                   {t('form.contact')}
                 </label>
                 <input id="event-contact" name="organizer_contact" type="tel" className={inputClass} />
-                <p className="mt-1 text-[11px] text-vigil-muted">{t('form.contactNote')}</p>
+                <p className="mt-1 text-[13px] text-vigil-muted">{t('form.contactNote')}</p>
               </div>
             </div>
             <button
               type="submit"
               disabled={submitting}
-              className="mt-4 min-h-[44px] w-full rounded-input bg-vigil-blue text-[13px] font-medium text-white disabled:opacity-50"
+              className="mt-4 min-h-[44px] w-full rounded-input bg-vigil-blue text-[16px] font-medium text-white disabled:opacity-50"
             >
               {submitting ? t('form.submitting') : t('form.submit')}
             </button>
@@ -257,11 +257,11 @@ export function EventsCalendar() {
       <div className="mt-6 space-y-6">
         {loading && <div className="skeleton h-24 rounded-card" />}
         {!loading && grouped.length === 0 && (
-          <p className="text-center text-[13px] text-vigil-muted">{t('empty')}</p>
+          <p className="text-center text-[16px] text-vigil-muted">{t('empty')}</p>
         )}
         {grouped.map(([dateKey, dayEvents]) => (
           <section key={dateKey}>
-            <h2 className="font-mono text-[12px] font-medium uppercase tracking-wide text-vigil-muted">
+            <h2 className="font-mono text-[13px] font-medium uppercase tracking-wide text-vigil-muted">
               {formatVenezuelaDateTime(dateKey, locale)}
             </h2>
             <div className="mt-2 space-y-3">
@@ -283,17 +283,17 @@ export function EventsCalendar() {
                       </span>
                       <div className="min-w-0 flex-1">
                         <h3 className="text-[14px] font-medium text-vigil-ink">{event.title}</h3>
-                        <p className="mt-0.5 font-mono text-[11px] text-vigil-muted">
+                        <p className="mt-0.5 font-mono text-[13px] text-vigil-muted">
                           {formatVenezuelaDateTime(event.starts_at, locale)} ({tzLabel})
                         </p>
-                        <p className="mt-1 text-[13px] text-slate-600">{event.location_label}</p>
+                        <p className="mt-1 text-[16px] text-slate-600">{event.location_label}</p>
                         {event.organizer_name && (
-                          <p className="mt-1 text-[11px] text-vigil-muted">
+                          <p className="mt-1 text-[13px] text-vigil-muted">
                             {t('organizer')}: {event.organizer_name}
                           </p>
                         )}
                         {event.description && (
-                          <p className="mt-2 text-[13px] leading-relaxed text-slate-500">{event.description}</p>
+                          <p className="mt-2 text-[16px] leading-relaxed text-slate-500">{event.description}</p>
                         )}
                       </div>
                     </div>

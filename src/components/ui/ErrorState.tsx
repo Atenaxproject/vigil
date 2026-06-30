@@ -26,12 +26,12 @@ export function ErrorState({ error, reset }: ErrorStateProps) {
       <span className="flex h-12 w-12 items-center justify-center rounded-full bg-status-unverified-bg">
         <AlertTriangle className="h-6 w-6 text-status-unverified" aria-hidden />
       </span>
-      <h2 className="mt-4 font-display text-lg font-semibold text-vigil-ink">{t('error')}</h2>
-      <p className="mt-1 max-w-sm text-[13px] text-vigil-muted">{t('errorHint')}</p>
+      <h2 className="mt-4 font-display text-[20px] font-semibold text-vigil-ink">{t('error')}</h2>
+      <p className="mt-1 max-w-sm text-[16px] text-vigil-muted">{t('errorHint')}</p>
       <button
         type="button"
         onClick={reset}
-        className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-input bg-vigil-blue px-4 text-[13px] font-medium text-white"
+        className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white"
       >
         <RotateCw className="h-4 w-4" aria-hidden />
         {t('retry')}

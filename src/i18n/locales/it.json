@@ -16,7 +16,11 @@
     "collectionPoint": "Punto di Raccolta",
     "privacy": "Informativa sulla Privacy",
     "terms": "Termini di Utilizzo",
-    "more": "Altro"
+    "more": "Altro",
+    "mapShort": "Mappa",
+    "searchShort": "Cerca",
+    "reportShort": "Segnala",
+    "needHelpShort": "Aiuto"
   },
   "banner": {
     "emergency": "Emergenza:",

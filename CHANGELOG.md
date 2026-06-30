@@ -4,6 +4,37 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (accessibility & menu)
+
+### Fixed
+- **Type scale raised for accessibility (WCAG)** — body `13px → 16px`,
+  caption `11px → 13px`, H3 `15px → 17px`, H2 `18px → 20px`, H1 `24px → 26px`,
+  display `32px → 34px`; minimum font floor raised to 13px (`text-xs`/`text-[10px]`
+  → 13px). Applied across 42 component/page files plus `DESIGN-SYSTEM.md`.
+- **`--vigil-muted` contrast** — `#94A3B8 → #64748B` (≈2.8:1 → ≈4.6:1 on white,
+  now passes WCAG AA for normal text); updated `globals.css`, `tailwind.config.ts`,
+  and `DESIGN-SYSTEM.md`.
+- **"Más" menu** — converted from a side-anchored flyout (clipped off-screen in
+  landscape) to a full-width **bottom-sheet** reusing the map-layers pattern:
+  backdrop tap-to-close, explicit X button, Escape to close, body-scroll lock,
+  focus trap + restore, `aria-modal`/`aria-haspopup`/`aria-expanded`, 44px tap
+  targets (`Navigation`).
+- **Feedback widget fixed position** — trigger button now rendered via
+  `createPortal` to `<body>` (previously only the modal was portaled), so its
+  `position: fixed` can never be broken by a transformed/filtered ancestor
+  containing block (`FeedbackWidget`).
+- **Bottom nav visual definition** — added `.mobile-bottom-nav` (opaque
+  `--vigil-surface`, top border, soft upward shadow) so content no longer shows
+  through while scrolling (`globals.css`, `Navigation`).
+
+### Added
+- **Short bottom-nav labels** — `nav.mapShort/searchShort/reportShort/needHelpShort`
+  added to all 8 locales so primary tabs fit at the raised 13px floor.
+- **`aria-current="page"`** on active sidebar, bottom-nav, and Más-sheet links.
+- **docs/build-process** — `17-accessibility-and-menu-fix.md` (archived prompt);
+  root `CURSOR-ACCESSIBILITY-AND-MENU-FIX.md` reduced to a stub; `docs/README.md`
+  index updated (also backfilled the missing `16-viewport-fix-and-proof.md` entry).
+
 ## [Unreleased] — 2026-06-30
 
 ### Fixed

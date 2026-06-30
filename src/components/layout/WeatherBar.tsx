@@ -57,7 +57,7 @@ export function WeatherBar() {
 
   return (
     <div
-      className="border-b border-slate-200 bg-white px-4 py-1 text-[11px] text-vigil-muted"
+      className="border-b border-slate-200 bg-white px-4 py-1 text-[13px] text-vigil-muted"
       role="status"
       aria-live="polite"
     >

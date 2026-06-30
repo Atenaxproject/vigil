@@ -45,7 +45,7 @@ export function StatusBadge({ status, className, label }: StatusBadgeProps) {
           </circle>
         </svg>
       )}
-      {label && <span className="text-[11px] font-medium text-slate-600">{label}</span>}
+      {label && <span className="text-[13px] font-medium text-slate-600">{label}</span>}
     </div>
   )
 }

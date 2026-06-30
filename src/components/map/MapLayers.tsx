@@ -34,7 +34,7 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
   ]
 
   const checkboxes = toggles.map(({ key, label }) => (
-    <label key={key} className="flex min-h-[36px] cursor-pointer items-center gap-2 px-2 text-[11px]">
+    <label key={key} className="flex min-h-[36px] cursor-pointer items-center gap-2 px-2 text-[13px]">
       <input
         type="checkbox"
         checked={layers[key]}
@@ -72,7 +72,7 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between px-4 py-3">
-              <span className="text-[13px] font-semibold text-slate-700">{t('title')}</span>
+              <span className="text-[16px] font-semibold text-slate-700">{t('title')}</span>
               <button
                 onClick={() => setMobileOpen(false)}
                 className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-slate-100"

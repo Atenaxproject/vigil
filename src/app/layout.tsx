@@ -68,7 +68,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <Navigation />
             <div className="flex min-w-0 flex-1 flex-col">
               <header className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 md:px-6">
-                <p className="hidden text-[11px] text-vigil-muted md:block">
+                <p className="hidden text-[13px] text-vigil-muted md:block">
                   {CRISIS_CONFIG.crisis} · {CRISIS_CONFIG.country}
                 </p>
                 <LanguageSwitcher />
@@ -77,7 +77,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-0">
                 {children}
               </main>
-              <footer className="bg-[color:var(--vigil-surface)] text-[11px] text-[color:var(--vigil-muted)]">
+              <footer className="bg-[color:var(--vigil-surface)] text-[13px] text-[color:var(--vigil-muted)]">
                 {/* Group 1 — Open source / legal */}
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-t border-[color:var(--vigil-border)] px-4 py-4 text-center">
                   <Link
@@ -108,7 +108,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
                 {/* Group 2 — Credits */}
                 <div className="border-t border-[color:var(--vigil-border)] px-4 py-4 text-center">
-                  <p className="text-[13px] text-[color:var(--vigil-body)]">{t('credits')} 🇻🇪</p>
+                  <p className="text-[16px] text-[color:var(--vigil-body)]">{t('credits')} 🇻🇪</p>
                   <p className="mt-1">
                     {t('creditsByPrefix')}{' '}
                     <a
@@ -125,7 +125,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
                 {/* Group 3 — Emergency disclaimer (quiet, but scannable) */}
                 <div className="border-t border-[color:var(--vigil-border)] px-4 py-4">
-                  <p className="flex items-center justify-center gap-2 text-center text-[13px] font-medium text-[color:var(--vigil-body)]">
+                  <p className="flex items-center justify-center gap-2 text-center text-[16px] font-medium text-[color:var(--vigil-body)]">
                     <AlertTriangle className="h-4 w-4 shrink-0 text-[color:var(--vigil-body)]" aria-hidden="true" />
                     <span>{t('notEmergency', { hotline: CRISIS_CONFIG.emergency.hotlineLabel })}</span>
                   </p>

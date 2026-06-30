@@ -85,19 +85,19 @@ export function MissingPersonForm() {
   }
 
   const inputClass =
-    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
-  const labelClass = 'block text-[11px] font-medium text-slate-600'
+    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
+  const labelClass = 'block text-[13px] font-medium text-slate-600'
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4">
-      <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('title')}</h1>
+      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
 
       <div>
         <label htmlFor="full_name" className={labelClass}>
           {t('name')} *
         </label>
         <input id="full_name" {...register('full_name')} className={inputClass} placeholder={t('namePlaceholder')} />
-        {errors.full_name && <p className="mt-1 text-[11px] text-status-missing">Required</p>}
+        {errors.full_name && <p className="mt-1 text-[13px] text-status-missing">Required</p>}
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -174,19 +174,19 @@ export function MissingPersonForm() {
           {t('contactEmail')}
         </label>
         <input id="contact_email" type="email" {...register('contact_email')} className={inputClass} />
-        <p className="mt-1 text-[11px] text-vigil-muted">{t('contactEmailHelp')}</p>
+        <p className="mt-1 text-[13px] text-vigil-muted">{t('contactEmailHelp')}</p>
       </div>
 
-      <p className="flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[11px] text-amber-800">
+      <p className="flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[13px] text-amber-800">
         <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
         {t('contactPrivacyNote')}
       </p>
 
-      <label className="flex items-start gap-2 text-[13px]">
+      <label className="flex items-start gap-2 text-[16px]">
         <input type="checkbox" {...register('consent_given')} className="mt-1" />
         {t('consent')} *
       </label>
-      <label className="flex items-start gap-2 text-[13px]">
+      <label className="flex items-start gap-2 text-[16px]">
         <input type="checkbox" {...register('data_accuracy_confirmed')} className="mt-1" />
         {t('accuracy')} *
       </label>
@@ -194,7 +194,7 @@ export function MissingPersonForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[13px] font-medium text-white disabled:opacity-50"
+        className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[16px] font-medium text-white disabled:opacity-50"
       >
         {submitting ? t('submitting') : t('submit')}
       </button>

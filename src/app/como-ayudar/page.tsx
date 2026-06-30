@@ -86,12 +86,12 @@ export default async function ComoAyudarPage() {
 
   return (
     <div className="mx-auto max-w-3xl p-4 pb-24">
-      <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('title')}</h1>
-      <p className="mt-1 text-[13px] text-vigil-muted">{t('subtitle')}</p>
+      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
+      <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
       <section className="mt-8">
-        <h2 className="text-[18px] font-semibold text-vigil-ink">{t('donations.title')}</h2>
-        <div className="mt-3 rounded-card border border-amber-200 bg-status-unverified-bg p-4 text-[13px] text-amber-900">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('donations.title')}</h2>
+        <div className="mt-3 rounded-card border border-amber-200 bg-status-unverified-bg p-4 text-[16px] text-amber-900">
           {t('donations.warning')}
         </div>
         <div className="mt-4 space-y-3">
@@ -109,16 +109,16 @@ export default async function ComoAyudarPage() {
                 className="rounded-card border border-slate-200 bg-white p-4"
               >
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-[15px] font-medium text-vigil-ink">{org.name}</h3>
+                  <h3 className="text-[17px] font-medium text-vigil-ink">{org.name}</h3>
                   {org.verified && <VerifiedBadge />}
                 </div>
-                {desc && <p className="mt-2 text-[13px] text-slate-600">{desc}</p>}
+                {desc && <p className="mt-2 text-[16px] text-slate-600">{desc}</p>}
                 {link && (
                   <a
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex min-h-[44px] items-center rounded-input bg-vigil-blue px-4 text-[13px] font-medium text-white"
+                    className="mt-3 inline-flex min-h-[44px] items-center rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white"
                   >
                     {t('donations.donateButton')}
                   </a>
@@ -130,55 +130,55 @@ export default async function ComoAyudarPage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-[18px] font-semibold text-vigil-ink">{t('teams.title')}</h2>
-        <p className="mt-2 text-[13px] text-slate-600">{t('teams.summary')}</p>
-        <p className="mt-1 font-mono text-[11px] text-vigil-muted">{t('teams.source')}</p>
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('teams.title')}</h2>
+        <p className="mt-2 text-[16px] text-slate-600">{t('teams.summary')}</p>
+        <p className="mt-1 font-mono text-[13px] text-vigil-muted">{t('teams.source')}</p>
         <div className="mt-4 space-y-4">
           <div>
-            <h3 className="text-[15px] font-medium">{t('teams.americas')}</h3>
-            <p className="mt-1 text-[13px] text-slate-600">{COUNTRIES.americas.join(' · ')}</p>
+            <h3 className="text-[17px] font-medium">{t('teams.americas')}</h3>
+            <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.americas.join(' · ')}</p>
           </div>
           <div>
-            <h3 className="text-[15px] font-medium">{t('teams.europe')}</h3>
-            <p className="mt-1 text-[13px] text-slate-600">{COUNTRIES.europe.join(' · ')}</p>
+            <h3 className="text-[17px] font-medium">{t('teams.europe')}</h3>
+            <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.europe.join(' · ')}</p>
           </div>
           <div>
-            <h3 className="text-[15px] font-medium">{t('teams.asia')}</h3>
-            <p className="mt-1 text-[13px] text-slate-600">{COUNTRIES.asia.join(' · ')}</p>
+            <h3 className="text-[17px] font-medium">{t('teams.asia')}</h3>
+            <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.asia.join(' · ')}</p>
           </div>
         </div>
       </section>
 
       <section className="mt-10">
-        <h2 className="text-[18px] font-semibold text-vigil-ink">{t('transfers.title')}</h2>
-        <p className="mt-2 text-[13px] text-slate-600">{t('transfers.note')}</p>
-        <p className="mt-1 font-mono text-[11px] text-vigil-muted">{t('transfers.source')}</p>
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('transfers.title')}</h2>
+        <p className="mt-2 text-[16px] text-slate-600">{t('transfers.note')}</p>
+        <p className="mt-1 font-mono text-[13px] text-vigil-muted">{t('transfers.source')}</p>
         <a
           href="https://www.riamoneytransfer.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-block text-[13px] text-vigil-blue underline"
+          className="mt-3 inline-block text-[16px] text-vigil-blue underline"
         >
           riamoneytransfer.com
         </a>
       </section>
 
       <section className="mt-10">
-        <h2 className="text-[18px] font-semibold text-vigil-ink">{t('collection.title')}</h2>
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('collection.title')}</h2>
         <div className="mt-4 space-y-3">
           {COLLECTION_POINTS.map((point) => (
             <div key={point.name} className="rounded-card border border-slate-200 bg-white p-4">
-              <h3 className="text-[15px] font-medium text-vigil-ink">{point.name}</h3>
-              <p className="mt-1 text-[13px] text-slate-600">{point.note}</p>
+              <h3 className="text-[17px] font-medium text-vigil-ink">{point.name}</h3>
+              <p className="mt-1 text-[16px] text-slate-600">{point.note}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <Link href="/voluntarios" className="mt-8 inline-block text-[13px] text-vigil-blue underline">
+      <Link href="/voluntarios" className="mt-8 inline-block text-[16px] text-vigil-blue underline">
         {t('volunteerLink')} →
       </Link>
-      <p className="mt-4 text-[11px] text-vigil-muted">
+      <p className="mt-4 text-[13px] text-vigil-muted">
         {CRISIS_CONFIG.emergency.hotlineLabel}: {CRISIS_CONFIG.emergency.hotline}
       </p>
     </div>

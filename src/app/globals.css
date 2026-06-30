@@ -14,7 +14,7 @@
     --vigil-cloud: #f8fafc;
     --vigil-border: #e2e8f0;
     --vigil-body: #334155;
-    --vigil-muted: #94a3b8;
+    --vigil-muted: #64748b;
     --status-missing: #dc2626;
     --status-missing-bg: #fef2f2;
     --status-alive: #16a34a;
@@ -58,6 +58,17 @@
  */
 .leaflet-container {
   z-index: 0;
+}
+
+/*
+ * Mobile bottom navigation — clear visual separation from scrolling content.
+ * Solid (opaque) surface so page content never shows through while scrolling;
+ * top border + soft upward shadow lift it above the content beneath it.
+ */
+.mobile-bottom-nav {
+  background: var(--vigil-surface);
+  border-top: 1px solid var(--vigil-border);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
 }
 
 @keyframes pulse-ring {

@@ -212,7 +212,7 @@ export default function IntercambioPage() {
   }
 
   const inputClass =
-    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
+    'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20'
 
   return (
     <div className="mx-auto max-w-3xl p-4 pb-24">
@@ -225,14 +225,14 @@ export default function IntercambioPage() {
         <div>
           <div className="flex items-center gap-2">
             <ArrowLeftRight className="h-6 w-6 text-vigil-blue" aria-hidden />
-            <h1 className="font-display text-2xl font-semibold text-vigil-ink">{t('title')}</h1>
+            <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
           </div>
-          <p className="mt-1 text-[13px] text-vigil-muted">{t('subtitle')}</p>
+          <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
         </div>
         <button
           type="button"
           onClick={() => setShowForm(true)}
-          className="flex min-h-[44px] shrink-0 items-center gap-2 rounded-input bg-vigil-blue px-4 text-[13px] font-medium text-white"
+          className="flex min-h-[44px] shrink-0 items-center gap-2 rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white"
         >
           <Plus className="h-4 w-4" />
           {t('publish')}
@@ -246,7 +246,7 @@ export default function IntercambioPage() {
             type="button"
             onClick={() => setTab(type)}
             className={cn(
-              'flex-1 min-h-[44px] rounded-input text-[13px] font-medium transition-colors',
+              'flex-1 min-h-[44px] rounded-input text-[16px] font-medium transition-colors',
               tab === type ? 'bg-white text-vigil-blue shadow-sm' : 'text-vigil-muted'
             )}
           >
@@ -262,7 +262,7 @@ export default function IntercambioPage() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder={t('searchPlaceholder')}
-          className="w-full min-h-[44px] rounded-input border border-slate-200 bg-white py-2 pl-10 pr-3 text-[13px]"
+          className="w-full min-h-[44px] rounded-input border border-slate-200 bg-white py-2 pl-10 pr-3 text-[16px]"
         />
       </div>
 
@@ -271,7 +271,7 @@ export default function IntercambioPage() {
           type="button"
           onClick={() => setCategory('all')}
           className={cn(
-            'rounded-badge border px-3 py-1.5 text-[11px] font-medium',
+            'rounded-badge border px-3 py-1.5 text-[13px] font-medium',
             category === 'all'
               ? 'border-vigil-blue bg-vigil-blue-light text-vigil-blue'
               : 'border-slate-200 text-vigil-muted'
@@ -285,7 +285,7 @@ export default function IntercambioPage() {
             type="button"
             onClick={() => setCategory(cat)}
             className={cn(
-              'rounded-badge border px-3 py-1.5 text-[11px] font-medium',
+              'rounded-badge border px-3 py-1.5 text-[13px] font-medium',
               category === cat
                 ? 'border-vigil-blue bg-vigil-blue-light text-vigil-blue'
                 : 'border-slate-200 text-vigil-muted'
@@ -305,7 +305,7 @@ export default function IntercambioPage() {
           </div>
         )}
         {!loading && filtered.length === 0 && (
-          <p className="py-12 text-center text-[13px] text-vigil-muted">{t('noResults')}</p>
+          <p className="py-12 text-center text-[16px] text-vigil-muted">{t('noResults')}</p>
         )}
         {filtered.map((entry) => {
           const Icon = CATEGORY_ICONS[entry.category]
@@ -321,23 +321,23 @@ export default function IntercambioPage() {
                     <Icon className="h-5 w-5 text-vigil-blue" aria-hidden />
                   </span>
                   <div>
-                    <h3 className="text-[15px] font-medium text-vigil-ink">{entry.title}</h3>
-                    <p className="mt-0.5 text-[11px] text-vigil-muted">
+                    <h3 className="text-[17px] font-medium text-vigil-ink">{entry.title}</h3>
+                    <p className="mt-0.5 text-[13px] text-vigil-muted">
                       {t(`categories.${entry.category}`)}
                       {entry.quantity && ` · ${entry.quantity}`}
                     </p>
                   </div>
                 </div>
                 {entry.urgent && (
-                  <span className="shrink-0 rounded-badge bg-status-missing-bg px-2 py-0.5 text-[11px] font-medium text-status-missing">
+                  <span className="shrink-0 rounded-badge bg-status-missing-bg px-2 py-0.5 text-[13px] font-medium text-status-missing">
                     {t('urgent')}
                   </span>
                 )}
               </div>
-              <p className="mt-2 line-clamp-2 text-[13px] text-slate-600">{entry.description}</p>
-              <p className="mt-2 text-[11px] text-vigil-muted">{entry.location}</p>
+              <p className="mt-2 line-clamp-2 text-[16px] text-slate-600">{entry.description}</p>
+              <p className="mt-2 text-[13px] text-vigil-muted">{entry.location}</p>
               <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
-                <time className="font-mono text-[11px] text-vigil-muted">
+                <time className="font-mono text-[13px] text-vigil-muted">
                   {formatDistanceToNow(new Date(entry.created_at), {
                     addSuffix: true,
                     locale: dateLocale,
@@ -346,7 +346,7 @@ export default function IntercambioPage() {
                 <button
                   type="button"
                   onClick={() => setContactEntry(entry)}
-                  className="rounded-input bg-vigil-blue px-3 py-1.5 text-[11px] font-medium text-white"
+                  className="rounded-input bg-vigil-blue px-3 py-1.5 text-[13px] font-medium text-white"
                 >
                   {t('contact')}
                 </button>
@@ -360,7 +360,7 @@ export default function IntercambioPage() {
         <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 p-4 sm:items-center">
           <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-card bg-white p-6 shadow-sm">
             <div className="flex items-center justify-between">
-              <h2 className="font-display text-lg font-semibold text-vigil-ink">{t('form.title')}</h2>
+              <h2 className="font-display text-[20px] font-semibold text-vigil-ink">{t('form.title')}</h2>
               <button type="button" onClick={() => setShowForm(false)} aria-label={tc('close')}>
                 <X className="h-5 w-5 text-vigil-muted" />
               </button>
@@ -368,13 +368,13 @@ export default function IntercambioPage() {
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <input type="hidden" name="entry_type" value={tab} />
               <div>
-                <label htmlFor="ex-title" className="text-[11px] font-medium">
+                <label htmlFor="ex-title" className="text-[13px] font-medium">
                   {t('form.titleLabel')} *
                 </label>
                 <input id="ex-title" name="title" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="ex-category" className="text-[11px] font-medium">
+                <label htmlFor="ex-category" className="text-[13px] font-medium">
                   {t('form.category')} *
                 </label>
                 <select id="ex-category" name="category" required className={inputClass}>
@@ -386,34 +386,34 @@ export default function IntercambioPage() {
                 </select>
               </div>
               <div>
-                <label htmlFor="ex-desc" className="text-[11px] font-medium">
+                <label htmlFor="ex-desc" className="text-[13px] font-medium">
                   {t('form.description')} *
                 </label>
                 <textarea id="ex-desc" name="description" required rows={3} className={inputClass} />
               </div>
               <div>
-                <label htmlFor="ex-qty" className="text-[11px] font-medium">
+                <label htmlFor="ex-qty" className="text-[13px] font-medium">
                   {t('form.quantity')}
                 </label>
                 <input id="ex-qty" name="quantity" className={inputClass} />
               </div>
               <div>
-                <label htmlFor="ex-loc" className="text-[11px] font-medium">
+                <label htmlFor="ex-loc" className="text-[13px] font-medium">
                   {t('form.location')} *
                 </label>
                 <input id="ex-loc" name="location" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="ex-until" className="text-[11px] font-medium">
+                <label htmlFor="ex-until" className="text-[13px] font-medium">
                   {t('form.availableUntil')}
                 </label>
                 <input id="ex-until" name="available_until" type="date" className={inputClass} />
               </div>
               <div>
-                <span className="text-[11px] font-medium">{t('form.languages')}</span>
+                <span className="text-[13px] font-medium">{t('form.languages')}</span>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {LANGUAGE_OPTIONS.map((lang) => (
-                    <label key={lang} className="flex items-center gap-1 text-[11px]">
+                    <label key={lang} className="flex items-center gap-1 text-[13px]">
                       <input type="checkbox" name="languages" value={lang} className="rounded" />
                       {lang.toUpperCase()}
                     </label>
@@ -421,7 +421,7 @@ export default function IntercambioPage() {
                 </div>
               </div>
               <div>
-                <label htmlFor="ex-method" className="text-[11px] font-medium">
+                <label htmlFor="ex-method" className="text-[13px] font-medium">
                   {t('form.contactMethod')} *
                 </label>
                 <select id="ex-method" name="contact_method" required className={inputClass}>
@@ -432,23 +432,23 @@ export default function IntercambioPage() {
                 </select>
               </div>
               <div>
-                <label htmlFor="ex-contact" className="text-[11px] font-medium">
+                <label htmlFor="ex-contact" className="text-[13px] font-medium">
                   {t('form.contactValue')}
                 </label>
                 <input id="ex-contact" name="contact_value" className={inputClass} />
-                <p className="mt-2 flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[11px] text-amber-900">
+                <p className="mt-2 flex items-start gap-2 rounded-input bg-status-unverified-bg p-3 text-[13px] text-amber-900">
                   <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
                   {t('form.privacyNotice')}
                 </p>
               </div>
-              <label className="flex items-center gap-2 text-[13px]">
+              <label className="flex items-center gap-2 text-[16px]">
                 <input type="checkbox" name="urgent" className="rounded" />
                 {t('form.urgent')}
               </label>
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[13px] font-medium text-white disabled:opacity-60"
+                className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[16px] font-medium text-white disabled:opacity-60"
               >
                 {submitting ? t('form.submitting') : t('form.submit')}
               </button>
@@ -461,34 +461,34 @@ export default function IntercambioPage() {
         <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 p-4 sm:items-center">
           <div className="w-full max-w-md rounded-card bg-white p-6 shadow-sm">
             <div className="flex items-center justify-between">
-              <h2 className="font-display text-lg font-semibold text-vigil-ink">{t('contact.title')}</h2>
+              <h2 className="font-display text-[20px] font-semibold text-vigil-ink">{t('contact.title')}</h2>
               <button type="button" onClick={() => setContactEntry(null)} aria-label={tc('close')}>
                 <X className="h-5 w-5 text-vigil-muted" />
               </button>
             </div>
-            <p className="mt-2 text-[13px] text-vigil-muted">{contactEntry.title}</p>
+            <p className="mt-2 text-[16px] text-vigil-muted">{contactEntry.title}</p>
             <form onSubmit={handleContact} className="mt-4 space-y-4">
               <div>
-                <label htmlFor="cr-name" className="text-[11px] font-medium">
+                <label htmlFor="cr-name" className="text-[13px] font-medium">
                   {t('contact.name')} *
                 </label>
                 <input id="cr-name" name="requester_name" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="cr-phone" className="text-[11px] font-medium">
+                <label htmlFor="cr-phone" className="text-[13px] font-medium">
                   {t('contact.phone')} *
                 </label>
                 <input id="cr-phone" name="requester_phone" required className={inputClass} />
               </div>
               <div>
-                <label htmlFor="cr-msg" className="text-[11px] font-medium">
+                <label htmlFor="cr-msg" className="text-[13px] font-medium">
                   {t('contact.message')}
                 </label>
                 <textarea id="cr-msg" name="message" rows={3} className={inputClass} />
               </div>
               <button
                 type="submit"
-                className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[13px] font-medium text-white"
+                className="w-full min-h-[44px] rounded-input bg-vigil-blue text-[16px] font-medium text-white"
               >
                 {t('contact.submit')}
               </button>

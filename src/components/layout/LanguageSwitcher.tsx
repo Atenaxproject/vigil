@@ -39,7 +39,7 @@ export function LanguageSwitcher() {
         value={locale}
         disabled={isPending}
         onChange={(e) => setLocale(e.target.value as SupportedLang)}
-        className="rounded-input border border-slate-200 bg-white px-2 py-1 text-[13px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20"
+        className="rounded-input border border-slate-200 bg-white px-2 py-1 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20"
       >
         {CRISIS_CONFIG.supportedLangs.map((code) => (
           <option key={code} value={code}>
