@@ -510,7 +510,6 @@ La Guaira (peor afectado — 1,400+ edificios destruidos), Caracas (Chacao, Baru
 **Líneas de emergencia verificadas:**
 - 🚨 0800-RESCATE: 0800-7372282 (gobierno venezolano)
 - Cruz Roja Venezolana: +58-212-781-2974
-- VenApp: app oficial del gobierno
 - OCHA Venezuela: twitter/x @OCHAVenezuela
 
 **Fuentes confiables para seguir:**

@@ -143,7 +143,7 @@ Everything else is static. This is what makes the animations meaningful.
 Height: 44px
 Background: #0F172A (never red — red causes alert fatigue)
 Always visible: position: sticky, top: 0, z-index: 100
-Content order: warning icon · "Emergencias Venezuela" · hotline pill · VenApp link · Intérpretes · Cruz Roja · [aftershock count right-aligned]
+Content order: warning icon · "Emergencias Venezuela" · hotline pill · Intérpretes · Cruz Roja · [aftershock count right-aligned]
 Hotline pill: background #DC2626, white text, mono font, 700 weight
 Links: border #1D4ED8, text #93C5FD
 Aftershock count: font-mono, color #475569 — live count, low visual weight

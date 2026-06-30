@@ -25,8 +25,8 @@ export const CRISIS_CONFIG = {
   emergency: {
     hotline: '0800-7372282',
     hotlineLabel: '0800-RESCATE',
-    officialApp: 'VenApp',
-    officialAppUrl: 'https://venapp.gob.ve',
+    // VenApp intentionally excluded — see Vigil Privacy Policy section on
+    // government data non-cooperation. VenApp has documented human rights concerns.
   },
 
   partnerLinks: [

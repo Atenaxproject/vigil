@@ -17,9 +17,7 @@
   "banner": {
     "emergency": "Emergency:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
-    "officialApp": "VenApp",
-    "interpreters": "Interpreters"
+    "hotlineNumber": "0800-7372282",    "interpreters": "Interpreters"
   },
   "missing": {
     "title": "Missing Persons",
@@ -382,8 +380,7 @@
     "hotlines": {
       "title": "Verified emergency hotlines",
       "rescate": "0800-RESCATE",
-      "redCross": "Venezuelan Red Cross",
-      "venapp": "VenApp"
+      "redCross": "Venezuelan Red Cross"
     },
     "sources": {
       "title": "Reliable sources to follow"

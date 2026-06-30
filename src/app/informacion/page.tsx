@@ -46,11 +46,6 @@ export default async function InformacionPage() {
       source: 'Cruz Roja Venezolana',
     },
     {
-      label: t('hotlines.venapp'),
-      value: CRISIS_CONFIG.emergency.officialApp,
-      source: 'Gobierno de Venezuela',
-    },
-    {
       label: 'OCHA Venezuela',
       value: '@OCHAVenezuela',
       source: 'X / Twitter',
