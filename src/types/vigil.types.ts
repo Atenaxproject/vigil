@@ -138,6 +138,66 @@ export interface Organization {
   active: boolean
 }
 
+export type ResourceExchangeType = 'offering' | 'requesting'
+export type ResourceExchangeCategory =
+  | 'goods'
+  | 'shelter'
+  | 'transport'
+  | 'skills'
+  | 'volunteer'
+  | 'equipment'
+  | 'money'
+export type ResourceExchangeStatus = 'active' | 'matched' | 'fulfilled' | 'expired'
+export type ContactMethod = 'whatsapp' | 'phone' | 'email' | 'vigil'
+
+export interface PublicResourceExchange {
+  id: string
+  entry_type: ResourceExchangeType
+  category: ResourceExchangeCategory
+  title: string
+  description: string
+  quantity: string | null
+  location: string
+  languages: string[]
+  available_until: string | null
+  urgent: boolean
+  status: ResourceExchangeStatus
+  verified: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface ResourceExchange extends PublicResourceExchange {
+  lat: number | null
+  lng: number | null
+  contact_method: ContactMethod
+  contact_value: string | null
+  flagged: boolean
+  flag_count: number
+  matched_with: string | null
+}
+
+export type VolunteerEquipment =
+  | 'vehicle'
+  | 'tools'
+  | 'generator'
+  | 'medical_kit'
+  | 'drones'
+  | 'comms'
+
+export interface PublicVolunteer {
+  id: string
+  display_name: string
+  skills: VolunteerSkill[]
+  languages: string[]
+  location_city: string | null
+  availability: Availability | null
+  specialization: string | null
+  equipment: VolunteerEquipment[]
+  remote_available: boolean
+  created_at: string
+}
+
 export interface Volunteer {
   id: string
   full_name: string
@@ -145,6 +205,11 @@ export interface Volunteer {
   languages: string[]
   location: string | null
   availability: Availability | null
+  specialization: string | null
+  equipment: VolunteerEquipment[]
+  remote_available: boolean
+  verification_url: string | null
+  public_display: boolean
   created_at: string
 }
 

@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import type { PublicMissingPerson, MapMarker } from '@/types/vigil.types'
+import type { PublicMissingPerson, MapMarker, Organization } from '@/types/vigil.types'
 
 export async function getRecentMissingPersons(limit = 10): Promise<PublicMissingPerson[]> {
   try {
@@ -12,6 +12,26 @@ export async function getRecentMissingPersons(limit = 10): Promise<PublicMissing
 
     if (error) return []
     return (data ?? []) as PublicMissingPerson[]
+  } catch {
+    return []
+  }
+}
+
+export async function getDonationOrganizations(): Promise<Organization[]> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('organizations')
+      .select(
+        'id, name, type, country, description_es, description_en, website, donation_link, donation_instructions, verified, active'
+      )
+      .eq('approved_by_admin', true)
+      .eq('active', true)
+      .or('type.eq.donation,donation_link.not.is.null')
+      .order('name')
+
+    if (error) return []
+    return (data ?? []) as Organization[]
   } catch {
     return []
   }

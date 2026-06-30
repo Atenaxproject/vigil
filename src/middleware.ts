@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAdminUser } from '@/lib/supabase/auth'
+import { updateSession } from '@/lib/supabase/middleware'
 
 const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/missing-persons/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/map-markers/submit': { max: 10, windowMs: 60 * 60 * 1000 },
   '/api/missing-persons/search': { max: 60, windowMs: 60 * 60 * 1000 },
   '/api/contact-request': { max: 3, windowMs: 60 * 60 * 1000 },
+  '/api/resource-exchange/submit': { max: 5, windowMs: 60 * 60 * 1000 },
+  '/api/resource-exchange/contact': { max: 3, windowMs: 60 * 60 * 1000 },
+  '/api/volunteers/submit': { max: 5, windowMs: 60 * 60 * 1000 },
+  '/api/volunteers/contact': { max: 3, windowMs: 60 * 60 * 1000 },
 }
 
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>()
@@ -23,10 +29,39 @@ async function getIpHash(request: NextRequest): Promise<string> {
   return hashHex.slice(0, 16)
 }
 
+function applySecurityHeaders(response: NextResponse): NextResponse {
+  response.headers.set('X-Frame-Options', 'DENY')
+  response.headers.set('X-Content-Type-Options', 'nosniff')
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  response.headers.set('X-XSS-Protection', '1; mode=block')
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(self)')
+  return response
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const limit = RATE_LIMITS[pathname]
 
+  // Refresh Supabase auth session on every matched request
+  const { response: sessionResponse, user } = await updateSession(request)
+  const response = sessionResponse
+
+  // Protect /admin routes — redirect unauthenticated or non-admin users
+  if (pathname.startsWith('/admin')) {
+    if (!user || !isAdminUser(user)) {
+      const loginUrl = request.nextUrl.clone()
+      loginUrl.pathname = '/auth/login'
+      loginUrl.searchParams.set('next', pathname)
+      if (!user) {
+        loginUrl.searchParams.set('reason', 'auth_required')
+      } else {
+        loginUrl.searchParams.set('reason', 'admin_required')
+      }
+      return NextResponse.redirect(loginUrl)
+    }
+  }
+
+  // API rate limiting
+  const limit = RATE_LIMITS[pathname]
   if (limit) {
     const ipHash = await getIpHash(request)
     const key = `${ipHash}:${pathname}`
@@ -49,16 +84,11 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  const response = NextResponse.next()
-  response.headers.set('X-Frame-Options', 'DENY')
-  response.headers.set('X-Content-Type-Options', 'nosniff')
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
-  response.headers.set('X-XSS-Protection', '1; mode=block')
-  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(self)')
-
-  return response
+  return applySecurityHeaders(response)
 }
 
 export const config = {
-  matcher: ['/api/:path*'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|icons|manifest.json|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
+  ],
 }

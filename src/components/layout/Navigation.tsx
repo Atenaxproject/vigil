@@ -14,12 +14,28 @@ import {
   Map,
   Plus,
   MoreHorizontal,
+  ArrowLeftRight,
+  Info,
+  HelpCircle,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+type NavLabelKey =
+  | 'search'
+  | 'report'
+  | 'needHelp'
+  | 'volunteers'
+  | 'organizations'
+  | 'donate'
+  | 'news'
+  | 'map'
+  | 'exchange'
+  | 'howToHelp'
+  | 'info'
+
 const navItems: Array<{
   href: string
-  labelKey: 'search' | 'report' | 'needHelp' | 'volunteers' | 'organizations' | 'donate' | 'news' | 'map'
+  labelKey: NavLabelKey
   icon: typeof Map
   center?: boolean
   more?: boolean
@@ -28,8 +44,11 @@ const navItems: Array<{
   { href: '/buscar', labelKey: 'search', icon: Search },
   { href: '/reportar', labelKey: 'report', icon: FilePlus, center: true },
   { href: '/necesito-ayuda', labelKey: 'needHelp', icon: HandHelping },
+  { href: '/intercambio', labelKey: 'exchange', icon: ArrowLeftRight, more: true },
   { href: '/voluntarios', labelKey: 'volunteers', icon: Users, more: true },
   { href: '/organizaciones', labelKey: 'organizations', icon: Building2, more: true },
+  { href: '/como-ayudar', labelKey: 'howToHelp', icon: HelpCircle, more: true },
+  { href: '/informacion', labelKey: 'info', icon: Info, more: true },
   { href: '/donaciones', labelKey: 'donate', icon: Heart, more: true },
   { href: '/noticias', labelKey: 'news', icon: Newspaper, more: true },
 ]
@@ -50,7 +69,7 @@ export function Navigation() {
           </Link>
           <p className="mt-1 text-[11px] text-vigil-muted">Venezuela 2026</p>
         </div>
-        <nav className="flex flex-1 flex-col gap-1 p-3" aria-label="Main">
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-3" aria-label="Main">
           {navItems.map((item) => {
             const Icon = item.icon
             const active = pathname === item.href
@@ -114,16 +133,20 @@ export function Navigation() {
             <MoreHorizontal className="h-5 w-5" />
             Más
           </summary>
-          <div className="absolute bottom-full mb-2 w-48 rounded-card border border-slate-200 bg-white p-2 shadow-sm">
-            {moreItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block rounded-input px-3 py-2 text-[13px] hover:bg-vigil-cloud"
-              >
-                {t(item.labelKey)}
-              </Link>
-            ))}
+          <div className="absolute bottom-full mb-2 max-h-64 w-48 overflow-y-auto rounded-card border border-slate-200 bg-white p-2 shadow-sm">
+            {moreItems.map((item) => {
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="flex items-center gap-2 rounded-input px-3 py-2 text-[13px] hover:bg-vigil-cloud"
+                >
+                  <Icon className="h-4 w-4 text-vigil-muted" />
+                  {t(item.labelKey)}
+                </Link>
+              )
+            })}
           </div>
         </details>
       </nav>

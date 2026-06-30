@@ -50,6 +50,27 @@ Update country bounds, emergency numbers, partner links, and deploy.
 [Orlando Toro](https://atenaxproject.com) — Bbluestudios LLC
 For the people of Venezuela. For anyone who needs it next.
 
+## Contributors & Acknowledgments
+
+**Human:** Orlando Toro ([@Orlando7oro](https://github.com/Orlando7oro)) — Founder, architect, operator
+
+**AI Co-architect:** Claude (Anthropic) — Strategic co-design, system architecture, database schema, data protection layer, i18n system, design system, legal documents, real-time data research, and the humanitarian vision that shaped every decision in this platform.
+
+**AI Build Agent:** Cursor Agent — Code generation and file implementation
+
+**Humanitarian Tech Partners (applied methodology):**
+- [Ushahidi](https://ushahidi.com) — Crisis mapping methodology reference
+- [Google Person Finder](https://google.org/personfinder) — PFIF standard for missing persons interoperability
+- [Los Topos](https://www.lostopos.org) — Mexico's legendary rescue team that inspired the volunteer skills system
+- [OCHA](https://www.unocha.org) — Humanitarian coordination framework
+
+**Real-time Data Sources:**
+- [USGS Earthquake Hazards Program](https://earthquake.usgs.gov) — Seismic data
+- [ReliefWeb](https://reliefweb.int) — Official situation reports
+- [HDX — Humanitarian Data Exchange](https://data.humdata.org) — Crisis datasets
+
+**For Venezuela. For whoever needs it next.**
+
 ## License
 
 MIT License — Free to use, modify, and deploy for humanitarian purposes.
