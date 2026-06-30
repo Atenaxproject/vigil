@@ -18,7 +18,7 @@ A unified, open-source humanitarian crisis platform — real-time missing person
 
 <br />
 
-**🌐 Live:** [vigil.youtheway.org](https://vigil.youtheway.org) &nbsp;·&nbsp; **🚨 Deployment:** Venezuela 2026 Earthquake Response
+**🌐 Live:** [vigil.youtheway.org](https://vigil.youtheway.org) &nbsp;·&nbsp; **📦 Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil) &nbsp;·&nbsp; **🚨 Deployment:** Venezuela 2026 Earthquake Response
 
 </div>
 
@@ -50,7 +50,9 @@ One config file change redeploys the whole platform for **any country, any disas
 - 🔁 **Resource Exchange** — Offer or request goods, shelter, transport, skills, equipment, and more.
 - 🦺 **Volunteer Marketplace** — Skills, languages, equipment, and availability — matched with verified organizations.
 - 🏢 **Organization Directory** — Verified NGOs, rescue teams, and diaspora groups with donation links (admin-approved before display).
+- 🛡️ **Admin Dashboard** — Protected by Supabase Auth (email/phone OTP) and an email allowlist (`VIGIL_ADMIN_EMAILS`).
 - 📡 **Official Updates** — ReliefWeb + OCHA/HDX feeds, labeled and unedited.
+- 🚨 **Emergency Banner** — Always-visible hotline (0800-RESCATE), Intérpretes, and Cruz Roja links — government-operated intake tools intentionally excluded.
 - 🌐 **8 Languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian.
 - 📱 **PWA / Offline-first** — Designed to work at 2G speeds with skeleton loading and a calm degraded state when live data is unavailable.
 
@@ -133,7 +135,7 @@ automatically. Full guide in [`DEPLOYMENT.md`](./DEPLOYMENT.md).
 Privacy is architecture, not an afterthought:
 
 - **Contact information is never displayed publicly.** All contact is routed through Vigil's internal request flow; submitters choose whether to respond.
-- **The Venezuelan government is explicitly excluded** from any data sharing.
+- **The Venezuelan government is explicitly excluded** from any data sharing. Government-operated intake apps (e.g. VenApp) are not linked or promoted.
 - IPs are stored only as salted SHA-256 hashes — never in clear text.
 - Row-level security, coordinate bounds validation, and per-IP rate limiting guard the API.
 - Right-to-erasure and data-retention windows are built into the schema.

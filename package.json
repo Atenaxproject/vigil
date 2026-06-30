@@ -1,6 +1,7 @@
 {
   "name": "vigil",
   "version": "0.1.0",
+  "description": "Vigil — Unified humanitarian crisis platform. Real-time missing persons, crisis mapping, volunteer coordination, and verified information for disaster response.",
   "private": true,
   "scripts": {
     "dev": "next dev",
