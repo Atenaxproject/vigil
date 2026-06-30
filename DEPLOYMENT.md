@@ -1,5 +1,7 @@
 # Vigil — Deployment Guide
 
+> Architecture and design constraints: [`docs/architecture/`](./docs/architecture/)
+
 ## Supabase Setup (Orlando — manual steps)
 
 ### 1. Create Supabase project

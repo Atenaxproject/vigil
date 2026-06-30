@@ -43,32 +43,65 @@ One config file change redeploys the whole platform for **any country, any disas
 
 ---
 
+## Documentation
+
+Full build process and architecture decisions: [`/docs`](./docs)
+
+---
+
 ## Features
 
-- 🔍 **Missing Persons Board** — Real-time, [PFIF](https://github.com/google/personfinder)-compatible, searchable. Contact info is never shown publicly.
-- 🗺️ **Crisis Map** — Live aftershock data from USGS (no API key needed), plus community-submitted needs, resources, shelters, and hospitals on Leaflet + OpenStreetMap.
-- 🔁 **Resource Exchange** — Offer or request goods, shelter, transport, skills, equipment, and more.
-- 🦺 **Volunteer Marketplace** — Skills, languages, equipment, and availability — matched with verified organizations.
-- 🏢 **Organization Directory** — Verified NGOs, rescue teams, and diaspora groups with donation links (admin-approved before display).
-- 🛡️ **Admin Dashboard** — Protected by Supabase Auth (email/phone OTP) and an email allowlist (`VIGIL_ADMIN_EMAILS`).
-- 📡 **Official Updates** — ReliefWeb + OCHA/HDX feeds, labeled and unedited.
-- 📬 **Official Contact** — `vigil@youtheway.org` (general) and `vigil.support@youtheway.org` (feedback/support), routed via Cloudflare Email Routing.
-- 🚨 **Emergency Banner** — Always-visible hotline (0800-RESCATE), Intérpretes, and Cruz Roja links — government-operated intake tools intentionally excluded.
-- 🌐 **8 Languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian.
-- 📱 **PWA / Offline-first** — Service worker with runtime caching (Supabase network-first, USGS/ReliefWeb stale-while-revalidate), offline fallback page, form submission queue, and a “showing saved data” banner when offline.
-- 📝 **Public notes & claim links** — Google Person Finder–style sightings on missing persons; passwordless private `/mi-reporte/{token}` and `/mi-intercambio/{token}` management pages.
-- 📦 **Collection points** — Citizen self-registration for donation drop-offs on the crisis map (`/punto-de-acopio`).
-- 📅 **Events calendar** — Lightweight date-grouped list of donation drives, volunteer meetups, and distributions (`/calendario`), with Venezuela timezone labels.
-- 🌤️ **Weather & time bar** — Open-Meteo ambient bar (Caracas + La Guaira) below the emergency banner; no API key required.
+What is built and deployed today at [vigil.youtheway.org](https://vigil.youtheway.org).
+Features that need Supabase env vars + migrations show a calm empty state when
+unconfigured — they do not crash the app.
+
+### Core crisis tools
+
+- 🔍 **Missing persons board** — Search (`/buscar`), report (`/reportar`), realtime feed on home. Contact info never shown publicly. [PFIF](https://github.com/google/personfinder) export at `/api/pfif`.
+- 🗺️ **Crisis map** — USGS aftershocks (no API key), community needs/resources, shelters, hospitals, collection points, and active rescue teams on Leaflet + OpenStreetMap.
+- 🔁 **Resource exchange** — Offer or request goods, shelter, transport, skills, and equipment (`/intercambio`).
+- 🦺 **Volunteer marketplace** — Register skills and browse available volunteers (`/voluntarios`).
+- 🆘 **I need help** — Drop a need pin on the map (`/necesito-ayuda`).
+
+### Information & coordination
+
+- 📡 **Official updates** — ReliefWeb feed on `/noticias` (live, no key required).
+- 📊 **Live information hub** — USGS significant quakes, ReliefWeb reports, manual crisis stats, and realtime infrastructure status (`/informacion`).
+- 🛡️ **Rescuer safety presence** — Field check-in, SOS, 4-hour auto-expire, map layer (`/equipo-activo`).
+- 💛 **How to help** — Verified donation organizations from Supabase seed with static fallback (`/como-ayudar`).
+- 🏢 **Partner links** — Curated NGOs and official sources from `crisis.config.ts` (`/organizaciones`).
+
+### Trust, access & resilience
+
+- 🚨 **Emergency banner** — Always-visible hotline (0800-RESCATE), Intérpretes, Cruz Roja. Government-operated intake tools intentionally excluded.
+- 📬 **Official contact** — `vigil@youtheway.org` and `vigil.support@youtheway.org` via Cloudflare Email Routing.
+- 💬 **Feedback widget** — Floating support button on all pages; admin review at `/admin/feedback`.
+- 🔐 **Admin auth** — Supabase OTP login + `VIGIL_ADMIN_EMAILS` allowlist. Main `/admin` panel is a stub — use Supabase Studio for moderation queue today.
+- 🌐 **8 languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian.
+- 📱 **PWA / offline-first** — Service worker caching, `/offline` fallback, offline form queue, network-status banner.
+- ⚖️ **Legal pages** — Privacy Policy and Terms in Spanish (`/privacidad`, `/terminos`) and English (`/privacy`, `/terms`).
+
+### Coded — enable with migration or config
+
+These ship in the codebase but require a Supabase migration and/or env var before they work in production:
+
+- 📝 **Public notes & sightings** — Thread on `/buscar/[id]` (needs migration `005_notes_claims_calendar.sql` + Realtime on `missing_person_notes`).
+- 🔗 **Claim-token inbox** — Passwordless `/mi-reporte/{token}` and `/mi-intercambio/{token}`; claim URL shown on submit (same migration).
+- 📦 **Collection points** — Citizen registration at `/punto-de-acopio` → amber map markers (same migration).
+- 📅 **Events calendar** — `/calendario` with category filters and Venezuela timezone labels (same migration + Realtime on `events`).
+- ✉️ **Resend email alerts** — Feedback notifications and claim-link emails on submit (needs `RESEND_API_KEY` + `youtheway.org` verified in Resend).
+- 🌤️ **Weather & time bar** — Open-Meteo bar below emergency banner (live now — no API key).
 
 ### Coming soon
 
 | Feature | Status |
 |---|---|
-| **Migration `005_notes_claims_calendar.sql`** | Coded — run in Supabase SQL Editor to enable notes, claim tokens, events, and collection-point fields |
-| **Claim-link email on submit** | Coded — requires `RESEND_API_KEY` + `youtheway.org` domain verification in Resend |
-| **Resend feedback email alerts** | Coded — requires `RESEND_API_KEY` in Vercel + `youtheway.org` domain verification in Resend |
-| **Push notifications (mag 4.0+ aftershocks)** | Planned — PWA install + notification permission flow |
+| **Full organization directory UI** | Schema + seed exist; `/organizaciones` shows partner links only — Supabase org cards not wired yet |
+| **Admin moderation dashboard** | Auth works; full queue UI not built — use Supabase Studio |
+| **HDX dataset feed** | `src/lib/hdx.ts` exists; not surfaced on any page yet |
+| **AI translation / dedup / matching** | Library code in `src/lib/ai/`; not wired to submit flows or cron |
+| **WhatsApp / Telegram intake** | Discussed in architecture docs; no webhook handlers built |
+| **Push notifications (mag 4.0+ aftershocks)** | Planned — PWA notification permission flow |
 | **Screenshots in README** | Planned — add to `public/screenshots/` |
 
 ---
@@ -90,7 +123,7 @@ One config file change redeploys the whole platform for **any country, any disas
 | Database | **Supabase** (Postgres + Realtime) | Row-level security, live subscriptions |
 | Auth | **Supabase Auth** | Email/phone OTP, admin allowlist |
 | Map | **Leaflet + OpenStreetMap** | Free, Venezuela-locked bounds |
-| Styling | **Tailwind CSS** | Tokens from `DESIGN-SYSTEM.md` |
+| Styling | **Tailwind CSS** | Tokens from [`docs/architecture/DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) |
 | i18n | **next-intl** | 8 locales, Spanish-first |
 | AI | **Claude (Haiku)** | Translation, dedup, match suggestions |
 | Hosting | **Vercel** + **Cloudflare** | Edge network, DDoS protection |

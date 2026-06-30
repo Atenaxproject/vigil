@@ -7,6 +7,15 @@ All notable changes to Vigil are documented here. Format loosely follows
 ## [Unreleased] — 2026-06-29
 
 ### Added
+- **`docs/` folder** — Architecture (`CLAUDE.md`, `DESIGN-SYSTEM.md`) and build-process prompts moved from repo root; `docs/README.md` index added.
+
+### Changed
+- **README**: documentation link, feature list rewritten to match actual codebase (live vs migration-gated vs coming soon).
+- **DEPLOYMENT**: pointer to `docs/` for architecture references.
+
+## [Unreleased] — 2026-06-29 (prior)
+
+### Added
 - **Public notes system** — `missing_person_notes` table, realtime thread on `/buscar/[id]`, API at `/api/missing-persons/notes`.
 - **Claim-token management** — passwordless `/mi-reporte/{token}` and `/mi-intercambio/{token}` pages; claim links shown on submit with copy button.
 - **Collection point registration** — `/punto-de-acopio` form → `map_markers` with hours, categories, organizer; amber markers on crisis map.
