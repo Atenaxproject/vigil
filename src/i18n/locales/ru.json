@@ -89,6 +89,8 @@
   "map": {
     "title": "Карта кризиса",
     "layers": {
+      "title": "Слои карты",
+      "toggleLayers": "Слои",
       "aftershocks": "Афтершоки (USGS)",
       "needs": "Потребности",
       "resources": "Доступные ресурсы",

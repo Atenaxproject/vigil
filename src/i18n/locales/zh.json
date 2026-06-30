@@ -89,6 +89,8 @@
   "map": {
     "title": "危机地图",
     "layers": {
+      "title": "地图图层",
+      "toggleLayers": "图层",
       "aftershocks": "余震（USGS）",
       "needs": "需求",
       "resources": "可用资源",

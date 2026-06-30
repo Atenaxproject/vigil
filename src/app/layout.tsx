@@ -32,9 +32,12 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 }
 
-// Declare light explicitly so Chrome's "Auto Dark Theme" (Android) does not
-// auto-invert the UI. DESIGN-SYSTEM.md mandates light as the true default.
+// width/initialScale are required — without them mobile browsers render at
+// ~980px desktop width and scale the page down, bypassing all breakpoints.
+// colorScheme: 'light' blocks Chrome Android auto-inversion.
 export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
   colorScheme: 'light',
   themeColor: '#0F172A',
 }

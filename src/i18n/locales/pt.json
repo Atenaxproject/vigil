@@ -89,6 +89,8 @@
   "map": {
     "title": "Mapa de Crise",
     "layers": {
+      "title": "Camadas do mapa",
+      "toggleLayers": "Camadas",
       "aftershocks": "Réplicas (USGS)",
       "needs": "Necessidades",
       "resources": "Recursos Disponíveis",

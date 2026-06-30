@@ -89,6 +89,8 @@
   "map": {
     "title": "Carte de crise",
     "layers": {
+      "title": "Couches de carte",
+      "toggleLayers": "Couches",
       "aftershocks": "Répliques (USGS)",
       "needs": "Besoins",
       "resources": "Ressources disponibles",

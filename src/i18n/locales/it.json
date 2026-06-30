@@ -89,6 +89,8 @@
   "map": {
     "title": "Mappa della Crisi",
     "layers": {
+      "title": "Livelli mappa",
+      "toggleLayers": "Livelli",
       "aftershocks": "Scosse di Assestamento (USGS)",
       "needs": "Necessità",
       "resources": "Risorse Disponibili",

@@ -89,6 +89,8 @@
   "map": {
     "title": "Krisenkarte",
     "layers": {
+      "title": "Kartenebenen",
+      "toggleLayers": "Ebenen",
       "aftershocks": "Nachbeben (USGS)",
       "needs": "Bedarf",
       "resources": "Verfügbare Ressourcen",
