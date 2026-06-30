@@ -432,13 +432,26 @@
     "hotlines": {
       "title": "已验证的紧急热线",
       "rescate": "0800-RESCATE",
-      "redCross": "委内瑞拉红十字会"
+      "redCross": "委内瑞拉红十字会",
+      "additionalTitle": "其他紧急热线",
+      "additionalSource": "venezuelatebusca.com/resources",
+      "additional": {
+        "cicpc": "CICPC（科学警察）",
+        "bomberosChacao": "查考消防队",
+        "policiaBaruta": "巴鲁塔市警察",
+        "policiaElHatillo": "埃尔哈蒂略市警察",
+        "defensaCivil": "大加拉加斯民防",
+        "emergenciasDigitel": "Digitel 紧急服务",
+        "transito": "国家交通监察局"
+      }
     },
     "sisterPlatforms": {
       "title": "姊妹平台（民间运营）",
       "approximateNote": "数据为近似值——未与 Vigil 实时同步",
       "venezuelaTeBusca": "民间运营的委内瑞拉失踪人员搜索平台。",
-      "desaparecidosTerremoto": "民间运营平台，报告有超过 35,000 个活跃案例（近似数字，可能已过时）。"
+      "desaparecidosTerremoto": "民间运营平台，报告有超过 35,000 个活跃案例（近似数字，可能已过时）。",
+      "redQuipu": "人道主义平台，连接各类倡议并整合需求，以协调委内瑞拉救援响应。",
+      "mapaDanosVenezuela": "地震后委内瑞拉结构性损害与需求报告的公民地图。"
     },
     "sources": {
       "title": "可靠来源"

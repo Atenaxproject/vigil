@@ -4,6 +4,26 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (resources seed + sister platforms)
+
+### Added
+- **Resource directory seed** — `supabase/seeds/002_resources_venezuelatebusca.sql`:
+  5 organizations (Red Cross family search lines in Honduras, Argentina,
+  Colombia; UNIMET structural engineers; RedQuipu) and 5 Caracas hospital
+  map markers sourced from venezuelatebusca.com/resources. Applied to Supabase
+  project `macmlvybpxdnzfviimvl`.
+- **Two more sister platforms** — RedQuipu and Mapa de Daños Venezuela in
+  `crisis.config.ts`; descriptions on `/informacion`; auto-listed on `/buscar`
+  no-results via existing sister-platform filter.
+- **Additional emergency hotlines** — compact reference list on `/informacion`
+  (CICPC, Bomberos Chacao, municipal police, Defensa Civil, Digitel 112,
+  Tránsito 167) with venezuelatebusca.com/resources citation. i18n in all 8
+  locales.
+
+### Changed
+- **Docs** — archived `25-resources-seed-and-sister-platforms.md`; removed root
+  `CURSOR-RESOURCES-SEED-AND-SISTER-PLATFORMS.md` stub.
+
 ## [Unreleased] — 2026-06-30 (OG banner + sister platforms)
 
 ### Added

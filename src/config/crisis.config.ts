@@ -49,6 +49,18 @@ export const CRISIS_CONFIG = {
       type: 'sister-platform' as const,
       slug: 'desaparecidosTerremoto' as const,
     },
+    {
+      name: 'RedQuipu',
+      url: 'https://redquipu.com',
+      type: 'sister-platform' as const,
+      slug: 'redQuipu' as const,
+    },
+    {
+      name: 'Mapa de Daños Venezuela',
+      url: 'https://terremotovenezuela.com',
+      type: 'sister-platform' as const,
+      slug: 'mapaDanosVenezuela' as const,
+    },
   ],
 
   seismic: {

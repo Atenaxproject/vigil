@@ -432,13 +432,26 @@
     "hotlines": {
       "title": "Numeri di emergenza verificati",
       "rescate": "0800-RESCATE",
-      "redCross": "Croce Rossa Venezuelana"
+      "redCross": "Croce Rossa Venezuelana",
+      "additionalTitle": "Linee di emergenza aggiuntive",
+      "additionalSource": "venezuelatebusca.com/resources",
+      "additional": {
+        "cicpc": "CICPC",
+        "bomberosChacao": "Vigili del fuoco di Chacao",
+        "policiaBaruta": "Polizia municipale di Baruta",
+        "policiaElHatillo": "Polizia municipale di El Hatillo",
+        "defensaCivil": "Protezione civile della Grande Caracas",
+        "emergenciasDigitel": "Emergenze Digitel",
+        "transito": "Ispettorato nazionale del traffico"
+      }
     },
     "sisterPlatforms": {
       "title": "Piattaforme sorelle (cittadine)",
       "approximateNote": "Cifre approssimative — non sincronizzate in tempo reale con Vigil",
       "venezuelaTeBusca": "Piattaforma cittadina per cercare persone scomparse in Venezuela.",
-      "desaparecidosTerremoto": "Piattaforma cittadina con oltre 35.000 casi attivi segnalati (cifra approssimativa, potrebbe essere obsoleta)."
+      "desaparecidosTerremoto": "Piattaforma cittadina con oltre 35.000 casi attivi segnalati (cifra approssimativa, potrebbe essere obsoleta).",
+      "redQuipu": "Piattaforma umanitaria che collega iniziative e consolida i bisogni per una risposta coordinata in Venezuela.",
+      "mapaDanosVenezuela": "Mappa cittadina dei danni strutturali e dei bisogni segnalati dopo il terremoto in Venezuela."
     },
     "sources": {
       "title": "Fonti affidabili da seguire"

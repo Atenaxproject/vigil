@@ -113,6 +113,16 @@ export function InformacionLive() {
     { label: 'OCHA Venezuela', value: '@OCHAVenezuela', source: 'X / Twitter' },
   ]
 
+  const additionalHotlines = [
+    { label: tc('hotlines.additional.cicpc'), value: '(0212) 571-3533' },
+    { label: tc('hotlines.additional.bomberosChacao'), value: '(0212) 265-3261' },
+    { label: tc('hotlines.additional.policiaBaruta'), value: '(0212) 943-2855' },
+    { label: tc('hotlines.additional.policiaElHatillo'), value: '(0212) 961-1682' },
+    { label: tc('hotlines.additional.defensaCivil'), value: '(0212) 662-6759' },
+    { label: tc('hotlines.additional.emergenciasDigitel'), value: '112' },
+    { label: tc('hotlines.additional.transito'), value: '167' },
+  ]
+
   const officialSources = CRISIS_CONFIG.partnerLinks.filter((p) => p.type !== 'sister-platform')
   const sisterPlatforms = CRISIS_CONFIG.partnerLinks.filter((p) => p.type === 'sister-platform')
 
@@ -247,18 +257,35 @@ export function InformacionLive() {
       </section>
 
       <section className="mt-10">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('hotlines.additionalTitle')}</h2>
+        <div className="mt-4 space-y-2">
+          {additionalHotlines.map((line) => (
+            <div
+              key={line.label}
+              className="flex items-center justify-between rounded-card border border-slate-200 bg-white px-4 py-3"
+            >
+              <p className="text-[16px] text-vigil-body">{line.label}</p>
+              <p className="font-mono text-[16px] font-medium text-vigil-blue">{line.value}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 font-mono text-[13px] text-vigil-muted">
+          {tc('source')}: {tc('hotlines.additionalSource')}
+        </p>
+      </section>
+
+      <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('sisterPlatforms.title')}</h2>
         <p className="mt-1 text-[13px] text-vigil-muted">{tc('sisterPlatforms.approximateNote')}</p>
         <div className="mt-4 space-y-3">
           {sisterPlatforms.map((platform) => {
             const slug =
-              'slug' in platform && platform.slug
-                ? platform.slug
-                : 'venezuelaTeBusca'
-            const descriptionKey =
-              slug === 'desaparecidosTerremoto'
-                ? 'sisterPlatforms.desaparecidosTerremoto'
-                : 'sisterPlatforms.venezuelaTeBusca'
+              'slug' in platform && platform.slug ? platform.slug : 'venezuelaTeBusca'
+            const descriptionKey = `sisterPlatforms.${slug}` as
+              | 'sisterPlatforms.venezuelaTeBusca'
+              | 'sisterPlatforms.desaparecidosTerremoto'
+              | 'sisterPlatforms.redQuipu'
+              | 'sisterPlatforms.mapaDanosVenezuela'
             return (
               <a
                 key={platform.url}

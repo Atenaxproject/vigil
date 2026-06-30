@@ -432,13 +432,26 @@
     "hotlines": {
       "title": "Numéros d'urgence vérifiés",
       "rescate": "0800-RESCATE",
-      "redCross": "Croix-Rouge vénézuélienne"
+      "redCross": "Croix-Rouge vénézuélienne",
+      "additionalTitle": "Lignes d'urgence supplémentaires",
+      "additionalSource": "venezuelatebusca.com/resources",
+      "additional": {
+        "cicpc": "CICPC",
+        "bomberosChacao": "Pompiers de Chacao",
+        "policiaBaruta": "Police municipale de Baruta",
+        "policiaElHatillo": "Police municipale d'El Hatillo",
+        "defensaCivil": "Protection civile de la Grande Caracas",
+        "emergenciasDigitel": "Urgences Digitel",
+        "transito": "Inspection nationale des transports"
+      }
     },
     "sisterPlatforms": {
       "title": "Plateformes sœurs (citoyennes)",
       "approximateNote": "Chiffres approximatifs — non synchronisés en direct avec Vigil",
       "venezuelaTeBusca": "Plateforme citoyenne pour rechercher des personnes disparues au Venezuela.",
-      "desaparecidosTerremoto": "Plateforme citoyenne signalant plus de 35 000 cas actifs (chiffre approximatif, peut être obsolète)."
+      "desaparecidosTerremoto": "Plateforme citoyenne signalant plus de 35 000 cas actifs (chiffre approximatif, peut être obsolète).",
+      "redQuipu": "Plateforme humanitaire reliant les initiatives et consolidant les besoins pour une réponse coordonnée au Venezuela.",
+      "mapaDanosVenezuela": "Carte citoyenne des dommages structurels et des besoins signalés après le séisme au Venezuela."
     },
     "sources": {
       "title": "Sources fiables à suivre"

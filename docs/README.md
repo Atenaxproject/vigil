@@ -49,6 +49,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `22-claude-code-catchup-and-fix.md` — autonomous catch-up: prompt-vs-done audit, default branch switch, domain typo cleanup, live route health check (completed)
 - `23-og-social-banner.md` — Open Graph / Twitter Card social share images via ImageResponse
 - `24-partner-platforms-link.md` — sister missing-persons platform links (Venezuela Te Busca, Desaparecidos Terremoto Venezuela)
+- `25-resources-seed-and-sister-platforms.md` — Red Cross family search orgs, Caracas hospital markers, RedQuipu + Mapa de Daños sister platforms, additional emergency hotlines on `/informacion`
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
