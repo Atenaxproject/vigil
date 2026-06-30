@@ -38,6 +38,8 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `13-mobile-rebuild-and-translations.md` — dark mode removal, mobile audit, i18n generation
 - `14-confirmed-mobile-bugs.md` — landscape layout breakpoint + confirmed iPhone fixes
 - `15-deep-investigation-final.md` — proof-required mobile investigation and viewport audit
+- `16-viewport-fix-and-proof.md` — viewport meta fix and device-proof verification
+- `17-accessibility-and-menu-fix.md` — type-scale accessibility revision, Más bottom-sheet, feedback widget fix, bottom-nav definition
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
@@ -54,6 +56,7 @@ and workspace rules; canonical content lives under `docs/`:
 - `CURSOR-MOBILE-REBUILD-AND-TRANSLATIONS.md` → `build-process/13-mobile-rebuild-and-translations.md`
 - `CURSOR-CONFIRMED-MOBILE-BUGS.md` → `build-process/14-confirmed-mobile-bugs.md`
 - `CURSOR-DEEP-INVESTIGATION-FINAL.md` → `build-process/15-deep-investigation-final.md`
+- `CURSOR-ACCESSIBILITY-AND-MENU-FIX.md` → `build-process/17-accessibility-and-menu-fix.md`
 
 ## For Contributors
 
