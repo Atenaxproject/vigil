@@ -109,15 +109,63 @@ These ship in the codebase but need an API key or external service before they w
 | **AI translation / dedup / matching** | Library code in `src/lib/ai/`; not wired to submit flows or cron |
 | **WhatsApp / Telegram intake** | Discussed in architecture docs; no webhook handlers built |
 | **Push notifications (mag 4.0+ aftershocks)** | Planned — PWA notification permission flow |
-| **Screenshots in README** | Planned — add to `public/screenshots/` |
+| **Screenshots in README** | Playwright captures in `screenshots/` (iphone-portrait, iphone-landscape, ipad-portrait, desktop) |
+
+---
+
+## Project Status
+
+Verified against current source code and live production site as of 2026-06-30.
+
+### ✅ Live Now
+
+- Missing persons search, report, detail page (`/buscar`, `/reportar`, `/buscar/[id]`)
+- Crisis map — USGS aftershocks, needs, resources, shelters, hospitals, collection points, active teams
+- Claim-token private management pages (`/mi-reporte/[token]`, `/mi-intercambio/[token]`)
+- Resource exchange (`/intercambio`)
+- Volunteer registration and directory (`/voluntarios`)
+- Collection point registration (`/punto-de-acopio`)
+- Events calendar (`/calendario`)
+- Rescuer field presence / SOS (`/equipo-activo`)
+- Live information hub — seismic status, ReliefWeb feed, infrastructure metrics (`/informacion`)
+- Official updates feed — ReliefWeb (`/noticias`)
+- How to help — 18 verified donation orgs from Supabase seed (`/como-ayudar`)
+- Emergency banner — 0800-RESCATE, Intérpretes, Cruz Roja (always visible, non-dismissible)
+- Weather + time bar — Open-Meteo (no API key)
+- Feedback widget — all pages; admin review at `/admin/feedback`
+- 8-language i18n — Spanish default; EN, PT, FR, IT, ZH, DE, RU
+- PWA — service worker, offline fallback, offline form queue, network-status banner
+- Privacy Policy + Terms — Spanish and English
+- Admin auth — Supabase OTP + `VIGIL_ADMIN_EMAILS` allowlist
+- Mobile viewport fix — `width: device-width` + `initialScale: 1` deployed 2026-06-30
+- Map layer panel — collapsible bottom-sheet on mobile, floating panel on desktop
+
+### 🔧 In Progress (code present, needs config)
+
+- **Resend email** — code in `src/lib/email.ts`; needs `RESEND_API_KEY` + `youthewave.org` verified domain in Resend dashboard
+- **PFIF export** — `src/lib/pfif.ts` exists; API route at `/api/pfif` not yet created
+- **Claude Haiku AI** — translation/dedup/matching code in `src/lib/ai/`; not wired to submit flows or cron; needs `ANTHROPIC_API_KEY`
+- **WhatsApp/Telegram intake** — documented in architecture; no webhook handlers built yet
+
+### 🔜 Coming Soon
+
+- Full organization directory with Supabase-backed cards (`/organizaciones` shows partner links only today)
+- Admin moderation queue UI (use Supabase Studio in the meantime)
+- HDX dataset feed (`src/lib/hdx.ts` exists but not surfaced on any page)
+- Push notifications for M4.0+ aftershocks (PWA permission flow not yet built)
 
 ---
 
 ## Screenshots
 
-> No screenshots are committed yet. Add images to `public/` and reference them here, e.g.
-> `![Crisis map](public/screenshots/map.png)`. The live site at
-> [vigil.youthewave.org](https://vigil.youthewave.org) is the current reference.
+Playwright visual captures of the live production site (`https://vigil.youthewave.org`) are in `screenshots/` — run `node scripts/visual-check.mjs` to refresh them.
+
+| Viewport | File | Notes |
+|---|---|---|
+| iPhone portrait 390×844 | `screenshots/iphone-portrait.png` | Mobile bottom-nav, layers icon button visible |
+| iPhone landscape 844×390 | `screenshots/iphone-landscape.png` | Landscape header + nav |
+| iPad portrait 768×1024 | `screenshots/ipad-portrait.png` | Tablet layout, bottom-nav at 768px |
+| Desktop 1440×900 | `screenshots/desktop.png` | Sidebar, three-column layout, layer panel open |
 
 ---
 
