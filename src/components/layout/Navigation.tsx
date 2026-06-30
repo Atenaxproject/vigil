@@ -25,6 +25,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
 } from 'lucide-react'
+import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { cn } from '@/lib/utils'
 
 const SIDEBAR_STORAGE_KEY = 'vigil-sidebar-collapsed'
@@ -311,6 +312,7 @@ export function Navigation() {
               </button>
             </div>
             <ul className="p-2">
+              <PwaInstallButton onInstalled={closeMore} />
               {moreItems.map((item) => {
                 const Icon = item.icon
                 const active = pathname === item.href

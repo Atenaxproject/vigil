@@ -29,6 +29,15 @@
   "a11y": {
     "skipToContent": "Zum Hauptinhalt springen"
   },
+  "pwa": {
+    "install": "Vigil installieren",
+    "iosBanner": {
+      "title": "Vigil zum Startbildschirm hinzufügen",
+      "instructionsPrefix": "Tippen Sie auf",
+      "instructionsSuffix": "und dann „Zum Home-Bildschirm“",
+      "dismiss": "Verstanden"
+    }
+  },
   "banner": {
     "emergency": "Notfall:",
     "hotline": "0800-RESCATE",
@@ -108,6 +117,8 @@
     "layers": {
       "title": "Kartenebenen",
       "toggleLayers": "Ebenen",
+      "showLayers": "Ebenen anzeigen",
+      "hideLayers": "Ebenen ausblenden",
       "aftershocks": "Nachbeben (USGS)",
       "needs": "Bedarf",
       "resources": "Verfügbare Ressourcen",

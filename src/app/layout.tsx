@@ -13,6 +13,7 @@ import { Navigation } from '@/components/layout/Navigation'
 import { SkipToContent } from '@/components/layout/SkipToContent'
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { FeedbackWidget } from '@/components/feedback/FeedbackWidget'
+import { IOSInstallBanner } from '@/components/pwa/IOSInstallBanner'
 import { NetworkStatusBanner } from '@/components/layout/NetworkStatusBanner'
 import { OfflineQueueProvider } from '@/components/providers/OfflineQueueProvider'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
@@ -31,6 +32,9 @@ export const metadata: Metadata = {
   description:
     'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
   manifest: '/manifest.json',
+  icons: {
+    apple: [{ url: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' }],
+  },
 }
 
 // width/initialScale are required — without them mobile browsers render at
@@ -142,6 +146,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Toaster position="top-center" />
           <OfflineQueueProvider />
           <FeedbackWidget />
+          <IOSInstallBanner />
         </NextIntlClientProvider>
       </body>
     </html>
