@@ -47,6 +47,8 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `20-testflight-full-qa.md` — sidebar width fix, full functional TestFlight QA, RLS security audit
 - `21-legal-links-zindex-fix.md` — legal page links verification, map z-index bleed fix (`isolation: isolate`)
 - `22-claude-code-catchup-and-fix.md` — autonomous catch-up: prompt-vs-done audit, default branch switch, domain typo cleanup, live route health check (completed)
+- `23-og-social-banner.md` — Open Graph / Twitter Card social share images via ImageResponse
+- `24-partner-platforms-link.md` — sister missing-persons platform links (Venezuela Te Busca, Desaparecidos Terremoto Venezuela)
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

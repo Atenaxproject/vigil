@@ -4,6 +4,24 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (OG banner + sister platforms)
+
+### Added
+- **Open Graph / Twitter Card images** — `src/app/opengraph-image.tsx` and
+  `src/app/twitter-image.tsx` generate 1200×630 share banners via Next.js
+  `ImageResponse` (DESIGN-SYSTEM ink/blue palette, Venezuela flag stripes).
+  Root `layout.tsx` now exports `openGraph` and `twitter` metadata with
+  `metadataBase` → `https://vigil.youthewave.org`.
+- **Sister missing-persons platforms** — Venezuela Te Busca and Desaparecidos
+  Terremoto Venezuela added to `crisis.config.ts` (`sister-platform` type).
+  Prominent no-results panel on `/buscar` with external links + report CTA.
+  Dedicated section on `/informacion` with approximate-scale disclaimer.
+  i18n strings in all 8 locales.
+
+### Changed
+- **Docs** — archived `23-og-social-banner.md` and `24-partner-platforms-link.md`;
+  removed root `CURSOR-*.md` prompt stubs.
+
 ## [Unreleased] — 2026-06-30 (map accessible list toggle — closeable)
 
 ### Fixed
