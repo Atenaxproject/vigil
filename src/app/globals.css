@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     --vigil-ink: #0f172a;
     --vigil-blue: #2563eb;
     --vigil-blue-light: #eff6ff;
@@ -27,11 +28,17 @@
   }
 
   .dark {
+    color-scheme: dark;
     --vigil-ink: #f1f5f9;
     --vigil-cloud: #111827;
     --vigil-muted: #9ca3af;
     background-color: #0a0f1e;
     color: #f1f5f9;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
   }
 
   body {

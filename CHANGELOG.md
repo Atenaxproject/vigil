@@ -4,6 +4,28 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30
+
+### Fixed
+- **Dark mode** — forced light as the true default. Declared `color-scheme: light`
+  in `globals.css` and via a Next `viewport` export (`<meta name="color-scheme">`)
+  plus inline `style` on `<html>`, stopping Chrome Auto Dark Theme (Android) from
+  auto-inverting the UI. (No `next-themes`/`ThemeProvider` exists.)
+- **Mobile layout** — `<main>` bottom padding now `calc(5rem + safe-area-inset)`
+  so content never hides behind the bottom nav on notched devices; added
+  `overflow-x: hidden` on `html, body` to prevent page-level horizontal scroll.
+- **Footer hierarchy** — restructured the inline footer in `layout.tsx` into three
+  tiers: (1) prominent "not an emergency service" disclaimer + tappable red hotline
+  button, (2) credits (Orlando / Atenax + new "Built with Claude + Cursor" line),
+  (3) locale-aware legal row (Privacy · Terms · Contact · Open source). Added
+  `footer.builtWith` to all 8 locales (ES translated).
+
+### Changed
+- **docs/build-process** — added `09-mobile-darkmode-fix.md` (moved from root
+  `CURSOR-MOBILE-DARKMODE-FIX.md`) and `10-footer-hierarchy-fix.md`; renumbered the
+  prior `09-docs-and-status.md` → `11-docs-and-status.md`; added a build-process
+  index to `docs/README.md`.
+
 ## [Unreleased] — 2026-06-29
 
 ### Added
@@ -12,7 +34,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 ### Changed
 - **README**: documentation link, feature list rewritten to match actual codebase (live vs migration-gated vs coming soon).
 - **DEPLOYMENT**: pointer to `docs/` for architecture references.
-- **README / DEPLOYMENT / 09-docs-and-status**: migration 005 + seed marked applied on production Supabase (`macmlvybpxdnzfviimvl`).
+- **README / DEPLOYMENT / 11-docs-and-status**: migration 005 + seed marked applied on production Supabase (`macmlvybpxdnzfviimvl`).
 
 ## [Unreleased] — 2026-06-29 (prior)
 

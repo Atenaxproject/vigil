@@ -279,6 +279,7 @@
     "credits": "Made with hope and love for Venezuela",
     "creditsByPrefix": "A project by Orlando Toro —",
     "creditsByLink": "Atenax Project",
+    "builtWith": "Built with Claude + Cursor",
     "notEmergency": "Vigil is NOT an emergency service. For immediate rescue call: {hotline}"
   },
   "exchange": {

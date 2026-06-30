@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
@@ -30,15 +31,31 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 }
 
+// Declare light explicitly so Chrome's "Auto Dark Theme" (Android) does not
+// auto-invert the UI. DESIGN-SYSTEM.md mandates light as the true default.
+export const viewport: Viewport = {
+  colorScheme: 'light',
+  themeColor: '#0F172A',
+}
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = await getLocale()
   const messages = await getMessages()
   const t = await getTranslations('footer')
+  const tNav = await getTranslations('nav')
   const events = await getVenezuelaSeismicEvents()
   const alertCount = countAlertEvents(events)
 
+  const isSpanish = locale === 'es'
+  const privacyHref = isSpanish ? '/privacidad' : '/privacy'
+  const termsHref = isSpanish ? '/terminos' : '/terms'
+
   return (
-    <html lang={locale} className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable}`}
+      style={{ colorScheme: 'light' }}
+    >
       <body className="min-h-screen font-sans">
         <NextIntlClientProvider messages={messages}>
           <EmergencyBanner aftershockCount={alertCount} />
@@ -53,31 +70,67 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <LanguageSwitcher />
               </header>
               <NetworkStatusBanner />
-              <main className="flex-1 pb-20 md:pb-0">{children}</main>
-              <footer className="border-t border-slate-200 bg-white px-4 py-6 text-center text-[11px] text-vigil-muted">
-                <p>{t('madeFor')}</p>
-                <p className="mt-1">{t('openSource')}</p>
-                <a
-                  href={`mailto:${CRISIS_CONFIG.legal.contactEmail}`}
-                  className="mt-2 inline-block text-vigil-muted transition-colors hover:text-vigil-blue"
-                >
-                  {t('contact')}
-                </a>
-                <p className="mt-3">{t('credits')} 🇻🇪</p>
-                <p className="mt-1">
-                  {t('creditsByPrefix')}{' '}
+              <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
+                {children}
+              </main>
+              <footer className="border-t border-slate-200 bg-white text-[11px] text-vigil-muted">
+                {/* Tier 1 — Safety disclaimer (most prominent) */}
+                <div className="border-b border-slate-200 bg-vigil-cloud px-4 py-4 text-center">
+                  <p className="text-[13px] font-medium leading-relaxed text-slate-700">
+                    {t('notEmergency', { hotline: CRISIS_CONFIG.emergency.hotlineLabel })}
+                  </p>
                   <a
-                    href="https://atenaxproject.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-vigil-muted transition-colors hover:text-vigil-blue"
+                    href={`tel:${CRISIS_CONFIG.emergency.hotline}`}
+                    className="mt-2 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-badge bg-status-missing px-5 font-mono text-sm font-bold text-white transition-opacity hover:opacity-90"
                   >
-                    {t('creditsByLink')}
+                    {CRISIS_CONFIG.emergency.hotlineLabel} · {CRISIS_CONFIG.emergency.hotline}
                   </a>
-                </p>
-                <p className="mt-2 text-slate-500">
-                  {t('notEmergency', { hotline: CRISIS_CONFIG.emergency.hotlineLabel })}
-                </p>
+                </div>
+
+                {/* Tier 2 — Credits (understated) */}
+                <div className="px-4 py-5 text-center">
+                  <p className="text-[13px] text-slate-600">{t('credits')} 🇻🇪</p>
+                  <p className="mt-1">
+                    {t('creditsByPrefix')}{' '}
+                    <a
+                      href="https://atenaxproject.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-vigil-blue"
+                    >
+                      {t('creditsByLink')}
+                    </a>
+                  </p>
+                  <p className="mt-1 text-vigil-muted">{t('builtWith')}</p>
+                </div>
+
+                {/* Tier 3 — Legal / meta */}
+                <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-t border-slate-200 px-4 py-4 text-center">
+                  <Link
+                    href={privacyHref}
+                    className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
+                  >
+                    {tNav('privacy')}
+                  </Link>
+                  <span aria-hidden="true">·</span>
+                  <Link
+                    href={termsHref}
+                    className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
+                  >
+                    {tNav('terms')}
+                  </Link>
+                  <span aria-hidden="true">·</span>
+                  <a
+                    href={`mailto:${CRISIS_CONFIG.legal.contactEmail}`}
+                    className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
+                  >
+                    {t('contact')}
+                  </a>
+                  <span aria-hidden="true">·</span>
+                  <span>{t('openSource')}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{t('madeFor')}</span>
+                </div>
               </footer>
             </div>
           </div>
