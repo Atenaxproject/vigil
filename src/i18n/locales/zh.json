@@ -238,6 +238,7 @@
   "common": {
     "loading": "Loading...",
     "error": "An error occurred. Please try again.",
+    "errorHint": "加载此部分时出现问题。您可以重试。",
     "retry": "Retry",
     "close": "Close",
     "back": "Back",

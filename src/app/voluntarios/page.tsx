@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { Lock, Search, Users, X } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
+import { isSupabaseConfigured } from '@/lib/supabase/env'
 import type { Availability, PublicVolunteer, VolunteerSkill } from '@/types/vigil.types'
 import { cn } from '@/lib/utils'
 
@@ -48,6 +49,11 @@ export default function VoluntariosPage() {
   const [contactVolunteer, setContactVolunteer] = useState<PublicVolunteer | null>(null)
 
   const fetchVolunteers = useCallback(async () => {
+    if (!isSupabaseConfigured()) {
+      setVolunteers([])
+      setLoading(false)
+      return
+    }
     try {
       const supabase = createClient()
       const { data, error } = await supabase

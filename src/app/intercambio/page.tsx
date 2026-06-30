@@ -20,6 +20,7 @@ import {
 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
+import { isSupabaseConfigured } from '@/lib/supabase/env'
 import type {
   PublicResourceExchange,
   ResourceExchangeCategory,
@@ -72,6 +73,11 @@ export default function IntercambioPage() {
   }, [])
 
   const fetchEntries = useCallback(async () => {
+    if (!isSupabaseConfigured()) {
+      setEntries([])
+      setLoading(false)
+      return
+    }
     try {
       const supabase = createClient()
       const { data, error } = await supabase
@@ -100,6 +106,10 @@ export default function IntercambioPage() {
   }, [fetchEntries])
 
   useEffect(() => {
+    // No live updates without a configured Supabase instance — avoid opening
+    // a websocket that would be blocked/fail and crash the page.
+    if (!isSupabaseConfigured()) return
+
     const supabase = createClient()
     const channel = supabase
       .channel('resource_exchange_live')

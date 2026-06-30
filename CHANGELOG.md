@@ -1,0 +1,48 @@
+# Changelog
+
+All notable changes to Vigil are documented here. Format loosely follows
+[Keep a Changelog](https://keepachangelog.com/) with
+[Conventional Commits](https://www.conventionalcommits.org/) style entries.
+
+## [Unreleased] — 2026-06-29
+
+### Fixed
+- **Production client-side crash** ("Application error: a client-side exception
+  has occurred"). Root cause: realtime websocket subscriptions were opened
+  against the placeholder Supabase instance (`wss://placeholder.supabase.co`)
+  while the CSP `connect-src` directive did not allow `wss://*.supabase.co`,
+  so the blocked socket bubbled up as an unhandled exception that took down the
+  whole page render.
+
+### Added
+- `src/app/error.tsx` and `src/app/global-error.tsx` — friendly, recoverable
+  error boundaries (global boundary is provider-free and bilingual).
+- Route-level `loading.tsx` / `error.tsx` for the main interactive routes
+  (home, `buscar`, `reportar`, `intercambio`, `voluntarios`).
+- Shared `ErrorState` and `LoadingState` UI components (DESIGN-SYSTEM compliant).
+- `common.errorHint` translation key across all 8 locales.
+- `CHANGELOG.md`.
+
+### Changed
+- **CSP** (`next.config.js`): added `wss://*.supabase.co` and
+  `https://*.tile.openstreetmap.org` to `connect-src`, and
+  `https://*.basemaps.cartocdn.com` to `img-src`. CSP otherwise unchanged.
+- **Graceful degradation**: realtime subscriptions and client Supabase queries
+  in `RecentMissingFeed`, `intercambio`, and `voluntarios` now no-op when
+  Supabase is unconfigured (placeholder/missing env) and render calm empty
+  states — no websocket is attempted at all.
+- **Middleware**: skips the Supabase auth session refresh entirely when Supabase
+  is unconfigured, avoiding network calls to a placeholder host.
+- **README**: redesigned into a modern GitHub landing (centered header, badges,
+  six user groups, feature list, tech-stack table, quick start, one-file deploy
+  guide, data-protection statement). Contributors & Acknowledgments preserved.
+
+## [0.1.0] — 2026-06-28
+
+### Added
+- Initial Vigil crisis platform for the Venezuela 2026 earthquake response.
+- Missing persons board (PFIF-compatible), USGS crisis map, resource exchange
+  board, volunteer marketplace, organization directory, official updates feed.
+- Full data-protection layer (contact masking, RLS, rate limiting, coordinate
+  validation), 8-language i18n, PWA manifest, privacy policy + terms.
+- Supabase schema migrations `001`–`003`, auth setup, and real-data seed.

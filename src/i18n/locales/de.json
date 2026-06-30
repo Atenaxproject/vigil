@@ -238,6 +238,7 @@
   "common": {
     "loading": "Loading...",
     "error": "An error occurred. Please try again.",
+    "errorHint": "Beim Laden dieses Bereichs ist ein Problem aufgetreten. Sie können es erneut versuchen.",
     "retry": "Retry",
     "close": "Close",
     "back": "Back",

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import type { User } from '@supabase/supabase-js'
 import { isAdminUser } from '@/lib/supabase/auth'
+import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { updateSession } from '@/lib/supabase/middleware'
 
 const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
@@ -41,9 +43,16 @@ function applySecurityHeaders(response: NextResponse): NextResponse {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Refresh Supabase auth session on every matched request
-  const { response: sessionResponse, user } = await updateSession(request)
-  const response = sessionResponse
+  // Refresh Supabase auth session on every matched request. When Supabase is
+  // not configured (placeholder env vars), skip the auth call entirely so we
+  // never attempt a request against a placeholder host.
+  let response = NextResponse.next({ request })
+  let user: User | null = null
+  if (isSupabaseConfigured()) {
+    const session = await updateSession(request)
+    response = session.response
+    user = session.user
+  }
 
   // Protect /admin routes — redirect unauthenticated or non-admin users
   if (pathname.startsWith('/admin')) {

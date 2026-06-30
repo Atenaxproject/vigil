@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { isSupabaseConfigured } from '@/lib/supabase/env'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
 import { useTranslations } from 'next-intl'
@@ -15,6 +16,11 @@ export function RecentMissingFeed({ initialRecords = [] }: RecentFeedProps) {
   const [records, setRecords] = useState<PublicMissingPerson[]>(initialRecords)
 
   useEffect(() => {
+    // Skip the realtime websocket entirely when Supabase is not configured
+    // (e.g. placeholder env vars in production) to avoid an unhandled
+    // client-side exception when the socket is blocked or fails to connect.
+    if (!isSupabaseConfigured()) return
+
     const supabase = createClient()
     const channel = supabase
       .channel('missing-persons-feed')

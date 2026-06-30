@@ -28,9 +28,16 @@ Get keys from **Project Settings → API** in the Supabase dashboard.
 
 **Option A — Supabase SQL Editor (quickest for launch)**
 
-1. Open **SQL Editor** in the Supabase dashboard.
-2. Run `supabase/migrations/001_initial_schema.sql`.
-3. Run `supabase/migrations/002_auth_setup.sql`.
+Open **SQL Editor** in the Supabase dashboard and run, in order:
+
+1. `supabase/migrations/001_initial_schema.sql`
+2. `supabase/migrations/002_auth_setup.sql`
+3. `supabase/migrations/002_resource_exchange.sql`
+4. `supabase/migrations/003_volunteer_enhancements.sql`
+
+Then seed verified launch data:
+
+5. `supabase/seeds/001_real_data.sql`
 
 **Option B — Supabase CLI (linked project)**
 
@@ -86,10 +93,42 @@ In **Database → Replication**, enable Realtime for:
 - `missing_persons`
 - `map_markers`
 - `needs_offers`
+- `resource_exchange`
 
 ### 7. Vercel environment variables
 
-Add the same env vars from `.env.local` to the Vercel project dashboard under **Settings → Environment Variables**.
+Add the following to the Vercel project under **Settings → Environment Variables**
+(Production scope), then redeploy:
+
+| Variable | Required | Notes |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | ✅ | From Supabase → Settings → API |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Public anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | Server-only — never client-exposed |
+| `VIGIL_ADMIN_SECRET` | ✅ | Strong random string (rate-limit IP hashing) |
+| `VIGIL_ADMIN_EMAILS` | ✅ | Comma-separated admin allowlist |
+| `ANTHROPIC_API_KEY` | optional | Enables translation / dedup / matching |
+
+> **Until real values are set, production renders without crashing** (static pages,
+> the USGS map, and forms all work) but live data sections show a calm empty state.
+> Adding the Supabase vars above + running migrations/seed enables live data.
+
+### 8. Deploy
+
+Production deploys automatically on push to `main` if the GitHub integration is
+connected. To deploy manually with the CLI:
+
+```bash
+vercel deploy --prod
+```
+
+### 9. Domain — vigil.youtheway.org
+
+1. In Vercel → **Settings → Domains**, add `vigil.youtheway.org`.
+2. In Cloudflare DNS, add a `CNAME` for `vigil` → `cname.vercel-dns.com`
+   (proxied / orange cloud for DDoS protection).
+3. Set Supabase **Auth → URL Configuration → Site URL** to
+   `https://vigil.youtheway.org` and add `/auth/callback` to redirect URLs.
 
 ---
 
