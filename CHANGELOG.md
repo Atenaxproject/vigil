@@ -12,6 +12,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 ### Changed
 - **README**: documentation link, feature list rewritten to match actual codebase (live vs migration-gated vs coming soon).
 - **DEPLOYMENT**: pointer to `docs/` for architecture references.
+- **README / DEPLOYMENT / 09-docs-and-status**: migration 005 + seed marked applied on production Supabase (`macmlvybpxdnzfviimvl`).
 
 ## [Unreleased] — 2026-06-29 (prior)
 

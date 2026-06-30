@@ -3,6 +3,22 @@
 
 ---
 
+## Production Supabase status (verified 2026-06-29)
+
+**Project:** `macmlvybpxdnzfviimvl` (production for [vigil.youtheway.org](https://vigil.youtheway.org))
+
+| Check | Status |
+|---|---|
+| Migrations `001`–`005` | Applied (`notes_claims_calendar` = 005) |
+| Seed `001_real_data.sql` | Applied |
+| `missing_person_notes`, `events`, `resource_exchange` tables | Present |
+| Organizations (`approved_by_admin = true`) | 18 |
+| `map_markers` by type | shelter 3, hospital 4, danger 4, rescue_zone 2, collection_point 2, resource 1 (16 total) |
+
+**Still not live (config or not built):** Resend outbound email (`RESEND_API_KEY`), push notifications, WhatsApp/Telegram intake, full org directory UI on `/organizaciones`, admin moderation dashboard UI.
+
+---
+
 ## TASK A — Verify Everything Is Actually Committed and Live
 
 ```bash

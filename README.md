@@ -52,13 +52,14 @@ Full build process and architecture decisions: [`/docs`](./docs)
 ## Features
 
 What is built and deployed today at [vigil.youtheway.org](https://vigil.youtheway.org).
-Features that need Supabase env vars + migrations show a calm empty state when
+Features that need optional API keys (e.g. Resend) degrade gracefully when
 unconfigured — they do not crash the app.
 
 ### Core crisis tools
 
-- 🔍 **Missing persons board** — Search (`/buscar`), report (`/reportar`), realtime feed on home. Contact info never shown publicly. [PFIF](https://github.com/google/personfinder) export at `/api/pfif`.
+- 🔍 **Missing persons board** — Search (`/buscar`), report (`/reportar`), realtime feed on home. Public notes & sightings thread on `/buscar/[id]`. Contact info never shown publicly. [PFIF](https://github.com/google/personfinder) export at `/api/pfif`.
 - 🗺️ **Crisis map** — USGS aftershocks (no API key), community needs/resources, shelters, hospitals, collection points, and active rescue teams on Leaflet + OpenStreetMap.
+- 📦 **Collection points** — Citizen registration at `/punto-de-acopio` → amber map markers (16 seeded markers on production map).
 - 🔁 **Resource exchange** — Offer or request goods, shelter, transport, skills, and equipment (`/intercambio`).
 - 🦺 **Volunteer marketplace** — Register skills and browse available volunteers (`/voluntarios`).
 - 🆘 **I need help** — Drop a need pin on the map (`/necesito-ayuda`).
@@ -67,30 +68,28 @@ unconfigured — they do not crash the app.
 
 - 📡 **Official updates** — ReliefWeb feed on `/noticias` (live, no key required).
 - 📊 **Live information hub** — USGS significant quakes, ReliefWeb reports, manual crisis stats, and realtime infrastructure status (`/informacion`).
+- 📅 **Events calendar** — `/calendario` with category filters and Venezuela timezone labels (realtime on `events`).
 - 🛡️ **Rescuer safety presence** — Field check-in, SOS, 4-hour auto-expire, map layer (`/equipo-activo`).
-- 💛 **How to help** — Verified donation organizations from Supabase seed with static fallback (`/como-ayudar`).
+- 💛 **How to help** — 18 verified donation organizations from production Supabase seed (`/como-ayudar`).
 - 🏢 **Partner links** — Curated NGOs and official sources from `crisis.config.ts` (`/organizaciones`).
+- 🌤️ **Weather & time bar** — Open-Meteo bar below emergency banner (no API key).
 
 ### Trust, access & resilience
 
 - 🚨 **Emergency banner** — Always-visible hotline (0800-RESCATE), Intérpretes, Cruz Roja. Government-operated intake tools intentionally excluded.
 - 📬 **Official contact** — `vigil@youtheway.org` and `vigil.support@youtheway.org` via Cloudflare Email Routing.
 - 💬 **Feedback widget** — Floating support button on all pages; admin review at `/admin/feedback`.
+- 🔗 **Claim-token inbox** — Passwordless `/mi-reporte/{token}` and `/mi-intercambio/{token}`; claim URL shown on submit.
 - 🔐 **Admin auth** — Supabase OTP login + `VIGIL_ADMIN_EMAILS` allowlist. Main `/admin` panel is a stub — use Supabase Studio for moderation queue today.
 - 🌐 **8 languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian.
 - 📱 **PWA / offline-first** — Service worker caching, `/offline` fallback, offline form queue, network-status banner.
 - ⚖️ **Legal pages** — Privacy Policy and Terms in Spanish (`/privacidad`, `/terminos`) and English (`/privacy`, `/terms`).
 
-### Coded — enable with migration or config
+### Optional integrations
 
-These ship in the codebase but require a Supabase migration and/or env var before they work in production:
+These ship in the codebase but need an API key or external service before they work in production:
 
-- 📝 **Public notes & sightings** — Thread on `/buscar/[id]` (needs migration `005_notes_claims_calendar.sql` + Realtime on `missing_person_notes`).
-- 🔗 **Claim-token inbox** — Passwordless `/mi-reporte/{token}` and `/mi-intercambio/{token}`; claim URL shown on submit (same migration).
-- 📦 **Collection points** — Citizen registration at `/punto-de-acopio` → amber map markers (same migration).
-- 📅 **Events calendar** — `/calendario` with category filters and Venezuela timezone labels (same migration + Realtime on `events`).
 - ✉️ **Resend email alerts** — Feedback notifications and claim-link emails on submit (needs `RESEND_API_KEY` + `youtheway.org` verified in Resend).
-- 🌤️ **Weather & time bar** — Open-Meteo bar below emergency banner (live now — no API key).
 
 ### Coming soon
 

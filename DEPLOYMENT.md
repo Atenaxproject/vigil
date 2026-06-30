@@ -28,6 +28,12 @@ Get keys from **Project Settings → API** in the Supabase dashboard.
 
 ### 3. Run database migrations
 
+> **Production (`vigil.youtheway.org`):** Migrations `001`–`005` and seed
+> `001_real_data.sql` are **already applied** on Supabase project
+> `macmlvybpxdnzfviimvl` (18 approved organizations, 16 map markers). Skip this
+> section for the live deployment — follow it only when spinning up a **new**
+> Supabase project.
+
 **Option A — Supabase SQL Editor (quickest for launch)**
 
 Open **SQL Editor** in the Supabase dashboard and run, in order:
@@ -116,9 +122,9 @@ Add the following to the Vercel project under **Settings → Environment Variabl
 | `ANTHROPIC_API_KEY` | optional | Enables translation / dedup / matching |
 | `RESEND_API_KEY` | optional | Sends feedback alert emails to `vigil.support@youtheway.org` via Resend |
 
-> **Until real values are set, production renders without crashing** (static pages,
-> the USGS map, and forms all work) but live data sections show a calm empty state.
-> Adding the Supabase vars above + running migrations/seed enables live data.
+> **Production Vigil:** Supabase env vars are set and migrations `001`–`005` plus
+> seed `001_real_data.sql` are complete on project `macmlvybpxdnzfviimvl`. New
+> forks or fresh projects must complete sections 3–6 below.
 
 ### 8. Deploy
 
