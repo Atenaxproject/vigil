@@ -26,7 +26,7 @@ A unified, open-source humanitarian crisis platform — real-time missing person
 
 <br />
 
-**Live now:** [vigil.youtheway.org](https://vigil.youtheway.org) &nbsp;·&nbsp; **📦 Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil) &nbsp;·&nbsp; **🚨 Deployment:** Venezuela 2026 Earthquake Response
+**Live now:** [vigil.youthewave.org](https://vigil.youthewave.org) &nbsp;·&nbsp; **📦 Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil) &nbsp;·&nbsp; **🚨 Deployment:** Venezuela 2026 Earthquake Response
 
 </div>
 
@@ -59,7 +59,7 @@ Full build process and architecture decisions: [`/docs`](./docs)
 
 ## Features
 
-What is built and deployed today at [vigil.youtheway.org](https://vigil.youtheway.org).
+What is built and deployed today at [vigil.youthewave.org](https://vigil.youthewave.org).
 Features that need optional API keys (e.g. Resend) degrade gracefully when
 unconfigured — they do not crash the app.
 
@@ -85,7 +85,7 @@ unconfigured — they do not crash the app.
 ### Trust, access & resilience
 
 - 🚨 **Emergency banner** — Always-visible hotline (0800-RESCATE), Intérpretes, Cruz Roja. Government-operated intake tools intentionally excluded.
-- 📬 **Official contact** — `vigil@youtheway.org` and `vigil.support@youtheway.org` via Cloudflare Email Routing.
+- 📬 **Official contact** — `vigil@youthewave.org` and `vigil.support@youthewave.org` via Cloudflare Email Routing.
 - 💬 **Feedback widget** — Floating support button on all pages; admin review at `/admin/feedback`.
 - 🔗 **Claim-token inbox** — Passwordless `/mi-reporte/{token}` and `/mi-intercambio/{token}`; claim URL shown on submit.
 - 🔐 **Admin auth** — Supabase OTP login + `VIGIL_ADMIN_EMAILS` allowlist. Main `/admin` panel is a stub — use Supabase Studio for moderation queue today.
@@ -97,7 +97,7 @@ unconfigured — they do not crash the app.
 
 These ship in the codebase but need an API key or external service before they work in production:
 
-- ✉️ **Resend email alerts** — Feedback notifications and claim-link emails on submit (needs `RESEND_API_KEY` + `youtheway.org` verified in Resend).
+- ✉️ **Resend email alerts** — Feedback notifications and claim-link emails on submit (needs `RESEND_API_KEY` + `youthewave.org` verified in Resend).
 
 ### Coming soon
 
@@ -117,7 +117,7 @@ These ship in the codebase but need an API key or external service before they w
 
 > No screenshots are committed yet. Add images to `public/` and reference them here, e.g.
 > `![Crisis map](public/screenshots/map.png)`. The live site at
-> [vigil.youtheway.org](https://vigil.youtheway.org) is the current reference.
+> [vigil.youthewave.org](https://vigil.youthewave.org) is the current reference.
 
 ---
 
@@ -196,7 +196,7 @@ Privacy is architecture, not an afterthought:
 - Row-level security, coordinate bounds validation, and per-IP rate limiting guard the API.
 - Right-to-erasure and data-retention windows are built into the schema.
 
-See the [Privacy Policy](https://vigil.youtheway.org/privacidad) and [Terms](https://vigil.youtheway.org/terminos).
+See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](https://vigil.youthewave.org/terminos).
 
 ---
 
@@ -235,4 +235,4 @@ For the people of Venezuela. For anyone who needs it next.
 ## License
 
 **MIT License** — Free to use, modify, and deploy for humanitarian purposes.
-Commercial use of the data is prohibited. See [Terms](https://vigil.youtheway.org/terminos).
+Commercial use of the data is prohibited. See [Terms](https://vigil.youthewave.org/terminos).

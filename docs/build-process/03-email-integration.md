@@ -6,8 +6,8 @@
 Read @CLAUDE.md before starting.
 
 Orlando has set up two email addresses via Cloudflare Email Routing:
-- vigil@youtheway.org — general contact, partnerships, public-facing
-- vigil.support@youtheway.org — feedback and support specifically
+- vigil@youthewave.org — general contact, partnerships, public-facing
+- vigil.support@youthewave.org — feedback and support specifically
 
 Do the following:
 
@@ -18,8 +18,8 @@ Update the `legal` object's `contactEmail` field:
 ```typescript
 legal: {
   // ...existing fields
-  contactEmail: 'vigil@youtheway.org',
-  supportEmail: 'vigil.support@youtheway.org',
+  contactEmail: 'vigil@youthewave.org',
+  supportEmail: 'vigil.support@youthewave.org',
 }
 ```
 
@@ -46,8 +46,8 @@ export async function notifyNewFeedback(feedback: {
 }) {
   try {
     await resend.emails.send({
-      from: 'Vigil <vigil@youtheway.org>',
-      to: 'vigil.support@youtheway.org',
+      from: 'Vigil <vigil@youthewave.org>',
+      to: 'vigil.support@youthewave.org',
       subject: `[Vigil] Nuevo feedback: ${feedback.category}`,
       html: `
         <h2>Nuevo mensaje de feedback</h2>
@@ -82,19 +82,19 @@ RESEND_API_KEY=
 
 Remind Orlando in your final summary: he needs to add `RESEND_API_KEY` to Vercel 
 Environment Variables (get it from resend.com dashboard → API Keys), and verify 
-`youtheway.org` as a sending domain in Resend (Resend dashboard → Domains → Add 
+`youthewave.org` as a sending domain in Resend (Resend dashboard → Domains → Add 
 Domain → it provides DKIM/SPF DNS records → add those to Cloudflare DNS).
 
 ## 6. Add contact emails to the visible UI
 
 Add a small "Contacto" link in the footer (every page) pointing to 
-`mailto:vigil@youtheway.org`. Add the support email visibly inside the feedback 
-widget modal: "También puedes escribirnos directamente a vigil.support@youtheway.org"
+`mailto:vigil@youthewave.org`. Add the support email visibly inside the feedback 
+widget modal: "También puedes escribirnos directamente a vigil.support@youthewave.org"
 
 ## 7. Update outreach email references (informational only — no code change)
 
 Note for Orlando: the outreach emails to Anthropic, Cloudflare, Vercel, Supabase, 
-etc. should now reference vigil@youtheway.org as the contact line instead of the 
+etc. should now reference vigil@youthewave.org as the contact line instead of the 
 personal Atenax email, since this is now the platform's official address. This is 
 a manual edit Orlando makes to the email text before sending — not a code task.
 
@@ -104,7 +104,7 @@ a manual edit Orlando makes to the email text before sending — not a code task
 git add -A
 git commit -m "feat: integrate official Vigil email addresses
 
-- Updated crisis.config.ts with vigil@youtheway.org and vigil.support@youtheway.org
+- Updated crisis.config.ts with vigil@youthewave.org and vigil.support@youthewave.org
 - Updated Privacy Policy and Terms contact references
 - Added Resend-powered feedback notification emails
 - Added visible contact email in footer and feedback widget"

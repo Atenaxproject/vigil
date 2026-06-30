@@ -16,4 +16,4 @@ Disallow: /admin/
 User-agent: Googlebot
 Allow: /api/pfif
 
-Sitemap: https://vigil.youtheway.org/sitemap.xml
+Sitemap: https://vigil.youthewave.org/sitemap.xml

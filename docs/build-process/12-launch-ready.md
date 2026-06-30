@@ -4,17 +4,17 @@
 >
 > | Item | Status |
 > |---|---|
-> | Production domain | `vigil.youtheway.org` (note: prompt typo `youthewave` is incorrect) |
+> | Production domain | `vigil.youthewave.org` |
 > | Migrations `001`–`005` + seed | Applied on production Supabase |
 > | Supabase Realtime | Enabled (`missing_persons`, `map_markers`, `needs_offers`) |
 > | Vercel deploy | Live |
 > | README banner + badges | Done (`docs/assets/vigil-banner.svg`) |
-> | Resend outbound email | **Pending** — needs `RESEND_API_KEY` + `youtheway.org` verified in Resend |
+> | Resend outbound email | **Pending** — needs `RESEND_API_KEY` + `youthewave.org` verified in Resend |
 > | Push notifications (PWA) | **Coming soon** |
 > | WhatsApp/Telegram intake | **Coming soon** |
 > | Full org directory UI | **Coming soon** |
 > | Admin moderation dashboard UI | **Coming soon** |
-> | DNS for `youtheway.org` email (Resend DKIM/SPF) | **Blocker** for feedback email delivery |
+> | DNS for `youthewave.org` email (Resend DKIM/SPF) | **Blocker** for feedback email delivery |
 
 ## Paste into Cursor Composer (Agent mode). If it stalls, hand to Claude Code CLI in WSL.
 
@@ -23,12 +23,13 @@
 ## TASK A — Final Domain Consistency Sweep
 
 ```bash
-grep -rn "youthewave" . --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=.git
+grep -rni "youtheway" . --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=.git
 grep -rn "vigil-ruby-theta" . --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=.git
 ```
 
-Confirm ZERO results for both. The only production domain reference anywhere
-in the codebase should be `vigil.youtheway.org`. Fix any remaining instances found.
+Confirm ZERO results for `youtheway` (except intentional historical notes). Confirm ZERO for
+`vigil-ruby-theta`. The only production domain reference anywhere in the codebase should be
+`vigil.youthewave.org`. Fix any remaining wrong-domain instances found.
 
 ---
 

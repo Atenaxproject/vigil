@@ -5,7 +5,7 @@
 
 ## Production Supabase status (verified 2026-06-29)
 
-**Project:** `macmlvybpxdnzfviimvl` (production for [vigil.youtheway.org](https://vigil.youtheway.org))
+**Project:** `macmlvybpxdnzfviimvl` (production for [vigil.youthewave.org](https://vigil.youthewave.org))
 
 | Check | Status |
 |---|---|

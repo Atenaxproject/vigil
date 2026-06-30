@@ -92,7 +92,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 ## [Unreleased] — 2026-06-29 (prior)
 
 ### Added
-- **Official email integration** — `vigil@youtheway.org` and `vigil.support@youtheway.org` in `crisis.config.ts`; footer contact link; Resend-powered feedback notifications (`src/lib/email/notify.ts`).
+- **Official email integration** — `vigil@youthewave.org` and `vigil.support@youthewave.org` in `crisis.config.ts`; footer contact link; Resend-powered feedback notifications (`src/lib/email/notify.ts`).
 - **PWA runtime caching** — `@ducanh2912/next-pwa` with network-first Supabase, stale-while-revalidate USGS/ReliefWeb, cache-first images, and `/offline` fallback page.
 - **Offline form queue** — missing-person and map-marker submissions queue in `localStorage` and flush on reconnect (`src/lib/offline-queue.ts`).
 - **Network status banner** — “showing saved data” indicator when offline.
@@ -113,7 +113,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **Feedback widget** — floating support button on all pages; admin review at `/admin/feedback` (password-gated via `VIGIL_ADMIN_SECRET`).
 - Migration `004_golive_features.sql` — `infrastructure_status`, `rescuer_presence`, `feedback` tables with Realtime.
 - Realtime subscriptions for map markers, missing persons search/feed updates, rescuer presence, infrastructure status.
-- `CRISIS_CONFIG.siteUrl` — canonical production domain `https://vigil.youtheway.org`.
+- `CRISIS_CONFIG.siteUrl` — canonical production domain `https://vigil.youthewave.org`.
 
 ### Fixed
 - **Production client-side crash** ("Application error: a client-side exception

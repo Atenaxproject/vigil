@@ -7,7 +7,7 @@
 ## CRITICAL FIX #1 — Domain Mismatch
 
 The domain configured in Vercel does not match the domain with the CNAME record in Cloudflare.
-Confirm with Orlando which domain is correct (youtheway.org vs youthewave.org), then:
+**Resolved (2026-06-30):** Canonical domain is `youthewave.org` (not the earlier typo `youtheway.org`). Steps applied:
 
 1. Update `crisis.config.ts` — the production URL referenced anywhere in code, metadata, 
    sitemap, robots.txt, and the README must use the CORRECT domain only.

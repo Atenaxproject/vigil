@@ -68,7 +68,7 @@ screen with:
 Tu reporte fue enviado correctamente.
 
 Guarda este enlace para gestionar tu reporte y ver actualizaciones:
-https://vigil.youtheway.org/mi-reporte/{claim_token}
+https://vigil.youthewave.org/mi-reporte/{claim_token}
 
 ⚠️ Este enlace es privado. Solo tú deberías tenerlo.
 ```

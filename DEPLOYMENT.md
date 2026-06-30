@@ -28,7 +28,7 @@ Get keys from **Project Settings → API** in the Supabase dashboard.
 
 ### 3. Run database migrations
 
-> **Production (`vigil.youtheway.org`):** Migrations `001`–`005` and seed
+> **Production (`vigil.youthewave.org`):** Migrations `001`–`005` and seed
 > `001_real_data.sql` are **already applied** on Supabase project
 > `macmlvybpxdnzfviimvl` (18 approved organizations, 16 map markers). Skip this
 > section for the live deployment — follow it only when spinning up a **new**
@@ -71,8 +71,8 @@ In **Authentication → Providers**:
 
 In **Authentication → URL Configuration**, set:
 
-- **Site URL**: `https://vigil.youtheway.org` (or your production domain)
-- **Redirect URLs**: add `https://vigil.youtheway.org/auth/callback` and `http://localhost:3000/auth/callback`
+- **Site URL**: `https://vigil.youthewave.org` (or your production domain)
+- **Redirect URLs**: add `https://vigil.youthewave.org/auth/callback` and `http://localhost:3000/auth/callback`
 
 ### 5. Grant admin access
 
@@ -120,7 +120,7 @@ Add the following to the Vercel project under **Settings → Environment Variabl
 | `VIGIL_ADMIN_SECRET` | ✅ | Strong random string (rate-limit IP hashing) |
 | `VIGIL_ADMIN_EMAILS` | ✅ | Comma-separated admin allowlist |
 | `ANTHROPIC_API_KEY` | optional | Enables translation / dedup / matching |
-| `RESEND_API_KEY` | optional | Sends feedback alert emails to `vigil.support@youtheway.org` via Resend |
+| `RESEND_API_KEY` | optional | Sends feedback alert emails to `vigil.support@youthewave.org` via Resend |
 
 > **Production Vigil:** Supabase env vars are set and migrations `001`–`005` plus
 > seed `001_real_data.sql` are complete on project `macmlvybpxdnzfviimvl`. New
@@ -135,32 +135,36 @@ connected. To deploy manually with the CLI:
 vercel deploy --prod
 ```
 
-### 9. Domain — vigil.youtheway.org
+### 9. Domain — vigil.youthewave.org
 
-1. In Vercel → **Settings → Domains**, add `vigil.youtheway.org`.
+1. In Vercel → **Settings → Domains**, add `vigil.youthewave.org`.
 2. In Cloudflare DNS, add a `CNAME` for `vigil` → `cname.vercel-dns.com`
    (proxied / orange cloud for DDoS protection).
 3. Set Supabase **Auth → URL Configuration → Site URL** to
-   `https://vigil.youtheway.org` and add `/auth/callback` to redirect URLs.
+   `https://vigil.youthewave.org` and add `/auth/callback` to redirect URLs.
 
 ### 10. Resend (feedback email alerts — optional)
 
 Feedback is always saved in Supabase. To also receive email alerts at
-`vigil.support@youtheway.org` when someone submits the feedback widget:
+`vigil.support@youthewave.org` when someone submits the feedback widget:
 
 1. Create an account at [resend.com](https://resend.com) and add an API key.
-2. In Resend → **Domains**, add `youtheway.org` and add the DKIM/SPF DNS records
-   Resend provides to Cloudflare DNS for `youtheway.org`.
+2. In Resend → **Domains**, add `youthewave.org` and add the DKIM/SPF DNS records
+   Resend provides to Cloudflare DNS for `youthewave.org`.
 3. Add `RESEND_API_KEY` to Vercel environment variables (Production) and redeploy.
 4. Test by submitting feedback on the live site — you should receive an email at
-   `vigil.support@youtheway.org`.
+   `vigil.support@youthewave.org`.
 
 > Without `RESEND_API_KEY`, feedback still works; only the email notification is skipped.
 
 ### 11. Cloudflare Email Routing (already configured)
 
-- `vigil@youtheway.org` — general contact, partnerships, public-facing
-- `vigil.support@youtheway.org` — feedback and support
+> **Domain:** All email routing and Resend domain verification must use **`youthewave.org`**
+> (not the earlier typo `youtheway.org`). Update Cloudflare Email Routing and Resend
+> **Domains** if anything still points at `youtheway.org`.
+
+- `vigil@youthewave.org` — general contact, partnerships, public-facing
+- `vigil.support@youthewave.org` — feedback and support
 
 These addresses receive mail via Cloudflare Email Routing. Resend is only needed
 for **outbound** automated notifications (feedback alerts, claim-link emails on
