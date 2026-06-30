@@ -17,6 +17,7 @@ import {
   ArrowLeftRight,
   Info,
   HelpCircle,
+  Shield,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -32,6 +33,7 @@ type NavLabelKey =
   | 'exchange'
   | 'howToHelp'
   | 'info'
+  | 'activeTeam'
 
 const navItems: Array<{
   href: string
@@ -48,6 +50,7 @@ const navItems: Array<{
   { href: '/voluntarios', labelKey: 'volunteers', icon: Users, more: true },
   { href: '/organizaciones', labelKey: 'organizations', icon: Building2, more: true },
   { href: '/como-ayudar', labelKey: 'howToHelp', icon: HelpCircle, more: true },
+  { href: '/equipo-activo', labelKey: 'activeTeam', icon: Shield, more: true },
   { href: '/informacion', labelKey: 'info', icon: Info, more: true },
   { href: '/donaciones', labelKey: 'donate', icon: Heart, more: true },
   { href: '/noticias', labelKey: 'news', icon: Newspaper, more: true },

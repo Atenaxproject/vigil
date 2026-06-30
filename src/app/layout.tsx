@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast'
 import { EmergencyBanner } from '@/components/layout/EmergencyBanner'
 import { Navigation } from '@/components/layout/Navigation'
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
+import { FeedbackWidget } from '@/components/feedback/FeedbackWidget'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { countAlertEvents, getVenezuelaSeismicEvents } from '@/lib/usgs'
 import './globals.css'
@@ -19,7 +20,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://vigil.youtheway.org'),
+  metadataBase: new URL(CRISIS_CONFIG.siteUrl),
   title: 'Vigil — Respuesta a Crisis Venezuela',
   description:
     'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
@@ -58,6 +59,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           </div>
           <Toaster position="top-center" />
+          <FeedbackWidget />
         </NextIntlClientProvider>
       </body>
     </html>

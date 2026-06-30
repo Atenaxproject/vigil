@@ -1,8 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Search } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
+import { isSupabaseConfigured } from '@/lib/supabase/env'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
 
@@ -16,6 +18,41 @@ export function MissingPersonSearch({ initialResults = [] }: MissingPersonSearch
   const [results, setResults] = useState<PublicMissingPerson[]>(initialResults)
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
+
+  useEffect(() => {
+    if (!isSupabaseConfigured()) return
+
+    const supabase = createClient()
+    const channel = supabase
+      .channel('missing-persons-search')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'missing_persons' },
+        (payload) => {
+          if (payload.eventType === 'INSERT') {
+            const row = payload.new as PublicMissingPerson
+            if (!searched || !query.trim()) {
+              setResults((prev) => [row, ...prev].slice(0, 50))
+            }
+          } else if (payload.eventType === 'UPDATE') {
+            const row = payload.new as PublicMissingPerson & { flagged?: boolean }
+            if (row.flagged) {
+              setResults((prev) => prev.filter((r) => r.id !== row.id))
+            } else {
+              setResults((prev) => prev.map((r) => (r.id === row.id ? { ...r, ...row } : r)))
+            }
+          } else if (payload.eventType === 'DELETE') {
+            const row = payload.old as { id: string }
+            setResults((prev) => prev.filter((r) => r.id !== row.id))
+          }
+        }
+      )
+      .subscribe()
+
+    return () => {
+      void supabase.removeChannel(channel)
+    }
+  }, [query, searched])
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault()

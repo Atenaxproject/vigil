@@ -243,3 +243,53 @@ export interface PFIFPerson {
   lastKnownLocation?: string
   status: 'information_sought' | 'is_note_author' | 'believed_alive' | 'believed_dead' | 'believed_missing'
 }
+
+export type InfrastructureMetric =
+  | 'electricity'
+  | 'water'
+  | 'roads'
+  | 'airport'
+  | 'telecom'
+  | 'fuel'
+
+export interface InfrastructureStatus {
+  id: string
+  region: string
+  metric: InfrastructureMetric
+  status_percent: number | null
+  status_label: string | null
+  notes: string | null
+  updated_by: string | null
+  updated_at: string
+}
+
+export type RescuerPresenceType = 'rescue_team' | 'volunteer' | 'medical' | 'individual'
+export type RescuerPresenceStatus = 'active' | 'checked_in' | 'needs_assistance' | 'signed_off'
+
+export interface PublicRescuerPresence {
+  id: string
+  display_name: string
+  team_or_org: string | null
+  presence_type: RescuerPresenceType
+  lat: number
+  lng: number
+  status: RescuerPresenceStatus
+  last_checkin: string
+  notes: string | null
+  auto_expire_at: string
+  created_at: string
+}
+
+export type FeedbackCategory = 'bug' | 'feature_request' | 'missing_info' | 'question' | 'other'
+export type FeedbackStatus = 'new' | 'reviewing' | 'resolved' | 'wont_fix'
+
+export interface FeedbackItem {
+  id: string
+  category: FeedbackCategory
+  message: string
+  contact_email: string | null
+  page_context: string | null
+  status: FeedbackStatus
+  admin_notes: string | null
+  created_at: string
+}

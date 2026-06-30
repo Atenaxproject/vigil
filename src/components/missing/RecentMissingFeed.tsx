@@ -32,6 +32,18 @@ export function RecentMissingFeed({ initialRecords = [] }: RecentFeedProps) {
           setRecords((prev) => [row, ...prev].slice(0, 20))
         }
       )
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'missing_persons' },
+        (payload) => {
+          const row = payload.new as PublicMissingPerson & { flagged?: boolean }
+          if (row.flagged) {
+            setRecords((prev) => prev.filter((r) => r.id !== row.id))
+            return
+          }
+          setRecords((prev) => prev.map((r) => (r.id === row.id ? { ...r, ...row } : r)))
+        }
+      )
       .subscribe()
 
     return () => {

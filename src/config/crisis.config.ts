@@ -6,6 +6,7 @@ export const CRISIS_CONFIG = {
   countryCode: 'VE',
   crisis: '2026 Earthquakes',
   crisisDate: '2026-06-24',
+  siteUrl: 'https://vigil.youtheway.org',
   activeDeployment: true,
   defaultLang: 'es' as const,
   supportedLangs: ['es', 'en', 'pt', 'fr', 'it', 'zh', 'de', 'ru'] as const,

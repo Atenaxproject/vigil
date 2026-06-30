@@ -6,6 +6,8 @@ import { CRISIS_CONFIG } from '@/config/crisis.config'
 import type { SeismicEvent } from '@/types/vigil.types'
 import type { MapMarker } from '@/types/vigil.types'
 import { MapLayers, type MapLayerState } from '@/components/map/MapLayers'
+import { useRealtimeMapMarkers } from '@/hooks/useRealtimeMapMarkers'
+import { useRealtimeRescuerPresence } from '@/hooks/useRealtimeRescuerPresence'
 
 const MapContainer = dynamic(() => import('react-leaflet').then((m) => m.MapContainer), { ssr: false })
 const TileLayer = dynamic(() => import('react-leaflet').then((m) => m.TileLayer), { ssr: false })
@@ -18,13 +20,17 @@ const ResourceLayer = dynamic(
   () => import('@/components/map/ResourceLayer').then((m) => m.ResourceLayer),
   { ssr: false }
 )
+const RescuerPresenceLayer = dynamic(
+  () => import('@/components/map/RescuerPresenceLayer').then((m) => m.RescuerPresenceLayer),
+  { ssr: false }
+)
 
 interface CrisisMapProps {
   events?: SeismicEvent[]
   markers?: MapMarker[]
 }
 
-export function CrisisMap({ events = [], markers = [] }: CrisisMapProps) {
+export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisMapProps) {
   const [mounted, setMounted] = useState(false)
   const [layers, setLayers] = useState<MapLayerState>({
     aftershocks: true,
@@ -32,7 +38,10 @@ export function CrisisMap({ events = [], markers = [] }: CrisisMapProps) {
     resources: true,
     shelters: false,
     hospitals: false,
+    activeTeams: true,
   })
+  const markers = useRealtimeMapMarkers(initialMarkers)
+  const rescuerPresence = useRealtimeRescuerPresence()
 
   useEffect(() => {
     setMounted(true)
@@ -62,6 +71,7 @@ export function CrisisMap({ events = [], markers = [] }: CrisisMapProps) {
         {layers.aftershocks && <AftershockLayer events={events} />}
         {layers.needs && <NeedsLayer markers={markers} />}
         {layers.resources && <ResourceLayer markers={markers} />}
+        {layers.activeTeams && <RescuerPresenceLayer presence={rescuerPresence} />}
       </MapContainer>
     </div>
   )

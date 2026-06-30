@@ -13,6 +13,9 @@ const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/resource-exchange/contact': { max: 3, windowMs: 60 * 60 * 1000 },
   '/api/volunteers/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/volunteers/contact': { max: 3, windowMs: 60 * 60 * 1000 },
+  '/api/feedback/submit': { max: 5, windowMs: 60 * 60 * 1000 },
+  '/api/rescuer-presence/submit': { max: 10, windowMs: 60 * 60 * 1000 },
+  '/api/rescuer-presence/checkin': { max: 20, windowMs: 60 * 60 * 1000 },
 }
 
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>()
@@ -55,7 +58,8 @@ export async function middleware(request: NextRequest) {
   }
 
   // Protect /admin routes — redirect unauthenticated or non-admin users
-  if (pathname.startsWith('/admin')) {
+  // Exception: /admin/feedback uses VIGIL_ADMIN_SECRET password gate instead
+  if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/feedback')) {
     if (!user || !isAdminUser(user)) {
       const loginUrl = request.nextUrl.clone()
       loginUrl.pathname = '/auth/login'

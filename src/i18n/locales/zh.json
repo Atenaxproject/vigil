@@ -12,12 +12,14 @@
     "howToHelp": "How to Help",
     "info": "Information",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Use"
+    "terms": "Terms of Use",
+    "activeTeam": "Active Team"
   },
   "banner": {
     "emergency": "Emergency:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",    "interpreters": "Interpreters"
+    "hotlineNumber": "0800-7372282",
+    "interpreters": "Interpreters"
   },
   "missing": {
     "title": "Missing Persons",
@@ -87,7 +89,8 @@
       "shelters": "Shelters",
       "hospitals": "Hospitals",
       "rescueZones": "Rescue Zones",
-      "collection": "Collection Points"
+      "collection": "Collection Points",
+      "activeTeams": "Active Teams"
     },
     "magnitude": "Magnitude",
     "depth": "Depth",
@@ -385,5 +388,79 @@
     "sources": {
       "title": "Reliable sources to follow"
     }
+  },
+  "liveInfo": {
+    "title": "Live Information Hub",
+    "subtitle": "Auto-refreshes every 5 minutes",
+    "manualStats": "Manually verified — last check: {date}",
+    "officialUpdates": "Official updates (ReliefWeb)",
+    "noReports": "No reports available at this time.",
+    "infraLive": "Real-time updates from Supabase",
+    "infraEmpty": "No infrastructure data. Admin can update in Supabase Studio.",
+    "clockTick": "Last updated: {time}",
+    "liveStatus": {
+      "title": "Live seismic status",
+      "refresh": "Refresh",
+      "lastUpdate": "Last updated: {time}",
+      "quakesTracked": "{count} recent M4.0+ aftershocks",
+      "fullFeed": "view full feed",
+      "latest": "Latest significant quake"
+    },
+    "infraMetrics": {
+      "electricity": "Electricity",
+      "water": "Water",
+      "roads": "Roads",
+      "airport": "Airport",
+      "telecom": "Telecom",
+      "fuel": "Fuel"
+    }
+  },
+  "feedback": {
+    "open": "Send feedback",
+    "title": "Help us improve Vigil",
+    "close": "Close",
+    "message": "Your message",
+    "email": "Want a reply? (optional)",
+    "supportEmail": "You can also email vigil.support@youtheway.org",
+    "submit": "Send",
+    "submitting": "Sending...",
+    "success": "Thank you. Your message helps improve Vigil for everyone.",
+    "error": "Failed to send. Please try again.",
+    "categories": {
+      "bug": "Bug",
+      "feature_request": "Suggestion",
+      "missing_info": "Missing info",
+      "question": "Question"
+    }
+  },
+  "rescuer": {
+    "title": "Register my presence",
+    "subtitle": "For rescue teams and field volunteers",
+    "name": "Name or team",
+    "team": "Organization (optional)",
+    "type": "Type",
+    "types": {
+      "rescue_team": "Rescue team",
+      "medical": "Medical",
+      "volunteer": "Volunteer",
+      "individual": "Individual"
+    },
+    "useGps": "Use my GPS location",
+    "notes": "Operation notes",
+    "phone": "Phone (private)",
+    "phonePrivate": "Never shown publicly",
+    "register": "Register presence",
+    "submitting": "Registering...",
+    "registered": "Presence registered",
+    "error": "Error. Please try again.",
+    "noGps": "GPS not available",
+    "gpsDenied": "Location permission denied",
+    "checkedInTitle": "Active presence",
+    "checkin": "Check-in (extend 4h)",
+    "checkinOk": "Check-in updated",
+    "sos": "I NEED ASSISTANCE",
+    "sosSent": "SOS alert sent",
+    "signOff": "End shift",
+    "signedOff": "Presence closed"
   }
 }

@@ -6,6 +6,15 @@ All notable changes to Vigil are documented here. Format loosely follows
 
 ## [Unreleased] — 2026-06-29
 
+### Added
+- **Live information hub** (`/informacion`) — auto-refreshing USGS + ReliefWeb feeds, manual crisis stats, realtime `infrastructure_status` from Supabase.
+- **`/api/live-info`** — aggregates USGS significant quakes and ReliefWeb reports (5-minute cache).
+- **Rescuer safety presence** (`/equipo-activo`) — field check-in, SOS button, 4-hour auto-expire, map layer "Equipos Activos".
+- **Feedback widget** — floating support button on all pages; admin review at `/admin/feedback` (password-gated via `VIGIL_ADMIN_SECRET`).
+- Migration `004_golive_features.sql` — `infrastructure_status`, `rescuer_presence`, `feedback` tables with Realtime.
+- Realtime subscriptions for map markers, missing persons search/feed updates, rescuer presence, infrastructure status.
+- `CRISIS_CONFIG.siteUrl` — canonical production domain `https://vigil.youtheway.org`.
+
 ### Fixed
 - **Production client-side crash** ("Application error: a client-side exception
   has occurred"). Root cause: realtime websocket subscriptions were opened
