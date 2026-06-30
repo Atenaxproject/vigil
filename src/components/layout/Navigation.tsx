@@ -22,8 +22,12 @@ import {
   Calendar,
   Package,
   X,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+
+const SIDEBAR_STORAGE_KEY = 'vigil-sidebar-collapsed'
 
 type NavLabelKey =
   | 'search'
@@ -70,6 +74,8 @@ export function Navigation() {
   const tCommon = useTranslations('common')
   const pathname = usePathname()
   const [moreOpen, setMoreOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
+  const [sidebarReady, setSidebarReady] = useState(false)
   const sheetRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -78,12 +84,32 @@ export function Navigation() {
 
   const closeMore = useCallback(() => setMoreOpen(false), [])
 
-  // Close the sheet whenever the route changes (a link was followed).
+  const toggleSidebar = useCallback(() => {
+    setCollapsed((prev) => {
+      const next = !prev
+      try {
+        localStorage.setItem(SIDEBAR_STORAGE_KEY, String(next))
+      } catch {
+        /* ignore quota / private mode */
+      }
+      return next
+    })
+  }, [])
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(SIDEBAR_STORAGE_KEY)
+      if (stored === 'true') setCollapsed(true)
+    } catch {
+      /* ignore */
+    }
+    setSidebarReady(true)
+  }, [])
+
   useEffect(() => {
     setMoreOpen(false)
   }, [pathname])
 
-  // Escape to close, body scroll lock, focus management + basic focus trap.
   useEffect(() => {
     if (!moreOpen) return
 
@@ -125,40 +151,89 @@ export function Navigation() {
 
   return (
     <>
-      <aside className="hidden w-60 shrink-0 border-r border-slate-200 bg-white lg:flex lg:flex-col">
-        <div className="border-b border-slate-200 px-4 py-5">
-          <Link href="/" className="font-display text-[20px] font-bold tracking-tight text-vigil-ink">
-            Vigil
+      <aside
+        className={cn(
+          'hidden shrink-0 flex-col border-r border-slate-200 bg-white lg:flex',
+          'transition-[width] duration-200 ease-out motion-reduce:transition-none',
+          collapsed ? 'w-16' : 'w-60'
+        )}
+        data-sidebar-ready={sidebarReady ? 'true' : 'false'}
+      >
+        <div
+          className={cn(
+            'border-b border-slate-200',
+            collapsed ? 'px-2 py-4 text-center' : 'px-4 py-5'
+          )}
+        >
+          <Link
+            href="/"
+            className={cn(
+              'font-display font-bold tracking-tight text-vigil-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40',
+              collapsed ? 'inline-flex h-9 w-9 items-center justify-center rounded-input text-[17px]' : 'text-[20px]'
+            )}
+            aria-label="Vigil"
+          >
+            {collapsed ? 'V' : 'Vigil'}
           </Link>
-          <p className="mt-1 text-[13px] text-vigil-muted">Venezuela 2026</p>
+          {!collapsed && <p className="mt-1 text-[13px] text-vigil-muted">Venezuela 2026</p>}
         </div>
-        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-3" aria-label="Main">
+
+        <nav
+          className="flex flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden p-2"
+          aria-label={t('desktopNav')}
+        >
           {navItems.map((item) => {
             const Icon = item.icon
             const active = pathname === item.href
+            const label = t(item.labelKey)
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={active ? 'page' : undefined}
+                aria-label={label}
+                title={collapsed ? label : undefined}
                 className={cn(
-                  'flex min-h-[44px] items-center gap-3 rounded-input px-3 text-[16px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40',
+                  'flex min-h-[44px] items-center rounded-input text-[16px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40',
+                  collapsed ? 'justify-center px-2' : 'gap-3 px-3',
                   active
                     ? 'border-l-4 border-vigil-blue bg-vigil-blue-light font-medium text-vigil-blue'
                     : 'text-slate-600 hover:bg-vigil-cloud'
                 )}
               >
-                <Icon className="h-5 w-5" aria-hidden />
-                {t(item.labelKey)}
+                <Icon className="h-5 w-5 shrink-0" aria-hidden />
+                <span className={cn('truncate', collapsed && 'sr-only')}>{label}</span>
               </Link>
             )
           })}
         </nav>
+
+        <div className="border-t border-slate-200 p-2">
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            aria-expanded={!collapsed}
+            aria-label={collapsed ? t('expandMenu') : t('collapseMenu')}
+            className={cn(
+              'flex min-h-[44px] w-full items-center rounded-input text-vigil-muted hover:bg-vigil-cloud focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40',
+              collapsed ? 'justify-center px-2' : 'gap-3 px-3'
+            )}
+          >
+            {collapsed ? (
+              <PanelLeftOpen className="h-5 w-5 shrink-0" aria-hidden />
+            ) : (
+              <PanelLeftClose className="h-5 w-5 shrink-0" aria-hidden />
+            )}
+            <span className={cn('text-[13px]', collapsed && 'sr-only')}>
+              {collapsed ? t('expandMenu') : t('collapseMenu')}
+            </span>
+          </button>
+        </div>
       </aside>
 
       <nav
         className="mobile-bottom-nav fixed bottom-0 left-0 right-0 z-50 flex items-end justify-around px-2 pb-[env(safe-area-inset-bottom)] pt-2 lg:hidden"
-        aria-label="Mobile"
+        aria-label={t('mobileNav')}
       >
         {primaryMobile.map((item) => {
           const Icon = item.icon
@@ -170,7 +245,7 @@ export function Navigation() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? 'page' : undefined}
-                className="-mt-6 flex flex-col items-center focus-visible:outline-none"
+                className="-mt-6 flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
                 aria-label={t(item.labelKey)}
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-vigil-blue text-white shadow-sm">
@@ -203,6 +278,7 @@ export function Navigation() {
           aria-haspopup="dialog"
           aria-expanded={moreOpen}
           aria-controls="more-nav-sheet"
+          aria-label={t('more')}
           className="flex min-h-[44px] flex-1 cursor-pointer flex-col items-center justify-center gap-0.5 text-[13px] text-vigil-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
         >
           <MoreHorizontal className="h-5 w-5" aria-hidden />
@@ -210,13 +286,8 @@ export function Navigation() {
         </button>
       </nav>
 
-      {/* Más menu — bottom-sheet (never clips in landscape, unlike the old side flyout) */}
       {moreOpen && (
-        <div
-          className="fixed inset-0 z-[60] lg:hidden"
-          onClick={closeMore}
-          role="presentation"
-        >
+        <div className="fixed inset-0 z-[60] lg:hidden" onClick={closeMore} role="presentation">
           <div className="absolute inset-0 bg-black/40" />
           <div
             ref={sheetRef}
