@@ -35,6 +35,21 @@ export const metadata: Metadata = {
   icons: {
     apple: [{ url: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' }],
   },
+  openGraph: {
+    title: 'Vigil — Respuesta a Crisis Venezuela',
+    description:
+      'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
+    url: CRISIS_CONFIG.siteUrl,
+    siteName: 'Vigil',
+    locale: 'es_VE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vigil — Respuesta a Crisis Venezuela',
+    description:
+      'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
+  },
 }
 
 // width/initialScale are required — without them mobile browsers render at
