@@ -15,8 +15,8 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **Cross-report banner** — dismissible info banner on `/reportar` (sessionStorage).
 - **`/red` page** — featured DTV active integration partner + other sister platforms.
 - **Paginated DTV center sync** — `getAllDTVCentros()` with cursor pagination;
-  hospital vs collection_point inference; Vercel cron every 6 hours; DTV badge
-  on map popups for synced markers.
+  hospital vs collection_point inference; Vercel cron daily at 06:00 UTC (Hobby tier;
+  6-hour schedule requires Pro); DTV badge on map popups for synced markers.
 - **i18n** — new DTV/red/estadisticas strings in all 8 locales.
 
 ### Changed
