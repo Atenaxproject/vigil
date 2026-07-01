@@ -25,7 +25,8 @@
     "collapseMenu": "Recolher menu",
     "expandMenu": "Expandir menu",
     "desktopNav": "Navegação principal",
-    "mobileNav": "Navegação móvel"
+    "mobileNav": "Navegação móvel",
+    "stats": "Statistics"
   },
   "a11y": {
     "skipToContent": "Ir para o conteúdo principal"
@@ -57,7 +58,9 @@
       "reportCta": "Reportar Desaparecido",
       "externalLink": "abre em nova aba",
       "loading": "Buscando...",
-      "resultsCount": "{{count}} resultados encontrados"
+      "resultsCount": "{{count}} resultados encontrados",
+      "allCountry": "All country",
+      "geoFilterLabel": "Filter by state"
     },
     "status": {
       "missing": "Desaparecida",
@@ -96,7 +99,16 @@
       "submitting": "Enviando...",
       "success": "Relatório enviado. Você será notificado se houver correspondência.",
       "error": "Falha no envio. Tente novamente.",
-      "queuedOffline": "Salvo offline. Será enviado automaticamente quando você se reconectar."
+      "queuedOffline": "Salvo offline. Será enviado automaticamente quando você se reconectar.",
+      "geo": {
+        "sectionTitle": "Geographic location",
+        "estado": "State",
+        "municipio": "Municipality",
+        "parroquia": "Parish",
+        "selectEstado": "Select a state",
+        "selectMunicipio": "Select a municipality",
+        "selectParroquia": "Select a parish (optional)"
+      }
     },
     "card": {
       "lastSeen": "Última vez vista:",
@@ -109,6 +121,16 @@
       "daysAgo": "{{count}} dias atrás",
       "hoursAgo": "{{count}} horas atrás",
       "justNow": "Agora mesmo"
+    },
+    "photoSearch": {
+      "divider": "or search by photo",
+      "uploadButton": "Upload a photo to search",
+      "analyzing": "Analyzing photo with AI...",
+      "privacyNotice": "The photo is analyzed temporarily and not stored. Only visible physical traits are compared against our database.",
+      "matchLabel": "Possible match · Confidence: {confidence}",
+      "aiDescription": "AI description",
+      "comingSoonTitle": "Coming soon",
+      "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
     }
   },
   "map": {
@@ -691,5 +713,26 @@
       "success": "Mensagem publicada.",
       "error": "Erro ao publicar. Tente novamente."
     }
+  },
+  "assistant": {
+    "triggerLabel": "Vigil Assistant",
+    "panelTitle": "Vigil Assistant",
+    "welcome": "Hello. I'm the Vigil assistant. I can help you find shelters, organizations, volunteers, or guide you to the right feature. How can I help?",
+    "inputPlaceholder": "Type your question...",
+    "loading": "Querying live data...",
+    "send": "Send",
+    "close": "Close",
+    "comingSoonTitle": "Coming soon",
+    "comingSoonBody": "The AI assistant requires ANTHROPIC_API_KEY. Meanwhile, use the map, /buscar, or call 0800-RESCATE.",
+    "errorFallback": "I can't respond right now. Call {hotline} ({number})."
+  },
+  "estadisticas": {
+    "title": "Statistics by State",
+    "subtitle": "Breakdown of missing persons and found alive by state",
+    "source": "Vigil data, updated in real time",
+    "empty": "Not enough geographic data yet.",
+    "unknownEstado": "No state",
+    "missingCount": "{count} missing",
+    "foundCount": "{count} found alive"
   }
 }

@@ -25,7 +25,8 @@
     "collapseMenu": "Réduire le menu",
     "expandMenu": "Développer le menu",
     "desktopNav": "Navigation principale",
-    "mobileNav": "Navigation mobile"
+    "mobileNav": "Navigation mobile",
+    "stats": "Statistics"
   },
   "a11y": {
     "skipToContent": "Aller au contenu principal"
@@ -57,7 +58,9 @@
       "reportCta": "Signaler une personne disparue",
       "externalLink": "ouvre dans un nouvel onglet",
       "loading": "Recherche en cours...",
-      "resultsCount": "{{count}} résultats trouvés"
+      "resultsCount": "{{count}} résultats trouvés",
+      "allCountry": "All country",
+      "geoFilterLabel": "Filter by state"
     },
     "status": {
       "missing": "Disparu",
@@ -96,7 +99,16 @@
       "submitting": "Soumission en cours...",
       "success": "Signalement soumis. Vous serez avisé en cas de correspondance.",
       "error": "Échec de la soumission. Veuillez réessayer.",
-      "queuedOffline": "Enregistré hors ligne. Il sera soumis automatiquement à la reconnexion."
+      "queuedOffline": "Enregistré hors ligne. Il sera soumis automatiquement à la reconnexion.",
+      "geo": {
+        "sectionTitle": "Geographic location",
+        "estado": "State",
+        "municipio": "Municipality",
+        "parroquia": "Parish",
+        "selectEstado": "Select a state",
+        "selectMunicipio": "Select a municipality",
+        "selectParroquia": "Select a parish (optional)"
+      }
     },
     "card": {
       "lastSeen": "Dernière observation :",
@@ -109,6 +121,16 @@
       "daysAgo": "il y a {{count}} jours",
       "hoursAgo": "il y a {{count}} heures",
       "justNow": "À l'instant"
+    },
+    "photoSearch": {
+      "divider": "or search by photo",
+      "uploadButton": "Upload a photo to search",
+      "analyzing": "Analyzing photo with AI...",
+      "privacyNotice": "The photo is analyzed temporarily and not stored. Only visible physical traits are compared against our database.",
+      "matchLabel": "Possible match · Confidence: {confidence}",
+      "aiDescription": "AI description",
+      "comingSoonTitle": "Coming soon",
+      "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
     }
   },
   "map": {
@@ -691,5 +713,26 @@
       "success": "Message publié.",
       "error": "Échec de la publication. Veuillez réessayer."
     }
+  },
+  "assistant": {
+    "triggerLabel": "Vigil Assistant",
+    "panelTitle": "Vigil Assistant",
+    "welcome": "Hello. I'm the Vigil assistant. I can help you find shelters, organizations, volunteers, or guide you to the right feature. How can I help?",
+    "inputPlaceholder": "Type your question...",
+    "loading": "Querying live data...",
+    "send": "Send",
+    "close": "Close",
+    "comingSoonTitle": "Coming soon",
+    "comingSoonBody": "The AI assistant requires ANTHROPIC_API_KEY. Meanwhile, use the map, /buscar, or call 0800-RESCATE.",
+    "errorFallback": "I can't respond right now. Call {hotline} ({number})."
+  },
+  "estadisticas": {
+    "title": "Statistics by State",
+    "subtitle": "Breakdown of missing persons and found alive by state",
+    "source": "Vigil data, updated in real time",
+    "empty": "Not enough geographic data yet.",
+    "unknownEstado": "No state",
+    "missingCount": "{count} missing",
+    "foundCount": "{count} found alive"
   }
 }

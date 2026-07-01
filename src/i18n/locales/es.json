@@ -14,6 +14,7 @@
     "activeTeam": "Equipo Activo",
     "calendar": "Calendario",
     "wall": "Muro",
+    "stats": "Estadísticas",
     "collectionPoint": "Punto de Acopio",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Uso",
@@ -57,7 +58,19 @@
       "reportCta": "Reportar Desaparecido",
       "externalLink": "abre en nueva pestaña",
       "loading": "Buscando...",
-      "resultsCount": "{count} resultados encontrados"
+      "resultsCount": "{count} resultados encontrados",
+      "allCountry": "Todo el país",
+      "geoFilterLabel": "Filtrar por estado"
+    },
+    "photoSearch": {
+      "divider": "o busca por foto",
+      "uploadButton": "Subir una foto para buscar",
+      "analyzing": "Analizando foto con IA...",
+      "privacyNotice": "La foto se analiza temporalmente y no se almacena. Solo se comparan características físicas visibles con nuestra base de datos.",
+      "matchLabel": "Posible coincidencia · Confianza: {confidence}",
+      "aiDescription": "Descripción de la IA",
+      "comingSoonTitle": "Próximamente",
+      "comingSoonBody": "La búsqueda por foto requiere configurar ANTHROPIC_API_KEY en el servidor."
     },
     "status": {
       "missing": "Desaparecido/a",
@@ -96,7 +109,16 @@
       "submitting": "Enviando...",
       "success": "Reporte enviado. Te notificaremos si hay coincidencia.",
       "error": "Error al enviar. Intenta de nuevo.",
-      "queuedOffline": "Guardado sin conexión. Se enviará automáticamente al reconectar."
+      "queuedOffline": "Guardado sin conexión. Se enviará automáticamente al reconectar.",
+      "geo": {
+        "sectionTitle": "Ubicación geográfica",
+        "estado": "Estado",
+        "municipio": "Municipio",
+        "parroquia": "Parroquia",
+        "selectEstado": "Selecciona un estado",
+        "selectMunicipio": "Selecciona un municipio",
+        "selectParroquia": "Selecciona una parroquia (opcional)"
+      }
     },
     "card": {
       "lastSeen": "Visto/a por última vez:",
@@ -495,6 +517,27 @@
       "telecom": "Telecomunicaciones",
       "fuel": "Combustible"
     }
+  },
+  "assistant": {
+    "triggerLabel": "Asistente Vigil",
+    "panelTitle": "Asistente Vigil",
+    "welcome": "Hola. Soy el asistente de Vigil. Puedo ayudarte a encontrar refugios, organizaciones, voluntarios, o guiarte a la función correcta. ¿En qué necesitas ayuda?",
+    "inputPlaceholder": "Escribe tu pregunta...",
+    "loading": "Consultando datos en tiempo real...",
+    "send": "Enviar",
+    "close": "Cerrar",
+    "comingSoonTitle": "Próximamente",
+    "comingSoonBody": "El asistente con IA requiere ANTHROPIC_API_KEY. Mientras tanto, usa el mapa, /buscar o llama al 0800-RESCATE.",
+    "errorFallback": "En este momento no puedo responder. Llama al {hotline} ({number})."
+  },
+  "estadisticas": {
+    "title": "Estadísticas por Estado",
+    "subtitle": "Desglose de personas desaparecidas y encontradas con vida",
+    "source": "Datos de Vigil, actualizados en tiempo real",
+    "empty": "Aún no hay datos geográficos suficientes.",
+    "unknownEstado": "Sin estado",
+    "missingCount": "{count} desaparecidos",
+    "foundCount": "{count} encontrados con vida"
   },
   "feedback": {
     "open": "Enviar comentarios",

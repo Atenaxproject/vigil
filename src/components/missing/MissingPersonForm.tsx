@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { Lock } from 'lucide-react'
 import { ClaimLinkSuccess } from '@/components/ui/ClaimLinkSuccess'
+import { GeoSelect } from '@/components/missing/GeoSelect'
 import { queueSubmission } from '@/lib/offline-queue'
 
 const formSchema = z.object({
@@ -15,6 +16,9 @@ const formSchema = z.object({
   age: z.number().min(0).max(150).optional(),
   gender: z.enum(['male', 'female', 'other', 'unknown']).optional(),
   last_seen_location: z.string().min(2).max(500),
+  estado: z.string().min(2).max(100),
+  municipio: z.string().max(100).optional(),
+  parroquia: z.string().max(100).optional(),
   last_seen_at: z.string().optional(),
   notes: z.string().max(2000).optional(),
   contact_name: z.string().min(2).max(200),
@@ -36,11 +40,18 @@ export function MissingPersonForm() {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
     reset,
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    defaultValues: { estado: '' },
   })
+
+  const estado = watch('estado') ?? ''
+  const municipio = watch('municipio') ?? ''
+  const parroquia = watch('parroquia') ?? ''
 
   async function onSubmit(data: FormValues) {
     setSubmitting(true)
@@ -153,6 +164,28 @@ export function MissingPersonForm() {
           </p>
         )}
       </div>
+
+      <GeoSelect
+        estado={estado}
+        municipio={municipio}
+        parroquia={parroquia}
+        onEstadoChange={(v) => {
+          setValue('estado', v, { shouldValidate: true })
+          setValue('municipio', '')
+          setValue('parroquia', '')
+        }}
+        onMunicipioChange={(v) => {
+          setValue('municipio', v)
+          setValue('parroquia', '')
+        }}
+        onParroquiaChange={(v) => setValue('parroquia', v)}
+        estadoError={!!errors.estado}
+      />
+      {errors.estado && (
+        <p role="alert" className="text-[13px] text-status-missing">
+          {tCommon('required')}
+        </p>
+      )}
 
       <div>
         <label htmlFor="last_seen_at" className={labelClass}>

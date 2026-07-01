@@ -4,6 +4,30 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-06-30 (Claude AI, photo search, geo breakdown)
+
+### Added
+- **Claude AI assistant** — Floating `VigilAssistant` widget on all pages;
+  `/api/assistant` streams SSE responses grounded in live Supabase data
+  (map markers, orgs, events, USGS aftershocks). Graceful "Coming soon"
+  when `ANTHROPIC_API_KEY` is unset.
+- **Photo-based search** — `/api/photo-search` uses Claude Vision (Sonnet)
+  to describe visible traits, then Haiku matches against public records.
+  No biometric storage. UI on `/buscar` with privacy notice.
+- **Venezuela geographic breakdown** — `estado`/`municipio`/`parroquia` on
+  `missing_persons` and `map_markers` (migration `008`); cascading selects
+  on `/reportar`; state filter chips on `/buscar`; `src/lib/venezuela-geo.ts`.
+- **Statistics page** — `/estadisticas` real-time breakdown by estado
+  (missing vs found alive) via Supabase Realtime.
+- **Duplicate detection cron** — `/api/cron/dedup` every 2 hours via
+  `vercel.json`; Claude Haiku flags probable duplicates to moderation queue.
+- **Shared AI client** — `src/lib/ai/client.ts` for Anthropic config checks.
+
+### Changed
+- **Rate limits** — `/api/assistant` (30/hr) and `/api/photo-search` (10/hr).
+- **Docs** — archived `27-claude-ai-facial-geo.md`; removed root prompt stub.
+- **README** — live features table updated; AI/geo moved from Coming soon.
+
 ## [Unreleased] — 2026-06-30 (RSS/GDACS + community wall)
 
 ### Added

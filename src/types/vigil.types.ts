@@ -65,6 +65,8 @@ export interface PublicMissingPerson {
   gender: string | null
   photo_url: string | null
   last_seen_location: string
+  estado: string | null
+  municipio: string | null
   last_seen_at: string | null
   status: MissingPersonStatus
   notes: string | null
@@ -91,6 +93,9 @@ export interface MissingPersonSubmission {
   gender?: string
   photo?: File
   last_seen_location: string
+  estado: string
+  municipio?: string
+  parroquia?: string
   last_seen_lat?: number
   last_seen_lng?: number
   last_seen_at?: string
@@ -110,6 +115,8 @@ export interface MapMarker {
   description: string | null
   lat: number
   lng: number
+  estado: string | null
+  municipio: string | null
   contact: string | null
   urgent: boolean
   status: MarkerStatus

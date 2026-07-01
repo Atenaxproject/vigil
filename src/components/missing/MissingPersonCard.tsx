@@ -49,7 +49,7 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
         <div className="min-w-0 flex-1 pr-16">
           <h3 className="text-[14px] font-medium text-vigil-ink">{person.full_name}</h3>
           <p className="mt-0.5 text-[13px] text-vigil-muted">
-            {[person.gender, person.age ? `${person.age}` : null, person.last_seen_location]
+            {[person.gender, person.age ? `${person.age}` : null, person.estado, person.last_seen_location]
               .filter(Boolean)
               .join(' · ')}
           </p>

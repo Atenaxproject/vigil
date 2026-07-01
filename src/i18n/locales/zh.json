@@ -25,7 +25,8 @@
     "collapseMenu": "收起菜单",
     "expandMenu": "展开菜单",
     "desktopNav": "主导航",
-    "mobileNav": "移动导航"
+    "mobileNav": "移动导航",
+    "stats": "Statistics"
   },
   "a11y": {
     "skipToContent": "跳到主要内容"
@@ -57,7 +58,9 @@
       "reportCta": "报告失踪人员",
       "externalLink": "在新标签页中打开",
       "loading": "搜索中...",
-      "resultsCount": "找到 {{count}} 条结果"
+      "resultsCount": "找到 {{count}} 条结果",
+      "allCountry": "All country",
+      "geoFilterLabel": "Filter by state"
     },
     "status": {
       "missing": "失踪",
@@ -96,7 +99,16 @@
       "submitting": "提交中...",
       "success": "报告已提交。如有匹配信息，我们将通知你。",
       "error": "提交失败。请重试。",
-      "queuedOffline": "已离线保存。当你重新连接时，它将自动提交。"
+      "queuedOffline": "已离线保存。当你重新连接时，它将自动提交。",
+      "geo": {
+        "sectionTitle": "Geographic location",
+        "estado": "State",
+        "municipio": "Municipality",
+        "parroquia": "Parish",
+        "selectEstado": "Select a state",
+        "selectMunicipio": "Select a municipality",
+        "selectParroquia": "Select a parish (optional)"
+      }
     },
     "card": {
       "lastSeen": "最后见到:",
@@ -109,6 +121,16 @@
       "daysAgo": "{{count}} 天前",
       "hoursAgo": "{{count}} 小时前",
       "justNow": "刚刚"
+    },
+    "photoSearch": {
+      "divider": "or search by photo",
+      "uploadButton": "Upload a photo to search",
+      "analyzing": "Analyzing photo with AI...",
+      "privacyNotice": "The photo is analyzed temporarily and not stored. Only visible physical traits are compared against our database.",
+      "matchLabel": "Possible match · Confidence: {confidence}",
+      "aiDescription": "AI description",
+      "comingSoonTitle": "Coming soon",
+      "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
     }
   },
   "map": {
@@ -691,5 +713,26 @@
       "success": "留言已发布。",
       "error": "发布失败。请重试。"
     }
+  },
+  "assistant": {
+    "triggerLabel": "Vigil Assistant",
+    "panelTitle": "Vigil Assistant",
+    "welcome": "Hello. I'm the Vigil assistant. I can help you find shelters, organizations, volunteers, or guide you to the right feature. How can I help?",
+    "inputPlaceholder": "Type your question...",
+    "loading": "Querying live data...",
+    "send": "Send",
+    "close": "Close",
+    "comingSoonTitle": "Coming soon",
+    "comingSoonBody": "The AI assistant requires ANTHROPIC_API_KEY. Meanwhile, use the map, /buscar, or call 0800-RESCATE.",
+    "errorFallback": "I can't respond right now. Call {hotline} ({number})."
+  },
+  "estadisticas": {
+    "title": "Statistics by State",
+    "subtitle": "Breakdown of missing persons and found alive by state",
+    "source": "Vigil data, updated in real time",
+    "empty": "Not enough geographic data yet.",
+    "unknownEstado": "No state",
+    "missingCount": "{count} missing",
+    "foundCount": "{count} found alive"
   }
 }

@@ -13,6 +13,7 @@ import { Navigation } from '@/components/layout/Navigation'
 import { SkipToContent } from '@/components/layout/SkipToContent'
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { FeedbackWidget } from '@/components/feedback/FeedbackWidget'
+import { VigilAssistant } from '@/components/ai/VigilAssistant'
 import { IOSInstallBanner } from '@/components/pwa/IOSInstallBanner'
 import { NetworkStatusBanner } from '@/components/layout/NetworkStatusBanner'
 import { OfflineQueueProvider } from '@/components/providers/OfflineQueueProvider'
@@ -161,6 +162,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Toaster position="top-center" />
           <OfflineQueueProvider />
           <FeedbackWidget />
+          <VigilAssistant />
           <IOSInstallBanner />
         </NextIntlClientProvider>
       </body>

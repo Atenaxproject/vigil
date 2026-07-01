@@ -81,7 +81,10 @@ Verified against source and production as of **2026-06-30**. Optional integratio
 
 | Feature | Route | Notes |
 |---|---|---|
-| **Missing persons board** | `/buscar`, `/reportar` | Realtime feed on home; contact info never shown publicly |
+| **Missing persons board** | `/buscar`, `/reportar` | Realtime feed on home; estado/municipio/parroquia on report form; state filter chips on search |
+| **Photo search (AI vision)** | `/buscar` | Claude Vision describes traits, matches public records — no biometric storage; needs `ANTHROPIC_API_KEY` |
+| **Claude AI assistant** | all pages (widget) | Live-data Q&A in 8 languages; streams from `/api/assistant`; degrades gracefully without API key |
+| **Statistics by state** | `/estadisticas` | Real-time missing/found-alive counts per estado |
 | **Person detail + public notes** | `/buscar/[id]` | Sightings thread; privacy-preserving contact flow |
 | **PFIF export** | `/api/pfif` | [Google Person Finder](https://github.com/google/personfinder) XML interoperability |
 | **Claim-token inbox** | `/mi-reporte/[token]`, `/mi-intercambio/[token]` | Passwordless management; claim URL on submit |
@@ -149,8 +152,8 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 | **Full organization directory UI** | Schema + seed exist; `/organizaciones` shows partner links only |
 | **Admin moderation dashboard** | Auth works; use Supabase Studio for queue today |
 | **HDX dataset feed** | `src/lib/hdx.ts` exists; not surfaced on any page |
-| **AI translation / dedup / matching** | `src/lib/ai/` library code; not wired to submit flows |
 | **Resend outbound email** | Code in `src/lib/email/`; needs `RESEND_API_KEY` + `youthewave.org` verified in Resend |
+| **AI duplicate cron (production)** | Code + Vercel schedule live; needs `ANTHROPIC_API_KEY` + `CRON_SECRET` + migration `008` applied |
 
 ---
 
@@ -177,7 +180,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 | Map | **Leaflet + OpenStreetMap** | Free, Venezuela-locked bounds |
 | Styling | **Tailwind CSS** | Tokens from [`DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) |
 | i18n | **next-intl** | 8 locales, Spanish-first |
-| AI | **Claude (Haiku)** | Translation, dedup, match suggestions (optional) |
+| AI | **Claude (Haiku + Sonnet)** | Assistant Q&A, photo vision search, dedup cron (optional `ANTHROPIC_API_KEY`) |
 | Email | **Resend** | Feedback alerts (optional) |
 | Hosting | **Vercel** + **Cloudflare** | Edge network, DDoS protection, email routing |
 
@@ -204,7 +207,8 @@ The app runs **without** a configured Supabase instance: static pages render, th
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key   # server-only, never exposed
-ANTHROPIC_API_KEY=your_anthropic_key              # optional, for AI features
+ANTHROPIC_API_KEY=your_anthropic_key              # optional, for AI assistant, photo search, dedup cron
+CRON_SECRET=generate_a_strong_random_secret       # optional, secures /api/cron/dedup on Vercel
 RESEND_API_KEY=your_resend_key                    # optional, feedback email alerts
 VIGIL_ADMIN_SECRET=generate_a_strong_random_secret
 VIGIL_ADMIN_EMAILS=orlando@atenaxproject.com

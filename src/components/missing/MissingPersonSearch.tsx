@@ -7,19 +7,31 @@ import { ExternalLink, Search, UserPlus } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { PRIORITY_ESTADOS } from '@/lib/venezuela-geo'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
+import { PhotoSearch } from '@/components/missing/PhotoSearch'
 
 const sisterPlatforms = CRISIS_CONFIG.partnerLinks.filter((link) => link.type === 'sister-platform')
 
+const GEO_FILTERS = [
+  { key: 'all', labelKey: 'allCountry' as const },
+  ...PRIORITY_ESTADOS.map((e) => ({
+    key: e === 'Distrito Capital' ? 'Caracas' : e,
+    label: e === 'Distrito Capital' ? 'Caracas' : e,
+  })),
+]
+
 interface MissingPersonSearchProps {
   initialResults?: PublicMissingPerson[]
+  aiAvailable?: boolean
 }
 
-export function MissingPersonSearch({ initialResults = [] }: MissingPersonSearchProps) {
+export function MissingPersonSearch({ initialResults = [], aiAvailable = true }: MissingPersonSearchProps) {
   const t = useTranslations('missing')
   const tNav = useTranslations('nav')
   const [query, setQuery] = useState('')
+  const [estadoFilter, setEstadoFilter] = useState('all')
   const [results, setResults] = useState<PublicMissingPerson[]>(initialResults)
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
@@ -59,19 +71,36 @@ export function MissingPersonSearch({ initialResults = [] }: MissingPersonSearch
     }
   }, [query, searched])
 
-  async function handleSearch(e: React.FormEvent) {
-    e.preventDefault()
-    if (!query.trim()) return
+  async function runSearch(searchQuery: string, estado: string) {
     setLoading(true)
     setSearched(true)
     try {
-      const res = await fetch(`/api/missing-persons/search?q=${encodeURIComponent(query.trim())}`)
+      const params = new URLSearchParams()
+      if (searchQuery.trim()) params.set('q', searchQuery.trim())
+      if (estado !== 'all') params.set('estado', estado)
+      const res = await fetch(`/api/missing-persons/search?${params.toString()}`)
       const data = (await res.json()) as { results?: PublicMissingPerson[] }
       setResults(data.results ?? [])
     } catch {
       setResults([])
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function handleSearch(e: React.FormEvent) {
+    e.preventDefault()
+    if (!query.trim() && estadoFilter === 'all') return
+    await runSearch(query, estadoFilter)
+  }
+
+  async function handleEstadoFilter(estado: string) {
+    setEstadoFilter(estado)
+    if (query.trim() || estado !== 'all') {
+      await runSearch(query, estado)
+    } else if (!query.trim()) {
+      setResults(initialResults)
+      setSearched(false)
     }
   }
 
@@ -110,6 +139,30 @@ export function MissingPersonSearch({ initialResults = [] }: MissingPersonSearch
             {tNav('reportShort')}
           </Link>
         </div>
+
+        <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label={t('search.geoFilterLabel')}>
+          {GEO_FILTERS.map((filter) => {
+            const label = 'labelKey' in filter ? t(`search.${filter.labelKey}`) : filter.label
+            const key = filter.key
+            const active = estadoFilter === key
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => void handleEstadoFilter(key)}
+                className={`min-h-[36px] rounded-full border px-3 text-[13px] font-medium transition-colors ${
+                  active
+                    ? 'border-vigil-blue bg-vigil-blue-light text-vigil-blue'
+                    : 'border-slate-200 bg-white text-vigil-muted hover:border-slate-300'
+                }`}
+              >
+                {label}
+              </button>
+            )
+          })}
+        </div>
+
+        <PhotoSearch aiAvailable={aiAvailable} />
       </div>
       <div className="flex-1 space-y-3 overflow-y-auto p-4">
         {loading && <div className="skeleton h-24 rounded-card" />}

@@ -51,6 +51,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `24-partner-platforms-link.md` — sister missing-persons platform links (Venezuela Te Busca, Desaparecidos Terremoto Venezuela)
 - `25-resources-seed-and-sister-platforms.md` — Red Cross family search orgs, Caracas hospital markers, RedQuipu + Mapa de Daños sister platforms, additional emergency hotlines on `/informacion`
 - `26-rss-gdacs-community-wall.md` — GDACS disaster alerts, Venezuelan RSS news tier, community wall (`/muro`)
+- `27-claude-ai-facial-geo.md` — Claude AI assistant (live data Q&A), photo-based search (vision, no biometrics), Venezuela geographic breakdown, duplicate detection cron, `/estadisticas`
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
