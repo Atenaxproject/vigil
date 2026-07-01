@@ -61,37 +61,30 @@ One config file change redeploys the whole platform for **any country, any disas
 
 ## What Vigil Does
 
-### For families searching for missing persons
+### Missing persons search — now federated across 55,891+ records
 
-- Search or report a missing person — PFIF 1.4 compatible, interoperable with Google Person Finder
-- Photo-based search — Claude Vision analyzes uploaded photos and matches against database descriptions (no biometric data stored)
-- Federated search — name queries also hit Desaparecidos Terremoto Venezuela's 55k+ record API live; results clearly attributed, never stored in Vigil
-- Private claim-link inbox — manage your own report and receive contact requests without creating an account
-- Public notes and sightings — anyone can add a verified sighting to any record in real time
-- Geographic breakdown — filter by estado, municipio, and parroquia across all 24 Venezuelan states
+- Search Vigil's own database AND Desaparecidos Terremoto Venezuela simultaneously
+- Results from both platforms shown side by side with clear source attribution
+- Photo-based search: upload a photo, Claude Vision analyzes features, matched against both databases — no biometric data stored
+- Geographic filters: estado, municipio, parroquia across all 24 Venezuelan states
+- PFIF 1.4 compatible — interoperable with Google Person Finder
+- Real-time updates across all open browser tabs (Supabase Realtime)
 
-### For rescue teams and volunteers
+### Crisis map — live data from multiple verified sources
 
-- Crisis map — live USGS aftershock data, needs, resources, shelters, hospitals, danger zones
-- Rescuer presence and safety — register your location, check in hourly, one-tap SOS
-- Volunteer matching — skills-based registration matched to verified organizations
-- 8-language interface — Spanish, English, Portuguese, French, Italian, Chinese, German, Russian
+- USGS aftershock data (real-time, 5-min refresh, magnitude 2.0+)
+- GDACS disaster alerts (United Nations / European Commission)
+- Centers and hospitals from Desaparecidos Terremoto Venezuela (integrated)
+- Citizen-reported needs, resources, shelters, danger zones, rescue zones
+- Rescuer safety presence system with GPS check-in and SOS button
+- Layer toggles for all marker types
 
-### For organizations and coordinators
+### AI coordination — Claude-powered in 8 languages
 
-- Verified organization directory with donation links
-- Resource exchange board — goods, shelter, transport, skills, equipment matching
-- Events calendar — donation drives, volunteer meetups, distribution points
-- Collection point self-registration with hours and accepted categories
-
-### For everyone
-
-- Claude AI assistant — answers questions in any language using live database data, never invents information
-- Community wall — public, append-only messages and announcements
-- Real-time information hub — USGS seismic feed, ReliefWeb official reports, GDACS disaster alerts, Venezuelan news RSS
-- Infrastructure status tracker — electricity, water, roads, airport — updated by admin, pushed live instantly
-- Feedback and improvement channel — floating widget, saves to database
-- PWA / offline-first — works at 2G speeds, forms queue locally and sync on reconnect
+- Live Q&A assistant: answers questions using real database data, never invents
+- Natural language intake: describe a person in plain text, Claude structures it
+- Photo-based identification: Claude Vision + DTV facial recognition
+- Hourly duplicate detection (Claude Haiku cron)
 
 ---
 
@@ -179,51 +172,52 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ---
 
-## Project Status
+## Project Status — July 2026
 
 ### ✅ Live Now
 
-- Missing persons board — search, report, real-time updates, claim-token private inbox
-- Federated search — Vigil + Desaparecidos Terremoto Venezuela (55k+ records, live API, attributed)
-- Photo-based search via Claude Vision + DTV facial recognition (federated, attributed)
-- Public notes and sightings on missing persons records
-- Crisis map — USGS aftershocks, needs, resources, shelters, hospitals, danger zones, rescue zones
-- Rescuer safety presence system with SOS button
-- Resource exchange board (Intercambio)
-- Volunteer registration and public directory
-- Organization directory (16 verified organizations seeded)
-- Events calendar
-- Citizen collection point registration
-- Claude AI assistant — live database Q&A in 8 languages
-- Real-time information hub — USGS, GDACS, ReliefWeb, Venezuelan news RSS
-- Infrastructure status tracker (admin-editable, Supabase Realtime)
-- Community wall (Muro Comunitario)
-- Feedback and improvement channel
-- Weather + Venezuela time ambient bar (Open-Meteo, free)
-- 8-language interface (ES, EN, PT, FR, IT, ZH, DE, RU)
-- PWA with offline form queue
-- Hourly duplicate detection via Claude Haiku cron job
-- PFIF 1.4 compatible missing persons endpoint
-- Sister platform network — links to 7 active citizen platforms
-- Emergency contacts — 0800-RESCATE, Cruz Roja, OCHA, regional hospitals
-- Geographic breakdown by estado/municipio/parroquia
-- Data protection — contact info never public, Venezuelan government explicitly excluded
-- Privacy Policy and Terms of Service (ES + EN)
+- **Federated missing persons search** — Vigil DB + DTV API (55,891+ records combined)
+- **Photo-based search** — Claude Vision analysis + DTV facial recognition
+- **Claude AI assistant** — live database Q&A in 8 languages, never invents information
+- **Crisis map** — USGS aftershocks, GDACS alerts, needs, resources, shelters, hospitals, rescue zones, collection points (including DTV-sourced centers)
+- **Rescuer safety system** — GPS check-in, 4-hour auto-expiry, SOS button
+- **Resource exchange (Intercambio)** — 7 categories, claim-token, 7-day auto-expiry
+- **Volunteer registry** — skills-based, public directory (name privacy protected)
+- **Organization directory** — 16 verified NGOs seeded, admin approval gate
+- **Events calendar** — donation drives, meetups, distributions, memorials
+- **Citizen collection point registry** — self-registration, map display
+- **Community wall (Muro)** — append-only, categorized, rate-limited
+- **Real-time information hub** — USGS, GDACS, ReliefWeb, Venezuelan news RSS
+- **Infrastructure status tracker** — electricity, water, roads, airport (admin-editable)
+- **Feedback system** — floating widget, admin-only access
+- **8-language interface** — ES/EN handcrafted, PT/FR/IT/ZH/DE/RU generated
+- **PWA** — 2G-optimized, offline form queue, iOS/Android install support
+- **Hourly duplicate detection** — Claude Haiku cron, flags to moderation queue
+- **PFIF 1.4 endpoint** — `/api/pfif`, Google Person Finder compatible
+- **Sister platform network** — 7 citizen platforms linked at `/red`
+- **DTV active integration** — Desaparecidos Terremoto Venezuela federated API
+- **Social share images** — Open Graph + Twitter Card auto-generated
+- **Geographic breakdown** — estado/municipio/parroquia across 24 Venezuelan states
+- **Privacy** — contact info never public, Venezuelan government explicitly excluded
 
 ### 🔧 In Progress
 
-- WhatsApp intake (Make.com scenario — code ready, scenario not built)
-- Telegram bot (code ready, bot token needed)
-- Resend email notifications for feedback submissions (RESEND_API_KEY needed)
-- Vercel AI Gateway integration (optimization — reduces Claude API costs via caching)
-- X/Twitter nonprofit API access (application submitted)
+- WhatsApp intake via Make.com (code ready, scenario not built)
+- Telegram bot (TELEGRAM_BOT_TOKEN needed)
+- Resend email notifications (RESEND_API_KEY needed)
+- Vercel AI Gateway (cost observability optimization)
+- DTV statistics widget on `/estadisticas` (API integration, UI in progress)
 
 ### 🔜 Coming Soon
 
-- Voice-based intake via OpenAI Whisper (accessibility for field workers)
-- PFIF bidirectional sync with Desaparecidos Terremoto Venezuela (partnership in discussion)
-- Multi-country framework documentation (one config file = any future disaster)
+- Voice intake via OpenAI Whisper (field accessibility)
+- PFIF bidirectional sync with DTV (partnership in validation)
+- Vigil Field variant (specialized for rescue teams, in design phase)
+- Vigil Family variant (specialized for victims/families, in design phase)
+- Vigil Command variant (organizational coordinators, planned)
 - Predictive aftershock visualization
+- Satellite imagery damage assessment
+- youthewave.org main site (Astro-based, design stage)
 
 ---
 
@@ -258,23 +252,37 @@ If you don't find someone here, check these too:
 
 ## Tech stack
 
-Next.js 14 App Router · Supabase (Postgres + Realtime + RLS) · Leaflet.js + OpenStreetMap ·
-Vercel · Cloudflare · Claude AI (Haiku + Sonnet) · next-intl (8 languages) ·
-USGS Earthquake API · GDACS (UN disaster alerts) · ReliefWeb API · Open-Meteo weather ·
-PFIF 1.4 (Google Person Finder compatible)
+**Frontend:** Next.js 14 App Router · Tailwind CSS · next-intl (8 languages) · PWA (next-pwa)
 
-| Layer | Choice | Notes |
-|---|---|---|
-| Framework | **Next.js 14** (App Router) | SSR, edge middleware, PWA-ready |
-| Language | **TypeScript** (strict) | End-to-end types in `src/types` |
-| Database | **Supabase** (Postgres + Realtime) | Row-level security, live subscriptions |
-| Auth | **Supabase Auth** | Email/phone OTP, admin allowlist |
-| Map | **Leaflet + OpenStreetMap** | Free, Venezuela-locked bounds |
-| Styling | **Tailwind CSS** | Tokens from [`DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) |
-| i18n | **next-intl** | 8 locales, Spanish-first |
-| AI | **Claude (Haiku + Sonnet)** | Assistant Q&A, photo vision search, dedup cron (optional `ANTHROPIC_API_KEY`) |
-| Email | **Resend** | Feedback alerts (optional) |
-| Hosting | **Vercel** + **Cloudflare** | Edge network, DDoS protection, email routing |
+**Database:** Supabase (Postgres + Realtime + RLS) · PFIF 1.4 schema
+
+**AI:** Claude Sonnet 4.6 (vision + photo search) · Claude Haiku 3.5 (assistant + dedup)
+
+**Map:** Leaflet.js + OpenStreetMap · Supabase Realtime subscriptions
+
+**Infrastructure:** Vercel · Cloudflare DNS · Supabase (sa-east-1 São Paulo)
+
+**External data:** USGS Earthquake API · GDACS (UN) · ReliefWeb · Open-Meteo weather ·
+Desaparecidos Terremoto Venezuela API (federated search + centers)
+
+**Standard:** PFIF 1.4 — Google Person Finder compatible, enables data federation
+
+---
+
+## Data Partnership
+
+Vigil integrates with **[Desaparecidos Terremoto Venezuela](https://desaparecidosterremotovenezuela.com)**
+as a registered integrator. Their database (55,891+ records, 15,770+ located)
+is accessible through Vigil's federated search — results appear alongside
+Vigil's own records with full source attribution and a direct link back
+to their platform.
+
+**Integration approach:** federated query only — their data is never stored
+in Vigil's database. Every search queries both platforms simultaneously in
+real time. Their facial recognition endpoint powers Vigil's photo search.
+
+This partnership is part of Vigil's commitment to building a network,
+not competing with the other citizen platforms serving the same families.
 
 ---
 
