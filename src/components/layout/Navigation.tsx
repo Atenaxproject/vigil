@@ -23,6 +23,7 @@ import {
   Package,
   MessageSquare,
   BarChart3,
+  ExternalLink,
   X,
   PanelLeftClose,
   PanelLeftOpen,
@@ -48,6 +49,7 @@ type NavLabelKey =
   | 'calendar'
   | 'wall'
   | 'stats'
+  | 'network'
   | 'collectionPoint'
 
 const navItems: Array<{
@@ -64,6 +66,7 @@ const navItems: Array<{
   { href: '/necesito-ayuda', labelKey: 'needHelp', shortKey: 'needHelpShort', icon: HandHelping },
   { href: '/calendario', labelKey: 'calendar', icon: Calendar, more: true },
   { href: '/muro', labelKey: 'wall', icon: MessageSquare, more: true },
+  { href: '/red', labelKey: 'network', icon: ExternalLink, more: true },
   { href: '/estadisticas', labelKey: 'stats', icon: BarChart3, more: true },
   { href: '/punto-de-acopio', labelKey: 'collectionPoint', icon: Package, more: true },
   { href: '/intercambio', labelKey: 'exchange', icon: ArrowLeftRight, more: true },

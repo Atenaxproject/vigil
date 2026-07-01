@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { Lock } from 'lucide-react'
 import { ClaimLinkSuccess } from '@/components/ui/ClaimLinkSuccess'
+import { DtvCrossReportBanner } from '@/components/dtv/DtvCrossReportBanner'
 import { GeoSelect } from '@/components/missing/GeoSelect'
 import { queueSubmission } from '@/lib/offline-queue'
 
@@ -103,6 +104,7 @@ export function MissingPersonForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4" noValidate>
       <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
+      <DtvCrossReportBanner />
 
       <div>
         <label htmlFor="full_name" className={labelClass}>

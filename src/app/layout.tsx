@@ -127,7 +127,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     {t('contact')}
                   </a>
                   <span aria-hidden="true">·</span>
-                  <span>{t('openSource')}</span>
+                  <a
+                    href="https://github.com/Atenaxproject/vigil"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
+                  >
+                    {t('openSource')}
+                  </a>
                   <span aria-hidden="true">·</span>
                   <span>{t('madeFor')}</span>
                 </div>

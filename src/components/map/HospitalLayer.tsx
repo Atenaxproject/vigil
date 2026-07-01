@@ -2,6 +2,7 @@
 
 import { CircleMarker, Popup } from 'react-leaflet'
 import type { MapMarker } from '@/types/vigil.types'
+import { MapMarkerSourceBadge } from '@/components/map/MapMarkerSourceBadge'
 
 interface HospitalLayerProps {
   markers: MapMarker[]
@@ -22,6 +23,7 @@ export function HospitalLayer({ markers }: HospitalLayerProps) {
           <Popup>
             <strong>{marker.title}</strong>
             {marker.description && <p className="text-sm">{marker.description}</p>}
+            <MapMarkerSourceBadge source={marker.source} />
           </Popup>
         </CircleMarker>
       ))}

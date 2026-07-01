@@ -34,13 +34,80 @@ export interface DTVSearchResult {
 }
 
 export interface DTVCentro {
+  id?: string
   nombre?: string
   name?: string
   descripcion?: string
+  tipo?: string
   lat?: number
   lng?: number
   latitud?: number
   longitud?: number
+}
+
+export interface DTVPagination {
+  nextCursor?: string
+  total?: number
+}
+
+export interface DTVMetrics {
+  totalPersonas: number
+  totalCentros: number
+  totalListas: number
+  lastUpdated: string
+  source: string
+  available: boolean
+}
+
+const DTV_SOURCE = 'desaparecidosterremotovenezuela.com'
+const DTV_REVALIDATE_SECONDS = 300
+
+function extractPagination(data: Record<string, unknown>): DTVPagination {
+  const pagination = (data.pagination ?? {}) as DTVPagination
+  const total =
+    pagination.total ??
+    (typeof data.total === 'number' ? data.total : undefined) ??
+    (typeof data.count === 'number' ? data.count : undefined)
+  return {
+    nextCursor: pagination.nextCursor,
+    total,
+  }
+}
+
+function extractCentros(data: Record<string, unknown>): DTVCentro[] {
+  const raw = data.data ?? data.centros
+  return Array.isArray(raw) ? (raw as DTVCentro[]) : []
+}
+
+export function inferCentroMarkerType(centro: DTVCentro): 'hospital' | 'collection_point' {
+  const text = `${centro.nombre ?? centro.name ?? ''} ${centro.descripcion ?? ''} ${centro.tipo ?? ''}`.toLowerCase()
+  if (/hospital|clinic|clínica|médic|salud|centro de salud|urgencias/.test(text)) {
+    return 'hospital'
+  }
+  return 'collection_point'
+}
+
+async function fetchDTVPage(
+  endpoint: string,
+  params: Record<string, string> = {}
+): Promise<Record<string, unknown> | null> {
+  if (!DTV_BASE || !DTV_KEY) return null
+
+  const search = new URLSearchParams(params)
+  try {
+    const res = await fetch(`${DTV_BASE}/${endpoint}?${search}`, {
+      headers: dtvHeaders(),
+      next: { revalidate: DTV_REVALIDATE_SECONDS },
+    })
+    if (!res.ok) {
+      console.error(`DTV API error (${endpoint}):`, res.status, res.statusText)
+      return null
+    }
+    return (await res.json()) as Record<string, unknown>
+  } catch (error) {
+    console.error(`DTV API fetch failed (${endpoint}):`, error)
+    return null
+  }
 }
 
 function extractPersonas(data: Record<string, unknown>): Record<string, unknown>[] {
@@ -130,24 +197,69 @@ export async function identifyByPhotoDTV(
 }
 
 export async function getDTVCentros(): Promise<DTVCentro[] | null> {
-  if (!DTV_BASE || !DTV_KEY) return null
+  const all = await getAllDTVCentros()
+  return all.length ? all : null
+}
 
-  try {
-    const res = await fetch(`${DTV_BASE}/centros?limit=100`, {
-      headers: dtvHeaders(),
-      next: { revalidate: 3600 },
-    })
+export async function getAllDTVCentros(): Promise<DTVCentro[]> {
+  if (!DTV_BASE || !DTV_KEY) return []
 
-    if (!res.ok) return null
+  const allCentros: DTVCentro[] = []
+  let cursor: string | undefined
 
-    const data = (await res.json()) as Record<string, unknown>
-    const raw = data.data ?? data.centros
-    return Array.isArray(raw) ? (raw as DTVCentro[]) : []
-  } catch {
-    return null
+  do {
+    const params: Record<string, string> = { limit: '100' }
+    if (cursor) params.cursor = cursor
+
+    const data = await fetchDTVPage('centros', params)
+    if (!data) break
+
+    allCentros.push(...extractCentros(data))
+    cursor = extractPagination(data).nextCursor
+  } while (cursor)
+
+  return allCentros
+}
+
+export async function getDTVMetrics(): Promise<DTVMetrics> {
+  const fallback: DTVMetrics = {
+    totalPersonas: 0,
+    totalCentros: 0,
+    totalListas: 0,
+    lastUpdated: new Date().toISOString(),
+    source: DTV_SOURCE,
+    available: false,
+  }
+
+  if (!DTV_BASE || !DTV_KEY) return fallback
+
+  const [personasRes, centrosRes, listasRes] = await Promise.allSettled([
+    fetchDTVPage('personas', { limit: '1' }),
+    fetchDTVPage('centros', { limit: '1' }),
+    fetchDTVPage('listas', { limit: '1' }),
+  ])
+
+  const personas =
+    personasRes.status === 'fulfilled' && personasRes.value ? extractPagination(personasRes.value) : null
+  const centros =
+    centrosRes.status === 'fulfilled' && centrosRes.value ? extractPagination(centrosRes.value) : null
+  const listas =
+    listasRes.status === 'fulfilled' && listasRes.value ? extractPagination(listasRes.value) : null
+
+  const available = Boolean(personas || centros || listas)
+
+  return {
+    totalPersonas: personas?.total ?? 0,
+    totalCentros: centros?.total ?? 0,
+    totalListas: listas?.total ?? 0,
+    lastUpdated: new Date().toISOString(),
+    source: DTV_SOURCE,
+    available,
   }
 }
 
 export function isDTVConfigured(): boolean {
   return Boolean(DTV_BASE && DTV_KEY)
 }
+
+export { DTV_SOURCE }

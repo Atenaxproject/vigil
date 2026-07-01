@@ -54,6 +54,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `27-claude-ai-facial-geo.md` — Claude AI assistant (live data Q&A), photo-based search (vision, no biometrics), Venezuela geographic breakdown, duplicate detection cron, `/estadisticas`
 - `28-readme-final-update.md` — README final update session
 - `29-dtv-api-integration.md` — federated search with Desaparecidos Terremoto Venezuela API (read-only, attributed results, photo ID, center sync)
+- `30-dtv-deep-integration.md` — DTV attribution UX, live metrics, paginated center sync cron, /red featured partner, UX cleanup
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

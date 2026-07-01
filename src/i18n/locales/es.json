@@ -15,6 +15,7 @@
     "calendar": "Calendario",
     "wall": "Muro",
     "stats": "Estadísticas",
+    "network": "Red de búsqueda",
     "collectionPoint": "Punto de Acopio",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Uso",
@@ -64,7 +65,14 @@
       "vigilSourceLabel": "En Vigil ({count})",
       "dtvSourceLabel": "En Desaparecidos Terremoto Venezuela ({count})",
       "dtvViewFullPlatform": "Ver plataforma completa →",
-      "dtvSearchedNoResults": "También buscamos en Desaparecidos Terremoto Venezuela — sin coincidencias."
+      "dtvSearchedNoResults": "También buscamos en Desaparecidos Terremoto Venezuela — sin coincidencias.",
+      "trustNote": "Los resultados incluyen registros de Vigil y de Desaparecidos Terremoto Venezuela (55,891+ personas reportadas). Ambas fuentes son iniciativas ciudadanas verificadas sin fines de lucro.",
+      "dtvSectionBadge": "Fuente: Desaparecidos Terremoto Venezuela",
+      "dtvSectionNote": "55,891+ registros · Datos públicos verificados · Se actualiza cada 5 min",
+      "noResultsBothTitle": "No encontramos a esta persona en ninguna de las dos plataformas.",
+      "noResultsReportBoth": "Considera reportarla:",
+      "noResultsReportDtv": "En Desaparecidos Terremoto Venezuela",
+      "noResultsBothHint": "Reportar en ambas amplía la red de búsqueda."
     },
     "photoSearch": {
       "divider": "o busca por foto",
@@ -125,6 +133,10 @@
         "selectEstado": "Selecciona un estado",
         "selectMunicipio": "Selecciona un municipio",
         "selectParroquia": "Selecciona una parroquia (opcional)"
+      },
+      "crossReport": {
+        "body": "Si ya reportaste a esta persona en <link>Desaparecidos Terremoto Venezuela</link>, reportarla también aquí amplía su alcance en la red de búsqueda. Si aún no lo has hecho, te recomendamos hacerlo en ambas plataformas.",
+        "dismiss": "Cerrar aviso"
       }
     },
     "card": {
@@ -191,7 +203,8 @@
     },
     "urgent": "URGENTE",
     "verified": "Verificado",
-    "lastUpdate": "Actualizado: {time}"
+    "lastUpdate": "Actualizado: {time}",
+    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela"
   },
   "volunteers": {
     "title": "Registro de Voluntarios",
@@ -540,13 +553,52 @@
     "errorFallback": "En este momento no puedo responder. Llama al {hotline} ({number})."
   },
   "estadisticas": {
-    "title": "Estadísticas por Estado",
-    "subtitle": "Desglose de personas desaparecidas y encontradas con vida",
+    "title": "Estadísticas",
+    "subtitle": "Red de búsqueda combinada y desglose geográfico de Vigil",
+    "byEstadoTitle": "Desglose por estado (Vigil)",
     "source": "Datos de Vigil, actualizados en tiempo real",
     "empty": "Aún no hay datos geográficos suficientes.",
     "unknownEstado": "Sin estado",
     "missingCount": "{count} desaparecidos",
-    "foundCount": "{count} encontrados con vida"
+    "foundCount": "{count} encontrados con vida",
+    "network": {
+      "title": "Red de búsqueda combinada",
+      "description": "Vigil trabaja en red con <link>Desaparecidos Terremoto Venezuela</link>. Los datos se actualizan automáticamente cada 5 minutos.",
+      "dtvPersonas": "Personas en red DTV",
+      "dtvPersonasSub": "Desaparecidos Terremoto Venezuela",
+      "dtvCentros": "Centros y hospitales",
+      "dtvCentrosSub": "Registrados en red DTV",
+      "dtvListas": "Listas de centros",
+      "dtvListasSub": "Grupos en albergues",
+      "vigilPersonas": "Reportados en Vigil",
+      "vigilPersonasSub": "Base de datos propia",
+      "attribution": "Datos de DTV: fuente desaparecidosterremotovenezuela.com · Última actualización: {time}",
+      "dtvUnavailable": "Métricas de DTV no disponibles en este momento. Los datos de Vigil siguen actualizándose."
+    }
+  },
+  "red": {
+    "title": "Red de búsqueda",
+    "subtitle": "Plataformas hermanas que amplían el alcance de búsqueda de personas desaparecidas",
+    "featured": {
+      "badge": "Integración activa",
+      "description": "Plataforma hermana con 55,891+ registros, reconocimiento facial y desglose geográfico. Los resultados de búsqueda en Vigil incluyen automáticamente su base de datos en tiempo real.",
+      "visit": "Visitar plataforma →",
+      "capabilities": {
+        "federated": "✓ Búsqueda federada activa",
+        "facial": "✓ Reconocimiento facial",
+        "centers": "✓ Centros y hospitales",
+        "refresh": "✓ Actualización cada 5 min"
+      }
+    },
+    "othersTitle": "Otras plataformas hermanas",
+    "platforms": {
+      "venezuelaTeBusca": "Plataforma ciudadana de búsqueda de personas desaparecidas en Venezuela.",
+      "desaparecidosTerremoto": "Registro masivo de desaparecidos del terremoto — datos públicos verificados.",
+      "redQuipu": "Red comunitaria de ayuda y coordinación en crisis.",
+      "mapaDanosVenezuela": "Mapa colaborativo de daños e infraestructura afectada."
+    },
+    "reportHint": "Cada reporte en múltiples plataformas amplía la red de búsqueda.",
+    "reportLink": "Reportar en Vigil"
   },
   "feedback": {
     "open": "Enviar comentarios",

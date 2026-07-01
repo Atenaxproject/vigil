@@ -7,13 +7,12 @@ import { ExternalLink, Search, UserPlus } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { tagVigilPerson, type FederatedPerson } from '@/lib/dtv-mapper'
-import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { PRIORITY_ESTADOS } from '@/lib/venezuela-geo'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
+import { DtvSourceHeader } from '@/components/dtv/DtvSourceHeader'
 import { PhotoSearch } from '@/components/missing/PhotoSearch'
 
-const sisterPlatforms = CRISIS_CONFIG.partnerLinks.filter((link) => link.type === 'sister-platform')
 const DTV_PLATFORM_URL = 'https://desaparecidosterremotovenezuela.com'
 
 const GEO_FILTERS = [
@@ -45,7 +44,6 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
     initialResults.map(tagVigilPerson)
   )
   const [dtvResults, setDtvResults] = useState<FederatedPerson[]>([])
-  const [dtvAvailable, setDtvAvailable] = useState(false)
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
 
@@ -97,11 +95,9 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
       const data = (await res.json()) as SearchResponse
       setVigilResults(data.vigil ?? data.results?.filter((r) => r._source === 'vigil') ?? [])
       setDtvResults(data.dtv ?? data.results?.filter((r) => r._source === 'dtv') ?? [])
-      setDtvAvailable(Boolean(data.dtvAvailable))
     } catch {
       setVigilResults([])
       setDtvResults([])
-      setDtvAvailable(false)
     } finally {
       setLoading(false)
     }
@@ -120,7 +116,6 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
     } else if (!query.trim()) {
       setVigilResults(initialResults.map(tagVigilPerson))
       setDtvResults([])
-      setDtvAvailable(false)
       setSearched(false)
     }
   }
@@ -187,39 +182,33 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
         </div>
 
         <PhotoSearch aiAvailable={aiAvailable} />
+
+        <p className="mt-3 text-[13px] leading-relaxed text-vigil-muted">{t('search.trustNote')}</p>
       </div>
       <div className="flex-1 space-y-3 overflow-y-auto p-4">
         {loading && <div className="skeleton h-24 rounded-card" />}
         {!loading && searched && !hasResults && (
           <div className="rounded-card border border-slate-200 bg-vigil-cloud p-6 text-center">
-            <p className="text-[16px] font-medium text-vigil-ink">{t('search.noResultsTitle')}</p>
-            {dtvAvailable && query.trim().length >= 2 && (
-              <p className="mt-2 text-[13px] text-vigil-muted">{t('search.dtvSearchedNoResults')}</p>
-            )}
-            <p className="mt-4 text-[16px] text-vigil-body">{t('search.sisterPlatformsIntro')}</p>
-            <ul className="mt-3 space-y-2">
-              {sisterPlatforms.map((platform) => (
-                <li key={platform.url}>
-                  <a
-                    href={platform.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-[44px] items-center justify-center gap-1 text-[16px] text-vigil-blue hover:underline"
-                  >
-                    {platform.name}
-                    <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
-                    <span className="sr-only">({t('search.externalLink')})</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-[16px] text-vigil-muted">{t('search.sisterPlatformsReport')}</p>
-            <Link
-              href="/reportar"
-              className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-input bg-vigil-blue px-5 text-[16px] font-medium text-white"
-            >
-              {t('search.reportCta')}
-            </Link>
+            <p className="text-[16px] font-medium text-vigil-ink">{t('search.noResultsBothTitle')}</p>
+            <p className="mt-4 text-[16px] text-vigil-body">{t('search.noResultsReportBoth')}</p>
+            <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Link
+                href="/reportar"
+                className="inline-flex min-h-[44px] items-center justify-center rounded-input bg-vigil-blue px-5 text-[16px] font-medium text-white"
+              >
+                {t('search.reportCta')}
+              </Link>
+              <a
+                href={DTV_PLATFORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center justify-center gap-1 rounded-input border border-slate-200 bg-white px-5 text-[16px] font-medium text-vigil-blue hover:border-vigil-blue"
+              >
+                {t('search.noResultsReportDtv')}
+                <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+              </a>
+            </div>
+            <p className="mt-4 text-[13px] text-vigil-muted">{t('search.noResultsBothHint')}</p>
           </div>
         )}
         {!loading && hasResults && (
@@ -245,19 +234,11 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
 
         {!loading && searched && dtvResults.length > 0 && (
           <section>
+            <DtvSourceHeader />
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <p className="text-[13px] font-medium text-vigil-ink">
                 {t('search.dtvSourceLabel', { count: dtvResults.length })}
               </p>
-              <a
-                href={DTV_PLATFORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[13px] text-slate-600 hover:text-slate-800 hover:underline"
-              >
-                {t('search.dtvViewFullPlatform')}
-                <ExternalLink className="h-3 w-3 shrink-0" aria-hidden />
-              </a>
             </div>
             <div className="space-y-3">
               {dtvResults.map((person) => (

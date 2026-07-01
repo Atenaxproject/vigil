@@ -2,7 +2,6 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { getDonationOrganizations } from '@/lib/data'
 import { VerifiedBadge } from '@/components/ui/VerifiedBadge'
-import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 export const dynamic = 'force-dynamic'
 
@@ -178,9 +177,6 @@ export default async function ComoAyudarPage() {
       <Link href="/voluntarios" className="mt-8 inline-block text-[16px] text-vigil-blue underline">
         {t('volunteerLink')} →
       </Link>
-      <p className="mt-4 text-[13px] text-vigil-muted">
-        {CRISIS_CONFIG.emergency.hotlineLabel}: {CRISIS_CONFIG.emergency.hotline}
-      </p>
     </div>
   )
 }

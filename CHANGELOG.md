@@ -4,6 +4,27 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-01 (DTV deep integration)
+
+### Added
+- **DTV live metrics** — `GET /api/dtv-metrics` returns personas/centros/listas
+  totals from DTV pagination metadata (5-minute cache); combined network
+  section on `/estadisticas` with amber DTV stat cards vs blue Vigil cards.
+- **Search attribution UX** — amber DTV source header, permanent trust note on
+  `/buscar`, dual-platform no-results state with report CTAs for Vigil and DTV.
+- **Cross-report banner** — dismissible info banner on `/reportar` (sessionStorage).
+- **`/red` page** — featured DTV active integration partner + other sister platforms.
+- **Paginated DTV center sync** — `getAllDTVCentros()` with cursor pagination;
+  hospital vs collection_point inference; Vercel cron every 6 hours; DTV badge
+  on map popups for synced markers.
+- **i18n** — new DTV/red/estadisticas strings in all 8 locales.
+
+### Changed
+- **Footer** — "Código abierto — Licencia MIT" links to GitHub repo.
+- **`/como-ayudar`** — removed redundant standalone hotline line (banner + footer remain).
+- **Navigation** — `/red` added under Más menu.
+- **Docs** — archived `30-dtv-deep-integration.md`; removed root prompt stub.
+
 ## [Unreleased] — 2026-07-01 (DTV federated search)
 
 ### Added

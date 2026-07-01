@@ -2,6 +2,7 @@
 
 import { CircleMarker, Popup } from 'react-leaflet'
 import { useTranslations } from 'next-intl'
+import { MapMarkerSourceBadge } from '@/components/map/MapMarkerSourceBadge'
 import type { MapMarker } from '@/types/vigil.types'
 
 interface CollectionPointLayerProps {
@@ -39,6 +40,7 @@ export function CollectionPointLayer({ markers }: CollectionPointLayerProps) {
               </p>
             )}
             {marker.description && <p className="text-sm">{marker.description}</p>}
+            <MapMarkerSourceBadge source={marker.source} />
             <p className="mt-2 text-[13px] text-vigil-blue">{t('map.contactViaVigil')}</p>
           </Popup>
         </CircleMarker>

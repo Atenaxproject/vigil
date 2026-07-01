@@ -26,7 +26,8 @@
     "expandMenu": "Espandi menu",
     "desktopNav": "Navigazione principale",
     "mobileNav": "Navigazione mobile",
-    "stats": "Statistics"
+    "stats": "Statistics",
+    "network": "Search network"
   },
   "a11y": {
     "skipToContent": "Vai al contenuto principale"
@@ -49,22 +50,29 @@
     "title": "Persone Scomparse",
     "subtitle": "Cerca o segnala una persona scomparsa",
     "search": {
-      "placeholder": "Cerca per nome...",
-      "button": "Cerca",
-      "noResults": "Nessun risultato trovato. Prova un nome diverso.",
-      "noResultsTitle": "Non abbiamo ancora trovato questa persona su Vigil.",
-      "sisterPlatformsIntro": "Puoi anche cercare su queste piattaforme sorelle:",
-      "sisterPlatformsReport": "Considera di segnalarla anche qui — ogni segnalazione aiuta.",
-      "reportCta": "Segnala persona scomparsa",
-      "externalLink": "si apre in una nuova scheda",
-      "loading": "Ricerca in corso...",
-      "resultsCount": "{{count}} risultati trovati",
+      "placeholder": "Search by name...",
+      "button": "Search",
+      "noResults": "No results found. Try a different name.",
+      "noResultsTitle": "We haven't found this person on Vigil yet.",
+      "sisterPlatformsIntro": "You can also search these sister platforms:",
+      "sisterPlatformsReport": "Please consider reporting here too — every report helps.",
+      "reportCta": "Report Missing Person",
+      "externalLink": "opens in new tab",
+      "loading": "Searching...",
+      "resultsCount": "{count} results found",
       "allCountry": "All country",
       "geoFilterLabel": "Filter by state",
-      "vigilSourceLabel": "Su Vigil ({count})",
-      "dtvSourceLabel": "Su Desaparecidos Terremoto Venezuela ({count})",
-      "dtvViewFullPlatform": "Vedi piattaforma completa →",
-      "dtvSearchedNoResults": "Abbiamo anche cercato su Desaparecidos Terremoto Venezuela — nessuna corrispondenza."
+      "vigilSourceLabel": "On Vigil ({count})",
+      "dtvSourceLabel": "On Desaparecidos Terremoto Venezuela ({count})",
+      "dtvViewFullPlatform": "View full platform →",
+      "dtvSearchedNoResults": "We also searched Desaparecidos Terremoto Venezuela — no matches.",
+      "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela (55,891+ people reported). Both sources are verified nonprofit citizen initiatives.",
+      "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
+      "dtvSectionNote": "55,891+ records · Verified public data · Updates every 5 min",
+      "noResultsBothTitle": "We didn't find this person on either platform.",
+      "noResultsReportBoth": "Consider reporting them:",
+      "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
+      "noResultsBothHint": "Reporting on both platforms expands the search network."
     },
     "status": {
       "missing": "Scomparsa",
@@ -112,6 +120,10 @@
         "selectEstado": "Select a state",
         "selectMunicipio": "Select a municipality",
         "selectParroquia": "Select a parish (optional)"
+      },
+      "crossReport": {
+        "body": "If you already reported this person on <link>Desaparecidos Terremoto Venezuela</link>, reporting here too expands their reach across the search network. If you haven't yet, we recommend reporting on both platforms.",
+        "dismiss": "Dismiss notice"
       }
     },
     "card": {
@@ -191,7 +203,8 @@
     },
     "urgent": "URGENTE",
     "verified": "Verificato",
-    "lastUpdate": "Ultimo aggiornamento: {{time}}"
+    "lastUpdate": "Ultimo aggiornamento: {{time}}",
+    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela"
   },
   "volunteers": {
     "title": "Registrazione Volontari",
@@ -737,11 +750,50 @@
   },
   "estadisticas": {
     "title": "Statistics by State",
-    "subtitle": "Breakdown of missing persons and found alive by state",
+    "subtitle": "Combined search network and Vigil geographic breakdown",
     "source": "Vigil data, updated in real time",
     "empty": "Not enough geographic data yet.",
     "unknownEstado": "No state",
     "missingCount": "{count} missing",
-    "foundCount": "{count} found alive"
+    "foundCount": "{count} found alive",
+    "byEstadoTitle": "Breakdown by state (Vigil)",
+    "network": {
+      "title": "Combined search network",
+      "description": "Vigil works in network with <link>Desaparecidos Terremoto Venezuela</link>. Data refreshes automatically every 5 minutes.",
+      "dtvPersonas": "People on DTV network",
+      "dtvPersonasSub": "Desaparecidos Terremoto Venezuela",
+      "dtvCentros": "Centers and hospitals",
+      "dtvCentrosSub": "Registered on DTV network",
+      "dtvListas": "Center lists",
+      "dtvListasSub": "Shelter groups",
+      "vigilPersonas": "Reported on Vigil",
+      "vigilPersonasSub": "Own database",
+      "attribution": "DTV data: source desaparecidosterremotovenezuela.com · Last updated: {time}",
+      "dtvUnavailable": "DTV metrics unavailable right now. Vigil data continues updating."
+    }
+  },
+  "red": {
+    "title": "Search network",
+    "subtitle": "Sister platforms that expand missing persons search reach",
+    "featured": {
+      "badge": "Active integration",
+      "description": "Sister platform with 55,891+ records, facial recognition, and geographic breakdown. Vigil search results automatically include their database in real time.",
+      "visit": "Visit platform →",
+      "capabilities": {
+        "federated": "✓ Active federated search",
+        "facial": "✓ Facial recognition",
+        "centers": "✓ Centers and hospitals",
+        "refresh": "✓ Updates every 5 min"
+      }
+    },
+    "othersTitle": "Other sister platforms",
+    "platforms": {
+      "venezuelaTeBusca": "Citizen missing persons search platform for Venezuela.",
+      "desaparecidosTerremoto": "Large earthquake missing persons registry — verified public data.",
+      "redQuipu": "Community aid and crisis coordination network.",
+      "mapaDanosVenezuela": "Collaborative damage and infrastructure map."
+    },
+    "reportHint": "Each report on multiple platforms expands the search network.",
+    "reportLink": "Report on Vigil"
   }
 }

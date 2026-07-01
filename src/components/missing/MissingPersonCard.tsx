@@ -71,7 +71,7 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
       <footer className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
         <div className="flex flex-wrap items-center gap-2">
           {isDtv ? (
-            <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-2 py-0.5 text-[13px] text-slate-600">
+            <span className="inline-flex items-center rounded-full border border-amber-300 bg-status-unverified-bg px-2 py-0.5 text-[13px] font-medium text-status-unverified">
               {t('card.dtvSourceBadge')}
             </span>
           ) : federated.verified ? (
@@ -89,7 +89,7 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
           {!isDtv && <FlagButton />}
           {isDtv ? (
             <span
-              className="inline-flex items-center gap-1 rounded-input bg-slate-600 px-3 py-1.5 text-[13px] font-medium text-white"
+              className="inline-flex items-center gap-1 rounded-input border border-amber-300 bg-status-unverified px-3 py-1.5 text-[13px] font-medium text-white"
               aria-hidden
             >
               {t('card.dtvViewPlatform')}

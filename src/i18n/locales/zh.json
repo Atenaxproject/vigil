@@ -26,7 +26,8 @@
     "expandMenu": "展开菜单",
     "desktopNav": "主导航",
     "mobileNav": "移动导航",
-    "stats": "Statistics"
+    "stats": "Statistics",
+    "network": "Search network"
   },
   "a11y": {
     "skipToContent": "跳到主要内容"
@@ -49,22 +50,29 @@
     "title": "失踪人员",
     "subtitle": "搜索或报告失踪人员",
     "search": {
-      "placeholder": "按姓名搜索...",
-      "button": "搜索",
-      "noResults": "未找到结果。请尝试不同的名字。",
-      "noResultsTitle": "我们尚未在 Vigil 上找到此人。",
-      "sisterPlatformsIntro": "您也可以在这些姊妹平台上搜索：",
-      "sisterPlatformsReport": "也请考虑在此举报——每一份报告都有帮助。",
-      "reportCta": "报告失踪人员",
-      "externalLink": "在新标签页中打开",
-      "loading": "搜索中...",
-      "resultsCount": "找到 {{count}} 条结果",
+      "placeholder": "Search by name...",
+      "button": "Search",
+      "noResults": "No results found. Try a different name.",
+      "noResultsTitle": "We haven't found this person on Vigil yet.",
+      "sisterPlatformsIntro": "You can also search these sister platforms:",
+      "sisterPlatformsReport": "Please consider reporting here too — every report helps.",
+      "reportCta": "Report Missing Person",
+      "externalLink": "opens in new tab",
+      "loading": "Searching...",
+      "resultsCount": "{count} results found",
       "allCountry": "All country",
       "geoFilterLabel": "Filter by state",
-      "vigilSourceLabel": "在 Vigil ({count})",
-      "dtvSourceLabel": "在 Desaparecidos Terremoto Venezuela ({count})",
-      "dtvViewFullPlatform": "查看完整平台 →",
-      "dtvSearchedNoResults": "我们也在 Desaparecidos Terremoto Venezuela 搜索过 — 无匹配结果。"
+      "vigilSourceLabel": "On Vigil ({count})",
+      "dtvSourceLabel": "On Desaparecidos Terremoto Venezuela ({count})",
+      "dtvViewFullPlatform": "View full platform →",
+      "dtvSearchedNoResults": "We also searched Desaparecidos Terremoto Venezuela — no matches.",
+      "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela (55,891+ people reported). Both sources are verified nonprofit citizen initiatives.",
+      "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
+      "dtvSectionNote": "55,891+ records · Verified public data · Updates every 5 min",
+      "noResultsBothTitle": "We didn't find this person on either platform.",
+      "noResultsReportBoth": "Consider reporting them:",
+      "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
+      "noResultsBothHint": "Reporting on both platforms expands the search network."
     },
     "status": {
       "missing": "失踪",
@@ -112,6 +120,10 @@
         "selectEstado": "Select a state",
         "selectMunicipio": "Select a municipality",
         "selectParroquia": "Select a parish (optional)"
+      },
+      "crossReport": {
+        "body": "If you already reported this person on <link>Desaparecidos Terremoto Venezuela</link>, reporting here too expands their reach across the search network. If you haven't yet, we recommend reporting on both platforms.",
+        "dismiss": "Dismiss notice"
       }
     },
     "card": {
@@ -191,7 +203,8 @@
     },
     "urgent": "紧急",
     "verified": "已验证",
-    "lastUpdate": "最后更新：{{time}}"
+    "lastUpdate": "最后更新：{{time}}",
+    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela"
   },
   "volunteers": {
     "title": "志愿者注册",
@@ -737,11 +750,50 @@
   },
   "estadisticas": {
     "title": "Statistics by State",
-    "subtitle": "Breakdown of missing persons and found alive by state",
+    "subtitle": "Combined search network and Vigil geographic breakdown",
     "source": "Vigil data, updated in real time",
     "empty": "Not enough geographic data yet.",
     "unknownEstado": "No state",
     "missingCount": "{count} missing",
-    "foundCount": "{count} found alive"
+    "foundCount": "{count} found alive",
+    "byEstadoTitle": "Breakdown by state (Vigil)",
+    "network": {
+      "title": "Combined search network",
+      "description": "Vigil works in network with <link>Desaparecidos Terremoto Venezuela</link>. Data refreshes automatically every 5 minutes.",
+      "dtvPersonas": "People on DTV network",
+      "dtvPersonasSub": "Desaparecidos Terremoto Venezuela",
+      "dtvCentros": "Centers and hospitals",
+      "dtvCentrosSub": "Registered on DTV network",
+      "dtvListas": "Center lists",
+      "dtvListasSub": "Shelter groups",
+      "vigilPersonas": "Reported on Vigil",
+      "vigilPersonasSub": "Own database",
+      "attribution": "DTV data: source desaparecidosterremotovenezuela.com · Last updated: {time}",
+      "dtvUnavailable": "DTV metrics unavailable right now. Vigil data continues updating."
+    }
+  },
+  "red": {
+    "title": "Search network",
+    "subtitle": "Sister platforms that expand missing persons search reach",
+    "featured": {
+      "badge": "Active integration",
+      "description": "Sister platform with 55,891+ records, facial recognition, and geographic breakdown. Vigil search results automatically include their database in real time.",
+      "visit": "Visit platform →",
+      "capabilities": {
+        "federated": "✓ Active federated search",
+        "facial": "✓ Facial recognition",
+        "centers": "✓ Centers and hospitals",
+        "refresh": "✓ Updates every 5 min"
+      }
+    },
+    "othersTitle": "Other sister platforms",
+    "platforms": {
+      "venezuelaTeBusca": "Citizen missing persons search platform for Venezuela.",
+      "desaparecidosTerremoto": "Large earthquake missing persons registry — verified public data.",
+      "redQuipu": "Community aid and crisis coordination network.",
+      "mapaDanosVenezuela": "Collaborative damage and infrastructure map."
+    },
+    "reportHint": "Each report on multiple platforms expands the search network.",
+    "reportLink": "Report on Vigil"
   }
 }
