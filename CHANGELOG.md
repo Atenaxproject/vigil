@@ -19,8 +19,8 @@ All notable changes to Vigil are documented here. Format loosely follows
   on `/reportar`; state filter chips on `/buscar`; `src/lib/venezuela-geo.ts`.
 - **Statistics page** — `/estadisticas` real-time breakdown by estado
   (missing vs found alive) via Supabase Realtime.
-- **Duplicate detection cron** — `/api/cron/dedup` every 2 hours via
-  `vercel.json`; Claude Haiku flags probable duplicates to moderation queue.
+- **Duplicate detection cron** — `/api/cron/dedup` daily at 08:00 UTC via
+  `vercel.json` (Vercel Hobby limit); Claude Haiku flags probable duplicates.
 - **Shared AI client** — `src/lib/ai/client.ts` for Anthropic config checks.
 
 ### Changed
