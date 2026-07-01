@@ -63,15 +63,26 @@ const DTV_SOURCE = 'desaparecidosterremotovenezuela.com'
 const DTV_REVALIDATE_SECONDS = 300
 
 function extractPagination(data: Record<string, unknown>): DTVPagination {
-  const pagination = (data.pagination ?? {}) as DTVPagination
-  const total =
-    pagination.total ??
-    (typeof data.total === 'number' ? data.total : undefined) ??
-    (typeof data.count === 'number' ? data.count : undefined)
-  return {
-    nextCursor: pagination.nextCursor,
-    total,
-  }
+  const pagination = (data.pagination ?? data.meta ?? {}) as Record<string, unknown>
+  const nested = (pagination.pagination ?? {}) as Record<string, unknown>
+
+  const totalCandidates = [
+    pagination.total,
+    pagination.totalCount,
+    pagination.totalItems,
+    pagination.total_records,
+    nested.total,
+    data.total,
+    data.totalCount,
+    data.count,
+  ]
+
+  const total = totalCandidates.find((v): v is number => typeof v === 'number')
+
+  const cursorCandidates = [pagination.nextCursor, pagination.next, pagination.cursor]
+  const nextCursor = cursorCandidates.find((v): v is string => typeof v === 'string')
+
+  return { nextCursor, total }
 }
 
 function extractCentros(data: Record<string, unknown>): DTVCentro[] {
