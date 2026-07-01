@@ -4,6 +4,22 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-01 (Vigil brand favicon)
+
+### Added
+- **Brand favicon set** — `favicon.ico`, PNG sizes 16/32/48/192/512, and
+  `apple-touch-icon.png` (180×180) in `public/`.
+- **Next.js metadata icons** — full `icons` config in `src/app/layout.tsx`
+  for browser tabs, iOS home screen, and PWA install.
+- **PWA manifest icons** — `manifest.json` now references
+  `android-chrome-192x192.png` and `android-chrome-512x512.png`.
+
+### Removed
+- Placeholder PWA icons under `public/icons/` (replaced by brand assets).
+
+### Archived
+- `docs/build-process/33-favicon-deploy.md`; root prompt stub deleted.
+
 ## [Unreleased] — 2026-07-01 (DTV geocode + stats fix)
 
 ### Added
