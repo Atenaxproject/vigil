@@ -6,7 +6,7 @@
     },
     {
       "path": "/api/admin/sync-dtv-centers",
-      "schedule": "0 */6 * * *"
+      "schedule": "0 6 * * *"
     }
   ]
 }
