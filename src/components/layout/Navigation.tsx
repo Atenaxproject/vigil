@@ -59,6 +59,7 @@ const navItems: Array<{
   icon: typeof Map
   center?: boolean
   more?: boolean
+  sidebarHidden?: boolean
 }> = [
   { href: '/', labelKey: 'map', shortKey: 'mapShort', icon: Map },
   { href: '/buscar', labelKey: 'search', shortKey: 'searchShort', icon: Search },
@@ -75,8 +76,8 @@ const navItems: Array<{
   { href: '/como-ayudar', labelKey: 'howToHelp', icon: HelpCircle, more: true },
   { href: '/equipo-activo', labelKey: 'activeTeam', icon: Shield, more: true },
   { href: '/informacion', labelKey: 'info', icon: Info, more: true },
-  { href: '/donaciones', labelKey: 'donate', icon: Heart, more: true },
-  { href: '/noticias', labelKey: 'news', icon: Newspaper, more: true },
+  { href: '/donaciones', labelKey: 'donate', icon: Heart, more: true, sidebarHidden: true },
+  { href: '/noticias', labelKey: 'news', icon: Newspaper, more: true, sidebarHidden: true },
 ]
 
 export function Navigation() {
@@ -192,7 +193,7 @@ export function Navigation() {
           className="flex flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden p-2"
           aria-label={t('desktopNav')}
         >
-          {navItems.map((item) => {
+          {navItems.filter((item) => !item.sidebarHidden).map((item) => {
             const Icon = item.icon
             const active = pathname === item.href
             const label = t(item.labelKey)

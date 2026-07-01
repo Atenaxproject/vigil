@@ -152,7 +152,9 @@
       "aiDescription": "AI description",
       "comingSoonTitle": "Coming soon",
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
-    }
+    },
+    "recentTitle": "Recent",
+    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include 55,891+ records from Desaparecidos Terremoto Venezuela."
   },
   "map": {
     "title": "Mappa della Crisi",
@@ -204,7 +206,18 @@
     "urgent": "URGENTE",
     "verified": "Verificato",
     "lastUpdate": "Ultimo aggiornamento: {{time}}",
-    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela"
+    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela",
+    "needHelpPageTitle": "I need help here",
+    "needHelpIntro": "Mark a need or resource on the crisis map so rescue teams and neighbors can see it. For peer-to-peer exchange (offer or request goods), use Exchange.",
+    "selectLocation": "Tap the map to mark the location",
+    "useMyLocation": "Use my location",
+    "fieldTitle": "Title",
+    "fieldDescription": "Description",
+    "fieldCategory": "Category",
+    "submitSuccess": "Marker submitted",
+    "submitError": "Failed to submit",
+    "exchangeHint": "Looking to exchange goods or services with another person?",
+    "exchangeLink": "Go to Exchange"
   },
   "volunteers": {
     "title": "Registrazione Volontari",
@@ -304,7 +317,13 @@
     "contact": "Contatti",
     "verified": "Organizzazione Verificata",
     "register": "Registra la Tua Organizzazione",
-    "registerNote": "Le organizzazioni richiedono verifica manuale prima di apparire pubblicamente. Consenti 24-48 ore."
+    "registerNote": "Le organizzazioni richiedono verifica manuale prima di apparire pubblicamente. Consenti 24-48 ore.",
+    "fraudWarning": "⚠️ Before donating: verify you are on the organization's official site. Type the URL directly. Beware of collection requests via direct message.",
+    "filterAll": "All",
+    "filterLabel": "Filter by type",
+    "count": "{count} organizations",
+    "empty": "No approved organizations yet.",
+    "howToHelpLink": "How to help — donations & collection points"
   },
   "donate": {
     "title": "Come Aiutare",
@@ -419,7 +438,9 @@
       "success": "Annuncio pubblicato.",
       "error": "Pubblicazione non riuscita.",
       "matchSuggestion": "{{count}} persone stanno offrendo qualcosa di simile"
-    }
+    },
+    "pageIntro": "Peer-to-peer board to offer or request goods, shelter, transport, and skills. To mark a need on the crisis map, use I Need Help.",
+    "expiryNotice": "Listings expire automatically after 7 days."
   },
   "howToHelp": {
     "title": "Come Aiutare",
@@ -427,7 +448,8 @@
     "donations": {
       "title": "Donazioni verificate",
       "warning": "⚠️ Prima di donare: verifica di essere sul sito ufficiale. Digita l'URL direttamente nel tuo browser. Attenzione alle richieste di raccolta da persone sconosciute tramite messaggio diretto.",
-      "donateButton": "Dona"
+      "donateButton": "Dona",
+      "curatedNote": "Highlighted channels to donate now. See the full directory on Organizations."
     },
     "teams": {
       "title": "Paesi e squadre che rispondono",
@@ -445,7 +467,14 @@
     "collection": {
       "title": "Punti di raccolta fisici"
     },
-    "volunteerLink": "Registrati come volontario"
+    "volunteerLink": "Registrati come volontario",
+    "familySearch": {
+      "title": "Family tracing — International Red Cross",
+      "honduras": "Honduran Red Cross — +504-9849-5556 · busquedarcf@cruzroja.org.hn",
+      "argentina": "Argentine Red Cross — cruzroja.org.ar/rcf/",
+      "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
+    },
+    "directoryLink": "View full organization directory"
   },
   "crisisInfo": {
     "title": "Informazioni sulla Crisi Verificate",
@@ -538,6 +567,16 @@
       "airport": "Aeroporto",
       "telecom": "Telecomunicazioni",
       "fuel": "Carburante"
+    },
+    "dtvNetwork": {
+      "title": "Sister platform network · Combined data",
+      "badge": "Active integration",
+      "personas": "People reported (DTV)",
+      "centros": "Collection centers (DTV)",
+      "listas": "Active lists (DTV)",
+      "attribution": "DTV data · source desaparecidosterremotovenezuela.com",
+      "unavailable": "DTV metrics unavailable right now.",
+      "viewPlatform": "View Desaparecidos Terremoto Venezuela"
     }
   },
   "feedback": {
@@ -586,7 +625,8 @@
     "sos": "HO BISOGNO DI ASSISTENZA",
     "sosSent": "Allarme SOS inviato",
     "signOff": "Termina turno",
-    "signedOff": "Presenza chiusa"
+    "signedOff": "Presenza chiusa",
+    "fieldWarning": "For rescue teams and field workers only. Civilians should use I Need Help to report needs on the map."
   },
   "offline": {
     "title": "Nessuna connessione",
@@ -644,7 +684,7 @@
     "title": "Calendario Eventi",
     "subtitle": "Campagne di raccolta, incontri di volontari e distribuzioni",
     "addEvent": "Aggiungi evento",
-    "empty": "Nessun evento imminente.",
+    "empty": "No upcoming events. Want to organize something?",
     "organizer": "Organizzatore",
     "filters": {
       "all": "Tutto"
@@ -673,7 +713,8 @@
       "success": "Evento pubblicato.",
       "error": "Pubblicazione non riuscita.",
       "cancel": "Chiudi"
-    }
+    },
+    "emptyAction": "Add an event"
   },
   "collectionPoint": {
     "title": "Registra Punto di Raccolta",

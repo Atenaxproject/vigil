@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -8,6 +9,7 @@ import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { queueSubmission } from '@/lib/offline-queue'
+import { PinDropMap } from '@/components/map/PinDropMap'
 
 const schema = z.object({
   type: z.enum(['need', 'resource']),
@@ -26,7 +28,7 @@ export default function NecesitoAyudaPage() {
   const t = useTranslations('map')
   const [submitting, setSubmitting] = useState(false)
 
-  const { register, handleSubmit, setValue } = useForm<FormValues>({
+  const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       type: 'need',
@@ -36,6 +38,9 @@ export default function NecesitoAyudaPage() {
       urgent: true,
     },
   })
+
+  const lat = watch('lat')
+  const lng = watch('lng')
 
   function useMyLocation() {
     if (!navigator.geolocation) return
@@ -60,9 +65,9 @@ export default function NecesitoAyudaPage() {
         body: JSON.stringify(data),
       })
       if (!res.ok) throw new Error('fail')
-      toast.success('Marcador enviado')
+      toast.success(t('submitSuccess'))
     } catch {
-      toast.error('Error al enviar')
+      toast.error(t('submitError'))
     } finally {
       setSubmitting(false)
     }
@@ -72,12 +77,13 @@ export default function NecesitoAyudaPage() {
     'mt-1 w-full min-h-[44px] rounded-input border border-slate-200 bg-vigil-cloud px-3 text-[16px]'
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4" noValidate>
-      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('markerTypes.need')}</h1>
+    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-xl space-y-4 p-4 pb-24" noValidate>
+      <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('needHelpPageTitle')}</h1>
+      <p className="text-[16px] leading-relaxed text-vigil-muted">{t('needHelpIntro')}</p>
 
       <div>
         <label htmlFor="title" className="text-[13px] font-medium text-slate-600">
-          Título *
+          {t('fieldTitle')} *
         </label>
         <input
           id="title"
@@ -89,7 +95,7 @@ export default function NecesitoAyudaPage() {
 
       <div>
         <label htmlFor="category" className="text-[13px] font-medium text-slate-600">
-          Categoría
+          {t('fieldCategory')}
         </label>
         <select id="category" {...register('category')} className={inputClass}>
           {Object.keys(t.raw('categories') as Record<string, string>).map((key) => (
@@ -102,34 +108,44 @@ export default function NecesitoAyudaPage() {
 
       <div>
         <label htmlFor="description" className="text-[13px] font-medium text-slate-600">
-          Descripción
+          {t('fieldDescription')}
         </label>
         <textarea id="description" rows={3} {...register('description')} className={inputClass} />
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <label htmlFor="lat" className="text-[13px] font-medium text-slate-600">
-            Lat
-          </label>
-          <input id="lat" type="number" step="any" {...register('lat', { valueAsNumber: true })} className={inputClass} />
+      <div>
+        <p className="text-[13px] font-medium text-slate-600">{t('selectLocation')}</p>
+        <div className="mt-2">
+          <PinDropMap
+            lat={lat}
+            lng={lng}
+            onChange={(nextLat, nextLng) => {
+              setValue('lat', nextLat)
+              setValue('lng', nextLng)
+            }}
+            ariaLabel={t('selectLocation')}
+          />
         </div>
-        <div>
-          <label htmlFor="lng" className="text-[13px] font-medium text-slate-600">
-            Lng
-          </label>
-          <input id="lng" type="number" step="any" {...register('lng', { valueAsNumber: true })} className={inputClass} />
-        </div>
+        <p className="mt-2 font-mono text-[13px] text-vigil-muted">
+          {lat.toFixed(4)}, {lng.toFixed(4)}
+        </p>
       </div>
 
       <button type="button" onClick={useMyLocation} className="text-[16px] text-vigil-blue underline">
-        Usar mi ubicación
+        {t('useMyLocation')}
       </button>
 
       <label className="flex items-center gap-2 text-[16px]">
         <input type="checkbox" {...register('urgent')} />
         {t('urgent')}
       </label>
+
+      <p className="text-[13px] text-vigil-muted">
+        {t('exchangeHint')}{' '}
+        <Link href="/intercambio" className="text-vigil-blue underline">
+          {t('exchangeLink')}
+        </Link>
+      </p>
 
       <button
         type="submit"

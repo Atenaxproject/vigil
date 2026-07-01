@@ -8,6 +8,7 @@ import { ExternalLink, RefreshCw } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { DtvNetworkWidget } from '@/components/dtv/DtvNetworkWidget'
 import type { InfrastructureStatus } from '@/types/vigil.types'
 
 interface LiveQuake {
@@ -205,7 +206,9 @@ export function InformacionLive() {
         )}
       </section>
 
-      <section className="mt-8">
+      <DtvNetworkWidget />
+
+      <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('stats.title')}</h2>
         <p className="mt-1 font-mono text-[13px] text-status-unverified">
           {t('manualStats', { date: STATS_VERIFIED_DATE })}

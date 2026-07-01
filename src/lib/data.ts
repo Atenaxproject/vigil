@@ -17,6 +17,25 @@ export async function getRecentMissingPersons(limit = 10): Promise<PublicMissing
   }
 }
 
+export async function getApprovedOrganizations(): Promise<Organization[]> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('organizations')
+      .select(
+        'id, name, type, country, description_es, description_en, website, phone, email, whatsapp, donation_link, donation_instructions, lat, lng, location_label, verified, active'
+      )
+      .eq('approved_by_admin', true)
+      .eq('active', true)
+      .order('name')
+
+    if (error) return []
+    return (data ?? []) as Organization[]
+  } catch {
+    return []
+  }
+}
+
 export async function getDonationOrganizations(): Promise<Organization[]> {
   try {
     const supabase = await createClient()

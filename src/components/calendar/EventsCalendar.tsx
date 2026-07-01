@@ -257,7 +257,17 @@ export function EventsCalendar() {
       <div className="mt-6 space-y-6">
         {loading && <div className="skeleton h-24 rounded-card" />}
         {!loading && grouped.length === 0 && (
-          <p className="text-center text-[16px] text-vigil-muted">{t('empty')}</p>
+          <div className="rounded-card border border-slate-200 bg-vigil-cloud py-10 text-center">
+            <p className="text-[16px] text-vigil-muted">{t('empty')}</p>
+            <button
+              type="button"
+              onClick={() => setShowForm(true)}
+              className="mt-4 inline-flex min-h-[44px] items-center gap-1 rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white"
+            >
+              <Plus className="h-4 w-4" aria-hidden />
+              {t('emptyAction')}
+            </button>
+          </div>
         )}
         {grouped.map(([dateKey, dayEvents]) => (
           <section key={dateKey}>

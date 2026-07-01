@@ -4,6 +4,33 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-01 (full page audit)
+
+### Added
+- **Homepage recent empty state** — warmer copy directing users to DTV's
+  55,891+ records when Vigil has no recent submissions.
+- **`/organizaciones` directory** — loads admin-approved orgs from Supabase
+  with type filter, fraud warning, and donation links (replaces partner-link stub).
+- **`/informacion` DTV widget** — live combined network metrics from
+  `/api/dtv-metrics`.
+- **`/necesito-ayuda` pin-drop map** — tap-to-place location picker plus
+  page intro distinguishing crisis map markers from `/intercambio`.
+- **`/como-ayudar` family tracing** — Red Cross Honduras, Argentina,
+  Colombia lines; curated donations note linking to full org directory.
+- **Field-worker warnings** — `/equipo-activo` banner for rescue teams only;
+  `/intercambio` 7-day expiry notice on publish form.
+- **Calendar empty CTA** — "Add event" button in empty state.
+- **i18n** — new strings in all 8 locales for audit changes.
+
+### Changed
+- **`/donaciones`** — redirects to `/como-ayudar`; removed from desktop
+  sidebar (kept in mobile Más menu).
+- **`/noticias`** — redirects to `/informacion`; removed from desktop sidebar.
+- **Navigation** — `sidebarHidden` flag for consolidated routes.
+
+### Archived
+- `docs/build-process/31-page-audit-and-refine.md`; root prompt stub deleted.
+
 ## [Unreleased] — 2026-07-01 (DTV deep integration)
 
 ### Added

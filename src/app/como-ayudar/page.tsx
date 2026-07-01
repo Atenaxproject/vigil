@@ -88,8 +88,24 @@ export default async function ComoAyudarPage() {
       <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
       <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
-      <section className="mt-8">
+      <section className="mt-10">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('familySearch.title')}</h2>
+        <div className="mt-4 space-y-3">
+          <div className="rounded-card border border-slate-200 bg-white p-4">
+            <p className="text-[16px] text-vigil-body">{t('familySearch.honduras')}</p>
+          </div>
+          <div className="rounded-card border border-slate-200 bg-white p-4">
+            <p className="text-[16px] text-vigil-body">{t('familySearch.argentina')}</p>
+          </div>
+          <div className="rounded-card border border-slate-200 bg-white p-4">
+            <p className="text-[16px] text-vigil-body">{t('familySearch.colombia')}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{t('donations.title')}</h2>
+        <p className="mt-1 text-[16px] text-vigil-muted">{t('donations.curatedNote')}</p>
         <div className="mt-3 rounded-card border border-amber-200 bg-status-unverified-bg p-4 text-[16px] text-amber-900">
           {t('donations.warning')}
         </div>
@@ -176,6 +192,10 @@ export default async function ComoAyudarPage() {
 
       <Link href="/voluntarios" className="mt-8 inline-block text-[16px] text-vigil-blue underline">
         {t('volunteerLink')} →
+      </Link>
+
+      <Link href="/organizaciones" className="mt-4 inline-block text-[16px] text-vigil-blue underline">
+        {t('directoryLink')} →
       </Link>
     </div>
   )

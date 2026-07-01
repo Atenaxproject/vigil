@@ -49,6 +49,8 @@
   "missing": {
     "title": "Missing Persons",
     "subtitle": "Search or report a missing person",
+    "recentTitle": "Recent",
+    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include 55,891+ records from Desaparecidos Terremoto Venezuela.",
     "search": {
       "placeholder": "Search by name...",
       "button": "Search",
@@ -204,6 +206,17 @@
     "urgent": "URGENT",
     "verified": "Verified",
     "lastUpdate": "Last updated: {time}",
+    "needHelpPageTitle": "I need help here",
+    "needHelpIntro": "Mark a need or resource on the crisis map so rescue teams and neighbors can see it. For peer-to-peer exchange (offer or request goods), use Exchange.",
+    "selectLocation": "Tap the map to mark the location",
+    "useMyLocation": "Use my location",
+    "fieldTitle": "Title",
+    "fieldDescription": "Description",
+    "fieldCategory": "Category",
+    "submitSuccess": "Marker submitted",
+    "submitError": "Failed to submit",
+    "exchangeHint": "Looking to exchange goods or services with another person?",
+    "exchangeLink": "Go to Exchange",
     "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela"
   },
   "volunteers": {
@@ -304,7 +317,13 @@
     "contact": "Contact",
     "verified": "Verified Organization",
     "register": "Register Your Organization",
-    "registerNote": "Organizations require manual verification before appearing publicly. Allow 24-48 hours."
+    "registerNote": "Organizations require manual verification before appearing publicly. Allow 24-48 hours.",
+    "fraudWarning": "⚠️ Before donating: verify you are on the organization's official site. Type the URL directly. Beware of collection requests via direct message.",
+    "filterAll": "All",
+    "filterLabel": "Filter by type",
+    "count": "{count} organizations",
+    "empty": "No approved organizations yet.",
+    "howToHelpLink": "How to help — donations & collection points"
   },
   "donate": {
     "title": "How to Help",
@@ -372,6 +391,8 @@
   "exchange": {
     "title": "Resource Exchange",
     "subtitle": "Offer or request goods, shelter, transport, skills and more",
+    "pageIntro": "Peer-to-peer board to offer or request goods, shelter, transport, and skills. To mark a need on the crisis map, use I Need Help.",
+    "expiryNotice": "Listings expire automatically after 7 days.",
     "publish": "Post",
     "tabs": {
       "offering": "I'm Offering",
@@ -427,8 +448,16 @@
     "donations": {
       "title": "Verified donations",
       "warning": "⚠️ Before donating: verify you are on the official site. Type the URL directly in your browser. Beware of collection requests from unknown people via direct message.",
-      "donateButton": "Donate"
+      "donateButton": "Donate",
+      "curatedNote": "Highlighted channels to donate now. See the full directory on Organizations."
     },
+    "familySearch": {
+      "title": "Family tracing — International Red Cross",
+      "honduras": "Honduran Red Cross — +504-9849-5556 · busquedarcf@cruzroja.org.hn",
+      "argentina": "Argentine Red Cross — cruzroja.org.ar/rcf/",
+      "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
+    },
+    "directoryLink": "View full organization directory",
     "teams": {
       "title": "Countries & teams responding",
       "summary": "Total: 2,624 rescuers, 137 search dogs, 44 USAR teams.",
@@ -538,6 +567,16 @@
       "airport": "Airport",
       "telecom": "Telecom",
       "fuel": "Fuel"
+    },
+    "dtvNetwork": {
+      "title": "Sister platform network · Combined data",
+      "badge": "Active integration",
+      "personas": "People reported (DTV)",
+      "centros": "Collection centers (DTV)",
+      "listas": "Active lists (DTV)",
+      "attribution": "DTV data · source desaparecidosterremotovenezuela.com",
+      "unavailable": "DTV metrics unavailable right now.",
+      "viewPlatform": "View Desaparecidos Terremoto Venezuela"
     }
   },
   "assistant": {
@@ -646,7 +685,8 @@
     "sos": "I NEED ASSISTANCE",
     "sosSent": "SOS alert sent",
     "signOff": "End shift",
-    "signedOff": "Presence closed"
+    "signedOff": "Presence closed",
+    "fieldWarning": "For rescue teams and field workers only. Civilians should use I Need Help to report needs on the map."
   },
   "offline": {
     "title": "No connection",
@@ -704,7 +744,8 @@
     "title": "Events Calendar",
     "subtitle": "Donation drives, volunteer meetups, and distributions",
     "addEvent": "Add event",
-    "empty": "No upcoming events.",
+    "empty": "No upcoming events. Want to organize something?",
+    "emptyAction": "Add an event",
     "organizer": "Organizer",
     "filters": {
       "all": "All"

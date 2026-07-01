@@ -158,6 +158,10 @@ export default function EquipoActivoPage() {
       <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
       <p className="text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
+      <div className="rounded-card border border-slate-200 bg-vigil-blue-light p-3 text-[13px] text-vigil-body">
+        {t('fieldWarning')}
+      </div>
+
       <div>
         <label htmlFor="display-name" className="text-[13px] font-medium text-slate-600">
           {t('name')} *

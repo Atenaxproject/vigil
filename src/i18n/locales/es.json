@@ -49,6 +49,8 @@
   "missing": {
     "title": "Personas Desaparecidas",
     "subtitle": "Busca o reporta una persona desaparecida",
+    "recentTitle": "Recientes",
+    "recentEmpty": "Aún no hay registros recientes en Vigil. Al buscar por nombre, incluiremos también los 55,891+ registros de Desaparecidos Terremoto Venezuela.",
     "search": {
       "placeholder": "Buscar por nombre...",
       "button": "Buscar",
@@ -204,6 +206,17 @@
     "urgent": "URGENTE",
     "verified": "Verificado",
     "lastUpdate": "Actualizado: {time}",
+    "needHelpPageTitle": "Necesito ayuda aquí",
+    "needHelpIntro": "Marca una necesidad o recurso en el mapa de crisis para que equipos de rescate y vecinos lo vean. Para intercambio entre personas (ofrecer o pedir bienes), usa Intercambio.",
+    "selectLocation": "Toca el mapa para marcar la ubicación",
+    "useMyLocation": "Usar mi ubicación",
+    "fieldTitle": "Título",
+    "fieldDescription": "Descripción",
+    "fieldCategory": "Categoría",
+    "submitSuccess": "Marcador enviado",
+    "submitError": "Error al enviar",
+    "exchangeHint": "¿Buscas intercambiar bienes o servicios con otra persona?",
+    "exchangeLink": "Ir a Intercambio",
     "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela"
   },
   "volunteers": {
@@ -304,7 +317,13 @@
     "contact": "Contactar",
     "verified": "Organización Verificada",
     "register": "Registrar tu Organización",
-    "registerNote": "Las organizaciones requieren verificación manual. Espera 24-48 horas."
+    "registerNote": "Las organizaciones requieren verificación manual. Espera 24-48 horas.",
+    "fraudWarning": "⚠️ Antes de donar: verifica que estás en el sitio oficial de la organización. Escribe la URL directamente. Desconfía de colectas por mensaje directo.",
+    "filterAll": "Todas",
+    "filterLabel": "Filtrar por tipo",
+    "count": "{count} organizaciones",
+    "empty": "No hay organizaciones aprobadas todavía.",
+    "howToHelpLink": "Cómo ayudar — donaciones y puntos de acopio"
   },
   "donate": {
     "title": "Cómo Ayudar",
@@ -372,6 +391,8 @@
   "exchange": {
     "title": "Intercambio de Recursos",
     "subtitle": "Ofrece o solicita bienes, refugio, transporte, habilidades y más",
+    "pageIntro": "Tablón entre personas para ofrecer o solicitar bienes, refugio, transporte y habilidades. Para marcar una necesidad en el mapa de crisis, usa Necesito ayuda.",
+    "expiryNotice": "Las publicaciones expiran automáticamente después de 7 días.",
     "publish": "Publicar",
     "tabs": {
       "offering": "Ofrezco",
@@ -427,8 +448,16 @@
     "donations": {
       "title": "Donaciones verificadas",
       "warning": "⚠️ Antes de donar: verifica que estás en el sitio oficial. Escribe la URL directamente en el navegador. Desconfía de colectas por mensaje directo de personas desconocidas.",
-      "donateButton": "Donar"
+      "donateButton": "Donar",
+      "curatedNote": "Canales destacados para donar ahora. El directorio completo está en Organizaciones."
     },
+    "familySearch": {
+      "title": "Búsqueda de familiares — Cruz Roja internacional",
+      "honduras": "Cruz Roja Hondureña — +504-9849-5556 · busquedarcf@cruzroja.org.hn",
+      "argentina": "Cruz Roja Argentina — cruzroja.org.ar/rcf/",
+      "colombia": "Cruz Roja Colombiana — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
+    },
+    "directoryLink": "Ver directorio completo de organizaciones",
     "teams": {
       "title": "Países y equipos en el terreno",
       "summary": "Total: 2,624 rescatistas, 137 perros de búsqueda, 44 equipos USAR.",
@@ -538,6 +567,16 @@
       "airport": "Aeropuerto",
       "telecom": "Telecomunicaciones",
       "fuel": "Combustible"
+    },
+    "dtvNetwork": {
+      "title": "Red de plataformas hermanas · Datos combinados",
+      "badge": "Integración activa",
+      "personas": "Personas reportadas (DTV)",
+      "centros": "Centros de acopio (DTV)",
+      "listas": "Listas activas (DTV)",
+      "attribution": "Datos de DTV · fuente desaparecidosterremotovenezuela.com",
+      "unavailable": "Métricas de DTV no disponibles en este momento.",
+      "viewPlatform": "Ver Desaparecidos Terremoto Venezuela"
     }
   },
   "assistant": {
@@ -646,7 +685,8 @@
     "sos": "NECESITO ASISTENCIA",
     "sosSent": "Alerta SOS enviada",
     "signOff": "Finalizar turno",
-    "signedOff": "Presencia cerrada"
+    "signedOff": "Presencia cerrada",
+    "fieldWarning": "Solo para equipos de rescate y trabajadores de campo. Los civiles deben usar «Necesito ayuda» para reportar necesidades en el mapa."
   },
   "offline": {
     "title": "Sin conexión",
@@ -704,7 +744,8 @@
     "title": "Calendario de Eventos",
     "subtitle": "Recolecciones, encuentros de voluntarios y distribuciones",
     "addEvent": "Agregar evento",
-    "empty": "No hay eventos próximos.",
+    "empty": "No hay eventos próximos. ¿Quieres organizar algo?",
+    "emptyAction": "Añadir un evento",
     "organizer": "Organizador",
     "filters": {
       "all": "Todos"

@@ -152,7 +152,9 @@
       "aiDescription": "AI description",
       "comingSoonTitle": "Coming soon",
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
-    }
+    },
+    "recentTitle": "Recent",
+    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include 55,891+ records from Desaparecidos Terremoto Venezuela."
   },
   "map": {
     "title": "危机地图",
@@ -204,7 +206,18 @@
     "urgent": "紧急",
     "verified": "已验证",
     "lastUpdate": "最后更新：{{time}}",
-    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela"
+    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela",
+    "needHelpPageTitle": "I need help here",
+    "needHelpIntro": "Mark a need or resource on the crisis map so rescue teams and neighbors can see it. For peer-to-peer exchange (offer or request goods), use Exchange.",
+    "selectLocation": "Tap the map to mark the location",
+    "useMyLocation": "Use my location",
+    "fieldTitle": "Title",
+    "fieldDescription": "Description",
+    "fieldCategory": "Category",
+    "submitSuccess": "Marker submitted",
+    "submitError": "Failed to submit",
+    "exchangeHint": "Looking to exchange goods or services with another person?",
+    "exchangeLink": "Go to Exchange"
   },
   "volunteers": {
     "title": "志愿者注册",
@@ -304,7 +317,13 @@
     "contact": "联系",
     "verified": "已验证的组织",
     "register": "注册你的组织",
-    "registerNote": "组织需要手动验证才能公开显示。请留出 24-48 小时。"
+    "registerNote": "组织需要手动验证才能公开显示。请留出 24-48 小时。",
+    "fraudWarning": "⚠️ Before donating: verify you are on the organization's official site. Type the URL directly. Beware of collection requests via direct message.",
+    "filterAll": "All",
+    "filterLabel": "Filter by type",
+    "count": "{count} organizations",
+    "empty": "No approved organizations yet.",
+    "howToHelpLink": "How to help — donations & collection points"
   },
   "donate": {
     "title": "如何帮助",
@@ -419,7 +438,9 @@
       "success": "列表已发布。",
       "error": "发布失败。",
       "matchSuggestion": "{{count}} 个人正在提供类似的东西"
-    }
+    },
+    "pageIntro": "Peer-to-peer board to offer or request goods, shelter, transport, and skills. To mark a need on the crisis map, use I Need Help.",
+    "expiryNotice": "Listings expire automatically after 7 days."
   },
   "howToHelp": {
     "title": "如何帮助",
@@ -427,7 +448,8 @@
     "donations": {
       "title": "已验证的捐赠",
       "warning": "⚠️ 捐赠前：验证你在官方网站上。直接在浏览器中输入网址。小心来自陌生人的私信收集请求。",
-      "donateButton": "捐赠"
+      "donateButton": "捐赠",
+      "curatedNote": "Highlighted channels to donate now. See the full directory on Organizations."
     },
     "teams": {
       "title": "国家和响应队伍",
@@ -445,7 +467,14 @@
     "collection": {
       "title": "物资收集点"
     },
-    "volunteerLink": "注册为志愿者"
+    "volunteerLink": "注册为志愿者",
+    "familySearch": {
+      "title": "Family tracing — International Red Cross",
+      "honduras": "Honduran Red Cross — +504-9849-5556 · busquedarcf@cruzroja.org.hn",
+      "argentina": "Argentine Red Cross — cruzroja.org.ar/rcf/",
+      "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
+    },
+    "directoryLink": "View full organization directory"
   },
   "crisisInfo": {
     "title": "已验证的危机信息",
@@ -538,6 +567,16 @@
       "airport": "机场",
       "telecom": "电信",
       "fuel": "燃料"
+    },
+    "dtvNetwork": {
+      "title": "Sister platform network · Combined data",
+      "badge": "Active integration",
+      "personas": "People reported (DTV)",
+      "centros": "Collection centers (DTV)",
+      "listas": "Active lists (DTV)",
+      "attribution": "DTV data · source desaparecidosterremotovenezuela.com",
+      "unavailable": "DTV metrics unavailable right now.",
+      "viewPlatform": "View Desaparecidos Terremoto Venezuela"
     }
   },
   "feedback": {
@@ -586,7 +625,8 @@
     "sos": "我需要协助",
     "sosSent": "SOS 警报已发送",
     "signOff": "结束班次",
-    "signedOff": "位置已关闭"
+    "signedOff": "位置已关闭",
+    "fieldWarning": "For rescue teams and field workers only. Civilians should use I Need Help to report needs on the map."
   },
   "offline": {
     "title": "无连接",
@@ -644,7 +684,7 @@
     "title": "事件日历",
     "subtitle": "捐赠活动、志愿者聚会和分发",
     "addEvent": "添加事件",
-    "empty": "没有即将发生的事件。",
+    "empty": "No upcoming events. Want to organize something?",
     "organizer": "组织者",
     "filters": {
       "all": "全部"
@@ -673,7 +713,8 @@
       "success": "事件已发布。",
       "error": "发布失败。",
       "cancel": "关闭"
-    }
+    },
+    "emptyAction": "Add an event"
   },
   "collectionPoint": {
     "title": "注册物资收集点",

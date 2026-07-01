@@ -55,6 +55,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `28-readme-final-update.md` — README final update session
 - `29-dtv-api-integration.md` — federated search with Desaparecidos Terremoto Venezuela API (read-only, attributed results, photo ID, center sync)
 - `30-dtv-deep-integration.md` — DTV attribution UX, live metrics, paginated center sync cron, /red featured partner, UX cleanup
+- `31-page-audit-and-refine.md` — full page audit: empty states, org directory rebuild, route consolidation, DTV widget on /informacion
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

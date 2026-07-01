@@ -54,15 +54,15 @@ export function RecentMissingFeed({ initialRecords = [] }: RecentFeedProps) {
   if (records.length === 0) {
     return (
       <div className="border-t border-slate-200 p-4">
-        <h3 className="text-[16px] font-medium text-vigil-ink">Recientes</h3>
-        <p className="mt-2 text-[13px] text-vigil-muted">{t('search.noResults')}</p>
+        <h3 className="text-[16px] font-medium text-vigil-ink">{t('recentTitle')}</h3>
+        <p className="mt-2 text-[13px] leading-relaxed text-vigil-muted">{t('recentEmpty')}</p>
       </div>
     )
   }
 
   return (
     <div className="border-t border-slate-200 p-4">
-      <h3 className="mb-3 text-[16px] font-medium text-vigil-ink">Recientes</h3>
+      <h3 className="mb-3 text-[16px] font-medium text-vigil-ink">{t('recentTitle')}</h3>
       <div className="space-y-3">
         {records.map((person) => (
           <MissingPersonCard key={person.id} person={person} />

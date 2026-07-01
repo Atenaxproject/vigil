@@ -228,6 +228,7 @@ export default function IntercambioPage() {
             <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
           </div>
           <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
+          <p className="mt-2 text-[16px] leading-relaxed text-vigil-body">{t('pageIntro')}</p>
         </div>
         <button
           type="button"
@@ -365,6 +366,7 @@ export default function IntercambioPage() {
                 <X className="h-5 w-5 text-vigil-muted" />
               </button>
             </div>
+            <p className="mt-2 text-[13px] text-vigil-muted">{t('expiryNotice')}</p>
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <input type="hidden" name="entry_type" value={tab} />
               <div>
