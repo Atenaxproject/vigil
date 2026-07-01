@@ -48,6 +48,7 @@ export const CRISIS_CONFIG = {
       url: 'https://desaparecidosterremotovenezuela.com',
       type: 'sister-platform' as const,
       slug: 'desaparecidosTerremoto' as const,
+      integrated: true,
     },
     {
       name: 'RedQuipu',

@@ -8,6 +8,8 @@ import {
   parseJsonFromText,
   SONNET_MODEL,
 } from '@/lib/ai/client'
+import { identifyByPhotoDTV } from '@/lib/dtv-api'
+import { mapDTVPersonaToFederated } from '@/lib/dtv-mapper'
 
 export const dynamic = 'force-dynamic'
 
@@ -22,7 +24,7 @@ interface MatchResult {
 export async function POST(request: NextRequest) {
   if (!isAnthropicConfigured()) {
     return NextResponse.json(
-      { unavailable: true, matches: [], description: null },
+      { unavailable: true, matches: [], dtvMatches: [], description: null },
       { status: 503 }
     )
   }
@@ -44,7 +46,7 @@ export async function POST(request: NextRequest) {
     const anthropic = createAnthropicClient()
     if (!anthropic) {
       return NextResponse.json(
-        { unavailable: true, matches: [], description: null },
+        { unavailable: true, matches: [], dtvMatches: [], description: null },
         { status: 503 }
       )
     }
@@ -79,7 +81,12 @@ If no person is clearly visible, say "No se puede identificar una persona en est
 
     const description = extractTextContent(visionResponse.content)
     if (!description || description.includes('No se puede identificar')) {
-      return NextResponse.json({ matches: [], description: null })
+      const dtvOnly = await identifyByPhotoDTV(base64, photo.type)
+      return NextResponse.json({
+        matches: [],
+        dtvMatches: (dtvOnly ?? []).map(mapDTVPersonaToFederated),
+        description: null,
+      })
     }
 
     const supabase = await createClient()
@@ -88,10 +95,6 @@ If no person is clearly visible, say "No se puede identificar una persona en est
       .select('id, full_name, age, gender, last_seen_location, estado, notes, photo_url')
       .eq('status', 'missing')
       .limit(100)
-
-    if (!candidates?.length) {
-      return NextResponse.json({ matches: [], description })
-    }
 
     const matchResponse = await anthropic.messages.create({
       model: HAIKU_MODEL,
@@ -107,7 +110,7 @@ Return ONLY JSON: {"matches": ["id1", "id2"], "confidence": "alta/media/baja"}
 
 Missing persons:
 ${JSON.stringify(
-  candidates.map((c) => ({
+  (candidates ?? []).map((c) => ({
     id: c.id,
     name: c.full_name,
     age: c.age,
@@ -123,7 +126,9 @@ ${JSON.stringify(
 
     const matchText = extractTextContent(matchResponse.content)
     const result = parseJsonFromText<MatchResult>(matchText, { matches: [], confidence: 'baja' })
-    const matchedRecords = candidates.filter((c) => result.matches?.includes(c.id))
+    const matchedRecords = (candidates ?? []).filter((c) => result.matches?.includes(c.id))
+
+    const dtvMatches = await identifyByPhotoDTV(base64, photo.type)
 
     return NextResponse.json({
       description,
@@ -142,9 +147,16 @@ ${JSON.stringify(
         verified: false,
         created_at: '',
         updated_at: '',
+        _source: 'vigil' as const,
       })),
+      dtvMatches: (dtvMatches ?? []).map(mapDTVPersonaToFederated),
     })
   } catch {
-    return NextResponse.json({ matches: [], description: null, error: 'analysis_failed' })
+    return NextResponse.json({
+      matches: [],
+      dtvMatches: [],
+      description: null,
+      error: 'analysis_failed',
+    })
   }
 }

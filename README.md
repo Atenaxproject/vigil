@@ -65,6 +65,7 @@ One config file change redeploys the whole platform for **any country, any disas
 
 - Search or report a missing person — PFIF 1.4 compatible, interoperable with Google Person Finder
 - Photo-based search — Claude Vision analyzes uploaded photos and matches against database descriptions (no biometric data stored)
+- Federated search — name queries also hit Desaparecidos Terremoto Venezuela's 55k+ record API live; results clearly attributed, never stored in Vigil
 - Private claim-link inbox — manage your own report and receive contact requests without creating an account
 - Public notes and sightings — anyone can add a verified sighting to any record in real time
 - Geographic breakdown — filter by estado, municipio, and parroquia across all 24 Venezuelan states
@@ -183,7 +184,8 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 ### ✅ Live Now
 
 - Missing persons board — search, report, real-time updates, claim-token private inbox
-- Photo-based search via Claude Vision
+- Federated search — Vigil + Desaparecidos Terremoto Venezuela (55k+ records, live API, attributed)
+- Photo-based search via Claude Vision + DTV facial recognition (federated, attributed)
 - Public notes and sightings on missing persons records
 - Crisis map — USGS aftershocks, needs, resources, shelters, hospitals, danger zones, rescue zones
 - Rescuer safety presence system with SOS button

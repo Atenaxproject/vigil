@@ -23,6 +23,7 @@ const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/community-wall/flag': { max: 20, windowMs: 60 * 60 * 1000 },
   '/api/assistant': { max: 30, windowMs: 60 * 60 * 1000 },
   '/api/photo-search': { max: 10, windowMs: 60 * 60 * 1000 },
+  '/api/admin/sync-dtv-centers': { max: 5, windowMs: 60 * 60 * 1000 },
 }
 
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>()

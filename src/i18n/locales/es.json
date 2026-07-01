@@ -60,7 +60,11 @@
       "loading": "Buscando...",
       "resultsCount": "{count} resultados encontrados",
       "allCountry": "Todo el país",
-      "geoFilterLabel": "Filtrar por estado"
+      "geoFilterLabel": "Filtrar por estado",
+      "vigilSourceLabel": "En Vigil ({count})",
+      "dtvSourceLabel": "En Desaparecidos Terremoto Venezuela ({count})",
+      "dtvViewFullPlatform": "Ver plataforma completa →",
+      "dtvSearchedNoResults": "También buscamos en Desaparecidos Terremoto Venezuela — sin coincidencias."
     },
     "photoSearch": {
       "divider": "o busca por foto",
@@ -68,6 +72,9 @@
       "analyzing": "Analizando foto con IA...",
       "privacyNotice": "La foto se analiza temporalmente y no se almacena. Solo se comparan características físicas visibles con nuestra base de datos.",
       "matchLabel": "Posible coincidencia · Confianza: {confidence}",
+      "vigilMatchLabel": "Posible coincidencia en Vigil · Confianza: {confidence}",
+      "dtvMatchLabel": "Coincidencias por reconocimiento facial — Desaparecidos Terremoto Venezuela",
+      "dtvViewFullPlatform": "Ver plataforma completa →",
       "aiDescription": "Descripción de la IA",
       "comingSoonTitle": "Próximamente",
       "comingSoonBody": "La búsqueda por foto requiere configurar ANTHROPIC_API_KEY en el servidor."
@@ -130,7 +137,9 @@
       "markFound": "Marcar como Encontrado/a",
       "daysAgo": "hace {count} días",
       "hoursAgo": "hace {count} horas",
-      "justNow": "Hace un momento"
+      "justNow": "Hace un momento",
+      "dtvSourceBadge": "Fuente: Desaparecidos Terremoto Venezuela",
+      "dtvViewPlatform": "Ver en plataforma"
     }
   },
   "map": {

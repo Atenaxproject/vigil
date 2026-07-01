@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { ExternalLink, Search, UserPlus } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
+import { tagVigilPerson, type FederatedPerson } from '@/lib/dtv-mapper'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { PRIORITY_ESTADOS } from '@/lib/venezuela-geo'
 import type { PublicMissingPerson } from '@/types/vigil.types'
@@ -13,6 +14,7 @@ import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
 import { PhotoSearch } from '@/components/missing/PhotoSearch'
 
 const sisterPlatforms = CRISIS_CONFIG.partnerLinks.filter((link) => link.type === 'sister-platform')
+const DTV_PLATFORM_URL = 'https://desaparecidosterremotovenezuela.com'
 
 const GEO_FILTERS = [
   { key: 'all', labelKey: 'allCountry' as const },
@@ -21,6 +23,13 @@ const GEO_FILTERS = [
     label: e === 'Distrito Capital' ? 'Caracas' : e,
   })),
 ]
+
+interface SearchResponse {
+  vigil?: FederatedPerson[]
+  dtv?: FederatedPerson[]
+  results?: FederatedPerson[]
+  dtvAvailable?: boolean
+}
 
 interface MissingPersonSearchProps {
   initialResults?: PublicMissingPerson[]
@@ -32,7 +41,11 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
   const tNav = useTranslations('nav')
   const [query, setQuery] = useState('')
   const [estadoFilter, setEstadoFilter] = useState('all')
-  const [results, setResults] = useState<PublicMissingPerson[]>(initialResults)
+  const [vigilResults, setVigilResults] = useState<FederatedPerson[]>(
+    initialResults.map(tagVigilPerson)
+  )
+  const [dtvResults, setDtvResults] = useState<FederatedPerson[]>([])
+  const [dtvAvailable, setDtvAvailable] = useState(false)
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
 
@@ -49,18 +62,20 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
           if (payload.eventType === 'INSERT') {
             const row = payload.new as PublicMissingPerson
             if (!searched || !query.trim()) {
-              setResults((prev) => [row, ...prev].slice(0, 50))
+              setVigilResults((prev) => [tagVigilPerson(row), ...prev].slice(0, 50))
             }
           } else if (payload.eventType === 'UPDATE') {
             const row = payload.new as PublicMissingPerson & { flagged?: boolean }
             if (row.flagged) {
-              setResults((prev) => prev.filter((r) => r.id !== row.id))
+              setVigilResults((prev) => prev.filter((r) => r.id !== row.id))
             } else {
-              setResults((prev) => prev.map((r) => (r.id === row.id ? { ...r, ...row } : r)))
+              setVigilResults((prev) =>
+                prev.map((r) => (r.id === row.id ? tagVigilPerson({ ...r, ...row }) : r))
+              )
             }
           } else if (payload.eventType === 'DELETE') {
             const row = payload.old as { id: string }
-            setResults((prev) => prev.filter((r) => r.id !== row.id))
+            setVigilResults((prev) => prev.filter((r) => r.id !== row.id))
           }
         }
       )
@@ -79,10 +94,14 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
       if (searchQuery.trim()) params.set('q', searchQuery.trim())
       if (estado !== 'all') params.set('estado', estado)
       const res = await fetch(`/api/missing-persons/search?${params.toString()}`)
-      const data = (await res.json()) as { results?: PublicMissingPerson[] }
-      setResults(data.results ?? [])
+      const data = (await res.json()) as SearchResponse
+      setVigilResults(data.vigil ?? data.results?.filter((r) => r._source === 'vigil') ?? [])
+      setDtvResults(data.dtv ?? data.results?.filter((r) => r._source === 'dtv') ?? [])
+      setDtvAvailable(Boolean(data.dtvAvailable))
     } catch {
-      setResults([])
+      setVigilResults([])
+      setDtvResults([])
+      setDtvAvailable(false)
     } finally {
       setLoading(false)
     }
@@ -99,10 +118,15 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
     if (query.trim() || estado !== 'all') {
       await runSearch(query, estado)
     } else if (!query.trim()) {
-      setResults(initialResults)
+      setVigilResults(initialResults.map(tagVigilPerson))
+      setDtvResults([])
+      setDtvAvailable(false)
       setSearched(false)
     }
   }
+
+  const totalResults = vigilResults.length + dtvResults.length
+  const hasResults = totalResults > 0
 
   return (
     <div className="flex h-full flex-col">
@@ -166,9 +190,12 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
       </div>
       <div className="flex-1 space-y-3 overflow-y-auto p-4">
         {loading && <div className="skeleton h-24 rounded-card" />}
-        {!loading && searched && results.length === 0 && (
+        {!loading && searched && !hasResults && (
           <div className="rounded-card border border-slate-200 bg-vigil-cloud p-6 text-center">
             <p className="text-[16px] font-medium text-vigil-ink">{t('search.noResultsTitle')}</p>
+            {dtvAvailable && query.trim().length >= 2 && (
+              <p className="mt-2 text-[13px] text-vigil-muted">{t('search.dtvSearchedNoResults')}</p>
+            )}
             <p className="mt-4 text-[16px] text-vigil-body">{t('search.sisterPlatformsIntro')}</p>
             <ul className="mt-3 space-y-2">
               {sisterPlatforms.map((platform) => (
@@ -195,14 +222,58 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
             </Link>
           </div>
         )}
-        {!loading && results.length > 0 && (
+        {!loading && hasResults && (
           <p className="text-[13px] text-vigil-muted">
-            {t('search.resultsCount', { count: results.length })}
+            {t('search.resultsCount', { count: totalResults })}
           </p>
         )}
-        {results.map((person) => (
-          <MissingPersonCard key={person.id} person={person} />
-        ))}
+
+        {!loading && searched && vigilResults.length > 0 && (
+          <section>
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-[13px] font-medium text-vigil-ink">
+                {t('search.vigilSourceLabel', { count: vigilResults.length })}
+              </p>
+            </div>
+            <div className="space-y-3">
+              {vigilResults.map((person) => (
+                <MissingPersonCard key={`vigil-${person.id}`} person={person} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {!loading && searched && dtvResults.length > 0 && (
+          <section>
+            <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+              <p className="text-[13px] font-medium text-vigil-ink">
+                {t('search.dtvSourceLabel', { count: dtvResults.length })}
+              </p>
+              <a
+                href={DTV_PLATFORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[13px] text-slate-600 hover:text-slate-800 hover:underline"
+              >
+                {t('search.dtvViewFullPlatform')}
+                <ExternalLink className="h-3 w-3 shrink-0" aria-hidden />
+              </a>
+            </div>
+            <div className="space-y-3">
+              {dtvResults.map((person) => (
+                <MissingPersonCard key={`dtv-${person.id}`} person={person} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {!loading && !searched && (
+          <div className="space-y-3">
+            {vigilResults.map((person) => (
+              <MissingPersonCard key={person.id} person={person} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

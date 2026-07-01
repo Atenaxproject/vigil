@@ -2,9 +2,13 @@
 
 import { useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { Camera, Loader2 } from 'lucide-react'
+import { Camera, ExternalLink, Loader2 } from 'lucide-react'
+import type { FederatedPerson } from '@/lib/dtv-mapper'
+import { tagVigilPerson } from '@/lib/dtv-mapper'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
+
+const DTV_PLATFORM_URL = 'https://desaparecidosterremotovenezuela.com'
 
 interface PhotoSearchProps {
   aiAvailable?: boolean
@@ -14,14 +18,16 @@ export function PhotoSearch({ aiAvailable = true }: PhotoSearchProps) {
   const t = useTranslations('missing.photoSearch')
   const inputRef = useRef<HTMLInputElement>(null)
   const [loading, setLoading] = useState(false)
-  const [results, setResults] = useState<PublicMissingPerson[]>([])
+  const [vigilResults, setVigilResults] = useState<FederatedPerson[]>([])
+  const [dtvResults, setDtvResults] = useState<FederatedPerson[]>([])
   const [confidence, setConfidence] = useState<string | null>(null)
   const [description, setDescription] = useState<string | null>(null)
   const [unavailable, setUnavailable] = useState(false)
 
   async function handleFile(file: File) {
     setLoading(true)
-    setResults([])
+    setVigilResults([])
+    setDtvResults([])
     setConfidence(null)
     setDescription(null)
     setUnavailable(false)
@@ -32,7 +38,8 @@ export function PhotoSearch({ aiAvailable = true }: PhotoSearchProps) {
       const res = await fetch('/api/photo-search', { method: 'POST', body: formData })
       const data = (await res.json()) as {
         unavailable?: boolean
-        matches?: PublicMissingPerson[]
+        matches?: (PublicMissingPerson & { _source?: 'vigil' })[]
+        dtvMatches?: FederatedPerson[]
         confidence?: string
         description?: string | null
       }
@@ -42,11 +49,13 @@ export function PhotoSearch({ aiAvailable = true }: PhotoSearchProps) {
         return
       }
 
-      setResults(data.matches ?? [])
+      setVigilResults((data.matches ?? []).map((m) => tagVigilPerson(m)))
+      setDtvResults(data.dtvMatches ?? [])
       setConfidence(data.confidence ?? null)
       setDescription(data.description ?? null)
     } catch {
-      setResults([])
+      setVigilResults([])
+      setDtvResults([])
     } finally {
       setLoading(false)
     }
@@ -111,13 +120,33 @@ export function PhotoSearch({ aiAvailable = true }: PhotoSearchProps) {
         </p>
       )}
 
-      {results.length > 0 && (
+      {vigilResults.length > 0 && (
         <div className="mt-4 space-y-3">
           <p className="text-[13px] font-medium text-vigil-ink">
-            {t('matchLabel', { confidence: confidence ?? 'baja' })}
+            {t('vigilMatchLabel', { confidence: confidence ?? 'baja' })}
           </p>
-          {results.map((person) => (
-            <MissingPersonCard key={person.id} person={person} />
+          {vigilResults.map((person) => (
+            <MissingPersonCard key={`vigil-${person.id}`} person={person} />
+          ))}
+        </div>
+      )}
+
+      {dtvResults.length > 0 && (
+        <div className="mt-4 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[13px] font-medium text-vigil-ink">{t('dtvMatchLabel')}</p>
+            <a
+              href={DTV_PLATFORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[13px] text-slate-600 hover:underline"
+            >
+              {t('dtvViewFullPlatform')}
+              <ExternalLink className="h-3 w-3 shrink-0" aria-hidden />
+            </a>
+          </div>
+          {dtvResults.map((person) => (
+            <MissingPersonCard key={`dtv-${person.id}`} person={person} />
           ))}
         </div>
       )}

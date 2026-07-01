@@ -60,7 +60,11 @@
       "loading": "Searching...",
       "resultsCount": "{count} results found",
       "allCountry": "All country",
-      "geoFilterLabel": "Filter by state"
+      "geoFilterLabel": "Filter by state",
+      "vigilSourceLabel": "On Vigil ({count})",
+      "dtvSourceLabel": "On Desaparecidos Terremoto Venezuela ({count})",
+      "dtvViewFullPlatform": "View full platform →",
+      "dtvSearchedNoResults": "We also searched Desaparecidos Terremoto Venezuela — no matches."
     },
     "photoSearch": {
       "divider": "or search by photo",
@@ -68,6 +72,9 @@
       "analyzing": "Analyzing photo with AI...",
       "privacyNotice": "The photo is analyzed temporarily and not stored. Only visible physical traits are compared against our database.",
       "matchLabel": "Possible match · Confidence: {confidence}",
+      "vigilMatchLabel": "Possible match on Vigil · Confidence: {confidence}",
+      "dtvMatchLabel": "Facial recognition matches — Desaparecidos Terremoto Venezuela",
+      "dtvViewFullPlatform": "View full platform →",
       "aiDescription": "AI description",
       "comingSoonTitle": "Coming soon",
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
@@ -130,7 +137,9 @@
       "markFound": "Mark as Found",
       "daysAgo": "{count} days ago",
       "hoursAgo": "{count} hours ago",
-      "justNow": "Just now"
+      "justNow": "Just now",
+      "dtvSourceBadge": "Source: Desaparecidos Terremoto Venezuela",
+      "dtvViewPlatform": "View on platform"
     }
   },
   "map": {

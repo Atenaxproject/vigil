@@ -60,7 +60,11 @@
       "loading": "搜索中...",
       "resultsCount": "找到 {{count}} 条结果",
       "allCountry": "All country",
-      "geoFilterLabel": "Filter by state"
+      "geoFilterLabel": "Filter by state",
+      "vigilSourceLabel": "在 Vigil ({count})",
+      "dtvSourceLabel": "在 Desaparecidos Terremoto Venezuela ({count})",
+      "dtvViewFullPlatform": "查看完整平台 →",
+      "dtvSearchedNoResults": "我们也在 Desaparecidos Terremoto Venezuela 搜索过 — 无匹配结果。"
     },
     "status": {
       "missing": "失踪",
@@ -120,7 +124,9 @@
       "markFound": "标记为已找到",
       "daysAgo": "{{count}} 天前",
       "hoursAgo": "{{count}} 小时前",
-      "justNow": "刚刚"
+      "justNow": "刚刚",
+      "dtvSourceBadge": "来源：Desaparecidos Terremoto Venezuela",
+      "dtvViewPlatform": "在平台查看"
     },
     "photoSearch": {
       "divider": "or search by photo",
@@ -128,6 +134,9 @@
       "analyzing": "Analyzing photo with AI...",
       "privacyNotice": "The photo is analyzed temporarily and not stored. Only visible physical traits are compared against our database.",
       "matchLabel": "Possible match · Confidence: {confidence}",
+      "vigilMatchLabel": "Vigil 可能匹配 · 置信度：{confidence}",
+      "dtvMatchLabel": "人脸识别匹配 — Desaparecidos Terremoto Venezuela",
+      "dtvViewFullPlatform": "查看完整平台 →",
       "aiDescription": "AI description",
       "comingSoonTitle": "Coming soon",
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."

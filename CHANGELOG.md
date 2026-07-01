@@ -4,6 +4,24 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-01 (DTV federated search)
+
+### Added
+- **Desaparecidos Terremoto Venezuela federated search** — `src/lib/dtv-api.ts`
+  read-only client; `/api/missing-persons/search` queries Vigil Supabase and
+  DTV API in parallel; results on `/` and `/buscar` with gray source badges and
+  back-links. No DTV data stored in Vigil's database.
+- **DTV facial recognition in photo search** — `/api/photo-search` also calls
+  DTV `/identificar`; separate attributed section in `PhotoSearch` UI.
+- **DTV center sync** — `POST /api/admin/sync-dtv-centers` (admin secret) imports
+  collection points into `map_markers` with source attribution.
+- **i18n** — DTV attribution strings in all 8 locales.
+
+### Changed
+- **`crisis.config.ts`** — DTV sister platform marked `integrated: true`.
+- **Rate limits** — `/api/admin/sync-dtv-centers` (5/hr).
+- **Docs** — archived `29-dtv-api-integration.md`; removed root prompt stub.
+
 ## [Unreleased] — 2026-06-30 (Claude AI, photo search, geo breakdown)
 
 ### Added

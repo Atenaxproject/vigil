@@ -60,7 +60,11 @@
       "loading": "Wird gesucht...",
       "resultsCount": "{{count}} Ergebnisse gefunden",
       "allCountry": "All country",
-      "geoFilterLabel": "Filter by state"
+      "geoFilterLabel": "Filter by state",
+      "vigilSourceLabel": "Auf Vigil ({count})",
+      "dtvSourceLabel": "Bei Desaparecidos Terremoto Venezuela ({count})",
+      "dtvViewFullPlatform": "Vollständige Plattform ansehen →",
+      "dtvSearchedNoResults": "Wir haben auch bei Desaparecidos Terremoto Venezuela gesucht — keine Treffer."
     },
     "status": {
       "missing": "Vermisst",
@@ -120,7 +124,9 @@
       "markFound": "Als gefunden markieren",
       "daysAgo": "vor {{count}} Tagen",
       "hoursAgo": "vor {{count}} Stunden",
-      "justNow": "Gerade eben"
+      "justNow": "Gerade eben",
+      "dtvSourceBadge": "Quelle: Desaparecidos Terremoto Venezuela",
+      "dtvViewPlatform": "Auf Plattform ansehen"
     },
     "photoSearch": {
       "divider": "or search by photo",
@@ -128,6 +134,9 @@
       "analyzing": "Analyzing photo with AI...",
       "privacyNotice": "The photo is analyzed temporarily and not stored. Only visible physical traits are compared against our database.",
       "matchLabel": "Possible match · Confidence: {confidence}",
+      "vigilMatchLabel": "Mögliche Übereinstimmung auf Vigil · Vertrauen: {confidence}",
+      "dtvMatchLabel": "Treffer per Gesichtserkennung — Desaparecidos Terremoto Venezuela",
+      "dtvViewFullPlatform": "Vollständige Plattform ansehen →",
       "aiDescription": "AI description",
       "comingSoonTitle": "Coming soon",
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."

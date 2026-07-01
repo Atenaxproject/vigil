@@ -60,7 +60,11 @@
       "loading": "Поиск...",
       "resultsCount": "Найдено {{count}} результатов",
       "allCountry": "All country",
-      "geoFilterLabel": "Filter by state"
+      "geoFilterLabel": "Filter by state",
+      "vigilSourceLabel": "На Vigil ({count})",
+      "dtvSourceLabel": "На Desaparecidos Terremoto Venezuela ({count})",
+      "dtvViewFullPlatform": "Открыть полную платформу →",
+      "dtvSearchedNoResults": "Мы также искали на Desaparecidos Terremoto Venezuela — совпадений нет."
     },
     "status": {
       "missing": "Пропал",
@@ -120,7 +124,9 @@
       "markFound": "Отметить как найденного",
       "daysAgo": "{{count}} дней назад",
       "hoursAgo": "{{count}} часов назад",
-      "justNow": "Только что"
+      "justNow": "Только что",
+      "dtvSourceBadge": "Источник: Desaparecidos Terremoto Venezuela",
+      "dtvViewPlatform": "Открыть на платформе"
     },
     "photoSearch": {
       "divider": "or search by photo",
@@ -128,6 +134,9 @@
       "analyzing": "Analyzing photo with AI...",
       "privacyNotice": "The photo is analyzed temporarily and not stored. Only visible physical traits are compared against our database.",
       "matchLabel": "Possible match · Confidence: {confidence}",
+      "vigilMatchLabel": "Возможное совпадение на Vigil · Уверенность: {confidence}",
+      "dtvMatchLabel": "Совпадения по распознаванию лиц — Desaparecidos Terremoto Venezuela",
+      "dtvViewFullPlatform": "Открыть полную платформу →",
       "aiDescription": "AI description",
       "comingSoonTitle": "Coming soon",
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
