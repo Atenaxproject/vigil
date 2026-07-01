@@ -2,6 +2,10 @@
 ALTER TABLE map_markers
   ADD COLUMN IF NOT EXISTS external_id TEXT;
 
-CREATE UNIQUE INDEX IF NOT EXISTS idx_map_markers_external_id
-  ON map_markers (external_id)
-  WHERE external_id IS NOT NULL;
+DROP INDEX IF EXISTS idx_map_markers_external_id;
+
+ALTER TABLE map_markers
+  DROP CONSTRAINT IF EXISTS map_markers_external_id_key;
+
+ALTER TABLE map_markers
+  ADD CONSTRAINT map_markers_external_id_key UNIQUE (external_id);
