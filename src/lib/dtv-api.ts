@@ -4,6 +4,7 @@
 
 const DTV_BASE = process.env.DTV_API_BASE_URL
 const DTV_KEY = process.env.DTV_API_KEY
+const DTV_PAGE_LIMIT = '100'
 
 function dtvHeaders(): Record<string, string> {
   return {
@@ -30,6 +31,8 @@ export interface DTVSearchResult {
   pagination: {
     nextCursor?: string
     total?: number
+    hasMore?: boolean
+    limit?: number
   }
 }
 
@@ -39,14 +42,20 @@ export interface DTVCentro {
   name?: string
   descripcion?: string
   tipo?: string
+  ubicacion?: string
+  telefono?: string | null
   lat?: number
   lng?: number
   latitud?: number
   longitud?: number
+  createdAt?: number
+  updatedAt?: number
 }
 
 export interface DTVPagination {
   nextCursor?: string
+  hasMore?: boolean
+  limit?: number
   total?: number
 }
 
@@ -79,15 +88,23 @@ function extractPagination(data: Record<string, unknown>): DTVPagination {
 
   const total = totalCandidates.find((v): v is number => typeof v === 'number')
 
-  const cursorCandidates = [pagination.nextCursor, pagination.next, pagination.cursor]
+  const cursorCandidates = [pagination.nextCursor, pagination.next, pagination.cursor, data.nextCursor]
   const nextCursor = cursorCandidates.find((v): v is string => typeof v === 'string')
 
-  return { nextCursor, total }
+  const hasMore = typeof pagination.hasMore === 'boolean' ? pagination.hasMore : undefined
+  const limit = typeof pagination.limit === 'number' ? pagination.limit : undefined
+
+  return { nextCursor, hasMore, limit, total }
 }
 
 function extractCentros(data: Record<string, unknown>): DTVCentro[] {
   const raw = data.data ?? data.centros
   return Array.isArray(raw) ? (raw as DTVCentro[]) : []
+}
+
+function extractListItems(data: Record<string, unknown>): unknown[] {
+  const raw = data.data ?? data.personas ?? data.listas ?? data.items
+  return Array.isArray(raw) ? raw : []
 }
 
 export function inferCentroMarkerType(centro: DTVCentro): 'hospital' | 'collection_point' {
@@ -96,6 +113,20 @@ export function inferCentroMarkerType(centro: DTVCentro): 'hospital' | 'collecti
     return 'hospital'
   }
   return 'collection_point'
+}
+
+export function inferCentroCategory(centro: DTVCentro): 'medical' | 'other' {
+  return inferCentroMarkerType(centro) === 'hospital' ? 'medical' : 'other'
+}
+
+export function getCentroAddress(centro: DTVCentro): string | null {
+  const address =
+    (typeof centro.ubicacion === 'string' ? centro.ubicacion : null) ||
+    centro.descripcion ||
+    centro.nombre ||
+    centro.name
+
+  return address?.trim() ? address.trim() : null
 }
 
 async function fetchDTVPage(
@@ -121,22 +152,62 @@ async function fetchDTVPage(
   }
 }
 
+/** Count items by walking cursor pagination — DTV does not expose pagination.total. */
+export async function countDTVItems(endpoint: string): Promise<number> {
+  if (!DTV_BASE || !DTV_KEY) return 0
+
+  let total = 0
+  let cursor: string | undefined
+
+  do {
+    const params: Record<string, string> = { limit: DTV_PAGE_LIMIT }
+    if (cursor) params.cursor = cursor
+
+    const data = await fetchDTVPage(endpoint, params)
+    if (!data) break
+
+    total += extractListItems(data).length
+
+    const pagination = extractPagination(data)
+    cursor = pagination.nextCursor
+
+    if (pagination.hasMore === false) break
+  } while (cursor)
+
+  return total
+}
+
 function extractPersonas(data: Record<string, unknown>): Record<string, unknown>[] {
   const raw = data.data ?? data.personas
   return Array.isArray(raw) ? (raw as Record<string, unknown>[]) : []
 }
 
 function mapPersona(p: Record<string, unknown>): DTVPersona {
+  const ubicacionRaw = p.ubicacion
+  const ubicacionText =
+    typeof ubicacionRaw === 'string'
+      ? ubicacionRaw
+      : typeof ubicacionRaw === 'object' &&
+          ubicacionRaw !== null &&
+          typeof (ubicacionRaw as Record<string, unknown>).texto === 'string'
+        ? String((ubicacionRaw as Record<string, unknown>).texto)
+        : undefined
+
   return {
     id: String(p.id ?? ''),
     nombre: String(p.nombre ?? p.name ?? ''),
     edad: typeof p.edad === 'number' ? p.edad : undefined,
     sexo: typeof p.sexo === 'string' ? p.sexo : undefined,
-    ubicacion: typeof p.ubicacion === 'string' ? p.ubicacion : undefined,
+    ubicacion: ubicacionText,
     estado: typeof p.estado === 'string' ? p.estado : undefined,
-    foto_url: typeof p.foto_url === 'string' ? p.foto_url : undefined,
-    localizado: Boolean(p.localizado),
-    created_at: typeof p.created_at === 'string' ? p.created_at : new Date().toISOString(),
+    foto_url: typeof p.foto === 'string' ? p.foto : typeof p.foto_url === 'string' ? p.foto_url : undefined,
+    localizado: p.estado === 'localizado' || Boolean(p.localizado),
+    created_at:
+      typeof p.created_at === 'string'
+        ? p.created_at
+        : typeof p.createdAt === 'number'
+          ? new Date(p.createdAt).toISOString()
+          : new Date().toISOString(),
     _source: 'dtv',
   }
 }
@@ -162,13 +233,15 @@ export async function searchDTVPersonas(
     }
 
     const data = (await res.json()) as Record<string, unknown>
-    const pagination = (data.pagination ?? {}) as DTVSearchResult['pagination']
+    const pagination = extractPagination(data)
     const tagged = extractPersonas(data).map(mapPersona)
 
     return {
       data: tagged,
       pagination: {
         nextCursor: pagination.nextCursor,
+        hasMore: pagination.hasMore,
+        limit: pagination.limit,
         total: pagination.total,
       },
     }
@@ -219,14 +292,17 @@ export async function getAllDTVCentros(): Promise<DTVCentro[]> {
   let cursor: string | undefined
 
   do {
-    const params: Record<string, string> = { limit: '100' }
+    const params: Record<string, string> = { limit: DTV_PAGE_LIMIT }
     if (cursor) params.cursor = cursor
 
     const data = await fetchDTVPage('centros', params)
     if (!data) break
 
     allCentros.push(...extractCentros(data))
-    cursor = extractPagination(data).nextCursor
+
+    const pagination = extractPagination(data)
+    cursor = pagination.nextCursor
+    if (pagination.hasMore === false) break
   } while (cursor)
 
   return allCentros
@@ -244,28 +320,26 @@ export async function getDTVMetrics(): Promise<DTVMetrics> {
 
   if (!DTV_BASE || !DTV_KEY) return fallback
 
-  const [personasRes, centrosRes, listasRes] = await Promise.allSettled([
-    fetchDTVPage('personas', { limit: '1' }),
-    fetchDTVPage('centros', { limit: '1' }),
-    fetchDTVPage('listas', { limit: '1' }),
-  ])
+  try {
+    const [totalPersonas, totalCentros, totalListas] = await Promise.all([
+      countDTVItems('personas'),
+      countDTVItems('centros'),
+      countDTVItems('listas'),
+    ])
 
-  const personas =
-    personasRes.status === 'fulfilled' && personasRes.value ? extractPagination(personasRes.value) : null
-  const centros =
-    centrosRes.status === 'fulfilled' && centrosRes.value ? extractPagination(centrosRes.value) : null
-  const listas =
-    listasRes.status === 'fulfilled' && listasRes.value ? extractPagination(listasRes.value) : null
+    const available = totalPersonas > 0 || totalCentros > 0 || totalListas > 0
 
-  const available = Boolean(personas || centros || listas)
-
-  return {
-    totalPersonas: personas?.total ?? 0,
-    totalCentros: centros?.total ?? 0,
-    totalListas: listas?.total ?? 0,
-    lastUpdated: new Date().toISOString(),
-    source: DTV_SOURCE,
-    available,
+    return {
+      totalPersonas,
+      totalCentros,
+      totalListas,
+      lastUpdated: new Date().toISOString(),
+      source: DTV_SOURCE,
+      available,
+    }
+  } catch (error) {
+    console.error('DTV metrics count failed:', error)
+    return fallback
   }
 }
 

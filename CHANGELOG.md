@@ -4,6 +4,25 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-01 (DTV geocode + stats fix)
+
+### Added
+- **`src/lib/geocode-venezuela.ts`** — Nominatim geocoding for Venezuelan
+  addresses with User-Agent, rate-limit helper, and map-bounds validation.
+- **`supabase/migrations/009_external_id.sql`** — `external_id` column on
+  `map_markers` for stable DTV centro deduplication.
+
+### Fixed
+- **DTV centro sync** — geocodes text `ubicacion` via Nominatim (1 req/sec),
+  upserts by `external_id`; reports `geocoded`, `skipped`, `failed`.
+- **DTV metrics** — API exposes no `pagination.total`; counts now walk
+  cursor pages (`nextCursor`, `hasMore`, `?cursor=`) for personas/centros/listas.
+- **`dtv-api.ts`** — aligned types and helpers with real DTV field names
+  (`ubicacion`, `foto`, `createdAt`, nested persona ubicacion object).
+
+### Archived
+- `docs/build-process/32-dtv-geocode-and-stats-fix.md`; root prompt stub deleted.
+
 ## [Unreleased] — 2026-07-01 (full page audit)
 
 ### Added

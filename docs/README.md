@@ -56,6 +56,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `29-dtv-api-integration.md` — federated search with Desaparecidos Terremoto Venezuela API (read-only, attributed results, photo ID, center sync)
 - `30-dtv-deep-integration.md` — DTV attribution UX, live metrics, paginated center sync cron, /red featured partner, UX cleanup
 - `31-page-audit-and-refine.md` — full page audit: empty states, org directory rebuild, route consolidation, DTV widget on /informacion
+- `32-dtv-geocode-and-stats-fix.md` — Nominatim geocoding for DTV centros, cursor-pagination metrics counts, external_id dedup
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
