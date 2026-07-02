@@ -34,7 +34,7 @@ A unified, open-source humanitarian crisis platform — real-time missing person
 
 <br />
 
-**[vigil.youthewave.org](https://vigil.youthewave.org)** &nbsp;·&nbsp; **[github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)**
+**[vigil.youthewave.org](https://vigil.youthewave.org)** &nbsp;·&nbsp; **[vigil.youthewave.com](https://vigil.youthewave.com)** (redirects) &nbsp;·&nbsp; **[github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)**
 
 </div>
 
@@ -104,7 +104,7 @@ Production captures from [vigil.youthewave.org](https://vigil.youthewave.org). R
 
 ## What's live now
 
-Verified against source and production as of **2026-06-30**. Optional integrations degrade gracefully when API keys are missing — they never crash the app.
+Verified against source and production as of **2026-07-02**. Optional integrations degrade gracefully when API keys are missing — they never crash the app.
 
 ### Core crisis tools
 
@@ -118,6 +118,7 @@ Verified against source and production as of **2026-06-30**. Optional integratio
 | **PFIF export** | `/api/pfif` | [Google Person Finder](https://github.com/google/personfinder) XML interoperability |
 | **Claim-token inbox** | `/mi-reporte/[token]`, `/mi-intercambio/[token]` | Passwordless management; claim URL on submit |
 | **Crisis map** | `/` | USGS aftershocks, needs, resources, shelters, hospitals, collection points, active rescue teams |
+| **Connectivity / comms layer** | `/conectividad` | WiFi, Starlink, cell signal citizen reports — map layer + info card on `/informacion` |
 | **Retractable map layers** | `/` (desktop) | Collapsible panel on `lg+`; preference in `localStorage` |
 | **Collection points** | `/punto-de-acopio` | Citizen registration → amber map markers |
 | **Resource exchange** | `/intercambio` | Offer or request goods, shelter, transport, skills, equipment |
@@ -180,6 +181,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Photo-based search** — Claude Vision analysis + DTV facial recognition
 - **Claude AI assistant** — live database Q&A in 8 languages, never invents information
 - **Crisis map** — USGS aftershocks, GDACS alerts, needs, resources, shelters, hospitals, rescue zones, collection points (including DTV-sourced centers)
+- **Connectivity / comms layer** — WiFi, Starlink, cell signal points on map; citizen submission at `/conectividad`
 - **Rescuer safety system** — GPS check-in, 4-hour auto-expiry, SOS button
 - **Resource exchange (Intercambio)** — 7 categories, claim-token, 7-day auto-expiry
 - **Volunteer registry** — skills-based, public directory (name privacy protected)

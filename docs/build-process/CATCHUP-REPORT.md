@@ -131,6 +131,80 @@ See git log entry for this session's commit.
 
 ---
 
+---
+
+## Phase 5 — Changes Since 2026-06-30 (audit run 2026-07-02)
+
+### 5.1 Commits since last README update (72ca1de)
+
+| Commit | Description | Files |
+|---|---|---|
+| `d2cdc78` | DTV centro geocoding via Nominatim; external_id for stable dedup; 85 centers importable | `dtv-api.ts`, `geocode-venezuela.ts`, `sync-dtv-centers`, migration 009 |
+| `0f61f32` | Full UNIQUE constraint on `map_markers.external_id` (fixes Supabase ON CONFLICT upserts) | migration 009 |
+| `d4f3c9d` | Vigil brand favicon — V. mark in all required sizes (16/32/48/192/512px + apple-touch-icon 180x180) | `public/`, `manifest.json`, `layout.tsx` |
+| `cbc0bdd` | Connectivity/comms layer on crisis map — WiFi, Starlink, cell signal points; `/conectividad` route; `ConnectivityInfoCard` on `/informacion` | 22 files across map, i18n, nav |
+| `331d18f` | iOS PWA meta tags (`appleWebApp` in Next.js metadata); dedup of informacion hub (removed duplicate DTV widget + sister-platform list); crisis stats updated to 2026-07-01 sources | `manifest.json`, `layout.tsx`, `InformacionLive.tsx`, all 8 locales |
+
+### 5.2 New domain redirect
+
+- **vigil.youthewave.com** → 308 permanent redirect → **vigil.youthewave.org**
+- Confirmed live: `curl -s -w "%{http_code} %{redirect_url}" https://vigil.youthewave.com` → `308 https://vigil.youthewave.org/`
+- Hosted on Vercel, Cloudflare DNS-only CNAME (not proxied) — same pattern as primary domain
+- Both domains now documented in README.md
+
+### 5.3 PWA audit (source-level, 2026-07-02)
+
+| Check | Status | Notes |
+|---|---|---|
+| `manifest.json` valid | ✅ | `id`, `scope`, `start_url`, `display: standalone` all present |
+| Apple touch icon (PNG, 180×180) | ✅ | `/apple-touch-icon.png` — V. mark brand favicon, not SVG |
+| `apple-mobile-web-app-capable` | ✅ | `appleWebApp.capable: true` in Next.js metadata (commit `331d18f`) |
+| `apple-mobile-web-app-title` | ✅ | `appleWebApp.title: 'Vigil'` |
+| `apple-mobile-web-app-status-bar-style` | ✅ | `appleWebApp.statusBarStyle: 'default'` |
+| iOS banner — iOS Safari only | ✅ | `isIOS() && !isInStandaloneMode()` gating in `IOSInstallBanner.tsx` |
+| iOS banner — standalone mode hidden | ✅ | `isInStandaloneMode()` check prevents showing when already installed |
+| Manifest icons (192 + 512, maskable) | ✅ | Both `any` and `maskable` purpose entries present |
+| `viewport` — `width: device-width` | ✅ | Set in `layout.tsx` viewport export (fix from prompt 16) |
+| Lighthouse PWA audit | ⚠️ | Cannot run remotely — requires Chrome DevTools on live device or CI |
+
+Note: iOS does not support `beforeinstallprompt`. The custom `IOSInstallBanner` component is the correct approach. Android/Chrome native install prompt is handled by `PwaInstallButton` in Navigation.tsx.
+
+### 5.4 Redundancy findings (Phase 3 of prompt 36)
+
+These are **findings for review, not changes made**:
+
+**Finding A — Sister platforms list out of sync**
+- `README.md § Sister Platforms` (added in prompt 28) hardcodes **7 platforms** as markdown links
+- `src/config/crisis.config.ts partnerLinks` has only **4 sister-platform entries** (Venezuela Te Busca, DTV, RedQuipu, Mapa de Daños Venezuela)
+- Missing from config: CIVIS Venezuela, SOS Venezuela 2026, Red Venezuela Activa
+- `/red` page renders from config only → users see 4 platforms there, README shows 7
+- **Recommendation:** Either add the 3 missing platforms to `crisis.config.ts` so `/red` shows all 7, or remove them from the README table to match what the page actually shows. Awaiting Orlando's decision.
+
+**Finding B — Root-level CLAUDE.md: ✅ clean pointer**
+- Still a 4-line pointer to `docs/architecture/CLAUDE.md`. No content drift.
+
+**Finding C — DESIGN-SYSTEM.md: ✅ no root-level stub**
+- Only exists at `docs/architecture/DESIGN-SYSTEM.md`. No duplication issue.
+
+**Finding D — i18n: EN/ES have 10 more keys than auto-generated locales in connectivity section**
+- `cbc0bdd` added 55 keys to EN/ES but only 45 keys to FR/IT/PT/DE/RU/ZH
+- The 10 missing keys in auto-generated locales will fall back to the ES default at runtime (next-intl fallback behavior) — no broken UI, but translations are missing
+- **Recommendation:** Back-fill the 10 connectivity keys across the 6 auto-generated locales in a separate pass. Low urgency.
+
+**Finding E — Informacion hub: ✅ already deduped**
+- Commit `331d18f` removed the duplicate DTV widget and sister-platform list from `/informacion`. The page now shows a cross-links section pointing to `/estadisticas`, `/red`, and `/conectividad`. Clean.
+
+### 5.5 Phase 4 — 35-crisis-statistics-update.md: ✅ confirmed executed
+
+Evidence in commit `331d18f` (2026-07-02):
+- `InformacionLive.tsx`: `STATS_VERIFIED_DATE = '2026-07-01'`; deaths `2,295`; injured `11,267`; missing via i18n key (`~50,000 estimado`)
+- i18n keys `deathsSource`, `injuredSource`, `missingValue`, `missingQualifier`, `displacedSource`, `buildingsSource` added across all 8 locales
+- File at `docs/build-process/35-crisis-statistics-update.md` includes implementation notes confirming execution
+- Root copy: does not exist (already archived)
+- **Status: DONE ✅**
+
+---
+
 ## Overall Launch Readiness Verdict
 
 **Vigil is ready to share publicly.**
