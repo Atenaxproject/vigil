@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { formatDistanceToNow } from 'date-fns'
 import { es, enUS } from 'date-fns/locale'
@@ -8,7 +9,6 @@ import { ExternalLink, RefreshCw } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
-import { DtvNetworkWidget } from '@/components/dtv/DtvNetworkWidget'
 import { ConnectivityInfoCard } from '@/components/informacion/ConnectivityInfoCard'
 import type { InfrastructureStatus } from '@/types/vigil.types'
 
@@ -52,7 +52,7 @@ interface LiveInfoResponse {
   gdacsEvents?: GDACSEvent[]
 }
 
-const STATS_VERIFIED_DATE = '2026-06-29'
+const STATS_VERIFIED_DATE = '2026-07-01'
 
 export function InformacionLive() {
   const t = useTranslations('liveInfo')
@@ -126,11 +126,16 @@ export function InformacionLive() {
     : '—'
 
   const stats = [
-    { label: tc('stats.deaths'), value: '1,430+', source: 'OCHA' },
-    { label: tc('stats.injured'), value: '3,238+', source: 'OCHA' },
-    { label: tc('stats.missing'), value: '45,000–68,900', source: tc('stats.missingSource') },
-    { label: tc('stats.displaced'), value: '12,000+', source: 'OCHA' },
-    { label: tc('stats.buildings'), value: '770+', source: 'OCHA' },
+    { label: tc('stats.deaths'), value: '2,295', source: tc('stats.deathsSource') },
+    { label: tc('stats.injured'), value: '11,267', source: tc('stats.injuredSource') },
+    {
+      label: tc('stats.missing'),
+      value: tc('stats.missingValue'),
+      source: tc('stats.missingSource'),
+      qualifier: tc('stats.missingQualifier'),
+    },
+    { label: tc('stats.displaced'), value: '12,000+', source: tc('stats.displacedSource') },
+    { label: tc('stats.buildings'), value: '770+', source: tc('stats.buildingsSource') },
   ]
 
   const hotlines = [
@@ -160,7 +165,6 @@ export function InformacionLive() {
     if (level === 'Orange') return 'text-status-unverified'
     return 'text-status-alive'
   }
-  const sisterPlatforms = CRISIS_CONFIG.partnerLinks.filter((p) => p.type === 'sister-platform')
 
   const metricLabel = (metric: string) => {
     const key = metric as 'electricity' | 'water' | 'roads' | 'airport' | 'telecom' | 'fuel'
@@ -207,9 +211,31 @@ export function InformacionLive() {
         )}
       </section>
 
-      <DtvNetworkWidget />
-
       <ConnectivityInfoCard />
+
+      <section className="mt-10 rounded-card border border-slate-200 bg-white p-4">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('crossLinks.title')}</h2>
+        <ul className="mt-3 space-y-2">
+          <li>
+            <Link href="/estadisticas" className="text-[16px] font-medium text-vigil-blue hover:underline">
+              {t('crossLinks.stats')} →
+            </Link>
+            <p className="text-[13px] text-vigil-muted">{t('crossLinks.statsDesc')}</p>
+          </li>
+          <li>
+            <Link href="/red" className="text-[16px] font-medium text-vigil-blue hover:underline">
+              {t('crossLinks.network')} →
+            </Link>
+            <p className="text-[13px] text-vigil-muted">{t('crossLinks.networkDesc')}</p>
+          </li>
+          <li>
+            <Link href="/conectividad" className="text-[16px] font-medium text-vigil-blue hover:underline">
+              {t('crossLinks.connectivity')} →
+            </Link>
+            <p className="text-[13px] text-vigil-muted">{t('crossLinks.connectivityDesc')}</p>
+          </li>
+        </ul>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('stats.title')}</h2>
@@ -224,6 +250,9 @@ export function InformacionLive() {
               <p className="mt-1 font-mono text-[13px] text-vigil-muted">
                 {tc('source')}: {stat.source}
               </p>
+              {'qualifier' in stat && stat.qualifier && (
+                <p className="mt-2 text-[13px] leading-snug text-status-unverified">{stat.qualifier}</p>
+              )}
             </div>
           ))}
         </div>
@@ -369,37 +398,6 @@ export function InformacionLive() {
         <p className="mt-3 font-mono text-[13px] text-vigil-muted">
           {tc('source')}: {tc('hotlines.additionalSource')}
         </p>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('sisterPlatforms.title')}</h2>
-        <p className="mt-1 text-[13px] text-vigil-muted">{tc('sisterPlatforms.approximateNote')}</p>
-        <div className="mt-4 space-y-3">
-          {sisterPlatforms.map((platform) => {
-            const slug =
-              'slug' in platform && platform.slug ? platform.slug : 'venezuelaTeBusca'
-            const descriptionKey = `sisterPlatforms.${slug}` as
-              | 'sisterPlatforms.venezuelaTeBusca'
-              | 'sisterPlatforms.desaparecidosTerremoto'
-              | 'sisterPlatforms.redQuipu'
-              | 'sisterPlatforms.mapaDanosVenezuela'
-            return (
-              <a
-                key={platform.url}
-                href={platform.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
-              >
-                <p className="flex items-center gap-1 text-[16px] font-medium text-vigil-blue">
-                  {platform.name}
-                  <ExternalLink className="h-3 w-3 shrink-0" aria-hidden />
-                </p>
-                <p className="mt-1 text-[16px] text-vigil-body">{tc(descriptionKey)}</p>
-              </a>
-            )
-          })}
-        </div>
       </section>
 
       <section className="mt-10">

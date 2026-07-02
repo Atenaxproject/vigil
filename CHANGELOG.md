@@ -4,6 +4,27 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-02 (PWA iOS fix, redundancy cleanup, crisis stats)
+
+### Fixed
+- **iOS PWA home screen** — added `appleWebApp` metadata (`capable`, `title`,
+  `statusBarStyle`), `viewportFit: 'cover'`, and manifest `id`/`scope`/180px icon;
+  production was missing `apple-mobile-web-app-*` meta tags required for standalone mode.
+- **Brand icons in `public/`** — synced Orlando's root favicon set into `public/` for
+  consistent apple-touch-icon and PWA install assets.
+
+### Changed
+- **`/informacion` redundancy** — removed duplicate DTV metrics widget and sister-platform
+  list; replaced with cross-links to `/estadisticas`, `/red`, and `/conectividad`.
+- **`ConnectivityInfoCard`** — removed duplicate 0800-RESCATE block (already in emergency
+  banner + hotlines section); added link to report connectivity on `/conectividad`.
+- **Manual crisis statistics** — deaths 2,295, injured 11,267, missing ~50,000 (est.) with
+  contested-data qualifier; verified date 2026-07-01; sources updated per Asamblea Nacional /
+  IRC / ABC News in all 8 locales.
+
+### Archived
+- `docs/build-process/35-crisis-statistics-update.md`; root prompt stub deleted.
+
 ## [Unreleased] — 2026-07-02 (Connectivity / comms layer)
 
 ### Added

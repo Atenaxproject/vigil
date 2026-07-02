@@ -488,9 +488,15 @@
       "deaths": "确认死亡",
       "injured": "受伤",
       "missing": "失踪",
-      "missingSource": "估计 — OCHA、CNN",
+      "missingValue": "约 50,000（估计）",
+      "missingSource": "IRC / ABC News",
+      "missingQualifier": "数据仍在核实中——官方统计存在差异，可能需要数周才能统一。",
+      "deathsSource": "国民议会（Jorge Rodríguez），经 NPR、ABC News、El Diario 核实",
+      "injuredSource": "国民议会（Jorge Rodríguez），经 NPR、ABC News、El Diario 核实",
       "displaced": "流离失所",
+      "displacedSource": "OCHA",
       "buildings": "倒塌建筑",
+      "buildingsSource": "OCHA",
       "damage": "直接物理损害",
       "children": "受灾地区儿童",
       "rescueTeams": "国际救援队",
@@ -554,6 +560,15 @@
     "infraLive": "来自 Supabase 的实时更新",
     "infraEmpty": "无基础设施数据。管理员可在 Supabase Studio 中更新。",
     "clockTick": "最后更新：{{time}}",
+    "crossLinks": {
+      "title": "更多信息",
+      "stats": "实时统计",
+      "statsDesc": "按州统计、DTV 网络及 Vigil 记录。",
+      "network": "搜索网络",
+      "networkDesc": "用于报告和搜索失踪人员的姊妹平台。",
+      "connectivity": "报告连通点",
+      "connectivityDesc": "标注 Starlink、手机信号或开放 WiFi 的位置。"
+    },
     "liveStatus": {
       "title": "实时地震状态",
       "refresh": "刷新",
@@ -756,6 +771,7 @@
       "emergencyDesc": "灾害响应计划的一般信息。"
     },
     "hotline": "全国应急热线",
+    "reportPoint": "在地图上报告连通点",
     "carrierNote": "部分运营商在受灾地区提供免费数据和通话。Movistar率先确认；Digitel和Movilnet状态可能变化 — 请向您的运营商确认。",
     "mapNote": "地图上的连接点为公民报告。Vigil不发布官方终端分发列表。"
   },

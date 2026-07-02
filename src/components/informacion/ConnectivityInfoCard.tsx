@@ -1,8 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { ExternalLink } from 'lucide-react'
-import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 const STARLINK_SUPPORT_URL =
   'https://starlink.com/support/article/28779c02-f1cb-4d77-1f75-b947ae179c91'
@@ -53,12 +53,12 @@ export function ConnectivityInfoCard() {
         ))}
       </div>
 
-      <div className="mt-4 rounded-card border border-slate-200 bg-white p-4">
-        <p className="text-[16px] font-medium text-vigil-ink">{t('hotline')}</p>
-        <p className="mt-1 font-mono text-[17px] text-vigil-blue">
-          {CRISIS_CONFIG.emergency.hotlineLabel} — {CRISIS_CONFIG.emergency.hotline}
-        </p>
-      </div>
+      <Link
+        href="/conectividad"
+        className="mt-4 inline-flex min-h-[44px] items-center text-[16px] font-medium text-vigil-blue hover:underline"
+      >
+        {t('reportPoint')} →
+      </Link>
 
       <p className="mt-4 text-[13px] text-vigil-muted">{t('carrierNote')}</p>
       <p className="mt-2 text-[13px] text-status-unverified">{t('mapNote')}</p>

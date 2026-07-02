@@ -488,9 +488,15 @@
       "deaths": "Bestätigte Todesfälle",
       "injured": "Verletzte",
       "missing": "Vermisste",
-      "missingSource": "Schätzungen — OCHA, CNN",
+      "missingValue": "~50.000 (Schätzung)",
+      "missingSource": "IRC / ABC News",
+      "missingQualifier": "Zahl in Prüfung — offizielle Bilanzen wiesen Abweichungen auf und können Wochen zur Konsolidierung brauchen.",
+      "deathsSource": "Nationalversammlung (Jorge Rodríguez), bestätigt durch NPR, ABC News, El Diario",
+      "injuredSource": "Nationalversammlung (Jorge Rodríguez), bestätigt durch NPR, ABC News, El Diario",
       "displaced": "Vertriebene",
+      "displacedSource": "OCHA",
       "buildings": "Eingestürzte Gebäude",
+      "buildingsSource": "OCHA",
       "damage": "Direkter materieller Schaden",
       "children": "Kinder in betroffenen Gebieten",
       "rescueTeams": "Internationale Rettungsteams",
@@ -554,6 +560,15 @@
     "infraLive": "Echtzeit-Updates von Supabase",
     "infraEmpty": "Keine Infrastrukturdaten. Admin kann in Supabase Studio aktualisieren.",
     "clockTick": "Zuletzt aktualisiert: {{time}}",
+    "crossLinks": {
+      "title": "Weitere Informationen",
+      "stats": "Live-Statistiken",
+      "statsDesc": "Zählungen nach Bundesstaat, DTV-Netzwerk und Vigil-Einträge.",
+      "network": "Suchnetzwerk",
+      "networkDesc": "Schwesterplattformen zum Melden und Suchen von Personen.",
+      "connectivity": "Konnektivität melden",
+      "connectivityDesc": "Markieren, wo Starlink, Mobilfunk oder offenes WLAN verfügbar ist."
+    },
     "liveStatus": {
       "title": "Live-Seismischer Status",
       "refresh": "Aktualisieren",
@@ -756,6 +771,7 @@
       "emergencyDesc": "Allgemeine Informationen zum Katastrophenhilfeprogramm."
     },
     "hotline": "Nationale Notfall-Hotline",
+    "reportPoint": "Konnektivitätspunkt auf der Karte melden",
     "carrierNote": "Einige Anbieter bieten kostenlose Daten und Anrufe in betroffenen Gebieten. Movistar bestätigte zuerst; der Status von Digitel und Movilnet kann sich ändern — beim Anbieter nachfragen.",
     "mapNote": "Kartenpunkte sind Bürgermeldungen. Vigil veröffentlicht keine offiziellen Terminal-Verteilungslisten."
   },

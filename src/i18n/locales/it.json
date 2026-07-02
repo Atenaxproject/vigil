@@ -488,9 +488,15 @@
       "deaths": "Morti confermati",
       "injured": "Feriti",
       "missing": "Scomparsi",
-      "missingSource": "Stime — OCHA, CNN",
+      "missingValue": "~50.000 (stima)",
+      "missingSource": "IRC / ABC News",
+      "missingQualifier": "Cifra in revisione — i bilanci ufficiali hanno mostrato discrepanze e possono richiedere settimane per consolidarsi.",
+      "deathsSource": "Assemblea nazionale (Jorge Rodríguez), corroborato da NPR, ABC News, El Diario",
+      "injuredSource": "Assemblea nazionale (Jorge Rodríguez), corroborato da NPR, ABC News, El Diario",
       "displaced": "Sfollati",
+      "displacedSource": "OCHA",
       "buildings": "Edifici crollati",
+      "buildingsSource": "OCHA",
       "damage": "Danno fisico diretto",
       "children": "Bambini nelle zone colpite",
       "rescueTeams": "Squadre di soccorso internazionali",
@@ -554,6 +560,15 @@
     "infraLive": "Aggiornamenti in tempo reale da Supabase",
     "infraEmpty": "Nessun dato di infrastruttura. L'amministratore può aggiornare in Supabase Studio.",
     "clockTick": "Ultimo aggiornamento: {{time}}",
+    "crossLinks": {
+      "title": "Altre informazioni",
+      "stats": "Statistiche in tempo reale",
+      "statsDesc": "Conteggi per stato, rete DTV e registri Vigil.",
+      "network": "Rete di ricerca",
+      "networkDesc": "Piattaforme sorelle per segnalare e cercare persone.",
+      "connectivity": "Segnala connettività",
+      "connectivityDesc": "Indica dove c'è Starlink, segnale mobile o WiFi aperto."
+    },
     "liveStatus": {
       "title": "Stato sismico live",
       "refresh": "Aggiorna",
@@ -756,6 +771,7 @@
       "emergencyDesc": "Informazioni generali sul programma di risposta ai disastri."
     },
     "hotline": "Linea di emergenza nazionale",
+    "reportPoint": "Segnala un punto di connettività sulla mappa",
     "carrierNote": "Alcuni operatori offrono dati e chiamate gratuite nelle zone colpite. Movistar è stato il primo a confermare; lo stato di Digitel e Movilnet può cambiare — verifica con il tuo operatore.",
     "mapNote": "I punti sulla mappa sono segnalazioni dei cittadini. Vigil non pubblica elenchi ufficiali di distribuzione terminali."
   },

@@ -32,7 +32,13 @@ export const metadata: Metadata = {
   title: 'Vigil — Respuesta a Crisis Venezuela',
   description:
     'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
+  applicationName: 'Vigil',
   manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    title: 'Vigil',
+    statusBarStyle: 'default',
+  },
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -69,6 +75,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
   colorScheme: 'light',
   themeColor: '#0F172A',
 }

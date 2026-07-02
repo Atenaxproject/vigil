@@ -488,9 +488,15 @@
       "deaths": "Décès confirmés",
       "injured": "Blessés",
       "missing": "Disparus",
-      "missingSource": "Estimations — OCHA, CNN",
+      "missingValue": "~50\u00a050 000 (estimation)",
+      "missingSource": "IRC / ABC News",
+      "missingQualifier": "Chiffre en cours de révision — les bilans officiels ont montré des écarts et peuvent prendre des semaines à se consolider.",
+      "deathsSource": "Assemblée nationale (Jorge Rodríguez), corroboré par NPR, ABC News, El Diario",
+      "injuredSource": "Assemblée nationale (Jorge Rodríguez), corroboré par NPR, ABC News, El Diario",
       "displaced": "Déplacés",
+      "displacedSource": "OCHA",
       "buildings": "Bâtiments effondrés",
+      "buildingsSource": "OCHA",
       "damage": "Dégâts matériels directs",
       "children": "Enfants dans les zones affectées",
       "rescueTeams": "Équipes de sauvetage internationales",
@@ -554,6 +560,15 @@
     "infraLive": "Mises à jour en temps réel depuis Supabase",
     "infraEmpty": "Aucune donnée d'infrastructure. L'administrateur peut mettre à jour dans Supabase Studio.",
     "clockTick": "Dernière mise à jour : {{time}}",
+    "crossLinks": {
+      "title": "Plus d'informations",
+      "stats": "Statistiques en direct",
+      "statsDesc": "Comptages par État, réseau DTV et registres Vigil.",
+      "network": "Réseau de recherche",
+      "networkDesc": "Plateformes sœurs pour signaler et rechercher des personnes.",
+      "connectivity": "Signaler une connectivité",
+      "connectivityDesc": "Indiquez où Starlink, le réseau mobile ou le WiFi ouvert est disponible."
+    },
     "liveStatus": {
       "title": "Statut sismique en direct",
       "refresh": "Actualiser",
@@ -756,6 +771,7 @@
       "emergencyDesc": "Informations générales sur le programme de réponse aux catastrophes."
     },
     "hotline": "Ligne d'urgence nationale",
+    "reportPoint": "Signaler un point de connectivité sur la carte",
     "carrierNote": "Certains opérateurs offrent des données et appels gratuits dans les zones affectées. Movistar a été le premier à confirmer ; le statut de Digitel et Movilnet peut changer — vérifiez auprès de votre opérateur.",
     "mapNote": "Les points sur la carte sont des signalements citoyens. Vigil ne publie pas de listes officielles de distribution de terminaux."
   },

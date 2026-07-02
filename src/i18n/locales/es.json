@@ -488,9 +488,15 @@
       "deaths": "Muertos confirmados",
       "injured": "Heridos",
       "missing": "Desaparecidos",
-      "missingSource": "Estimados — OCHA, CNN",
+      "missingValue": "~50.000 (estimado)",
+      "missingSource": "IRC / ABC News",
+      "missingQualifier": "Cifra en revisión — los balances oficiales han mostrado discrepancias y pueden tardar semanas en consolidarse.",
+      "deathsSource": "Asamblea Nacional (Jorge Rodríguez), corroborado por NPR, ABC News, El Diario",
+      "injuredSource": "Asamblea Nacional (Jorge Rodríguez), corroborado por NPR, ABC News, El Diario",
       "displaced": "Desplazados",
+      "displacedSource": "OCHA",
       "buildings": "Edificios colapsados",
+      "buildingsSource": "OCHA",
       "damage": "Daño físico directo",
       "children": "Niños en zonas afectadas",
       "rescueTeams": "Equipos de rescate internacionales",
@@ -554,6 +560,15 @@
     "infraLive": "Actualización en tiempo real desde Supabase",
     "infraEmpty": "Sin datos de infraestructura. Orlando puede actualizar en Supabase Studio.",
     "clockTick": "Última actualización: {time}",
+    "crossLinks": {
+      "title": "Más información",
+      "stats": "Estadísticas en vivo",
+      "statsDesc": "Conteos por estado, red DTV y registros de Vigil.",
+      "network": "Red de búsqueda",
+      "networkDesc": "Plataformas hermanas para reportar y buscar personas.",
+      "connectivity": "Reportar conectividad",
+      "connectivityDesc": "Indica dónde hay Starlink, señal móvil o WiFi abierto."
+    },
     "liveStatus": {
       "title": "Estado sísmico en vivo",
       "refresh": "Actualizar",
@@ -826,6 +841,7 @@
       "emergencyDesc": "Información general sobre el programa de respuesta ante desastres."
     },
     "hotline": "Línea de emergencia nacional",
+    "reportPoint": "Reportar un punto de conectividad en el mapa",
     "carrierNote": "Algunos operadores están ofreciendo acceso gratuito a datos y llamadas en zonas afectadas. Movistar fue el primero en confirmarlo; el estado de Digitel y Movilnet puede cambiar — confirma con tu operador.",
     "mapNote": "Los puntos de conectividad en el mapa son reportes ciudadanos. Vigil no publica listas oficiales de distribución de terminales."
   },

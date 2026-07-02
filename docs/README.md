@@ -59,6 +59,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `32-dtv-geocode-and-stats-fix.md` — Nominatim geocoding for DTV centros, cursor-pagination metrics counts, external_id dedup
 - `33-favicon-deploy.md` — Vigil brand favicon set (V. mark), Next.js metadata, PWA manifest icons
 - `34-connectivity-comms-layer.md` — comms map layer (amber WiFi markers), `/conectividad` submission, Starlink info card on `/informacion`
+- `35-crisis-statistics-update.md` — manual crisis stats block update (deaths, injured, missing + qualifier)
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

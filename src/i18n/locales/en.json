@@ -488,9 +488,15 @@
       "deaths": "Confirmed deaths",
       "injured": "Injured",
       "missing": "Missing",
-      "missingSource": "Estimates — OCHA, CNN",
+      "missingValue": "~50,000 (estimated)",
+      "missingSource": "IRC / ABC News",
+      "missingQualifier": "Figure under review — official tallies have shown discrepancies and may take weeks to consolidate.",
+      "deathsSource": "National Assembly (Jorge Rodríguez), corroborated by NPR, ABC News, El Diario",
+      "injuredSource": "National Assembly (Jorge Rodríguez), corroborated by NPR, ABC News, El Diario",
       "displaced": "Displaced",
+      "displacedSource": "OCHA",
       "buildings": "Collapsed buildings",
+      "buildingsSource": "OCHA",
       "damage": "Direct physical damage",
       "children": "Children in affected areas",
       "rescueTeams": "International rescue teams",
@@ -554,6 +560,15 @@
     "infraLive": "Real-time updates from Supabase",
     "infraEmpty": "No infrastructure data. Admin can update in Supabase Studio.",
     "clockTick": "Last updated: {time}",
+    "crossLinks": {
+      "title": "More information",
+      "stats": "Live statistics",
+      "statsDesc": "Counts by state, DTV network, and Vigil records.",
+      "network": "Search network",
+      "networkDesc": "Sister platforms to report and search for missing persons.",
+      "connectivity": "Report connectivity",
+      "connectivityDesc": "Mark where Starlink, cell signal, or open WiFi is available."
+    },
     "liveStatus": {
       "title": "Live seismic status",
       "refresh": "Refresh",
@@ -826,6 +841,7 @@
       "emergencyDesc": "General information about the disaster response program."
     },
     "hotline": "National emergency hotline",
+    "reportPoint": "Report a connectivity point on the map",
     "carrierNote": "Some carriers are offering free data and calls in affected areas. Movistar was the first to confirm; Digitel and Movilnet status may change — check with your carrier.",
     "mapNote": "Connectivity points on the map are citizen reports. Vigil does not publish official terminal distribution lists."
   },
