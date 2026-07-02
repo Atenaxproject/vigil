@@ -889,6 +889,9 @@
     "othersTitle": "Other sister platforms",
     "platforms": {
       "venezuelaTeBusca": "Citizen missing persons search platform for Venezuela.",
+      "civisVenezuela": "Missing persons, damage maps, and supply points.",
+      "sosVenezuela2026": "Live collaborative crisis mapping.",
+      "redVenezuelaActiva": "Volunteer coordination.",
       "desaparecidosTerremoto": "Large earthquake missing persons registry — verified public data.",
       "redQuipu": "Community aid and crisis coordination network.",
       "mapaDanosVenezuela": "Collaborative damage and infrastructure map."

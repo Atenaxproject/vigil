@@ -55,6 +55,9 @@ export function RedNetworkClient() {
               'slug' in platform && platform.slug ? platform.slug : 'venezuelaTeBusca'
             const descriptionKey = `platforms.${slug}` as
               | 'platforms.venezuelaTeBusca'
+              | 'platforms.civisVenezuela'
+              | 'platforms.sosVenezuela2026'
+              | 'platforms.redVenezuelaActiva'
               | 'platforms.desaparecidosTerremoto'
               | 'platforms.redQuipu'
               | 'platforms.mapaDanosVenezuela'

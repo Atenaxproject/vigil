@@ -4,6 +4,20 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-02 (sister platforms sync + PWA closeout)
+
+### Added
+- **Three sister platforms in config** — CIVIS Venezuela, SOS Venezuela 2026, and Red
+  Venezuela Activa added to `crisis.config.ts`; `/red` now lists all 7 platforms matching
+  README (link-only, no scraping).
+
+### Changed
+- **PWA Phase 2 closed** — `CATCHUP-REPORT.md` updated: iOS Add to Home Screen confirmed
+  in standalone mode on a real device (Orlando).
+
+### Archived
+- `docs/build-process/37-sister-platforms-fix-and-pwa-closeout.md`; root prompt stub deleted.
+
 ## [Unreleased] — 2026-07-02 (PWA iOS fix, redundancy cleanup, crisis stats)
 
 ### Fixed

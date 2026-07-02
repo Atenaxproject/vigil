@@ -152,7 +152,9 @@ See git log entry for this session's commit.
 - Hosted on Vercel, Cloudflare DNS-only CNAME (not proxied) — same pattern as primary domain
 - Both domains now documented in README.md
 
-### 5.3 PWA audit (source-level, 2026-07-02)
+### 5.3 PWA audit — device-confirmed (2026-07-02)
+
+Orlando verified on a real iOS device (Safari → Add to Home Screen) that Vigil installs in **standalone mode** with correct branding. Phase 2 PWA work is closed unless a new issue is reported.
 
 | Check | Status | Notes |
 |---|---|---|
@@ -161,11 +163,12 @@ See git log entry for this session's commit.
 | `apple-mobile-web-app-capable` | ✅ | `appleWebApp.capable: true` in Next.js metadata (commit `331d18f`) |
 | `apple-mobile-web-app-title` | ✅ | `appleWebApp.title: 'Vigil'` |
 | `apple-mobile-web-app-status-bar-style` | ✅ | `appleWebApp.statusBarStyle: 'default'` |
+| **iOS Add to Home Screen → standalone** | ✅ | **Device-confirmed by Orlando** (not source-only) |
 | iOS banner — iOS Safari only | ✅ | `isIOS() && !isInStandaloneMode()` gating in `IOSInstallBanner.tsx` |
 | iOS banner — standalone mode hidden | ✅ | `isInStandaloneMode()` check prevents showing when already installed |
 | Manifest icons (192 + 512, maskable) | ✅ | Both `any` and `maskable` purpose entries present |
 | `viewport` — `width: device-width` | ✅ | Set in `layout.tsx` viewport export (fix from prompt 16) |
-| Lighthouse PWA audit | ⚠️ | Cannot run remotely — requires Chrome DevTools on live device or CI |
+| Lighthouse PWA audit | ⚠️ | Optional — not required for launch; source + device checks passed |
 
 Note: iOS does not support `beforeinstallprompt`. The custom `IOSInstallBanner` component is the correct approach. Android/Chrome native install prompt is handled by `PwaInstallButton` in Navigation.tsx.
 
@@ -173,12 +176,10 @@ Note: iOS does not support `beforeinstallprompt`. The custom `IOSInstallBanner` 
 
 These are **findings for review, not changes made**:
 
-**Finding A — Sister platforms list out of sync**
-- `README.md § Sister Platforms` (added in prompt 28) hardcodes **7 platforms** as markdown links
-- `src/config/crisis.config.ts partnerLinks` has only **4 sister-platform entries** (Venezuela Te Busca, DTV, RedQuipu, Mapa de Daños Venezuela)
-- Missing from config: CIVIS Venezuela, SOS Venezuela 2026, Red Venezuela Activa
-- `/red` page renders from config only → users see 4 platforms there, README shows 7
-- **Recommendation:** Either add the 3 missing platforms to `crisis.config.ts` so `/red` shows all 7, or remove them from the README table to match what the page actually shows. Awaiting Orlando's decision.
+**Finding A — Sister platforms list out of sync: ✅ RESOLVED (prompt 37)**
+- `README.md § Sister Platforms` lists **7 platforms**
+- `crisis.config.ts partnerLinks` now has **7 sister-platform entries** (added CIVIS Venezuela, SOS Venezuela 2026, Red Venezuela Activa)
+- `/red` renders all 7 — DTV featured + 6 others in link-only cards
 
 **Finding B — Root-level CLAUDE.md: ✅ clean pointer**
 - Still a 4-line pointer to `docs/architecture/CLAUDE.md`. No content drift.

@@ -44,6 +44,24 @@ export const CRISIS_CONFIG = {
       slug: 'venezuelaTeBusca' as const,
     },
     {
+      name: 'CIVIS Venezuela',
+      url: 'https://civisvenezuela.com',
+      type: 'sister-platform' as const,
+      slug: 'civisVenezuela' as const,
+    },
+    {
+      name: 'SOS Venezuela 2026',
+      url: 'https://sosvenezuela2026.com',
+      type: 'sister-platform' as const,
+      slug: 'sosVenezuela2026' as const,
+    },
+    {
+      name: 'Red Venezuela Activa',
+      url: 'https://redvenezuelaactiva.com',
+      type: 'sister-platform' as const,
+      slug: 'redVenezuelaActiva' as const,
+    },
+    {
       name: 'Desaparecidos Terremoto Venezuela',
       url: 'https://desaparecidosterremotovenezuela.com',
       type: 'sister-platform' as const,
