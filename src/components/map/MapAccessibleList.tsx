@@ -16,11 +16,21 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
   const toggleRef = useRef<HTMLButtonElement>(null)
 
   const needs = markers.filter((m) => m.type === 'need' && m.status === 'active')
-  const resources = markers.filter((m) => m.type === 'resource' && m.status === 'active')
+  const comms = markers.filter(
+    (m) => m.type === 'resource' && m.category === 'comms' && m.status === 'active'
+  )
+  const resources = markers.filter(
+    (m) => m.type === 'resource' && m.category !== 'comms' && m.status === 'active'
+  )
   const collection = markers.filter((m) => m.type === 'collection_point' && m.status === 'active')
   const significantEvents = events.filter((e) => (e.magnitude ?? 0) >= 4)
 
-  const hasContent = needs.length > 0 || resources.length > 0 || collection.length > 0 || significantEvents.length > 0
+  const hasContent =
+    needs.length > 0 ||
+    resources.length > 0 ||
+    comms.length > 0 ||
+    collection.length > 0 ||
+    significantEvents.length > 0
 
   return (
     <section
@@ -71,6 +81,23 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
               <ul className="mt-2 space-y-2">
                 {needs.slice(0, 15).map((marker) => (
                   <li key={marker.id} className="rounded-input border border-slate-200 px-3 py-2">
+                    <span className="font-medium">{marker.title}</span>
+                    {marker.description && <p className="mt-1 text-[13px] text-vigil-muted">{marker.description}</p>}
+                    <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                      {marker.lat.toFixed(4)}, {marker.lng.toFixed(4)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {comms.length > 0 && (
+            <div className="mb-4">
+              <h3 className="text-[17px] font-medium text-vigil-ink">{t('layers.comms')}</h3>
+              <ul className="mt-2 space-y-2">
+                {comms.slice(0, 15).map((marker) => (
+                  <li key={marker.id} className="rounded-input border border-amber-200 bg-amber-50/30 px-3 py-2">
                     <span className="font-medium">{marker.title}</span>
                     {marker.description && <p className="mt-1 text-[13px] text-vigil-muted">{marker.description}</p>}
                     <p className="mt-1 font-mono text-[13px] text-vigil-muted">

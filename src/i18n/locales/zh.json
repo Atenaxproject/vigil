@@ -15,6 +15,7 @@
     "calendar": "日历",
     "wall": "社区墙",
     "collectionPoint": "物资收集点",
+    "connectivity": "网络连接",
     "privacy": "隐私政策",
     "terms": "使用条款",
     "more": "更多",
@@ -176,7 +177,8 @@
       "shelters": "避难所",
       "hospitals": "医院",
       "rescueZones": "搜救区域",
-      "collection": "物资收集点"
+      "collection": "物资收集点",
+      "comms": "网络连接（WiFi / Starlink）"
     },
     "magnitude": "震级",
     "depth": "深度",
@@ -715,6 +717,47 @@
       "cancel": "关闭"
     },
     "emptyAction": "Add an event"
+  },
+  "connectivity": {
+    "title": "报告网络连接",
+    "subtitle": "此处有互联网或手机信号？帮助他人找到连接。",
+    "backToMap": "返回地图",
+    "boundsNote": "仅接受{country}境内的位置。",
+    "map": { "reportedByCommunity": "社区报告 — 未验证" },
+    "types": { "starlink": "Starlink", "cell": "手机信号", "wifi": "开放WiFi" },
+    "access": { "public": "公众", "rescue_only": "仅救援队", "ngo_only": "仅非政府组织" },
+    "form": {
+      "title": "点位名称",
+      "type": "连接类型",
+      "location": "位置",
+      "hours": "可用时间",
+      "hoursPlaceholder": "例如：每天8:00–20:00",
+      "access": "谁可以使用？",
+      "contact": "联系方式",
+      "contactNote": "您的联系方式不会公开显示。",
+      "gpsOk": "已检测到GPS位置",
+      "gpsPending": "等待GPS…",
+      "gpsRequired": "需要委内瑞拉境内的GPS位置。",
+      "submit": "发布到地图",
+      "submitting": "发布中…",
+      "success": "连接点已发布。",
+      "error": "发布失败。"
+    }
+  },
+  "connectivityInfo": {
+    "title": "应急网络连接 — Starlink与运营商",
+    "subtitle": "激活Starlink或与运营商确认免费访问的官方资源。",
+    "links": {
+      "support": "Starlink支持 — 委内瑞拉地震",
+      "supportDesc": "我没有设备：人道主义响应计划信息。",
+      "activate": "激活Starlink账户",
+      "activateDesc": "我已有设备：在starlink.com/activate创建或管理账户。",
+      "emergency": "Starlink应急响应",
+      "emergencyDesc": "灾害响应计划的一般信息。"
+    },
+    "hotline": "全国应急热线",
+    "carrierNote": "部分运营商在受灾地区提供免费数据和通话。Movistar率先确认；Digitel和Movilnet状态可能变化 — 请向您的运营商确认。",
+    "mapNote": "地图上的连接点为公民报告。Vigil不发布官方终端分发列表。"
   },
   "collectionPoint": {
     "title": "注册物资收集点",

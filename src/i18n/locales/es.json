@@ -17,6 +17,7 @@
     "stats": "Estadísticas",
     "network": "Red de búsqueda",
     "collectionPoint": "Punto de Acopio",
+    "connectivity": "Conectividad",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Uso",
     "more": "Más",
@@ -176,7 +177,8 @@
       "shelters": "Refugios",
       "hospitals": "Hospitales",
       "rescueZones": "Zonas de Rescate",
-      "collection": "Puntos de Acopio"
+      "collection": "Puntos de Acopio",
+      "comms": "Conectividad (WiFi / Starlink)"
     },
     "magnitude": "Magnitud",
     "depth": "Profundidad",
@@ -775,6 +777,57 @@
       "error": "Error al publicar.",
       "cancel": "Cerrar"
     }
+  },
+  "connectivity": {
+    "title": "Reportar conectividad",
+    "subtitle": "¿Hay internet o señal celular disponible aquí? Ayuda a otros a encontrar conexión.",
+    "backToMap": "Volver al mapa",
+    "boundsNote": "Solo se aceptan ubicaciones dentro de {country}.",
+    "map": {
+      "reportedByCommunity": "Reportado por la comunidad — no verificado"
+    },
+    "types": {
+      "starlink": "Starlink",
+      "cell": "Señal celular",
+      "wifi": "WiFi abierto"
+    },
+    "access": {
+      "public": "Público",
+      "rescue_only": "Solo rescate",
+      "ngo_only": "Solo ONG"
+    },
+    "form": {
+      "title": "Nombre del punto (ej. Plaza Bolívar)",
+      "type": "Tipo de conectividad",
+      "location": "Ubicación (dirección o referencia)",
+      "hours": "Horario de disponibilidad",
+      "hoursPlaceholder": "Ej: 8am–8pm todos los días",
+      "access": "¿Quién puede usarlo?",
+      "contact": "Contacto",
+      "contactNote": "Tu contacto no se muestra públicamente.",
+      "gpsOk": "Ubicación GPS detectada",
+      "gpsPending": "Esperando ubicación GPS…",
+      "gpsRequired": "Se requiere ubicación GPS dentro de Venezuela.",
+      "submit": "Publicar en el mapa",
+      "submitting": "Publicando...",
+      "success": "Punto de conectividad publicado.",
+      "error": "Error al publicar."
+    }
+  },
+  "connectivityInfo": {
+    "title": "Conectividad de emergencia — Starlink y operadores",
+    "subtitle": "Recursos oficiales para activar Starlink o confirmar acceso gratuito con tu operador móvil.",
+    "links": {
+      "support": "Soporte Starlink — terremoto Venezuela",
+      "supportDesc": "No tengo un kit: información sobre el programa de respuesta humanitaria.",
+      "activate": "Activar cuenta Starlink",
+      "activateDesc": "Ya tengo un kit: crear o gestionar tu cuenta en starlink.com/activate.",
+      "emergency": "Respuesta de emergencia Starlink",
+      "emergencyDesc": "Información general sobre el programa de respuesta ante desastres."
+    },
+    "hotline": "Línea de emergencia nacional",
+    "carrierNote": "Algunos operadores están ofreciendo acceso gratuito a datos y llamadas en zonas afectadas. Movistar fue el primero en confirmarlo; el estado de Digitel y Movilnet puede cambiar — confirma con tu operador.",
+    "mapNote": "Los puntos de conectividad en el mapa son reportes ciudadanos. Vigil no publica listas oficiales de distribución de terminales."
   },
   "collectionPoint": {
     "title": "Registrar Punto de Acopio",

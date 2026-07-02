@@ -4,6 +4,23 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-02 (Connectivity / comms layer)
+
+### Added
+- **`CommsLayer`** — distinct amber dashed markers for `category=comms` resources on the
+  crisis map (visible under the Recursos layer toggle).
+- **`/conectividad`** — citizen submission form for Starlink, cell signal, or open WiFi
+  points (low-friction, auto-approved, same pattern as Punto de Acopio).
+- **`/api/connectivity/submit`** — validates GPS bounds, stores `type=resource`,
+  `category=comms` in existing `map_markers` schema (no migration).
+- **`ConnectivityInfoCard`** on `/informacion` — verified Starlink support, activate, and
+  emergency-response links; 0800-RESCATE; carrier free-access disclaimer.
+- **i18n** — `connectivity` and `connectivityInfo` namespaces in all 8 locales; nav link
+  in Más menu.
+
+### Archived
+- `docs/build-process/34-connectivity-comms-layer.md`; root prompt stub deleted.
+
 ## [Unreleased] — 2026-07-01 (Vigil brand favicon)
 
 ### Added

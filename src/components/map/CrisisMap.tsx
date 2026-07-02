@@ -24,6 +24,10 @@ const CollectionPointLayer = dynamic(
   () => import('@/components/map/CollectionPointLayer').then((m) => m.CollectionPointLayer),
   { ssr: false }
 )
+const CommsLayer = dynamic(
+  () => import('@/components/map/CommsLayer').then((m) => m.CommsLayer),
+  { ssr: false }
+)
 const ShelterLayer = dynamic(
   () => import('@/components/map/ShelterLayer').then((m) => m.ShelterLayer),
   { ssr: false }
@@ -88,7 +92,12 @@ export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisM
         />
         {layers.aftershocks && <AftershockLayer events={events} />}
         {layers.needs && <NeedsLayer markers={markers} />}
-        {layers.resources && <ResourceLayer markers={markers} />}
+        {layers.resources && (
+          <>
+            <ResourceLayer markers={markers} />
+            <CommsLayer markers={markers} />
+          </>
+        )}
         {layers.collection && <CollectionPointLayer markers={markers} />}
         {layers.shelters && <ShelterLayer markers={markers} />}
         {layers.hospitals && <HospitalLayer markers={markers} />}

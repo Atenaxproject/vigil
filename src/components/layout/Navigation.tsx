@@ -24,6 +24,7 @@ import {
   MessageSquare,
   BarChart3,
   ExternalLink,
+  Wifi,
   X,
   PanelLeftClose,
   PanelLeftOpen,
@@ -51,6 +52,7 @@ type NavLabelKey =
   | 'stats'
   | 'network'
   | 'collectionPoint'
+  | 'connectivity'
 
 const navItems: Array<{
   href: string
@@ -70,6 +72,7 @@ const navItems: Array<{
   { href: '/red', labelKey: 'network', icon: ExternalLink, more: true },
   { href: '/estadisticas', labelKey: 'stats', icon: BarChart3, more: true },
   { href: '/punto-de-acopio', labelKey: 'collectionPoint', icon: Package, more: true },
+  { href: '/conectividad', labelKey: 'connectivity', icon: Wifi, more: true },
   { href: '/intercambio', labelKey: 'exchange', icon: ArrowLeftRight, more: true },
   { href: '/voluntarios', labelKey: 'volunteers', icon: Users, more: true },
   { href: '/organizaciones', labelKey: 'organizations', icon: Building2, more: true },

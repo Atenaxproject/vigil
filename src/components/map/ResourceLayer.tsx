@@ -8,7 +8,9 @@ interface ResourceLayerProps {
 }
 
 export function ResourceLayer({ markers }: ResourceLayerProps) {
-  const resources = markers.filter((m) => m.type === 'resource' && m.status === 'active')
+  const resources = markers.filter(
+    (m) => m.type === 'resource' && m.category !== 'comms' && m.status === 'active'
+  )
 
   return (
     <>

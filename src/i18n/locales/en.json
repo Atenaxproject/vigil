@@ -17,6 +17,7 @@
     "stats": "Statistics",
     "network": "Search network",
     "collectionPoint": "Collection Point",
+    "connectivity": "Connectivity",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
     "more": "More",
@@ -176,7 +177,8 @@
       "shelters": "Shelters",
       "hospitals": "Hospitals",
       "rescueZones": "Rescue Zones",
-      "collection": "Collection Points"
+      "collection": "Collection Points",
+      "comms": "Connectivity (WiFi / Starlink)"
     },
     "magnitude": "Magnitude",
     "depth": "Depth",
@@ -775,6 +777,57 @@
       "error": "Failed to publish.",
       "cancel": "Close"
     }
+  },
+  "connectivity": {
+    "title": "Report connectivity",
+    "subtitle": "Is internet or cell service available here? Help others find a connection.",
+    "backToMap": "Back to map",
+    "boundsNote": "Only locations within {country} are accepted.",
+    "map": {
+      "reportedByCommunity": "Community-reported — unverified"
+    },
+    "types": {
+      "starlink": "Starlink",
+      "cell": "Cell signal",
+      "wifi": "Open WiFi"
+    },
+    "access": {
+      "public": "Public",
+      "rescue_only": "Rescue teams only",
+      "ngo_only": "NGO staff only"
+    },
+    "form": {
+      "title": "Point name (e.g. Plaza Bolívar)",
+      "type": "Connectivity type",
+      "location": "Location (address or landmark)",
+      "hours": "Availability hours",
+      "hoursPlaceholder": "E.g. 8am–8pm daily",
+      "access": "Who can use it?",
+      "contact": "Contact",
+      "contactNote": "Your contact is not shown publicly.",
+      "gpsOk": "GPS location detected",
+      "gpsPending": "Waiting for GPS location…",
+      "gpsRequired": "GPS location within Venezuela is required.",
+      "submit": "Publish on map",
+      "submitting": "Publishing...",
+      "success": "Connectivity point published.",
+      "error": "Failed to publish."
+    }
+  },
+  "connectivityInfo": {
+    "title": "Emergency connectivity — Starlink and carriers",
+    "subtitle": "Official resources to activate Starlink or confirm free access with your mobile carrier.",
+    "links": {
+      "support": "Starlink support — Venezuela earthquake",
+      "supportDesc": "I don't have a kit: humanitarian response program information.",
+      "activate": "Activate Starlink account",
+      "activateDesc": "I already have a kit: create or manage your account at starlink.com/activate.",
+      "emergency": "Starlink emergency response",
+      "emergencyDesc": "General information about the disaster response program."
+    },
+    "hotline": "National emergency hotline",
+    "carrierNote": "Some carriers are offering free data and calls in affected areas. Movistar was the first to confirm; Digitel and Movilnet status may change — check with your carrier.",
+    "mapNote": "Connectivity points on the map are citizen reports. Vigil does not publish official terminal distribution lists."
   },
   "collectionPoint": {
     "title": "Register Collection Point",

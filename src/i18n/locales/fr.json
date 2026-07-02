@@ -15,6 +15,7 @@
     "calendar": "Calendrier",
     "wall": "Mur",
     "collectionPoint": "Point de collecte",
+    "connectivity": "Connectivité",
     "privacy": "Politique de confidentialité",
     "terms": "Conditions d'utilisation",
     "more": "Plus",
@@ -176,7 +177,8 @@
       "shelters": "Abris",
       "hospitals": "Hôpitaux",
       "rescueZones": "Zones de sauvetage",
-      "collection": "Points de collecte"
+      "collection": "Points de collecte",
+      "comms": "Connectivité (WiFi / Starlink)"
     },
     "magnitude": "Magnitude",
     "depth": "Profondeur",
@@ -715,6 +717,47 @@
       "cancel": "Fermer"
     },
     "emptyAction": "Add an event"
+  },
+  "connectivity": {
+    "title": "Signaler une connectivité",
+    "subtitle": "Internet ou réseau mobile disponible ici ? Aidez les autres à trouver une connexion.",
+    "backToMap": "Retour à la carte",
+    "boundsNote": "Seules les localisations en {country} sont acceptées.",
+    "map": { "reportedByCommunity": "Signalé par la communauté — non vérifié" },
+    "types": { "starlink": "Starlink", "cell": "Réseau mobile", "wifi": "WiFi ouvert" },
+    "access": { "public": "Public", "rescue_only": "Secours uniquement", "ngo_only": "ONG uniquement" },
+    "form": {
+      "title": "Nom du point",
+      "type": "Type de connectivité",
+      "location": "Emplacement",
+      "hours": "Horaires de disponibilité",
+      "hoursPlaceholder": "Ex : 8h–20h tous les jours",
+      "access": "Qui peut l'utiliser ?",
+      "contact": "Contact",
+      "contactNote": "Votre contact n'est pas affiché publiquement.",
+      "gpsOk": "Position GPS détectée",
+      "gpsPending": "En attente du GPS…",
+      "gpsRequired": "Position GPS au Venezuela requise.",
+      "submit": "Publier sur la carte",
+      "submitting": "Publication…",
+      "success": "Point de connectivité publié.",
+      "error": "Échec de la publication."
+    }
+  },
+  "connectivityInfo": {
+    "title": "Connectivité d'urgence — Starlink et opérateurs",
+    "subtitle": "Ressources officielles pour activer Starlink ou confirmer l'accès gratuit avec votre opérateur.",
+    "links": {
+      "support": "Support Starlink — séisme Venezuela",
+      "supportDesc": "Je n'ai pas de kit : informations sur le programme humanitaire.",
+      "activate": "Activer un compte Starlink",
+      "activateDesc": "J'ai déjà un kit : créer ou gérer votre compte sur starlink.com/activate.",
+      "emergency": "Réponse d'urgence Starlink",
+      "emergencyDesc": "Informations générales sur le programme de réponse aux catastrophes."
+    },
+    "hotline": "Ligne d'urgence nationale",
+    "carrierNote": "Certains opérateurs offrent des données et appels gratuits dans les zones affectées. Movistar a été le premier à confirmer ; le statut de Digitel et Movilnet peut changer — vérifiez auprès de votre opérateur.",
+    "mapNote": "Les points sur la carte sont des signalements citoyens. Vigil ne publie pas de listes officielles de distribution de terminaux."
   },
   "collectionPoint": {
     "title": "Enregistrer un point de collecte",

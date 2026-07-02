@@ -9,6 +9,7 @@ import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { DtvNetworkWidget } from '@/components/dtv/DtvNetworkWidget'
+import { ConnectivityInfoCard } from '@/components/informacion/ConnectivityInfoCard'
 import type { InfrastructureStatus } from '@/types/vigil.types'
 
 interface LiveQuake {
@@ -207,6 +208,8 @@ export function InformacionLive() {
       </section>
 
       <DtvNetworkWidget />
+
+      <ConnectivityInfoCard />
 
       <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('stats.title')}</h2>

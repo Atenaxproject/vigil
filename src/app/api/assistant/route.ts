@@ -110,6 +110,7 @@ FUNCIONES QUE VIGIL TIENE:
 - Registro como equipo activo/rescatista → /equipo-activo
 - Calendario de eventos → /calendario
 - Puntos de acopio → /punto-de-acopio
+- Conectividad (WiFi/Starlink) → /conectividad
 - Actualizaciones oficiales → /noticias
 - Estadísticas por estado → /estadisticas`
 

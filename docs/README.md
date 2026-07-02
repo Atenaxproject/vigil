@@ -58,6 +58,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `31-page-audit-and-refine.md` — full page audit: empty states, org directory rebuild, route consolidation, DTV widget on /informacion
 - `32-dtv-geocode-and-stats-fix.md` — Nominatim geocoding for DTV centros, cursor-pagination metrics counts, external_id dedup
 - `33-favicon-deploy.md` — Vigil brand favicon set (V. mark), Next.js metadata, PWA manifest icons
+- `34-connectivity-comms-layer.md` — comms map layer (amber WiFi markers), `/conectividad` submission, Starlink info card on `/informacion`
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
