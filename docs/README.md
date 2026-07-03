@@ -58,12 +58,13 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `31-page-audit-and-refine.md` — full page audit: empty states, org directory rebuild, route consolidation, DTV widget on /informacion
 - `32-dtv-geocode-and-stats-fix.md` — Nominatim geocoding for DTV centros, cursor-pagination metrics counts, external_id dedup
 - `33-favicon-deploy.md` — Vigil brand favicon set (V. mark), Next.js metadata, PWA manifest icons
-- `34-connectivity-comms-layer.md` — comms map layer (amber WiFi markers), `/conectividad` submission, Starlink info card on `/informacion`
-- `35-crisis-statistics-update.md` — manual crisis stats block update (deaths, injured, missing + qualifier)
-- `36-repo-audit-pwa-cleanup.md` — repo audit, PWA source verification, redundancy findings
-- `37-sister-platforms-fix-and-pwa-closeout.md` — sister platforms config sync (7/7 on `/red`), PWA device-confirmed closeout
-- `38-branding-orgs-update.md` — YouTheWave branding swap, Hogar Bambi org seed, Mapa de Necesidades VZLA sister platform
-- `39-property-safety-assessment.md` — structural safety assessment (ATC-20 tags), map layer, admin queue, ToS
+- `34-connectivity-comms-layer.md` — WiFi/Starlink/cell signal citizen reports, `/conectividad` map layer
+- `35-crisis-statistics-update.md` — manual crisis statistics refresh across all 8 locales
+- `36-repo-audit-pwa-cleanup.md` — repo audit + README sync, iOS PWA meta tags, informacion hub dedup, vigil.youthewave.com redirect
+- `37-sister-platforms-fix-and-pwa-closeout.md` — CIVIS Venezuela, SOS Venezuela 2026, Red Venezuela Activa added to config; PWA Phase 2 closed
+- `38-branding-orgs-update.md` — youthewave.org branding swap, Hogar Bambi (17th org), Mapa de Necesidades VZLA (8th sister platform)
+- `39-property-safety-assessment.md` — Evaluación de Seguridad Estructural: ATC-20 tagging, volunteer taxonomy extension, ToS §4
+- `40-readme-docs-sync.md` — README accuracy pass: property assessment, org counts, contact emails, package.json description
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

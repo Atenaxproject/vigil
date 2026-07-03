@@ -1,7 +1,7 @@
 {
   "name": "vigil",
   "version": "0.1.0",
-  "description": "Vigil — Open-source humanitarian crisis platform. Real-time missing persons, Claude AI assistant, photo search, geo breakdown, crisis map. Live at vigil.youthewave.org.",
+  "description": "Vigil — Open-source humanitarian crisis platform. Real-time missing persons, Claude AI assistant, photo search, crisis map, and post-disaster property safety assessment. Live at vigil.youthewave.org.",
   "homepage": "https://vigil.youthewave.org",
   "repository": {
     "type": "git",

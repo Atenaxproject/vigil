@@ -104,7 +104,7 @@ Production captures from [vigil.youthewave.org](https://vigil.youthewave.org). R
 
 ## What's live now
 
-Verified against source and production as of **2026-07-02**. Optional integrations degrade gracefully when API keys are missing — they never crash the app.
+Verified against source and production as of **2026-07-03**. Optional integrations degrade gracefully when API keys are missing — they never crash the app.
 
 ### Core crisis tools
 
@@ -122,7 +122,8 @@ Verified against source and production as of **2026-07-02**. Optional integratio
 | **Retractable map layers** | `/` (desktop) | Collapsible panel on `lg+`; preference in `localStorage` |
 | **Collection points** | `/punto-de-acopio` | Citizen registration → amber map markers |
 | **Resource exchange** | `/intercambio` | Offer or request goods, shelter, transport, skills, equipment |
-| **Volunteer marketplace** | `/voluntarios` | Skills registration and directory |
+| **Volunteer marketplace** | `/voluntarios` | Skills registration and directory (now includes structural_engineer, architect, surveyor for post-disaster property assessment). |
+| **Property safety assessment** | `/evaluacion-estructural` | ATC-20-style green/yellow/red tagging; volunteer-assigned only (structural_engineer/architect/surveyor roles), never AI-assigned; claim link at `/mi-evaluacion/[token]` |
 | **I need help** | `/necesito-ayuda` | Drop a need pin on the map |
 
 ### Information & coordination
@@ -133,14 +134,14 @@ Verified against source and production as of **2026-07-02**. Optional integratio
 | **Official updates** | `/noticias` | ReliefWeb feed (no API key) |
 | **Events calendar** | `/calendario` | Category filters, Venezuela timezone labels |
 | **Rescuer field presence** | `/equipo-activo` | Check-in, SOS, 4-hour auto-expire, map layer |
-| **How to help** | `/como-ayudar` | 18 verified donation orgs from production seed |
+| **How to help** | `/como-ayudar` | 17 verified donation orgs from production seed |
 | **Partner links** | `/organizaciones` | Curated NGOs from `crisis.config.ts` |
 | **Weather & time bar** | all pages | Open-Meteo below emergency banner (no API key) |
 
 ### Trust, access & resilience
 
 - 🚨 **Emergency banner** — Always-visible hotline (0800-RESCATE), Intérpretes, Cruz Roja. Government-operated intake tools intentionally excluded.
-- 📬 **Official contact** — `vigil@youthewave.org` and `vigil.support@youthewave.org` via Cloudflare Email Routing.
+- 📬 **Official contact** — `vigil@youthewave.org`, `vigil.support@youthewave.org`, and `support@youthewave.org` via Cloudflare Email Routing.
 - 💬 **Feedback widget** — Floating support button on all pages; admin review at `/admin/feedback`.
 - 🔐 **Admin auth** — Supabase OTP + `VIGIL_ADMIN_EMAILS` allowlist.
 - 🌐 **8 languages** — Spanish default; English, Portuguese, French, Italian, Chinese, German, Russian (machine-translated locales).
@@ -185,7 +186,8 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Rescuer safety system** — GPS check-in, 4-hour auto-expiry, SOS button
 - **Resource exchange (Intercambio)** — 7 categories, claim-token, 7-day auto-expiry
 - **Volunteer registry** — skills-based, public directory (name privacy protected)
-- **Organization directory** — 16 verified NGOs seeded, admin approval gate
+- **Organization directory** — 17 verified NGOs seeded (including Hogar Bambi Venezuela, child protection), admin approval gate
+- **Property safety assessment** — `/evaluacion-estructural`, ATC-20 green/yellow/red tagging, volunteer-assigned (structural_engineer/architect/surveyor), never AI-assigned, ToS §4 liability language
 - **Events calendar** — donation drives, meetups, distributions, memorials
 - **Citizen collection point registry** — self-registration, map display
 - **Community wall (Muro)** — append-only, categorized, rate-limited

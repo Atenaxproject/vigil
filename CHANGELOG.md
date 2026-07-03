@@ -4,6 +4,20 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-03 (README + docs index sync)
+
+### Changed
+- **README** — property safety assessment in live-features table and Project Status;
+  org counts corrected to 17 (Hogar Bambi); `support@youthewave.org` in official
+  contact line; volunteer skills parenthetical for structural assessment roles;
+  verification date 2026-07-03.
+- **`package.json` description** — mentions post-disaster property safety assessment;
+  removed stale "geo breakdown" phrase.
+- **`docs/README.md`** — build-process index entries #34–40 aligned with CHANGELOG.
+
+### Archived
+- `docs/build-process/40-readme-docs-sync.md`; root prompt stub deleted.
+
 ## [Unreleased] — 2026-07-03 (branding + structural assessment)
 
 ### Added
