@@ -87,7 +87,21 @@ export default function TerminosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">4. Limitación de Responsabilidad</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">
+            4. Evaluaciones de Seguridad Estructural
+          </h2>
+          <p className="text-slate-700 leading-relaxed">
+            Las etiquetas de seguridad estructural (verde, amarillo, rojo) en Vigil son{' '}
+            <strong>opiniones de voluntarios con formación profesional</strong>, no inspecciones
+            oficiales del gobierno ni dictámenes de organismos de gestión de emergencias o
+            departamentos de construcción. No sustituyen ni anulan órdenes de las autoridades
+            locales competentes. En caso de duda, sigue las instrucciones oficiales y no ingreses a
+            edificios marcados como inseguros.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">5. Limitación de Responsabilidad</h2>
           <p className="text-slate-700 leading-relaxed">
             Vigil y {CRISIS_CONFIG.legal.operator} se esfuerzan por mantener la plataforma operativa y
             la información útil, pero:
@@ -110,7 +124,7 @@ export default function TerminosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">5. Propiedad Intelectual</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">6. Propiedad Intelectual</h2>
           <p className="text-slate-700 leading-relaxed">
             El código de Vigil es de código abierto bajo licencia MIT. Puedes usar, modificar y
             redistribuir el código según los términos de esa licencia.
@@ -124,7 +138,7 @@ export default function TerminosPage() {
 
         <section>
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">
-            6. Uso de Datos — Prohibición de Uso Comercial
+            7. Uso de Datos — Prohibición de Uso Comercial
           </h2>
           <p className="text-slate-700 leading-relaxed font-medium text-red-700">
             Los datos de Vigil — incluyendo pero no limitado a registros de personas desaparecidas,
@@ -135,7 +149,7 @@ export default function TerminosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">7. Terminación del Acceso</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">8. Terminación del Acceso</h2>
           <p className="text-slate-700 leading-relaxed">
             Nos reservamos el derecho de bloquear el acceso de cualquier usuario o IP que viole estos
             términos, intente hacer scraping masivo de datos, o use la plataforma de manera que ponga
@@ -144,7 +158,7 @@ export default function TerminosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">8. Ley Aplicable y Disputas</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">9. Ley Aplicable y Disputas</h2>
           <p className="text-slate-700 leading-relaxed">
             Estos términos se rigen por las leyes del Estado de {CRISIS_CONFIG.legal.governingLaw}.
             Cualquier disputa se resolverá en los tribunales del Condado de Palm Beach, Florida, EE.UU.
@@ -152,7 +166,7 @@ export default function TerminosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">9. Cambios a los Términos</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">10. Cambios a los Términos</h2>
           <p className="text-slate-700 leading-relaxed">
             Podemos actualizar estos términos. El uso continuado de la plataforma después de cambios
             publicados constituye aceptación de los nuevos términos.
@@ -160,7 +174,7 @@ export default function TerminosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">10. Contacto</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">11. Contacto</h2>
           <p className="text-slate-700">
             Preguntas sobre estos términos:{' '}
             <a

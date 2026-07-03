@@ -13,6 +13,7 @@ const ORG_TYPES = [
   'medical',
   'food',
   'shelter',
+  'child_protection',
   'translation',
   'tech',
   'government',

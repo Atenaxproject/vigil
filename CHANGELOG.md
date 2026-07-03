@@ -4,6 +4,22 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-03 (branding + structural assessment)
+
+### Added
+- **YouTheWave branding** — footer credits link to youthewave.org; support email
+  `support@youthewave.org`; README contact copy updated (legal operator Bbluestudios LLC unchanged).
+- **Hogar Bambi Venezuela** — 17th verified org in seed `003_hogar_bambi.sql` (`child_protection` type).
+- **Mapa de Necesidades VZLA** — 8th sister platform on `/red` (link-only).
+- **Evaluación de Seguridad Estructural** — `/evaluacion-estructural` submission flow, map layer
+  (green/yellow/red ATC-20 tags), admin assignment queue, claim link `/mi-evaluacion/{token}`,
+  migration `010_property_assessments.sql`, volunteer skills `structural_engineer` / `architect` /
+  `surveyor`, optional `credential_note`.
+- **ToS §4** — structural assessments are volunteer opinions, not official government inspections.
+
+### Archived
+- `docs/build-process/38-branding-orgs-update.md`, `39-property-safety-assessment.md`; root prompt stubs deleted.
+
 ## [Unreleased] — 2026-07-02 (sister platforms sync + PWA closeout)
 
 ### Added

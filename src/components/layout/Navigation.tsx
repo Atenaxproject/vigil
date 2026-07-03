@@ -28,6 +28,7 @@ import {
   X,
   PanelLeftClose,
   PanelLeftOpen,
+  Home,
 } from 'lucide-react'
 import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { cn } from '@/lib/utils'
@@ -53,6 +54,7 @@ type NavLabelKey =
   | 'network'
   | 'collectionPoint'
   | 'connectivity'
+  | 'propertyAssessment'
 
 const navItems: Array<{
   href: string
@@ -73,6 +75,7 @@ const navItems: Array<{
   { href: '/estadisticas', labelKey: 'stats', icon: BarChart3, more: true },
   { href: '/punto-de-acopio', labelKey: 'collectionPoint', icon: Package, more: true },
   { href: '/conectividad', labelKey: 'connectivity', icon: Wifi, more: true },
+  { href: '/evaluacion-estructural', labelKey: 'propertyAssessment', icon: Home, more: true },
   { href: '/intercambio', labelKey: 'exchange', icon: ArrowLeftRight, more: true },
   { href: '/voluntarios', labelKey: 'volunteers', icon: Users, more: true },
   { href: '/organizaciones', labelKey: 'organizations', icon: Building2, more: true },

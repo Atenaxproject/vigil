@@ -196,7 +196,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **PWA** — 2G-optimized, offline form queue, iOS/Android install support
 - **Hourly duplicate detection** — Claude Haiku cron, flags to moderation queue
 - **PFIF 1.4 endpoint** — `/api/pfif`, Google Person Finder compatible
-- **Sister platform network** — 7 citizen platforms linked at `/red`
+- **Sister platform network** — 8 citizen platforms linked at `/red`
 - **DTV active integration** — Desaparecidos Terremoto Venezuela federated API
 - **Social share images** — Open Graph + Twitter Card auto-generated
 - **Geographic breakdown** — estado/municipio/parroquia across 24 Venezuelan states
@@ -237,6 +237,7 @@ If you don't find someone here, check these too:
 | [Red Venezuela Activa](https://redvenezuelaactiva.com) | Volunteer coordination |
 | [Mapa de Daños Venezuela](https://terremotovenezuela.com) | Structural damage mapping |
 | [RedQuipu](https://redquipu.com) | Multi-organization coordination |
+| [Mapa de Necesidades VZLA](https://mapadenecesidadesvzla.com/) | Zone-based live needs map (critical/partial/covered) |
 
 ---
 
@@ -313,7 +314,7 @@ ANTHROPIC_API_KEY=your_anthropic_key              # optional, for AI assistant, 
 CRON_SECRET=generate_a_strong_random_secret       # optional, secures /api/cron/dedup on Vercel
 RESEND_API_KEY=your_resend_key                    # optional, feedback email alerts
 VIGIL_ADMIN_SECRET=generate_a_strong_random_secret
-VIGIL_ADMIN_EMAILS=orlando@atenaxproject.com
+VIGIL_ADMIN_EMAILS=vigil@youthewave.org
 ```
 
 > Never commit `.env.local`. See [`DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md) for migrations and DNS.
@@ -336,7 +337,7 @@ Update country bounds, emergency hotline, partner links, languages, and seismic 
 
 Made with hope and love for Venezuela 🇻🇪
 
-[Orlando Toro](https://atenaxproject.com) — Founder, Bbluestudios LLC  
+[Orlando Toro](https://youthewave.org) — Founder, Bbluestudios LLC  
 For the people of Venezuela. For anyone who needs it next.
 
 ---

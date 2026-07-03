@@ -20,6 +20,7 @@ const schema = z.object({
   equipment: z.array(z.string()).max(10).default([]),
   remote_available: z.boolean().default(false),
   verification_url: z.string().url().max(500).optional().or(z.literal('')),
+  credential_note: z.string().max(300).optional(),
   public_display: z.boolean().default(true),
 })
 
@@ -52,6 +53,7 @@ export async function POST(request: NextRequest) {
         equipment: body.equipment,
         remote_available: body.remote_available,
         verification_url: body.verification_url ? sanitizeText(body.verification_url) : null,
+        credential_note: body.credential_note ? sanitizeText(body.credential_note) : null,
         public_display: body.public_display,
         active: true,
       })

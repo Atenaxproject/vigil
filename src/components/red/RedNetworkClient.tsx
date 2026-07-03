@@ -61,6 +61,7 @@ export function RedNetworkClient() {
               | 'platforms.desaparecidosTerremoto'
               | 'platforms.redQuipu'
               | 'platforms.mapaDanosVenezuela'
+              | 'platforms.mapaNecesidadesVzla'
             return (
               <a
                 key={platform.url}

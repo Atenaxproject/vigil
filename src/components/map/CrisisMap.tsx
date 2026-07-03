@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import type { SeismicEvent } from '@/types/vigil.types'
-import type { MapMarker } from '@/types/vigil.types'
+import type { MapMarker, PublicPropertyAssessment } from '@/types/vigil.types'
 import { MapLayers, type MapLayerState } from '@/components/map/MapLayers'
 import { useRealtimeMapMarkers } from '@/hooks/useRealtimeMapMarkers'
 import { useRealtimeRescuerPresence } from '@/hooks/useRealtimeRescuerPresence'
@@ -40,6 +40,11 @@ const RescuerPresenceLayer = dynamic(
   () => import('@/components/map/RescuerPresenceLayer').then((m) => m.RescuerPresenceLayer),
   { ssr: false }
 )
+const PropertyAssessmentLayer = dynamic(
+  () => import('@/components/map/PropertyAssessmentLayer').then((m) => m.PropertyAssessmentLayer),
+  { ssr: false }
+)
+
 const MapZoomControls = dynamic(
   () => import('@/components/map/MapZoomControls').then((m) => m.MapZoomControls),
   { ssr: false }
@@ -48,9 +53,10 @@ const MapZoomControls = dynamic(
 interface CrisisMapProps {
   events?: SeismicEvent[]
   markers?: MapMarker[]
+  propertyAssessments?: PublicPropertyAssessment[]
 }
 
-export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisMapProps) {
+export function CrisisMap({ events = [], markers: initialMarkers = [], propertyAssessments = [] }: CrisisMapProps) {
   const [mounted, setMounted] = useState(false)
   const [layers, setLayers] = useState<MapLayerState>({
     aftershocks: true,
@@ -60,6 +66,7 @@ export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisM
     hospitals: false,
     activeTeams: true,
     collection: true,
+    propertyAssessments: true,
   })
   const markers = useRealtimeMapMarkers(initialMarkers)
   const rescuerPresence = useRealtimeRescuerPresence()
@@ -102,6 +109,9 @@ export function CrisisMap({ events = [], markers: initialMarkers = [] }: CrisisM
         {layers.shelters && <ShelterLayer markers={markers} />}
         {layers.hospitals && <HospitalLayer markers={markers} />}
         {layers.activeTeams && <RescuerPresenceLayer presence={rescuerPresence} />}
+        {layers.propertyAssessments && (
+          <PropertyAssessmentLayer assessments={propertyAssessments} />
+        )}
         <MapZoomControls />
       </MapContainer>
     </div>

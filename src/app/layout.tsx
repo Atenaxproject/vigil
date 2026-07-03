@@ -162,7 +162,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   <p className="mt-1">
                     {t('creditsByPrefix')}{' '}
                     <a
-                      href="https://atenaxproject.com"
+                      href="https://youthewave.org"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-vigil-blue underline-offset-2 transition-colors hover:underline"

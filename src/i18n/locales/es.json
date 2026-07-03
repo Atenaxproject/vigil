@@ -28,7 +28,8 @@
     "collapseMenu": "Contraer menú",
     "expandMenu": "Expandir menú",
     "desktopNav": "Navegación principal",
-    "mobileNav": "Navegación móvil"
+    "mobileNav": "Navegación móvil",
+    "propertyAssessment": "Evaluación Estructural"
   },
   "a11y": {
     "skipToContent": "Saltar al contenido principal"
@@ -178,7 +179,8 @@
       "hospitals": "Hospitales",
       "rescueZones": "Zonas de Rescate",
       "collection": "Puntos de Acopio",
-      "comms": "Conectividad (WiFi / Starlink)"
+      "comms": "Conectividad (WiFi / Starlink)",
+      "propertyAssessments": "Evaluaciones estructurales"
     },
     "magnitude": "Magnitud",
     "depth": "Profundidad",
@@ -234,7 +236,10 @@
       "drone": "Operación de Drones",
       "legal": "Asistencia Legal",
       "psych": "Apoyo Psicológico",
-      "communications": "Comunicaciones / Medios"
+      "communications": "Comunicaciones / Medios",
+      "structural_engineer": "Ingeniero estructural",
+      "architect": "Arquitecto",
+      "surveyor": "Topógrafo / Agrimensor"
     },
     "availability": {
       "immediate": "Disponible de Inmediato (Presencial)",
@@ -269,7 +274,9 @@
       "submit": "Registrarme como Voluntario",
       "submitting": "Enviando...",
       "success": "Gracias. Serás contactado cuando haya coincidencia.",
-      "error": "Error en el registro. Intenta de nuevo."
+      "error": "Error en el registro. Intenta de nuevo.",
+      "credentialNote": "Credencial profesional (opcional)",
+      "credentialNotePlaceholder": "Ej: colegio, licencia, número de registro"
     },
     "directory": {
       "directory": "Directorio",
@@ -312,7 +319,8 @@
       "government": "Gobierno",
       "diaspora": "Grupo de la Diáspora",
       "donation": "Donaciones",
-      "legal": "Asistencia Legal"
+      "legal": "Asistencia Legal",
+      "child_protection": "Protección infantil"
     },
     "donate": "Donar",
     "website": "Sitio Web",
@@ -386,7 +394,7 @@
     "contact": "Contacto",
     "credits": "Hecho con esperanza y amor para Venezuela",
     "creditsByPrefix": "Un proyecto de Orlando Toro —",
-    "creditsByLink": "Atenax Project",
+    "creditsByLink": "YouTheWave",
     "builtWith": "Construido con Claude + Cursor",
     "notEmergency": "Vigil NO es un servicio de emergencias. Para rescate inmediato llama al: {hotline}"
   },
@@ -654,7 +662,8 @@
       "redVenezuelaActiva": "Coordinación de voluntarios.",
       "desaparecidosTerremoto": "Registro masivo de desaparecidos del terremoto — datos públicos verificados.",
       "redQuipu": "Red comunitaria de ayuda y coordinación en crisis.",
-      "mapaDanosVenezuela": "Mapa colaborativo de daños e infraestructura afectada."
+      "mapaDanosVenezuela": "Mapa colaborativo de daños e infraestructura afectada.",
+      "mapaNecesidadesVzla": "Mapa en vivo de necesidades por zona (crítico/parcial/cubierto), reportado por la comunidad y verificado por centros de acopio."
     },
     "reportHint": "Cada reporte en múltiples plataformas amplía la red de búsqueda.",
     "reportLink": "Reportar en Vigil"
@@ -907,6 +916,79 @@
       "submit": "Publicar mensaje",
       "success": "Mensaje publicado.",
       "error": "Error al publicar. Intenta de nuevo."
+    }
+  },
+  "propertyAssessment": {
+    "title": "Evaluación de Seguridad Estructural",
+    "subtitle": "Solicita una evaluación voluntaria de tu vivienda tras el terremoto. Las etiquetas verde/amarillo/rojo siguen el estándar ATC-20.",
+    "backToMap": "Volver al mapa",
+    "disclaimer": "Esta evaluación es una opinión de voluntarios profesionales, no una inspección oficial del gobierno. No sustituye órdenes de autoridades locales de construcción o emergencias.",
+    "stats": {
+      "assessedWeek": "Propiedades evaluadas esta semana",
+      "professionals": "Profesionales voluntarios activos"
+    },
+    "form": {
+      "address": "Dirección exacta (privada — no se publica)",
+      "mapPin": "Ubicación en el mapa",
+      "requestType": "Tipo de solicitud",
+      "requestTypes": {
+        "inspection": "Inspección",
+        "relocation_assistance": "Reubicación",
+        "both": "Ambas"
+      },
+      "indicators": "Indicadores de peligro (opcional)",
+      "dangerIndicators": {
+        "visible_cracks": "Grietas visibles",
+        "leaning": "Inclinación",
+        "flooding": "Inundación",
+        "foundation_damage": "Daño en cimentación",
+        "gas_smell": "Olor a gas",
+        "partial_collapse": "Colapso parcial",
+        "other": "Otro"
+      },
+      "description": "Descripción del daño",
+      "descriptionPlaceholder": "Describe lo que observas en lenguaje natural…",
+      "photo": "Foto del daño (opcional)",
+      "photoNote": "JPG/PNG/WebP, máx. 5 MB. La IA solo prioriza en cola — nunca asigna etiquetas.",
+      "contactName": "Tu nombre",
+      "phone": "Teléfono",
+      "consent": "Acepto que mi solicitud sea procesada según la Política de Privacidad de Vigil.",
+      "accuracy": "Confirmo que la información es verídica al mejor de mi conocimiento.",
+      "submit": "Enviar solicitud",
+      "submitting": "Enviando…",
+      "success": "Solicitud registrada. Guarda tu enlace privado de seguimiento.",
+      "error": "Error al enviar. Intenta de nuevo."
+    },
+    "map": {
+      "approxLocation": "Ubicación aproximada en el mapa",
+      "tag": {
+        "unassessed": "Sin evaluar",
+        "green": "Seguro (voluntario)",
+        "yellow": "Uso restringido",
+        "red": "No ingresar"
+      }
+    },
+    "claim": {
+      "title": "Tu solicitud de evaluación",
+      "loading": "Cargando…",
+      "notFound": "Enlace no válido o expirado.",
+      "back": "Nueva solicitud",
+      "status": "Estado de evaluación",
+      "tagStatus": {
+        "unassessed": "Pendiente de evaluación",
+        "green": "Verde — uso permitido",
+        "yellow": "Amarillo — uso restringido",
+        "red": "Rojo — no ingresar"
+      },
+      "workflow": {
+        "open": "En cola",
+        "assigned": "Asignada a voluntario",
+        "completed": "Evaluación completada",
+        "closed": "Cerrada"
+      },
+      "relocationLinked": "Tu solicitud de reubicación está vinculada al intercambio de recursos.",
+      "relocationLink": "Ver refugios en Intercambio",
+      "privacyNote": "Tu dirección exacta y contacto nunca se muestran públicamente."
     }
   }
 }

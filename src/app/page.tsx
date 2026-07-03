@@ -3,7 +3,7 @@ import { RecentMissingFeed } from '@/components/missing/RecentMissingFeed'
 import { CrisisMap } from '@/components/map/CrisisMap'
 import { MapAccessibleList } from '@/components/map/MapAccessibleList'
 import { AftershockAlert } from '@/components/feed/AftershockAlert'
-import { getMapMarkers, getRecentMissingPersons } from '@/lib/data'
+import { getMapMarkers, getPublicPropertyAssessments, getRecentMissingPersons } from '@/lib/data'
 import { getVenezuelaSeismicEvents } from '@/lib/usgs'
 import { getTranslations } from 'next-intl/server'
 
@@ -11,10 +11,11 @@ export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   const t = await getTranslations('map')
-  const [events, markers, recent] = await Promise.all([
+  const [events, markers, recent, propertyAssessments] = await Promise.all([
     getVenezuelaSeismicEvents(),
     getMapMarkers(),
     getRecentMissingPersons(10),
+    getPublicPropertyAssessments(),
   ])
 
   return (
@@ -34,7 +35,7 @@ export default async function HomePage() {
           bounded so the footer always sits below the map in normal flow.
         */}
         <div className="h-[min(45vh,360px)] shrink-0 lg:h-auto lg:min-h-[280px] lg:flex-1">
-          <CrisisMap events={events} markers={markers} />
+          <CrisisMap events={events} markers={markers} propertyAssessments={propertyAssessments} />
         </div>
         <MapAccessibleList markers={markers} events={events} />
       </section>

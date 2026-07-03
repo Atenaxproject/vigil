@@ -62,6 +62,8 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `35-crisis-statistics-update.md` — manual crisis stats block update (deaths, injured, missing + qualifier)
 - `36-repo-audit-pwa-cleanup.md` — repo audit, PWA source verification, redundancy findings
 - `37-sister-platforms-fix-and-pwa-closeout.md` — sister platforms config sync (7/7 on `/red`), PWA device-confirmed closeout
+- `38-branding-orgs-update.md` — YouTheWave branding swap, Hogar Bambi org seed, Mapa de Necesidades VZLA sister platform
+- `39-property-safety-assessment.md` — structural safety assessment (ATC-20 tags), map layer, admin queue, ToS
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

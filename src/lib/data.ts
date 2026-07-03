@@ -1,5 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
-import type { PublicMissingPerson, MapMarker, Organization } from '@/types/vigil.types'
+import type {
+  PublicMissingPerson,
+  MapMarker,
+  Organization,
+  PublicPropertyAssessment,
+} from '@/types/vigil.types'
 
 export async function getRecentMissingPersons(limit = 10): Promise<PublicMissingPerson[]> {
   try {
@@ -53,6 +58,62 @@ export async function getDonationOrganizations(): Promise<Organization[]> {
     return (data ?? []) as Organization[]
   } catch {
     return []
+  }
+}
+
+export async function getPublicPropertyAssessments(): Promise<PublicPropertyAssessment[]> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('public_property_assessments')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(200)
+
+    if (error) return []
+    return (data ?? []).map((row) => ({
+      ...row,
+      approx_location_lat:
+        row.approx_location_lat != null ? Number(row.approx_location_lat) : null,
+      approx_location_lng:
+        row.approx_location_lng != null ? Number(row.approx_location_lng) : null,
+    })) as PublicPropertyAssessment[]
+  } catch {
+    return []
+  }
+}
+
+export async function getPropertyAssessmentStats(): Promise<{
+  assessedThisWeek: number
+  activeProfessionals: number
+}> {
+  try {
+    const supabase = await createClient()
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+
+    const { count: assessed } = await supabase
+      .from('public_property_assessments')
+      .select('id', { count: 'exact', head: true })
+      .neq('tag_status', 'unassessed')
+      .gte('created_at', weekAgo)
+
+    const skillQueries = await Promise.all(
+      (['structural_engineer', 'architect', 'surveyor'] as const).map((skill) =>
+        supabase
+          .from('public_volunteers')
+          .select('id', { count: 'exact', head: true })
+          .contains('skills', [skill])
+      )
+    )
+
+    const activeProfessionals = skillQueries.reduce((sum, r) => sum + (r.count ?? 0), 0)
+
+    return {
+      assessedThisWeek: assessed ?? 0,
+      activeProfessionals,
+    }
+  } catch {
+    return { assessedThisWeek: 0, activeProfessionals: 0 }
   }
 }
 

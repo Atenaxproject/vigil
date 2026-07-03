@@ -28,7 +28,8 @@
     "desktopNav": "主导航",
     "mobileNav": "移动导航",
     "stats": "Statistics",
-    "network": "Search network"
+    "network": "Search network",
+    "propertyAssessment": "Structural Assessment"
   },
   "a11y": {
     "skipToContent": "跳到主要内容"
@@ -178,7 +179,8 @@
       "hospitals": "医院",
       "rescueZones": "搜救区域",
       "collection": "物资收集点",
-      "comms": "网络连接（WiFi / Starlink）"
+      "comms": "网络连接（WiFi / Starlink）",
+      "propertyAssessments": "Structural assessments"
     },
     "magnitude": "震级",
     "depth": "深度",
@@ -234,7 +236,10 @@
       "drone": "无人机操作",
       "legal": "法律援助",
       "psych": "心理支持",
-      "communications": "通讯/媒体"
+      "communications": "通讯/媒体",
+      "structural_engineer": "Structural engineer",
+      "architect": "Architect",
+      "surveyor": "Surveyor"
     },
     "availability": {
       "immediate": "立即可用（现场）",
@@ -269,7 +274,9 @@
       "submit": "注册为志愿者",
       "submitting": "提交中...",
       "success": "感谢。当有匹配时我们会联系你。",
-      "error": "注册失败。请重试。"
+      "error": "注册失败。请重试。",
+      "credentialNote": "Professional credential (optional)",
+      "credentialNotePlaceholder": "E.g. license, association, registration number"
     },
     "directory": {
       "directory": "目录",
@@ -312,7 +319,8 @@
       "government": "政府",
       "diaspora": "侨民组织",
       "donation": "捐赠",
-      "legal": "法律援助"
+      "legal": "法律援助",
+      "child_protection": "Child protection"
     },
     "donate": "捐赠",
     "website": "网站",
@@ -386,7 +394,7 @@
     "contact": "联系",
     "credits": "为委内瑞拉而以希望和爱而制作",
     "creditsByPrefix": "一个项目由 Orlando Toro —",
-    "creditsByLink": "Atenax 项目",
+    "creditsByLink": "YouTheWave",
     "builtWith": "由 Claude + Cursor 构建",
     "notEmergency": "Vigil 不是紧急服务。若需立即救援，请致电：{{hotline}}"
   },
@@ -738,9 +746,19 @@
     "subtitle": "此处有互联网或手机信号？帮助他人找到连接。",
     "backToMap": "返回地图",
     "boundsNote": "仅接受{country}境内的位置。",
-    "map": { "reportedByCommunity": "社区报告 — 未验证" },
-    "types": { "starlink": "Starlink", "cell": "手机信号", "wifi": "开放WiFi" },
-    "access": { "public": "公众", "rescue_only": "仅救援队", "ngo_only": "仅非政府组织" },
+    "map": {
+      "reportedByCommunity": "社区报告 — 未验证"
+    },
+    "types": {
+      "starlink": "Starlink",
+      "cell": "手机信号",
+      "wifi": "开放WiFi"
+    },
+    "access": {
+      "public": "公众",
+      "rescue_only": "仅救援队",
+      "ngo_only": "仅非政府组织"
+    },
     "form": {
       "title": "点位名称",
       "type": "连接类型",
@@ -894,9 +912,83 @@
       "redVenezuelaActiva": "Volunteer coordination.",
       "desaparecidosTerremoto": "Large earthquake missing persons registry — verified public data.",
       "redQuipu": "Community aid and crisis coordination network.",
-      "mapaDanosVenezuela": "Collaborative damage and infrastructure map."
+      "mapaDanosVenezuela": "Collaborative damage and infrastructure map.",
+      "mapaNecesidadesVzla": "Zone-based live needs map (critical/partial/covered), community-reported and verified by collection centers."
     },
     "reportHint": "Each report on multiple platforms expands the search network.",
     "reportLink": "Report on Vigil"
+  },
+  "propertyAssessment": {
+    "title": "Structural Safety Assessment",
+    "subtitle": "Request a voluntary assessment of your home after the earthquake. Green/yellow/red tags follow the ATC-20 standard.",
+    "backToMap": "Back to map",
+    "disclaimer": "This assessment is a volunteer professional opinion, not an official government inspection. It does not override orders from local building or emergency authorities.",
+    "stats": {
+      "assessedWeek": "Properties assessed this week",
+      "professionals": "Active volunteer professionals"
+    },
+    "form": {
+      "address": "Exact address (private — not published)",
+      "mapPin": "Location on map",
+      "requestType": "Request type",
+      "requestTypes": {
+        "inspection": "Inspection",
+        "relocation_assistance": "Relocation help",
+        "both": "Both"
+      },
+      "indicators": "Danger indicators (optional)",
+      "dangerIndicators": {
+        "visible_cracks": "Visible cracks",
+        "leaning": "Leaning",
+        "flooding": "Flooding",
+        "foundation_damage": "Foundation damage",
+        "gas_smell": "Gas smell",
+        "partial_collapse": "Partial collapse",
+        "other": "Other"
+      },
+      "description": "Damage description",
+      "descriptionPlaceholder": "Describe what you observe in natural language…",
+      "photo": "Damage photo (optional)",
+      "photoNote": "JPG/PNG/WebP, max 5 MB. AI only prioritizes queue — never assigns tags.",
+      "contactName": "Your name",
+      "phone": "Phone",
+      "consent": "I agree my request will be processed per Vigil Privacy Policy.",
+      "accuracy": "I confirm this information is accurate to the best of my knowledge.",
+      "submit": "Submit request",
+      "submitting": "Submitting…",
+      "success": "Request registered. Save your private tracking link.",
+      "error": "Submit failed. Try again."
+    },
+    "map": {
+      "approxLocation": "Approximate map location",
+      "tag": {
+        "unassessed": "Unassessed",
+        "green": "Safe (volunteer)",
+        "yellow": "Restricted use",
+        "red": "Do not enter"
+      }
+    },
+    "claim": {
+      "title": "Your assessment request",
+      "loading": "Loading…",
+      "notFound": "Invalid or expired link.",
+      "back": "New request",
+      "status": "Assessment status",
+      "tagStatus": {
+        "unassessed": "Pending assessment",
+        "green": "Green — permitted use",
+        "yellow": "Yellow — restricted",
+        "red": "Red — do not enter"
+      },
+      "workflow": {
+        "open": "In queue",
+        "assigned": "Assigned to volunteer",
+        "completed": "Assessment complete",
+        "closed": "Closed"
+      },
+      "relocationLinked": "Your relocation request is linked to resource exchange.",
+      "relocationLink": "View shelter posts in Exchange",
+      "privacyNote": "Your exact address and contact are never shown publicly."
+    }
   }
 }

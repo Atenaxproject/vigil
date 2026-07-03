@@ -80,6 +80,12 @@ export const CRISIS_CONFIG = {
       type: 'sister-platform' as const,
       slug: 'mapaDanosVenezuela' as const,
     },
+    {
+      name: 'Mapa de Necesidades VZLA',
+      url: 'https://mapadenecesidadesvzla.com/',
+      type: 'sister-platform' as const,
+      slug: 'mapaNecesidadesVzla' as const,
+    },
   ],
 
   seismic: {
@@ -99,7 +105,7 @@ export const CRISIS_CONFIG = {
     operator: 'Bbluestudios LLC',
     operatorLocation: 'Greenacres, Florida, USA',
     contactEmail: 'vigil@youthewave.org',
-    supportEmail: 'vigil.support@youthewave.org',
+    supportEmail: 'support@youthewave.org',
     privacyPolicyVersion: '1.0.0',
     tosVersion: '1.0.0',
     governingLaw: 'Florida, United States',

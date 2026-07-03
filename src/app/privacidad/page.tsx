@@ -25,6 +25,7 @@ export default function PrivacidadPage() {
             humanitarias. No somos una organización de rescate, un servicio gubernamental ni una
             entidad con fines de lucro en relación con esta plataforma.
           </p>
+          {/* TODO: update legal operator line once YouTheWave Inc. is incorporated */}
           <p className="text-slate-700 leading-relaxed mt-3">
             Contacto de privacidad:{' '}
             <a

@@ -20,6 +20,9 @@ const SKILLS: VolunteerSkill[] = [
   'legal',
   'psych',
   'communications',
+  'structural_engineer',
+  'architect',
+  'surveyor',
 ]
 
 const EQUIPMENT_OPTIONS = ['vehicle', 'tools', 'generator', 'medical_kit', 'drones', 'comms'] as const
@@ -108,6 +111,7 @@ export default function VoluntariosPage() {
       equipment,
       remote_available: form.get('remote_available') === 'on',
       verification_url: (form.get('verification_url') as string) || undefined,
+      credential_note: (form.get('credential_note') as string) || undefined,
       public_display: form.get('public_display') !== 'off',
     }
 
@@ -361,6 +365,18 @@ export default function VoluntariosPage() {
               {tf('verificationUrl')}
             </label>
             <input id="verification_url" name="verification_url" type="url" className={inputClass} />
+          </div>
+          <div>
+            <label htmlFor="credential_note" className="text-[13px] font-medium">
+              {tf('credentialNote')}
+            </label>
+            <input
+              id="credential_note"
+              name="credential_note"
+              maxLength={300}
+              placeholder={tf('credentialNotePlaceholder')}
+              className={inputClass}
+            />
           </div>
           <div>
             <label htmlFor="phone" className="text-[13px] font-medium">

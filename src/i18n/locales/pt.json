@@ -28,7 +28,8 @@
     "desktopNav": "Navegação principal",
     "mobileNav": "Navegação móvel",
     "stats": "Statistics",
-    "network": "Search network"
+    "network": "Search network",
+    "propertyAssessment": "Structural Assessment"
   },
   "a11y": {
     "skipToContent": "Ir para o conteúdo principal"
@@ -178,7 +179,8 @@
       "hospitals": "Hospitais",
       "rescueZones": "Zonas de Resgate",
       "collection": "Pontos de Coleta",
-      "comms": "Conectividade (WiFi / Starlink)"
+      "comms": "Conectividade (WiFi / Starlink)",
+      "propertyAssessments": "Structural assessments"
     },
     "magnitude": "Magnitude",
     "depth": "Profundidade",
@@ -234,7 +236,10 @@
       "drone": "Operação de Drone",
       "legal": "Assistência Jurídica",
       "psych": "Apoio Psicológico",
-      "communications": "Comunicações / Mídia"
+      "communications": "Comunicações / Mídia",
+      "structural_engineer": "Structural engineer",
+      "architect": "Architect",
+      "surveyor": "Surveyor"
     },
     "availability": {
       "immediate": "Disponível Imediatamente (No Local)",
@@ -269,7 +274,9 @@
       "submit": "Registrar como Voluntário",
       "submitting": "Enviando...",
       "success": "Obrigado. Você será contatado quando houver correspondência.",
-      "error": "Falha no registro. Tente novamente."
+      "error": "Falha no registro. Tente novamente.",
+      "credentialNote": "Professional credential (optional)",
+      "credentialNotePlaceholder": "E.g. license, association, registration number"
     },
     "directory": {
       "directory": "Diretório",
@@ -312,7 +319,8 @@
       "government": "Governo",
       "diaspora": "Grupo da Diáspora",
       "donation": "Doações",
-      "legal": "Assistência Jurídica"
+      "legal": "Assistência Jurídica",
+      "child_protection": "Child protection"
     },
     "donate": "Doar",
     "website": "Website",
@@ -386,7 +394,7 @@
     "contact": "Contato",
     "credits": "Feito com esperança e amor pela Venezuela",
     "creditsByPrefix": "Um projeto de Orlando Toro —",
-    "creditsByLink": "Projeto Atenax",
+    "creditsByLink": "YouTheWave",
     "builtWith": "Construído com Claude + Cursor",
     "notEmergency": "Vigil NÃO é um serviço de emergência. Para resgate imediato ligue: {{hotline}}"
   },
@@ -738,9 +746,19 @@
     "subtitle": "Há internet ou sinal celular disponível aqui? Ajude outros a encontrar conexão.",
     "backToMap": "Voltar ao mapa",
     "boundsNote": "Apenas localizações dentro de {country} são aceitas.",
-    "map": { "reportedByCommunity": "Reportado pela comunidade — não verificado" },
-    "types": { "starlink": "Starlink", "cell": "Sinal celular", "wifi": "WiFi aberto" },
-    "access": { "public": "Público", "rescue_only": "Apenas resgate", "ngo_only": "Apenas ONG" },
+    "map": {
+      "reportedByCommunity": "Reportado pela comunidade — não verificado"
+    },
+    "types": {
+      "starlink": "Starlink",
+      "cell": "Sinal celular",
+      "wifi": "WiFi aberto"
+    },
+    "access": {
+      "public": "Público",
+      "rescue_only": "Apenas resgate",
+      "ngo_only": "Apenas ONG"
+    },
     "form": {
       "title": "Nome do ponto",
       "type": "Tipo de conectividade",
@@ -894,9 +912,83 @@
       "redVenezuelaActiva": "Volunteer coordination.",
       "desaparecidosTerremoto": "Large earthquake missing persons registry — verified public data.",
       "redQuipu": "Community aid and crisis coordination network.",
-      "mapaDanosVenezuela": "Collaborative damage and infrastructure map."
+      "mapaDanosVenezuela": "Collaborative damage and infrastructure map.",
+      "mapaNecesidadesVzla": "Zone-based live needs map (critical/partial/covered), community-reported and verified by collection centers."
     },
     "reportHint": "Each report on multiple platforms expands the search network.",
     "reportLink": "Report on Vigil"
+  },
+  "propertyAssessment": {
+    "title": "Structural Safety Assessment",
+    "subtitle": "Request a voluntary assessment of your home after the earthquake. Green/yellow/red tags follow the ATC-20 standard.",
+    "backToMap": "Back to map",
+    "disclaimer": "This assessment is a volunteer professional opinion, not an official government inspection. It does not override orders from local building or emergency authorities.",
+    "stats": {
+      "assessedWeek": "Properties assessed this week",
+      "professionals": "Active volunteer professionals"
+    },
+    "form": {
+      "address": "Exact address (private — not published)",
+      "mapPin": "Location on map",
+      "requestType": "Request type",
+      "requestTypes": {
+        "inspection": "Inspection",
+        "relocation_assistance": "Relocation help",
+        "both": "Both"
+      },
+      "indicators": "Danger indicators (optional)",
+      "dangerIndicators": {
+        "visible_cracks": "Visible cracks",
+        "leaning": "Leaning",
+        "flooding": "Flooding",
+        "foundation_damage": "Foundation damage",
+        "gas_smell": "Gas smell",
+        "partial_collapse": "Partial collapse",
+        "other": "Other"
+      },
+      "description": "Damage description",
+      "descriptionPlaceholder": "Describe what you observe in natural language…",
+      "photo": "Damage photo (optional)",
+      "photoNote": "JPG/PNG/WebP, max 5 MB. AI only prioritizes queue — never assigns tags.",
+      "contactName": "Your name",
+      "phone": "Phone",
+      "consent": "I agree my request will be processed per Vigil Privacy Policy.",
+      "accuracy": "I confirm this information is accurate to the best of my knowledge.",
+      "submit": "Submit request",
+      "submitting": "Submitting…",
+      "success": "Request registered. Save your private tracking link.",
+      "error": "Submit failed. Try again."
+    },
+    "map": {
+      "approxLocation": "Approximate map location",
+      "tag": {
+        "unassessed": "Unassessed",
+        "green": "Safe (volunteer)",
+        "yellow": "Restricted use",
+        "red": "Do not enter"
+      }
+    },
+    "claim": {
+      "title": "Your assessment request",
+      "loading": "Loading…",
+      "notFound": "Invalid or expired link.",
+      "back": "New request",
+      "status": "Assessment status",
+      "tagStatus": {
+        "unassessed": "Pending assessment",
+        "green": "Green — permitted use",
+        "yellow": "Yellow — restricted",
+        "red": "Red — do not enter"
+      },
+      "workflow": {
+        "open": "In queue",
+        "assigned": "Assigned to volunteer",
+        "completed": "Assessment complete",
+        "closed": "Closed"
+      },
+      "relocationLinked": "Your relocation request is linked to resource exchange.",
+      "relocationLink": "View shelter posts in Exchange",
+      "privacyNote": "Your exact address and contact are never shown publicly."
+    }
   }
 }

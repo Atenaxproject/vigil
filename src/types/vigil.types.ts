@@ -31,6 +31,7 @@ export type OrgType =
   | 'diaspora'
   | 'donation'
   | 'legal'
+  | 'child_protection'
 export type VolunteerSkill =
   | 'medical'
   | 'rescue'
@@ -42,6 +43,23 @@ export type VolunteerSkill =
   | 'legal'
   | 'psych'
   | 'communications'
+  | 'structural_engineer'
+  | 'architect'
+  | 'surveyor'
+export type PropertyRequestType = 'inspection' | 'relocation_assistance' | 'both'
+export type PropertyTagStatus = 'unassessed' | 'green' | 'yellow' | 'red'
+export type PropertyAssessmentStatus = 'open' | 'assigned' | 'completed' | 'closed'
+
+export interface PublicPropertyAssessment {
+  id: string
+  estado: string | null
+  municipio: string | null
+  approx_location_lat: number | null
+  approx_location_lng: number | null
+  request_type: PropertyRequestType
+  tag_status: PropertyTagStatus
+  created_at: string
+}
 export type Availability = 'immediate' | 'this_week' | 'remote_only' | 'on_request'
 export type NeedOfferType = 'need' | 'offer'
 export type NeedCategory =
@@ -219,6 +237,7 @@ export interface Volunteer {
   equipment: VolunteerEquipment[]
   remote_available: boolean
   verification_url: string | null
+  credential_note: string | null
   public_display: boolean
   created_at: string
 }
