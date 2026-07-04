@@ -62,6 +62,20 @@ supabase link --project-ref YOUR_PROJECT_REF
 supabase db push
 ```
 
+**Option C — Incremental migrations (existing production project)**
+
+If the project already has migrations `001`–`010` applied, run only the new files
+in **SQL Editor**, in order:
+
+1. `006_missing_persons_rls_fix.sql` through `010_property_assessments.sql` (if not yet applied)
+2. `011_diaspora_region.sql` — adds `region_scope` for USA diaspora hub (`/apoyo-usa`)
+
+Then seed diaspora organizations (after Orlando confirms GEM/AFE hours):
+
+3. `supabase/seeds/004_diaspora_orgs.sql`
+
+Without `011`, `/apoyo-usa` and region-scoped filters degrade gracefully (empty data).
+
 ### 4. Enable Auth providers
 
 In **Authentication → Providers**:
@@ -122,9 +136,10 @@ Add the following to the Vercel project under **Settings → Environment Variabl
 | `ANTHROPIC_API_KEY` | optional | Enables translation / dedup / matching |
 | `RESEND_API_KEY` | optional | Sends feedback alert emails to `vigil.support@youthewave.org` via Resend |
 
-> **Production Vigil:** Supabase env vars are set and migrations `001`–`005` plus
-> seed `001_real_data.sql` are complete on project `macmlvybpxdnzfviimvl`. New
-> forks or fresh projects must complete sections 3–6 below.
+> **Production Vigil:** Supabase env vars are set on project `macmlvybpxdnzfviimvl`.
+> As of 2026-07-04, apply **`011_diaspora_region.sql`** and seed **`004_diaspora_orgs.sql`**
+> after Orlando verifies emergency contacts and diaspora org hours. New forks must
+> complete sections 3–6 below (migrations `001`–`011`).
 
 ### 8. Deploy
 

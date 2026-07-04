@@ -46,6 +46,14 @@ export type VolunteerSkill =
   | 'structural_engineer'
   | 'architect'
   | 'surveyor'
+  | 'logistics_shipping'
+  | 'translation_local'
+  | 'warehouse_sorting'
+  | 'local_driver'
+  | 'fundraising_event'
+
+export type RegionScope = 'venezuela' | 'usa_diaspora'
+export type SeismicSource = 'USGS' | 'FUNVISIS'
 export type PropertyRequestType = 'inspection' | 'relocation_assistance' | 'both'
 export type PropertyTagStatus = 'unassessed' | 'green' | 'yellow' | 'red'
 export type PropertyAssessmentStatus = 'open' | 'assigned' | 'completed' | 'closed'
@@ -164,6 +172,7 @@ export interface Organization {
   location_label: string | null
   verified: boolean
   active: boolean
+  region_scope?: RegionScope
 }
 
 export type ResourceExchangeType = 'offering' | 'requesting'
@@ -251,6 +260,7 @@ export interface SeismicEvent {
   lng: number
   depth: number
   url: string
+  source: SeismicSource
 }
 
 export interface ContactRequest {

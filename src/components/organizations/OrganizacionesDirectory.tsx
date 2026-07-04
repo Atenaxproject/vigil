@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 import { ExternalLink } from 'lucide-react'
-import type { Organization } from '@/types/vigil.types'
+import type { Organization, RegionScope } from '@/types/vigil.types'
 import { VerifiedBadge } from '@/components/ui/VerifiedBadge'
 import { cn } from '@/lib/utils'
 
@@ -24,9 +24,13 @@ const ORG_TYPES = [
 
 interface OrganizacionesDirectoryProps {
   organizations: Organization[]
+  regionScope?: RegionScope
 }
 
-export function OrganizacionesDirectory({ organizations }: OrganizacionesDirectoryProps) {
+export function OrganizacionesDirectory({
+  organizations,
+  regionScope = 'venezuela',
+}: OrganizacionesDirectoryProps) {
   const t = useTranslations('organizations')
   const locale = useLocale()
   const [typeFilter, setTypeFilter] = useState<string>('all')
@@ -40,6 +44,9 @@ export function OrganizacionesDirectory({ organizations }: OrganizacionesDirecto
     <div className="mx-auto max-w-3xl p-4 pb-24">
       <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
       <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
+      {regionScope === 'usa_diaspora' && (
+        <p className="mt-2 text-[13px] text-status-unverified">{t('usaVerifyNote')}</p>
+      )}
 
       <div className="mt-4 rounded-card border border-amber-200 bg-status-unverified-bg p-4 text-[16px] text-amber-900">
         {t('fraudWarning')}

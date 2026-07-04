@@ -61,6 +61,7 @@ export async function getVenezuelaSeismicEvents(): Promise<SeismicEvent[]> {
         lng: f.geometry.coordinates[0],
         depth: f.geometry.coordinates[2],
         url: f.properties.url,
+        source: 'USGS' as const,
       }))
   } catch {
     return []

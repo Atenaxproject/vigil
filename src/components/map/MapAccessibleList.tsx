@@ -68,6 +68,7 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
               <ul className="mt-2 list-disc space-y-1 pl-5">
                 {significantEvents.slice(0, 10).map((event) => (
                   <li key={event.id}>
+                    <span className="font-mono text-[13px] text-vigil-muted">[{event.source}]</span>{' '}
                     {t('magnitude')} {event.magnitude?.toFixed(1)} — {event.place}
                   </li>
                 ))}

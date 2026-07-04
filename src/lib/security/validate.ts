@@ -1,9 +1,24 @@
-import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { CRISIS_CONFIG, diasporaSupportConfig } from '@/config/crisis.config'
+import type { RegionScope } from '@/types/vigil.types'
 import { createHash } from 'crypto'
 
 export function isWithinBounds(lat: number, lng: number): boolean {
   const { minLat, maxLat, minLng, maxLng } = CRISIS_CONFIG.mapBounds
   return lat >= minLat && lat <= maxLat && lng >= minLng && lng <= maxLng
+}
+
+export function isWithinDiasporaBounds(lat: number, lng: number): boolean {
+  const { minLat, maxLat, minLng, maxLng } = diasporaSupportConfig.bounds
+  return lat >= minLat && lat <= maxLat && lng >= minLng && lng <= maxLng
+}
+
+export function isWithinRegionBounds(
+  regionScope: RegionScope,
+  lat: number,
+  lng: number
+): boolean {
+  if (regionScope === 'usa_diaspora') return isWithinDiasporaBounds(lat, lng)
+  return isWithinBounds(lat, lng)
 }
 
 export function hashIp(ip: string): string {

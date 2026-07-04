@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import dynamic from 'next/dynamic'
-import { CRISIS_CONFIG } from '@/config/crisis.config'
-import type { SeismicEvent } from '@/types/vigil.types'
+import { CRISIS_CONFIG, diasporaSupportConfig } from '@/config/crisis.config'
+import type { SeismicEvent, RegionScope } from '@/types/vigil.types'
 import type { MapMarker, PublicPropertyAssessment } from '@/types/vigil.types'
 import { MapLayers, type MapLayerState } from '@/components/map/MapLayers'
 import { useRealtimeMapMarkers } from '@/hooks/useRealtimeMapMarkers'
@@ -54,28 +54,64 @@ interface CrisisMapProps {
   events?: SeismicEvent[]
   markers?: MapMarker[]
   propertyAssessments?: PublicPropertyAssessment[]
+  regionScope?: RegionScope
 }
 
-export function CrisisMap({ events = [], markers: initialMarkers = [], propertyAssessments = [] }: CrisisMapProps) {
+export function CrisisMap({
+  events = [],
+  markers: initialMarkers = [],
+  propertyAssessments = [],
+  regionScope = 'venezuela',
+}: CrisisMapProps) {
+  const isDiaspora = regionScope === 'usa_diaspora'
   const [mounted, setMounted] = useState(false)
   const [layers, setLayers] = useState<MapLayerState>({
-    aftershocks: true,
+    aftershocks: !isDiaspora,
     needs: true,
     resources: true,
     shelters: false,
     hospitals: false,
-    activeTeams: true,
+    activeTeams: !isDiaspora,
     collection: true,
-    propertyAssessments: true,
+    propertyAssessments: !isDiaspora,
   })
-  const markers = useRealtimeMapMarkers(initialMarkers)
+  const markers = useRealtimeMapMarkers(initialMarkers, regionScope)
   const rescuerPresence = useRealtimeRescuerPresence()
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const { centerLat, centerLng, defaultZoom, minZoom, maxZoom } = CRISIS_CONFIG.mapBounds
+  const mapConfig = useMemo(() => {
+    if (isDiaspora) {
+      const b = diasporaSupportConfig
+      return {
+        centerLat: b.centerLat,
+        centerLng: b.centerLng,
+        defaultZoom: b.defaultZoom,
+        minZoom: b.minZoom,
+        maxZoom: b.maxZoom,
+        maxBounds: [
+          [b.bounds.minLat, b.bounds.minLng],
+          [b.bounds.maxLat, b.bounds.maxLng],
+        ] as [[number, number], [number, number]],
+      }
+    }
+    const b = CRISIS_CONFIG.mapBounds
+    return {
+      centerLat: b.centerLat,
+      centerLng: b.centerLng,
+      defaultZoom: b.defaultZoom,
+      minZoom: b.minZoom,
+      maxZoom: b.maxZoom,
+      maxBounds: [
+        [b.minLat, b.minLng],
+        [b.maxLat, b.maxLng],
+      ] as [[number, number], [number, number]],
+    }
+  }, [isDiaspora])
+
+  const { centerLat, centerLng, defaultZoom, minZoom, maxZoom, maxBounds } = mapConfig
 
   if (!mounted) {
     return <div className="skeleton h-full min-h-[240px] w-full rounded-card lg:min-h-[400px]" />
@@ -89,6 +125,8 @@ export function CrisisMap({ events = [], markers: initialMarkers = [], propertyA
         zoom={defaultZoom}
         minZoom={minZoom}
         maxZoom={maxZoom}
+        maxBounds={maxBounds}
+        maxBoundsViscosity={1.0}
         zoomControl={false}
         className="h-full min-h-[240px] w-full lg:min-h-[400px]"
         scrollWheelZoom

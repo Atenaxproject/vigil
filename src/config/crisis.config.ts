@@ -86,6 +86,33 @@ export const CRISIS_CONFIG = {
       type: 'sister-platform' as const,
       slug: 'mapaNecesidadesVzla' as const,
     },
+    {
+      name: 'Encuéntrame VZLA',
+      url: 'https://encuentramevzla.com',
+      type: 'sister-platform' as const,
+      slug: 'encuentrameVzla' as const,
+    },
+    {
+      name: 'Venezuela Earthquake Map',
+      url: 'https://venezuela-earthquake-map.vercel.app',
+      type: 'sister-platform' as const,
+      slug: 'venezuelaEarthquakeMap' as const,
+      integrated: false,
+    },
+    {
+      name: 'Yummy SOS',
+      url: 'https://sos.yummyrides.com',
+      type: 'sister-platform' as const,
+      slug: 'yummySos' as const,
+      integrated: false,
+    },
+    {
+      name: 'Centros de Ayuda Venezuela',
+      url: 'https://centrosayudavenezuela.org',
+      type: 'sister-platform' as const,
+      slug: 'centrosAyudaVenezuela' as const,
+      integrated: false,
+    },
   ],
 
   seismic: {
@@ -111,7 +138,98 @@ export const CRISIS_CONFIG = {
     governingLaw: 'Florida, United States',
     effectiveDate: '2026-06-29',
   },
+
+  /**
+   * Emergency contacts — secondhand from sos.yummyrides.com (NOT independently verified).
+   * Orlando must verify each number before treating as authoritative.
+   * UI surfaces verify-before-calling language when verified === false.
+   */
+  emergencyContacts: [
+    {
+      id: 'rescate',
+      label_es: '0800-RESCATE (Emergencias nacional)',
+      label_en: '0800-RESCATE (National emergencies)',
+      numbers: ['0800-7372282', '911'],
+      carrierAccess: 'Movistar 911 · Digitel 112 · Movilnet *1 · Cantv 171',
+      verified: false,
+      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+    },
+    {
+      id: 'proteccion_civil',
+      label_es: 'Protección Civil',
+      label_en: 'Civil Protection',
+      numbers: ['0800-5588427', '0800-266-8446', '0800-262-4368'],
+      verified: false,
+      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+    },
+    {
+      id: 'cruz_roja',
+      label_es: 'Cruz Roja Venezolana',
+      label_en: 'Venezuelan Red Cross',
+      numbers: ['0212-578-2516', '0212-571-2411'],
+      verified: false,
+      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+    },
+    {
+      id: 'funvisis',
+      label_es: 'FUNVISIS (Información sísmica)',
+      label_en: 'FUNVISIS (Seismic information)',
+      numbers: ['0212-257-5153', '0800-836-2567'],
+      verified: false,
+      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+    },
+  ] as const,
+
+  /**
+   * Directory sort priority — lower number = shown first.
+   * Orlando confirms which orgs remain actively operating before changing ranks.
+   */
+  orgDisplayPriority: {
+    'Cruz Roja Venezolana': 1,
+    'IFRC': 2,
+    'UNICEF Venezuela': 3,
+    'Direct Relief': 4,
+    'International Rescue Committee': 5,
+    'Global Empowerment Mission': 10,
+    'Los Topos': 11,
+    'Team Rubicon': 12,
+    'Samaritan': 13,
+    'Convoy of Hope': 14,
+    'Cadena': 15,
+    'Save the Children': 16,
+    'UNHCR': 17,
+    'Protección Civil': 18,
+    'JRS': 19,
+    'International Medical Corps': 20,
+    'OCHA': 90,
+  } as Record<string, number>,
 } as const
+
+/** USA diaspora support layer — separate bounds from Venezuela crisis map. */
+export const diasporaSupportConfig = {
+  enabled: true,
+  region_id: 'usa_diaspora' as const,
+  region_label: 'Apoyo desde EE.UU.',
+  region_label_en: 'Support from the U.S.',
+  bounds: {
+    minLat: 25.1,
+    maxLat: 26.95,
+    minLng: -80.9,
+    maxLng: -79.9,
+  },
+  centerLat: 25.9,
+  centerLng: -80.36,
+  defaultZoom: 9,
+  minZoom: 8,
+  maxZoom: 16,
+  emergency_number: '911',
+  legal_note_en:
+    'Informational only. Verify all locations and hours directly before traveling. Vigil is not affiliated with any government agency.',
+  legal_note_es:
+    'Uso informativo. Verifica siempre ubicaciones y horarios directamente antes de trasladarte. Vigil no está afiliado a ninguna agencia gubernamental.',
+} as const
+
+export type { RegionScope } from '@/types/vigil.types'
 
 export type SupportedLang = (typeof CRISIS_CONFIG.supportedLangs)[number]
 export type PartnerLinkType = 'translation' | 'official' | 'ngo' | 'data' | 'sister-platform'

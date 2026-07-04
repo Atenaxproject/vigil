@@ -23,6 +23,11 @@ const SKILLS: VolunteerSkill[] = [
   'structural_engineer',
   'architect',
   'surveyor',
+  'logistics_shipping',
+  'translation_local',
+  'warehouse_sorting',
+  'local_driver',
+  'fundraising_event',
 ]
 
 const EQUIPMENT_OPTIONS = ['vehicle', 'tools', 'generator', 'medical_kit', 'drones', 'comms'] as const

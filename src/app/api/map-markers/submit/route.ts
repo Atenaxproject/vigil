@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
-import { getClientIp, hashIp, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
-
-export const dynamic = 'force-dynamic'
+import { getClientIp, hashIp, isWithinRegionBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import type { RegionScope } from '@/types/vigil.types'
 
 const schema = z.object({
   type: z.enum(['need', 'resource', 'shelter', 'hospital', 'danger', 'rescue_zone', 'collection_point']),
@@ -16,14 +15,21 @@ const schema = z.object({
   lng: z.number(),
   contact: z.string().max(100).optional(),
   urgent: z.boolean().optional(),
+  region_scope: z.enum(['venezuela', 'usa_diaspora']).default('venezuela'),
 })
 
 export async function POST(request: NextRequest) {
   try {
     const body = schema.parse(await request.json())
 
-    if (!isWithinBounds(body.lat, body.lng)) {
-      return NextResponse.json({ error: 'Coordenadas fuera de Venezuela' }, { status: 400 })
+    const regionScope = body.region_scope as RegionScope
+
+    if (!isWithinRegionBounds(regionScope, body.lat, body.lng)) {
+      const msg =
+        regionScope === 'usa_diaspora'
+          ? 'Coordenadas fuera del área de apoyo (Sur de Florida)'
+          : 'Coordenadas fuera de Venezuela'
+      return NextResponse.json({ error: msg }, { status: 400 })
     }
 
     const supabase = await createClient()
@@ -42,6 +48,7 @@ export async function POST(request: NextRequest) {
         urgent: body.urgent ?? false,
         reporter_ip_hash: ipHash,
         source: 'citizen',
+        region_scope: regionScope,
       })
       .select('id, title, type, lat, lng, created_at')
       .single()

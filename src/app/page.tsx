@@ -3,8 +3,9 @@ import { RecentMissingFeed } from '@/components/missing/RecentMissingFeed'
 import { CrisisMap } from '@/components/map/CrisisMap'
 import { MapAccessibleList } from '@/components/map/MapAccessibleList'
 import { AftershockAlert } from '@/components/feed/AftershockAlert'
+import { RegionScopeTabs } from '@/components/map/RegionScopeTabs'
 import { getMapMarkers, getPublicPropertyAssessments, getRecentMissingPersons } from '@/lib/data'
-import { getVenezuelaSeismicEvents } from '@/lib/usgs'
+import { getMergedSeismicEvents } from '@/lib/seismic'
 import { getTranslations } from 'next-intl/server'
 
 export const dynamic = 'force-dynamic'
@@ -12,7 +13,7 @@ export const dynamic = 'force-dynamic'
 export default async function HomePage() {
   const t = await getTranslations('map')
   const [events, markers, recent, propertyAssessments] = await Promise.all([
-    getVenezuelaSeismicEvents(),
+    getMergedSeismicEvents(),
     getMapMarkers(),
     getRecentMissingPersons(10),
     getPublicPropertyAssessments(),
@@ -26,6 +27,7 @@ export default async function HomePage() {
         <RecentMissingFeed initialRecords={recent} />
       </section>
       <section className="flex w-full min-w-0 flex-col gap-3 p-4 lg:w-[60%] lg:min-h-0 lg:overflow-y-auto">
+        <RegionScopeTabs />
         <AftershockAlert events={events} />
         {/*
           Map cell must fill ONLY the space left after its siblings (AftershockAlert +

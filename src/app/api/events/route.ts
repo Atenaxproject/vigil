@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
-import { isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import { isWithinRegionBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import type { RegionScope } from '@/types/vigil.types'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,11 +24,14 @@ const postSchema = z.object({
   lng: z.number().optional(),
   organizer_name: z.string().min(2).max(200).optional(),
   organizer_contact: z.string().max(100).optional(),
+  region_scope: z.enum(['venezuela', 'usa_diaspora']).default('venezuela'),
 })
 
 export async function GET(request: NextRequest) {
   const upcoming = request.nextUrl.searchParams.get('upcoming') !== 'false'
   const category = request.nextUrl.searchParams.get('category')
+  const regionScope = (request.nextUrl.searchParams.get('region_scope') ??
+    'venezuela') as 'venezuela' | 'usa_diaspora'
 
   try {
     const supabase = await createClient()
@@ -37,6 +41,7 @@ export async function GET(request: NextRequest) {
         'id, title, description, category, starts_at, ends_at, location_label, lat, lng, organizer_name, verified, created_at'
       )
       .eq('flagged', false)
+      .eq('region_scope', regionScope)
       .order('starts_at', { ascending: true })
       .limit(100)
 
@@ -63,9 +68,15 @@ export async function POST(request: NextRequest) {
   try {
     const body = postSchema.parse(await request.json())
 
+    const regionScope = body.region_scope as RegionScope
+
     if (body.lat !== undefined && body.lng !== undefined) {
-      if (!isWithinBounds(body.lat, body.lng)) {
-        return NextResponse.json({ error: 'Coordenadas fuera de Venezuela' }, { status: 400 })
+      if (!isWithinRegionBounds(regionScope, body.lat, body.lng)) {
+        const msg =
+          regionScope === 'usa_diaspora'
+            ? 'Coordenadas fuera del área de apoyo (Sur de Florida)'
+            : 'Coordenadas fuera de Venezuela'
+        return NextResponse.json({ error: msg }, { status: 400 })
       }
     }
 
@@ -83,6 +94,7 @@ export async function POST(request: NextRequest) {
         lng: body.lng ?? null,
         organizer_name: body.organizer_name ? sanitizeText(body.organizer_name) : null,
         organizer_contact: body.organizer_contact ? sanitizePhone(body.organizer_contact) : null,
+        region_scope: regionScope,
       })
       .select('id, title, category, starts_at, location_label, created_at')
       .single()

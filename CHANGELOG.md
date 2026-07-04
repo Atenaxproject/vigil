@@ -4,6 +4,60 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-04 (adaptive onboarding + CAV sync)
+
+### Added
+- **Adaptive view modes** — six personas + "Ver todo"; first-visit picker below emergency bar; header switcher; client-side nav filtering (`vigil_view_mode` in localStorage).
+- **Per-mode mini-guides** — dismissible tips with deep links to `/ayuda` sections.
+- **`/ayuda` help center** — eight accordion sections from `help-center-structure.md` (Spanish primary, i18n keys in all locales).
+- **CAV collection-point sync** — `src/lib/cav-import.ts`, `/api/admin/sync-cav-centers`, weekly cron Mon 06:00 UTC.
+- **Three sister platforms** — Venezuela Earthquake Map, Yummy SOS, Centros de Ayuda Venezuela (`integrated: false`).
+- **CAV map attribution** — "vía Centros de Ayuda Venezuela" badge on `source=cav` markers.
+
+### Changed
+- **Emergency banner** — 911 primary with carrier codes; Protección Civil, Cruz Roja, FUNVISIS under expandable "Más contactos".
+- **Mobile nav** — Ayuda tab always visible; mode-filtered primary routes.
+- **`help-center-structure.md`** — marked implemented at `/ayuda`.
+
+### Archived
+- `docs/build-process/43-adaptive-onboarding-and-help-center.md`, `44-sister-network-and-cav-sync.md`; root prompt stubs deleted.
+
+## [Unreleased] — 2026-07-04 (FUNVISIS pass + USA diaspora hub)
+
+### Added
+- **`src/lib/seismic.ts`** — merged seismic feed with per-event `source` labels (USGS today; FUNVISIS when feed exists).
+- **`diasporaSupportConfig`** + **`emergencyContacts`** in `crisis.config.ts` (unverified numbers flagged).
+- **Migration `011_diaspora_region.sql`** — `region_scope` on map_markers, organizations, events, resource_exchange, needs_offers.
+- **Route `/apoyo-usa`** — South Florida diaspora hub (map, orgs, intercambio/events links, 911 module).
+- **Region toggle tabs** on home map: Venezuela | Apoyo desde EE.UU.
+- **`CrisisMap` `regionScope` prop** — separate bounds; reuses single Leaflet component.
+- **USA volunteer skills** — logistics_shipping, translation_local, warehouse_sorting, local_driver, fundraising_event.
+- **Seed `004_diaspora_orgs.sql`** — GEM Doral + AFE (flagged for Orlando hour verification).
+- **Encuéntrame VZLA** sister platform link in `crisis.config.ts`.
+- **Info hub** — psychosocial block, telecom free-calling note, AP July 1 casualty sources, medical strain note.
+- **`/como-ayudar`** — OFAC GL 60, Meru remittances, Banesco matching notes.
+
+### Changed
+- **Emergency banner + `/informacion`** — fuller contact directory with verify-before-calling caveat.
+- **Org directory** — `orgDisplayPriority` sort in `getApprovedOrganizations()`.
+- **API submit routes** — `region_scope` bounds validation (Venezuela unchanged; usa_diaspora → tri-county FL).
+- **README** — diaspora hub feature, DTV live wording, AP stats sync, Hurricane `region_scope` reuse note.
+
+### Skipped
+- **`src/lib/funvisis.ts`** — no official FUNVISIS JSON/XML feed (HTML only); scraper not built per guardrails.
+
+### Archived
+- `docs/build-process/41-funvisis-and-content-refresh.md`, `42-vigil-usa-diaspora-hub.md`; root prompt stubs deleted.
+
+## [Unreleased] — 2026-07-04 (complete operational reference)
+
+### Added
+- **`docs/reference/`** — full A-to-Z operational documentation derived from live codebase:
+  `VIGIL-COMPLETE-GUIDE.md` (master), `onboarding.md`, `api-reference.md` (33 routes),
+  `data-model.md` (migrations 001–010, RLS, views), `sops.md`, `help-center-structure.md`,
+  `glossary.md`.
+- **`docs/README.md`** — Reference index section linking all new docs.
+
 ## [Unreleased] — 2026-07-03 (README + docs index sync)
 
 ### Changed

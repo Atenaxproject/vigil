@@ -165,9 +165,24 @@ export default async function ComoAyudarPage() {
       </section>
 
       <section className="mt-10">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('ofac.title')}</h2>
+        <p className="mt-2 text-[16px] text-slate-600">{t('ofac.note')}</p>
+      </section>
+
+      <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{t('transfers.title')}</h2>
         <p className="mt-2 text-[16px] text-slate-600">{t('transfers.note')}</p>
         <p className="mt-1 font-mono text-[13px] text-vigil-muted">{t('transfers.source')}</p>
+        <div className="mt-4 space-y-3">
+          <div className="rounded-card border border-slate-200 bg-white p-4">
+            <h3 className="text-[17px] font-medium text-vigil-ink">{t('transfers.meru.title')}</h3>
+            <p className="mt-2 text-[16px] text-slate-600">{t('transfers.meru.note')}</p>
+          </div>
+          <div className="rounded-card border border-slate-200 bg-white p-4">
+            <h3 className="text-[17px] font-medium text-vigil-ink">{t('transfers.banesco.title')}</h3>
+            <p className="mt-2 text-[16px] text-slate-600">{t('transfers.banesco.note')}</p>
+          </div>
+        </div>
         <a
           href="https://www.riamoneytransfer.com"
           target="_blank"

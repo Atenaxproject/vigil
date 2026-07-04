@@ -7,6 +7,10 @@
     {
       "path": "/api/admin/sync-dtv-centers",
       "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/admin/sync-cav-centers",
+      "schedule": "0 6 * * 1"
     }
   ]
 }

@@ -72,7 +72,7 @@ One config file change redeploys the whole platform for **any country, any disas
 
 ### Crisis map — live data from multiple verified sources
 
-- USGS aftershock data (real-time, 5-min refresh, magnitude 2.0+)
+- USGS aftershock data (real-time, 5-min refresh, magnitude 2.0+, **source-labeled USGS/FUNVISIS** when FUNVISIS feed available)
 - GDACS disaster alerts (United Nations / European Commission)
 - Centers and hospitals from Desaparecidos Terremoto Venezuela (integrated)
 - Citizen-reported needs, resources, shelters, danger zones, rescue zones
@@ -117,7 +117,8 @@ Verified against source and production as of **2026-07-03**. Optional integratio
 | **Person detail + public notes** | `/buscar/[id]` | Sightings thread; privacy-preserving contact flow |
 | **PFIF export** | `/api/pfif` | [Google Person Finder](https://github.com/google/personfinder) XML interoperability |
 | **Claim-token inbox** | `/mi-reporte/[token]`, `/mi-intercambio/[token]` | Passwordless management; claim URL on submit |
-| **Crisis map** | `/` | USGS aftershocks, needs, resources, shelters, hospitals, collection points, active rescue teams |
+| **Crisis map** | `/` | USGS aftershocks (source-labeled), needs, resources, shelters, hospitals, collection points, active rescue teams; region tabs → `/apoyo-usa` |
+| **USA/Diaspora hub** | `/apoyo-usa` | South Florida tri-county map (separate bounds), collection points, diaspora orgs, intercambio/events filtered by `region_scope`; does not share Venezuela map data |
 | **Connectivity / comms layer** | `/conectividad` | WiFi, Starlink, cell signal citizen reports — map layer + info card on `/informacion` |
 | **Retractable map layers** | `/` (desktop) | Collapsible panel on `lg+`; preference in `localStorage` |
 | **Collection points** | `/punto-de-acopio` | Citizen registration → amber map markers |
@@ -181,7 +182,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Federated missing persons search** — Vigil DB + DTV API (55,891+ records combined)
 - **Photo-based search** — Claude Vision analysis + DTV facial recognition
 - **Claude AI assistant** — live database Q&A in 8 languages, never invents information
-- **Crisis map** — USGS aftershocks, GDACS alerts, needs, resources, shelters, hospitals, rescue zones, collection points (including DTV-sourced centers)
+- **Crisis map** — USGS aftershocks (source-labeled), GDACS alerts, needs, resources, shelters, hospitals, rescue zones, collection points (including DTV-sourced centers); **USA diaspora hub** at `/apoyo-usa` (South Florida, separate `region_scope`)
 - **Connectivity / comms layer** — WiFi, Starlink, cell signal points on map; citizen submission at `/conectividad`
 - **Rescuer safety system** — GPS check-in, 4-hour auto-expiry, SOS button
 - **Resource exchange (Intercambio)** — 7 categories, claim-token, 7-day auto-expiry
@@ -199,7 +200,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Hourly duplicate detection** — Claude Haiku cron, flags to moderation queue
 - **PFIF 1.4 endpoint** — `/api/pfif`, Google Person Finder compatible
 - **Sister platform network** — 8 citizen platforms linked at `/red`
-- **DTV active integration** — Desaparecidos Terremoto Venezuela federated API
+- **DTV active integration** — Desaparecidos Terremoto Venezuela federated API (live when `DTV_API_KEY` configured)
 - **Social share images** — Open Graph + Twitter Card auto-generated
 - **Geographic breakdown** — estado/municipio/parroquia across 24 Venezuelan states
 - **Privacy** — contact info never public, Venezuelan government explicitly excluded
@@ -211,6 +212,8 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - Resend email notifications (RESEND_API_KEY needed)
 - Vercel AI Gateway (cost observability optimization)
 - DTV statistics widget on `/estadisticas` (API integration, UI in progress)
+
+- Vigil Hurricane (Florida) archetype — diaspora hub's `region_scope` + bounds pattern is designed for reuse
 
 ### 🔜 Coming Soon
 
@@ -239,6 +242,7 @@ If you don't find someone here, check these too:
 | [Red Venezuela Activa](https://redvenezuelaactiva.com) | Volunteer coordination |
 | [Mapa de Daños Venezuela](https://terremotovenezuela.com) | Structural damage mapping |
 | [RedQuipu](https://redquipu.com) | Multi-organization coordination |
+| [Encuéntrame VZLA](https://encuentramevzla.com) | Hospital admissions locator (distinct from general missing-persons search) |
 | [Mapa de Necesidades VZLA](https://mapadenecesidadesvzla.com/) | Zone-based live needs map (critical/partial/covered) |
 
 ---

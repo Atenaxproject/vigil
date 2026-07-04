@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
-import { isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { isWithinRegionBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import type { RegionScope } from '@/types/vigil.types'
 
 export const dynamic = 'force-dynamic'
+
+const regionScopeSchema = z.enum(['venezuela', 'usa_diaspora']).default('venezuela')
 
 const schema = z.object({
   entry_type: z.enum(['offering', 'requesting']),
@@ -20,15 +23,22 @@ const schema = z.object({
   languages: z.array(z.string().max(50)).max(10).default([]),
   available_until: z.string().optional(),
   urgent: z.boolean().default(false),
+  region_scope: regionScopeSchema,
 })
 
 export async function POST(request: NextRequest) {
   try {
     const body = schema.parse(await request.json())
 
+    const regionScope = body.region_scope as RegionScope
+
     if (body.lat !== undefined && body.lng !== undefined) {
-      if (!isWithinBounds(body.lat, body.lng)) {
-        return NextResponse.json({ error: 'Coordenadas fuera de Venezuela' }, { status: 400 })
+      if (!isWithinRegionBounds(regionScope, body.lat, body.lng)) {
+        const msg =
+          regionScope === 'usa_diaspora'
+            ? 'Coordenadas fuera del área de apoyo (Sur de Florida)'
+            : 'Coordenadas fuera de Venezuela'
+        return NextResponse.json({ error: msg }, { status: 400 })
       }
     }
 
@@ -60,6 +70,7 @@ export async function POST(request: NextRequest) {
         available_until: body.available_until ?? null,
         urgent: body.urgent,
         status: 'active',
+        region_scope: regionScope,
       })
       .select('id, entry_type, category, title, status, created_at, claim_token')
       .single()

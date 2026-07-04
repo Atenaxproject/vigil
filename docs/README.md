@@ -11,6 +11,8 @@ this shows the reasoning behind every major decision.
 
 - `architecture/` — Tech stack, design system, deployment guide, and AI agent
   instructions that govern ongoing development
+- `reference/` — Complete operational guide for help content, SOPs, onboarding,
+  API reference, and data model (derived from live codebase)
 - `build-process/` — The sequential build prompts used to construct Vigil
   from scratch, including the Venezuela 2026 data seed, privacy
   architecture decisions, and feature specs
@@ -23,6 +25,18 @@ Living specs and operational guides:
 - `architecture/CLAUDE.md` — tech stack, constraints, and agent instructions
 - `architecture/DESIGN-SYSTEM.md` — UI tokens, typography, and component rules
 - `architecture/DEPLOYMENT.md` — Supabase, Vercel, DNS, Resend, and local dev setup
+
+## Reference index
+
+Complete A-to-Z operational documentation (help, SOPs, onboarding):
+
+- `reference/VIGIL-COMPLETE-GUIDE.md` — master guide with architecture, features, and gaps
+- `reference/onboarding.md` — end-user, volunteer, admin, and developer onboarding
+- `reference/api-reference.md` — all 34 API routes (inputs, outputs, rate limits)
+- `reference/data-model.md` — schema, views, RLS, migrations 001–010
+- `reference/sops.md` — daily ops, moderation, troubleshooting procedures
+- `reference/help-center-structure.md` — FAQ and in-app help outline
+- `reference/glossary.md` — PFIF, DTV, ATC-20, and platform terminology
 
 ## Build-process index
 
@@ -65,6 +79,10 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `38-branding-orgs-update.md` — youthewave.org branding swap, Hogar Bambi (17th org), Mapa de Necesidades VZLA (8th sister platform)
 - `39-property-safety-assessment.md` — Evaluación de Seguridad Estructural: ATC-20 tagging, volunteer taxonomy extension, ToS §4
 - `40-readme-docs-sync.md` — README accuracy pass: property assessment, org counts, contact emails, package.json description
+- `41-funvisis-and-content-refresh.md` — seismic source labels, emergency contacts, org priority sort (FUNVISIS feed gap documented)
+- `42-vigil-usa-diaspora-hub.md` — `region_scope` migration 011, `/apoyo-usa`, diaspora bounds, info hub refresh
+- `43-adaptive-onboarding-and-help-center.md` — six view modes, mode picker, `/ayuda` help center, emergency bar refresh
+- `44-sister-network-and-cav-sync.md` — three sister links, CAV CSV weekly sync to `map_markers`
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

@@ -29,7 +29,9 @@
     "expandMenu": "Expandir menú",
     "desktopNav": "Navegación principal",
     "mobileNav": "Navegación móvil",
-    "propertyAssessment": "Evaluación Estructural"
+    "propertyAssessment": "Evaluación Estructural",
+    "help": "Centro de Ayuda",
+    "helpShort": "Ayuda"
   },
   "a11y": {
     "skipToContent": "Saltar al contenido principal"
@@ -46,7 +48,40 @@
   "banner": {
     "emergency": "Emergencias:",
     "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282"
+    "hotlineNumber": "0800-7372282",
+    "moreNumbers": "Más contactos",
+    "fullDirectory": "Directorio completo",
+    "verifyBeforeCalling": "Verifica antes de llamar"
+  },
+  "regionScope": {
+    "label": "Región del mapa",
+    "venezuela": "🇻🇪 Venezuela",
+    "usaDiaspora": "🇺🇸 Apoyo desde EE.UU."
+  },
+  "diasporaHub": {
+    "title": "Apoyo desde EE.UU.",
+    "subtitle": "Coordinación para quienes organizan ayuda desde el sur de Florida hacia Venezuela",
+    "emergency": {
+      "title": "Emergencias locales (EE.UU.)"
+    },
+    "orgs": {
+      "title": "Organizaciones en el sur de Florida",
+      "verifyNote": "⚠️ Verifica horarios y estado directamente con cada organización antes de trasladarte.",
+      "website": "Sitio web",
+      "empty": "No hay organizaciones registradas aún."
+    },
+    "exchange": {
+      "title": "Intercambio de recursos",
+      "desc": "Envíos, voluntarios, equipos y donaciones desde EE.UU.",
+      "count": "{count} publicaciones activas"
+    },
+    "events": {
+      "title": "Eventos y jornadas",
+      "desc": "Acopios, clasificación en bodega, recaudaciones",
+      "count": "{count} eventos próximos"
+    },
+    "viewAll": "Ver todo",
+    "volunteerLink": "Registrarse como voluntario"
   },
   "missing": {
     "title": "Personas Desaparecidas",
@@ -221,7 +256,8 @@
     "submitError": "Error al enviar",
     "exchangeHint": "¿Buscas intercambiar bienes o servicios con otra persona?",
     "exchangeLink": "Ir a Intercambio",
-    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela"
+    "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela",
+    "cavSourceBadge": "vía Centros de Ayuda Venezuela"
   },
   "volunteers": {
     "title": "Registro de Voluntarios",
@@ -239,7 +275,12 @@
       "communications": "Comunicaciones / Medios",
       "structural_engineer": "Ingeniero estructural",
       "architect": "Arquitecto",
-      "surveyor": "Topógrafo / Agrimensor"
+      "surveyor": "Topógrafo / Agrimensor",
+      "logistics_shipping": "Logística de envíos a Venezuela",
+      "translation_local": "Traducción en puntos de acopio (EE.UU.)",
+      "warehouse_sorting": "Clasificación en bodega / almacén",
+      "local_driver": "Conductor local (recogida/entrega)",
+      "fundraising_event": "Organización de recaudaciones / eventos"
     },
     "availability": {
       "immediate": "Disponible de Inmediato (Presencial)",
@@ -309,6 +350,7 @@
   "organizations": {
     "title": "Organizaciones y Equipos",
     "subtitle": "Organizaciones verificadas respondiendo a la crisis",
+    "usaVerifyNote": "Organizaciones del sur de Florida — verifica horarios directamente antes de trasladarte.",
     "types": {
       "rescue": "Búsqueda y Rescate",
       "medical": "Médico",
@@ -479,7 +521,19 @@
     "transfers": {
       "title": "Enviar dinero a Venezuela",
       "note": "Ria Money Transfer eliminó comisiones para transferencias a Venezuela hasta el 15 de julio 2026.",
-      "source": "Fuente: riamoneytransfer.com"
+      "source": "Fuente: riamoneytransfer.com",
+      "meru": {
+        "title": "Meru — remesas sin comisión",
+        "note": "Meru ha eliminado comisiones en remesas hacia Venezuela durante la crisis. Verifica condiciones actuales en su app o sitio oficial antes de enviar."
+      },
+      "banesco": {
+        "title": "Banesco — donaciones con matching",
+        "note": "Banesco ha anunciado programas de matching para donaciones relacionadas con el terremoto. Consulta canales oficiales del banco para detalles vigentes."
+      }
+    },
+    "ofac": {
+      "title": "Licencia OFAC General 60 (EE.UU.)",
+      "note": "El Departamento del Tesoro de EE.UU. (OFAC) emitió la Licencia General 60 el 25 de junio de 2026, autorizando transacciones relacionadas con la ayuda humanitaria ante el terremoto en Venezuela pese a las sanciones vigentes. Esta licencia vence el 23 de octubre de 2026. Fuente: state.gov. Vigil no ofrece asesoría legal — consulta la fuente oficial."
     },
     "collection": {
       "title": "Puntos de acopio físicos"
@@ -499,8 +553,9 @@
       "missingValue": "~50.000 (estimado)",
       "missingSource": "IRC / ABC News",
       "missingQualifier": "Cifra en revisión — los balances oficiales han mostrado discrepancias y pueden tardar semanas en consolidarse.",
-      "deathsSource": "Asamblea Nacional (Jorge Rodríguez), corroborado por NPR, ABC News, El Diario",
-      "injuredSource": "Asamblea Nacional (Jorge Rodríguez), corroborado por NPR, ABC News, El Diario",
+      "deathsSource": "AP, 1 de julio de 2026",
+      "injuredSource": "AP, 1 de julio de 2026",
+      "medicalStrain": "La zona afectada sigue bajo presión médica: heridas sin tratar e riesgo de enfermedades infecciosas reportados por AP una semana después del terremoto.",
       "displaced": "Desplazados",
       "displacedSource": "OCHA",
       "buildings": "Edificios colapsados",
@@ -524,7 +579,8 @@
       "bridgeValue": "Colapsado (réplica 26 junio)"
     },
     "hotlines": {
-      "title": "Líneas de emergencia verificadas",
+      "title": "Líneas de emergencia",
+      "verifyNote": "⚠️ Números de segunda mano — verifica antes de llamar. Orlando debe confirmar cada número.",
       "rescate": "0800-RESCATE",
       "redCross": "Cruz Roja Venezolana",
       "additionalTitle": "Líneas de emergencia adicionales",
@@ -547,6 +603,20 @@
       "redQuipu": "Plataforma humanitaria que conecta iniciativas y consolida necesidades para una respuesta coordinada en Venezuela.",
       "mapaDanosVenezuela": "Mapa ciudadano de daños estructurales y necesidades reportadas tras el terremoto en Venezuela."
     },
+    "psychosocial": {
+      "title": "Apoyo psicosocial",
+      "verifyNote": "Líneas de crisis — verifica disponibilidad antes de compartir.",
+      "psicoLinea": {
+        "name": "PsicoLínea Venezuela (UCAB)",
+        "phones": "0414-127 78 82 · 0424-172 38 81",
+        "note": "Atención psicológica gratuita"
+      },
+      "venemergencia": {
+        "name": "Grupo Venemergencia",
+        "note": "Apoyo médico/psicológico — consulta su Instagram para contacto actualizado"
+      }
+    },
+    "telecomFreeCalls": "Movistar, O2 y MasOrange ofrecen llamadas internacionales gratuitas entre España y Venezuela durante la crisis.",
     "sources": {
       "title": "Fuentes confiables para seguir"
     }
@@ -663,7 +733,11 @@
       "desaparecidosTerremoto": "Registro masivo de desaparecidos del terremoto — datos públicos verificados.",
       "redQuipu": "Red comunitaria de ayuda y coordinación en crisis.",
       "mapaDanosVenezuela": "Mapa colaborativo de daños e infraestructura afectada.",
-      "mapaNecesidadesVzla": "Mapa en vivo de necesidades por zona (crítico/parcial/cubierto), reportado por la comunidad y verificado por centros de acopio."
+      "mapaNecesidadesVzla": "Mapa en vivo de necesidades por zona (crítico/parcial/cubierto), reportado por la comunidad y verificado por centros de acopio.",
+      "encuentrameVzla": "Plataforma ciudadana de búsqueda y reunificación familiar.",
+      "venezuelaEarthquakeMap": "Mapa colaborativo de terremotos y daños — enlace externo, sin federación de datos.",
+      "yummySos": "App ciudadana de emergencias — enlace externo, sin federación de datos.",
+      "centrosAyudaVenezuela": "Directorio comunitario de centros de acopio — datos importados vía CSV público."
     },
     "reportHint": "Cada reporte en múltiples plataformas amplía la red de búsqueda.",
     "reportLink": "Reportar en Vigil"
@@ -989,6 +1063,268 @@
       "relocationLinked": "Tu solicitud de reubicación está vinculada al intercambio de recursos.",
       "relocationLink": "Ver refugios en Intercambio",
       "privacyNote": "Tu dirección exacta y contacto nunca se muestran públicamente."
+    }
+  },
+  "viewMode": {
+    "pickerTitle": "¿Qué necesitas en este momento?",
+    "pickerSubtitle": "Personalizamos el menú según tu situación. Siempre puedes ver todo.",
+    "switcherPrefix": "Modo:",
+    "miniGuide": {
+      "fullGuideLink": "Ver guía completa",
+      "dismiss": "No volver a mostrar",
+      "busco_a_alguien": {
+        "title": "Buscando a alguien",
+        "tips": [
+          "Busca por nombre o sube una foto — comparamos con Vigil y con Desaparecidos Terremoto Venezuela a la vez.",
+          "Guarda tu link de reclamo si reportas a alguien — es la única forma de gestionar tu reporte sin cuenta.",
+          "Revisa las notas públicas en cada perfil — pueden tener avistamientos recientes."
+        ]
+      },
+      "necesito_ayuda": {
+        "title": "Necesitas ayuda ahora",
+        "tips": [
+          "Usa Necesito ayuda para marcar tu ubicación en el mapa — los equipos de rescate lo ven en tiempo real.",
+          "Llama al 911 o 0800-RESCATE antes de depender solo de la app.",
+          "Reporta conectividad si encuentras WiFi o señal — ayuda a otros a comunicarse."
+        ]
+      },
+      "quiero_ayudar": {
+        "title": "Quieres ayudar",
+        "tips": [
+          "Regístrate como voluntario con tus habilidades — rescate, médico, logística y más.",
+          "Publica ofertas o necesidades en Intercambio — los contactos pasan por Vigil, no son públicos.",
+          "Registra un punto de acopio si recibes donaciones en tu comunidad."
+        ]
+      },
+      "soy_organizacion": {
+        "title": "Representas una organización",
+        "tips": [
+          "Solicita listado en Organizaciones — requiere aprobación de admin antes de aparecer públicamente.",
+          "Usa Intercambio y Calendario para coordinar recursos y eventos con la comunidad.",
+          "Consulta la Red de búsqueda para ver plataformas hermanas federadas."
+        ]
+      },
+      "equipo_rescate": {
+        "title": "Equipo de rescate",
+        "tips": [
+          "El mapa principal muestra necesidades, recursos, réplicas y puntos de acopio en capas.",
+          "Marca tu equipo activo para que coordinadores sepan dónde operan.",
+          "Revisa Conectividad para ubicar señal y puntos de comunicación."
+        ]
+      },
+      "solo_informacion": {
+        "title": "Solo información",
+        "tips": [
+          "Información agrega USGS, GDACS, ReliefWeb y contactos de emergencia verificados.",
+          "Estadísticas muestra conteos de Vigil y datos federados de DTV.",
+          "Noticias y Muro tienen actualizaciones oficiales y mensajes comunitarios."
+        ]
+      }
+    },
+    "modes": {
+      "busco_a_alguien": {
+        "label": "Busco a alguien",
+        "short": "Busco a alguien",
+        "description": "Familiares en el exterior buscando personas desaparecidas"
+      },
+      "necesito_ayuda": {
+        "label": "Necesito ayuda",
+        "short": "Necesito ayuda",
+        "description": "Víctimas que necesitan asistencia inmediata"
+      },
+      "quiero_ayudar": {
+        "label": "Quiero ayudar",
+        "short": "Quiero ayudar",
+        "description": "Voluntarios y donantes"
+      },
+      "soy_organizacion": {
+        "label": "Soy organización",
+        "short": "Organización",
+        "description": "ONGs, equipos de rescate y grupos de ayuda"
+      },
+      "equipo_rescate": {
+        "label": "Equipo de rescate",
+        "short": "Rescate",
+        "description": "Equipos activos en terreno"
+      },
+      "solo_informacion": {
+        "label": "Solo información",
+        "short": "Información",
+        "description": "Prensa, investigadores y público general"
+      },
+      "ver_todo": {
+        "label": "Ver todo / Omitir",
+        "short": "Ver todo",
+        "description": "Mostrar todas las secciones sin filtrar"
+      }
+    }
+  },
+  "helpCenter": {
+    "metaTitle": "Centro de Ayuda — Vigil",
+    "title": "Centro de Ayuda",
+    "subtitle": "Respuestas a las preguntas más frecuentes sobre Vigil.",
+    "sectionNav": "Secciones del centro de ayuda",
+    "sections": {
+      "gettingStarted": {
+        "title": "Primeros pasos",
+        "whatIsVigil": {
+          "q": "¿Qué es Vigil?",
+          "a": "Vigil es una plataforma humanitaria de crisis que reúne búsqueda de personas desaparecidas, mapas en vivo, intercambio de recursos y datos oficiales de desastres en una app móvil. Conecta reportes ciudadanos con equipos de rescate, voluntarios y familias en el exterior."
+        },
+        "government": {
+          "q": "¿Es Vigil una app del gobierno?",
+          "a": "No. Vigil es operada por Bbluestudios LLC bajo la iniciativa YouTheWave. No comparte datos de usuarios con el gobierno venezolano. Consulta /privacidad para más detalles."
+        },
+        "install": {
+          "q": "¿Cómo instalo la app?",
+          "a": "En móvil: abre vigil.youthewave.org en Safari (iOS) o Chrome (Android) → Compartir → Agregar a pantalla de inicio. La app funciona sin conexión para envíos en cola."
+        },
+        "languages": {
+          "q": "¿Qué idiomas están disponibles?",
+          "a": "8 idiomas mediante el selector del encabezado. Español es el predeterminado."
+        },
+        "free": {
+          "q": "¿Vigil es gratis?",
+          "a": "Sí. Vigil es gratuito. Los enlaces de donación en /donaciones van directamente a organizaciones verificadas, no a Vigil."
+        }
+      },
+      "missingPersons": {
+        "title": "Personas desaparecidas",
+        "search": {
+          "q": "¿Cómo busco a alguien?",
+          "a": "Ve a Buscar (/buscar). Ingresa un nombre (mínimo 2 caracteres) o filtra por estado. Los resultados incluyen registros de Vigil y resultados federados de la plataforma DTV (claramente etiquetados)."
+        },
+        "report": {
+          "q": "¿Cómo reporto a alguien desaparecido?",
+          "a": "Ve a Reportar (/reportar). Completa los datos, proporciona contacto privado y acepta el consentimiento. Guarda tu link de reclamo — es la única forma de gestionar tu reporte sin cuenta."
+        },
+        "claimLink": {
+          "q": "¿Qué es un link de reclamo?",
+          "a": "Una URL única (/mi-reporte/[token]) que te permite actualizar el estado, ver solicitudes de contacto y gestionar tu reporte sin contraseña. Trátalo como una contraseña — no lo compartas públicamente."
+        },
+        "phone": {
+          "q": "¿Otros pueden ver mi teléfono?",
+          "a": "No. La información de contacto nunca se muestra en páginas públicas. Otros solicitan contacto a través de Vigil; tú recibes la notificación en tu bandeja de reclamo."
+        },
+        "status": {
+          "q": "¿Qué significan los estados?",
+          "a": "Desaparecido = búsqueda activa. Encontrado con vida = localizado y a salvo. Encontrado fallecido = confirmado fallecido. No verificado = reporte ciudadano sin confirmación de admin."
+        },
+        "photo": {
+          "q": "¿Cómo funciona la búsqueda por foto?",
+          "a": "Sube una foto en la página de búsqueda. La IA describe rasgos visibles (no identificación biométrica) y sugiere posibles coincidencias de Vigil y DTV. Los resultados son indicativos — siempre verifica con familias y autoridades."
+        },
+        "pfif": {
+          "q": "¿Qué es PFIF?",
+          "a": "Person Finder Interchange Format — un estándar para compartir datos de personas desaparecidas con Google Person Finder y otras herramientas de crisis. Vigil exporta en /api/pfif."
+        },
+        "sighting": {
+          "q": "¿Cómo agrego una nota de avistamiento?",
+          "a": "En la página de detalle de una persona (/buscar/[id]), envía una nota pública con ubicación y hora del avistamiento. No incluyas información de contacto privada en las notas."
+        }
+      },
+      "mapNeeds": {
+        "title": "Mapa y necesidades",
+        "readMap": {
+          "q": "¿Cómo leo el mapa de crisis?",
+          "a": "El mapa de la página principal muestra múltiples capas: réplicas, necesidades, recursos, refugios, hospitales y más. Usa el panel de capas (escritorio) para activarlas. Hay una lista de texto alternativa para accesibilidad."
+        },
+        "needHelp": {
+          "q": "¿Cómo reporto \"necesito ayuda\"?",
+          "a": "Ve a Necesito ayuda (/necesito-ayuda) y marca un pin con descripción. Los rescatistas lo ven en el mapa."
+        },
+        "collectionPoint": {
+          "q": "¿Qué es un punto de acopio?",
+          "a": "Un lugar que acepta bienes donados. Regístralo en /punto-de-acopio o encuentra puntos existentes en la capa del mapa."
+        },
+        "colors": {
+          "q": "¿Cuáles son los colores del mapa?",
+          "a": "Varían por capa — consulta la leyenda en /. Las evaluaciones estructurales usan colores ATC-20: verde (seguro), amarillo (precaución), rojo (inseguro)."
+        }
+      },
+      "volunteers": {
+        "title": "Voluntarios e intercambio",
+        "register": {
+          "q": "¿Cómo me registro como voluntario?",
+          "a": "Ve a Voluntarios (/voluntarios), selecciona habilidades e idiomas, y proporciona un método de contacto. Tu nombre puede aparecer enmascarado en el directorio público."
+        },
+        "exchange": {
+          "q": "¿Cómo funciona el intercambio de recursos?",
+          "a": "Ve a Intercambio (/intercambio) para ofrecer o solicitar comida, agua, medicina, refugio, transporte, equipos u otros recursos. Las publicaciones expiran a los 7 días."
+        },
+        "contact": {
+          "q": "¿Cómo funciona el contacto?",
+          "a": "Cuando alguien quiere tu publicación o perfil de voluntario, envía una solicitud de contacto. Vigil enruta la solicitud — los teléfonos nunca son públicos en el tablero."
+        },
+        "structural": {
+          "q": "¿Puedo evaluar seguridad de edificios?",
+          "a": "Solo si estás registrado con habilidades estructurales y asignado por admin. Envía reportes en /evaluacion-estructural; la asignación ocurre vía cola de admin."
+        }
+      },
+      "safety": {
+        "title": "Seguridad y confianza",
+        "unverified": {
+          "q": "¿Qué significa \"no verificado\"?",
+          "a": "El reporte fue enviado por un ciudadano y no ha sido confirmado por un admin o fuente oficial. Trátalo como pista, no como hecho confirmado."
+        },
+        "flag": {
+          "q": "¿Cómo reporto contenido inapropiado?",
+          "a": "Muro comunitario: usa el botón de reportar en /muro (se oculta automáticamente tras 3 reportes). Personas desaparecidas: aún no hay API pública de reporte — contacta support@youthewave.org."
+        },
+        "structural": {
+          "q": "¿Las evaluaciones estructurales son oficiales?",
+          "a": "No. Son opiniones de voluntarios en campo siguiendo guías ATC-20, no inspecciones gubernamentales. Consulta Términos de Servicio §4."
+        },
+        "hotline": {
+          "q": "¿Cuál es la línea de emergencia?",
+          "a": "0800-RESCATE — siempre visible en el banner del sitio. Vigil complementa pero no reemplaza servicios de emergencia oficiales."
+        }
+      },
+      "connectivity": {
+        "title": "Conectividad e infraestructura",
+        "wifi": {
+          "q": "¿Cómo reporto WiFi o Starlink disponible?",
+          "a": "Ve a Conectividad (/conectividad) y reporta el tipo de señal con ubicación. Ayuda a rescatistas y familias a encontrar internet funcionando."
+        },
+        "alerts": {
+          "q": "¿De dónde vienen las alertas oficiales?",
+          "a": "/informacion agrega USGS, GDACS, ReliefWeb y estado de infraestructura en vivo. /noticias muestra actualizaciones oficiales de ReliefWeb."
+        }
+      },
+      "donations": {
+        "title": "Donaciones y organizaciones",
+        "where": {
+          "q": "¿Dónde debo donar?",
+          "a": "/donaciones y /como-ayudar enlazan a 17 organizaciones verificadas. Vigil no procesa pagos — los enlaces van directamente a las páginas de donación de cada org."
+        },
+        "listed": {
+          "q": "¿Cómo se listan las organizaciones?",
+          "a": "Envía solicitud vía el flujo de registro de orgs. Se requiere aprobación de admin antes de aparecer públicamente en /organizaciones."
+        },
+        "sister": {
+          "q": "¿Qué son las plataformas hermanas?",
+          "a": "Herramientas ciudadanas de crisis independientes enlazadas en /red. Cada una opera por separado; Vigil federa búsqueda con DTV pero no controla datos de socios."
+        }
+      },
+      "legal": {
+        "title": "Legal y privacidad",
+        "privacy": {
+          "q": "Política de privacidad",
+          "a": "Español: /privacidad · Inglés: /privacy"
+        },
+        "terms": {
+          "q": "Términos de servicio",
+          "a": "Español: /terminos · Inglés: /terms"
+        },
+        "erasure": {
+          "q": "¿Cómo solicito borrado de datos?",
+          "a": "Contacta support@youthewave.org. Las solicitudes de borrado se registran en la tabla erasure_requests para procesamiento de admin."
+        },
+        "operator": {
+          "q": "¿Quién opera Vigil?",
+          "a": "Bbluestudios LLC, Delray Beach, FL — iniciativa humanitaria YouTheWave."
+        }
+      }
     }
   }
 }

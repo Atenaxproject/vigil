@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
-import type { MapMarker } from '@/types/vigil.types'
+import type { MapMarker, RegionScope } from '@/types/vigil.types'
 
-export function useRealtimeMapMarkers(initialMarkers: MapMarker[]) {
+export function useRealtimeMapMarkers(initialMarkers: MapMarker[], regionScope: RegionScope = 'venezuela') {
   const [markers, setMarkers] = useState<MapMarker[]>(initialMarkers)
 
   useEffect(() => {
@@ -18,10 +18,11 @@ export function useRealtimeMapMarkers(initialMarkers: MapMarker[]) {
     const { data } = await supabase
       .from('map_markers')
       .select(
-        'id, type, category, title, description, lat, lng, urgent, status, verified, source, created_at, hours_schedule, accepts_categories, organizer_name'
+        'id, type, category, title, description, lat, lng, estado, municipio, urgent, status, verified, source, created_at, hours_schedule, accepts_categories, organizer_name, region_scope'
       )
       .eq('status', 'active')
       .eq('flagged', false)
+      .eq('region_scope', regionScope)
       .limit(200)
 
     if (data) {
@@ -34,7 +35,7 @@ export function useRealtimeMapMarkers(initialMarkers: MapMarker[]) {
         })) as MapMarker[]
       )
     }
-  }, [])
+  }, [regionScope])
 
   useEffect(() => {
     if (!isSupabaseConfigured()) return

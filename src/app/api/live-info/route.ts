@@ -59,6 +59,7 @@ export async function GET() {
         place: f.properties.place,
         time: f.properties.time,
         url: f.properties.url,
+        source: 'USGS',
       })) ?? [],
     officialReports:
       reliefweb?.data?.map((r) => ({

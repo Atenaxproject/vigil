@@ -1,10 +1,30 @@
 import { createClient } from '@/lib/supabase/server'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
+import type { RegionScope } from '@/types/vigil.types'
 import type {
   PublicMissingPerson,
   MapMarker,
   Organization,
   PublicPropertyAssessment,
 } from '@/types/vigil.types'
+
+const DEFAULT_REGION: RegionScope = 'venezuela'
+
+function orgPriority(name: string): number {
+  const priorities = CRISIS_CONFIG.orgDisplayPriority
+  for (const [key, value] of Object.entries(priorities)) {
+    if (name.includes(key)) return value
+  }
+  return 50
+}
+
+function sortOrganizations(orgs: Organization[]): Organization[] {
+  return [...orgs].sort((a, b) => {
+    const diff = orgPriority(a.name) - orgPriority(b.name)
+    if (diff !== 0) return diff
+    return a.name.localeCompare(b.name)
+  })
+}
 
 export async function getRecentMissingPersons(limit = 10): Promise<PublicMissingPerson[]> {
   try {
@@ -22,20 +42,22 @@ export async function getRecentMissingPersons(limit = 10): Promise<PublicMissing
   }
 }
 
-export async function getApprovedOrganizations(): Promise<Organization[]> {
+export async function getApprovedOrganizations(
+  regionScope: RegionScope = DEFAULT_REGION
+): Promise<Organization[]> {
   try {
     const supabase = await createClient()
     const { data, error } = await supabase
       .from('organizations')
       .select(
-        'id, name, type, country, description_es, description_en, website, phone, email, whatsapp, donation_link, donation_instructions, lat, lng, location_label, verified, active'
+        'id, name, type, country, description_es, description_en, website, phone, email, whatsapp, donation_link, donation_instructions, lat, lng, location_label, verified, active, region_scope'
       )
       .eq('approved_by_admin', true)
       .eq('active', true)
-      .order('name')
+      .eq('region_scope', regionScope)
 
     if (error) return []
-    return (data ?? []) as Organization[]
+    return sortOrganizations((data ?? []) as Organization[])
   } catch {
     return []
   }
@@ -117,16 +139,17 @@ export async function getPropertyAssessmentStats(): Promise<{
   }
 }
 
-export async function getMapMarkers(): Promise<MapMarker[]> {
+export async function getMapMarkers(regionScope: RegionScope = DEFAULT_REGION): Promise<MapMarker[]> {
   try {
     const supabase = await createClient()
     const { data, error } = await supabase
       .from('map_markers')
       .select(
-        'id, type, category, title, description, lat, lng, urgent, status, verified, source, created_at, hours_schedule, accepts_categories, organizer_name'
+        'id, type, category, title, description, lat, lng, estado, municipio, urgent, status, verified, source, created_at, hours_schedule, accepts_categories, organizer_name, region_scope'
       )
       .eq('status', 'active')
       .eq('flagged', false)
+      .eq('region_scope', regionScope)
       .limit(200)
 
     if (error) return []

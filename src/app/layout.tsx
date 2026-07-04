@@ -10,15 +10,16 @@ import { Toaster } from 'react-hot-toast'
 import { EmergencyBanner } from '@/components/layout/EmergencyBanner'
 import { WeatherBar } from '@/components/layout/WeatherBar'
 import { Navigation } from '@/components/layout/Navigation'
+import { AppHeader } from '@/components/layout/AppHeader'
+import { ViewModeProvider } from '@/components/onboarding/ViewModeProvider'
 import { SkipToContent } from '@/components/layout/SkipToContent'
-import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { FeedbackWidget } from '@/components/feedback/FeedbackWidget'
 import { VigilAssistant } from '@/components/ai/VigilAssistant'
 import { IOSInstallBanner } from '@/components/pwa/IOSInstallBanner'
 import { NetworkStatusBanner } from '@/components/layout/NetworkStatusBanner'
 import { OfflineQueueProvider } from '@/components/providers/OfflineQueueProvider'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
-import { countAlertEvents, getVenezuelaSeismicEvents } from '@/lib/usgs'
+import { countAlertEvents, getMergedSeismicEvents } from '@/lib/seismic'
 import './globals.css'
 
 const inter = Inter({
@@ -85,7 +86,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messages = await getMessages()
   const t = await getTranslations('footer')
   const tNav = await getTranslations('nav')
-  const events = await getVenezuelaSeismicEvents()
+  const events = await getMergedSeismicEvents()
   const alertCount = countAlertEvents(events)
 
   const isSpanish = locale === 'es'
@@ -101,17 +102,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-screen font-sans">
         <SkipToContent />
         <NextIntlClientProvider messages={messages}>
+          <ViewModeProvider>
           <EmergencyBanner aftershockCount={alertCount} />
           <WeatherBar />
           <div className="flex min-h-[calc(100vh-44px)]">
             <Navigation />
             <div className="flex min-w-0 flex-1 flex-col">
-              <header className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 md:px-6">
-                <p className="hidden text-[13px] text-vigil-muted md:block">
-                  {CRISIS_CONFIG.crisis} · {CRISIS_CONFIG.country}
-                </p>
-                <LanguageSwitcher />
-              </header>
+              <AppHeader />
               <NetworkStatusBanner />
               <main
                 id="main-content"
@@ -188,6 +185,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <FeedbackWidget />
           <VigilAssistant />
           <IOSInstallBanner />
+          </ViewModeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

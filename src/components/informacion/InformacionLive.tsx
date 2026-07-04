@@ -17,6 +17,7 @@ interface LiveQuake {
   place: string
   time: number
   url: string
+  source?: string
 }
 
 interface OfficialReport {
@@ -127,7 +128,7 @@ export function InformacionLive() {
 
   const stats = [
     { label: tc('stats.deaths'), value: '2,295', source: tc('stats.deathsSource') },
-    { label: tc('stats.injured'), value: '11,267', source: tc('stats.injuredSource') },
+    { label: tc('stats.injured'), value: '11,000+', source: tc('stats.injuredSource') },
     {
       label: tc('stats.missing'),
       value: tc('stats.missingValue'),
@@ -138,15 +139,13 @@ export function InformacionLive() {
     { label: tc('stats.buildings'), value: '770+', source: tc('stats.buildingsSource') },
   ]
 
-  const hotlines = [
-    {
-      label: tc('hotlines.rescate'),
-      value: `${CRISIS_CONFIG.emergency.hotlineLabel} — ${CRISIS_CONFIG.emergency.hotline}`,
-      source: 'Gobierno de Venezuela',
-    },
-    { label: tc('hotlines.redCross'), value: '+58-212-781-2974', source: 'Cruz Roja Venezolana' },
-    { label: 'OCHA Venezuela', value: '@OCHAVenezuela', source: 'X / Twitter' },
-  ]
+  const hotlines = CRISIS_CONFIG.emergencyContacts.map((contact) => ({
+    label: locale === 'en' ? contact.label_en : contact.label_es,
+    value: contact.numbers.join(' · '),
+    carrierAccess: 'carrierAccess' in contact ? contact.carrierAccess : undefined,
+    source: contact.source,
+    verified: contact.verified,
+  }))
 
   const additionalHotlines = [
     { label: tc('hotlines.additional.cicpc'), value: '(0212) 571-3533' },
@@ -205,7 +204,13 @@ export function InformacionLive() {
         </a>
         {liveData?.recentSignificantQuakes[0] && (
           <p className="mt-2 text-[16px] text-slate-700">
-            {t('liveStatus.latest')}: M{liveData.recentSignificantQuakes[0].magnitude}{' '}
+            {t('liveStatus.latest')}:{' '}
+            {liveData.recentSignificantQuakes[0].source && (
+              <span className="font-mono text-[13px] text-vigil-muted">
+                [{liveData.recentSignificantQuakes[0].source}]{' '}
+              </span>
+            )}
+            M{liveData.recentSignificantQuakes[0].magnitude}{' '}
             {liveData.recentSignificantQuakes[0].place}
           </p>
         )}
@@ -256,6 +261,27 @@ export function InformacionLive() {
             </div>
           ))}
         </div>
+        <p className="mt-4 text-[16px] text-slate-700">{tc('stats.medicalStrain')}</p>
+      </section>
+
+      <section className="mt-10 rounded-card border border-slate-200 bg-white p-4">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('psychosocial.title')}</h2>
+        <p className="mt-1 text-[13px] text-status-unverified">{tc('psychosocial.verifyNote')}</p>
+        <div className="mt-4 space-y-3">
+          <div className="rounded-card border border-slate-200 px-4 py-3">
+            <p className="text-[16px] font-medium text-vigil-ink">{tc('psychosocial.psicoLinea.name')}</p>
+            <p className="mt-1 font-mono text-[17px] text-vigil-blue">{tc('psychosocial.psicoLinea.phones')}</p>
+            <p className="mt-1 text-[13px] text-vigil-muted">{tc('psychosocial.psicoLinea.note')}</p>
+          </div>
+          <div className="rounded-card border border-slate-200 px-4 py-3">
+            <p className="text-[16px] font-medium text-vigil-ink">{tc('psychosocial.venemergencia.name')}</p>
+            <p className="mt-1 text-[16px] text-vigil-body">{tc('psychosocial.venemergencia.note')}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-10 rounded-card border border-slate-200 bg-vigil-cloud p-4">
+        <p className="text-[16px] text-vigil-body">{tc('telecomFreeCalls')}</p>
       </section>
 
       <section className="mt-10">
@@ -367,13 +393,17 @@ export function InformacionLive() {
         </div>
       </section>
 
-      <section className="mt-10">
+      <section className="mt-10" id="emergency-contacts">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('hotlines.title')}</h2>
+        <p className="mt-1 text-[13px] text-status-unverified">{tc('hotlines.verifyNote')}</p>
         <div className="mt-4 space-y-3">
           {hotlines.map((line) => (
             <div key={line.label} className="rounded-card border border-slate-200 bg-white p-4">
               <p className="text-[16px] font-medium text-vigil-ink">{line.label}</p>
               <p className="mt-1 font-mono text-[17px] text-vigil-blue">{line.value}</p>
+              {'carrierAccess' in line && line.carrierAccess && (
+                <p className="mt-1 text-[13px] text-vigil-muted">{line.carrierAccess}</p>
+              )}
               <p className="mt-1 font-mono text-[13px] text-vigil-muted">
                 {tc('source')}: {line.source}
               </p>
