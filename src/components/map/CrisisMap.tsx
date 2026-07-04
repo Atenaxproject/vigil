@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { CRISIS_CONFIG, diasporaSupportConfig } from '@/config/crisis.config'
 import type { SeismicEvent, RegionScope } from '@/types/vigil.types'
-import type { MapMarker, PublicPropertyAssessment } from '@/types/vigil.types'
+import type { MapMarker, PublicPropertyAssessment, PublicMissingPerson } from '@/types/vigil.types'
 import { MapLayers, type MapLayerState } from '@/components/map/MapLayers'
 import { useRealtimeMapMarkers } from '@/hooks/useRealtimeMapMarkers'
 import { useRealtimeRescuerPresence } from '@/hooks/useRealtimeRescuerPresence'
@@ -40,6 +40,10 @@ const RescuerPresenceLayer = dynamic(
   () => import('@/components/map/RescuerPresenceLayer').then((m) => m.RescuerPresenceLayer),
   { ssr: false }
 )
+const MissingPersonsLayer = dynamic(
+  () => import('@/components/map/MissingPersonsLayer').then((m) => m.MissingPersonsLayer),
+  { ssr: false }
+)
 const PropertyAssessmentLayer = dynamic(
   () => import('@/components/map/PropertyAssessmentLayer').then((m) => m.PropertyAssessmentLayer),
   { ssr: false }
@@ -54,6 +58,7 @@ interface CrisisMapProps {
   events?: SeismicEvent[]
   markers?: MapMarker[]
   propertyAssessments?: PublicPropertyAssessment[]
+  missingPersons?: PublicMissingPerson[]
   regionScope?: RegionScope
 }
 
@@ -61,6 +66,7 @@ export function CrisisMap({
   events = [],
   markers: initialMarkers = [],
   propertyAssessments = [],
+  missingPersons = [],
   regionScope = 'venezuela',
 }: CrisisMapProps) {
   const isDiaspora = regionScope === 'usa_diaspora'
@@ -74,6 +80,7 @@ export function CrisisMap({
     activeTeams: !isDiaspora,
     collection: true,
     propertyAssessments: !isDiaspora,
+    missingPersons: !isDiaspora,
   })
   const markers = useRealtimeMapMarkers(initialMarkers, regionScope)
   const rescuerPresence = useRealtimeRescuerPresence()
@@ -150,6 +157,7 @@ export function CrisisMap({
         {layers.propertyAssessments && (
           <PropertyAssessmentLayer assessments={propertyAssessments} />
         )}
+        {layers.missingPersons && <MissingPersonsLayer persons={missingPersons} />}
         <MapZoomControls />
       </MapContainer>
     </div>

@@ -10,9 +10,9 @@ export default async function BuscarPage() {
   const recent = await getRecentMissingPersons(20)
   const aiAvailable = isAnthropicConfigured()
   return (
-    <div className="mx-auto max-w-2xl bg-white">
+    <div className="mx-auto w-full max-w-5xl bg-white">
       <h1 className="sr-only">{t('title')}</h1>
-      <MissingPersonSearch initialResults={recent} aiAvailable={aiAvailable} />
+      <MissingPersonSearch initialResults={recent} aiAvailable={aiAvailable} fullWidth />
     </div>
   )
 }

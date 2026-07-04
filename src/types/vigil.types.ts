@@ -93,6 +93,9 @@ export interface PublicMissingPerson {
   last_seen_location: string
   estado: string | null
   municipio: string | null
+  parroquia: string | null
+  approx_last_seen_lat: number | null
+  approx_last_seen_lng: number | null
   last_seen_at: string | null
   status: MissingPersonStatus
   notes: string | null

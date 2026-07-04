@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
 import { getClientIp, hashIp, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
 import { notifyClaimLink } from '@/lib/email/notify'
+import { jitterCoordinates } from '@/lib/property-assessment'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 export const dynamic = 'force-dynamic'
@@ -40,6 +41,11 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const ipHash = hashIp(getClientIp(request.headers))
 
+    const approxCoords =
+      body.last_seen_lat != null && body.last_seen_lng != null
+        ? jitterCoordinates(body.last_seen_lat, body.last_seen_lng)
+        : null
+
     const { data, error } = await supabase
       .from('missing_persons')
       .insert({
@@ -52,6 +58,8 @@ export async function POST(request: NextRequest) {
         parroquia: body.parroquia ? sanitizeText(body.parroquia) : null,
         last_seen_lat: body.last_seen_lat ?? null,
         last_seen_lng: body.last_seen_lng ?? null,
+        approx_last_seen_lat: approxCoords?.lat ?? null,
+        approx_last_seen_lng: approxCoords?.lng ?? null,
         last_seen_at: body.last_seen_at ?? null,
         notes: body.notes ? sanitizeText(body.notes) : null,
         contact_name: sanitizeText(body.contact_name),

@@ -11,6 +11,7 @@ import { PRIORITY_ESTADOS } from '@/lib/venezuela-geo'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
 import { DtvSourceHeader } from '@/components/dtv/DtvSourceHeader'
+import { GeoSelect } from '@/components/missing/GeoSelect'
 import { PhotoSearch } from '@/components/missing/PhotoSearch'
 
 const DTV_PLATFORM_URL = 'https://desaparecidosterremotovenezuela.com'
@@ -33,13 +34,20 @@ interface SearchResponse {
 interface MissingPersonSearchProps {
   initialResults?: PublicMissingPerson[]
   aiAvailable?: boolean
+  fullWidth?: boolean
 }
 
-export function MissingPersonSearch({ initialResults = [], aiAvailable = true }: MissingPersonSearchProps) {
+export function MissingPersonSearch({
+  initialResults = [],
+  aiAvailable = true,
+  fullWidth = false,
+}: MissingPersonSearchProps) {
   const t = useTranslations('missing')
   const tNav = useTranslations('nav')
   const [query, setQuery] = useState('')
   const [estadoFilter, setEstadoFilter] = useState('all')
+  const [municipioFilter, setMunicipioFilter] = useState('')
+  const [parroquiaFilter, setParroquiaFilter] = useState('')
   const [vigilResults, setVigilResults] = useState<FederatedPerson[]>(
     initialResults.map(tagVigilPerson)
   )
@@ -84,13 +92,20 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
     }
   }, [query, searched])
 
-  async function runSearch(searchQuery: string, estado: string) {
+  async function runSearch(
+    searchQuery: string,
+    estado: string,
+    municipio: string,
+    parroquia: string
+  ) {
     setLoading(true)
     setSearched(true)
     try {
       const params = new URLSearchParams()
       if (searchQuery.trim()) params.set('q', searchQuery.trim())
       if (estado !== 'all') params.set('estado', estado)
+      if (municipio) params.set('municipio', municipio)
+      if (parroquia) params.set('parroquia', parroquia)
       const res = await fetch(`/api/missing-persons/search?${params.toString()}`)
       const data = (await res.json()) as SearchResponse
       setVigilResults(data.vigil ?? data.results?.filter((r) => r._source === 'vigil') ?? [])
@@ -103,16 +118,55 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
     }
   }
 
+  const hasGeoFilter = estadoFilter !== 'all' || municipioFilter || parroquiaFilter
+
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault()
-    if (!query.trim() && estadoFilter === 'all') return
-    await runSearch(query, estadoFilter)
+    if (!query.trim() && !hasGeoFilter) return
+    await runSearch(query, estadoFilter, municipioFilter, parroquiaFilter)
   }
 
   async function handleEstadoFilter(estado: string) {
     setEstadoFilter(estado)
+    setMunicipioFilter('')
+    setParroquiaFilter('')
     if (query.trim() || estado !== 'all') {
-      await runSearch(query, estado)
+      await runSearch(query, estado, '', '')
+    } else if (!query.trim()) {
+      setVigilResults(initialResults.map(tagVigilPerson))
+      setDtvResults([])
+      setSearched(false)
+    }
+  }
+
+  async function handleGeoSelectChange(
+    field: 'estado' | 'municipio' | 'parroquia',
+    value: string
+  ) {
+    let nextEstado = estadoFilter
+    let nextMunicipio = municipioFilter
+    let nextParroquia = parroquiaFilter
+
+    if (field === 'estado') {
+      nextEstado = value || 'all'
+      nextMunicipio = ''
+      nextParroquia = ''
+      setEstadoFilter(nextEstado)
+      setMunicipioFilter('')
+      setParroquiaFilter('')
+    } else if (field === 'municipio') {
+      nextMunicipio = value
+      nextParroquia = ''
+      setMunicipioFilter(value)
+      setParroquiaFilter('')
+    } else {
+      nextParroquia = value
+      setParroquiaFilter(value)
+    }
+
+    const estadoParam = nextEstado === 'all' ? 'all' : nextEstado
+    if (query.trim() || estadoParam !== 'all' || nextMunicipio || nextParroquia) {
+      await runSearch(query, estadoParam, nextMunicipio, nextParroquia)
     } else if (!query.trim()) {
       setVigilResults(initialResults.map(tagVigilPerson))
       setDtvResults([])
@@ -122,6 +176,9 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
 
   const totalResults = vigilResults.length + dtvResults.length
   const hasResults = totalResults > 0
+  const resultsGridClass = fullWidth
+    ? 'grid gap-3 sm:grid-cols-2'
+    : 'space-y-3'
 
   return (
     <div className="flex h-full flex-col">
@@ -181,6 +238,19 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
           })}
         </div>
 
+        {fullWidth && (
+          <div className="mt-4">
+            <GeoSelect
+              estado={estadoFilter === 'all' ? '' : estadoFilter}
+              municipio={municipioFilter}
+              parroquia={parroquiaFilter}
+              onEstadoChange={(v) => void handleGeoSelectChange('estado', v)}
+              onMunicipioChange={(v) => void handleGeoSelectChange('municipio', v)}
+              onParroquiaChange={(v) => void handleGeoSelectChange('parroquia', v)}
+            />
+          </div>
+        )}
+
         <PhotoSearch aiAvailable={aiAvailable} />
 
         <p className="mt-3 text-[13px] leading-relaxed text-vigil-muted">{t('search.trustNote')}</p>
@@ -224,7 +294,7 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
                 {t('search.vigilSourceLabel', { count: vigilResults.length })}
               </p>
             </div>
-            <div className="space-y-3">
+            <div className={resultsGridClass}>
               {vigilResults.map((person) => (
                 <MissingPersonCard key={`vigil-${person.id}`} person={person} />
               ))}
@@ -240,7 +310,7 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
                 {t('search.dtvSourceLabel', { count: dtvResults.length })}
               </p>
             </div>
-            <div className="space-y-3">
+            <div className={resultsGridClass}>
               {dtvResults.map((person) => (
                 <MissingPersonCard key={`dtv-${person.id}`} person={person} />
               ))}
@@ -249,7 +319,7 @@ export function MissingPersonSearch({ initialResults = [], aiAvailable = true }:
         )}
 
         {!loading && !searched && (
-          <div className="space-y-3">
+          <div className={resultsGridClass}>
             {vigilResults.map((person) => (
               <MissingPersonCard key={person.id} person={person} />
             ))}

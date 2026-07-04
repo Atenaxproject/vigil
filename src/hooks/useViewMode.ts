@@ -7,17 +7,21 @@ import {
   type ViewModeId,
 } from '@/config/viewMode.config'
 
+function readStoredMode(): ViewModeId | null {
+  if (typeof window === 'undefined') return null
+  try {
+    return parseStoredViewMode(localStorage.getItem(VIEW_MODE_STORAGE_KEY))
+  } catch {
+    return null
+  }
+}
+
 export function useViewMode() {
-  const [mode, setModeState] = useState<ViewModeId | null>(null)
+  const [mode, setModeState] = useState<ViewModeId | null>(readStoredMode)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(VIEW_MODE_STORAGE_KEY)
-      setModeState(parseStoredViewMode(stored))
-    } catch {
-      setModeState(null)
-    }
+    setModeState(readStoredMode())
     setReady(true)
   }, [])
 

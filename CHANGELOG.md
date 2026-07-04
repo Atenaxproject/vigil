@@ -4,6 +4,21 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-04 (map/search separation + mode nav fix)
+
+### Added
+- **Map layer "Personas Desaparecidas"** — jittered pins from `public_missing_persons`; popup links to `/buscar/[id]`.
+- **Migration `012_missing_persons_map_coords.sql`** — `approx_last_seen_lat/lng` on `missing_persons`; `parroquia` in public view.
+- **`getMissingPersonsForMap()`** — server helper for crisis map missing-persons layer.
+
+### Changed
+- **`/` (Mapa de Crisis)** — map-only layout; removed missing-persons search widget from home route.
+- **`/buscar`** — full-width search with `GeoSelect` municipio/parroquia filters and 2-column results grid; DTV federation preserved.
+- **Mode nav filtering** — synchronous `localStorage` read in `useViewMode`; sidebar strictly applies `isRouteVisibleForMode` (no `!modeReady` bypass).
+
+### Archived
+- `docs/build-process/45-fix-map-search-and-mode-filtering.md`; root `NEXT-PROMPT-fix-map-search-and-mode-filtering.md` deleted.
+
 ## [Unreleased] — 2026-07-04 (adaptive onboarding + CAV sync)
 
 ### Added

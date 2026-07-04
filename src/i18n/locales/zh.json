@@ -184,7 +184,10 @@
       "rescueZones": "搜救区域",
       "collection": "物资收集点",
       "comms": "网络连接（WiFi / Starlink）",
-      "propertyAssessments": "Structural assessments"
+      "propertyAssessments": "Structural assessments",
+      "missingPersons": "Missing persons",
+      "missingPersonsApprox": "Approximate location (privacy)",
+      "missingPersonsView": "View profile"
     },
     "magnitude": "震级",
     "depth": "深度",

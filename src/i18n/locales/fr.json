@@ -184,7 +184,10 @@
       "rescueZones": "Zones de sauvetage",
       "collection": "Points de collecte",
       "comms": "Connectivité (WiFi / Starlink)",
-      "propertyAssessments": "Structural assessments"
+      "propertyAssessments": "Structural assessments",
+      "missingPersons": "Missing persons",
+      "missingPersonsApprox": "Approximate location (privacy)",
+      "missingPersonsView": "View profile"
     },
     "magnitude": "Magnitude",
     "depth": "Profondeur",

@@ -184,7 +184,10 @@
       "rescueZones": "Зоны спасения",
       "collection": "Пункты сбора",
       "comms": "Связь (WiFi / Starlink)",
-      "propertyAssessments": "Structural assessments"
+      "propertyAssessments": "Structural assessments",
+      "missingPersons": "Missing persons",
+      "missingPersonsApprox": "Approximate location (privacy)",
+      "missingPersonsView": "View profile"
     },
     "magnitude": "Магнитуда",
     "depth": "Глубина",

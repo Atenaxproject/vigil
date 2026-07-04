@@ -26,6 +26,31 @@ function sortOrganizations(orgs: Organization[]): Organization[] {
   })
 }
 
+export async function getMissingPersonsForMap(limit = 300): Promise<PublicMissingPerson[]> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('public_missing_persons')
+      .select('*')
+      .not('approx_last_seen_lat', 'is', null)
+      .not('approx_last_seen_lng', 'is', null)
+      .eq('status', 'missing')
+      .order('created_at', { ascending: false })
+      .limit(limit)
+
+    if (error) return []
+    return (data ?? []).map((row) => ({
+      ...row,
+      approx_last_seen_lat:
+        row.approx_last_seen_lat != null ? Number(row.approx_last_seen_lat) : null,
+      approx_last_seen_lng:
+        row.approx_last_seen_lng != null ? Number(row.approx_last_seen_lng) : null,
+    })) as PublicMissingPerson[]
+  } catch {
+    return []
+  }
+}
+
 export async function getRecentMissingPersons(limit = 10): Promise<PublicMissingPerson[]> {
   try {
     const supabase = await createClient()

@@ -96,15 +96,17 @@ export function Navigation() {
   const t = useTranslations('nav')
   const tCommon = useTranslations('common')
   const pathname = usePathname()
-  const { mode, ready: modeReady } = useViewModeContext()
+  const { mode } = useViewModeContext()
   const [moreOpen, setMoreOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const [sidebarReady, setSidebarReady] = useState(false)
   const sheetRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
-  const isVisible = (item: (typeof navItems)[number]) =>
-    item.alwaysVisible || !modeReady || isRouteVisibleForMode(item.href, mode)
+  const isVisible = (item: (typeof navItems)[number]) => {
+    if (item.alwaysVisible) return true
+    return isRouteVisibleForMode(item.href, mode)
+  }
 
   const visibleItems = navItems.filter(isVisible)
   const helpItem = visibleItems.find((item) => item.href === '/ayuda')

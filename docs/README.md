@@ -83,6 +83,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `42-vigil-usa-diaspora-hub.md` — `region_scope` migration 011, `/apoyo-usa`, diaspora bounds, info hub refresh
 - `43-adaptive-onboarding-and-help-center.md` — six view modes, mode picker, `/ayuda` help center, emergency bar refresh
 - `44-sister-network-and-cav-sync.md` — three sister links, CAV CSV weekly sync to `map_markers`
+- `45-fix-map-search-and-mode-filtering.md` — map/search route separation, Personas Desaparecidas map layer, mode nav filtering fix
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
