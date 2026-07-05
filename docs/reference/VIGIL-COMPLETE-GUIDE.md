@@ -419,4 +419,5 @@ For onboarding steps see [onboarding.md](./onboarding.md). For operational proce
 - `docs/architecture/CLAUDE.md` — tech stack and agent constraints
 - `docs/architecture/DESIGN-SYSTEM.md` — UI tokens and component rules
 - `docs/architecture/DEPLOYMENT.md` — Supabase, Vercel, DNS setup
+- `docs/architecture/DEPLOYMENT-PLAYBOOK.md` — new-crisis rollout checklist (go/no-go, archetypes, config)
 - `docs/build-process/` — historical build prompts (not living specs)

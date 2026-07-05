@@ -20,8 +20,10 @@
 | 008 | `008_geographic_fields.sql` | estado/municipio/parroquia |
 | 009 | `009_external_id.sql` | map_markers.external_id (DTV dedup) |
 | 010 | `010_property_assessments.sql` | property_assessments + public view |
+| 011 | `011_diaspora_region.sql` | `region_scope` on map_markers, organizations, events, etc. |
+| 012 | `012_missing_persons_map_coords.sql` | jittered map coords on missing_persons; parroquia in public view |
 
-> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 only. Production requires 006–010.
+> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Production requires **001–012** — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
 
 ---
 

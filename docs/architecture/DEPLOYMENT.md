@@ -1,5 +1,7 @@
 # Vigil — Deployment Guide
 
+> **New crisis deployment:** start with [`DEPLOYMENT-PLAYBOOK.md`](./DEPLOYMENT-PLAYBOOK.md) for go/no-go, archetype feeds, and config-driven rollout — then use this guide for Supabase/Vercel/DNS steps.
+
 > Architecture and design constraints: [`CLAUDE.md`](./CLAUDE.md), [`DESIGN-SYSTEM.md`](./DESIGN-SYSTEM.md)
 
 ## Supabase Setup (Orlando — manual steps)

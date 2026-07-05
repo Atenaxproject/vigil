@@ -4,6 +4,16 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-04 (deployment playbook docs)
+
+### Changed
+- **`docs/architecture/DEPLOYMENT-PLAYBOOK.md`** — canonical home for new-crisis rollout playbook (moved from repo root); links fixed to `sops.md`, `data-model.md`, `VIGIL-COMPLETE-GUIDE.md`, `CLAUDE.md`; migrations **001–012**; diaspora `region_scope`, CAV sync, and adaptive onboarding in checklist; inline archetype table (expansion roadmap doc noted as planned).
+- **`docs/README.md`**, **`DEPLOYMENT.md`**, **`VIGIL-COMPLETE-GUIDE.md`** — index cross-links to deployment playbook.
+- **`docs/reference/data-model.md`** — migrations table extended through **012**.
+
+### Removed
+- Root **`VIGIL-DEPLOYMENT-PLAYBOOK.md`** (content lives under `docs/architecture/`).
+
 ## [Unreleased] — 2026-07-04 (map/search separation + mode nav fix)
 
 ### Added

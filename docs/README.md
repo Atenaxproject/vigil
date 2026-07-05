@@ -25,6 +25,7 @@ Living specs and operational guides:
 - `architecture/CLAUDE.md` — tech stack, constraints, and agent instructions
 - `architecture/DESIGN-SYSTEM.md` — UI tokens, typography, and component rules
 - `architecture/DEPLOYMENT.md` — Supabase, Vercel, DNS, Resend, and local dev setup
+- `architecture/DEPLOYMENT-PLAYBOOK.md` — new-crisis rollout: go/no-go, archetypes, config-driven deployment
 
 ## Reference index
 
@@ -33,7 +34,7 @@ Complete A-to-Z operational documentation (help, SOPs, onboarding):
 - `reference/VIGIL-COMPLETE-GUIDE.md` — master guide with architecture, features, and gaps
 - `reference/onboarding.md` — end-user, volunteer, admin, and developer onboarding
 - `reference/api-reference.md` — all 34 API routes (inputs, outputs, rate limits)
-- `reference/data-model.md` — schema, views, RLS, migrations 001–010
+- `reference/data-model.md` — schema, views, RLS, migrations 001–012
 - `reference/sops.md` — daily ops, moderation, troubleshooting procedures
 - `reference/help-center-structure.md` — FAQ and in-app help outline
 - `reference/glossary.md` — PFIF, DTV, ATC-20, and platform terminology
