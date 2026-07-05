@@ -151,6 +151,12 @@ export const CRISIS_CONFIG = {
       label_en: '0800-RESCATE (National emergencies)',
       numbers: ['0800-7372282', '911'],
       carrierAccess: 'Movistar 911 · Digitel 112 · Movilnet *1 · Cantv 171',
+      carrierCodes: [
+        { carrier: 'Movistar', code: '911' },
+        { carrier: 'Digitel', code: '112' },
+        { carrier: 'Movilnet', code: '*1' },
+        { carrier: 'Cantv', code: '171' },
+      ],
       verified: false,
       source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
     },

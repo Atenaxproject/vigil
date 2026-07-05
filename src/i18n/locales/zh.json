@@ -51,7 +51,12 @@
     "hotlineNumber": "0800-7372282",
     "fullDirectory": "Full directory",
     "moreNumbers": "More contacts",
-    "verifyBeforeCalling": "拨打前请核实"
+    "verifyBeforeCalling": "拨打前请核实",
+    "directory": "通讯录",
+    "directoryTitle": "紧急联系方式",
+    "unverified": "未核实",
+    "secondhandNote": "拨打前请核实——号码来自二手来源，Vigil 尚未确认。",
+    "carrierCodes": "各运营商紧急号码"
   },
   "missing": {
     "title": "失踪人员",
@@ -1140,7 +1145,9 @@
         "short": "See all",
         "description": "Show all sections without filtering"
       }
-    }
+    },
+    "tierUrgent": "当前需要",
+    "tierPlanning": "帮助或了解信息"
   },
   "helpCenter": {
     "metaTitle": "Help Center — Vigil",

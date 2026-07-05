@@ -51,7 +51,12 @@
     "hotlineNumber": "0800-7372282",
     "fullDirectory": "Full directory",
     "moreNumbers": "More contacts",
-    "verifyBeforeCalling": "Проверьте номер перед звонком"
+    "verifyBeforeCalling": "Проверьте номер перед звонком",
+    "directory": "Справочник",
+    "directoryTitle": "Экстренные контакты",
+    "unverified": "Не проверено",
+    "secondhandNote": "Проверьте перед звонком — номера из вторых рук, ещё не подтверждены Vigil.",
+    "carrierCodes": "Экстренные номера по операторам"
   },
   "missing": {
     "title": "Пропавшие люди",
@@ -1140,7 +1145,9 @@
         "short": "See all",
         "description": "Show all sections without filtering"
       }
-    }
+    },
+    "tierUrgent": "Прямо сейчас",
+    "tierPlanning": "Помочь или узнать информацию"
   },
   "helpCenter": {
     "metaTitle": "Help Center — Vigil",

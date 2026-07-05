@@ -51,7 +51,12 @@
     "hotlineNumber": "0800-7372282",
     "fullDirectory": "Full directory",
     "moreNumbers": "More contacts",
-    "verifyBeforeCalling": "Vor dem Anruf prüfen"
+    "verifyBeforeCalling": "Vor dem Anruf prüfen",
+    "directory": "Verzeichnis",
+    "directoryTitle": "Notfallkontakte",
+    "unverified": "Ungeprüft",
+    "secondhandNote": "Vor dem Anruf prüfen — Nummern aus zweiter Hand, von Vigil noch nicht bestätigt.",
+    "carrierCodes": "Notrufnummern nach Anbieter"
   },
   "missing": {
     "title": "Vermisste Personen",
@@ -1140,7 +1145,9 @@
         "short": "See all",
         "description": "Show all sections without filtering"
       }
-    }
+    },
+    "tierUrgent": "Jetzt sofort",
+    "tierPlanning": "Zum Helfen oder Informieren"
   },
   "helpCenter": {
     "metaTitle": "Help Center — Vigil",

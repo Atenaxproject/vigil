@@ -51,7 +51,12 @@
     "hotlineNumber": "0800-7372282",
     "moreNumbers": "More contacts",
     "fullDirectory": "Full directory",
-    "verifyBeforeCalling": "Verify before calling"
+    "verifyBeforeCalling": "Verify before calling",
+    "directory": "Directory",
+    "directoryTitle": "Emergency contacts",
+    "unverified": "Unverified",
+    "secondhandNote": "Verify before calling — numbers are from secondhand sources, not yet confirmed by Vigil.",
+    "carrierCodes": "Emergency numbers by carrier"
   },
   "regionScope": {
     "label": "Map region",
@@ -1170,7 +1175,9 @@
         "short": "See all",
         "description": "Show all sections without filtering"
       }
-    }
+    },
+    "tierUrgent": "Right now",
+    "tierPlanning": "To help or stay informed"
   },
   "helpCenter": {
     "metaTitle": "Help Center — Vigil",
