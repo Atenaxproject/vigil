@@ -54,6 +54,7 @@ export function MissingPersonSearch({
   const [dtvResults, setDtvResults] = useState<FederatedPerson[]>([])
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
+  const [searchError, setSearchError] = useState(false)
 
   useEffect(() => {
     if (!isSupabaseConfigured()) return
@@ -100,6 +101,7 @@ export function MissingPersonSearch({
   ) {
     setLoading(true)
     setSearched(true)
+    setSearchError(false)
     try {
       const params = new URLSearchParams()
       if (searchQuery.trim()) params.set('q', searchQuery.trim())
@@ -107,12 +109,16 @@ export function MissingPersonSearch({
       if (municipio) params.set('municipio', municipio)
       if (parroquia) params.set('parroquia', parroquia)
       const res = await fetch(`/api/missing-persons/search?${params.toString()}`)
+      if (!res.ok) throw new Error(`search failed: ${res.status}`)
       const data = (await res.json()) as SearchResponse
       setVigilResults(data.vigil ?? data.results?.filter((r) => r._source === 'vigil') ?? [])
       setDtvResults(data.dtv ?? data.results?.filter((r) => r._source === 'dtv') ?? [])
     } catch {
+      // A failed request is not "no results" — keep them separate so the
+      // empty state never claims a person wasn't found when the search broke.
       setVigilResults([])
       setDtvResults([])
+      setSearchError(true)
     } finally {
       setLoading(false)
     }
@@ -226,7 +232,7 @@ export function MissingPersonSearch({
                 key={key}
                 type="button"
                 onClick={() => void handleEstadoFilter(key)}
-                className={`min-h-[36px] rounded-full border px-3 text-[13px] font-medium transition-colors ${
+                className={`min-h-[44px] rounded-full border px-4 text-[13px] font-medium transition-colors ${
                   active
                     ? 'border-vigil-blue bg-vigil-blue-light text-vigil-blue'
                     : 'border-slate-200 bg-white text-vigil-muted hover:border-slate-300'
@@ -256,8 +262,27 @@ export function MissingPersonSearch({
         <p className="mt-3 text-[13px] leading-relaxed text-vigil-muted">{t('search.trustNote')}</p>
       </div>
       <div className="flex-1 space-y-3 overflow-y-auto p-4">
-        {loading && <div className="skeleton h-24 rounded-card" />}
-        {!loading && searched && !hasResults && (
+        {loading && (
+          <div className={resultsGridClass} aria-hidden>
+            <div className="skeleton h-32 rounded-card" />
+            <div className="skeleton h-32 rounded-card" />
+            <div className="skeleton h-32 rounded-card" />
+          </div>
+        )}
+        {!loading && searchError && (
+          <div role="alert" className="rounded-card border border-status-unverified bg-status-unverified-bg p-6 text-center">
+            <p className="text-[16px] font-medium text-vigil-ink">{t('search.errorTitle')}</p>
+            <p className="mt-2 text-[16px] text-vigil-body">{t('search.errorBody')}</p>
+            <button
+              type="button"
+              onClick={() => void runSearch(query, estadoFilter, municipioFilter, parroquiaFilter)}
+              className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-input bg-vigil-blue px-5 text-[16px] font-medium text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+            >
+              {t('search.retry')}
+            </button>
+          </div>
+        )}
+        {!loading && !searchError && searched && !hasResults && (
           <div className="rounded-card border border-slate-200 bg-vigil-cloud p-6 text-center">
             <p className="text-[16px] font-medium text-vigil-ink">{t('search.noResultsBothTitle')}</p>
             <p className="mt-4 text-[16px] text-vigil-body">{t('search.noResultsReportBoth')}</p>

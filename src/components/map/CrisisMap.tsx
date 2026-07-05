@@ -9,7 +9,12 @@ import { MapLayers, type MapLayerState } from '@/components/map/MapLayers'
 import { useRealtimeMapMarkers } from '@/hooks/useRealtimeMapMarkers'
 import { useRealtimeRescuerPresence } from '@/hooks/useRealtimeRescuerPresence'
 
-const MapContainer = dynamic(() => import('react-leaflet').then((m) => m.MapContainer), { ssr: false })
+const MapContainer = dynamic(() => import('react-leaflet').then((m) => m.MapContainer), {
+  ssr: false,
+  // Keeps the shimmer up between hydration and the react-leaflet chunk arriving;
+  // without it the map area goes blank on slow connections.
+  loading: () => <div className="skeleton h-full min-h-[240px] w-full lg:min-h-[400px]" />,
+})
 const TileLayer = dynamic(() => import('react-leaflet').then((m) => m.TileLayer), { ssr: false })
 const AftershockLayer = dynamic(
   () => import('@/components/map/AftershockLayer').then((m) => m.AftershockLayer),

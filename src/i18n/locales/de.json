@@ -50,7 +50,8 @@
     "hotline": "0800-RESCATE",
     "hotlineNumber": "0800-7372282",
     "fullDirectory": "Full directory",
-    "moreNumbers": "More contacts"
+    "moreNumbers": "More contacts",
+    "verifyBeforeCalling": "Vor dem Anruf prüfen"
   },
   "missing": {
     "title": "Vermisste Personen",
@@ -78,7 +79,10 @@
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
-      "noResultsBothHint": "Reporting on both platforms expands the search network."
+      "noResultsBothHint": "Reporting on both platforms expands the search network.",
+      "errorTitle": "Suche konnte nicht abgeschlossen werden",
+      "errorBody": "Es gab ein Verbindungsproblem. Versuche es erneut.",
+      "retry": "Erneut versuchen"
     },
     "status": {
       "missing": "Vermisst",
@@ -247,7 +251,12 @@
       "communications": "Kommunikation / Medien",
       "structural_engineer": "Structural engineer",
       "architect": "Architect",
-      "surveyor": "Surveyor"
+      "surveyor": "Surveyor",
+      "logistics_shipping": "Versandlogistik nach Venezuela",
+      "translation_local": "Übersetzung an Sammelstellen (USA)",
+      "warehouse_sorting": "Sortierung im Lager",
+      "local_driver": "Lokaler Fahrer (Abholung/Lieferung)",
+      "fundraising_event": "Organisation von Spendenaktionen / Events"
     },
     "availability": {
       "immediate": "Sofort verfügbar (vor Ort)",
@@ -341,7 +350,8 @@
     "filterLabel": "Filter by type",
     "count": "{count} organizations",
     "empty": "No approved organizations yet.",
-    "howToHelpLink": "How to help — donations & collection points"
+    "howToHelpLink": "How to help — donations & collection points",
+    "usaVerifyNote": "Organisationen in Südflorida — Öffnungszeiten direkt prüfen, bevor du dich auf den Weg machst."
   },
   "donate": {
     "title": "Wie man helfen kann",
@@ -390,7 +400,14 @@
     "notFound": "Nicht gefunden",
     "noData": "Keine Daten verfügbar",
     "poweredBy": "Vigil — Open-Source-Humanitärsplattform",
-    "language": "Sprache"
+    "language": "Sprache",
+    "validation": {
+      "tooShort": "Zu kurz — mindestens 2 Zeichen eingeben",
+      "tooLong": "Zu lang",
+      "invalidEmail": "Ungültige E-Mail-Adresse",
+      "invalidAge": "Ungültiges Alter",
+      "mustAccept": "Zum Fortfahren musst du zustimmen"
+    }
   },
   "privacy": {
     "shortNotice": "Ihre Kontaktdaten werden nie öffentlich angezeigt. Wir teilen Daten nicht mit der venezolanischen Regierung.",
@@ -480,7 +497,15 @@
     "transfers": {
       "title": "Geldtransfers nach Venezuela",
       "note": "Ria Money Transfer hat Gebühren für Transfers nach Venezuela bis 15. Juli 2026 erlassen.",
-      "source": "Quelle: riamoneytransfer.com"
+      "source": "Quelle: riamoneytransfer.com",
+      "meru": {
+        "title": "Meru — gebührenfreie Überweisungen",
+        "note": "Meru hat während der Krise die Gebühren für Überweisungen nach Venezuela gestrichen. Prüfe die aktuellen Bedingungen in der App oder auf der offiziellen Website, bevor du sendest."
+      },
+      "banesco": {
+        "title": "Banesco — Spenden mit Matching",
+        "note": "Banesco hat Matching-Programme für erdbebenbezogene Spenden angekündigt. Aktuelle Details über die offiziellen Kanäle der Bank."
+      }
     },
     "collection": {
       "title": "Physische Sammelstellen"
@@ -492,7 +517,11 @@
       "argentina": "Argentine Red Cross — cruzroja.org.ar/rcf/",
       "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
     },
-    "directoryLink": "View full organization directory"
+    "directoryLink": "View full organization directory",
+    "ofac": {
+      "title": "OFAC General License 60 (USA)",
+      "note": "Das US-Finanzministerium (OFAC) hat am 25. Juni 2026 die General License 60 erlassen, die Transaktionen im Zusammenhang mit humanitärer Erdbebenhilfe für Venezuela trotz geltender Sanktionen erlaubt. Die Lizenz läuft am 23. Oktober 2026 ab. Quelle: state.gov. Vigil bietet keine Rechtsberatung — bitte die offizielle Quelle konsultieren."
+    }
   },
   "crisisInfo": {
     "title": "Verifizierte Krisieninformationen",
@@ -516,7 +545,8 @@
       "damage": "Direkter materieller Schaden",
       "children": "Kinder in betroffenen Gebieten",
       "rescueTeams": "Internationale Rettungsteams",
-      "aftershocks": "Bestätigte Nachbeben"
+      "aftershocks": "Bestätigte Nachbeben",
+      "medicalStrain": "Das betroffene Gebiet steht weiter unter medizinischem Druck: AP berichtet eine Woche nach dem Beben von unbehandelten Wunden und Infektionsrisiken."
     },
     "states": {
       "title": "Am stärksten betroffene Bundesstaaten"
@@ -545,7 +575,8 @@
         "defensaCivil": "Zivilschutz Groß-Caracas",
         "emergenciasDigitel": "Digitel Notfall",
         "transito": "Nationale Verkehrsaufsicht"
-      }
+      },
+      "verifyNote": "⚠️ Nummern aus zweiter Hand — vor dem Anruf prüfen."
     },
     "sisterPlatforms": {
       "title": "Schwesterplattformen (bürgerlich)",
@@ -557,7 +588,21 @@
     },
     "sources": {
       "title": "Zuverlässige Quellen zum Folgen"
-    }
+    },
+    "psychosocial": {
+      "title": "Psychosoziale Unterstützung",
+      "verifyNote": "Krisenhotlines — Verfügbarkeit vor dem Teilen prüfen.",
+      "psicoLinea": {
+        "name": "PsicoLínea Venezuela (UCAB)",
+        "phones": "0414-127 78 82 · 0424-172 38 81",
+        "note": "Kostenlose psychologische Hilfe"
+      },
+      "venemergencia": {
+        "name": "Grupo Venemergencia",
+        "note": "Medizinische/psychologische Unterstützung — aktueller Kontakt über ihren Instagram-Account"
+      }
+    },
+    "telecomFreeCalls": "Movistar, O2 und MasOrange bieten während der Krise kostenlose Auslandsgespräche zwischen Spanien und Venezuela an."
   },
   "liveInfo": {
     "title": "Live-Informationszentrale",
@@ -1264,5 +1309,35 @@
         }
       }
     }
+  },
+  "regionScope": {
+    "label": "Kartenregion",
+    "venezuela": "🇻🇪 Venezuela",
+    "usaDiaspora": "🇺🇸 Unterstützung aus den USA"
+  },
+  "diasporaHub": {
+    "title": "Unterstützung aus den USA",
+    "subtitle": "Koordination für alle, die Hilfe aus Südflorida nach Venezuela organisieren",
+    "emergency": {
+      "title": "Lokale Notrufnummern (USA)"
+    },
+    "orgs": {
+      "title": "Organisationen in Südflorida",
+      "verifyNote": "⚠️ Öffnungszeiten und Status direkt bei jeder Organisation prüfen, bevor du dich auf den Weg machst.",
+      "website": "Website",
+      "empty": "Noch keine Organisationen registriert."
+    },
+    "exchange": {
+      "title": "Ressourcenbörse",
+      "desc": "Sendungen, Freiwillige, Ausrüstung und Spenden aus den USA",
+      "count": "{count} aktive Einträge"
+    },
+    "events": {
+      "title": "Veranstaltungen und Aktionstage",
+      "desc": "Sammelstellen, Sortierung im Lager, Spendenaktionen",
+      "count": "{count} bevorstehende Veranstaltungen"
+    },
+    "viewAll": "Alles anzeigen",
+    "volunteerLink": "Als Freiwillige/r registrieren"
   }
 }

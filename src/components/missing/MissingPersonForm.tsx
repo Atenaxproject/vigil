@@ -12,31 +12,44 @@ import { DtvCrossReportBanner } from '@/components/dtv/DtvCrossReportBanner'
 import { GeoSelect } from '@/components/missing/GeoSelect'
 import { queueSubmission } from '@/lib/offline-queue'
 
+// Message strings are i18n keys under common.validation, translated at render.
 const formSchema = z.object({
-  full_name: z.string().min(2).max(200),
-  age: z.number().min(0).max(150).optional(),
+  full_name: z.string().min(1, 'required').min(2, 'tooShort').max(200, 'tooLong'),
+  age: z.number({ message: 'invalidAge' }).min(0, 'invalidAge').max(150, 'invalidAge').optional(),
   gender: z.enum(['male', 'female', 'other', 'unknown']).optional(),
-  last_seen_location: z.string().min(2).max(500),
-  estado: z.string().min(2).max(100),
-  municipio: z.string().max(100).optional(),
-  parroquia: z.string().max(100).optional(),
+  last_seen_location: z.string().min(1, 'required').min(2, 'tooShort').max(500, 'tooLong'),
+  estado: z.string().min(1, 'required').min(2, 'tooShort').max(100, 'tooLong'),
+  municipio: z.string().max(100, 'tooLong').optional(),
+  parroquia: z.string().max(100, 'tooLong').optional(),
   last_seen_at: z.string().optional(),
-  notes: z.string().max(2000).optional(),
-  contact_name: z.string().min(2).max(200),
-  contact_phone: z.string().max(25).optional(),
-  contact_whatsapp: z.string().max(25).optional(),
-  contact_email: z.string().email().max(200).optional().or(z.literal('')),
-  consent_given: z.literal(true),
-  data_accuracy_confirmed: z.literal(true),
+  notes: z.string().max(2000, 'tooLong').optional(),
+  contact_name: z.string().min(1, 'required').min(2, 'tooShort').max(200, 'tooLong'),
+  contact_phone: z.string().max(25, 'tooLong').optional(),
+  contact_whatsapp: z.string().max(25, 'tooLong').optional(),
+  contact_email: z.string().email('invalidEmail').max(200, 'tooLong').optional().or(z.literal('')),
+  consent_given: z.literal(true, { message: 'mustAccept' }),
+  data_accuracy_confirmed: z.literal(true, { message: 'mustAccept' }),
 })
 
 type FormValues = z.infer<typeof formSchema>
+
+const VALIDATION_KEYS = ['required', 'tooShort', 'tooLong', 'invalidEmail', 'invalidAge', 'mustAccept'] as const
+type ValidationKey = (typeof VALIDATION_KEYS)[number]
 
 export function MissingPersonForm() {
   const t = useTranslations('missing.form')
   const tCommon = useTranslations('common')
   const [submitting, setSubmitting] = useState(false)
   const [claimUrl, setClaimUrl] = useState<string | null>(null)
+
+  // Zod messages carry i18n key names (see formSchema); translate them here so
+  // an invalid email says "invalid email", not a generic "required".
+  const fieldMessage = (message?: string) => {
+    const key = VALIDATION_KEYS.includes(message as ValidationKey)
+      ? (message as ValidationKey)
+      : 'required'
+    return key === 'required' ? tCommon('required') : tCommon(`validation.${key}`)
+  }
 
   const {
     register,
@@ -121,7 +134,7 @@ export function MissingPersonForm() {
         />
         {errors.full_name && (
           <p id="full_name-error" role="alert" className="mt-1 text-[13px] text-status-missing">
-            {tCommon('required')}
+            {fieldMessage(errors.full_name.message)}
           </p>
         )}
       </div>
@@ -131,7 +144,23 @@ export function MissingPersonForm() {
           <label htmlFor="age" className={labelClass}>
             {t('age')}
           </label>
-          <input id="age" type="number" {...register('age', { valueAsNumber: true })} className={inputClass} />
+          <input
+            id="age"
+            type="number"
+            // Empty input must become undefined, not NaN — NaN fails
+            // z.number().optional() and silently blocks submission.
+            {...register('age', {
+              setValueAs: (v) => (v === '' || v === null || v === undefined ? undefined : Number(v)),
+            })}
+            className={inputClass}
+            aria-invalid={!!errors.age}
+            aria-describedby={errors.age ? 'age-error' : undefined}
+          />
+          {errors.age && (
+            <p id="age-error" role="alert" className="mt-1 text-[13px] text-status-missing">
+              {fieldMessage(errors.age.message)}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="gender" className={labelClass}>
@@ -162,7 +191,7 @@ export function MissingPersonForm() {
         />
         {errors.last_seen_location && (
           <p id="last_seen_location-error" role="alert" className="mt-1 text-[13px] text-status-missing">
-            {tCommon('required')}
+            {fieldMessage(errors.last_seen_location.message)}
           </p>
         )}
       </div>
@@ -185,7 +214,7 @@ export function MissingPersonForm() {
       />
       {errors.estado && (
         <p role="alert" className="text-[13px] text-status-missing">
-          {tCommon('required')}
+          {fieldMessage(errors.estado.message)}
         </p>
       )}
 
@@ -221,7 +250,7 @@ export function MissingPersonForm() {
         />
         {errors.contact_name && (
           <p id="contact_name-error" role="alert" className="mt-1 text-[13px] text-status-missing">
-            {tCommon('required')}
+            {fieldMessage(errors.contact_name.message)}
           </p>
         )}
       </div>
@@ -262,11 +291,22 @@ export function MissingPersonForm() {
           type="email"
           {...register('contact_email')}
           className={inputClass}
-          aria-describedby="contact_email-help contact-privacy-note"
+          aria-invalid={!!errors.contact_email}
+          aria-describedby={
+            errors.contact_email
+              ? 'contact_email-error contact-privacy-note'
+              : 'contact_email-help contact-privacy-note'
+          }
         />
-        <p id="contact_email-help" className="mt-1 text-[13px] text-vigil-muted">
-          {t('contactEmailHelp')}
-        </p>
+        {errors.contact_email ? (
+          <p id="contact_email-error" role="alert" className="mt-1 text-[13px] text-status-missing">
+            {fieldMessage(errors.contact_email.message)}
+          </p>
+        ) : (
+          <p id="contact_email-help" className="mt-1 text-[13px] text-vigil-muted">
+            {t('contactEmailHelp')}
+          </p>
+        )}
       </div>
 
       <p
@@ -277,11 +317,11 @@ export function MissingPersonForm() {
         {t('contactPrivacyNote')}
       </p>
 
-      <label className="flex items-start gap-2 text-[16px]">
+      <label className="flex min-h-[44px] items-start gap-3 text-[16px]">
         <input
           type="checkbox"
           {...register('consent_given')}
-          className="mt-1"
+          className="mt-0.5 h-5 w-5 shrink-0 accent-[color:var(--vigil-blue)]"
           aria-required="true"
           aria-invalid={!!errors.consent_given}
           aria-describedby={errors.consent_given ? 'consent-error' : undefined}
@@ -290,14 +330,14 @@ export function MissingPersonForm() {
       </label>
       {errors.consent_given && (
         <p id="consent-error" role="alert" className="text-[13px] text-status-missing">
-          {tCommon('required')}
+          {fieldMessage(errors.consent_given.message)}
         </p>
       )}
-      <label className="flex items-start gap-2 text-[16px]">
+      <label className="flex min-h-[44px] items-start gap-3 text-[16px]">
         <input
           type="checkbox"
           {...register('data_accuracy_confirmed')}
-          className="mt-1"
+          className="mt-0.5 h-5 w-5 shrink-0 accent-[color:var(--vigil-blue)]"
           aria-required="true"
           aria-invalid={!!errors.data_accuracy_confirmed}
           aria-describedby={errors.data_accuracy_confirmed ? 'accuracy-error' : undefined}
@@ -306,7 +346,7 @@ export function MissingPersonForm() {
       </label>
       {errors.data_accuracy_confirmed && (
         <p id="accuracy-error" role="alert" className="text-[13px] text-status-missing">
-          {tCommon('required')}
+          {fieldMessage(errors.data_accuracy_confirmed.message)}
         </p>
       )}
 

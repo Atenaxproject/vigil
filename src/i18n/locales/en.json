@@ -61,7 +61,9 @@
   "diasporaHub": {
     "title": "Support from the U.S.",
     "subtitle": "Coordination for South Florida organizers sending aid to Venezuela",
-    "emergency": { "title": "Local emergencies (U.S.)" },
+    "emergency": {
+      "title": "Local emergencies (U.S.)"
+    },
     "orgs": {
       "title": "South Florida organizations",
       "verifyNote": "⚠️ Verify hours and status directly with each organization before traveling.",
@@ -109,7 +111,10 @@
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
-      "noResultsBothHint": "Reporting on both platforms expands the search network."
+      "noResultsBothHint": "Reporting on both platforms expands the search network.",
+      "errorTitle": "Search couldn't be completed",
+      "errorBody": "There was a connection problem. Try again.",
+      "retry": "Retry"
     },
     "photoSearch": {
       "divider": "or search by photo",
@@ -276,7 +281,12 @@
       "communications": "Communications / Media",
       "structural_engineer": "Structural engineer",
       "architect": "Architect",
-      "surveyor": "Surveyor"
+      "surveyor": "Surveyor",
+      "logistics_shipping": "Shipping logistics to Venezuela",
+      "translation_local": "Translation at collection points (USA)",
+      "warehouse_sorting": "Warehouse sorting",
+      "local_driver": "Local driver (pickup/delivery)",
+      "fundraising_event": "Fundraising / event organizing"
     },
     "availability": {
       "immediate": "Available Immediately (On-Site)",
@@ -370,7 +380,8 @@
     "filterLabel": "Filter by type",
     "count": "{count} organizations",
     "empty": "No approved organizations yet.",
-    "howToHelpLink": "How to help — donations & collection points"
+    "howToHelpLink": "How to help — donations & collection points",
+    "usaVerifyNote": "South Florida organizations — verify hours directly before traveling."
   },
   "donate": {
     "title": "How to Help",
@@ -419,7 +430,14 @@
     "notFound": "Not found",
     "noData": "No data available",
     "poweredBy": "Vigil — Open source humanitarian platform",
-    "language": "Language"
+    "language": "Language",
+    "validation": {
+      "tooShort": "Too short — enter at least 2 characters",
+      "tooLong": "Too long",
+      "invalidEmail": "Invalid email address",
+      "invalidAge": "Invalid age",
+      "mustAccept": "You must accept to continue"
+    }
   },
   "privacy": {
     "shortNotice": "Your contact info is never shown publicly. We do not share data with the Venezuelan government.",
@@ -516,12 +534,24 @@
     "transfers": {
       "title": "Sending money to Venezuela",
       "note": "Ria Money Transfer waived fees for transfers to Venezuela until July 15, 2026.",
-      "source": "Source: riamoneytransfer.com"
+      "source": "Source: riamoneytransfer.com",
+      "meru": {
+        "title": "Meru — fee-free remittances",
+        "note": "Meru has waived fees on remittances to Venezuela during the crisis. Verify current terms in their app or official site before sending."
+      },
+      "banesco": {
+        "title": "Banesco — matched donations",
+        "note": "Banesco has announced matching programs for earthquake-related donations. Check the bank's official channels for current details."
+      }
     },
     "collection": {
       "title": "Physical collection points"
     },
-    "volunteerLink": "Register as a volunteer"
+    "volunteerLink": "Register as a volunteer",
+    "ofac": {
+      "title": "OFAC General License 60 (USA)",
+      "note": "The U.S. Treasury Department (OFAC) issued General License 60 on June 25, 2026, authorizing transactions related to humanitarian earthquake relief in Venezuela despite active sanctions. The license expires October 23, 2026. Source: state.gov. Vigil does not provide legal advice — consult the official source."
+    }
   },
   "crisisInfo": {
     "title": "Verified Crisis Information",
@@ -545,7 +575,8 @@
       "damage": "Direct physical damage",
       "children": "Children in affected areas",
       "rescueTeams": "International rescue teams",
-      "aftershocks": "Confirmed aftershocks"
+      "aftershocks": "Confirmed aftershocks",
+      "medicalStrain": "The affected zone remains under medical strain: untreated wounds and infectious disease risk reported by AP one week after the earthquake."
     },
     "states": {
       "title": "Most affected states"
@@ -574,7 +605,8 @@
         "defensaCivil": "Greater Caracas Civil Defense",
         "emergenciasDigitel": "Digitel Emergency",
         "transito": "National Traffic Inspectorate"
-      }
+      },
+      "verifyNote": "⚠️ Secondhand numbers — verify before calling."
     },
     "sisterPlatforms": {
       "title": "Sister platforms (citizen-run)",
@@ -586,7 +618,21 @@
     },
     "sources": {
       "title": "Reliable sources to follow"
-    }
+    },
+    "psychosocial": {
+      "title": "Psychosocial support",
+      "verifyNote": "Crisis lines — verify availability before sharing.",
+      "psicoLinea": {
+        "name": "PsicoLínea Venezuela (UCAB)",
+        "phones": "0414-127 78 82 · 0424-172 38 81",
+        "note": "Free psychological support"
+      },
+      "venemergencia": {
+        "name": "Grupo Venemergencia",
+        "note": "Medical/psychological support — check their Instagram for current contact"
+      }
+    },
+    "telecomFreeCalls": "Movistar, O2 and MasOrange offer free international calls between Spain and Venezuela during the crisis."
   },
   "liveInfo": {
     "title": "Live Information Hub",
@@ -1157,53 +1203,140 @@
       },
       "missingPersons": {
         "title": "Missing persons",
-        "search": { "q": "How do I search for someone?", "a": "Go to Search (/buscar). Enter a name or filter by state. Results include Vigil and DTV federated records." },
-        "report": { "q": "How do I report someone missing?", "a": "Go to Report (/reportar). Save your claim link — it's the only way to manage your report without an account." },
-        "claimLink": { "q": "What is a claim link?", "a": "A unique URL (/mi-reporte/[token]) to update status and manage your report without a password." },
-        "phone": { "q": "Can others see my phone number?", "a": "No. Contact information is never shown on public pages." },
-        "status": { "q": "What do status badges mean?", "a": "Missing = active search. Found alive = safe. Found deceased = confirmed deceased. Unverified = not yet admin-verified." },
-        "photo": { "q": "How does photo search work?", "a": "Upload a photo on the search page. AI suggests possible matches — always verify with families and authorities." },
-        "pfif": { "q": "What is PFIF?", "a": "Person Finder Interchange Format — Vigil exports at /api/pfif." },
-        "sighting": { "q": "How do I add a sighting note?", "a": "On a person's detail page, submit a public note with location and time. Do not include private contact info." }
+        "search": {
+          "q": "How do I search for someone?",
+          "a": "Go to Search (/buscar). Enter a name or filter by state. Results include Vigil and DTV federated records."
+        },
+        "report": {
+          "q": "How do I report someone missing?",
+          "a": "Go to Report (/reportar). Save your claim link — it's the only way to manage your report without an account."
+        },
+        "claimLink": {
+          "q": "What is a claim link?",
+          "a": "A unique URL (/mi-reporte/[token]) to update status and manage your report without a password."
+        },
+        "phone": {
+          "q": "Can others see my phone number?",
+          "a": "No. Contact information is never shown on public pages."
+        },
+        "status": {
+          "q": "What do status badges mean?",
+          "a": "Missing = active search. Found alive = safe. Found deceased = confirmed deceased. Unverified = not yet admin-verified."
+        },
+        "photo": {
+          "q": "How does photo search work?",
+          "a": "Upload a photo on the search page. AI suggests possible matches — always verify with families and authorities."
+        },
+        "pfif": {
+          "q": "What is PFIF?",
+          "a": "Person Finder Interchange Format — Vigil exports at /api/pfif."
+        },
+        "sighting": {
+          "q": "How do I add a sighting note?",
+          "a": "On a person's detail page, submit a public note with location and time. Do not include private contact info."
+        }
       },
       "mapNeeds": {
         "title": "Map & needs",
-        "readMap": { "q": "How do I read the crisis map?", "a": "The home map shows aftershocks, needs, resources, shelters, hospitals, and more." },
-        "needHelp": { "q": "How do I report I need help?", "a": "Go to I Need Help (/necesito-ayuda) and drop a pin with a description." },
-        "collectionPoint": { "q": "What is a collection point?", "a": "A location accepting donated goods. Register at /punto-de-acopio or find points on the map." },
-        "colors": { "q": "What are the map layer colors?", "a": "Layer-specific — see map legend. Property assessments use ATC-20 colors." }
+        "readMap": {
+          "q": "How do I read the crisis map?",
+          "a": "The home map shows aftershocks, needs, resources, shelters, hospitals, and more."
+        },
+        "needHelp": {
+          "q": "How do I report I need help?",
+          "a": "Go to I Need Help (/necesito-ayuda) and drop a pin with a description."
+        },
+        "collectionPoint": {
+          "q": "What is a collection point?",
+          "a": "A location accepting donated goods. Register at /punto-de-acopio or find points on the map."
+        },
+        "colors": {
+          "q": "What are the map layer colors?",
+          "a": "Layer-specific — see map legend. Property assessments use ATC-20 colors."
+        }
       },
       "volunteers": {
         "title": "Volunteers & exchange",
-        "register": { "q": "How do I register as a volunteer?", "a": "Go to Volunteers (/voluntarios), select skills and languages, and provide contact." },
-        "exchange": { "q": "How does resource exchange work?", "a": "Go to Exchange (/intercambio) to offer or request resources. Listings expire after 7 days." },
-        "contact": { "q": "How does contact matching work?", "a": "Contact requests go through Vigil — phone numbers are never public." },
-        "structural": { "q": "Can I assess building safety?", "a": "Only if registered with structural skills and assigned by admin." }
+        "register": {
+          "q": "How do I register as a volunteer?",
+          "a": "Go to Volunteers (/voluntarios), select skills and languages, and provide contact."
+        },
+        "exchange": {
+          "q": "How does resource exchange work?",
+          "a": "Go to Exchange (/intercambio) to offer or request resources. Listings expire after 7 days."
+        },
+        "contact": {
+          "q": "How does contact matching work?",
+          "a": "Contact requests go through Vigil — phone numbers are never public."
+        },
+        "structural": {
+          "q": "Can I assess building safety?",
+          "a": "Only if registered with structural skills and assigned by admin."
+        }
       },
       "safety": {
         "title": "Safety & trust",
-        "unverified": { "q": "What does unverified mean?", "a": "Citizen submission not yet confirmed by admin or official source." },
-        "flag": { "q": "How do I report inappropriate content?", "a": "Use the flag button on /muro. For missing persons, contact support@youthewave.org." },
-        "structural": { "q": "Are structural assessments official?", "a": "No. Volunteer field opinions following ATC-20, not government inspections." },
-        "hotline": { "q": "What is the emergency hotline?", "a": "0800-RESCATE — always shown in the site banner." }
+        "unverified": {
+          "q": "What does unverified mean?",
+          "a": "Citizen submission not yet confirmed by admin or official source."
+        },
+        "flag": {
+          "q": "How do I report inappropriate content?",
+          "a": "Use the flag button on /muro. For missing persons, contact support@youthewave.org."
+        },
+        "structural": {
+          "q": "Are structural assessments official?",
+          "a": "No. Volunteer field opinions following ATC-20, not government inspections."
+        },
+        "hotline": {
+          "q": "What is the emergency hotline?",
+          "a": "0800-RESCATE — always shown in the site banner."
+        }
       },
       "connectivity": {
         "title": "Connectivity & infrastructure",
-        "wifi": { "q": "How do I report WiFi or Starlink?", "a": "Go to Connectivity (/conectividad) and report signal type with location." },
-        "alerts": { "q": "Where do official alerts come from?", "a": "/informacion aggregates USGS, GDACS, ReliefWeb. /noticias shows ReliefWeb updates." }
+        "wifi": {
+          "q": "How do I report WiFi or Starlink?",
+          "a": "Go to Connectivity (/conectividad) and report signal type with location."
+        },
+        "alerts": {
+          "q": "Where do official alerts come from?",
+          "a": "/informacion aggregates USGS, GDACS, ReliefWeb. /noticias shows ReliefWeb updates."
+        }
       },
       "donations": {
         "title": "Donations & organizations",
-        "where": { "q": "Where should I donate?", "a": "/donaciones and /como-ayudar link to verified organizations." },
-        "listed": { "q": "How do organizations get listed?", "a": "Submit via org registration. Admin approval required." },
-        "sister": { "q": "What are sister platforms?", "a": "Independent citizen crisis tools linked at /red." }
+        "where": {
+          "q": "Where should I donate?",
+          "a": "/donaciones and /como-ayudar link to verified organizations."
+        },
+        "listed": {
+          "q": "How do organizations get listed?",
+          "a": "Submit via org registration. Admin approval required."
+        },
+        "sister": {
+          "q": "What are sister platforms?",
+          "a": "Independent citizen crisis tools linked at /red."
+        }
       },
       "legal": {
         "title": "Legal & privacy",
-        "privacy": { "q": "Privacy policy", "a": "Spanish: /privacidad · English: /privacy" },
-        "terms": { "q": "Terms of service", "a": "Spanish: /terminos · English: /terms" },
-        "erasure": { "q": "How do I request data erasure?", "a": "Contact support@youthewave.org." },
-        "operator": { "q": "Who operates Vigil?", "a": "Bbluestudios LLC — YouTheWave humanitarian initiative." }
+        "privacy": {
+          "q": "Privacy policy",
+          "a": "Spanish: /privacidad · English: /privacy"
+        },
+        "terms": {
+          "q": "Terms of service",
+          "a": "Spanish: /terminos · English: /terms"
+        },
+        "erasure": {
+          "q": "How do I request data erasure?",
+          "a": "Contact support@youthewave.org."
+        },
+        "operator": {
+          "q": "Who operates Vigil?",
+          "a": "Bbluestudios LLC — YouTheWave humanitarian initiative."
+        }
       }
     }
   }

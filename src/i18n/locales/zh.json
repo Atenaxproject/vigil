@@ -50,7 +50,8 @@
     "hotline": "0800-RESCATE",
     "hotlineNumber": "0800-7372282",
     "fullDirectory": "Full directory",
-    "moreNumbers": "More contacts"
+    "moreNumbers": "More contacts",
+    "verifyBeforeCalling": "拨打前请核实"
   },
   "missing": {
     "title": "失踪人员",
@@ -78,7 +79,10 @@
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
-      "noResultsBothHint": "Reporting on both platforms expands the search network."
+      "noResultsBothHint": "Reporting on both platforms expands the search network.",
+      "errorTitle": "搜索未能完成",
+      "errorBody": "连接出现问题，请重试。",
+      "retry": "重试"
     },
     "status": {
       "missing": "失踪",
@@ -247,7 +251,12 @@
       "communications": "通讯/媒体",
       "structural_engineer": "Structural engineer",
       "architect": "Architect",
-      "surveyor": "Surveyor"
+      "surveyor": "Surveyor",
+      "logistics_shipping": "对委内瑞拉的运输物流",
+      "translation_local": "收集点翻译（美国）",
+      "warehouse_sorting": "仓库分拣",
+      "local_driver": "当地司机（取送货）",
+      "fundraising_event": "募捐/活动组织"
     },
     "availability": {
       "immediate": "立即可用（现场）",
@@ -341,7 +350,8 @@
     "filterLabel": "Filter by type",
     "count": "{count} organizations",
     "empty": "No approved organizations yet.",
-    "howToHelpLink": "How to help — donations & collection points"
+    "howToHelpLink": "How to help — donations & collection points",
+    "usaVerifyNote": "南佛罗里达的组织——前往之前请直接核实营业时间。"
   },
   "donate": {
     "title": "如何帮助",
@@ -390,7 +400,14 @@
     "notFound": "未找到",
     "noData": "没有可用数据",
     "poweredBy": "Vigil — 开源人道主义平台",
-    "language": "语言"
+    "language": "语言",
+    "validation": {
+      "tooShort": "太短——请至少输入2个字符",
+      "tooLong": "太长",
+      "invalidEmail": "电子邮箱无效",
+      "invalidAge": "年龄无效",
+      "mustAccept": "必须接受才能继续"
+    }
   },
   "privacy": {
     "shortNotice": "你的联系信息永远不会公开显示。我们不与委内瑞拉政府共享数据。",
@@ -480,7 +497,15 @@
     "transfers": {
       "title": "向委内瑞拉汇款",
       "note": "Ria 汇款公司自 2026 年 7 月 15 日起免除向委内瑞拉的转账费用。",
-      "source": "来源：riamoneytransfer.com"
+      "source": "来源：riamoneytransfer.com",
+      "meru": {
+        "title": "Meru——免手续费汇款",
+        "note": "危机期间 Meru 已免除汇往委内瑞拉的手续费。汇款前请在其应用或官网核实当前条款。"
+      },
+      "banesco": {
+        "title": "Banesco——配捐计划",
+        "note": "Banesco 已宣布为地震相关捐款提供配捐计划。请通过银行官方渠道了解最新详情。"
+      }
     },
     "collection": {
       "title": "物资收集点"
@@ -492,7 +517,11 @@
       "argentina": "Argentine Red Cross — cruzroja.org.ar/rcf/",
       "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
     },
-    "directoryLink": "View full organization directory"
+    "directoryLink": "View full organization directory",
+    "ofac": {
+      "title": "OFAC 第60号通用许可证（美国）",
+      "note": "美国财政部（OFAC）于2026年6月25日签发第60号通用许可证，尽管制裁仍然有效，仍授权与委内瑞拉地震人道主义援助相关的交易。该许可证于2026年10月23日到期。来源：state.gov。Vigil 不提供法律咨询——请查阅官方来源。"
+    }
   },
   "crisisInfo": {
     "title": "已验证的危机信息",
@@ -516,7 +545,8 @@
       "damage": "直接物理损害",
       "children": "受灾地区儿童",
       "rescueTeams": "国际救援队",
-      "aftershocks": "确认余震"
+      "aftershocks": "确认余震",
+      "medicalStrain": "受灾地区医疗压力持续：据美联社报道，地震一周后仍存在未经处理的伤口和传染病风险。"
     },
     "states": {
       "title": "最受影响的州"
@@ -545,7 +575,8 @@
         "defensaCivil": "大加拉加斯民防",
         "emergenciasDigitel": "Digitel 紧急服务",
         "transito": "国家交通监察局"
-      }
+      },
+      "verifyNote": "⚠️ 号码来自二手信息——拨打前请核实。"
     },
     "sisterPlatforms": {
       "title": "姊妹平台（民间运营）",
@@ -557,7 +588,21 @@
     },
     "sources": {
       "title": "可靠来源"
-    }
+    },
+    "psychosocial": {
+      "title": "心理社会支持",
+      "verifyNote": "危机热线——分享前请核实可用性。",
+      "psicoLinea": {
+        "name": "PsicoLínea Venezuela (UCAB)",
+        "phones": "0414-127 78 82 · 0424-172 38 81",
+        "note": "免费心理援助"
+      },
+      "venemergencia": {
+        "name": "Grupo Venemergencia",
+        "note": "医疗/心理支持——请查看其 Instagram 获取最新联系方式"
+      }
+    },
+    "telecomFreeCalls": "危机期间，Movistar、O2 和 MasOrange 提供西班牙与委内瑞拉之间的免费国际通话。"
   },
   "liveInfo": {
     "title": "实时信息中心",
@@ -1264,5 +1309,35 @@
         }
       }
     }
+  },
+  "regionScope": {
+    "label": "地图区域",
+    "venezuela": "🇻🇪 委内瑞拉",
+    "usaDiaspora": "🇺🇸 来自美国的支援"
+  },
+  "diasporaHub": {
+    "title": "来自美国的支援",
+    "subtitle": "为从南佛罗里达向委内瑞拉组织援助的人士提供协调",
+    "emergency": {
+      "title": "当地紧急电话（美国）"
+    },
+    "orgs": {
+      "title": "南佛罗里达的组织",
+      "verifyNote": "⚠️ 前往之前请直接与各组织核实营业时间和状态。",
+      "website": "网站",
+      "empty": "暂无已登记的组织。"
+    },
+    "exchange": {
+      "title": "资源交换",
+      "desc": "来自美国的运输、志愿者、设备和捐赠",
+      "count": "{count} 条有效信息"
+    },
+    "events": {
+      "title": "活动与集会",
+      "desc": "物资收集、仓库分拣、募捐活动",
+      "count": "{count} 场即将举行的活动"
+    },
+    "viewAll": "查看全部",
+    "volunteerLink": "注册成为志愿者"
   }
 }

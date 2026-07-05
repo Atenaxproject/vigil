@@ -50,7 +50,8 @@
     "hotline": "0800-RESCATE",
     "hotlineNumber": "0800-7372282",
     "fullDirectory": "Full directory",
-    "moreNumbers": "More contacts"
+    "moreNumbers": "More contacts",
+    "verifyBeforeCalling": "Проверьте номер перед звонком"
   },
   "missing": {
     "title": "Пропавшие люди",
@@ -78,7 +79,10 @@
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
-      "noResultsBothHint": "Reporting on both platforms expands the search network."
+      "noResultsBothHint": "Reporting on both platforms expands the search network.",
+      "errorTitle": "Не удалось выполнить поиск",
+      "errorBody": "Возникла проблема с соединением. Попробуйте ещё раз.",
+      "retry": "Повторить"
     },
     "status": {
       "missing": "Пропал",
@@ -247,7 +251,12 @@
       "communications": "Коммуникации / СМИ",
       "structural_engineer": "Structural engineer",
       "architect": "Architect",
-      "surveyor": "Surveyor"
+      "surveyor": "Surveyor",
+      "logistics_shipping": "Логистика отправок в Венесуэлу",
+      "translation_local": "Перевод в пунктах сбора (США)",
+      "warehouse_sorting": "Сортировка на складе",
+      "local_driver": "Местный водитель (забор/доставка)",
+      "fundraising_event": "Организация сборов средств / мероприятий"
     },
     "availability": {
       "immediate": "Доступен сразу (на месте)",
@@ -341,7 +350,8 @@
     "filterLabel": "Filter by type",
     "count": "{count} organizations",
     "empty": "No approved organizations yet.",
-    "howToHelpLink": "How to help — donations & collection points"
+    "howToHelpLink": "How to help — donations & collection points",
+    "usaVerifyNote": "Организации Южной Флориды — уточняйте часы работы напрямую перед поездкой."
   },
   "donate": {
     "title": "Как помочь",
@@ -390,7 +400,14 @@
     "notFound": "Не найдено",
     "noData": "Данные отсутствуют",
     "poweredBy": "Vigil — открытая гуманитарная платформа",
-    "language": "Язык"
+    "language": "Язык",
+    "validation": {
+      "tooShort": "Слишком короткое значение — минимум 2 символа",
+      "tooLong": "Слишком длинное значение",
+      "invalidEmail": "Неверный адрес эл. почты",
+      "invalidAge": "Неверный возраст",
+      "mustAccept": "Необходимо согласиться, чтобы продолжить"
+    }
   },
   "privacy": {
     "shortNotice": "Ваши контактные данные никогда не показываются публично. Мы не передаём данные венесуэльскому правительству.",
@@ -480,7 +497,15 @@
     "transfers": {
       "title": "Отправка денег в Венесуэлу",
       "note": "Ria Money Transfer отменила комиссии за переводы в Венесуэлу до 15 июля 2026 г.",
-      "source": "Источник: riamoneytransfer.com"
+      "source": "Источник: riamoneytransfer.com",
+      "meru": {
+        "title": "Meru — переводы без комиссии",
+        "note": "Meru отменила комиссии за переводы в Венесуэлу на время кризиса. Перед отправкой проверьте актуальные условия в приложении или на официальном сайте."
+      },
+      "banesco": {
+        "title": "Banesco — пожертвования с удвоением",
+        "note": "Banesco объявил о программах удвоения пожертвований, связанных с землетрясением. Актуальные детали — в официальных каналах банка."
+      }
     },
     "collection": {
       "title": "Физические пункты сбора"
@@ -492,7 +517,11 @@
       "argentina": "Argentine Red Cross — cruzroja.org.ar/rcf/",
       "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
     },
-    "directoryLink": "View full organization directory"
+    "directoryLink": "View full organization directory",
+    "ofac": {
+      "title": "Генеральная лицензия OFAC 60 (США)",
+      "note": "Министерство финансов США (OFAC) выпустило Генеральную лицензию 60 25 июня 2026 года, разрешающую операции, связанные с гуманитарной помощью после землетрясения в Венесуэле, несмотря на действующие санкции. Лицензия действует до 23 октября 2026 года. Источник: state.gov. Vigil не предоставляет юридических консультаций — обращайтесь к официальному источнику."
+    }
   },
   "crisisInfo": {
     "title": "Проверенная информация о кризисе",
@@ -516,7 +545,8 @@
       "damage": "Прямой материальный ущерб",
       "children": "Дети в пострадавших районах",
       "rescueTeams": "Международные спасательные команды",
-      "aftershocks": "Подтверждённые афтершоки"
+      "aftershocks": "Подтверждённые афтершоки",
+      "medicalStrain": "Пострадавшая зона по-прежнему испытывает медицинскую нагрузку: по данным AP, спустя неделю после землетрясения сохраняются необработанные раны и риск инфекционных заболеваний."
     },
     "states": {
       "title": "Наиболее пострадавшие штаты"
@@ -545,7 +575,8 @@
         "defensaCivil": "Гражданская защита Большого Каракаса",
         "emergenciasDigitel": "Экстренная служба Digitel",
         "transito": "Национальная инспекция дорожного движения"
-      }
+      },
+      "verifyNote": "⚠️ Номера получены из вторых рук — проверьте перед звонком."
     },
     "sisterPlatforms": {
       "title": "Родственные платформы (гражданские)",
@@ -557,7 +588,21 @@
     },
     "sources": {
       "title": "Надёжные источники для отслеживания"
-    }
+    },
+    "psychosocial": {
+      "title": "Психосоциальная поддержка",
+      "verifyNote": "Кризисные линии — проверьте доступность, прежде чем делиться.",
+      "psicoLinea": {
+        "name": "PsicoLínea Venezuela (UCAB)",
+        "phones": "0414-127 78 82 · 0424-172 38 81",
+        "note": "Бесплатная психологическая помощь"
+      },
+      "venemergencia": {
+        "name": "Grupo Venemergencia",
+        "note": "Медицинская/психологическая поддержка — актуальные контакты в их Instagram"
+      }
+    },
+    "telecomFreeCalls": "Movistar, O2 и MasOrange предоставляют бесплатные международные звонки между Испанией и Венесуэлой во время кризиса."
   },
   "liveInfo": {
     "title": "Центр живой информации",
@@ -1264,5 +1309,35 @@
         }
       }
     }
+  },
+  "regionScope": {
+    "label": "Регион карты",
+    "venezuela": "🇻🇪 Венесуэла",
+    "usaDiaspora": "🇺🇸 Поддержка из США"
+  },
+  "diasporaHub": {
+    "title": "Поддержка из США",
+    "subtitle": "Координация для тех, кто организует помощь из Южной Флориды в Венесуэлу",
+    "emergency": {
+      "title": "Местные экстренные службы (США)"
+    },
+    "orgs": {
+      "title": "Организации Южной Флориды",
+      "verifyNote": "⚠️ Уточняйте часы работы и статус напрямую у каждой организации перед поездкой.",
+      "website": "Сайт",
+      "empty": "Зарегистрированных организаций пока нет."
+    },
+    "exchange": {
+      "title": "Обмен ресурсами",
+      "desc": "Отправка грузов, волонтёры, оборудование и пожертвования из США",
+      "count": "{count} активных объявлений"
+    },
+    "events": {
+      "title": "Мероприятия и акции",
+      "desc": "Пункты сбора, сортировка на складе, сбор средств",
+      "count": "{count} предстоящих мероприятий"
+    },
+    "viewAll": "Показать всё",
+    "volunteerLink": "Зарегистрироваться волонтёром"
   }
 }

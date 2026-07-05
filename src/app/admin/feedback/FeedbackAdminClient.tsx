@@ -89,7 +89,7 @@ export function FeedbackAdminClient() {
               <select
                 value={item.status}
                 onChange={(e) => void updateStatus(item.id, e.target.value as FeedbackStatus)}
-                className="rounded-input border border-slate-200 px-2 py-1 text-[13px]"
+                className="min-h-[44px] rounded-input border border-slate-200 px-3 py-1 text-[13px]"
               >
                 <option value="new">new</option>
                 <option value="reviewing">reviewing</option>

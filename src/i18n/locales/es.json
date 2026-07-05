@@ -111,7 +111,10 @@
       "noResultsBothTitle": "No encontramos a esta persona en ninguna de las dos plataformas.",
       "noResultsReportBoth": "Considera reportarla:",
       "noResultsReportDtv": "En Desaparecidos Terremoto Venezuela",
-      "noResultsBothHint": "Reportar en ambas amplía la red de búsqueda."
+      "noResultsBothHint": "Reportar en ambas amplía la red de búsqueda.",
+      "errorTitle": "No se pudo completar la búsqueda",
+      "errorBody": "Hubo un problema de conexión. Intenta de nuevo.",
+      "retry": "Reintentar"
     },
     "photoSearch": {
       "divider": "o busca por foto",
@@ -427,7 +430,14 @@
     "notFound": "No encontrado",
     "noData": "Sin datos disponibles",
     "poweredBy": "Vigil — Plataforma humanitaria de código abierto",
-    "language": "Idioma"
+    "language": "Idioma",
+    "validation": {
+      "tooShort": "Demasiado corto — escribe al menos 2 caracteres",
+      "tooLong": "Demasiado largo",
+      "invalidEmail": "Correo electrónico no válido",
+      "invalidAge": "Edad no válida",
+      "mustAccept": "Debes aceptar para continuar"
+    }
   },
   "privacy": {
     "shortNotice": "Tu información de contacto nunca se muestra públicamente. No compartimos datos con el gobierno venezolano.",
@@ -558,7 +568,7 @@
       "missingQualifier": "Cifra en revisión — los balances oficiales han mostrado discrepancias y pueden tardar semanas en consolidarse.",
       "deathsSource": "AP, 1 de julio de 2026",
       "injuredSource": "AP, 1 de julio de 2026",
-      "medicalStrain": "La zona afectada sigue bajo presión médica: heridas sin tratar e riesgo de enfermedades infecciosas reportados por AP una semana después del terremoto.",
+      "medicalStrain": "La zona afectada sigue bajo presión médica: heridas sin tratar y riesgo de enfermedades infecciosas reportados por AP una semana después del terremoto.",
       "displaced": "Desplazados",
       "displacedSource": "OCHA",
       "buildings": "Edificios colapsados",
@@ -583,7 +593,7 @@
     },
     "hotlines": {
       "title": "Líneas de emergencia",
-      "verifyNote": "⚠️ Números de segunda mano — verifica antes de llamar. Orlando debe confirmar cada número.",
+      "verifyNote": "⚠️ Números de segunda mano — verifica antes de llamar.",
       "rescate": "0800-RESCATE",
       "redCross": "Cruz Roja Venezolana",
       "additionalTitle": "Líneas de emergencia adicionales",

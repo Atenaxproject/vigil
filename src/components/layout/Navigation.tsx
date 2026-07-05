@@ -205,7 +205,7 @@ export function Navigation() {
             href="/"
             className={cn(
               'font-display font-bold tracking-tight text-vigil-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40',
-              collapsed ? 'inline-flex h-9 w-9 items-center justify-center rounded-input text-[17px]' : 'text-[20px]'
+              collapsed ? 'inline-flex h-11 w-11 items-center justify-center rounded-input text-[17px]' : 'text-[20px]'
             )}
             aria-label="Vigil"
           >
@@ -367,7 +367,7 @@ export function Navigation() {
                 type="button"
                 onClick={closeMore}
                 aria-label={tCommon('close')}
-                className="flex h-9 w-9 items-center justify-center rounded-full text-vigil-muted hover:bg-vigil-cloud focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-vigil-muted hover:bg-vigil-cloud focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
               >
                 <X className="h-5 w-5" aria-hidden />
               </button>
