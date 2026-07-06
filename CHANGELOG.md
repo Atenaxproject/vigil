@@ -1,24 +1,25 @@
-﻿# Changelog
+# Changelog
 
-## [Unreleased] — 2026-07-06 (infrastructure ops 47–51)
-
-### Added
-- **`Atenaxproject/vigil-backups`** — private repo with weekly Supabase `pg_dump` GitHub Actions workflow.
-- **`.github/dependabot.yml`** — weekly npm and GitHub Actions updates.
-- **`.github/workflows/codeql.yml`** — CodeQL for JavaScript/TypeScript.
-- **`docs/build-process/47-vigil-backups-repo.md`** through **`51-zoho-dns-cloudflare.md`** — session archives.
-
-### Changed
-- **GitHub** — Dependabot vulnerability alerts and automated security updates enabled on `Atenaxproject/vigil`.
-- **GitHub Actions secret** — `CRON_SECRET` set on `Atenaxproject/vigil` (`SUPABASE_DB_URL` and `SUPABASE_ACCESS_TOKEN` pending Orlando).
-
-### Pending
-- **Cloudflare DNS** — Zoho MX/SPF/DKIM/DMARC for `youthewave.org` (no API token in CI shell).
-- **Secrets** — `SUPABASE_DB_URL` / `SUPABASE_ACCESS_TOKEN` on vigil and vigil-backups repos.
 All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+
+## [Unreleased] — 2026-07-06 (infrastructure ops 47–51)
+
+### Added
+- **Atenaxproject/vigil-backups** — private repo with weekly Supabase pg_dump GitHub Actions workflow.
+- **.github/dependabot.yml** — weekly npm and GitHub Actions updates.
+- **.github/workflows/codeql.yml** — CodeQL for JavaScript/TypeScript.
+- **docs/build-process/47-vigil-backups-repo.md** through **51-zoho-dns-cloudflare.md** — session archives.
+
+### Changed
+- **GitHub** — Dependabot vulnerability alerts and automated security updates enabled on Atenaxproject/vigil.
+- **GitHub Actions secret** — CRON_SECRET set on Atenaxproject/vigil (SUPABASE_DB_URL and SUPABASE_ACCESS_TOKEN pending Orlando).
+
+### Pending
+- **Cloudflare DNS** — Zoho MX/SPF/DKIM/DMARC for youthewave.org (no API token in CI shell).
+- **Secrets** — SUPABASE_DB_URL / SUPABASE_ACCESS_TOKEN on vigil and vigil-backups repos.
 ## [Unreleased] â€” 2026-07-05 (press kit + outreach corrections)
 
 ### Added
