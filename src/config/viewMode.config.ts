@@ -15,6 +15,7 @@ export const MINI_GUIDE_DISMISS_PREFIX = 'vigil_mini_guide_dismissed_'
 /** Routes never filtered by mode (plus /admin, /auth handled separately). */
 export const ALWAYS_VISIBLE_PATHS = new Set([
   '/ayuda',
+  '/prensa',
   '/privacidad',
   '/privacy',
   '/terminos',

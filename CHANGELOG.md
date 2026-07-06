@@ -4,6 +4,22 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/) with
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
+## [Unreleased] — 2026-07-05 (press kit + outreach corrections)
+
+### Added
+- **`/prensa`** — bilingual press kit page with live `/api/dtv-metrics`, screenshots, founder bio, government data exclusion, and media contact (`vigil@youthewave.org`).
+- **`docs/outreach/OUTREACH-SEND-PACKAGE-V4.md`** — corrected outreach letters archived from repo root.
+- **`docs/build-process/46-press-kit-and-outreach-corrections.md`** — session archive.
+
+### Changed
+- **Outreach package** — honest DTV federation wording (55,000+ total reports, ~12,000 API-searchable, cached locally); 26 verified orgs; M1 missing-persons figure ~50,000 (IRC).
+- **README**, **`help-center-structure.md`**, **`VIGIL-COMPLETE-GUIDE.md`**, **es.json** help FAQ — 17 → 26 verified orgs.
+- **Footer** — press link to `/prensa`; route in `ALWAYS_VISIBLE_PATHS`.
+- **`scripts/visual-check.mjs`** — writes screenshots to `screenshots/` (README) and `public/screenshots/` (app).
+
+### Removed
+- Root **`VIGIL-OUTREACH-SEND-PACKAGE-V4.md`** (content under `docs/outreach/`).
+
 ## [Unreleased] — 2026-07-04 (deployment playbook docs)
 
 ### Changed

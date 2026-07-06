@@ -10,13 +10,16 @@ const VIEWPORTS = [
 ]
 
 fs.mkdirSync('screenshots', { recursive: true })
+fs.mkdirSync('public/screenshots', { recursive: true })
 
 const browser = await chromium.launch()
 for (const vp of VIEWPORTS) {
   const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } })
   await page.goto(URL, { waitUntil: 'networkidle', timeout: 30000 })
-  await page.screenshot({ path: `screenshots/${vp.name}.png`, fullPage: false })
-  console.log(`Captured: screenshots/${vp.name}.png`)
+  const buffer = await page.screenshot({ fullPage: false })
+  fs.writeFileSync(`screenshots/${vp.name}.png`, buffer)
+  fs.writeFileSync(`public/screenshots/${vp.name}.png`, buffer)
+  console.log(`Captured: screenshots/${vp.name}.png + public/screenshots/${vp.name}.png`)
   await page.close()
 }
 await browser.close()

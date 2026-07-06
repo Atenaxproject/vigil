@@ -185,7 +185,7 @@ Key fields beyond the spec in `docs/architecture/CLAUDE.md`:
 | `/voluntarios` | Volunteer registration + directory |
 | `/organizaciones` | Verified NGO directory |
 | `/donaciones` | Donation portal (links out) |
-| `/como-ayudar` | Curated how-to-help (17 orgs) |
+| `/como-ayudar` | Curated how-to-help (26 orgs) |
 | `/noticias` | ReliefWeb official updates |
 | `/informacion` | Live hub: USGS, GDACS, stats, infrastructure |
 | `/estadisticas` | Missing/found counts by estado |
@@ -198,6 +198,7 @@ Key fields beyond the spec in `docs/architecture/CLAUDE.md`:
 | `/mi-evaluacion/[token]` | Claim link for property assessment |
 | `/equipo-activo` | Rescuer presence check-in + SOS |
 | `/ayuda` | Help center (8 FAQ sections, accordion) |
+| `/prensa` | Press kit — live DTV stats, screenshots, founder bio, media contact |
 | `/apoyo-usa` | USA diaspora coordination hub |
 | `/privacidad`, `/terminos` | Legal (ES) |
 | `/privacy`, `/terms` | Legal (EN) |

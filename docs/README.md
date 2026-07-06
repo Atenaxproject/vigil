@@ -39,6 +39,12 @@ Complete A-to-Z operational documentation (help, SOPs, onboarding):
 - `reference/help-center-structure.md` — FAQ and in-app help outline
 - `reference/glossary.md` — PFIF, DTV, ATC-20, and platform terminology
 
+## Outreach index
+
+Media and partnership outreach packages (honest stats, send maps, letter templates):
+
+- `outreach/OUTREACH-SEND-PACKAGE-V4.md` — VOAD, media pitches, follow-ups, Show HN appendix (July 2026)
+
 ## Build-process index
 
 Sequential prompts/specs used to construct Vigil (historical record):
@@ -85,6 +91,7 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `43-adaptive-onboarding-and-help-center.md` — six view modes, mode picker, `/ayuda` help center, emergency bar refresh
 - `44-sister-network-and-cav-sync.md` — three sister links, CAV CSV weekly sync to `map_markers`
 - `45-fix-map-search-and-mode-filtering.md` — map/search route separation, Personas Desaparecidas map layer, mode nav filtering fix
+- `46-press-kit-and-outreach-corrections.md` — honest stat corrections, `/prensa` press kit, outreach archive
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

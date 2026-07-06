@@ -166,7 +166,7 @@ Go to **Conectividad** (`/conectividad`) and report signal type with location. H
 
 ### Where should I donate?
 
-`/donaciones` and `/como-ayudar` link to 17 verified organizations. Vigil does not process payments — links go directly to org donation pages.
+`/donaciones` and `/como-ayudar` link to 26 verified organizations. Vigil does not process payments — links go directly to org donation pages.
 
 ### How do organizations get listed?
 

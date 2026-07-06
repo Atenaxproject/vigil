@@ -456,7 +456,8 @@
     "creditsByPrefix": "A project by Orlando Toro —",
     "creditsByLink": "YouTheWave",
     "builtWith": "Built with Claude + Cursor",
-    "notEmergency": "Vigil is NOT an emergency service. For immediate rescue call: {hotline}"
+    "notEmergency": "Vigil is NOT an emergency service. For immediate rescue call: {hotline}",
+    "press": "Press"
   },
   "exchange": {
     "title": "Resource Exchange",
@@ -1315,7 +1316,7 @@
         "title": "Donations & organizations",
         "where": {
           "q": "Where should I donate?",
-          "a": "/donaciones and /como-ayudar link to verified organizations."
+          "a": "/donaciones and /como-ayudar link to 26 verified organizations. Vigil does not process payments — links go directly to each org's donation page."
         },
         "listed": {
           "q": "How do organizations get listed?",
@@ -1346,5 +1347,56 @@
         }
       }
     }
+  },
+  "press": {
+    "metaTitle": "Press Kit — Vigil",
+    "metaDescription": "Press materials, verified stats, screenshots, and media contact for Vigil.",
+    "title": "Press Kit",
+    "subtitle": "Verifiable materials for media, researchers, and partners.",
+    "boilerplate": {
+      "title": "About Vigil",
+      "body": "Vigil is an open-source humanitarian platform unifying missing-persons search, crisis mapping, resource exchange, and volunteer coordination. Live deployment for the June 2026 Venezuela earthquake response.",
+      "liveLabel": "Live URL",
+      "repoLabel": "Repository"
+    },
+    "stats": {
+      "title": "Live stats (DTV)",
+      "subtitle": "Figures from the Desaparecidos Terremoto Venezuela public API — refreshed when you load this page.",
+      "searchablePersons": "Persons searchable via API",
+      "centros": "Collection centers (DTV)",
+      "source": "Source: {source}",
+      "unavailable": "DTV metrics unavailable right now.",
+      "lastUpdated": "Last updated: {time}",
+      "disclaimer": "Desaparecidos Terremoto Venezuela reports 55,000+ total citizen reports; their public API exposes approximately 12,000 searchable persons. Vigil caches and searches this set locally — data is not stored in our database."
+    },
+    "screenshots": {
+      "title": "Screenshots"
+    },
+    "screenshotDesktop": "Vigil on desktop — sidebar and map layers",
+    "screenshotIphone": "Vigil on iPhone — mobile nav and crisis map",
+    "screenshotIpad": "Vigil on iPad",
+    "screenshotLandscape": "Vigil on iPhone landscape",
+    "founder": {
+      "title": "Founder",
+      "bio": "Orlando Toro is a Venezuelan-American developer based in Greenacres, Florida. Founder of YouTheWave and Bbluestudios, he built and deployed Vigil in 48 hours after the June 2026 Venezuela earthquakes — a free, multilingual, open-source platform for families searching for missing loved ones."
+    },
+    "govExclusion": {
+      "title": "Commitment: government data exclusion",
+      "body": "Vigil is publicly committed to never sharing user data with the Venezuelan government. This is an architectural — not commercial — policy, documented in our terms and privacy policy as part of the Venezuela deployment stance."
+    },
+    "keyFacts": {
+      "title": "Key facts",
+      "languages": "8 languages — Spanish, English, Portuguese, French, Italian, Chinese, German, and Russian",
+      "diaspora": "Diaspora hub at /apoyo-usa — coordination from South Florida",
+      "structural": "Structural safety assessment (ATC-20 methodology) at /evaluacion-estructural",
+      "connectivity": "Connectivity map — WiFi, Starlink, and cell signal at /conectividad",
+      "orgs": "26 verified organizations in the donation directory",
+      "missingEstimate": "Persons unaccounted for: ~50,000 (estimated, IRC) — same figure as /informacion"
+    },
+    "contact": {
+      "title": "Press contact",
+      "note": "We respond in Spanish and English. Include your deadline and outlet."
+    },
+    "informacionLink": "View live information hub"
   }
 }

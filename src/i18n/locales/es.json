@@ -456,7 +456,8 @@
     "creditsByPrefix": "Un proyecto de Orlando Toro —",
     "creditsByLink": "YouTheWave",
     "builtWith": "Construido con Claude + Cursor",
-    "notEmergency": "Vigil NO es un servicio de emergencias. Para rescate inmediato llama al: {hotline}"
+    "notEmergency": "Vigil NO es un servicio de emergencias. Para rescate inmediato llama al: {hotline}",
+    "press": "Prensa"
   },
   "exchange": {
     "title": "Intercambio de Recursos",
@@ -1315,7 +1316,7 @@
         "title": "Donaciones y organizaciones",
         "where": {
           "q": "¿Dónde debo donar?",
-          "a": "/donaciones y /como-ayudar enlazan a 17 organizaciones verificadas. Vigil no procesa pagos — los enlaces van directamente a las páginas de donación de cada org."
+          "a": "/donaciones y /como-ayudar enlazan a 26 organizaciones verificadas. Vigil no procesa pagos — los enlaces van directamente a las páginas de donación de cada org."
         },
         "listed": {
           "q": "¿Cómo se listan las organizaciones?",
@@ -1346,5 +1347,56 @@
         }
       }
     }
+  },
+  "press": {
+    "metaTitle": "Kit de prensa — Vigil",
+    "metaDescription": "Material de prensa, estadísticas verificadas, capturas y contacto para medios sobre Vigil.",
+    "title": "Kit de prensa",
+    "subtitle": "Material verificable para medios, investigadores y socios.",
+    "boilerplate": {
+      "title": "Sobre Vigil",
+      "body": "Vigil es una plataforma humanitaria de código abierto que unifica búsqueda de personas desaparecidas, mapa de crisis, intercambio de recursos y coordinación de voluntarios. Desplegada en vivo para la respuesta al terremoto de Venezuela de junio de 2026.",
+      "liveLabel": "URL en vivo",
+      "repoLabel": "Repositorio"
+    },
+    "stats": {
+      "title": "Estadísticas en vivo (DTV)",
+      "subtitle": "Cifras de la API pública de Desaparecidos Terremoto Venezuela — actualizadas al cargar la página.",
+      "searchablePersons": "Personas buscables vía API",
+      "centros": "Centros de acopio (DTV)",
+      "source": "Fuente: {source}",
+      "unavailable": "Métricas de DTV no disponibles en este momento.",
+      "lastUpdated": "Última actualización: {time}",
+      "disclaimer": "Desaparecidos Terremoto Venezuela reporta más de 55.000 registros ciudadanos en total; su API pública expone aproximadamente 12.000 personas buscables. Vigil cachea y busca ese conjunto localmente — los datos no se almacenan en nuestra base de datos."
+    },
+    "screenshots": {
+      "title": "Capturas de pantalla"
+    },
+    "screenshotDesktop": "Vigil en escritorio — barra lateral y capas del mapa",
+    "screenshotIphone": "Vigil en iPhone — navegación móvil y mapa de crisis",
+    "screenshotIpad": "Vigil en iPad",
+    "screenshotLandscape": "Vigil en iPhone horizontal",
+    "founder": {
+      "title": "Fundador",
+      "bio": "Orlando Toro es un desarrollador venezolano-americano con base en Greenacres, Florida. Fundador de YouTheWave y Bbluestudios, construyó y desplegó Vigil en 48 horas tras los terremotos de junio de 2026 en Venezuela — una plataforma gratuita, multilingüe y de código abierto para familias que buscan a sus seres queridos."
+    },
+    "govExclusion": {
+      "title": "Compromiso: exclusión de datos gubernamentales",
+      "body": "Vigil se compromete públicamente a nunca compartir datos de usuarios con el gobierno venezolano. Esta política es arquitectónica — no comercial — y forma parte de la política de despliegue para Venezuela documentada en nuestros términos y política de privacidad."
+    },
+    "keyFacts": {
+      "title": "Datos clave",
+      "languages": "8 idiomas — español, inglés, portugués, francés, italiano, chino, alemán y ruso",
+      "diaspora": "Hub de diáspora en /apoyo-usa — coordinación desde el sur de Florida",
+      "structural": "Evaluación de seguridad estructural (metodología ATC-20) en /evaluacion-estructural",
+      "connectivity": "Mapa de conectividad — WiFi, Starlink y señal celular en /conectividad",
+      "orgs": "26 organizaciones verificadas en el directorio de donaciones",
+      "missingEstimate": "Personas sin localizar: ~50.000 (estimado, IRC) — misma cifra que /informacion"
+    },
+    "contact": {
+      "title": "Contacto de prensa",
+      "note": "Respondemos en español e inglés. Incluye tu plazo y medio de publicación."
+    },
+    "informacionLink": "Ver hub de información en vivo"
   }
 }

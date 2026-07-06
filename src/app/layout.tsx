@@ -134,6 +134,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     {tNav('terms')}
                   </Link>
                   <span aria-hidden="true">·</span>
+                  <Link
+                    href="/prensa"
+                    className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
+                  >
+                    {t('press')}
+                  </Link>
+                  <span aria-hidden="true">·</span>
                   <a
                     href={`mailto:${CRISIS_CONFIG.legal.contactEmail}`}
                     className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"

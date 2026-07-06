@@ -135,7 +135,7 @@ Verified against source and production as of **2026-07-03**. Optional integratio
 | **Official updates** | `/noticias` | ReliefWeb feed (no API key) |
 | **Events calendar** | `/calendario` | Category filters, Venezuela timezone labels |
 | **Rescuer field presence** | `/equipo-activo` | Check-in, SOS, 4-hour auto-expire, map layer |
-| **How to help** | `/como-ayudar` | 17 verified donation orgs from production seed |
+| **How to help** | `/como-ayudar` | 26 verified donation orgs from production seed |
 | **Partner links** | `/organizaciones` | Curated NGOs from `crisis.config.ts` |
 | **Weather & time bar** | all pages | Open-Meteo below emergency banner (no API key) |
 
@@ -187,7 +187,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Rescuer safety system** — GPS check-in, 4-hour auto-expiry, SOS button
 - **Resource exchange (Intercambio)** — 7 categories, claim-token, 7-day auto-expiry
 - **Volunteer registry** — skills-based, public directory (name privacy protected)
-- **Organization directory** — 17 verified NGOs seeded (including Hogar Bambi Venezuela, child protection), admin approval gate
+- **Organization directory** — 26 verified NGOs seeded (including Hogar Bambi Venezuela, child protection), admin approval gate
 - **Property safety assessment** — `/evaluacion-estructural`, ATC-20 green/yellow/red tagging, volunteer-assigned (structural_engineer/architect/surveyor), never AI-assigned, ToS §4 liability language
 - **Events calendar** — donation drives, meetups, distributions, memorials
 - **Citizen collection point registry** — self-registration, map display
