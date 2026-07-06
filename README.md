@@ -61,7 +61,7 @@ One config file change redeploys the whole platform for **any country, any disas
 
 ## What Vigil Does
 
-### Missing persons search — now federated across 55,891+ records
+### Missing persons search — federated with Desaparecidos Terremoto Venezuela
 
 - Search Vigil's own database AND Desaparecidos Terremoto Venezuela simultaneously
 - Results from both platforms shown side by side with clear source attribution
@@ -179,7 +179,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ### ✅ Live Now
 
-- **Federated missing persons search** — Vigil DB + DTV API (55,891+ records combined)
+- **Federated missing persons search** — Vigil DB + a cached DTV index (~12,000 records via their public API), accent-insensitive ranked name matching
 - **Photo-based search** — Claude Vision analysis + DTV facial recognition
 - **Claude AI assistant** — live database Q&A in 8 languages, never invents information
 - **Crisis map** — USGS aftershocks (source-labeled), GDACS alerts, needs, resources, shelters, hospitals, rescue zones, collection points (including DTV-sourced centers); **USA diaspora hub** at `/apoyo-usa` (South Florida, separate `region_scope`)
@@ -281,14 +281,17 @@ Desaparecidos Terremoto Venezuela API (federated search + centers)
 ## Data Partnership
 
 Vigil integrates with **[Desaparecidos Terremoto Venezuela](https://desaparecidosterremotovenezuela.com)**
-as a registered integrator. Their database (55,891+ records, 15,770+ located)
-is accessible through Vigil's federated search — results appear alongside
-Vigil's own records with full source attribution and a direct link back
-to their platform.
+as a registered integrator. Their platform reports 55,000+ total citizen
+reports; their public API currently exposes ~12,000 person records, all of
+which are searchable through Vigil's federated search — results appear
+alongside Vigil's own records with full source attribution and a direct link
+back to their platform.
 
-**Integration approach:** federated query only — their data is never stored
-in Vigil's database. Every search queries both platforms simultaneously in
-real time. Their facial recognition endpoint powers Vigil's photo search.
+**Integration approach:** nothing is stored in Vigil's database. Because the
+DTV API has no server-side search, Vigil keeps a short-lived in-memory index
+(refreshed at most every 30 minutes) and runs accent-insensitive ranked name
+matching against it. Their facial recognition endpoint powers Vigil's photo
+search.
 
 This partnership is part of Vigil's commitment to building a network,
 not competing with the other citizen platforms serving the same families.

@@ -92,7 +92,7 @@
     "title": "Personas Desaparecidas",
     "subtitle": "Busca o reporta una persona desaparecida",
     "recentTitle": "Recientes",
-    "recentEmpty": "Aún no hay registros recientes en Vigil. Al buscar por nombre, incluiremos también los 55,891+ registros de Desaparecidos Terremoto Venezuela.",
+    "recentEmpty": "Aún no hay registros recientes en Vigil. Al buscar por nombre, incluiremos también los registros públicos de Desaparecidos Terremoto Venezuela.",
     "search": {
       "placeholder": "Buscar por nombre...",
       "button": "Buscar",
@@ -110,9 +110,9 @@
       "dtvSourceLabel": "En Desaparecidos Terremoto Venezuela ({count})",
       "dtvViewFullPlatform": "Ver plataforma completa →",
       "dtvSearchedNoResults": "También buscamos en Desaparecidos Terremoto Venezuela — sin coincidencias.",
-      "trustNote": "Los resultados incluyen registros de Vigil y de Desaparecidos Terremoto Venezuela (55,891+ personas reportadas). Ambas fuentes son iniciativas ciudadanas verificadas sin fines de lucro.",
+      "trustNote": "Los resultados incluyen registros de Vigil y de Desaparecidos Terremoto Venezuela. Ambas fuentes son iniciativas ciudadanas verificadas sin fines de lucro.",
       "dtvSectionBadge": "Fuente: Desaparecidos Terremoto Venezuela",
-      "dtvSectionNote": "55,891+ registros · Datos públicos verificados · Se actualiza cada 5 min",
+      "dtvSectionNote": "Datos públicos verificados · desaparecidosterremotovenezuela.com",
       "noResultsBothTitle": "No encontramos a esta persona en ninguna de las dos plataformas.",
       "noResultsReportBoth": "Considera reportarla:",
       "noResultsReportDtv": "En Desaparecidos Terremoto Venezuela",
@@ -733,7 +733,7 @@
     "subtitle": "Plataformas hermanas que amplían el alcance de búsqueda de personas desaparecidas",
     "featured": {
       "badge": "Integración activa",
-      "description": "Plataforma hermana con 55,891+ registros, reconocimiento facial y desglose geográfico. Los resultados de búsqueda en Vigil incluyen automáticamente su base de datos en tiempo real.",
+      "description": "Plataforma hermana con decenas de miles de reportes, reconocimiento facial y desglose geográfico. Los resultados de búsqueda en Vigil incluyen automáticamente su base de datos en tiempo real.",
       "visit": "Visitar plataforma →",
       "capabilities": {
         "federated": "✓ Búsqueda federada activa",

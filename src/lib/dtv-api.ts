@@ -177,9 +177,8 @@ export async function countDTVItems(endpoint: string): Promise<number> {
   return total
 }
 
-function extractPersonas(data: Record<string, unknown>): Record<string, unknown>[] {
-  const raw = data.data ?? data.personas
-  return Array.isArray(raw) ? (raw as Record<string, unknown>[]) : []
+export function mapRawDTVPersona(p: Record<string, unknown>): DTVPersona {
+  return mapPersona(p)
 }
 
 function mapPersona(p: Record<string, unknown>): DTVPersona {
@@ -212,44 +211,10 @@ function mapPersona(p: Record<string, unknown>): DTVPersona {
   }
 }
 
-export async function searchDTVPersonas(
-  query: string,
-  cursor?: string
-): Promise<DTVSearchResult | null> {
-  if (!DTV_BASE || !DTV_KEY) return null
-
-  try {
-    const params = new URLSearchParams({ q: query, limit: '20' })
-    if (cursor) params.set('cursor', cursor)
-
-    const res = await fetch(`${DTV_BASE}/personas?${params}`, {
-      headers: dtvHeaders(),
-      next: { revalidate: 60 },
-    })
-
-    if (!res.ok) {
-      console.error('DTV API error:', res.status, res.statusText)
-      return null
-    }
-
-    const data = (await res.json()) as Record<string, unknown>
-    const pagination = extractPagination(data)
-    const tagged = extractPersonas(data).map(mapPersona)
-
-    return {
-      data: tagged,
-      pagination: {
-        nextCursor: pagination.nextCursor,
-        hasMore: pagination.hasMore,
-        limit: pagination.limit,
-        total: pagination.total,
-      },
-    }
-  } catch (error) {
-    console.error('DTV API fetch failed:', error)
-    return null
-  }
-}
+// NOTE: DTV's /personas endpoint has NO server-side search — q/search/nombre
+// are silently ignored and the same first page comes back for any query
+// (verified 2026-07-05). Name search runs against the cached index in
+// src/lib/dtv-index.ts instead. Do not reintroduce a q= passthrough here.
 
 export async function identifyByPhotoDTV(
   photoBase64: string,
@@ -321,8 +286,13 @@ export async function getDTVMetrics(): Promise<DTVMetrics> {
   if (!DTV_BASE || !DTV_KEY) return fallback
 
   try {
+    // Personas count comes from the cached search index (~120 pages walked at
+    // most once per 30 min) instead of a fresh full walk per metrics call —
+    // the triple walk here was tripping DTV's 429 rate limit and knocking out
+    // federated search for everyone. Centros/listas stay as walks (1-2 pages).
+    const { getDTVPersonaCount } = await import('@/lib/dtv-index')
     const [totalPersonas, totalCentros, totalListas] = await Promise.all([
-      countDTVItems('personas'),
+      getDTVPersonaCount(),
       countDTVItems('centros'),
       countDTVItems('listas'),
     ])

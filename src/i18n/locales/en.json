@@ -92,7 +92,7 @@
     "title": "Missing Persons",
     "subtitle": "Search or report a missing person",
     "recentTitle": "Recent",
-    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include 55,891+ records from Desaparecidos Terremoto Venezuela.",
+    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include the public records from Desaparecidos Terremoto Venezuela.",
     "search": {
       "placeholder": "Search by name...",
       "button": "Search",
@@ -110,9 +110,9 @@
       "dtvSourceLabel": "On Desaparecidos Terremoto Venezuela ({count})",
       "dtvViewFullPlatform": "View full platform →",
       "dtvSearchedNoResults": "We also searched Desaparecidos Terremoto Venezuela — no matches.",
-      "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela (55,891+ people reported). Both sources are verified nonprofit citizen initiatives.",
+      "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela. Both sources are verified nonprofit citizen initiatives.",
       "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
-      "dtvSectionNote": "55,891+ records · Verified public data · Updates every 5 min",
+      "dtvSectionNote": "Verified public data · desaparecidosterremotovenezuela.com",
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
@@ -733,7 +733,7 @@
     "subtitle": "Sister platforms that expand missing persons search reach",
     "featured": {
       "badge": "Active integration",
-      "description": "Sister platform with 55,891+ records, facial recognition, and geographic breakdown. Vigil search results automatically include their database in real time.",
+      "description": "Sister platform with tens of thousands of reports, facial recognition, and geographic breakdown. Vigil search results automatically include their database in real time.",
       "visit": "Visit platform →",
       "capabilities": {
         "federated": "✓ Active federated search",

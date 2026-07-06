@@ -20,7 +20,7 @@ export async function GET() {
     const metrics = await getDTVMetrics()
     return NextResponse.json(metrics, {
       headers: {
-        'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=300',
+        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=3600',
       },
     })
   } catch {

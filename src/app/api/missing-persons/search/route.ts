@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
-import { searchDTVPersonas } from '@/lib/dtv-api'
+import { searchDTVIndex } from '@/lib/dtv-index'
 import { mapDTVPersonaToFederated, tagVigilPerson } from '@/lib/dtv-mapper'
 import { sanitizeText } from '@/lib/security/validate'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 
 export const dynamic = 'force-dynamic'
+// Cold DTV index build walks ~120 pages (~15-20s); warm searches are instant.
+export const maxDuration = 60
 
 const querySchema = z.object({
   q: z.string().trim().min(2).max(200).optional(),
@@ -71,7 +73,7 @@ export async function GET(request: NextRequest) {
       return (data ?? []) as PublicMissingPerson[]
     })()
 
-    const dtvPromise = q && q.length >= 2 ? searchDTVPersonas(q) : Promise.resolve(null)
+    const dtvPromise = q && q.length >= 2 ? searchDTVIndex(q) : Promise.resolve(null)
 
     const [vigilResult, dtvResult] = await Promise.allSettled([vigilPromise, dtvPromise])
 
@@ -80,11 +82,9 @@ export async function GET(request: NextRequest) {
         ? vigilResult.value.map(tagVigilPerson)
         : []
 
-    const dtvRaw =
-      dtvResult.status === 'fulfilled' && dtvResult.value ? dtvResult.value.data : []
-
-    const dtvData = dtvRaw.map(mapDTVPersonaToFederated)
-    const dtvAvailable = dtvResult.status === 'fulfilled' && dtvResult.value !== null
+    const dtvSearch = dtvResult.status === 'fulfilled' ? dtvResult.value : null
+    const dtvData = (dtvSearch?.data ?? []).map(mapDTVPersonaToFederated)
+    const dtvAvailable = dtvSearch !== null && dtvSearch.indexSize > 0
 
     return NextResponse.json({
       vigil: vigilData,
@@ -92,6 +92,8 @@ export async function GET(request: NextRequest) {
       results: [...vigilData, ...dtvData],
       total: vigilData.length + dtvData.length,
       dtvAvailable,
+      dtvMatchTotal: dtvSearch?.total ?? 0,
+      dtvIndexSize: dtvSearch?.indexSize ?? 0,
     })
   } catch {
     return NextResponse.json({

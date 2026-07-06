@@ -78,9 +78,9 @@
       "dtvSourceLabel": "On Desaparecidos Terremoto Venezuela ({count})",
       "dtvViewFullPlatform": "View full platform →",
       "dtvSearchedNoResults": "We also searched Desaparecidos Terremoto Venezuela — no matches.",
-      "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela (55,891+ people reported). Both sources are verified nonprofit citizen initiatives.",
+      "trustNote": "Результаты включают записи Vigil и Desaparecidos Terremoto Venezuela. Оба источника — проверенные некоммерческие гражданские инициативы.",
       "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
-      "dtvSectionNote": "55,891+ records · Verified public data · Updates every 5 min",
+      "dtvSectionNote": "Проверенные открытые данные · desaparecidosterremotovenezuela.com",
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
@@ -169,7 +169,7 @@
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
     },
     "recentTitle": "Recent",
-    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include 55,891+ records from Desaparecidos Terremoto Venezuela."
+    "recentEmpty": "На Vigil пока нет свежих записей. При поиске по имени мы также включаем открытые записи Desaparecidos Terremoto Venezuela."
   },
   "map": {
     "title": "Карта кризиса",
@@ -953,7 +953,7 @@
     "subtitle": "Sister platforms that expand missing persons search reach",
     "featured": {
       "badge": "Active integration",
-      "description": "Sister platform with 55,891+ records, facial recognition, and geographic breakdown. Vigil search results automatically include their database in real time.",
+      "description": "Родственная платформа с десятками тысяч сообщений, распознаванием лиц и географической разбивкой. Результаты поиска Vigil автоматически включают её базу данных в реальном времени.",
       "visit": "Visit platform →",
       "capabilities": {
         "federated": "✓ Active federated search",

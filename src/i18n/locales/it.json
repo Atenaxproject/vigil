@@ -78,9 +78,9 @@
       "dtvSourceLabel": "On Desaparecidos Terremoto Venezuela ({count})",
       "dtvViewFullPlatform": "View full platform →",
       "dtvSearchedNoResults": "We also searched Desaparecidos Terremoto Venezuela — no matches.",
-      "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela (55,891+ people reported). Both sources are verified nonprofit citizen initiatives.",
+      "trustNote": "I risultati includono registri di Vigil e di Desaparecidos Terremoto Venezuela. Entrambe le fonti sono iniziative cittadine verificate senza scopo di lucro.",
       "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
-      "dtvSectionNote": "55,891+ records · Verified public data · Updates every 5 min",
+      "dtvSectionNote": "Dati pubblici verificati · desaparecidosterremotovenezuela.com",
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
@@ -169,7 +169,7 @@
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
     },
     "recentTitle": "Recent",
-    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include 55,891+ records from Desaparecidos Terremoto Venezuela."
+    "recentEmpty": "Non ci sono ancora registrazioni recenti su Vigil. Cercando per nome includiamo anche i registri pubblici di Desaparecidos Terremoto Venezuela."
   },
   "map": {
     "title": "Mappa della Crisi",
@@ -953,7 +953,7 @@
     "subtitle": "Sister platforms that expand missing persons search reach",
     "featured": {
       "badge": "Active integration",
-      "description": "Sister platform with 55,891+ records, facial recognition, and geographic breakdown. Vigil search results automatically include their database in real time.",
+      "description": "Piattaforma gemella con decine di migliaia di segnalazioni, riconoscimento facciale e suddivisione geografica. I risultati di ricerca di Vigil includono automaticamente il suo database in tempo reale.",
       "visit": "Visit platform →",
       "capabilities": {
         "federated": "✓ Active federated search",

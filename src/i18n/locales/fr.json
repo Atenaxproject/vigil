@@ -78,9 +78,9 @@
       "dtvSourceLabel": "On Desaparecidos Terremoto Venezuela ({count})",
       "dtvViewFullPlatform": "View full platform →",
       "dtvSearchedNoResults": "We also searched Desaparecidos Terremoto Venezuela — no matches.",
-      "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela (55,891+ people reported). Both sources are verified nonprofit citizen initiatives.",
+      "trustNote": "Les résultats incluent les registres de Vigil et de Desaparecidos Terremoto Venezuela. Les deux sources sont des initiatives citoyennes vérifiées à but non lucratif.",
       "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
-      "dtvSectionNote": "55,891+ records · Verified public data · Updates every 5 min",
+      "dtvSectionNote": "Données publiques vérifiées · desaparecidosterremotovenezuela.com",
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
@@ -169,7 +169,7 @@
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
     },
     "recentTitle": "Recent",
-    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include 55,891+ records from Desaparecidos Terremoto Venezuela."
+    "recentEmpty": "Aucun enregistrement récent sur Vigil pour le moment. Lors d'une recherche par nom, nous incluons aussi les registres publics de Desaparecidos Terremoto Venezuela."
   },
   "map": {
     "title": "Carte de crise",
@@ -953,7 +953,7 @@
     "subtitle": "Sister platforms that expand missing persons search reach",
     "featured": {
       "badge": "Active integration",
-      "description": "Sister platform with 55,891+ records, facial recognition, and geographic breakdown. Vigil search results automatically include their database in real time.",
+      "description": "Plateforme sœur avec des dizaines de milliers de signalements, reconnaissance faciale et répartition géographique. Les résultats de recherche de Vigil incluent automatiquement sa base de données en temps réel.",
       "visit": "Visit platform →",
       "capabilities": {
         "federated": "✓ Active federated search",

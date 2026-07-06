@@ -78,9 +78,9 @@
       "dtvSourceLabel": "On Desaparecidos Terremoto Venezuela ({count})",
       "dtvViewFullPlatform": "View full platform →",
       "dtvSearchedNoResults": "We also searched Desaparecidos Terremoto Venezuela — no matches.",
-      "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela (55,891+ people reported). Both sources are verified nonprofit citizen initiatives.",
+      "trustNote": "搜索结果包含 Vigil 和 Desaparecidos Terremoto Venezuela 的记录。两个来源均为经过核实的非营利公民倡议。",
       "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
-      "dtvSectionNote": "55,891+ records · Verified public data · Updates every 5 min",
+      "dtvSectionNote": "经核实的公开数据 · desaparecidosterremotovenezuela.com",
       "noResultsBothTitle": "We didn't find this person on either platform.",
       "noResultsReportBoth": "Consider reporting them:",
       "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
@@ -169,7 +169,7 @@
       "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
     },
     "recentTitle": "Recent",
-    "recentEmpty": "No recent records on Vigil yet. When you search by name, we also include 55,891+ records from Desaparecidos Terremoto Venezuela."
+    "recentEmpty": "Vigil 上暂无最新记录。按姓名搜索时，我们还会包含 Desaparecidos Terremoto Venezuela 的公开记录。"
   },
   "map": {
     "title": "危机地图",
@@ -953,7 +953,7 @@
     "subtitle": "Sister platforms that expand missing persons search reach",
     "featured": {
       "badge": "Active integration",
-      "description": "Sister platform with 55,891+ records, facial recognition, and geographic breakdown. Vigil search results automatically include their database in real time.",
+      "description": "姊妹平台，拥有数万条报告、人脸识别和地理细分。Vigil 的搜索结果会自动实时包含其数据库。",
       "visit": "Visit platform →",
       "capabilities": {
         "federated": "✓ Active federated search",
