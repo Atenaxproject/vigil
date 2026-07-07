@@ -31,7 +31,8 @@
     "network": "Search network",
     "propertyAssessment": "Structural Assessment",
     "help": "Help Center",
-    "helpShort": "Help"
+    "helpShort": "Help",
+    "preparedness": "Vorsorge"
   },
   "a11y": {
     "skipToContent": "Zum Hauptinhalt springen"
@@ -1355,5 +1356,32 @@
     "regionsTitle": "Vigil-Regionen",
     "regionsSubtitle": "Aktive Plattform-Deployments nach Region.",
     "regionsPrivacyNote": "Der Regionsvorschlag nutzt nur das ungefähre Land deiner Verbindung (Vercel-Netzwerk-Header). Kein GPS, dein Standort wird nie gespeichert, und es werden dafür keine Cookies verwendet."
+  },
+  "prep": {
+    "title": "Notfallvorsorge",
+    "subtitle": "Leitfäden Vorher / Während / Danach, adaptiert aus offiziellen Quellen (FEMA, Ready.gov, NWS, Rotes Kreuz).",
+    "offlineHint": "Die Leitfäden funktionieren offline, sobald sie einmal geöffnet wurden.",
+    "otherEmergencies": "Weitere Notfälle",
+    "tabs": {
+      "antes": "Vorher",
+      "durante": "Während",
+      "despues": "Danach"
+    },
+    "contexts": {
+      "all": "Alles",
+      "interior": "Drinnen",
+      "exterior": "Draußen",
+      "vehiculo": "Im Fahrzeug"
+    },
+    "contextFilter": "Nach Situation filtern",
+    "checklistTitle": "Vorratsliste",
+    "planTitle": "Familien-Notfallplan",
+    "planLocalNote": "Dieser Plan wird nur auf deinem Gerät gespeichert. Er wird nie an Vigil oder einen Server gesendet.",
+    "print": "Drucken",
+    "printPlan": "Plan drucken",
+    "offlineNote": "Du bist offline — dieser Leitfaden funktioniert ohne Internet.",
+    "sourcesTitle": "Offizielle Quellen",
+    "sourcesNote": "Inhalte ausschließlich aus diesen Quellen adaptiert. Vigil erstellt keine eigenen Sicherheitsratschläge.",
+    "lastReviewed": "Zuletzt geprüft: {date}"
   }
 }

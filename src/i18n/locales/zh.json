@@ -31,7 +31,8 @@
     "network": "Search network",
     "propertyAssessment": "Structural Assessment",
     "help": "Help Center",
-    "helpShort": "Help"
+    "helpShort": "Help",
+    "preparedness": "防灾准备"
   },
   "a11y": {
     "skipToContent": "跳到主要内容"
@@ -1355,5 +1356,32 @@
     "regionsTitle": "Vigil 地区",
     "regionsSubtitle": "按地区列出的平台活跃部署。",
     "regionsPrivacyNote": "地区建议仅使用您连接的大致国家（Vercel 网络标头）。不使用 GPS，不存储您的位置，也不为此使用 Cookie。"
+  },
+  "prep": {
+    "title": "应急准备",
+    "subtitle": "灾前/灾中/灾后指南，改编自官方来源（FEMA、Ready.gov、NWS、红十字会）。",
+    "offlineHint": "指南打开一次后即可离线使用。",
+    "otherEmergencies": "其他紧急情况",
+    "tabs": {
+      "antes": "灾前",
+      "durante": "灾中",
+      "despues": "灾后"
+    },
+    "contexts": {
+      "all": "全部",
+      "interior": "室内",
+      "exterior": "室外",
+      "vehiculo": "车内"
+    },
+    "contextFilter": "按场景筛选",
+    "checklistTitle": "物资清单",
+    "planTitle": "家庭应急计划",
+    "planLocalNote": "此计划仅保存在您的设备上，绝不会发送给 Vigil 或任何服务器。",
+    "print": "打印",
+    "printPlan": "打印计划",
+    "offlineNote": "您已离线——本指南无需网络即可使用。",
+    "sourcesTitle": "官方来源",
+    "sourcesNote": "内容仅改编自这些来源。Vigil 不自行生成安全建议。",
+    "lastReviewed": "最后审核：{date}"
   }
 }

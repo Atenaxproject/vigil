@@ -1,0 +1,107 @@
+{
+  "archetype": "hurricane",
+  "title": "Hurricanes and tropical storms",
+  "summary": "What to do before, during, and after a hurricane. Adapted from official Ready.gov, National Hurricane Center (NHC), and Red Cross guidance. If authorities order an evacuation, evacuate.",
+  "sources": [
+    { "label": "Ready.gov — Hurricanes", "url": "https://www.ready.gov/hurricanes" },
+    { "label": "National Hurricane Center (NHC)", "url": "https://www.nhc.noaa.gov" },
+    { "label": "American Red Cross — Hurricanes", "url": "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/hurricane.html" }
+  ],
+  "lastReviewed": "2026-07-07",
+  "sections": {
+    "antes": [
+      {
+        "heading": "Know your zone and your evacuation route",
+        "body": "Check with civil protection whether your area is an evacuation zone and which way out to take. Decide now where you would go: a relative's home inland, or the nearest official shelter. Evacuating late, on packed roads, is the most dangerous option."
+      },
+      {
+        "heading": "Stock supplies for several days",
+        "body": "Water (1 gallon per person per day), non-perishable food, medications, flashlight, radio, and cash for at least 3 days — 7 if you can. After a major hurricane, services can take weeks to return."
+      },
+      {
+        "heading": "Protect your home",
+        "body": "Board up windows, secure or store anything the wind can turn into a projectile (planters, loose metal roofing, patio furniture), and clear gutters and drains."
+      },
+      {
+        "heading": "Full tank and documents ready",
+        "body": "Fill the vehicle's tank early and keep important documents in a waterproof bag. Charge phones and power banks before the wind arrives."
+      },
+      {
+        "heading": "If ordered to evacuate: evacuate",
+        "body": "Evacuation orders are issued because the area is not survivable in storm surge or flooding. Don't wait to 'see how it goes'. Leave early, tell your out-of-area contact, and follow official routes.",
+        "critical": true
+      }
+    ],
+    "durante": [
+      {
+        "heading": "Stay inside, away from windows",
+        "body": "Shelter in an interior room without windows, on the lowest level that won't flood. Hurricane winds throw debris at lethal speed — most injuries during the storm are from glass and flying objects.",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "The eye of the hurricane deceives",
+        "body": "If the wind suddenly calms, it may be the eye: the second half of the storm arrives within minutes, with wind from the opposite direction. Do not go out until officials announce the storm has fully passed.",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "If water starts coming in",
+        "body": "Shut off electricity at the main breaker if it's safe to reach, and move to the highest level where you won't be trapped (not a closed attic with no exit). Take your phone, radio, and whistle.",
+        "context": "interior"
+      },
+      {
+        "heading": "Never drive or walk through moving water",
+        "body": "Twelve inches of water can move a car; six inches can knock a person down. Most hurricane deaths are from drowning in water, not wind. Turn around.",
+        "context": "vehiculo",
+        "critical": true
+      },
+      {
+        "heading": "If you're caught outside",
+        "body": "Get to the nearest solid structure immediately. Stay away from trees, poles, and power lines. A ditch or low ground is the last resort against extreme wind.",
+        "context": "exterior"
+      }
+    ],
+    "despues": [
+      {
+        "heading": "Wait for the official all-clear before returning",
+        "body": "Do not return to an evacuated area until authorities announce it. Roads may be cut, energized by downed lines, or undermined by water.",
+        "critical": true
+      },
+      {
+        "heading": "Generators OUTDOORS only",
+        "body": "Never run a generator, grill, or gas stove inside the house or garage, or near windows. Carbon monoxide is invisible and odorless and kills entire families after storms. Outdoors only, away from openings.",
+        "critical": true
+      },
+      {
+        "heading": "Beware of water and power lines",
+        "body": "Treat every downed line as energized. Floodwater may be contaminated with sewage or fuel — don't use it for anything, and discard any food it touched."
+      },
+      {
+        "heading": "Document damage and report it",
+        "body": "Photograph damage before cleaning up, for insurance and aid. If your structure is compromised, request an assessment through Vigil and don't occupy it until it's checked."
+      }
+    ]
+  },
+  "supplyChecklist": [
+    { "item": "Drinking water", "qty": "1 gal per person per day × 7 days", "note": "Also fill bathtubs and containers before the storm" },
+    { "item": "Non-perishable food", "qty": "7 days" },
+    { "item": "Flashlight + batteries", "note": "No candles — fire risk" },
+    { "item": "Battery-powered radio", "note": "For NHC and civil-protection notices without power" },
+    { "item": "First-aid kit and medications", "qty": "7 days" },
+    { "item": "Documents in a waterproof bag" },
+    { "item": "Cash in small bills" },
+    { "item": "Charged power bank" },
+    { "item": "Whistle" },
+    { "item": "Plastic tarp and strong tape", "note": "Temporary roof repairs" },
+    { "item": "Vehicle tank full" },
+    { "item": "Supplies for babies, elders, and pets" }
+  ],
+  "familyPlanPrompts": [
+    { "id": "evacuation_destination", "label": "Where we evacuate to (address and how to get there)", "placeholder": "E.g.: uncle Juan's house at..., via..." },
+    { "id": "meeting_point", "label": "Meeting point if we get separated", "placeholder": "E.g.: the official shelter at..." },
+    { "id": "out_of_area_contact", "label": "Contact OUTSIDE the area (name and phone)", "placeholder": "E.g.: cousin Ana in Mérida, +58..." },
+    { "id": "medical_notes", "label": "Medical conditions and medications for each member", "placeholder": "E.g.: grandmother — oxygen, blood pressure..." },
+    { "id": "pet_plan", "label": "Plan for pets", "placeholder": "Not all shelters take pets — where do they go?" }
+  ]
+}

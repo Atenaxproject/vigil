@@ -1,0 +1,96 @@
+{
+  "archetype": "flood",
+  "title": "Inundaciones",
+  "summary": "Qué hacer antes, durante y después de una inundación. Adaptado de la guía oficial de Ready.gov y el Servicio Meteorológico Nacional de EE.UU. (NWS). La regla que salva vidas: ante agua en movimiento, da la vuelta.",
+  "sources": [
+    { "label": "Ready.gov — Inundaciones", "url": "https://www.ready.gov/es/inundaciones" },
+    { "label": "NWS — Turn Around Don't Drown", "url": "https://www.weather.gov/safety/flood" },
+    { "label": "Cruz Roja Americana — Inundaciones", "url": "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/flood.html" }
+  ],
+  "lastReviewed": "2026-07-07",
+  "sections": {
+    "antes": [
+      {
+        "heading": "Conoce el riesgo de tu zona",
+        "body": "Si vives cerca de un río, quebrada, cauce seco o en zona baja, tu riesgo es real aunque 'nunca haya pasado nada'. Las crecidas repentinas llegan en minutos con lluvia fuerte aguas arriba, incluso con cielo despejado donde estás."
+      },
+      {
+        "heading": "Define tu ruta a terreno alto",
+        "body": "Identifica desde ya el punto alto más cercano al que puedes llegar a pie en minutos. Acuérdalo con la familia como punto de encuentro. En crecida repentina no hay tiempo de decidir."
+      },
+      {
+        "heading": "Protege documentos y prepara el kit",
+        "body": "Documentos y medicinas en bolsa impermeable, en un lugar alto de la casa. Kit de emergencia listo para agarrar y salir (lista abajo)."
+      },
+      {
+        "heading": "Atiende los avisos oficiales",
+        "body": "Un aviso de crecidas significa que puede ocurrir; una alerta significa que está ocurriendo o es inminente — actúa de inmediato. Sigue protección civil y noticias locales cuando llueva fuerte."
+      }
+    ],
+    "durante": [
+      {
+        "heading": "Da la vuelta — no cruces agua en movimiento",
+        "body": "15 centímetros de agua en movimiento tumban a una persona; 30 a 60 centímetros arrastran un vehículo, incluso una camioneta. No se puede saber la profundidad ni si la vía sigue debajo. La mayoría de las muertes por inundación son vehículos que intentaron cruzar.",
+        "context": "vehiculo",
+        "critical": true
+      },
+      {
+        "heading": "Ve a terreno alto de inmediato",
+        "body": "Si hay alerta de crecida repentina o ves subir el agua, muévete YA al punto alto. No esperes confirmación ni recojas pertenencias. Los primeros minutos son la diferencia.",
+        "context": "exterior",
+        "critical": true
+      },
+      {
+        "heading": "Si el agua entra a la casa",
+        "body": "Corta la electricidad en el interruptor principal si es seguro. Sube al nivel más alto habitable — evita áticos cerrados sin salida donde puedas quedar atrapado. Al techo solo si es necesario, y señaliza tu posición (tela de color, linterna, silbato).",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "No toques el agua si puedes evitarla",
+        "body": "El agua de inundación esconde huecos, escombros, animales y puede estar energizada por cables caídos o contaminada con aguas negras. Si debes caminar por agua quieta, usa una vara para tantear el fondo.",
+        "context": "exterior"
+      }
+    ],
+    "despues": [
+      {
+        "heading": "No regreses hasta el aviso oficial",
+        "body": "Las estructuras pueden estar socavadas y las vías cortadas por debajo aunque se vean bien. Espera el anuncio de las autoridades antes de volver a una zona inundada.",
+        "critical": true
+      },
+      {
+        "heading": "Asume el agua como contaminada",
+        "body": "No uses agua de la inundación para nada. Bota todo alimento que haya tocado, hierve o purifica el agua de consumo hasta que las autoridades confirmen que es segura, y lava bien todo lo que el agua tocó."
+      },
+      {
+        "heading": "Electricidad y gas antes de entrar",
+        "body": "No entres a una casa inundada con la electricidad conectada. Si hueles gas, no entres: repórtalo. Usa linterna, nunca velas ni fósforos, para revisar."
+      },
+      {
+        "heading": "Documenta y reporta",
+        "body": "Fotografía los daños antes de limpiar. El moho aparece en 24-48 horas: seca y ventila lo antes posible. Si la estructura quedó comprometida, solicita una evaluación en Vigil."
+      }
+    ]
+  },
+  "supplyChecklist": [
+    { "item": "Agua potable", "qty": "4 L por persona por día × 3 días" },
+    { "item": "Comida no perecedera", "qty": "3 días" },
+    { "item": "Linterna + pilas" },
+    { "item": "Radio a pilas" },
+    { "item": "Botiquín y medicamentos", "qty": "7 días" },
+    { "item": "Documentos en bolsa impermeable", "note": "Guardados en un punto ALTO de la casa" },
+    { "item": "Silbato", "note": "Para señalizar posición si quedas aislado" },
+    { "item": "Botas de goma y guantes" },
+    { "item": "Efectivo en billetes pequeños" },
+    { "item": "Power bank cargado" },
+    { "item": "Tela de color vivo", "note": "Señal visible para rescatistas desde techo o ventana" },
+    { "item": "Artículos para bebés, adultos mayores y mascotas" }
+  ],
+  "familyPlanPrompts": [
+    { "id": "high_ground", "label": "Nuestro punto alto de encuentro (a pie, en minutos)", "placeholder": "Ej.: la loma detrás de la escuela..." },
+    { "id": "out_of_area_contact", "label": "Contacto FUERA de la zona (nombre y teléfono)", "placeholder": "Ej.: hermano Luis en Valencia, +58..." },
+    { "id": "medical_notes", "label": "Condiciones médicas y medicamentos de cada miembro", "placeholder": "Ej.: María — asma, inhalador..." },
+    { "id": "pet_plan", "label": "Plan para las mascotas", "placeholder": "Quién las carga, a dónde van..." },
+    { "id": "shutoffs", "label": "Dónde están las llaves de electricidad, agua y gas", "placeholder": "Ej.: breaker en el pasillo, llave de gas en..." }
+  ]
+}

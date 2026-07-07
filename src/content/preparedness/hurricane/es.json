@@ -1,0 +1,107 @@
+{
+  "archetype": "hurricane",
+  "title": "Huracanes y tormentas tropicales",
+  "summary": "Qué hacer antes, durante y después de un huracán. Adaptado de la guía oficial de Ready.gov, el Centro Nacional de Huracanes (NHC) y la Cruz Roja. Si las autoridades ordenan evacuar, evacúa.",
+  "sources": [
+    { "label": "Ready.gov — Huracanes", "url": "https://www.ready.gov/es/huracanes" },
+    { "label": "Centro Nacional de Huracanes (NHC)", "url": "https://www.nhc.noaa.gov" },
+    { "label": "Cruz Roja Americana — Huracanes", "url": "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/hurricane.html" }
+  ],
+  "lastReviewed": "2026-07-07",
+  "sections": {
+    "antes": [
+      {
+        "heading": "Conoce tu zona y tu ruta de evacuación",
+        "body": "Averigua con protección civil si tu zona es evacuable y por dónde salir. Decide desde ya a dónde irías: casa de un familiar tierra adentro, o el refugio oficial más cercano. Evacuar tarde, con las vías llenas, es lo más peligroso."
+      },
+      {
+        "heading": "Prepara suministros para varios días",
+        "body": "Agua (4 L por persona por día), comida no perecedera, medicinas, linterna, radio y efectivo para al menos 3 días — 7 si puedes. Después de un huracán fuerte los servicios pueden tardar semanas en volver."
+      },
+      {
+        "heading": "Protege tu casa",
+        "body": "Cubre las ventanas con paneles o madera, asegura o guarda todo lo que el viento pueda convertir en proyectil (macetas, techos de zinc sueltos, muebles de patio), y limpia canales y desagües."
+      },
+      {
+        "heading": "Tanque lleno y documentos listos",
+        "body": "Llena el tanque del vehículo con anticipación y guarda documentos importantes en bolsa impermeable. Carga teléfonos y power banks antes de que llegue el viento."
+      },
+      {
+        "heading": "Si ordenan evacuar: evacúa",
+        "body": "Las órdenes de evacuación se emiten porque la zona no es sobrevivible en marejada o inundación. No esperes a 'ver cómo se pone'. Sal temprano, avisa a tu contacto fuera de la zona y sigue las rutas oficiales.",
+        "critical": true
+      }
+    ],
+    "durante": [
+      {
+        "heading": "Quédate adentro, lejos de las ventanas",
+        "body": "Ubícate en un cuarto interior sin ventanas, en el nivel más bajo que no se inunde. Los vientos lanzan escombros a velocidad letal — la mayoría de las heridas durante el paso del huracán son por vidrios y objetos voladores.",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "El ojo del huracán engaña",
+        "body": "Si el viento se calma de repente, puede ser el ojo: la segunda mitad de la tormenta llega en minutos y con viento en dirección contraria. No salgas hasta el aviso oficial de que pasó por completo.",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "Si el agua empieza a entrar",
+        "body": "Corta la electricidad en el interruptor principal si es seguro llegar a él y sube al nivel más alto que no quede atrapado (no un ático cerrado sin salida). Lleva el teléfono, el radio y el silbato.",
+        "context": "interior"
+      },
+      {
+        "heading": "Nunca manejes ni camines por agua en movimiento",
+        "body": "30 centímetros de agua mueven un carro; 15 centímetros tumban a una persona. La mayoría de las muertes en huracanes son por ahogamiento en el agua, no por el viento. Da la vuelta.",
+        "context": "vehiculo",
+        "critical": true
+      },
+      {
+        "heading": "Si estás afuera cuando llega",
+        "body": "Busca de inmediato la estructura sólida más cercana. Aléjate de árboles, postes y cables. Una zanja o depresión del terreno es el último recurso frente a viento extremo.",
+        "context": "exterior"
+      }
+    ],
+    "despues": [
+      {
+        "heading": "Espera el aviso oficial antes de volver",
+        "body": "No regreses a una zona evacuada hasta que las autoridades lo anuncien. Las carreteras pueden estar cortadas, energizadas por cables caídos o socavadas por el agua.",
+        "critical": true
+      },
+      {
+        "heading": "Generadores SOLO al aire libre",
+        "body": "Nunca uses un generador, parrilla o cocina de gas dentro de la casa o el garaje, ni cerca de ventanas. El monóxido de carbono no se ve ni se huele y mata a familias enteras después de las tormentas. Solo afuera, lejos de aberturas.",
+        "critical": true
+      },
+      {
+        "heading": "Cuidado con el agua y los cables",
+        "body": "Trata todo cable caído como energizado. El agua de inundación puede estar contaminada con aguas negras o combustible — no la uses para nada, y bota cualquier alimento que haya tocado."
+      },
+      {
+        "heading": "Documenta daños y repórtalos",
+        "body": "Fotografía los daños antes de limpiar, para seguros y ayudas. Si tu estructura quedó comprometida, solicita una evaluación en Vigil y no la habites hasta revisarla."
+      }
+    ]
+  },
+  "supplyChecklist": [
+    { "item": "Agua potable", "qty": "4 L por persona por día × 7 días", "note": "Llena también bañeras y envases antes de la tormenta" },
+    { "item": "Comida no perecedera", "qty": "7 días" },
+    { "item": "Linterna + pilas", "note": "No velas — riesgo de incendio" },
+    { "item": "Radio a pilas", "note": "Para avisos del NHC y protección civil sin electricidad" },
+    { "item": "Botiquín y medicamentos", "qty": "7 días" },
+    { "item": "Documentos en bolsa impermeable" },
+    { "item": "Efectivo en billetes pequeños" },
+    { "item": "Power bank cargado" },
+    { "item": "Silbato" },
+    { "item": "Lona plástica y cinta adhesiva fuerte", "note": "Reparaciones temporales de techo" },
+    { "item": "Tanque del vehículo lleno" },
+    { "item": "Artículos para bebés, adultos mayores y mascotas" }
+  ],
+  "familyPlanPrompts": [
+    { "id": "evacuation_destination", "label": "A dónde evacuamos (dirección y cómo llegar)", "placeholder": "Ej.: casa del tío Juan en..., por la ruta..." },
+    { "id": "meeting_point", "label": "Punto de encuentro si nos separamos", "placeholder": "Ej.: el refugio oficial de..." },
+    { "id": "out_of_area_contact", "label": "Contacto FUERA de la zona (nombre y teléfono)", "placeholder": "Ej.: prima Ana en Mérida, +58..." },
+    { "id": "medical_notes", "label": "Condiciones médicas y medicamentos de cada miembro", "placeholder": "Ej.: abuela — oxígeno, tensión..." },
+    { "id": "pet_plan", "label": "Plan para las mascotas", "placeholder": "No todos los refugios aceptan mascotas — ¿a dónde van?" }
+  ]
+}

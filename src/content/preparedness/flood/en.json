@@ -1,0 +1,96 @@
+{
+  "archetype": "flood",
+  "title": "Floods",
+  "summary": "What to do before, during, and after a flood. Adapted from official Ready.gov and U.S. National Weather Service (NWS) guidance. The life-saving rule: when you see moving water, Turn Around Don't Drown.",
+  "sources": [
+    { "label": "Ready.gov — Floods", "url": "https://www.ready.gov/floods" },
+    { "label": "NWS — Turn Around Don't Drown", "url": "https://www.weather.gov/safety/flood" },
+    { "label": "American Red Cross — Floods", "url": "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/flood.html" }
+  ],
+  "lastReviewed": "2026-07-07",
+  "sections": {
+    "antes": [
+      {
+        "heading": "Know your area's risk",
+        "body": "If you live near a river, creek, dry channel, or in low ground, your risk is real even if 'nothing has ever happened'. Flash floods arrive in minutes from heavy rain upstream — even under clear sky where you are."
+      },
+      {
+        "heading": "Define your route to high ground",
+        "body": "Identify now the nearest high point you can reach on foot within minutes. Agree on it with your family as the meeting point. In a flash flood there is no time to decide."
+      },
+      {
+        "heading": "Protect documents and prep the kit",
+        "body": "Documents and medications in a waterproof bag, stored high in the house. Emergency kit ready to grab and go (list below)."
+      },
+      {
+        "heading": "Heed official notices",
+        "body": "A flood watch means flooding is possible; a warning means it is happening or imminent — act immediately. Follow civil protection and local news whenever rain is heavy."
+      }
+    ],
+    "durante": [
+      {
+        "heading": "Turn Around Don't Drown — never cross moving water",
+        "body": "Six inches of moving water can knock a person down; one to two feet will carry away a vehicle, even a truck. You cannot know the depth or whether the road still exists underneath. Most flood deaths are vehicles that tried to cross.",
+        "context": "vehiculo",
+        "critical": true
+      },
+      {
+        "heading": "Get to high ground immediately",
+        "body": "If there is a flash-flood warning or you see water rising, move NOW to your high point. Don't wait for confirmation or gather belongings. The first minutes are the difference.",
+        "context": "exterior",
+        "critical": true
+      },
+      {
+        "heading": "If water enters the house",
+        "body": "Shut off electricity at the main breaker if safe. Move to the highest livable level — avoid closed attics with no exit where you could be trapped. Roof only if necessary, and signal your position (bright cloth, flashlight, whistle).",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "Avoid contact with the water",
+        "body": "Floodwater hides holes, debris, and animals, and can be energized by downed lines or contaminated with sewage. If you must walk through still water, probe the ground ahead with a stick.",
+        "context": "exterior"
+      }
+    ],
+    "despues": [
+      {
+        "heading": "Don't return until the official all-clear",
+        "body": "Structures can be undermined and roads washed out underneath even when they look fine. Wait for the authorities' announcement before returning to a flooded area.",
+        "critical": true
+      },
+      {
+        "heading": "Treat all water as contaminated",
+        "body": "Don't use floodwater for anything. Discard any food it touched, boil or purify drinking water until authorities confirm it's safe, and wash everything the water reached."
+      },
+      {
+        "heading": "Electricity and gas before entering",
+        "body": "Never enter a flooded home with the power connected. If you smell gas, don't go in: report it. Use a flashlight — never candles or matches — to inspect."
+      },
+      {
+        "heading": "Document and report",
+        "body": "Photograph damage before cleaning. Mold appears within 24-48 hours: dry and ventilate as soon as possible. If the structure is compromised, request an assessment through Vigil."
+      }
+    ]
+  },
+  "supplyChecklist": [
+    { "item": "Drinking water", "qty": "1 gal per person per day × 3 days" },
+    { "item": "Non-perishable food", "qty": "3 days" },
+    { "item": "Flashlight + batteries" },
+    { "item": "Battery-powered radio" },
+    { "item": "First-aid kit and medications", "qty": "7 days" },
+    { "item": "Documents in a waterproof bag", "note": "Stored HIGH in the house" },
+    { "item": "Whistle", "note": "To signal your position if stranded" },
+    { "item": "Rubber boots and gloves" },
+    { "item": "Cash in small bills" },
+    { "item": "Charged power bank" },
+    { "item": "Bright-colored cloth", "note": "Visible signal for rescuers from roof or window" },
+    { "item": "Supplies for babies, elders, and pets" }
+  ],
+  "familyPlanPrompts": [
+    { "id": "high_ground", "label": "Our high-ground meeting point (on foot, within minutes)", "placeholder": "E.g.: the hill behind the school..." },
+    { "id": "out_of_area_contact", "label": "Contact OUTSIDE the area (name and phone)", "placeholder": "E.g.: brother Luis in Valencia, +58..." },
+    { "id": "medical_notes", "label": "Medical conditions and medications for each member", "placeholder": "E.g.: María — asthma, inhaler..." },
+    { "id": "pet_plan", "label": "Plan for pets", "placeholder": "Who carries them, where they go..." },
+    { "id": "shutoffs", "label": "Where the electricity, water, and gas shutoffs are", "placeholder": "E.g.: breaker in the hallway, gas valve at..." }
+  ]
+}

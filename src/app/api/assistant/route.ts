@@ -8,6 +8,7 @@ import {
   isAnthropicConfigured,
 } from '@/lib/ai/client'
 import { getVenezuelaSeismicEvents } from '@/lib/usgs'
+import { getGuideIndex } from '@/content/preparedness'
 
 export const dynamic = 'force-dynamic'
 
@@ -103,7 +104,14 @@ FUNCIONES QUE VIGIL TIENE:
 - Conectividad (WiFi/Starlink) → /conectividad
 - Actualizaciones oficiales → /noticias
 - Estadísticas por estado → /estadisticas
-- Guías de preparación → /preparacion`
+- Guías de preparación → /preparacion
+
+GUÍAS DE PREPARACIÓN DISPONIBLES (para preguntas de preparación, responde SOLO
+con el resumen de la guía correspondiente y enlaza a su ruta — nunca inventes
+ni parafrasees pasos de seguridad más allá de estos resúmenes):
+${getGuideIndex('es')
+  .map((g) => `- ${g.title} → /preparacion/${g.archetype}: ${g.summary}`)
+  .join('\n')}`
 
   const liveDataBlock = `Idioma del usuario: ${lang}
 

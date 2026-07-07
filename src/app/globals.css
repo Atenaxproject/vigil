@@ -137,3 +137,38 @@
     animation: none;
   }
 }
+
+/* Print styles — preparedness guides, family plan, and checklist print
+   black-on-white with sources visible; app chrome hidden. */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  nav,
+  aside,
+  header,
+  footer,
+  div[role='banner'],
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+
+  /* Floating widgets (feedback, assistant, install banners) */
+  body > div > button,
+  [class*='z-40'],
+  [class*='z-50'] {
+    display: none !important;
+  }
+
+  .prep-guide {
+    max-width: 100% !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .prep-guide a {
+    color: #000 !important;
+  }
+}

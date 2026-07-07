@@ -1,0 +1,111 @@
+{
+  "archetype": "earthquake",
+  "title": "Terremotos y réplicas",
+  "summary": "Qué hacer antes, durante y después de un terremoto. Adaptado de la guía oficial de FEMA, Ready.gov y la Cruz Roja. La acción oficial durante el temblor es: Agáchate, Cúbrete y Sujétate.",
+  "sources": [
+    { "label": "Ready.gov — Terremotos", "url": "https://www.ready.gov/es/terremotos" },
+    { "label": "FEMA", "url": "https://www.fema.gov/es" },
+    { "label": "Cruz Roja Americana — Seguridad en terremotos", "url": "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/earthquake.html" }
+  ],
+  "lastReviewed": "2026-07-07",
+  "sections": {
+    "antes": [
+      {
+        "heading": "Identifica los lugares seguros de tu casa",
+        "body": "Debajo de una mesa resistente o junto a una pared interior, lejos de ventanas, vidrios y objetos que puedan caer. Practica llegar a ese lugar con toda la familia — en un temblor real tendrás segundos, no minutos."
+      },
+      {
+        "heading": "Asegura lo que puede caer",
+        "body": "Ancla a la pared estantes, bibliotecas y muebles altos. Baja los objetos pesados a repisas bajas. La mayoría de las lesiones en terremotos las causan objetos que caen, no edificios que colapsan."
+      },
+      {
+        "heading": "Prepara tu kit de emergencia",
+        "body": "Agua, comida no perecedera, linterna, radio y botiquín para al menos 3 días (lista completa abajo). Guarda zapatos cerrados y una linterna junto a tu cama — los vidrios rotos en el piso son la lesión más común después de un temblor nocturno."
+      },
+      {
+        "heading": "Acuerda un plan familiar",
+        "body": "Punto de encuentro si no pueden volver a casa, y un contacto fuera de la zona afectada al que todos reporten. Después de un terremoto los SMS suelen funcionar cuando las llamadas no."
+      }
+    ],
+    "durante": [
+      {
+        "heading": "Agáchate, Cúbrete y Sujétate",
+        "body": "Agáchate al piso, cúbrete debajo de una mesa resistente protegiendo cabeza y cuello, y sujétate hasta que pare el movimiento. Esta es la guía oficial de FEMA y la Cruz Roja. No corras hacia afuera mientras tiembla.",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "El 'Triángulo de la Vida' es un MITO",
+        "body": "La recomendación de acostarse JUNTO a un mueble en vez de debajo de él circula mucho en América Latina y es FALSA: fue desmentida por la Cruz Roja Americana y los servicios sísmicos oficiales. La acción correcta es Agáchate, Cúbrete y Sujétate debajo de una mesa resistente. Compartir el mito pone vidas en riesgo.",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "No uses los marcos de las puertas",
+        "body": "En construcción moderna el marco de la puerta no es más fuerte que el resto de la casa y no te protege de objetos que caen. Mesa resistente, o al piso junto a una pared interior cubriendo cabeza y cuello.",
+        "context": "interior"
+      },
+      {
+        "heading": "Si estás al aire libre",
+        "body": "Aléjate de edificios, postes, cables eléctricos y muros. Busca un espacio abierto y quédate agachado hasta que pare el movimiento. El mayor peligro es justo al lado de las fachadas, por vidrios y escombros que caen.",
+        "context": "exterior",
+        "critical": true
+      },
+      {
+        "heading": "Si vas manejando",
+        "body": "Detente en un lugar despejado — nunca debajo de puentes, pasos elevados, postes o cables — y quédate dentro del vehículo con el cinturón puesto hasta que pare. Al continuar, evita puentes y rampas que puedan estar dañados.",
+        "context": "vehiculo"
+      },
+      {
+        "heading": "Si usas silla de ruedas",
+        "body": "Frena las ruedas, inclínate hacia adelante y cubre cabeza y cuello con los brazos o una almohada. Si estás en cama, quédate ahí y protege la cabeza con la almohada — moverte durante el temblor es más peligroso.",
+        "context": "interior"
+      }
+    ],
+    "despues": [
+      {
+        "heading": "Espera réplicas — cada una es un temblor real",
+        "body": "Las réplicas pueden seguir por semanas y algunas son fuertes. Ante cada una: Agáchate, Cúbrete y Sujétate otra vez. No entres a estructuras dañadas entre réplicas.",
+        "critical": true
+      },
+      {
+        "heading": "Emergencias: 0800-RESCATE (0800-7372282) o 911",
+        "body": "Si hay personas heridas o atrapadas, llama a la línea nacional de emergencias. Si las llamadas no salen, los SMS y WhatsApp suelen pasar. Usa el teléfono solo para emergencias — las redes estarán saturadas.",
+        "critical": true
+      },
+      {
+        "heading": "Revisa gas, electricidad y agua",
+        "body": "Si hueles gas: abre ventanas, sal de inmediato y reporta desde afuera. No enciendas fósforos, velas ni interruptores. Si hay daños eléctricos visibles, corta el interruptor principal solo si es seguro llegar a él."
+      },
+      {
+        "heading": "No entres a edificios dañados",
+        "body": "Grietas en columnas, muros inclinados o el edificio visiblemente fuera de plomo significan peligro real de colapso en réplicas. Espera la evaluación de las autoridades o solicita una evaluación estructural en Vigil."
+      },
+      {
+        "heading": "Reporta y busca en Vigil",
+        "body": "Si buscas a un familiar, usa la búsqueda de personas desaparecidas. Si necesitas ayuda, marca tu ubicación en el mapa. Si estás bien, avísale a tu contacto fuera de la zona para liberar las líneas."
+      }
+    ]
+  },
+  "supplyChecklist": [
+    { "item": "Agua potable", "qty": "4 L por persona por día × 3 días", "note": "La mitad para beber, la mitad para higiene y cocina" },
+    { "item": "Comida no perecedera", "qty": "3 días", "note": "Enlatados, granos, barras — y abrelatas manual" },
+    { "item": "Linterna + pilas de repuesto", "note": "Una por persona si es posible; no dependas del teléfono" },
+    { "item": "Radio a pilas", "note": "La información oficial llega por radio cuando no hay datos ni electricidad" },
+    { "item": "Botiquín de primeros auxilios" },
+    { "item": "Medicamentos personales", "qty": "7 días", "note": "Con copia del récipe si aplica" },
+    { "item": "Silbato", "note": "Tres pitidos = señal de auxilio; ahorra la voz si quedas atrapado" },
+    { "item": "Copias de documentos", "note": "Cédulas, títulos de propiedad, seguros — en bolsa impermeable" },
+    { "item": "Efectivo en billetes pequeños", "note": "Los puntos de venta no funcionan sin electricidad" },
+    { "item": "Cargador portátil (power bank) cargado" },
+    { "item": "Zapatos cerrados y guantes de trabajo", "note": "Vidrio y escombros — junto a la cama" },
+    { "item": "Artículos para bebés, adultos mayores y mascotas", "note": "Fórmula, pañales, alimento para mascotas" }
+  ],
+  "familyPlanPrompts": [
+    { "id": "meeting_point", "label": "Punto de encuentro si no podemos volver a casa", "placeholder": "Ej.: la plaza frente a la iglesia de..." },
+    { "id": "out_of_area_contact", "label": "Contacto FUERA de la zona afectada (nombre y teléfono)", "placeholder": "Ej.: tía María en Bogotá, +57..." },
+    { "id": "medical_notes", "label": "Condiciones médicas y medicamentos de cada miembro", "placeholder": "Ej.: Pedro — insulina, refrigerada..." },
+    { "id": "pet_plan", "label": "Plan para las mascotas", "placeholder": "Quién las lleva, transportín, alimento..." },
+    { "id": "locations", "label": "Dónde está cada miembro entre semana (trabajo/escuela)", "placeholder": "Ej.: niños en colegio X hasta las 3pm..." }
+  ]
+}

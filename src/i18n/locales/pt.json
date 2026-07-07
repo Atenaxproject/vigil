@@ -31,7 +31,8 @@
     "network": "Search network",
     "propertyAssessment": "Structural Assessment",
     "help": "Help Center",
-    "helpShort": "Help"
+    "helpShort": "Help",
+    "preparedness": "Preparação"
   },
   "a11y": {
     "skipToContent": "Ir para o conteúdo principal"
@@ -1355,5 +1356,32 @@
     "regionsTitle": "Regiões do Vigil",
     "regionsSubtitle": "Implantações ativas da plataforma por região.",
     "regionsPrivacyNote": "A sugestão de região usa apenas o país aproximado da sua conexão (cabeçalhos de rede da Vercel). Sem GPS, sua localização nunca é armazenada e não usamos cookies para isso."
+  },
+  "prep": {
+    "title": "Preparação para emergências",
+    "subtitle": "Guias Antes / Durante / Depois adaptados de fontes oficiais (FEMA, Ready.gov, NWS, Cruz Vermelha).",
+    "offlineHint": "Os guias funcionam sem internet depois de abertos.",
+    "otherEmergencies": "Outras emergências",
+    "tabs": {
+      "antes": "Antes",
+      "durante": "Durante",
+      "despues": "Depois"
+    },
+    "contexts": {
+      "all": "Tudo",
+      "interior": "Interior",
+      "exterior": "Exterior",
+      "vehiculo": "No veículo"
+    },
+    "contextFilter": "Filtrar por situação",
+    "checklistTitle": "Lista de suprimentos",
+    "planTitle": "Plano familiar de emergência",
+    "planLocalNote": "Este plano é salvo apenas no seu dispositivo. Nunca é enviado ao Vigil nem a nenhum servidor.",
+    "print": "Imprimir",
+    "printPlan": "Imprimir plano",
+    "offlineNote": "Você está sem conexão — este guia funciona sem internet.",
+    "sourcesTitle": "Fontes oficiais",
+    "sourcesNote": "Conteúdo adaptado exclusivamente destas fontes. O Vigil não gera conselhos de segurança próprios.",
+    "lastReviewed": "Última revisão: {date}"
   }
 }

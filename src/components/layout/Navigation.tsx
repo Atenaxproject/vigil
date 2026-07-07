@@ -30,6 +30,7 @@ import {
   PanelLeftOpen,
   Home,
   LifeBuoy,
+  BookOpen,
 } from 'lucide-react'
 import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { useViewModeContext } from '@/components/onboarding/ViewModeProvider'
@@ -59,6 +60,7 @@ type NavLabelKey =
   | 'connectivity'
   | 'propertyAssessment'
   | 'help'
+  | 'preparedness'
 
 const navItems: Array<{
   href: string
@@ -75,6 +77,7 @@ const navItems: Array<{
   { href: '/buscar', labelKey: 'search', shortKey: 'searchShort', icon: Search },
   { href: '/reportar', labelKey: 'report', shortKey: 'reportShort', icon: FilePlus, center: true },
   { href: '/necesito-ayuda', labelKey: 'needHelp', shortKey: 'needHelpShort', icon: HandHelping },
+  { href: '/preparacion', labelKey: 'preparedness', icon: BookOpen, more: true, alwaysVisible: true },
   { href: '/calendario', labelKey: 'calendar', icon: Calendar, more: true },
   { href: '/muro', labelKey: 'wall', icon: MessageSquare, more: true },
   { href: '/red', labelKey: 'network', icon: ExternalLink, more: true },

@@ -1,0 +1,110 @@
+{
+  "archetype": "earthquake",
+  "title": "Earthquakes and aftershocks",
+  "summary": "What to do before, during, and after an earthquake. Adapted from official FEMA, Ready.gov, and Red Cross guidance. The official action during shaking is: Drop, Cover, and Hold On.",
+  "sources": [
+    { "label": "Ready.gov — Earthquakes", "url": "https://www.ready.gov/earthquakes" },
+    { "label": "FEMA", "url": "https://www.fema.gov" },
+    { "label": "American Red Cross — Earthquake safety", "url": "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/earthquake.html" }
+  ],
+  "lastReviewed": "2026-07-07",
+  "sections": {
+    "antes": [
+      {
+        "heading": "Identify the safe spots in your home",
+        "body": "Under a sturdy table or against an interior wall, away from windows, glass, and anything that can fall. Practice getting there with the whole family — in a real quake you have seconds, not minutes."
+      },
+      {
+        "heading": "Secure what can fall",
+        "body": "Anchor shelves, bookcases, and tall furniture to walls. Move heavy objects to low shelves. Most earthquake injuries are caused by falling objects, not collapsing buildings."
+      },
+      {
+        "heading": "Build your emergency kit",
+        "body": "Water, non-perishable food, flashlight, radio, and first-aid supplies for at least 3 days (full list below). Keep closed shoes and a flashlight by your bed — broken glass on the floor is the most common injury after a nighttime quake."
+      },
+      {
+        "heading": "Agree on a family plan",
+        "body": "A meeting point if you can't get home, and one out-of-area contact everyone reports to. After an earthquake, text messages often get through when calls don't."
+      }
+    ],
+    "durante": [
+      {
+        "heading": "Drop, Cover, and Hold On",
+        "body": "Drop to the floor, take cover under a sturdy table protecting your head and neck, and hold on until the shaking stops. This is the official FEMA and Red Cross guidance. Do not run outside while the ground is shaking.",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "The 'Triangle of Life' is a MYTH",
+        "body": "The advice to lie down NEXT to furniture instead of under it circulates widely in Latin America and is FALSE: it has been debunked by the American Red Cross and official seismic agencies. The correct action is Drop, Cover, and Hold On under a sturdy table. Sharing the myth puts lives at risk.",
+        "context": "interior",
+        "critical": true
+      },
+      {
+        "heading": "Do not use doorways",
+        "body": "In modern construction a door frame is no stronger than the rest of the house and does not protect you from falling objects. A sturdy table, or the floor against an interior wall covering your head and neck."
+      },
+      {
+        "heading": "If you are outdoors",
+        "body": "Move away from buildings, poles, power lines, and walls. Find open space and stay low until the shaking stops. The most dangerous place is right next to building facades, where glass and debris fall.",
+        "context": "exterior",
+        "critical": true
+      },
+      {
+        "heading": "If you are driving",
+        "body": "Pull over in a clear spot — never under bridges, overpasses, poles, or power lines — and stay inside with your seatbelt on until it stops. When you continue, avoid bridges and ramps that may be damaged.",
+        "context": "vehiculo"
+      },
+      {
+        "heading": "If you use a wheelchair",
+        "body": "Lock the wheels, lean forward, and cover your head and neck with your arms or a pillow. If you are in bed, stay there and protect your head with the pillow — moving during shaking is more dangerous.",
+        "context": "interior"
+      }
+    ],
+    "despues": [
+      {
+        "heading": "Expect aftershocks — each one is a real quake",
+        "body": "Aftershocks can continue for weeks and some are strong. For every one: Drop, Cover, and Hold On again. Do not enter damaged structures between aftershocks.",
+        "critical": true
+      },
+      {
+        "heading": "Emergencies: 0800-RESCATE (0800-7372282) or 911",
+        "body": "If people are injured or trapped, call the national emergency line. If calls don't go through, SMS and WhatsApp usually do. Use your phone only for emergencies — networks will be saturated.",
+        "critical": true
+      },
+      {
+        "heading": "Check gas, electricity, and water",
+        "body": "If you smell gas: open windows, leave immediately, and report it from outside. Do not light matches, candles, or flip switches. If there is visible electrical damage, shut off the main breaker only if it is safe to reach."
+      },
+      {
+        "heading": "Do not enter damaged buildings",
+        "body": "Cracked columns, leaning walls, or a building visibly out of plumb mean real collapse risk in aftershocks. Wait for an official assessment or request a structural assessment through Vigil."
+      },
+      {
+        "heading": "Report and search on Vigil",
+        "body": "If you are looking for a family member, use the missing-persons search. If you need help, drop your location on the map. If you are safe, tell your out-of-area contact so the lines stay free."
+      }
+    ]
+  },
+  "supplyChecklist": [
+    { "item": "Drinking water", "qty": "1 gal (4 L) per person per day × 3 days", "note": "Half for drinking, half for hygiene and cooking" },
+    { "item": "Non-perishable food", "qty": "3 days", "note": "Canned goods, grains, bars — plus a manual can opener" },
+    { "item": "Flashlight + spare batteries", "note": "One per person if possible; don't rely on your phone" },
+    { "item": "Battery-powered radio", "note": "Official information arrives by radio when data and power are out" },
+    { "item": "First-aid kit" },
+    { "item": "Personal medications", "qty": "7 days", "note": "With a copy of the prescription if applicable" },
+    { "item": "Whistle", "note": "Three blasts = distress signal; saves your voice if trapped" },
+    { "item": "Copies of documents", "note": "IDs, property titles, insurance — in a waterproof bag" },
+    { "item": "Cash in small bills", "note": "Card terminals don't work without power" },
+    { "item": "Charged power bank" },
+    { "item": "Closed shoes and work gloves", "note": "Glass and debris — keep by the bed" },
+    { "item": "Supplies for babies, elders, and pets", "note": "Formula, diapers, pet food" }
+  ],
+  "familyPlanPrompts": [
+    { "id": "meeting_point", "label": "Meeting point if we can't get home", "placeholder": "E.g.: the square in front of the church at..." },
+    { "id": "out_of_area_contact", "label": "Contact OUTSIDE the affected area (name and phone)", "placeholder": "E.g.: aunt María in Bogotá, +57..." },
+    { "id": "medical_notes", "label": "Medical conditions and medications for each member", "placeholder": "E.g.: Pedro — insulin, refrigerated..." },
+    { "id": "pet_plan", "label": "Plan for pets", "placeholder": "Who takes them, carrier, food..." },
+    { "id": "locations", "label": "Where each member is on weekdays (work/school)", "placeholder": "E.g.: kids at school X until 3pm..." }
+  ]
+}

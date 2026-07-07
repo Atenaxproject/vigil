@@ -10,6 +10,16 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   workboxOptions: {
     runtimeCaching: [
       {
+        // Preparedness hub — CacheFirst so guides open offline (the content
+        // itself ships in the JS bundle; this covers the page documents).
+        urlPattern: /\/preparacion/,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'preparedness-pages',
+          expiration: { maxEntries: 40, maxAgeSeconds: 60 * 60 * 24 * 30 },
+        },
+      },
+      {
         urlPattern: /^https:\/\/.*\.supabase\.co\/.*/i,
         handler: 'NetworkFirst',
         options: {
