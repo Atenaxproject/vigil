@@ -10,7 +10,14 @@ export function isAnthropicConfigured(): boolean {
 
 export function createAnthropicClient(): Anthropic | null {
   if (!isAnthropicConfigured()) return null
-  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+  // ANTHROPIC_BASE_URL enables routing through Vercel AI Gateway (per-workload
+  // spend observability, budget alerts, no token markup) without code changes.
+  // Unset = direct Anthropic API. Key stays server-side either way.
+  const baseURL = process.env.ANTHROPIC_BASE_URL
+  return new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY,
+    ...(baseURL ? { baseURL } : {}),
+  })
 }
 
 export function extractTextContent(

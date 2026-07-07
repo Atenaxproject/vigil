@@ -58,13 +58,21 @@ export async function GET(request: NextRequest) {
       messages: [
         {
           role: 'user',
-          content: `Analyze this list of missing persons reports and identify probable duplicates.
+          // Stable instruction as a cacheable prefix; only the records vary.
+          content: [
+            {
+              type: 'text',
+              text: `Analyze this list of missing persons reports and identify probable duplicates.
 Two records are probably the same person if: same or very similar name, similar age (within 5 years), same general location.
 Return ONLY a JSON array of pairs: [{"original_id": "...", "duplicate_id": "..."}]
-If no duplicates found, return [].
-
-Records:
-${JSON.stringify(recent, null, 2)}`,
+If no duplicates found, return [].`,
+              cache_control: { type: 'ephemeral' },
+            },
+            {
+              type: 'text',
+              text: `Records:\n${JSON.stringify(recent, null, 2)}`,
+            },
+          ],
         },
       ],
     })

@@ -76,16 +76,36 @@ export async function POST(request: NextRequest) {
     }))
 
   const lang = parsed.language ?? CRISIS_CONFIG.defaultLang
-  const systemPrompt = `Eres el asistente de Vigil, una plataforma humanitaria para la respuesta al terremoto en Venezuela 2026.
+
+  // System prompt split into a stable prefix (cacheable via prompt caching —
+  // must stay byte-identical between calls) and the live-data suffix. Keep all
+  // dynamic values (quakes, markers, language) OUT of the first block.
+  const stableSystemBlock = `Eres el asistente de Vigil, una plataforma humanitaria para la respuesta al terremoto en Venezuela 2026.
 
 REGLAS ABSOLUTAS:
 - Solo responde con información que existe en el contexto provisto abajo
 - Si no tienes la información, di exactamente: "No tengo esa información en este momento. Intenta en [recurso relevante]."
 - NUNCA inventes datos, números, nombres o ubicaciones
-- Responde siempre en el mismo idioma del usuario (código idioma: ${lang})
+- Responde siempre en el mismo idioma del usuario (el código de idioma llega en el contexto)
 - Sé directo y conciso — las personas están bajo estrés
 - Para emergencias inmediatas, siempre menciona primero: ${CRISIS_CONFIG.emergency.hotlineLabel} (${CRISIS_CONFIG.emergency.hotline})
 - NUNCA compartas teléfonos o datos de contacto de reportantes de personas desaparecidas
+
+FUNCIONES QUE VIGIL TIENE:
+- Buscar/reportar personas desaparecidas → /buscar y /reportar
+- Mapa de crisis con réplicas USGS, refugios, hospitales → página principal
+- Registrar necesidades o recursos → /necesito-ayuda
+- Intercambio de recursos → /intercambio
+- Registro de voluntarios → /voluntarios
+- Registro como equipo activo/rescatista → /equipo-activo
+- Calendario de eventos → /calendario
+- Puntos de acopio → /punto-de-acopio
+- Conectividad (WiFi/Starlink) → /conectividad
+- Actualizaciones oficiales → /noticias
+- Estadísticas por estado → /estadisticas
+- Guías de preparación → /preparacion`
+
+  const liveDataBlock = `Idioma del usuario: ${lang}
 
 DATOS EN TIEMPO REAL DE VIGIL:
 
@@ -99,20 +119,7 @@ Organizaciones verificadas (${orgsRes.data?.length ?? 0} total):
 ${JSON.stringify(orgsRes.data?.slice(0, 15) ?? [])}
 
 Próximos eventos (${eventsRes.data?.length ?? 0}):
-${JSON.stringify(eventsRes.data ?? [])}
-
-FUNCIONES QUE VIGIL TIENE:
-- Buscar/reportar personas desaparecidas → /buscar y /reportar
-- Mapa de crisis con réplicas USGS, refugios, hospitales → página principal
-- Registrar necesidades o recursos → /necesito-ayuda
-- Intercambio de recursos → /intercambio
-- Registro de voluntarios → /voluntarios
-- Registro como equipo activo/rescatista → /equipo-activo
-- Calendario de eventos → /calendario
-- Puntos de acopio → /punto-de-acopio
-- Conectividad (WiFi/Starlink) → /conectividad
-- Actualizaciones oficiales → /noticias
-- Estadísticas por estado → /estadisticas`
+${JSON.stringify(eventsRes.data ?? [])}`
 
   const encoder = new TextEncoder()
   const stream = new ReadableStream({
@@ -121,7 +128,14 @@ FUNCIONES QUE VIGIL TIENE:
         const response = await anthropic.messages.create({
           model: HAIKU_MODEL,
           max_tokens: 400,
-          system: systemPrompt,
+          system: [
+            {
+              type: 'text',
+              text: stableSystemBlock,
+              cache_control: { type: 'ephemeral' },
+            },
+            { type: 'text', text: liveDataBlock },
+          ],
           stream: true,
           messages: [{ role: 'user', content: parsed.message }],
         })

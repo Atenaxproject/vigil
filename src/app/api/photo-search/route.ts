@@ -61,11 +61,9 @@ export async function POST(request: NextRequest) {
       messages: [
         {
           role: 'user',
+          // Stable instruction first (cacheable prefix), image after — prompt
+          // caching only applies to an unchanged leading block sequence.
           content: [
-            {
-              type: 'image',
-              source: { type: 'base64', media_type: mediaType, data: base64 },
-            },
             {
               type: 'text',
               text: `Describe the physical characteristics of the person in this photo to help identify them among missing persons records.
@@ -73,6 +71,11 @@ Be specific about: estimated age range, gender, hair color and style, any distin
 Do NOT speculate about identity, nationality, or name.
 Return a brief, factual description in Spanish under 100 words.
 If no person is clearly visible, say "No se puede identificar una persona en esta imagen."`,
+              cache_control: { type: 'ephemeral' },
+            },
+            {
+              type: 'image',
+              source: { type: 'base64', media_type: mediaType, data: base64 },
             },
           ],
         },
