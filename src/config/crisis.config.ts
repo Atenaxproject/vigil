@@ -1,6 +1,8 @@
 // THIS IS THE ONLY FILE THAT CHANGES BETWEEN COUNTRY DEPLOYMENTS
 // Swap these values + redeploy = Vigil runs for any country, any disaster
 
+import type { DisasterArchetype, FeedConfig, NotificationConfig } from '@/types/vigil.types'
+
 export const CRISIS_CONFIG = {
   country: 'Venezuela',
   countryCode: 'VE',
@@ -122,6 +124,57 @@ export const CRISIS_CONFIG = {
     refreshIntervalMs: 300000,
   },
 
+  // ── Disaster-archetype schema ─────────────────────────────────────────────
+  // Foundation for multi-deployment templates (Florida, Mexico Pacific, …).
+  // Venezuela behavior is unchanged: values mirror the live integrations.
+  disasterArchetypes: ['earthquake'] satisfies DisasterArchetype[] as DisasterArchetype[],
+
+  dataFeeds: [
+    {
+      id: 'usgs',
+      label: 'feeds.usgs',
+      url: 'https://earthquake.usgs.gov/fdsnws/event/1/query',
+      tier: 'primary',
+      cacheSeconds: 300,
+      enabled: true,
+    },
+    {
+      // FUNVISIS gap (2026-07-04): funvisis.gob.ve is HTML-only — no structured
+      // feed exists. Kept disabled; see src/lib/seismic.ts for the merge point.
+      id: 'funvisis',
+      label: 'feeds.funvisis',
+      url: 'https://www.funvisis.gob.ve',
+      tier: 'secondary',
+      cacheSeconds: 300,
+      enabled: false,
+    },
+    {
+      id: 'gdacs',
+      label: 'feeds.gdacs',
+      url: 'https://www.gdacs.org/gdacsapi/api/events',
+      tier: 'primary',
+      cacheSeconds: 600,
+      enabled: true,
+    },
+    {
+      id: 'reliefweb',
+      label: 'feeds.reliefweb',
+      url: 'https://api.reliefweb.int/v1/reports',
+      tier: 'secondary',
+      cacheSeconds: 3600,
+      enabled: true,
+    },
+  ] satisfies FeedConfig[] as FeedConfig[],
+
+  // Vigil Alerta is not built yet — honest empty state, no invented tiers.
+  notificationConfig: {
+    zoneSubscription: false,
+    severityTiers: [],
+    channels: [],
+  } satisfies NotificationConfig as NotificationConfig,
+
+  uniqueFeatures: ['preparedness_hub'] as string[],
+
   dataRetention: {
     activeRecordDays: 90,
     archiveAfterDays: 365,
@@ -236,6 +289,12 @@ export const diasporaSupportConfig = {
 } as const
 
 export type { RegionScope } from '@/types/vigil.types'
+
+/** Resolve a data feed by id. Feed consumers in src/lib/ read URL and cache
+ *  values through this — never hardcode external endpoints in lib files. */
+export function getDataFeed(id: string): FeedConfig | undefined {
+  return CRISIS_CONFIG.dataFeeds.find((f) => f.id === id)
+}
 
 export type SupportedLang = (typeof CRISIS_CONFIG.supportedLangs)[number]
 export type PartnerLinkType = 'translation' | 'official' | 'ngo' | 'data' | 'sister-platform'

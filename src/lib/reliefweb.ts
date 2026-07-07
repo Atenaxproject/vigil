@@ -1,3 +1,9 @@
+import { getDataFeed } from '@/config/crisis.config'
+
+const RELIEFWEB_FEED = getDataFeed('reliefweb')
+const RELIEFWEB_BASE = RELIEFWEB_FEED?.url ?? 'https://api.reliefweb.int/v1/reports'
+const RELIEFWEB_REVALIDATE = RELIEFWEB_FEED?.cacheSeconds ?? 3600
+
 export interface ReliefWebReport {
   id: string
   title: string
@@ -21,8 +27,8 @@ interface ReliefWebResponse {
 export async function getVenezuelaUpdates(limit = 10): Promise<ReliefWebReport[]> {
   try {
     const res = await fetch(
-      `https://api.reliefweb.int/v1/reports?appname=vigil-crisis&filter[field]=country.iso3&filter[value]=VEN&limit=${limit}&sort[]=date:desc&fields[include][]=title&fields[include][]=date&fields[include][]=url&fields[include][]=source`,
-      { next: { revalidate: 3600 } }
+      `${RELIEFWEB_BASE}?appname=vigil-crisis&filter[field]=country.iso3&filter[value]=VEN&limit=${limit}&sort[]=date:desc&fields[include][]=title&fields[include][]=date&fields[include][]=url&fields[include][]=source`,
+      { next: { revalidate: RELIEFWEB_REVALIDATE } }
     )
 
     if (!res.ok) return []

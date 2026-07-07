@@ -1,7 +1,9 @@
-import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { CRISIS_CONFIG, getDataFeed } from '@/config/crisis.config'
 import type { SeismicEvent } from '@/types/vigil.types'
 
-const BASE = 'https://earthquake.usgs.gov/fdsnws/event/1/query'
+const USGS_FEED = getDataFeed('usgs')
+const BASE = USGS_FEED?.url ?? 'https://earthquake.usgs.gov/fdsnws/event/1/query'
+const REVALIDATE = USGS_FEED?.cacheSeconds ?? 300
 
 interface UsgsFeature {
   id: string
@@ -31,6 +33,14 @@ export function getMagnitudeColor(mag: number): string {
 export async function getVenezuelaSeismicEvents(): Promise<SeismicEvent[]> {
   try {
     const { mapBounds, seismic } = CRISIS_CONFIG
+    // Rolling 30-day window with the crisis date as a floor: keeps the feed
+    // current as the sequence ages instead of pinning to June 24 forever
+    // (limit 300 newest-first would eventually fill with old events).
+    const rollingStart = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+    const crisisStart = new Date(`${seismic.startDate}T00:00:00Z`)
+    const starttime = (rollingStart > crisisStart ? rollingStart : crisisStart)
+      .toISOString()
+      .slice(0, 10)
     const params = new URLSearchParams({
       format: 'geojson',
       minlatitude: String(mapBounds.minLat),
@@ -39,12 +49,12 @@ export async function getVenezuelaSeismicEvents(): Promise<SeismicEvent[]> {
       maxlongitude: String(mapBounds.maxLng),
       orderby: 'time',
       limit: '300',
-      starttime: seismic.startDate,
+      starttime,
       minmagnitude: String(seismic.minMagnitudeDisplay),
     })
 
     const res = await fetch(`${BASE}?${params}`, {
-      next: { revalidate: 300 },
+      next: { revalidate: REVALIDATE },
     })
 
     if (!res.ok) return []

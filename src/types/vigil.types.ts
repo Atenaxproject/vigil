@@ -54,6 +54,34 @@ export type VolunteerSkill =
 
 export type RegionScope = 'venezuela' | 'usa_diaspora'
 export type SeismicSource = 'USGS' | 'FUNVISIS'
+
+/** Disaster-archetype schema (VIGIL-EXPANSION-ROADMAP): pick archetype(s) →
+ *  feeds, map layers, knowledge guides, and notification triggers come with it. */
+export type DisasterArchetype =
+  | 'earthquake'
+  | 'hurricane'
+  | 'tornado'
+  | 'flood'
+  | 'wildfire'
+  | 'volcanic'
+  | 'tsunami'
+  | 'winter_storm'
+
+export interface FeedConfig {
+  id: string // 'usgs', 'gdacs', 'reliefweb', 'nws-alerts', 'nhc-storms'
+  label: string // i18n key
+  url: string // base endpoint
+  tier: 'primary' | 'secondary' | 'partnership_gated'
+  cacheSeconds: number
+  enabled: boolean
+}
+
+export interface NotificationConfig {
+  zoneSubscription: boolean
+  /** MIRROR the official agency's tiers (NWS Extreme/Severe/…). Never invent tiers. */
+  severityTiers: string[]
+  channels: ('push' | 'email' | 'sms' | 'whatsapp')[]
+}
 export type PropertyRequestType = 'inspection' | 'relocation_assistance' | 'both'
 export type PropertyTagStatus = 'unassessed' | 'green' | 'yellow' | 'red'
 export type PropertyAssessmentStatus = 'open' | 'assigned' | 'completed' | 'closed'

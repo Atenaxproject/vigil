@@ -1,3 +1,9 @@
+import { getDataFeed } from '@/config/crisis.config'
+
+const GDACS_FEED = getDataFeed('gdacs')
+const GDACS_BASE = GDACS_FEED?.url ?? 'https://www.gdacs.org/gdacsapi/api/events'
+const GDACS_REVALIDATE = GDACS_FEED?.cacheSeconds ?? 600
+
 export interface GDACSEvent {
   title: string
   alertLevel: string
@@ -29,8 +35,8 @@ interface GDACSResponse {
 export async function getGDACSEvents(): Promise<GDACSEvent[]> {
   try {
     const res = await fetch(
-      'https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventtypes=EQ&country=Venezuela',
-      { next: { revalidate: 600 } }
+      `${GDACS_BASE}/geteventlist/SEARCH?eventtypes=EQ&country=Venezuela`,
+      { next: { revalidate: GDACS_REVALIDATE } }
     )
     if (!res.ok) return []
 
