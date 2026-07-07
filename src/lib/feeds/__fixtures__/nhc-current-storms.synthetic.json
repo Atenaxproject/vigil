@@ -1,0 +1,45 @@
+{
+  "_note": "SYNTHETIC fixture — no active storms existed when recorded (2026-07-07). Shape mirrors NHC CurrentStorms.json documented fields. Used only by scripts/test-feeds.mjs to exercise the parser; never shipped to users.",
+  "activeStorms": [
+    {
+      "id": "ep022026",
+      "binNumber": "EP2",
+      "name": "Test",
+      "classification": "HU",
+      "intensity": "85",
+      "pressure": "970",
+      "latitude": "16.5N",
+      "longitude": "-105.2W",
+      "latitudeNumeric": 16.5,
+      "longitudeNumeric": -105.2,
+      "movementDir": 295,
+      "movementSpeed": 10,
+      "lastUpdate": "2026-07-07T12:00:00.000Z",
+      "publicAdvisory": {
+        "advNum": "12A",
+        "issuance": "2026-07-07T12:00:00.000Z",
+        "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPEP2+shtml/"
+      }
+    },
+    {
+      "id": "al032026",
+      "binNumber": "AT3",
+      "name": "Prueba",
+      "classification": "TS",
+      "intensity": "45",
+      "pressure": "1002",
+      "latitude": "23.1N",
+      "longitude": "-82.0W",
+      "latitudeNumeric": 23.1,
+      "longitudeNumeric": -82.0,
+      "movementDir": 320,
+      "movementSpeed": 12,
+      "lastUpdate": "2026-07-07T12:00:00.000Z",
+      "publicAdvisory": {
+        "advNum": "5",
+        "issuance": "2026-07-07T12:00:00.000Z",
+        "url": "https://www.nhc.noaa.gov/text/refresh/MIATCPAT3+shtml/"
+      }
+    }
+  ]
+}

@@ -59,12 +59,32 @@ const MapZoomControls = dynamic(
   { ssr: false }
 )
 
+// Hurricane/flood archetype layers — dormant for Venezuela (['earthquake']).
+// A hurricane deployment passes data via props; these never mount here.
+const NwsAlertsLayer = dynamic(
+  () => import('@/components/map/NwsAlertsLayer').then((m) => m.NwsAlertsLayer),
+  { ssr: false }
+)
+const NhcStormsLayer = dynamic(
+  () => import('@/components/map/NhcStormsLayer').then((m) => m.NhcStormsLayer),
+  { ssr: false }
+)
+const WaterLevelLayer = dynamic(
+  () => import('@/components/map/WaterLevelLayer').then((m) => m.WaterLevelLayer),
+  { ssr: false }
+)
+
 interface CrisisMapProps {
   events?: SeismicEvent[]
   markers?: MapMarker[]
   propertyAssessments?: PublicPropertyAssessment[]
   missingPersons?: PublicMissingPerson[]
   regionScope?: RegionScope
+  /** Hurricane/flood archetype data — only rendered when the deployment's
+   *  disasterArchetypes include hurricane/flood (Venezuela: never). */
+  nwsAlerts?: import('@/lib/feeds/nws').NwsAlert[]
+  nhcStorms?: import('@/lib/feeds/nhc').NhcActiveStorm[]
+  waterGauges?: import('@/lib/feeds/usgs-water').WaterGauge[]
 }
 
 export function CrisisMap({
@@ -73,8 +93,14 @@ export function CrisisMap({
   propertyAssessments = [],
   missingPersons = [],
   regionScope = 'venezuela',
+  nwsAlerts = [],
+  nhcStorms = [],
+  waterGauges = [],
 }: CrisisMapProps) {
   const isDiaspora = regionScope === 'usa_diaspora'
+  const hasHurricaneArchetype = CRISIS_CONFIG.disasterArchetypes.some(
+    (a) => a === 'hurricane' || a === 'flood'
+  )
   const [mounted, setMounted] = useState(false)
   const [layers, setLayers] = useState<MapLayerState>({
     aftershocks: !isDiaspora,
@@ -163,6 +189,9 @@ export function CrisisMap({
           <PropertyAssessmentLayer assessments={propertyAssessments} />
         )}
         {layers.missingPersons && <MissingPersonsLayer persons={missingPersons} />}
+        {hasHurricaneArchetype && nwsAlerts.length > 0 && <NwsAlertsLayer alerts={nwsAlerts} />}
+        {hasHurricaneArchetype && nhcStorms.length > 0 && <NhcStormsLayer storms={nhcStorms} />}
+        {hasHurricaneArchetype && waterGauges.length > 0 && <WaterLevelLayer gauges={waterGauges} />}
         <MapZoomControls />
       </MapContainer>
     </div>
