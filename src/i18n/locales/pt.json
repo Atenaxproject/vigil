@@ -426,7 +426,8 @@
     "creditsByPrefix": "Um projeto de Orlando Toro —",
     "creditsByLink": "YouTheWave",
     "builtWith": "Construído com Claude + Cursor",
-    "notEmergency": "Vigil NÃO é um serviço de emergência. Para resgate imediato ligue: {{hotline}}"
+    "notEmergency": "Vigil NÃO é um serviço de emergência. Para resgate imediato ligue: {{hotline}}",
+    "otherRegions": "Outras regiões"
   },
   "exchange": {
     "title": "Troca de Recursos",
@@ -1346,5 +1347,13 @@
     },
     "viewAll": "Ver tudo",
     "volunteerLink": "Registrar-se como voluntário"
+  },
+  "deploymentSuggestion": {
+    "question": "Você está em outra região? {label} está disponível.",
+    "go": "Ir",
+    "dismiss": "Dispensar sugestão",
+    "regionsTitle": "Regiões do Vigil",
+    "regionsSubtitle": "Implantações ativas da plataforma por região.",
+    "regionsPrivacyNote": "A sugestão de região usa apenas o país aproximado da sua conexão (cabeçalhos de rede da Vercel). Sem GPS, sua localização nunca é armazenada e não usamos cookies para isso."
   }
 }

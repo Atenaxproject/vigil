@@ -426,7 +426,8 @@
     "creditsByPrefix": "一个项目由 Orlando Toro —",
     "creditsByLink": "YouTheWave",
     "builtWith": "由 Claude + Cursor 构建",
-    "notEmergency": "Vigil 不是紧急服务。若需立即救援，请致电：{{hotline}}"
+    "notEmergency": "Vigil 不是紧急服务。若需立即救援，请致电：{{hotline}}",
+    "otherRegions": "其他地区"
   },
   "exchange": {
     "title": "资源交换",
@@ -1346,5 +1347,13 @@
     },
     "viewAll": "查看全部",
     "volunteerLink": "注册成为志愿者"
+  },
+  "deploymentSuggestion": {
+    "question": "您在其他地区吗？{label} 已可用。",
+    "go": "前往",
+    "dismiss": "关闭建议",
+    "regionsTitle": "Vigil 地区",
+    "regionsSubtitle": "按地区列出的平台活跃部署。",
+    "regionsPrivacyNote": "地区建议仅使用您连接的大致国家（Vercel 网络标头）。不使用 GPS，不存储您的位置，也不为此使用 Cookie。"
   }
 }

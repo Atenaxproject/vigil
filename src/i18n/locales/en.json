@@ -457,7 +457,8 @@
     "creditsByLink": "YouTheWave",
     "builtWith": "Built with Claude + Cursor",
     "notEmergency": "Vigil is NOT an emergency service. For immediate rescue call: {hotline}",
-    "press": "Press"
+    "press": "Press",
+    "otherRegions": "Other regions"
   },
   "exchange": {
     "title": "Resource Exchange",
@@ -1398,5 +1399,13 @@
       "note": "We respond in Spanish and English. Include your deadline and outlet."
     },
     "informacionLink": "View live information hub"
+  },
+  "deploymentSuggestion": {
+    "question": "Are you in another region? {label} is available.",
+    "go": "Go",
+    "dismiss": "Dismiss suggestion",
+    "regionsTitle": "Vigil regions",
+    "regionsSubtitle": "Active platform deployments by region.",
+    "regionsPrivacyNote": "The region suggestion uses only the approximate country of your connection (Vercel network headers). No GPS, your location is never stored, and no cookies are used for this."
   }
 }

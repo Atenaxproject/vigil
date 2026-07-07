@@ -457,7 +457,8 @@
     "creditsByLink": "YouTheWave",
     "builtWith": "Construido con Claude + Cursor",
     "notEmergency": "Vigil NO es un servicio de emergencias. Para rescate inmediato llama al: {hotline}",
-    "press": "Prensa"
+    "press": "Prensa",
+    "otherRegions": "Otras regiones"
   },
   "exchange": {
     "title": "Intercambio de Recursos",
@@ -1398,5 +1399,13 @@
       "note": "Respondemos en español e inglés. Incluye tu plazo y medio de publicación."
     },
     "informacionLink": "Ver hub de información en vivo"
+  },
+  "deploymentSuggestion": {
+    "question": "¿Estás en otra región? {label} está disponible.",
+    "go": "Ir",
+    "dismiss": "Descartar sugerencia",
+    "regionsTitle": "Regiones de Vigil",
+    "regionsSubtitle": "Despliegues activos de la plataforma por región.",
+    "regionsPrivacyNote": "La sugerencia de región usa solo el país aproximado de tu conexión (encabezados de red de Vercel). No usamos GPS, no guardamos tu ubicación y no usamos cookies para esto."
   }
 }

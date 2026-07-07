@@ -18,6 +18,7 @@ import { VigilAssistant } from '@/components/ai/VigilAssistant'
 import { IOSInstallBanner } from '@/components/pwa/IOSInstallBanner'
 import { NetworkStatusBanner } from '@/components/layout/NetworkStatusBanner'
 import { OfflineQueueProvider } from '@/components/providers/OfflineQueueProvider'
+import { DeploymentSuggestion } from '@/components/layout/DeploymentSuggestion'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { countAlertEvents, getMergedSeismicEvents } from '@/lib/seismic'
 import './globals.css'
@@ -104,6 +105,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NextIntlClientProvider messages={messages}>
           <ViewModeProvider>
           <EmergencyBanner aftershockCount={alertCount} />
+          <DeploymentSuggestion />
           <WeatherBar />
           <div className="flex min-h-[calc(100vh-44px)]">
             <Navigation />
@@ -156,6 +158,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   >
                     {t('openSource')}
                   </a>
+                  <span aria-hidden="true">·</span>
+                  <Link
+                    href="/regiones"
+                    className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
+                  >
+                    {t('otherRegions')}
+                  </Link>
                   <span aria-hidden="true">·</span>
                   <span>{t('madeFor')}</span>
                 </div>

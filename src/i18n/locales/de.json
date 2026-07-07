@@ -426,7 +426,8 @@
     "creditsByPrefix": "Ein Projekt von Orlando Toro —",
     "creditsByLink": "YouTheWave",
     "builtWith": "Entwickelt mit Claude + Cursor",
-    "notEmergency": "Vigil ist KEIN Rettungsdienst. Im Notfall anrufen: {{hotline}}"
+    "notEmergency": "Vigil ist KEIN Rettungsdienst. Im Notfall anrufen: {{hotline}}",
+    "otherRegions": "Andere Regionen"
   },
   "exchange": {
     "title": "Ressourcenaustausch",
@@ -1346,5 +1347,13 @@
     },
     "viewAll": "Alles anzeigen",
     "volunteerLink": "Als Freiwillige/r registrieren"
+  },
+  "deploymentSuggestion": {
+    "question": "Bist du in einer anderen Region? {label} ist verfügbar.",
+    "go": "Öffnen",
+    "dismiss": "Vorschlag ausblenden",
+    "regionsTitle": "Vigil-Regionen",
+    "regionsSubtitle": "Aktive Plattform-Deployments nach Region.",
+    "regionsPrivacyNote": "Der Regionsvorschlag nutzt nur das ungefähre Land deiner Verbindung (Vercel-Netzwerk-Header). Kein GPS, dein Standort wird nie gespeichert, und es werden dafür keine Cookies verwendet."
   }
 }
