@@ -12,8 +12,8 @@ import { DeploymentSuggestionBanner } from '@/components/layout/DeploymentSugges
  * the visitor matches a DIFFERENT deployment that is actually live (no
  * vaporware banners for prebuilt configs).
  */
-export function DeploymentSuggestion() {
-  const h = headers()
+export async function DeploymentSuggestion() {
+  const h = await headers()
   const country = h.get('x-vercel-ip-country')
   const region = h.get('x-vercel-ip-country-region')
 
