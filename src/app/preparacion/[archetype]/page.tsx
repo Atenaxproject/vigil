@@ -8,14 +8,15 @@ import { FamilyPlanBuilder } from '@/components/preparedness/FamilyPlanBuilder'
 import { OfflineNote } from '@/components/preparedness/OfflineNote'
 
 interface GuidePageProps {
-  params: { archetype: string }
+  params: Promise<{ archetype: string }>
 }
 
 export function generateStaticParams() {
   return PREPAREDNESS_ARCHETYPES.map((archetype) => ({ archetype }))
 }
 
-export async function generateMetadata({ params }: GuidePageProps) {
+export async function generateMetadata(props: GuidePageProps) {
+  const params = await props.params
   const locale = await getLocale()
   const guide = getPreparednessGuide(params.archetype, locale)
   if (!guide) return {}
@@ -26,7 +27,8 @@ export async function generateMetadata({ params }: GuidePageProps) {
   }
 }
 
-export default async function GuidePage({ params }: GuidePageProps) {
+export default async function GuidePage(props: GuidePageProps) {
+  const params = await props.params
   const locale = await getLocale()
   const guide = getPreparednessGuide(params.archetype, locale)
   if (!guide) notFound()
