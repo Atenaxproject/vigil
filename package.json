@@ -11,6 +11,9 @@
     "url": "https://github.com/Atenaxproject/vigil/issues"
   },
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "overrides": {
     "serialize-javascript": "^7.0.5",
     "postcss": "$postcss"

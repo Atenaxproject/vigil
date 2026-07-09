@@ -16,7 +16,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata(props: GuidePageProps) {
-  const params = await props.params;
+  const params = await props.params
   const locale = await getLocale()
   const guide = getPreparednessGuide(params.archetype, locale)
   if (!guide) return {}
@@ -28,7 +28,7 @@ export async function generateMetadata(props: GuidePageProps) {
 }
 
 export default async function GuidePage(props: GuidePageProps) {
-  const params = await props.params;
+  const params = await props.params
   const locale = await getLocale()
   const guide = getPreparednessGuide(params.archetype, locale)
   if (!guide) notFound()
