@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
-import { isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import { isSafeHttpUrl, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
 
 export const dynamic = 'force-dynamic'
 
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
         specialization: body.specialization ? sanitizeText(body.specialization) : null,
         equipment: body.equipment,
         remote_available: body.remote_available,
-        verification_url: body.verification_url ? sanitizeText(body.verification_url) : null,
+        verification_url: body.verification_url ? isSafeHttpUrl(body.verification_url) : null,
         credential_note: body.credential_note ? sanitizeText(body.credential_note) : null,
         public_display: body.public_display,
         active: true,

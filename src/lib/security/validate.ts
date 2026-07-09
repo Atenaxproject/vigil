@@ -34,13 +34,44 @@ export function getClientIp(headers: Headers): string {
   )
 }
 
+// Script-capable URL schemes. Blocklisted as defense-in-depth; the angle-bracket
+// strip below already prevents any HTML element from forming, and React escapes
+// on render. URL fields used as links must additionally pass isSafeHttpUrl().
+const DANGEROUS_SCHEME = /(?:javascript|data|vbscript):/gi
+const ANGLE_BRACKETS = /[<>]/g
+
+/**
+ * Neutralize user text before storage/display. Removes angle brackets outright
+ * (so no HTML tag can ever form — robust against the "reforming tag" and bare
+ * "<script" bypasses) and strips script-capable URL schemes. Removals run to a
+ * fixpoint so a match revealed by an earlier removal cannot survive. Text only —
+ * it must not emit HTML entities (React re-escapes on render).
+ */
 export function sanitizeText(text: string): string {
-  return text
-    .replace(/<[^>]*>/g, '')
-    .replace(/javascript:/gi, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 2000)
+  // Bound the work before the fixpoint loop.
+  let out = text.slice(0, 4000)
+  let previous: string
+  do {
+    previous = out
+    out = out.replace(ANGLE_BRACKETS, '').replace(DANGEROUS_SCHEME, '')
+  } while (out !== previous)
+  return out.replace(/\s+/g, ' ').trim().slice(0, 2000)
+}
+
+/**
+ * Allowlist URL validator for values rendered as links. Only http(s), mailto,
+ * and tel schemes pass — blocks javascript:, data:, vbscript:, and anything
+ * else. Returns the trimmed URL if safe, otherwise null.
+ */
+export function isSafeHttpUrl(url: string): string | null {
+  const trimmed = url.trim()
+  try {
+    const parsed = new URL(trimmed)
+    const allowed = ['http:', 'https:', 'mailto:', 'tel:']
+    return allowed.includes(parsed.protocol) ? trimmed : null
+  } catch {
+    return null
+  }
 }
 
 export function sanitizePhone(phone: string): string {
