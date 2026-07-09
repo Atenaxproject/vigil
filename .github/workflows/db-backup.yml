@@ -18,10 +18,21 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
-      - name: Install tools
+      - name: Install PostgreSQL 17 client + age
         run: |
+          # Supabase runs Postgres 17; the ubuntu-latest default client is 16,
+          # and pg_dump refuses to dump from a newer server ("server version
+          # mismatch"). Install the matching pg17 client from the official PGDG
+          # apt repo so dumps actually succeed once the secrets are set.
           sudo apt-get update -qq
-          sudo apt-get install -y -qq postgresql-client age
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl -fsSL -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc \
+            https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" \
+            | sudo tee /etc/apt/sources.list.d/pgdg.list >/dev/null
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client-17 age
+          pg_dump --version
 
       - name: Dump database
         env:
