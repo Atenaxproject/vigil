@@ -1,6 +1,6 @@
-# Vigil Watch trigger — polling logic lives in /api/watch/scan (in-repo,
-# testable); this Action is only the scheduler. Requires CRON_SECRET repo
-# secret matching the Vercel env var of the same name.
+# Vigil Watch trigger — polling logic lives in /api/watch/scan and
+# /api/cron/hazards (in-repo, testable); this Action is only the scheduler.
+# Requires CRON_SECRET repo secret matching the Vercel env var of the same name.
 name: vigil-watch
 
 on:
@@ -15,12 +15,12 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger watch scan
+      - name: Trigger operator watch scan
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
           if [ -z "$CRON_SECRET" ]; then
-            echo "CRON_SECRET secret not set in GitHub — cannot authenticate against /api/watch/scan"
+            echo "CRON_SECRET secret not set in GitHub — cannot authenticate"
             exit 1
           fi
           status=$(curl -s -o response.json -w "%{http_code}" \
@@ -29,5 +29,18 @@ jobs:
           cat response.json
           if [ "$status" != "200" ]; then
             echo "Scan returned HTTP $status"
+            exit 1
+          fi
+
+      - name: Trigger global hazard poll
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          status=$(curl -s -o hazards.json -w "%{http_code}" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "https://vigil.youthewave.org/api/cron/hazards")
+          cat hazards.json
+          if [ "$status" != "200" ]; then
+            echo "Hazards poll returned HTTP $status"
             exit 1
           fi

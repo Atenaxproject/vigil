@@ -137,6 +137,10 @@ export const CRISIS_CONFIG = {
     minMagnitudeDisplay: 2.0,
     alertThresholdMag: 4.0,
     refreshIntervalMs: 300000,
+    /** Banner M4+ count — pure rolling days (prompt 67; never crisis-pinned). */
+    alertWindowDays: 7,
+    /** Map marker window — rolling days; events age out. */
+    mapWindowDays: 30,
   },
 
   /**

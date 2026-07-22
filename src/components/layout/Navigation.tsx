@@ -31,6 +31,7 @@ import {
   Home,
   LifeBuoy,
   BookOpen,
+  Radio,
 } from 'lucide-react'
 import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { useViewModeContext } from '@/components/onboarding/ViewModeProvider'
@@ -61,6 +62,7 @@ type NavLabelKey =
   | 'propertyAssessment'
   | 'help'
   | 'preparedness'
+  | 'monitor'
 
 const navItems: Array<{
   href: string
@@ -78,6 +80,7 @@ const navItems: Array<{
   { href: '/reportar', labelKey: 'report', shortKey: 'reportShort', icon: FilePlus, center: true },
   { href: '/necesito-ayuda', labelKey: 'needHelp', shortKey: 'needHelpShort', icon: HandHelping },
   { href: '/preparacion', labelKey: 'preparedness', icon: BookOpen, more: true, alwaysVisible: true },
+  { href: '/monitor', labelKey: 'monitor', icon: Radio, more: true, alwaysVisible: true },
   { href: '/calendario', labelKey: 'calendar', icon: Calendar, more: true },
   { href: '/muro', labelKey: 'wall', icon: MessageSquare, more: true },
   { href: '/red', labelKey: 'network', icon: ExternalLink, more: true },

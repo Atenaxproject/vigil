@@ -32,7 +32,8 @@
     "propertyAssessment": "Evaluación Estructural",
     "help": "Centro de Ayuda",
     "helpShort": "Ayuda",
-    "preparedness": "Preparación"
+    "preparedness": "Preparación",
+    "monitor": "Monitor global"
   },
   "a11y": {
     "skipToContent": "Saltar al contenido principal"
@@ -59,7 +60,11 @@
     "secondhandNote": "Cada número muestra fuente y fecha de verificación.",
     "carrierCodes": "Números de emergencia por operadora",
     "servicePublic": "Servicio público",
-    "servicePrivate": "Servicio privado · puede tener costo"
+    "servicePrivate": "Servicio privado · puede tener costo",
+    "aftershockCount": "{count} réplicas M4.0+ ({days}d)",
+    "seismicStale": "datos atrasados",
+    "seismicUnavailable": "Datos sísmicos no disponibles · USGS",
+    "seismicFetchedAt": "Última lectura USGS: {time}"
   },
   "regionScope": {
     "label": "Región del mapa",
@@ -239,6 +244,10 @@
     },
     "magnitude": "Magnitud",
     "depth": "Profundidad",
+    "seismicFreshness": {
+      "stale": "Datos sísmicos con más de 30 min. Verifica en",
+      "unavailable": "Datos sísmicos en vivo no disponibles. Consulta la fuente oficial:"
+    },
     "addMarker": "Agregar al Mapa",
     "queuedOffline": "Guardado sin conexión. Se enviará automáticamente al reconectar.",
     "markerTypes": {
@@ -536,7 +545,11 @@
       "title": "Búsqueda de familiares — Cruz Roja internacional",
       "honduras": "Cruz Roja Hondureña — +504-9849-5556 · busquedarcf@cruzroja.org.hn",
       "argentina": "Cruz Roja Argentina — cruzroja.org.ar/rcf/",
-      "colombia": "Cruz Roja Colombiana — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
+      "colombia": "Cruz Roja Colombiana — +57-321-213-9525 · rcf@cruzrojacolombiana.org",
+      "relocatedTitle": "¿Buscas a un familiar?",
+      "relocatedBody": "Los servicios de Restoring Family Links (Cruz Roja) y la búsqueda en la red DTV están en Buscar y Red — no son canales de donación.",
+      "buscarLink": "Ir a Buscar",
+      "redLink": "Ver red DTV"
     },
     "directoryLink": "Ver directorio completo de organizaciones",
     "teams": {
@@ -545,7 +558,8 @@
       "source": "Fuente: OCHA/ONU, 27 junio 2026",
       "americas": "Américas",
       "europe": "Europa",
-      "asia": "Asia/Otros"
+      "asia": "Asia/Otros",
+      "suppressed": "Las cifras pico de equipos USAR (OCHA, 27 jun 2026) ya no se muestran: tienen más de 21 días y reflejan el pico de respuesta, no el despliegue actual. Consulta Situation Reports actualizados."
     },
     "transfers": {
       "title": "Enviar dinero a Venezuela",
@@ -558,16 +572,19 @@
       "banesco": {
         "title": "Banesco — donaciones con matching",
         "note": "Banesco ha anunciado programas de matching para donaciones relacionadas con el terremoto. Consulta canales oficiales del banco para detalles vigentes."
-      }
+      },
+      "noteExpired": "La exención de comisiones de Ria Money Transfer (hasta el 15 de julio 2026) ya venció. Verifica tarifas actuales en su sitio oficial antes de enviar."
     },
     "ofac": {
       "title": "Licencia OFAC General 60 (EE.UU.)",
       "note": "El Departamento del Tesoro de EE.UU. (OFAC) emitió la Licencia General 60 el 25 de junio de 2026, autorizando transacciones relacionadas con la ayuda humanitaria ante el terremoto en Venezuela pese a las sanciones vigentes. Esta licencia vence el 23 de octubre de 2026. Fuente: state.gov. Vigil no ofrece asesoría legal — consulta la fuente oficial."
     },
     "collection": {
-      "title": "Puntos de acopio físicos"
+      "title": "Puntos de acopio físicos",
+      "ucvNote": "Historial: punto reportado activo el 27 de junio — confirma estado actual antes de trasladarte."
     },
-    "volunteerLink": "Registrarse como voluntario"
+    "volunteerLink": "Registrarse como voluntario",
+    "expiredBadge": "Esta promoción ya venció — verifica condiciones actuales en la fuente."
   },
   "crisisInfo": {
     "title": "Información de Crisis Verificada",
@@ -908,7 +925,8 @@
   },
   "weather": {
     "venezuela": "Venezuela",
-    "rain": "lluvia"
+    "rain": "lluvia",
+    "unavailable": "clima no disponible"
   },
   "calendar": {
     "title": "Calendario de Eventos",
@@ -1530,5 +1548,18 @@
     "sourcesTitle": "Fuentes oficiales",
     "sourcesNote": "Contenido adaptado únicamente de estas fuentes. Vigil no genera consejos de seguridad propios.",
     "lastReviewed": "Última revisión: {date}"
+  },
+  "monitor": {
+    "title": "Vigil Watch — Monitor global",
+    "subtitle": "Alertas oficiales de agencias. Vigil solo retransmite — no emite advertencias propias.",
+    "relayBadge": "Retransmisión automática · no verificado por Vigil",
+    "disclaimer": "Cada ítem proviene de la agencia emisora. La autoridad es siempre la fuente oficial enlazada. Sin comentarios ni interpretación de IA. Sin cifras de víctimas.",
+    "empty": "No hay alertas activas en los feeds vigilados en este momento.",
+    "officialSource": "Ver fuente oficial",
+    "agencyAuthoritative": "La agencia emisora es la autoridad. Vigil no emite esta alerta.",
+    "alsoReported": "También reportado por",
+    "attribution": "Fuentes: USGS, GDACS, NOAA NHC, NWS, NASA FIRMS, NOAA Tsunami, USGS Water, ReliefWeb, Open-Meteo.",
+    "disabled": "El monitor público está desactivado temporalmente (kill switch).",
+    "backHome": "Volver al inicio"
   }
 }

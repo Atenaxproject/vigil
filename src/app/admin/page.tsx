@@ -2,7 +2,10 @@ import { createClient } from '@/lib/supabase/server'
 import { isAdminUser } from '@/lib/supabase/auth'
 import { SignOutButton } from '@/components/auth/SignOutButton'
 import { PropertyAssessmentAdmin } from '@/components/admin/PropertyAssessmentAdmin'
+import { FeedHealthPanel } from '@/components/admin/FeedHealthPanel'
 import { redirect } from 'next/navigation'
+
+export const dynamic = 'force-dynamic'
 
 export default async function AdminPage() {
   const supabase = await createClient()
@@ -28,6 +31,7 @@ export default async function AdminPage() {
       <p className="mt-8 text-sm text-slate-600">
         Moderación completa próximamente. Use Supabase Studio para revisar la cola de moderación.
       </p>
+      <FeedHealthPanel />
       <PropertyAssessmentAdmin />
     </div>
   )

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getDTVMetrics, isDTVConfigured } from '@/lib/dtv-api'
+import { recordFeedHealth } from '@/lib/feed-health-server'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -28,16 +29,37 @@ const unavailable = () =>
   })
 
 export async function GET() {
-  if (!isDTVConfigured()) return unavailable()
+  if (!isDTVConfigured()) {
+    await recordFeedHealth({
+      feedId: 'dtv-metrics',
+      label: 'DTV federation metrics',
+      ok: false,
+      error: 'DTV not configured',
+    })
+    return unavailable()
+  }
 
   try {
     const metrics = await getDTVMetrics()
+    await recordFeedHealth({
+      feedId: 'dtv-metrics',
+      label: 'DTV federation metrics',
+      ok: metrics.available !== false,
+      itemCount: metrics.totalPersonas,
+      meta: { source: metrics.source },
+    })
     return NextResponse.json(metrics, {
       headers: {
         'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=3600',
       },
     })
-  } catch {
+  } catch (err) {
+    await recordFeedHealth({
+      feedId: 'dtv-metrics',
+      label: 'DTV federation metrics',
+      ok: false,
+      error: err instanceof Error ? err.message : 'unknown',
+    })
     return unavailable()
   }
 }

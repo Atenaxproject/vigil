@@ -1,6 +1,11 @@
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import type { SeismicEvent } from '@/types/vigil.types'
-import { getVenezuelaSeismicEvents } from '@/lib/usgs'
+import {
+  getAlertAftershockCount,
+  getVenezuelaSeismicEvents,
+  getVenezuelaSeismicFetch,
+  type SeismicFetchResult,
+} from '@/lib/usgs'
 
 /**
  * Merged seismic feed for map and /informacion.
@@ -17,6 +22,12 @@ export async function getMergedSeismicEvents(): Promise<SeismicEvent[]> {
   // prefer USGS for overlapping events, keep FUNVISIS-only local aftershocks.
   return usgsEvents.sort((a, b) => b.time - a.time)
 }
+
+export async function getMergedSeismicFetch(): Promise<SeismicFetchResult> {
+  return getVenezuelaSeismicFetch()
+}
+
+export { getAlertAftershockCount }
 
 export function countAlertEvents(events: SeismicEvent[]): number {
   return events.filter((e) => e.magnitude >= CRISIS_CONFIG.seismic.alertThresholdMag).length

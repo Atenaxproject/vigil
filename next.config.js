@@ -79,7 +79,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com",
               // cdn-imagenes.theempire.tech: DTV federated result photos
               "img-src 'self' data: blob: https://*.supabase.co https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com https://cdn-imagenes.theempire.tech",
-              "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.tile.openstreetmap.org https://earthquake.usgs.gov https://api.reliefweb.int https://api.anthropic.com https://data.humdata.org https://api.open-meteo.com https://www.gdacs.org",
+              "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.tile.openstreetmap.org https://earthquake.usgs.gov https://api.reliefweb.int https://api.anthropic.com https://data.humdata.org https://api.open-meteo.com https://www.gdacs.org https://www.nhc.noaa.gov https://api.weather.gov https://firms.modaps.eosdis.nasa.gov https://www.tsunami.gov https://waterservices.usgs.gov",
               "worker-src 'self'",
               "frame-ancestors 'none'",
               'report-uri /api/csp-report',

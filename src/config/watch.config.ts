@@ -87,8 +87,26 @@ export const WATCHED_REGIONS: WatchedRegion[] = [
     bounds: { minLat: 32.0, maxLat: 42.0, minLng: -125.0, maxLng: -114.0 },
     tropical: false,
     eqMinMag: 6.0,
-    gdacsHazards: ['EQ', 'WF'], // WF via GDACS only in v1 — no FIRMS integration yet
-    notes: 'Roadmap Tier 1 (wildfire + EQ). FIRMS is a later feed; GDACS Orange wildfire suffices as v1 trigger.',
+    gdacsHazards: ['EQ', 'WF'],
+    notes: 'Roadmap Tier 1 (wildfire + EQ). FIRMS feeds /monitor; GDACS Orange wildfire for operator digest.',
+  },
+  {
+    id: 'canada-wildfire',
+    label: 'Canada (wildfire belt)',
+    bounds: { minLat: 48.0, maxLat: 70.0, minLng: -140.0, maxLng: -50.0 },
+    tropical: false,
+    eqMinMag: null,
+    gdacsHazards: ['WF'],
+    notes: 'Expansion roadmap — wildfire season trigger via GDACS Orange/Red.',
+  },
+  {
+    id: 'east-se-asia',
+    label: 'East / Southeast Asia (typhoon · flood · tsunami)',
+    bounds: { minLat: -10.0, maxLat: 40.0, minLng: 95.0, maxLng: 145.0 },
+    tropical: true,
+    eqMinMag: 6.5,
+    gdacsHazards: ['EQ', 'TC', 'FL'],
+    notes: 'Typhoon / flood / tsunami-capable subduction. NHC does not cover WP; tropical via GDACS TC.',
   },
 ]
 

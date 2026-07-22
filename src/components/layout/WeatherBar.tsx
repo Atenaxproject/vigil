@@ -15,7 +15,17 @@ interface WeatherLocation {
 interface WeatherResponse {
   locations: WeatherLocation[]
   venezuelaTime: string
+  fetchedAt?: string
   error?: boolean
+}
+
+function caracasClock(): string {
+  return new Date().toLocaleString('es-VE', {
+    timeZone: 'America/Caracas',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  })
 }
 
 function WeatherIcon({ condition }: { condition: WeatherLocation['condition'] }) {
@@ -34,15 +44,24 @@ function WeatherIcon({ condition }: { condition: WeatherLocation['condition'] })
 
 export function WeatherBar() {
   const t = useTranslations('weather')
+  // Local Caracas clock immediately — never ship "—" while waiting on Open-Meteo.
+  const [time, setTime] = useState(caracasClock)
   const [data, setData] = useState<WeatherResponse | null>(null)
   const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
+    setTime(caracasClock())
+    const clock = setInterval(() => setTime(caracasClock()), 30_000)
+    return () => clearInterval(clock)
+  }, [])
+
+  useEffect(() => {
     async function load() {
       try {
-        const res = await fetch('/api/weather')
+        const res = await fetch('/api/weather', { cache: 'no-store' })
         const json = (await res.json()) as WeatherResponse
         setData(json)
+        if (json.venezuelaTime) setTime(json.venezuelaTime)
       } catch {
         setData(null)
       }
@@ -52,8 +71,6 @@ export function WeatherBar() {
     const interval = setInterval(load, 30 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
-
-  const time = data?.venezuelaTime ?? '—'
 
   return (
     <div
@@ -70,6 +87,9 @@ export function WeatherBar() {
         <span className="truncate">
           🕐 {t('venezuela')}: {time}
           <span className={cn('lg:inline', expanded ? 'inline' : 'hidden')}>
+            {data?.error && (
+              <span className="text-status-unverified"> · {t('unavailable')}</span>
+            )}
             {data?.locations.map((loc) => (
               <span key={loc.name}>
                 {' '}

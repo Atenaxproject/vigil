@@ -1,4 +1,5 @@
 import { getDataFeed } from '@/config/crisis.config'
+import { recordFeedHealth } from '@/lib/feed-health-server'
 
 const GDACS_FEED = getDataFeed('gdacs')
 const GDACS_BASE = GDACS_FEED?.url ?? 'https://www.gdacs.org/gdacsapi/api/events'
@@ -36,12 +37,20 @@ export async function getGDACSEvents(): Promise<GDACSEvent[]> {
   try {
     const res = await fetch(
       `${GDACS_BASE}/geteventlist/SEARCH?eventtypes=EQ&country=Venezuela`,
-      { next: { revalidate: GDACS_REVALIDATE } }
+      { next: { revalidate: GDACS_REVALIDATE, tags: ['gdacs'] } }
     )
-    if (!res.ok) return []
+    if (!res.ok) {
+      await recordFeedHealth({
+        feedId: 'gdacs',
+        label: 'GDACS alerts',
+        ok: false,
+        error: `HTTP ${res.status}`,
+      })
+      return []
+    }
 
     const data = (await res.json()) as GDACSResponse
-    return (
+    const events =
       data.features?.map((f) => ({
         title: f.properties.eventname || f.properties.name || 'Earthquake in Venezuela',
         alertLevel: f.properties.alertlevel ?? 'Green',
@@ -52,8 +61,21 @@ export async function getGDACSEvents(): Promise<GDACSEvent[]> {
         lng: f.geometry?.coordinates?.[0] ?? null,
         severity: f.properties.severitydata?.severity ?? null,
       })) ?? []
-    )
-  } catch {
+
+    await recordFeedHealth({
+      feedId: 'gdacs',
+      label: 'GDACS alerts',
+      ok: true,
+      itemCount: events.length,
+    })
+    return events
+  } catch (err) {
+    await recordFeedHealth({
+      feedId: 'gdacs',
+      label: 'GDACS alerts',
+      ok: false,
+      error: err instanceof Error ? err.message : 'unknown',
+    })
     return []
   }
 }

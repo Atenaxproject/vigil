@@ -27,6 +27,9 @@ Living specs and operational guides:
 - `architecture/DEPLOYMENT.md` — Supabase, Vercel, DNS, Resend, and local dev setup
 - `architecture/DEPLOYMENT-PLAYBOOK.md` — new-crisis rollout: go/no-go, archetypes, config-driven deployment
 - `architecture/VIGIL-LAUNCH-READINESS.md` — DTV listing launch checklist (P0/P1 gaps; living)
+- `build-process/66-full-platform-audit.md` — content/UX audit + expiry mechanism (2026-07-22)
+- `build-process/67-live-data-freshness-map.md` — USGS rolling-window freshness fix (2026-07-22)
+- `build-process/68-vigil-watch-global-monitor.md` — global hazard monitor `/monitor` (2026-07-22)
 
 ## Reference index
 

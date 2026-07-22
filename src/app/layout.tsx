@@ -20,8 +20,11 @@ import { NetworkStatusBanner } from '@/components/layout/NetworkStatusBanner'
 import { OfflineQueueProvider } from '@/components/providers/OfflineQueueProvider'
 import { DeploymentSuggestion } from '@/components/layout/DeploymentSuggestion'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
-import { countAlertEvents, getMergedSeismicEvents } from '@/lib/seismic'
+import { getAlertAftershockCount } from '@/lib/seismic'
 import './globals.css'
+
+/** Root layout carries live aftershock count — must not ISR-freeze the shell. */
+export const dynamic = 'force-dynamic'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -87,8 +90,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messages = await getMessages()
   const t = await getTranslations('footer')
   const tNav = await getTranslations('nav')
-  const events = await getMergedSeismicEvents()
-  const alertCount = countAlertEvents(events)
+  const aftershock = await getAlertAftershockCount()
 
   const isSpanish = locale === 'es'
   const privacyHref = isSpanish ? '/privacidad' : '/privacy'
@@ -104,7 +106,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SkipToContent />
         <NextIntlClientProvider messages={messages}>
           <ViewModeProvider>
-          <EmergencyBanner aftershockCount={alertCount} />
+          <EmergencyBanner
+            aftershockCount={aftershock.count}
+            aftershockFetchedAt={aftershock.fetchedAt}
+            aftershockOk={aftershock.ok}
+            aftershockSourceUrl={aftershock.sourceUrl}
+            aftershockWindowDays={aftershock.windowDays}
+          />
           <DeploymentSuggestion />
           <WeatherBar />
           <div className="flex min-h-[calc(100vh-44px)]">

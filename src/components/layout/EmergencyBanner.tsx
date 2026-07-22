@@ -4,10 +4,15 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { AlertTriangle, ChevronRight, Phone, X } from 'lucide-react'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { getFeedFreshness, usgsSourceUrl } from '@/lib/feed-health'
 import Link from 'next/link'
 
 interface EmergencyBannerProps {
   aftershockCount?: number
+  aftershockFetchedAt?: string
+  aftershockOk?: boolean
+  aftershockSourceUrl?: string
+  aftershockWindowDays?: number
 }
 
 // tel: URIs need * percent-encoded (Movilnet *1); stripping it dials the wrong number.
@@ -15,12 +20,23 @@ function telHref(num: string): string {
   return `tel:${encodeURIComponent(num.replace(/[^\d*+]/g, ''))}`
 }
 
-export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
+export function EmergencyBanner({
+  aftershockCount = 0,
+  aftershockFetchedAt,
+  aftershockOk = true,
+  aftershockSourceUrl,
+  aftershockWindowDays = 7,
+}: EmergencyBannerProps) {
   const t = useTranslations('banner')
   const tCommon = useTranslations('common')
   const [directoryOpen, setDirectoryOpen] = useState(false)
   const sheetRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+  const freshness = aftershockOk
+    ? getFeedFreshness(aftershockFetchedAt)
+    : 'unavailable'
+  const usgsHref = aftershockSourceUrl ?? usgsSourceUrl()
 
   const nacional = CRISIS_CONFIG.emergencyContacts.find((c) => c.id === 'nacional')
   const carrierCodes = nacional && 'carrierCodes' in nacional ? nacional.carrierCodes : []
@@ -109,11 +125,33 @@ export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
             <ChevronRight className="h-3.5 w-3.5" aria-hidden />
           </button>
 
-          {aftershockCount > 0 && (
-            <span className="hidden shrink-0 font-mono text-amber-300 md:inline">
-              {aftershockCount} réplicas M4.0+
+          {freshness === 'unavailable' || !aftershockOk ? (
+            <a
+              href={usgsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden shrink-0 text-amber-200 underline-offset-2 hover:underline md:inline"
+            >
+              {t('seismicUnavailable')}
+            </a>
+          ) : aftershockCount > 0 ? (
+            <span
+              className={`hidden shrink-0 font-mono md:inline ${
+                freshness === 'stale' ? 'text-amber-200/80' : 'text-amber-300'
+              }`}
+              title={
+                aftershockFetchedAt
+                  ? t('seismicFetchedAt', { time: aftershockFetchedAt })
+                  : undefined
+              }
+            >
+              {t('aftershockCount', {
+                count: aftershockCount,
+                days: aftershockWindowDays,
+              })}
+              {freshness === 'stale' ? ` · ${t('seismicStale')}` : ''}
             </span>
-          )}
+          ) : null}
         </div>
       </div>
 

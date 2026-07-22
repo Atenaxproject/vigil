@@ -2,6 +2,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { getDonationOrganizations } from '@/lib/data'
 import { VerifiedBadge } from '@/components/ui/VerifiedBadge'
+import { dedupeDonationOrgs, getContentDisposition } from '@/lib/content-expiry'
 
 export const dynamic = 'force-dynamic'
 
@@ -62,18 +63,24 @@ const COUNTRIES = {
   asia: ['China', 'India', 'Turquía'],
 }
 
+/** Collection points with expiry — peak-response "activo el…" claims must not linger. */
 const COLLECTION_POINTS = [
   {
     name: 'Universidad Central de Venezuela',
-    note: 'Centro de acopio verificado activo el 27 de junio',
+    noteKey: 'ucv' as const,
+    verifiedAt: '2026-06-27',
+    suppressWhenStale: true,
   },
   {
     name: 'Estado Falcón',
     note: '20+ puntos de acopio incluyendo sede de Periodistas de Paraguaná',
+    verifiedAt: '2026-07-01',
+    suppressWhenStale: false,
   },
   {
-    name: 'Área de Miami — GEM',
-    note: 'Global Empowerment Mission — múltiples puntos. Ver globalempowermentmission.org',
+    name: 'Global Empowerment Mission (GEM)',
+    note: 'Sede Doral FL + operaciones LATAM en La Guaira. Ver globalempowermentmission.org — un solo canal de donación.',
+    verifiedAt: '2026-07-11',
   },
 ]
 
@@ -81,25 +88,59 @@ export default async function ComoAyudarPage() {
   const t = await getTranslations('howToHelp')
   const locale = await getLocale()
   const orgs = await getDonationOrganizations()
-  const displayOrgs = orgs.length > 0 ? orgs : FALLBACK_ORGS
+  const rawOrgs = orgs.length > 0 ? orgs : FALLBACK_ORGS
+  const displayOrgs = dedupeDonationOrgs(
+    rawOrgs.map((org) => ({
+      name: org.name,
+      description_es: ('description_es' in org ? org.description_es : null) ?? null,
+      description_en: ('description_en' in org ? org.description_en : null) ?? null,
+      donation_link: ('donation_link' in org ? org.donation_link : null) ?? null,
+      verified: Boolean(org.verified),
+    }))
+  )
+
+  const teamsDisposition = getContentDisposition({
+    verifiedAt: '2026-06-27',
+    suppressWhenStale: true,
+  })
+  const riaDisposition = getContentDisposition({
+    expiresAt: '2026-07-15',
+    suppressWhenStale: false,
+  })
+  const ofacDisposition = getContentDisposition({
+    expiresAt: '2026-10-23',
+  })
+
+  const collectionPoints = COLLECTION_POINTS.filter((p) => {
+    const d = getContentDisposition({
+      verifiedAt: p.verifiedAt,
+      suppressWhenStale: p.suppressWhenStale,
+    })
+    return d.disposition === 'show'
+  })
 
   return (
     <div className="mx-auto max-w-3xl p-4 pb-24">
       <h1 className="font-display text-[26px] font-semibold text-vigil-ink">{t('title')}</h1>
       <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('familySearch.title')}</h2>
-        <div className="mt-4 space-y-3">
-          <div className="rounded-card border border-slate-200 bg-white p-4">
-            <p className="text-[16px] text-vigil-body">{t('familySearch.honduras')}</p>
-          </div>
-          <div className="rounded-card border border-slate-200 bg-white p-4">
-            <p className="text-[16px] text-vigil-body">{t('familySearch.argentina')}</p>
-          </div>
-          <div className="rounded-card border border-slate-200 bg-white p-4">
-            <p className="text-[16px] text-vigil-body">{t('familySearch.colombia')}</p>
-          </div>
+      {/* RCF family search belongs on /buscar — not donation channels */}
+      <section className="mt-10 rounded-card border border-slate-200 bg-vigil-cloud p-4">
+        <h2 className="text-[17px] font-medium text-vigil-ink">{t('familySearch.relocatedTitle')}</h2>
+        <p className="mt-2 text-[16px] text-vigil-body">{t('familySearch.relocatedBody')}</p>
+        <div className="mt-3 flex flex-wrap gap-3">
+          <Link
+            href="/buscar"
+            className="inline-flex min-h-[44px] items-center text-[16px] font-medium text-vigil-blue underline-offset-2 hover:underline"
+          >
+            {t('familySearch.buscarLink')} →
+          </Link>
+          <Link
+            href="/red"
+            className="inline-flex min-h-[44px] items-center text-[16px] font-medium text-vigil-blue underline-offset-2 hover:underline"
+          >
+            {t('familySearch.redLink')} →
+          </Link>
         </div>
       </section>
 
@@ -112,12 +153,10 @@ export default async function ComoAyudarPage() {
         <div className="mt-4 space-y-3">
           {displayOrgs.map((org) => {
             const desc =
-              locale === 'en' && 'description_en' in org && org.description_en
+              locale === 'en' && org.description_en
                 ? org.description_en
-                : 'description_es' in org
-                  ? org.description_es
-                  : null
-            const link = 'donation_link' in org ? org.donation_link : null
+                : org.description_es
+            const link = org.donation_link
             return (
               <article
                 key={org.name}
@@ -144,34 +183,58 @@ export default async function ComoAyudarPage() {
         </div>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('teams.title')}</h2>
-        <p className="mt-2 text-[16px] text-slate-600">{t('teams.summary')}</p>
-        <p className="mt-1 font-mono text-[13px] text-vigil-muted">{t('teams.source')}</p>
-        <div className="mt-4 space-y-4">
-          <div>
-            <h3 className="text-[17px] font-medium">{t('teams.americas')}</h3>
-            <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.americas.join(' · ')}</p>
+      {teamsDisposition.disposition === 'show' ? (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('teams.title')}</h2>
+          <p className="mt-2 text-[16px] text-slate-600">{t('teams.summary')}</p>
+          <p className="mt-1 font-mono text-[13px] text-vigil-muted">{t('teams.source')}</p>
+          <div className="mt-4 space-y-4">
+            <div>
+              <h3 className="text-[17px] font-medium">{t('teams.americas')}</h3>
+              <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.americas.join(' · ')}</p>
+            </div>
+            <div>
+              <h3 className="text-[17px] font-medium">{t('teams.europe')}</h3>
+              <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.europe.join(' · ')}</p>
+            </div>
+            <div>
+              <h3 className="text-[17px] font-medium">{t('teams.asia')}</h3>
+              <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.asia.join(' · ')}</p>
+            </div>
           </div>
-          <div>
-            <h3 className="text-[17px] font-medium">{t('teams.europe')}</h3>
-            <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.europe.join(' · ')}</p>
-          </div>
-          <div>
-            <h3 className="text-[17px] font-medium">{t('teams.asia')}</h3>
-            <p className="mt-1 text-[16px] text-slate-600">{COUNTRIES.asia.join(' · ')}</p>
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="mt-10 rounded-card border border-slate-200 bg-vigil-cloud p-4">
+          <h2 className="text-[17px] font-medium text-vigil-ink">{t('teams.title')}</h2>
+          <p className="mt-2 text-[16px] text-vigil-body">{t('teams.suppressed')}</p>
+          <a
+            href="https://reliefweb.int/country/ven"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex min-h-[44px] items-center text-[16px] text-vigil-blue underline-offset-2 hover:underline"
+          >
+            ReliefWeb Venezuela →
+          </a>
+        </section>
+      )}
 
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('ofac.title')}</h2>
-        <p className="mt-2 text-[16px] text-slate-600">{t('ofac.note')}</p>
-      </section>
+      {ofacDisposition.disposition !== 'suppressed' && (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('ofac.title')}</h2>
+          <p className="mt-2 text-[16px] text-slate-600">{t('ofac.note')}</p>
+          {ofacDisposition.disposition === 'expired' && (
+            <p className="mt-2 text-[13px] font-medium text-status-unverified">{t('expiredBadge')}</p>
+          )}
+        </section>
+      )}
 
       <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{t('transfers.title')}</h2>
-        <p className="mt-2 text-[16px] text-slate-600">{t('transfers.note')}</p>
+        {riaDisposition.disposition === 'expired' ? (
+          <p className="mt-2 text-[16px] text-slate-600">{t('transfers.noteExpired')}</p>
+        ) : (
+          <p className="mt-2 text-[16px] text-slate-600">{t('transfers.note')}</p>
+        )}
         <p className="mt-1 font-mono text-[13px] text-vigil-muted">{t('transfers.source')}</p>
         <div className="mt-4 space-y-3">
           <div className="rounded-card border border-slate-200 bg-white p-4">
@@ -193,17 +256,23 @@ export default async function ComoAyudarPage() {
         </a>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('collection.title')}</h2>
-        <div className="mt-4 space-y-3">
-          {COLLECTION_POINTS.map((point) => (
-            <div key={point.name} className="rounded-card border border-slate-200 bg-white p-4">
-              <h3 className="text-[17px] font-medium text-vigil-ink">{point.name}</h3>
-              <p className="mt-1 text-[16px] text-slate-600">{point.note}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {collectionPoints.length > 0 && (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('collection.title')}</h2>
+          <div className="mt-4 space-y-3">
+            {collectionPoints.map((point) => (
+              <div key={point.name} className="rounded-card border border-slate-200 bg-white p-4">
+                <h3 className="text-[17px] font-medium text-vigil-ink">{point.name}</h3>
+                <p className="mt-1 text-[16px] text-slate-600">
+                  {'noteKey' in point && point.noteKey === 'ucv'
+                    ? t('collection.ucvNote')
+                    : point.note}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <Link href="/voluntarios" className="mt-8 inline-block text-[16px] text-vigil-blue underline">
         {t('volunteerLink')} →

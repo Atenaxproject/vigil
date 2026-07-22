@@ -5,6 +5,22 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-22 (prompts 66–68)
+
+### Fixed
+- **Frozen aftershock banner** — root cause was crisis-pinned USGS `starttime` (cumulative M4+ = 20 forever). Banner now uses a **rolling 7-day** window; map markers use **rolling 30-day**. Layout is `force-dynamic`.
+- **Weather bar `Venezuela: —`** — Caracas clock renders immediately client-side; no longer waits on Open-Meteo.
+- **Expired /como-ayudar claims** — Ria waiver past 2026-07-15 shows expired notice; OCHA peak USAR figures and UCV "activo el 27 jun" suppressed per 63 staleness; RCF links relocated off the donation page.
+
+### Added
+- **Feed health** — migration `016_feed_health`; last-success timestamps; stale/unavailable seismic UI; Admin feed panel.
+- **Content expiry helper** — `content-expiry.ts` (`expiresAt` / `verifiedAt` / suppress + donation org dedupe).
+- **Vigil Watch /monitor** — nine hazard adapters, EQ cross-source clustering, migration `017_hazard_events` + kill switch (`platform_settings` / `VIGIL_MONITOR_PUBLIC_ENABLED`), cron `/api/cron/hazards`, nav entry.
+- Watch regions: Canada wildfire belt, East/SE Asia.
+
+### Archived
+- Root prompts `66`–`68` → `docs/build-process/66-full-platform-audit.md`, `67-live-data-freshness-map.md`, `68-vigil-watch-global-monitor.md`.
+
 ## [Unreleased] — 2026-07-21 (launch readiness P1: 63–65)
 
 ### Added

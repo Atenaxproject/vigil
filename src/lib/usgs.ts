@@ -1,9 +1,16 @@
 import { CRISIS_CONFIG, getDataFeed } from '@/config/crisis.config'
+import { usgsSourceUrl } from '@/lib/feed-health'
+import { recordFeedHealth } from '@/lib/feed-health-server'
 import type { SeismicEvent } from '@/types/vigil.types'
 
 const USGS_FEED = getDataFeed('usgs')
 const BASE = USGS_FEED?.url ?? 'https://earthquake.usgs.gov/fdsnws/event/1/query'
 const REVALIDATE = USGS_FEED?.cacheSeconds ?? 300
+
+/** Banner / alert count: true rolling window so M4+ ages out (prompt 67). */
+export const ALERT_WINDOW_DAYS = CRISIS_CONFIG.seismic.alertWindowDays ?? 7
+/** Map markers: longer rolling window for situational context. */
+export const MAP_WINDOW_DAYS = CRISIS_CONFIG.seismic.mapWindowDays ?? 30
 
 interface UsgsFeature {
   id: string
@@ -22,6 +29,15 @@ interface UsgsGeoJson {
   features: UsgsFeature[]
 }
 
+export interface SeismicFetchResult {
+  events: SeismicEvent[]
+  fetchedAt: string
+  starttime: string
+  windowDays: number
+  ok: boolean
+  sourceUrl: string
+}
+
 export function getMagnitudeColor(mag: number): string {
   if (mag < 2.5) return '#22c55e'
   if (mag < 4.0) return '#f59e0b'
@@ -30,17 +46,19 @@ export function getMagnitudeColor(mag: number): string {
   return '#7c3aed'
 }
 
-export async function getVenezuelaSeismicEvents(): Promise<SeismicEvent[]> {
+function rollingStartIso(windowDays: number): string {
+  // Pure rolling window — do NOT floor at crisisDate. A crisis-pinned
+  // starttime produced the frozen "20 réplicas M4.0+" banner (prompt 67).
+  return new Date(Date.now() - windowDays * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+}
+
+async function fetchUsgsWindow(windowDays: number): Promise<SeismicFetchResult> {
+  const fetchedAt = new Date().toISOString()
+  const sourceUrl = usgsSourceUrl()
+  const starttime = rollingStartIso(windowDays)
+
   try {
     const { mapBounds, seismic } = CRISIS_CONFIG
-    // Rolling 30-day window with the crisis date as a floor: keeps the feed
-    // current as the sequence ages instead of pinning to June 24 forever
-    // (limit 300 newest-first would eventually fill with old events).
-    const rollingStart = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
-    const crisisStart = new Date(`${seismic.startDate}T00:00:00Z`)
-    const starttime = (rollingStart > crisisStart ? rollingStart : crisisStart)
-      .toISOString()
-      .slice(0, 10)
     const params = new URLSearchParams({
       format: 'geojson',
       minlatitude: String(mapBounds.minLat),
@@ -54,13 +72,22 @@ export async function getVenezuelaSeismicEvents(): Promise<SeismicEvent[]> {
     })
 
     const res = await fetch(`${BASE}?${params}`, {
-      next: { revalidate: REVALIDATE },
+      next: { revalidate: REVALIDATE, tags: ['usgs-seismic'] },
     })
 
-    if (!res.ok) return []
+    if (!res.ok) {
+      await recordFeedHealth({
+        feedId: 'usgs',
+        label: 'USGS seismic',
+        ok: false,
+        error: `HTTP ${res.status}`,
+        meta: { windowDays, starttime },
+      })
+      return { events: [], fetchedAt, starttime, windowDays, ok: false, sourceUrl }
+    }
 
     const data = (await res.json()) as UsgsGeoJson
-    return data.features
+    const events = data.features
       .filter((f) => f.properties.mag !== null)
       .map((f) => ({
         id: f.id,
@@ -73,8 +100,63 @@ export async function getVenezuelaSeismicEvents(): Promise<SeismicEvent[]> {
         url: f.properties.url,
         source: 'USGS' as const,
       }))
-  } catch {
-    return []
+
+    await recordFeedHealth({
+      feedId: 'usgs',
+      label: 'USGS seismic',
+      ok: true,
+      itemCount: events.length,
+      meta: { windowDays, starttime },
+    })
+
+    return { events, fetchedAt, starttime, windowDays, ok: true, sourceUrl }
+  } catch (err) {
+    await recordFeedHealth({
+      feedId: 'usgs',
+      label: 'USGS seismic',
+      ok: false,
+      error: err instanceof Error ? err.message : 'unknown',
+      meta: { windowDays, starttime },
+    })
+    return { events: [], fetchedAt, starttime, windowDays, ok: false, sourceUrl }
+  }
+}
+
+/** Map + feed: rolling MAP_WINDOW_DAYS (events age out). */
+export async function getVenezuelaSeismicEvents(): Promise<SeismicEvent[]> {
+  const result = await fetchUsgsWindow(MAP_WINDOW_DAYS)
+  return result.events
+}
+
+/** Full result with freshness metadata for banner / staleness UI. */
+export async function getVenezuelaSeismicFetch(
+  windowDays: number = MAP_WINDOW_DAYS
+): Promise<SeismicFetchResult> {
+  return fetchUsgsWindow(windowDays)
+}
+
+/**
+ * M4.0+ count for the emergency banner — rolling ALERT_WINDOW_DAYS only.
+ * Crisis-pinned cumulative counts freeze once the sequence plateaus.
+ */
+export async function getAlertAftershockCount(): Promise<{
+  count: number
+  fetchedAt: string
+  ok: boolean
+  sourceUrl: string
+  windowDays: number
+}> {
+  const result = await fetchUsgsWindow(ALERT_WINDOW_DAYS)
+  const threshold = CRISIS_CONFIG.seismic.alertThresholdMag
+  const count = result.ok
+    ? result.events.filter((e) => e.magnitude >= threshold).length
+    : 0
+  return {
+    count,
+    fetchedAt: result.fetchedAt,
+    ok: result.ok,
+    sourceUrl: result.sourceUrl,
+    windowDays: ALERT_WINDOW_DAYS,
   }
 }
 

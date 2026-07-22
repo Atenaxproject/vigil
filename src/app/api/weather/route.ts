@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { recordFeedHealth } from '@/lib/feed-health-server'
 
 const LOCATIONS = [
   { name: 'Caracas', lat: 10.4806, lng: -66.9036 },
@@ -16,7 +17,19 @@ function mapWeatherCode(code: number): 'clear' | 'cloudy' | 'rain' | 'storm' {
   return 'cloudy'
 }
 
+function venezuelaTimeNow(): string {
+  return new Date().toLocaleString('es-VE', {
+    timeZone: 'America/Caracas',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  })
+}
+
 export async function GET() {
+  const venezuelaTime = venezuelaTimeNow()
+  const fetchedAt = new Date().toISOString()
+
   try {
     const results = await Promise.all(
       LOCATIONS.map(async (loc) => {
@@ -25,7 +38,7 @@ export async function GET() {
           `&current=temperature_2m,precipitation_probability,weather_code` +
           `&timezone=America/Caracas`
 
-        const res = await fetch(url, { next: { revalidate: 1800 } })
+        const res = await fetch(url, { next: { revalidate: 1800, tags: ['open-meteo'] } })
         if (!res.ok) throw new Error('weather fetch failed')
         const data = await res.json()
         return {
@@ -38,24 +51,26 @@ export async function GET() {
       })
     )
 
-    const venezuelaTime = new Date().toLocaleString('es-VE', {
-      timeZone: 'America/Caracas',
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
+    await recordFeedHealth({
+      feedId: 'open-meteo',
+      label: 'Open-Meteo weather',
+      ok: true,
+      itemCount: results.length,
     })
 
-    return NextResponse.json({ locations: results, venezuelaTime })
-  } catch {
+    return NextResponse.json({ locations: results, venezuelaTime, fetchedAt })
+  } catch (err) {
+    await recordFeedHealth({
+      feedId: 'open-meteo',
+      label: 'Open-Meteo weather',
+      ok: false,
+      error: err instanceof Error ? err.message : 'unknown',
+    })
     return NextResponse.json(
       {
         locations: [],
-        venezuelaTime: new Date().toLocaleString('es-VE', {
-          timeZone: 'America/Caracas',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true,
-        }),
+        venezuelaTime,
+        fetchedAt,
         error: true,
       },
       { status: 503 }

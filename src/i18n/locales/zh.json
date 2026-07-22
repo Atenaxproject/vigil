@@ -32,7 +32,8 @@
     "propertyAssessment": "Structural Assessment",
     "help": "Help Center",
     "helpShort": "Help",
-    "preparedness": "防灾准备"
+    "preparedness": "防灾准备",
+    "monitor": "全球监测"
   },
   "a11y": {
     "skipToContent": "跳到主要内容"
@@ -59,7 +60,11 @@
     "secondhandNote": "Every number shows source and verification date.",
     "carrierCodes": "Emergency numbers by carrier",
     "servicePublic": "Public service",
-    "servicePrivate": "Private service · may have a cost"
+    "servicePrivate": "Private service · may have a cost",
+    "aftershockCount": "{count} 次 M4.0+ 余震（{days}天）",
+    "seismicStale": "数据过期",
+    "seismicUnavailable": "地震数据不可用 · USGS",
+    "seismicFetchedAt": "USGS 最近读取: {time}"
   },
   "missing": {
     "title": "失踪人员",
@@ -247,7 +252,11 @@
     "submitError": "Failed to submit",
     "exchangeHint": "Looking to exchange goods or services with another person?",
     "exchangeLink": "Go to Exchange",
-    "cavSourceBadge": "via Centros de Ayuda Venezuela"
+    "cavSourceBadge": "via Centros de Ayuda Venezuela",
+    "seismicFreshness": {
+      "stale": "地震数据超过30分钟。请在此核实",
+      "unavailable": "实时地震数据不可用。请查看官方来源："
+    }
   },
   "volunteers": {
     "title": "志愿者注册",
@@ -507,7 +516,8 @@
       "source": "来源：UN OCHA，2026 年 6 月 27 日",
       "americas": "美洲",
       "europe": "欧洲",
-      "asia": "亚洲/其他"
+      "asia": "亚洲/其他",
+      "suppressed": "Peak USAR team figures (OCHA, 27 Jun 2026) are suppressed: older than 21 days and peak-response, not current deployment. See current Situation Reports."
     },
     "transfers": {
       "title": "向委内瑞拉汇款",
@@ -520,23 +530,30 @@
       "banesco": {
         "title": "Banesco——配捐计划",
         "note": "Banesco 已宣布为地震相关捐款提供配捐计划。请通过银行官方渠道了解最新详情。"
-      }
+      },
+      "noteExpired": "The Ria Money Transfer fee waiver (through 15 July 2026) has expired. Check current fees on their official site before sending."
     },
     "collection": {
-      "title": "物资收集点"
+      "title": "物资收集点",
+      "ucvNote": "Historical: collection point reported active 27 June — confirm current status before traveling."
     },
     "volunteerLink": "注册为志愿者",
     "familySearch": {
       "title": "Family tracing — International Red Cross",
       "honduras": "Honduran Red Cross — +504-9849-5556 · busquedarcf@cruzroja.org.hn",
       "argentina": "Argentine Red Cross — cruzroja.org.ar/rcf/",
-      "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
+      "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org",
+      "relocatedTitle": "Looking for a family member?",
+      "relocatedBody": "Restoring Family Links (Red Cross) and DTV network search live under Search and Network — they are not donation channels.",
+      "buscarLink": "Go to Search",
+      "redLink": "View DTV network"
     },
     "directoryLink": "View full organization directory",
     "ofac": {
       "title": "OFAC 第60号通用许可证（美国）",
       "note": "美国财政部（OFAC）于2026年6月25日签发第60号通用许可证，尽管制裁仍然有效，仍授权与委内瑞拉地震人道主义援助相关的交易。该许可证于2026年10月23日到期。来源：state.gov。Vigil 不提供法律咨询——请查阅官方来源。"
-    }
+    },
+    "expiredBadge": "This promotion has ended — verify current terms at the source."
   },
   "crisisInfo": {
     "title": "已验证的危机信息",
@@ -790,7 +807,8 @@
   },
   "weather": {
     "venezuela": "委内瑞拉",
-    "rain": "降雨"
+    "rain": "降雨",
+    "unavailable": "天气不可用"
   },
   "calendar": {
     "title": "事件日历",
@@ -1529,5 +1547,18 @@
       "note": "We reply in Spanish and English. Include your deadline and outlet. Vigil does not solicit donations."
     },
     "informacionLink": "See live information hub"
+  },
+  "monitor": {
+    "title": "Vigil Watch — Global monitor",
+    "subtitle": "Official agency alerts. Vigil only relays — it does not issue its own warnings.",
+    "relayBadge": "Automated relay · not Vigil-verified",
+    "disclaimer": "Each item comes from the issuing agency. Authority is always the linked official source. No AI commentary. No casualty figures.",
+    "empty": "No active alerts in watched feeds right now.",
+    "officialSource": "View official source",
+    "agencyAuthoritative": "The issuing agency is authoritative. Vigil does not issue this alert.",
+    "alsoReported": "Also reported by",
+    "attribution": "Sources: USGS, GDACS, NOAA NHC, NWS, NASA FIRMS, NOAA Tsunami, USGS Water, ReliefWeb, Open-Meteo.",
+    "disabled": "The public monitor is temporarily disabled (kill switch).",
+    "backHome": "Back to home"
   }
 }

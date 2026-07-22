@@ -32,7 +32,8 @@
     "propertyAssessment": "Structural Assessment",
     "help": "Help Center",
     "helpShort": "Help",
-    "preparedness": "Подготовка"
+    "preparedness": "Подготовка",
+    "monitor": "Глобальный монитор"
   },
   "a11y": {
     "skipToContent": "Перейти к основному содержимому"
@@ -59,7 +60,11 @@
     "secondhandNote": "Every number shows source and verification date.",
     "carrierCodes": "Emergency numbers by carrier",
     "servicePublic": "Public service",
-    "servicePrivate": "Private service · may have a cost"
+    "servicePrivate": "Private service · may have a cost",
+    "aftershockCount": "{count} афтершоков M4.0+ ({days}д)",
+    "seismicStale": "устаревшие данные",
+    "seismicUnavailable": "Сейсмические данные недоступны · USGS",
+    "seismicFetchedAt": "Последнее чтение USGS: {time}"
   },
   "missing": {
     "title": "Пропавшие люди",
@@ -247,7 +252,11 @@
     "submitError": "Failed to submit",
     "exchangeHint": "Looking to exchange goods or services with another person?",
     "exchangeLink": "Go to Exchange",
-    "cavSourceBadge": "via Centros de Ayuda Venezuela"
+    "cavSourceBadge": "via Centros de Ayuda Venezuela",
+    "seismicFreshness": {
+      "stale": "Сейсмические данные старше 30 мин. Проверьте на",
+      "unavailable": "Данные в реальном времени недоступны. Официальный источник:"
+    }
   },
   "volunteers": {
     "title": "Регистрация волонтёров",
@@ -507,7 +516,8 @@
       "source": "Источник: UN OCHA, 27 июня 2026",
       "americas": "Америка",
       "europe": "Европа",
-      "asia": "Азия/другое"
+      "asia": "Азия/другое",
+      "suppressed": "Peak USAR team figures (OCHA, 27 Jun 2026) are suppressed: older than 21 days and peak-response, not current deployment. See current Situation Reports."
     },
     "transfers": {
       "title": "Отправка денег в Венесуэлу",
@@ -520,23 +530,30 @@
       "banesco": {
         "title": "Banesco — пожертвования с удвоением",
         "note": "Banesco объявил о программах удвоения пожертвований, связанных с землетрясением. Актуальные детали — в официальных каналах банка."
-      }
+      },
+      "noteExpired": "The Ria Money Transfer fee waiver (through 15 July 2026) has expired. Check current fees on their official site before sending."
     },
     "collection": {
-      "title": "Физические пункты сбора"
+      "title": "Физические пункты сбора",
+      "ucvNote": "Historical: collection point reported active 27 June — confirm current status before traveling."
     },
     "volunteerLink": "Зарегистрироваться волонтёром",
     "familySearch": {
       "title": "Family tracing — International Red Cross",
       "honduras": "Honduran Red Cross — +504-9849-5556 · busquedarcf@cruzroja.org.hn",
       "argentina": "Argentine Red Cross — cruzroja.org.ar/rcf/",
-      "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org"
+      "colombia": "Colombian Red Cross — +57-321-213-9525 · rcf@cruzrojacolombiana.org",
+      "relocatedTitle": "Looking for a family member?",
+      "relocatedBody": "Restoring Family Links (Red Cross) and DTV network search live under Search and Network — they are not donation channels.",
+      "buscarLink": "Go to Search",
+      "redLink": "View DTV network"
     },
     "directoryLink": "View full organization directory",
     "ofac": {
       "title": "Генеральная лицензия OFAC 60 (США)",
       "note": "Министерство финансов США (OFAC) выпустило Генеральную лицензию 60 25 июня 2026 года, разрешающую операции, связанные с гуманитарной помощью после землетрясения в Венесуэле, несмотря на действующие санкции. Лицензия действует до 23 октября 2026 года. Источник: state.gov. Vigil не предоставляет юридических консультаций — обращайтесь к официальному источнику."
-    }
+    },
+    "expiredBadge": "This promotion has ended — verify current terms at the source."
   },
   "crisisInfo": {
     "title": "Проверенная информация о кризисе",
@@ -790,7 +807,8 @@
   },
   "weather": {
     "venezuela": "Венесуэла",
-    "rain": "дождь"
+    "rain": "дождь",
+    "unavailable": "погода недоступна"
   },
   "calendar": {
     "title": "Календарь событий",
@@ -1529,5 +1547,18 @@
       "note": "We reply in Spanish and English. Include your deadline and outlet. Vigil does not solicit donations."
     },
     "informacionLink": "See live information hub"
+  },
+  "monitor": {
+    "title": "Vigil Watch — Global monitor",
+    "subtitle": "Official agency alerts. Vigil only relays — it does not issue its own warnings.",
+    "relayBadge": "Automated relay · not Vigil-verified",
+    "disclaimer": "Each item comes from the issuing agency. Authority is always the linked official source. No AI commentary. No casualty figures.",
+    "empty": "No active alerts in watched feeds right now.",
+    "officialSource": "View official source",
+    "agencyAuthoritative": "The issuing agency is authoritative. Vigil does not issue this alert.",
+    "alsoReported": "Also reported by",
+    "attribution": "Sources: USGS, GDACS, NOAA NHC, NWS, NASA FIRMS, NOAA Tsunami, USGS Water, ReliefWeb, Open-Meteo.",
+    "disabled": "The public monitor is temporarily disabled (kill switch).",
+    "backHome": "Back to home"
   }
 }

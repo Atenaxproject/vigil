@@ -67,6 +67,9 @@ This does not block the listing. It does mean:
 ### 1.2c — Press page
 **[SHIPPED 2026-07-21 prompt 65]** `/prensa` enhanced with boilerplate copy, provenance fact sheet, kit ZIP, coverage section hidden while empty.
 
+### 1.2d — Live data freshness + content expiry + Vigil Watch
+**[SHIPPED 2026-07-22 prompts 67 → 66 → 68]** Aftershock banner uses rolling 7d USGS (was crisis-pinned cumulative "20"); feed_health + stale markers; `/como-ayudar` expiry/suppress; `/monitor` global hazard relay with kill switch. Orlando: apply migrations `016_feed_health` + `017_hazard_events`.
+
 ### 1.3 — Minors protection policy
 **Gap. Vigil has no equivalent page.**
 
