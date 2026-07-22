@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { formatDistanceToNow } from 'date-fns'
@@ -10,7 +10,10 @@ import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { ConnectivityInfoCard } from '@/components/informacion/ConnectivityInfoCard'
-import type { InfrastructureStatus } from '@/types/vigil.types'
+import { EmergencyDirectory } from '@/components/directory/EmergencyDirectory'
+import { SourcedFigureCard, StatsRefreshTimestamp } from '@/components/stats/SourcedFigureCard'
+import { getFigureFreshness } from '@/lib/provenance'
+import type { InfrastructureStatus, SourcedFigureRow } from '@/types/vigil.types'
 
 interface LiveQuake {
   magnitude: number | null
@@ -53,14 +56,14 @@ interface LiveInfoResponse {
   gdacsEvents?: GDACSEvent[]
 }
 
-const STATS_VERIFIED_DATE = '2026-07-01'
-
 export function InformacionLive() {
   const t = useTranslations('liveInfo')
   const tc = useTranslations('crisisInfo')
   const [liveData, setLiveData] = useState<LiveInfoResponse | null>(null)
   const [rssItems, setRssItems] = useState<RssNewsItem[]>([])
   const [infra, setInfra] = useState<InfrastructureStatus[]>([])
+  const [figures, setFigures] = useState<SourcedFigureRow[]>([])
+  const [figuresUpdated, setFiguresUpdated] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [clock, setClock] = useState(Date.now())
   const [locale, setLocale] = useState('es')
@@ -71,9 +74,10 @@ export function InformacionLive() {
 
   const fetchLive = useCallback(async () => {
     try {
-      const [liveRes, rssRes] = await Promise.all([
+      const [liveRes, rssRes, figuresRes] = await Promise.all([
         fetch('/api/live-info'),
         fetch('/api/news-rss'),
+        fetch('/api/sourced-figures'),
       ])
       if (liveRes.ok) {
         setLiveData(await liveRes.json())
@@ -81,6 +85,14 @@ export function InformacionLive() {
       if (rssRes.ok) {
         const rssData = (await rssRes.json()) as { items?: RssNewsItem[] }
         setRssItems(rssData.items ?? [])
+      }
+      if (figuresRes.ok) {
+        const figData = (await figuresRes.json()) as {
+          figures?: SourcedFigureRow[]
+          lastUpdated?: string
+        }
+        setFigures(figData.figures ?? [])
+        setFiguresUpdated(figData.lastUpdated ?? new Date().toISOString())
       }
     } catch {
       /* keep previous data */
@@ -115,47 +127,26 @@ export function InformacionLive() {
       .on('postgres_changes', { event: '*', schema: 'public', table: 'infrastructure_status' }, () => {
         void fetchInfra()
       })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'sourced_figures' }, () => {
+        void fetchLive()
+      })
       .subscribe()
     return () => {
       void supabase.removeChannel(channel)
     }
-  }, [fetchInfra])
+  }, [fetchInfra, fetchLive])
 
   const dateLocale = locale === 'es' ? es : enUS
   const lastUpdatedLabel = liveData?.lastUpdated
     ? formatDistanceToNow(new Date(liveData.lastUpdated), { addSuffix: true, locale: dateLocale })
     : '—'
 
-  const stats = [
-    { label: tc('stats.deaths'), value: '2,295', source: tc('stats.deathsSource') },
-    { label: tc('stats.injured'), value: '11,000+', source: tc('stats.injuredSource') },
-    {
-      label: tc('stats.missing'),
-      value: tc('stats.missingValue'),
-      source: tc('stats.missingSource'),
-      qualifier: tc('stats.missingQualifier'),
-    },
-    { label: tc('stats.displaced'), value: '12,000+', source: tc('stats.displacedSource') },
-    { label: tc('stats.buildings'), value: '770+', source: tc('stats.buildingsSource') },
-  ]
-
-  const hotlines = CRISIS_CONFIG.emergencyContacts.map((contact) => ({
-    label: locale === 'en' ? contact.label_en : contact.label_es,
-    value: contact.numbers.join(' · '),
-    carrierAccess: 'carrierAccess' in contact ? contact.carrierAccess : undefined,
-    source: contact.source,
-    verified: contact.verified,
-  }))
-
-  const additionalHotlines = [
-    { label: tc('hotlines.additional.cicpc'), value: '(0212) 571-3533' },
-    { label: tc('hotlines.additional.bomberosChacao'), value: '(0212) 265-3261' },
-    { label: tc('hotlines.additional.policiaBaruta'), value: '(0212) 943-2855' },
-    { label: tc('hotlines.additional.policiaElHatillo'), value: '(0212) 961-1682' },
-    { label: tc('hotlines.additional.defensaCivil'), value: '(0212) 662-6759' },
-    { label: tc('hotlines.additional.emergenciasDigitel'), value: '112' },
-    { label: tc('hotlines.additional.transito'), value: '167' },
-  ]
+  const visibleInfra = useMemo(() => {
+    return infra.filter((item) => {
+      const verified = item.verified_at ?? item.updated_at
+      return getFigureFreshness(verified) !== 'expired'
+    })
+  }, [infra])
 
   const officialSources = CRISIS_CONFIG.partnerLinks.filter((p) => p.type !== 'sister-platform')
 
@@ -169,6 +160,8 @@ export function InformacionLive() {
     const key = metric as 'electricity' | 'water' | 'roads' | 'airport' | 'telecom' | 'fuel'
     return t(`infraMetrics.${key}`)
   }
+
+  const psychosocial = CRISIS_CONFIG.psychosocialLines
 
   return (
     <div className="mx-auto max-w-3xl p-4 pb-24">
@@ -198,6 +191,15 @@ export function InformacionLive() {
             })}
           </p>
         )}
+        <div className="mt-3 space-y-1 text-[16px] text-slate-700">
+          {CRISIS_CONFIG.epicenters.map((e) => (
+            <p key={e.magnitude}>
+              <span className="font-semibold">Mw {e.magnitude}</span>
+              {' — '}
+              {locale === 'en' ? e.place_en : e.place_es}
+            </p>
+          ))}
+        </div>
         <a
           href="https://earthquake.usgs.gov/earthquakes/map/"
           target="_blank"
@@ -248,44 +250,58 @@ export function InformacionLive() {
 
       <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('stats.title')}</h2>
-        <p className="mt-1 font-mono text-[13px] text-status-unverified">
-          {t('manualStats', { date: STATS_VERIFIED_DATE })}
-        </p>
+        <p className="mt-1 text-[13px] text-status-unverified">{tc('stats.officialFraming')}</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {stats.map((stat) => (
-            <div key={stat.label} className="rounded-card border border-slate-200 bg-white p-4">
-              <p className="text-[13px] text-vigil-muted">{stat.label}</p>
-              <p className="mt-1 font-display text-xl font-semibold text-vigil-ink">{stat.value}</p>
-              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                {tc('source')}: {stat.source}
-              </p>
-              {'qualifier' in stat && stat.qualifier && (
-                <p className="mt-2 text-[13px] leading-snug text-status-unverified">{stat.qualifier}</p>
-              )}
-            </div>
+          {figures.map((fig) => (
+            <SourcedFigureCard
+              key={fig.key}
+              locale={locale}
+              figure={{
+                key: fig.key,
+                label: locale === 'en' ? fig.label_en : fig.label_es,
+                value: fig.value,
+                source: fig.source,
+                source_url: fig.source_url,
+                verified_at: fig.verified_at,
+                is_official: fig.is_official,
+              }}
+            />
           ))}
         </div>
+        {figuresUpdated && <StatsRefreshTimestamp lastUpdated={figuresUpdated} locale={locale} />}
         <p className="mt-4 text-[16px] text-slate-700">{tc('stats.medicalStrain')}</p>
       </section>
 
-      <section className="mt-10 rounded-card border border-slate-200 bg-white p-4">
+      <section className="mt-10 rounded-card border border-slate-200 bg-white p-4" id="apoyo-psicosocial">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('psychosocial.title')}</h2>
         <p className="mt-1 text-[13px] text-status-unverified">{tc('psychosocial.verifyNote')}</p>
+        <p className="mt-2 text-[13px] text-vigil-muted">{tc('psychosocial.scopeNote')}</p>
         <div className="mt-4 space-y-3">
-          <div className="rounded-card border border-slate-200 px-4 py-3">
-            <p className="text-[16px] font-medium text-vigil-ink">{tc('psychosocial.psicoLinea.name')}</p>
-            <p className="mt-1 font-mono text-[17px] text-vigil-blue">{tc('psychosocial.psicoLinea.phones')}</p>
-            <p className="mt-1 text-[13px] text-vigil-muted">{tc('psychosocial.psicoLinea.note')}</p>
-          </div>
-          <div className="rounded-card border border-slate-200 px-4 py-3">
-            <p className="text-[16px] font-medium text-vigil-ink">{tc('psychosocial.venemergencia.name')}</p>
-            <p className="mt-1 text-[16px] text-vigil-body">{tc('psychosocial.venemergencia.note')}</p>
-          </div>
+          {psychosocial.map((line) => (
+            <div key={line.id} className="rounded-card border border-slate-200 px-4 py-3">
+              <p className="text-[16px] font-medium text-vigil-ink">{line.name}</p>
+              {line.numbers.length > 0 && (
+                <p className="mt-1 font-mono text-[17px] text-vigil-blue">{line.numbers.join(' · ')}</p>
+              )}
+              <p className="mt-1 text-[13px] text-vigil-muted">
+                {locale === 'en' ? line.note_en : line.note_es}
+              </p>
+              {line.venezuela_only && (
+                <p className="mt-2 text-[13px] font-medium text-status-unverified">
+                  {tc('psychosocial.venezuelaOnly')}
+                </p>
+              )}
+              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                {tc('source')}: {line.source} · {line.verified_at}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="mt-10 rounded-card border border-slate-200 bg-vigil-cloud p-4">
         <p className="text-[16px] text-vigil-body">{tc('telecomFreeCalls')}</p>
+        <p className="mt-2 font-mono text-[13px] text-vigil-muted">{tc('telecomFreeCallsSource')}</p>
       </section>
 
       <section className="mt-10">
@@ -373,65 +389,48 @@ export function InformacionLive() {
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('infra.title')}</h2>
         <p className="mt-1 text-[13px] text-vigil-muted">{t('infraLive')}</p>
         <div className="mt-4 space-y-3">
-          {infra.length === 0 && (
+          {visibleInfra.length === 0 && (
             <p className="text-[16px] text-vigil-muted">{t('infraEmpty')}</p>
           )}
-          {infra.map((item) => (
-            <div
-              key={item.id}
-              className="flex items-center justify-between rounded-card border border-slate-200 bg-white px-4 py-3"
-            >
-              <div>
-                <p className="text-[16px] font-medium text-vigil-ink">
-                  {metricLabel(item.metric)} — {item.region}
-                </p>
-                {item.status_label && (
-                  <p className="text-[13px] text-vigil-muted">{item.status_label}</p>
-                )}
+          {visibleInfra.map((item) => {
+            const freshness = getFigureFreshness(item.verified_at ?? item.updated_at)
+            return (
+              <div
+                key={item.id}
+                className="flex items-center justify-between rounded-card border border-slate-200 bg-white px-4 py-3"
+              >
+                <div>
+                  <p className="text-[16px] font-medium text-vigil-ink">
+                    {metricLabel(item.metric)} — {item.region}
+                  </p>
+                  {item.status_label && (
+                    <p className="text-[13px] text-vigil-muted">{item.status_label}</p>
+                  )}
+                  {item.source && (
+                    <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                      {tc('source')}: {item.source}
+                      {item.verified_at
+                        ? ` · ${new Date(item.verified_at).toLocaleDateString(locale)}`
+                        : ''}
+                    </p>
+                  )}
+                  {freshness === 'stale' && (
+                    <p className="mt-1 text-[13px] text-status-unverified">
+                      {locale === 'en' ? 'May be outdated' : 'Puede estar desactualizado'}
+                    </p>
+                  )}
+                </div>
+                <span className="font-mono text-[17px] font-semibold text-vigil-ink">
+                  {item.status_percent != null ? `${item.status_percent}%` : '—'}
+                </span>
               </div>
-              <span className="font-mono text-[17px] font-semibold text-vigil-ink">
-                {item.status_percent != null ? `${item.status_percent}%` : '—'}
-              </span>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
 
       <section className="mt-10" id="emergency-contacts">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('hotlines.title')}</h2>
-        <p className="mt-1 text-[13px] text-status-unverified">{tc('hotlines.verifyNote')}</p>
-        <div className="mt-4 space-y-3">
-          {hotlines.map((line) => (
-            <div key={line.label} className="rounded-card border border-slate-200 bg-white p-4">
-              <p className="text-[16px] font-medium text-vigil-ink">{line.label}</p>
-              <p className="mt-1 font-mono text-[17px] text-vigil-blue">{line.value}</p>
-              {'carrierAccess' in line && line.carrierAccess && (
-                <p className="mt-1 text-[13px] text-vigil-muted">{line.carrierAccess}</p>
-              )}
-              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                {tc('source')}: {line.source}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('hotlines.additionalTitle')}</h2>
-        <div className="mt-4 space-y-2">
-          {additionalHotlines.map((line) => (
-            <div
-              key={line.label}
-              className="flex items-center justify-between rounded-card border border-slate-200 bg-white px-4 py-3"
-            >
-              <p className="text-[16px] text-vigil-body">{line.label}</p>
-              <p className="font-mono text-[16px] font-medium text-vigil-blue">{line.value}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-3 font-mono text-[13px] text-vigil-muted">
-          {tc('source')}: {tc('hotlines.additionalSource')}
-        </p>
+        <EmergencyDirectory locale={locale} />
       </section>
 
       <section className="mt-10">
@@ -452,7 +451,12 @@ export function InformacionLive() {
       </section>
 
       <p className="mt-8 font-mono text-[13px] text-vigil-muted" suppressHydrationWarning>
-        {t('clockTick', { time: formatDistanceToNow(liveData?.lastUpdated ? new Date(liveData.lastUpdated) : new Date(clock), { addSuffix: true, locale: dateLocale }) })}
+        {t('clockTick', {
+          time: formatDistanceToNow(
+            liveData?.lastUpdated ? new Date(liveData.lastUpdated) : new Date(clock),
+            { addSuffix: true, locale: dateLocale }
+          ),
+        })}
       </p>
     </div>
   )

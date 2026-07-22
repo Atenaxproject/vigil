@@ -21,10 +21,10 @@ If FUNVISIS doesn't expose a clean JSON/XML feed and only has an HTML page, chec
 
 ## 2. RECONCILE EMERGENCY CONTACT NUMBERS
 
-Cross-referencing `sos.yummyrides.com`'s emergency directory against what's likely in `crisis.config.ts` today surfaced a more complete set than the single 0800-RESCATE line documented in earlier Vigil references:
+Cross-referencing `sos.yummyrides.com`'s emergency directory against what's likely in `crisis.config.ts` today surfaced a more complete set than the single [former rescue-coordination label] line documented in earlier Vigil references:
 
 - Emergencias nacional — 911 (carrier access: Movistar 911, Digitel 112, Movilnet *1, Cantv 171)
-- Protección Civil — 0800-5588427 (alt: 0800 266-8446, 0800 262-4368)
+- Protección Civil — [do-not-ship-PC-alt] (alt: 0800 266-8446, 0800 262-4368)
 - Cruz Roja Venezolana — 0212-578-2516 (alt: 0212 571-2411)
 - FUNVISIS — 0212-257-5153 (alt: 0800 836-2567)
 

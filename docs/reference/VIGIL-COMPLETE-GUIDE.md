@@ -271,7 +271,7 @@ Key fields beyond the spec in `docs/architecture/CLAUDE.md`:
 
 ### Trust & resilience
 
-- Always-visible emergency banner (0800-RESCATE)
+- Always-visible emergency banner ([former rescue-coordination label])
 - Unverified badges on citizen submissions
 - Rate limiting per IP (middleware)
 - Offline form queue (`src/lib/offline-queue.ts`) for missing-person + map-marker

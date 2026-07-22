@@ -47,17 +47,19 @@
     }
   },
   "banner": {
-    "emergency": "Notfall:",
+    "emergency": "Emergency:",
     "hotline": "911",
     "hotlineNumber": "911",
     "fullDirectory": "Full directory",
     "moreNumbers": "More contacts",
-    "verifyBeforeCalling": "Vor dem Anruf prüfen",
-    "directory": "Verzeichnis",
-    "directoryTitle": "Notfallkontakte",
-    "unverified": "Ungeprüft",
-    "secondhandNote": "Vor dem Anruf prüfen — Nummern aus zweiter Hand, von Vigil noch nicht bestätigt.",
-    "carrierCodes": "Notrufnummern nach Anbieter"
+    "verifyBeforeCalling": "Verify before calling",
+    "directory": "Directory",
+    "directoryTitle": "Emergency contacts",
+    "unverified": "Unverified",
+    "secondhandNote": "Every number shows source and verification date.",
+    "carrierCodes": "Emergency numbers by carrier",
+    "servicePublic": "Public service",
+    "servicePrivate": "Private service · may have a cost"
   },
   "missing": {
     "title": "Vermisste Personen",
@@ -88,7 +90,9 @@
       "noResultsBothHint": "Reporting on both platforms expands the search network.",
       "errorTitle": "Suche konnte nicht abgeschlossen werden",
       "errorBody": "Es gab ein Verbindungsproblem. Versuche es erneut.",
-      "retry": "Erneut versuchen"
+      "retry": "Erneut versuchen",
+      "psychosocialPrompt": "If you need emotional support now:",
+      "psychosocialLink": "psychosocial support lines"
     },
     "status": {
       "missing": "Vermisst",
@@ -540,24 +544,25 @@
     "updated": "Aktualisiert: 29. Juni 2026",
     "source": "Quelle",
     "stats": {
-      "title": "Krisenstatistiken",
-      "deaths": "Bestätigte Todesfälle",
-      "injured": "Verletzte",
-      "missing": "Vermisste",
-      "missingValue": "~50.000 (Schätzung)",
-      "missingSource": "IRC / ABC News",
-      "missingQualifier": "Zahl in Prüfung — offizielle Bilanzen wiesen Abweichungen auf und können Wochen zur Konsolidierung brauchen.",
-      "deathsSource": "Nationalversammlung (Jorge Rodríguez), bestätigt durch NPR, ABC News, El Diario",
-      "injuredSource": "Nationalversammlung (Jorge Rodríguez), bestätigt durch NPR, ABC News, El Diario",
-      "displaced": "Vertriebene",
-      "displacedSource": "OCHA",
-      "buildings": "Eingestürzte Gebäude",
-      "buildingsSource": "OCHA",
-      "damage": "Direkter materieller Schaden",
-      "children": "Kinder in betroffenen Gebieten",
-      "rescueTeams": "Internationale Rettungsteams",
-      "aftershocks": "Bestätigte Nachbeben",
-      "medicalStrain": "Das betroffene Gebiet steht weiter unter medizinischem Druck: AP berichtet eine Woche nach dem Beben von unbehandelten Wunden und Infektionsrisiken."
+      "title": "Crisis statistics",
+      "deaths": "Confirmed deaths",
+      "injured": "Injured",
+      "missing": "People in the search network",
+      "missingValue": "See live statistics",
+      "missingSource": "DTV network (federated API)",
+      "missingQualifier": "Person-search figures update live from the DTV network — do not use static estimates.",
+      "deathsSource": "Asamblea Nacional",
+      "injuredSource": "Asamblea Nacional",
+      "displaced": "Displaced",
+      "displacedSource": "EFE / Asamblea Nacional",
+      "buildings": "Collapsed buildings",
+      "buildingsSource": "Asamblea Nacional / Oregon State University",
+      "damage": "Direct physical damage",
+      "children": "Children in affected areas",
+      "rescueTeams": "International rescue teams",
+      "aftershocks": "Confirmed aftershocks",
+      "medicalStrain": "The affected area remains under medical pressure. Official and independent figures may differ — Vigil shows both with attribution.",
+      "officialFraming": "Official figures come from Venezuelan government channels. Vigil publishes them attributed — not as independently verified. Where an independent analysis exists, it is shown alongside."
     },
     "states": {
       "title": "Am stärksten betroffene Bundesstaaten"
@@ -574,7 +579,7 @@
     },
     "hotlines": {
       "title": "Verifizierte Notfallnummern",
-      "rescate": "0800-RESCATE",
+      "rescate": "911",
       "redCross": "Venezolanisches Rotes Kreuz",
       "additionalTitle": "Weitere Notrufnummern",
       "additionalSource": "venezuelatebusca.com/resources",
@@ -601,19 +606,37 @@
       "title": "Zuverlässige Quellen zum Folgen"
     },
     "psychosocial": {
-      "title": "Psychosoziale Unterstützung",
-      "verifyNote": "Krisenhotlines — Verfügbarkeit vor dem Teilen prüfen.",
+      "title": "Psychosocial support",
+      "verifyNote": "Vigil only links. It does not operate, staff, or intermediate psychosocial support.",
+      "scopeNote": "Link directory — not a Vigil service.",
+      "venezuelaOnly": "Only reachable from inside Venezuela.",
       "psicoLinea": {
         "name": "PsicoLínea Venezuela (UCAB)",
-        "phones": "0414-127 78 82 · 0424-172 38 81",
-        "note": "Kostenlose psychologische Hilfe"
+        "phones": "0414-121-7882 · 0424-172-3981",
+        "note": "Free psychological care. Venezuela only."
       },
       "venemergencia": {
         "name": "Grupo Venemergencia",
-        "note": "Medizinische/psychologische Unterstützung — aktueller Kontakt über ihren Instagram-Account"
+        "note": "Venezuelan medical platform — use their published channels."
       }
     },
-    "telecomFreeCalls": "Movistar, O2 und MasOrange bieten während der Krise kostenlose Auslandsgespräche zwischen Spanien und Venezuela an."
+    "telecomFreeCalls": "Movistar, O2 and MasOrange are offering free international calls between Spain and Venezuela for the duration of the emergency.",
+    "directory": {
+      "title": "Emergency directory",
+      "subtitle": "National lines first. Defaults to La Guaira — the hardest-hit region in the federated network.",
+      "nationalTitle": "National lines",
+      "byStateTitle": "By state",
+      "stateLabel": "State",
+      "noLocalNumbers": "No verified local numbers for {state}. Use the national lines above.",
+      "servicePublic": "Public service",
+      "servicePrivate": "Private service · may have a cost",
+      "source": "Source",
+      "reportBad": "Didn't work",
+      "reportThanks": "Thanks",
+      "reportError": "Error — retry",
+      "reportedUnavailable": "Reported as unavailable"
+    },
+    "telecomFreeCallsSource": "Source: carrier announcements · editorial verification 2026-07"
   },
   "liveInfo": {
     "title": "Live-Informationszentrale",
@@ -933,8 +956,8 @@
     "unavailableBody": "The assistant is not available right now. For emergencies call 911. You can keep using the map, search, and directories as usual."
   },
   "estadisticas": {
-    "title": "Statistics by State",
-    "subtitle": "Combined search network and Vigil geographic breakdown",
+    "title": "Statistics",
+    "subtitle": "Combined search network, attributed official figures, and geographic breakdown",
     "source": "Vigil data, updated in real time",
     "empty": "Not enough geographic data yet.",
     "unknownEstado": "No state",
@@ -944,16 +967,31 @@
     "network": {
       "title": "Combined search network",
       "description": "Vigil works in network with <link>Desaparecidos Terremoto Venezuela</link>. Data refreshes automatically every 5 minutes.",
-      "dtvPersonas": "People on DTV network",
-      "dtvPersonasSub": "Desaparecidos Terremoto Venezuela",
+      "dtvPersonas": "People in DTV network",
+      "dtvPersonasSub": "Federated records (GET /personas)",
       "dtvCentros": "Centers and hospitals",
       "dtvCentrosSub": "Registered on DTV network",
       "dtvListas": "Center lists",
       "dtvListasSub": "Shelter groups",
       "vigilPersonas": "Reported on Vigil",
       "vigilPersonasSub": "Own database",
-      "attribution": "DTV data: source desaparecidosterremotovenezuela.com · Last updated: {time}",
-      "dtvUnavailable": "DTV metrics unavailable right now. Vigil data continues updating."
+      "attribution": "DTV network data · {source} — not Vigil's own figures",
+      "dtvUnavailable": "DTV metrics unavailable right now. Vigil data continues updating.",
+      "dtvSinContacto": "Still without contact",
+      "dtvSinContactoSub": "API: estado = sin-contacto",
+      "dtvLocalizados": "Located",
+      "dtvLocalizadosSub": "API: estado = localizado",
+      "dtvCentrosDetail": "{hospitals} hospitals · {centers} collection centers",
+      "attributionPermanent": "Federated figures from the DTV network. Never presented as Vigil's own data."
+    },
+    "dtvByEstadoTitle": "Geographic breakdown (DTV network)",
+    "dtvByEstadoSource": "API field: ubicacion.estado · Desaparecidos Terremoto Venezuela network",
+    "officialTitle": "Official and independent figures",
+    "officialFraming": "Official figures attributed to the issuer. Independent analysis labeled separately.",
+    "noCenter": {
+      "title": "Located without a registered center",
+      "body": "Of {total} located people in the DTV network, {count} ({pct}%) have no hospital or collection center registered. If you know where someone is, report the sighting.",
+      "cta": "Report a sighting or location"
     }
   },
   "red": {
@@ -980,10 +1018,12 @@
       "redQuipu": "Community aid and crisis coordination network.",
       "mapaDanosVenezuela": "Collaborative damage and infrastructure map.",
       "mapaNecesidadesVzla": "Zone-based live needs map (critical/partial/covered), community-reported and verified by collection centers.",
-      "encuentrameVzla": "Citizen family reunification search platform.",
+      "encuentrameVzla": "Locates people found and taken to hospitals.",
       "venezuelaEarthquakeMap": "Collaborative earthquake and damage map — external link, no data federation.",
       "yummySos": "Citizen emergency app — external link, no data federation.",
-      "centrosAyudaVenezuela": "Community collection center directory — data imported via public CSV."
+      "centrosAyudaVenezuela": "Community collection center directory — data imported via public CSV.",
+      "ayudaVenezuela": "Per-state emergency directory with per-entry verification dates.",
+      "tiltelyVenezuela": "Search and aid coordination with safety guidance."
     },
     "reportHint": "Each report on multiple platforms expands the search network.",
     "reportLink": "Report on Vigil"
@@ -1395,5 +1435,99 @@
     "sourcesTitle": "Offizielle Quellen",
     "sourcesNote": "Inhalte ausschließlich aus diesen Quellen adaptiert. Vigil erstellt keine eigenen Sicherheitsratschläge.",
     "lastReviewed": "Zuletzt geprüft: {date}"
+  },
+  "press": {
+    "metaTitle": "Press kit — Vigil",
+    "metaDescription": "Boilerplate, fact sheet, mission, story, and downloadable kit for media.",
+    "title": "Press",
+    "subtitle": "Verifiable material for journalists. No invented zeros. No donation ask.",
+    "boilerplate": {
+      "title": "Boilerplate",
+      "body": "Vigil is an open-source humanitarian platform built in response to the 24 June 2026 earthquakes in Venezuela. It provides missing-persons search by name and by photograph, a live crisis map with seismic aftershock data, resource coordination between people in need and people who can help, and verified directories of organizations and collection points. It operates in eight languages for international rescue teams and is API-federated with Desaparecidos Terremoto Venezuela. No registration is required, no money is solicited, and the code is public under the MIT license. Vigil is a project of YouTheWave, founded by Orlando Toro.",
+      "liveLabel": "Live URL",
+      "repoLabel": "Repository",
+      "copy": "Copy text",
+      "copied": "Copied"
+    },
+    "factSheet": {
+      "title": "Fact sheet",
+      "subtitle": "Figures with source and date — same provenance system as the rest of the platform.",
+      "dtvNote": "Person-search figures come from the DTV network (federated API) and are not Vigil's own data."
+    },
+    "stats": {
+      "title": "DTV network (live)",
+      "subtitle": "Attributed to desaparecidosterremotovenezuela.com",
+      "searchablePersons": "People in DTV network (GET /personas)",
+      "sinContacto": "Still without contact",
+      "localizados": "Located",
+      "centros": "Centers and hospitals",
+      "source": "Source: {source}",
+      "unavailable": "DTV metrics unavailable right now.",
+      "lastUpdated": "Last update: {time}",
+      "disclaimer": "Vigil does not invent or average figures. Official figures are labeled as such; federated figures carry DTV network attribution."
+    },
+    "mission": {
+      "title": "Mission",
+      "body": "Be present when it matters most. Build technology that works in the worst conditions — no signal, no registration, no barriers — so no family is left without a way to search."
+    },
+    "vision": {
+      "title": "Vision",
+      "body": "Next time, no starting from zero. A platform that deploys in hours for any country and any disaster, and arrives at each emergency better than the last."
+    },
+    "values": {
+      "title": "Values",
+      "honesty": "Honesty before speed",
+      "honestyBody": "Vigil's AI never invents information. When there is no data, it says so.",
+      "privacy": "Non-negotiable privacy",
+      "privacyBody": "Family contact data is never public. It is never shared with the Venezuelan government.",
+      "federate": "Federate, do not copy",
+      "federateBody": "Data from other platforms is integrated by agreement and API, never by scraping.",
+      "open": "Open by default",
+      "openBody": "Public code, MIT license, not for profit, no ads.",
+      "barrier": "No barriers",
+      "barrierBody": "No registration, no account, no app. Works on 2G and offline."
+    },
+    "story": {
+      "title": "The story",
+      "body": "48 hours. On 24 June 2026, during the Battle of Carabobo holiday, two earthquakes struck northern Venezuela 39 seconds apart: magnitude 7.2 near San Felipe, Yaracuy, and magnitude 7.5 near Yumare. They were the strongest in more than a century. Orlando Toro is Venezuelan and lives in Florida. Like hundreds of thousands in the diaspora, he spent that night trying to reach people who did not answer. He did not wait. In one overnight session he built and deployed Vigil. Vigil does not compete — it federates. What it adds is photo search, geographic breakdown to parish, eight languages, and a map that works on intermittent signal."
+    },
+    "assets": {
+      "title": "Assets",
+      "logoSvg": "Logo SVG",
+      "logoPng": "Logo PNG",
+      "ogImage": "Open Graph image",
+      "screenshots": "Platform screenshots"
+    },
+    "kit": {
+      "title": "Download press kit",
+      "subtitle": "One archive with one-pager, mission/vision/values, history, and fact sheet.",
+      "download": "Download kit (ZIP)",
+      "bulletinsNext": "Dated bulletins with hard numbers are the follow-on content task — not part of this initial kit."
+    },
+    "coverage": {
+      "title": "Coverage",
+      "emptyHint": "When published coverage exists, it will appear here with a link to the original."
+    },
+    "screenshots": {
+      "title": "Screenshots"
+    },
+    "screenshotDesktop": "Vigil on desktop",
+    "screenshotIphone": "Vigil on iPhone",
+    "screenshotIpad": "Vigil on iPad",
+    "screenshotLandscape": "Vigil on iPhone landscape",
+    "founder": {
+      "title": "Founder and contact",
+      "bio": "Orlando Toro, founder of YouTheWave. Typical response in 1–2 business days (Spanish and English). YouTheWave is a pre-incorporation project — not a registered 501(c)(3).",
+      "responseTime": "Expected response time: 1–2 business days."
+    },
+    "govExclusion": {
+      "title": "Commitment: government data exclusion",
+      "body": "Vigil publicly commits never to share user data with the Venezuelan government. This policy is architectural — not commercial."
+    },
+    "contact": {
+      "title": "Press contact",
+      "note": "We reply in Spanish and English. Include your deadline and outlet. Vigil does not solicit donations."
+    },
+    "informacionLink": "See live information hub"
   }
 }

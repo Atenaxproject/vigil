@@ -61,8 +61,8 @@ export const CRISIS_CONFIG = {
     defaultZoom: 7
   },
   emergency: {
-    hotline: '0800-7372282',
-    hotlineLabel: '0800-RESCATE',
+    hotline: '911',
+    hotlineLabel: '911',
     // VenApp intentionally excluded — see Vigil Privacy Policy section on
     // government data non-cooperation. VenApp has documented human rights concerns.
   },
@@ -442,7 +442,7 @@ The system is designed to be self-regulating:
 
 **Emergency Banner (always visible, cannot be dismissed):**
 ```
-🚨  Emergencias Venezuela: 0800-RESCATE (0800-7372282)  |  Intérpretes  |  Cruz Roja
+🚨  Emergencias Venezuela: 911 (Movistar 911 · Digitel 112 · Movilnet *1 · Cantv 171)  |  Directorio  |  Cruz Roja
 ```
 
 ---
@@ -508,7 +508,7 @@ The system is designed to be self-regulating:
 5. Every database query must be tested against the schema above before generating.
 6. Performance budget is law. No component ships without considering 2G behavior.
 7. Claude API calls: Haiku 3.5 for all automated/batch tasks. Never use Sonnet in a hot path.
-8. When in doubt about a feature, ask: "Does this help the 68,900 missing Venezuelans right now?" If yes, build it. If not, defer.
+8. When in doubt about a feature, ask: "Does this help families searching for missing Venezuelans right now?" If yes, build it. If not, defer.
 
 ---
 
@@ -526,7 +526,7 @@ Execute in this exact order:
 3. Create src/config/crisis.config.ts with the exact config from CLAUDE.md
 4. Create src/types/vigil.types.ts with TypeScript interfaces for all database tables
 5. Create the layout.tsx with:
-   - EmergencyBanner component (always visible, hotline 0800-7372282, Intérpretes + Cruz Roja links)
+   - EmergencyBanner component (always visible, hotline 911, Intérpretes + Cruz Roja links)
    - Navigation with links to: Buscar persona / Reportar / Necesito ayuda / Voluntarios / Organizaciones / Donar / Noticias
    - LanguageSwitcher (ES default)
 6. Create the home page (/) with:

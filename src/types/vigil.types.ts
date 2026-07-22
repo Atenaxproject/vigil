@@ -331,6 +331,47 @@ export interface InfrastructureStatus {
   notes: string | null
   updated_by: string | null
   updated_at: string
+  source?: string | null
+  source_url?: string | null
+  verified_at?: string | null
+}
+
+export type FeedbackCategory =
+  | 'bug'
+  | 'feature_request'
+  | 'missing_info'
+  | 'question'
+  | 'other'
+  | 'bad_number'
+
+export type FeedbackStatus = 'new' | 'reviewing' | 'resolved' | 'wont_fix'
+
+export interface FeedbackItem {
+  id: string
+  category: FeedbackCategory
+  message: string
+  contact_email: string | null
+  page_context: string | null
+  status: FeedbackStatus
+  admin_notes: string | null
+  created_at: string
+  entry_id?: string | null
+  ip_hash?: string | null
+}
+
+export interface SourcedFigureRow {
+  id?: string
+  key: string
+  label_es: string
+  label_en: string
+  value: string
+  source: string
+  source_url: string | null
+  verified_at: string
+  is_official: boolean
+  category: 'casualty' | 'infrastructure' | 'operational' | 'other'
+  sort_order?: number
+  active?: boolean
 }
 
 export type RescuerPresenceType = 'rescue_team' | 'volunteer' | 'medical' | 'individual'
@@ -347,20 +388,6 @@ export interface PublicRescuerPresence {
   last_checkin: string
   notes: string | null
   auto_expire_at: string
-  created_at: string
-}
-
-export type FeedbackCategory = 'bug' | 'feature_request' | 'missing_info' | 'question' | 'other'
-export type FeedbackStatus = 'new' | 'reviewing' | 'resolved' | 'wont_fix'
-
-export interface FeedbackItem {
-  id: string
-  category: FeedbackCategory
-  message: string
-  contact_email: string | null
-  page_context: string | null
-  status: FeedbackStatus
-  admin_notes: string | null
   created_at: string
 }
 

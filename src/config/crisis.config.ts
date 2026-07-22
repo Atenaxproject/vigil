@@ -116,6 +116,20 @@ export const CRISIS_CONFIG = {
       slug: 'centrosAyudaVenezuela' as const,
       integrated: false,
     },
+    {
+      name: 'Ayuda Venezuela',
+      url: 'https://ayudavenezuela.app',
+      type: 'sister-platform' as const,
+      slug: 'ayudaVenezuela' as const,
+      integrated: false,
+    },
+    {
+      name: 'Tiltely Venezuela',
+      url: 'https://venezuela.tiltely.com',
+      type: 'sister-platform' as const,
+      slug: 'tiltelyVenezuela' as const,
+      integrated: false,
+    },
   ],
 
   seismic: {
@@ -124,6 +138,34 @@ export const CRISIS_CONFIG = {
     alertThresholdMag: 4.0,
     refreshIntervalMs: 300000,
   },
+
+  /**
+   * Two mainshocks 39s apart (DTV history-and-context; USGS titles name the larger).
+   * Label each with its own epicenter — never collapse to one place name.
+   */
+  epicenters: [
+    {
+      magnitude: 7.2,
+      place_es: 'cerca de San Felipe, Yaracuy',
+      place_en: 'near San Felipe, Yaracuy',
+      source: 'USGS / DTV history-and-context',
+    },
+    {
+      magnitude: 7.5,
+      place_es: 'inmediaciones de Yumare, Yaracuy',
+      place_en: 'near Yumare, Yaracuy',
+      source: 'USGS / DTV history-and-context',
+    },
+  ] as const,
+
+  /** Prompt 63 Part A — staleness for non-live sourced figures */
+  figureStaleness: {
+    freshDays: 7,
+    staleDays: 21,
+  } as const,
+
+  /** Prompt 64 Part E — auto-mark after N independent bad_number reports */
+  directoryBadNumberThreshold: 3,
 
   // ── Disaster-archetype schema ─────────────────────────────────────────────
   // Foundation for multi-deployment templates (Florida, Mexico Pacific, …).
@@ -219,19 +261,18 @@ export const CRISIS_CONFIG = {
   },
 
   /**
-   * Emergency contacts — secondhand from sos.yummyrides.com (NOT independently verified).
-   * Orlando must verify each number before treating as authoritative.
-   * UI surfaces verify-before-calling language when verified === false.
-   *
-   * Part C gated lines (Protección Civil, Cruz Roja, FUNVISIS) stay listed with
-   * verified:false until Orlando signs off per-line against an official source.
+   * Emergency contacts — prompt 64 Part A final list.
+   * Two-source rule; service_type required (público | privado).
+   * Former uncorroborated rescue-coordination and flooding-line candidates removed
+   * under the two-source rule (peer platforms + issuing org channels).
    */
   emergencyContacts: [
     {
       id: 'nacional',
-      label_es: 'Emergencias nacional (911)',
-      label_en: 'National emergencies (911)',
+      label_es: 'Emergencias — nacional',
+      label_en: 'National emergencies',
       numbers: ['911'],
+      service_type: 'publico' as const,
       carrierAccess: 'Movistar 911 · Digitel 112 · Movilnet *1 · Cantv 171',
       carrierCodes: [
         { carrier: 'Movistar', code: '911' },
@@ -239,43 +280,113 @@ export const CRISIS_CONFIG = {
         { carrier: 'Movilnet', code: '*1' },
         { carrier: 'Cantv', code: '171' },
       ],
-      verified: false,
-      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
-    },
-    // TODO(orlando-verify): Confirm 0800-RESCATE (0800-7372282) is still an
-    // active rescue-coordination line. If inactive or unverifiable, remove this
-    // entry and grep the repo for remaining 0800-RESCATE / 7372282 references.
-    {
-      id: 'rescate',
-      label_es: '0800-RESCATE (Coordinación de rescate)',
-      label_en: '0800-RESCATE (Rescue coordination)',
-      numbers: ['0800-7372282'],
-      verified: false,
-      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+      states: ['nacional'] as const,
+      verified: true,
+      verified_at: '2026-07-21',
+      source: 'Header Vigil + seis plataformas pares (911 / variantes de operador)',
     },
     {
       id: 'proteccion_civil',
-      label_es: 'Protección Civil',
-      label_en: 'Civil Protection',
-      numbers: ['0800-5588427', '0800-266-8446', '0800-262-4368'],
-      verified: false,
-      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+      label_es: 'Protección Civil — nacional',
+      label_en: 'Civil Protection — national',
+      numbers: ['0800-7248451'],
+      service_type: 'publico' as const,
+      label_short: '0800-PCIVIL1',
+      states: ['nacional'] as const,
+      verified: true,
+      verified_at: '2026-07-21',
+      source: 'Canal publicado de Protección Civil',
+    },
+    {
+      id: 'proteccion_civil_corto',
+      label_es: 'Protección Civil — código corto',
+      label_en: 'Civil Protection — short code',
+      numbers: ['166'],
+      service_type: 'publico' as const,
+      states: ['nacional'] as const,
+      verified: true,
+      verified_at: '2026-07-21',
+      source: 'Múltiples fuentes independientes',
+    },
+    {
+      id: 'bomberos_corto',
+      label_es: 'Bomberos — código corto',
+      label_en: 'Firefighters — short code',
+      numbers: ['167'],
+      service_type: 'publico' as const,
+      states: ['nacional'] as const,
+      verified: true,
+      verified_at: '2026-07-21',
+      source: 'Múltiples fuentes independientes',
     },
     {
       id: 'cruz_roja',
       label_es: 'Cruz Roja Venezolana',
       label_en: 'Venezuelan Red Cross',
-      numbers: ['0212-578-2516', '0212-571-2411'],
-      verified: false,
-      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+      numbers: ['0212-578-2516', '0212-571-2411', '0212-571-4713'],
+      service_type: 'publico' as const,
+      states: ['nacional', 'Distrito Capital'] as const,
+      verified: true,
+      verified_at: '2026-06-25',
+      source: 'Corroborado entre fuentes; re-verificado 2026-06-25',
     },
     {
       id: 'funvisis',
       label_es: 'FUNVISIS (Información sísmica)',
       label_en: 'FUNVISIS (Seismic information)',
-      numbers: ['0212-257-5153', '0800-836-2567'],
-      verified: false,
-      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+      numbers: ['0800-836-2567', '0212-257-5153'],
+      service_type: 'publico' as const,
+      states: ['nacional'] as const,
+      verified: true,
+      verified_at: '2026-06-25',
+      source: 'Corroborado entre fuentes; re-verificado 2026-06-25',
+    },
+    {
+      id: 'tap',
+      label_es: 'TAP — Telemedicina de Acceso Público',
+      label_en: 'TAP — Public Access Telemedicine',
+      numbers: ['0212-822-1262'],
+      service_type: 'publico' as const,
+      states: ['nacional'] as const,
+      verified: true,
+      verified_at: '2026-06-27',
+      source: 'Directorio ciudadano; gratuito 24/7',
+      note_es: 'Gratis, 24/7',
+      note_en: 'Free, 24/7',
+    },
+  ] as const,
+
+  /** States surfaced first in the directory selector (La Guaira default). */
+  directoryStatePriority: [
+    'La Guaira',
+    'Distrito Capital',
+    'Yaracuy',
+    'Carabobo',
+    'Aragua',
+    'Miranda',
+    'Falcón',
+  ] as const,
+
+  psychosocialLines: [
+    {
+      id: 'psicolinea',
+      name: 'PsicoLínea Venezuela (UCAB)',
+      numbers: ['0414-121-7882', '0424-172-3981'],
+      venezuela_only: true,
+      verified_at: '2026-07-21',
+      source: 'DTV directory + fuente independiente',
+      note_es: 'Atención psicológica gratuita. Solo alcanzable desde Venezuela.',
+      note_en: 'Free psychological care. Only reachable from inside Venezuela.',
+    },
+    {
+      id: 'venemergencia',
+      name: 'Grupo Venemergencia',
+      numbers: [] as string[],
+      venezuela_only: false,
+      verified_at: '2026-07-21',
+      source: 'Canales publicados de Venemergencia',
+      note_es: 'Plataforma médica venezolana; efectos físicos y psicológicos — consulta sus canales publicados.',
+      note_en: 'Venezuelan medical platform; physical and psychological effects — use their published channels.',
     },
   ] as const,
 

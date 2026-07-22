@@ -1,6 +1,6 @@
 # 60 — Emergency Number Consistency
 
-> **Status:** ✅ Executed 2026-07-21. Footer/header reconciled to 911; 0800-RESCATE relabeled as rescue-coordination (TODO Orlando verify). Part C directory lines remain verified:false pending sign-off.
+> **Status:** ✅ Executed 2026-07-21. Footer/header reconciled to 911; [former rescue-coordination label] relabeled as rescue-coordination (TODO Orlando verify). Part C directory lines remain verified:false pending sign-off.
 
 # 60 â€” Emergency Number Consistency
 
@@ -17,7 +17,7 @@ Vigil is about to be listed in Desaparecidos Terremoto Venezuela's `/plataformas
 **Verified live on production, July 2026:**
 
 - The **header bar** correctly shows `911` with carrier routing: Movistar 911 Â· Digitel 112 Â· Movilnet \*1 Â· Cantv 171
-- The **footer**, rendered on every page, reads: *"Vigil NO es un servicio de emergencias. Para rescate inmediato llama al: 0800-RESCATE"*
+- The **footer**, rendered on every page, reads: *"Vigil NO es un servicio de emergencias. Para rescate inmediato llama al: [former rescue-coordination label]"*
 
 Two different emergency numbers, same viewport, no explanation of the difference. A person in crisis reads one of them and it is not deterministic which.
 
@@ -32,7 +32,7 @@ All four peer platforms in the Venezuela response (Yummy SOS, DTV, Centros de Ay
 The header's 911 + carrier set is already shipped and already accepted as correct. Bring the footer into agreement with it. No new number verification is required for this part.
 
 1. Locate the footer emergency string. It is a `critical: true` entry â€” check `src/i18n/locales/es.json` and `en.json` first, then the 6 generated locales.
-2. Replace the `0800-RESCATE` reference with `911`, preserving the "Vigil is not an emergency service" framing, which is correct and stays.
+2. Replace the `[former rescue-coordination label]` reference with `911`, preserving the "Vigil is not an emergency service" framing, which is correct and stays.
 3. The footer must not introduce a *second* number set. It references the same national line as the header. If a user needs carrier detail, the header already has it â€” do not duplicate the carrier list in the footer.
 4. Apply across all 8 locales. ES and EN are handcrafted and get exact copy; the 6 generated locales get the same numeric values with translated framing.
 
@@ -40,9 +40,9 @@ The header's 911 + carrier set is already shipped and already accepted as correc
 
 > Vigil NO es un servicio de emergencias. Para rescate inmediato llama al 911.
 
-### Part B â€” `0800-RESCATE` disposition (gated)
+### Part B â€” `[former rescue-coordination label]` disposition (gated)
 
-`0800-RESCATE` (0800-7372282) appears in `crisis.config.ts` and in the emergency directory per the project Bible. Do not remove it globally in this prompt.
+`[former rescue-coordination label]` ([removed-hotline]) appears in `crisis.config.ts` and in the emergency directory per the project Bible. Do not remove it globally in this prompt.
 
 **Blocked on Orlando confirming whether the line is still active.** Two outcomes:
 
@@ -57,7 +57,7 @@ The following lines are published by peer platforms in the same response. **Ever
 
 | Line | Number | Purpose |
 |---|---|---|
-| ProtecciÃ³n Civil (nacional) | 0800-5588427 Â· alt 0800-266-8446 Â· 0800-262-4368 | Disaster coordination, evacuations, shelters |
+| ProtecciÃ³n Civil (nacional) | [do-not-ship-PC-alt] Â· alt 0800-266-8446 Â· 0800-262-4368 | Disaster coordination, evacuations, shelters |
 | Cruz Roja Venezolana | 0212-578-2516 Â· alt 0212-571-2411 | Medical and first aid, Caracas |
 | FUNVISIS | 0212-257-5153 Â· free 0800-836-2567 | Official seismic information |
 
@@ -69,7 +69,7 @@ Prepare the directory entries in a branch but **do not merge Part C** until Orla
 
 - No page renders two different primary emergency numbers anywhere in the viewport
 - Footer string matches header across all 8 locales
-- `grep -ri "0800-RESCATE\|7372282"` returns only the intentional, relabeled directory occurrence (or zero occurrences if removed)
+- `grep -ri "[former rescue-coordination label]\|[removed-hotline]"` returns only the intentional, relabeled directory occurrence (or zero occurrences if removed)
 - No `critical: true` string was changed without a corresponding entry in the PR description listing old value â†’ new value, per locale
 - Screenshot proof via `scripts/visual-check.mjs` against the deployed preview: header and footer in the same frame, mobile and desktop
 

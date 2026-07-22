@@ -24,7 +24,6 @@ export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
 
   const nacional = CRISIS_CONFIG.emergencyContacts.find((c) => c.id === 'nacional')
   const carrierCodes = nacional && 'carrierCodes' in nacional ? nacional.carrierCodes : []
-  const hasUnverified = CRISIS_CONFIG.emergencyContacts.some((c) => !c.verified)
 
   useEffect(() => {
     if (!directoryOpen) return
@@ -152,9 +151,20 @@ export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
             <div className="space-y-4 p-4">
               {CRISIS_CONFIG.emergencyContacts.map((contact) => (
                 <section key={contact.id}>
-                  <h3 className="text-[11px] font-semibold uppercase tracking-wider text-vigil-muted">
-                    {contact.label_es}
-                  </h3>
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="text-[11px] font-semibold uppercase tracking-wider text-vigil-muted">
+                      {contact.label_es}
+                    </h3>
+                    <span
+                      className={`shrink-0 rounded-badge px-2 py-0.5 text-[11px] font-medium ${
+                        (contact.service_type as string) === 'privado'
+                          ? 'bg-status-unverified-bg text-status-unverified'
+                          : 'bg-status-alive-bg text-status-alive'
+                      }`}
+                    >
+                      {(contact.service_type as string) === 'privado' ? t('servicePrivate') : t('servicePublic')}
+                    </span>
+                  </div>
                   <ul className="mt-1.5 space-y-1.5">
                     {contact.numbers.map((num) => (
                       <li key={num}>
@@ -164,27 +174,20 @@ export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
                         >
                           <Phone className="h-4 w-4 shrink-0 text-vigil-blue" aria-hidden />
                           <span className="font-mono text-[15px] font-semibold text-vigil-ink">{num}</span>
-                          {!contact.verified && (
-                            <span className="ml-auto shrink-0 rounded-badge border border-status-unverified bg-status-unverified-bg px-2 py-0.5 text-[11px] font-medium text-status-unverified">
-                              {t('unverified')}
-                            </span>
-                          )}
                         </a>
                       </li>
                     ))}
                   </ul>
-                  {contact.id === 'nacional' && contact.carrierAccess && (
+                  {contact.id === 'nacional' && 'carrierAccess' in contact && contact.carrierAccess && (
                     <p className="mt-1.5 font-mono text-[13px] text-vigil-muted">{contact.carrierAccess}</p>
+                  )}
+                  {'verified_at' in contact && contact.verified_at && (
+                    <p className="mt-1 font-mono text-[11px] text-vigil-muted">
+                      {contact.source} · {contact.verified_at}
+                    </p>
                   )}
                 </section>
               ))}
-
-              {hasUnverified && (
-                <p className="flex items-start gap-2 rounded-input border border-amber-200 bg-status-unverified-bg p-3 text-[13px] leading-snug text-amber-800">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
-                  {t('secondhandNote')}
-                </p>
-              )}
 
               <Link
                 href="/informacion#emergency-contacts"

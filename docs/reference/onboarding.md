@@ -11,7 +11,7 @@
 
 1. Open https://vigil.youthewave.org on mobile or desktop.
 2. On iPhone/Android, use **Add to Home Screen** for offline-capable PWA access.
-3. The emergency banner (0800-RESCATE) is always visible at the top.
+3. The emergency banner ([former rescue-coordination label]) is always visible at the top.
 4. Switch language via the header if needed (Spanish is default; 8 languages supported).
 
 ### Search for a missing person

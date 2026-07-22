@@ -141,7 +141,7 @@ Verified against source and production as of **2026-07-03**. Optional integratio
 
 ### Trust, access & resilience
 
-- 🚨 **Emergency banner** — Always-visible hotline (0800-RESCATE), Intérpretes, Cruz Roja. Government-operated intake tools intentionally excluded.
+- 🚨 **Emergency banner** — Always-visible hotline ([former rescue-coordination label]), Intérpretes, Cruz Roja. Government-operated intake tools intentionally excluded.
 - 📬 **Official contact** — `vigil@youthewave.org`, `vigil.support@youthewave.org`, and `support@youthewave.org` via Cloudflare Email Routing.
 - 💬 **Feedback widget** — Floating support button on all pages; admin review at `/admin/feedback`.
 - 🔐 **Admin auth** — Supabase OTP + `VIGIL_ADMIN_EMAILS` allowlist.

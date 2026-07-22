@@ -56,8 +56,10 @@
     "directory": "Directorio",
     "directoryTitle": "Contactos de emergencia",
     "unverified": "Sin verificar",
-    "secondhandNote": "Verifica antes de llamar — números de fuentes de segunda mano, aún no confirmados por Vigil.",
-    "carrierCodes": "Números de emergencia por operadora"
+    "secondhandNote": "Cada número muestra fuente y fecha de verificación.",
+    "carrierCodes": "Números de emergencia por operadora",
+    "servicePublic": "Servicio público",
+    "servicePrivate": "Servicio privado · puede tener costo"
   },
   "regionScope": {
     "label": "Región del mapa",
@@ -118,6 +120,8 @@
       "noResultsReportBoth": "Considera reportarla:",
       "noResultsReportDtv": "En Desaparecidos Terremoto Venezuela",
       "noResultsBothHint": "Reportar en ambas amplía la red de búsqueda.",
+      "psychosocialPrompt": "Si necesitas apoyo emocional ahora:",
+      "psychosocialLink": "líneas de apoyo psicosocial",
       "errorTitle": "No se pudo completar la búsqueda",
       "errorBody": "Hubo un problema de conexión. Intenta de nuevo.",
       "retry": "Reintentar"
@@ -572,19 +576,20 @@
     "source": "Fuente",
     "stats": {
       "title": "Estadísticas de la crisis",
+      "officialFraming": "Las cifras oficiales provienen de canales del gobierno venezolano. Vigil las publica atribuidas — no las presenta como verificadas de forma independiente. Donde existe un análisis independiente, se muestra al lado.",
       "deaths": "Muertos confirmados",
       "injured": "Heridos",
-      "missing": "Desaparecidos",
-      "missingValue": "~50.000 (estimado)",
-      "missingSource": "IRC / ABC News",
-      "missingQualifier": "Cifra en revisión — los balances oficiales han mostrado discrepancias y pueden tardar semanas en consolidarse.",
-      "deathsSource": "AP, 1 de julio de 2026",
-      "injuredSource": "AP, 1 de julio de 2026",
-      "medicalStrain": "La zona afectada sigue bajo presión médica: heridas sin tratar y riesgo de enfermedades infecciosas reportados por AP una semana después del terremoto.",
+      "missing": "Personas en red de búsqueda",
+      "missingValue": "Ver estadísticas en vivo",
+      "missingSource": "Red DTV (API federada)",
+      "missingQualifier": "Las cifras de búsqueda de personas se actualizan en vivo desde la red DTV — no uses estimados estáticos.",
+      "deathsSource": "Asamblea Nacional",
+      "injuredSource": "Asamblea Nacional",
+      "medicalStrain": "La zona afectada sigue bajo presión médica. Las cifras oficiales y los análisis independientes pueden diferir — Vigil muestra ambas con atribución.",
       "displaced": "Desplazados",
-      "displacedSource": "OCHA",
-      "buildings": "Edificios colapsados",
-      "buildingsSource": "OCHA",
+      "displacedSource": "EFE / Asamblea Nacional",
+      "buildings": "Edificios afectados",
+      "buildingsSource": "Asamblea Nacional / Oregon State University",
       "damage": "Daño físico directo",
       "children": "Niños en zonas afectadas",
       "rescueTeams": "Equipos de rescate internacionales",
@@ -605,11 +610,11 @@
     },
     "hotlines": {
       "title": "Líneas de emergencia",
-      "verifyNote": "⚠️ Números de segunda mano — verifica antes de llamar.",
-      "rescate": "0800-RESCATE (Coordinación de rescate)",
+      "verifyNote": "Cada número muestra fuente y fecha. Si no funciona, usa «No funcionó».",
+      "rescate": "Emergencias nacional (911)",
       "redCross": "Cruz Roja Venezolana",
       "additionalTitle": "Líneas de emergencia adicionales",
-      "additionalSource": "venezuelatebusca.com/resources",
+      "additionalSource": "Directorio nacional Vigil",
       "additional": {
         "cicpc": "CICPC",
         "bomberosChacao": "Bomberos Chacao",
@@ -620,30 +625,48 @@
         "transito": "Inspectoría Nacional de Tránsito"
       }
     },
-    "sisterPlatforms": {
-      "title": "Plataformas hermanas (ciudadanas)",
-      "approximateNote": "Cifras aproximadas — no sincronizadas en vivo con Vigil",
-      "venezuelaTeBusca": "Plataforma ciudadana para buscar personas desaparecidas en Venezuela.",
-      "desaparecidosTerremoto": "Plataforma ciudadana con más de 35.000 casos activos reportados (cifra aproximada, puede estar desactualizada).",
-      "redQuipu": "Plataforma humanitaria que conecta iniciativas y consolida necesidades para una respuesta coordinada en Venezuela.",
-      "mapaDanosVenezuela": "Mapa ciudadano de daños estructurales y necesidades reportadas tras el terremoto en Venezuela."
+    "directory": {
+      "title": "Directorio de emergencia",
+      "subtitle": "Nacionales primero. Por defecto La Guaira — la región más afectada en la red federada.",
+      "nationalTitle": "Líneas nacionales",
+      "byStateTitle": "Por estado",
+      "stateLabel": "Estado",
+      "noLocalNumbers": "No hay números locales verificados para {state}. Usa las líneas nacionales arriba.",
+      "servicePublic": "Servicio público",
+      "servicePrivate": "Servicio privado · puede tener costo",
+      "source": "Fuente",
+      "reportBad": "No funcionó",
+      "reportThanks": "Gracias",
+      "reportError": "Error — reintenta",
+      "reportedUnavailable": "Reportado como no disponible"
     },
     "psychosocial": {
       "title": "Apoyo psicosocial",
-      "verifyNote": "Líneas de crisis — verifica disponibilidad antes de compartir.",
+      "verifyNote": "Vigil solo enlaza. No opera, modera ni intermedia apoyo psicosocial.",
+      "scopeNote": "Directorio de enlace — no es un servicio de Vigil.",
+      "venezuelaOnly": "Solo alcanzable desde dentro de Venezuela.",
       "psicoLinea": {
         "name": "PsicoLínea Venezuela (UCAB)",
-        "phones": "0414-127 78 82 · 0424-172 38 81",
-        "note": "Atención psicológica gratuita"
+        "phones": "0414-121-7882 · 0424-172-3981",
+        "note": "Atención psicológica gratuita. Solo desde Venezuela."
       },
       "venemergencia": {
         "name": "Grupo Venemergencia",
-        "note": "Apoyo médico/psicológico — consulta su Instagram para contacto actualizado"
+        "note": "Plataforma médica venezolana — consulta sus canales publicados."
       }
     },
-    "telecomFreeCalls": "Movistar, O2 y MasOrange ofrecen llamadas internacionales gratuitas entre España y Venezuela durante la crisis.",
+    "telecomFreeCalls": "Movistar, O2 y MasOrange ofrecen llamadas internacionales gratuitas entre España y Venezuela durante la emergencia.",
+    "telecomFreeCallsSource": "Fuente: anuncios de operadores · verificación editorial 2026-07",
     "sources": {
       "title": "Fuentes confiables para seguir"
+    },
+    "sisterPlatforms": {
+      "title": "Plataformas hermanas (ciudadanas)",
+      "approximateNote": "Cifras de plataformas hermanas — no sincronizadas salvo DTV federado",
+      "venezuelaTeBusca": "Plataforma ciudadana para buscar personas desaparecidas en Venezuela.",
+      "desaparecidosTerremoto": "Mayor repositorio ciudadano de esta emergencia — federado por API con Vigil.",
+      "redQuipu": "Plataforma humanitaria que conecta iniciativas y consolida necesidades.",
+      "mapaDanosVenezuela": "Mapa ciudadano de daños estructurales y necesidades reportadas."
     }
   },
   "liveInfo": {
@@ -715,25 +738,40 @@
   },
   "estadisticas": {
     "title": "Estadísticas",
-    "subtitle": "Red de búsqueda combinada y desglose geográfico de Vigil",
+    "subtitle": "Red de búsqueda combinada, cifras oficiales atribuidas y desglose geográfico",
     "byEstadoTitle": "Desglose por estado (Vigil)",
+    "dtvByEstadoTitle": "Desglose geográfico (red DTV)",
+    "dtvByEstadoSource": "Campo API: ubicacion.estado · Red Desaparecidos Terremoto Venezuela",
+    "officialTitle": "Cifras oficiales e independientes",
+    "officialFraming": "Cifras oficiales atribuidas al emisor. Análisis independiente etiquetado por separado.",
     "source": "Datos de Vigil, actualizados en tiempo real",
     "empty": "Aún no hay datos geográficos suficientes.",
     "unknownEstado": "Sin estado",
     "missingCount": "{count} desaparecidos",
     "foundCount": "{count} encontrados con vida",
+    "noCenter": {
+      "title": "Localizados sin centro registrado",
+      "body": "De {total} personas localizadas en la red DTV, {count} ({pct}%) no tienen hospital ni centro de acopio registrado. Si sabes dónde está alguien, reporta el avistamiento.",
+      "cta": "Reportar avistamiento o ubicación"
+    },
     "network": {
       "title": "Red de búsqueda combinada",
       "description": "Vigil trabaja en red con <link>Desaparecidos Terremoto Venezuela</link>. Los datos se actualizan automáticamente cada 5 minutos.",
       "dtvPersonas": "Personas en red DTV",
-      "dtvPersonasSub": "Desaparecidos Terremoto Venezuela",
+      "dtvPersonasSub": "Registros federados (GET /personas)",
+      "dtvSinContacto": "Aún sin contacto",
+      "dtvSinContactoSub": "API: estado = sin-contacto",
+      "dtvLocalizados": "Localizados",
+      "dtvLocalizadosSub": "API: estado = localizado",
       "dtvCentros": "Centros y hospitales",
       "dtvCentrosSub": "Registrados en red DTV",
+      "dtvCentrosDetail": "{hospitals} hospitales · {centers} centros de acopio",
       "dtvListas": "Listas de centros",
       "dtvListasSub": "Grupos en albergues",
       "vigilPersonas": "Reportados en Vigil",
       "vigilPersonasSub": "Base de datos propia",
-      "attribution": "Datos de DTV: fuente desaparecidosterremotovenezuela.com · Última actualización: {time}",
+      "attribution": "Datos de la red DTV · {source} — no son cifras de Vigil",
+      "attributionPermanent": "Cifras federadas de la red DTV. Nunca se presentan como datos propios de Vigil.",
       "dtvUnavailable": "Métricas de DTV no disponibles en este momento. Los datos de Vigil siguen actualizándose."
     }
   },
@@ -761,10 +799,12 @@
       "redQuipu": "Red comunitaria de ayuda y coordinación en crisis.",
       "mapaDanosVenezuela": "Mapa colaborativo de daños e infraestructura afectada.",
       "mapaNecesidadesVzla": "Mapa en vivo de necesidades por zona (crítico/parcial/cubierto), reportado por la comunidad y verificado por centros de acopio.",
-      "encuentrameVzla": "Plataforma ciudadana de búsqueda y reunificación familiar.",
+      "encuentrameVzla": "Localiza personas encontradas y trasladadas a hospitales.",
       "venezuelaEarthquakeMap": "Mapa colaborativo de terremotos y daños — enlace externo, sin federación de datos.",
       "yummySos": "App ciudadana de emergencias — enlace externo, sin federación de datos.",
-      "centrosAyudaVenezuela": "Directorio comunitario de centros de acopio — datos importados vía CSV público."
+      "centrosAyudaVenezuela": "Directorio comunitario de centros de acopio — datos importados vía CSV público.",
+      "ayudaVenezuela": "Directorio de emergencia por estado con fechas de verificación por entrada.",
+      "tiltelyVenezuela": "Búsqueda y coordinación de ayuda con orientación de seguridad."
     },
     "reportHint": "Cada reporte en múltiples plataformas amplía la red de búsqueda.",
     "reportLink": "Reportar en Vigil"
@@ -1364,24 +1404,75 @@
   },
   "press": {
     "metaTitle": "Kit de prensa — Vigil",
-    "metaDescription": "Material de prensa, estadísticas verificadas, capturas y contacto para medios sobre Vigil.",
-    "title": "Kit de prensa",
-    "subtitle": "Material verificable para medios, investigadores y socios.",
+    "metaDescription": "Boilerplate, hoja de hechos, misión, historia y kit descargable para medios.",
+    "title": "Prensa",
+    "subtitle": "Material verificable para medios. Sin ceros inventados. Sin solicitud de donaciones.",
     "boilerplate": {
-      "title": "Sobre Vigil",
-      "body": "Vigil es una plataforma humanitaria de código abierto que unifica búsqueda de personas desaparecidas, mapa de crisis, intercambio de recursos y coordinación de voluntarios. Desplegada en vivo para la respuesta al terremoto de Venezuela de junio de 2026.",
+      "title": "Texto para citar",
+      "body": "Vigil es una plataforma humanitaria de código abierto creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela. Permite buscar personas desaparecidas por nombre y por fotografía, consultar un mapa de crisis con réplicas sísmicas en vivo, coordinar recursos entre quienes necesitan y quienes pueden ayudar, y acceder a directorios verificados de organizaciones y centros de acopio. Opera en ocho idiomas para equipos de rescate internacionales y está federada por API con Desaparecidos Terremoto Venezuela. No requiere registro, no solicita dinero y su código es público bajo licencia MIT. Es un proyecto de YouTheWave, fundado por Orlando Toro.",
       "liveLabel": "URL en vivo",
-      "repoLabel": "Repositorio"
+      "repoLabel": "Repositorio",
+      "copy": "Copiar texto",
+      "copied": "Copiado"
+    },
+    "factSheet": {
+      "title": "Hoja de hechos",
+      "subtitle": "Cifras con fuente y fecha — mismo sistema de proveniencia que el resto de la plataforma.",
+      "dtvNote": "Las cifras de búsqueda de personas provienen de la red DTV (API federada) y no son datos propios de Vigil."
     },
     "stats": {
-      "title": "Estadísticas en vivo (DTV)",
-      "subtitle": "Cifras de la API pública de Desaparecidos Terremoto Venezuela — actualizadas al cargar la página.",
-      "searchablePersons": "Personas buscables vía API",
-      "centros": "Centros de acopio (DTV)",
+      "title": "Red DTV (en vivo)",
+      "subtitle": "Atribuidas a desaparecidosterremotovenezuela.com",
+      "searchablePersons": "Personas en red DTV (GET /personas)",
+      "sinContacto": "Aún sin contacto",
+      "localizados": "Localizados",
+      "centros": "Centros y hospitales",
       "source": "Fuente: {source}",
       "unavailable": "Métricas de DTV no disponibles en este momento.",
       "lastUpdated": "Última actualización: {time}",
-      "disclaimer": "Desaparecidos Terremoto Venezuela reporta más de 55.000 registros ciudadanos en total; su API pública expone aproximadamente 12.000 personas buscables. Vigil cachea y busca ese conjunto localmente — los datos no se almacenan en nuestra base de datos."
+      "disclaimer": "Vigil no inventa ni promedia cifras. Las cifras oficiales se etiquetan como tales; las federadas llevan atribución a la red DTV."
+    },
+    "mission": {
+      "title": "Misión",
+      "body": "Estar presentes cuando más importa. Construir tecnología que funcione en las peores condiciones —sin señal, sin registro, sin barreras— para que ninguna familia quede sin una forma de buscar."
+    },
+    "vision": {
+      "title": "Visión",
+      "body": "Que la próxima vez no haya que empezar de cero. Una plataforma que se despliegue en horas para cualquier país y cualquier desastre, y que llegue a cada emergencia mejor que a la anterior."
+    },
+    "values": {
+      "title": "Valores",
+      "honesty": "Honestidad antes que velocidad",
+      "honestyBody": "La IA de Vigil nunca inventa información. Cuando no hay dato, lo dice.",
+      "privacy": "Privacidad no negociable",
+      "privacyBody": "Los datos de contacto de las familias nunca son públicos. Nunca se comparten con el gobierno venezolano.",
+      "federate": "Federar, no copiar",
+      "federateBody": "Los datos de otras plataformas se integran por acuerdo y API, jamás por scraping.",
+      "open": "Abierto por defecto",
+      "openBody": "Código público, licencia MIT, sin fines de lucro, sin publicidad.",
+      "barrier": "Sin barreras",
+      "barrierBody": "Sin registro, sin cuenta, sin app. Funciona en 2G y sin conexión."
+    },
+    "story": {
+      "title": "La historia",
+      "body": "48 horas. El 24 de junio de 2026, durante el feriado de la Batalla de Carabobo, dos terremotos sacudieron el norte de Venezuela con 39 segundos de diferencia: uno de magnitud 7,2 con epicentro cerca de San Felipe, Yaracuy, y otro de magnitud 7,5 con epicentro en las inmediaciones de Yumare. Fueron los más fuertes en más de un siglo. Orlando Toro es venezolano y vive en Florida. Como cientos de miles de venezolanos en la diáspora, pasó esa noche intentando comunicarse con gente que no respondía. No esperó. En una sola sesión de trabajo durante la madrugada construyó y desplegó Vigil. Vigil no compite: se federa. Lo que aporta es búsqueda por fotografía, desglose geográfico hasta parroquia, ocho idiomas, y un mapa que funciona con señal intermitente."
+    },
+    "assets": {
+      "title": "Activos",
+      "logoSvg": "Logo SVG",
+      "logoPng": "Logo PNG",
+      "ogImage": "Imagen Open Graph",
+      "screenshots": "Capturas de la plataforma"
+    },
+    "kit": {
+      "title": "Descargar kit de prensa",
+      "subtitle": "Un archivo con one-pager, misión/visión/valores, historia y hoja de hechos.",
+      "download": "Descargar kit (ZIP)",
+      "bulletinsNext": "Los boletines fechados con cifras serán el siguiente paso de contenido — no forman parte de este kit inicial."
+    },
+    "coverage": {
+      "title": "Cobertura",
+      "emptyHint": "Cuando haya cobertura publicada, aparecerá aquí con enlace al original."
     },
     "screenshots": {
       "title": "Capturas de pantalla"
@@ -1391,25 +1482,17 @@
     "screenshotIpad": "Vigil en iPad",
     "screenshotLandscape": "Vigil en iPhone horizontal",
     "founder": {
-      "title": "Fundador",
-      "bio": "Orlando Toro es un desarrollador venezolano-americano con base en Greenacres, Florida. Fundador de YouTheWave y Bbluestudios, construyó y desplegó Vigil en 48 horas tras los terremotos de junio de 2026 en Venezuela — una plataforma gratuita, multilingüe y de código abierto para familias que buscan a sus seres queridos."
+      "title": "Fundador y contacto",
+      "bio": "Orlando Toro, fundador de YouTheWave. Respuesta habitual en 1–2 días hábiles (español e inglés). YouTheWave es un proyecto pre-constitución — no una organización 501(c)(3) registrada.",
+      "responseTime": "Tiempo de respuesta esperado: 1–2 días hábiles."
     },
     "govExclusion": {
       "title": "Compromiso: exclusión de datos gubernamentales",
-      "body": "Vigil se compromete públicamente a nunca compartir datos de usuarios con el gobierno venezolano. Esta política es arquitectónica — no comercial — y forma parte de la política de despliegue para Venezuela documentada en nuestros términos y política de privacidad."
-    },
-    "keyFacts": {
-      "title": "Datos clave",
-      "languages": "8 idiomas — español, inglés, portugués, francés, italiano, chino, alemán y ruso",
-      "diaspora": "Hub de diáspora en /apoyo-usa — coordinación desde el sur de Florida",
-      "structural": "Evaluación de seguridad estructural (metodología ATC-20) en /evaluacion-estructural",
-      "connectivity": "Mapa de conectividad — WiFi, Starlink y señal celular en /conectividad",
-      "orgs": "26 organizaciones verificadas en el directorio de donaciones",
-      "missingEstimate": "Personas sin localizar: ~50.000 (estimado, IRC) — misma cifra que /informacion"
+      "body": "Vigil se compromete públicamente a nunca compartir datos de usuarios con el gobierno venezolano. Esta política es arquitectónica — no comercial — y forma parte de la política de despliegue para Venezuela."
     },
     "contact": {
       "title": "Contacto de prensa",
-      "note": "Respondemos en español e inglés. Incluye tu plazo y medio de publicación."
+      "note": "Respondemos en español e inglés. Incluye tu plazo y medio. Vigil no solicita donaciones."
     },
     "informacionLink": "Ver hub de información en vivo"
   },

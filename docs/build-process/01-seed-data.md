@@ -177,7 +177,7 @@ INSERT INTO organizations (
 ('Protección Civil Venezuela', 'rescue', 'Venezuela',
  'Organismo oficial de protección civil de Venezuela. Coordinando operaciones de rescate nacionales.',
  'Official Venezuelan civil protection agency. Coordinating national rescue operations.',
- 'https://www.proteccioncivil.gob.ve', '0800-RESCATE', NULL,
+ 'https://www.proteccioncivil.gob.ve', '[former rescue-coordination label]', NULL,
  NULL, NULL,
  10.4806, -66.9036, 'Caracas, Venezuela', true, true, true, true),
 
@@ -489,7 +489,7 @@ Static page with real verified facts, updated as of June 29, 2026:
 **Crisis Stats (source: OCHA, CNN, National Assembly):**
 - Muertos confirmados: 1,430+
 - Heridos: 3,238+
-- Desaparecidos: 45,000–68,900 (estimados)
+- Desaparecidos: ver métricas federadas DTV en vivo (no usar estimados estáticos)
 - Desplazados: 12,000+
 - Edificios colapsados: 770+
 - Daño físico directo: $6.7 mil millones (PNUD/RAPIDA)
@@ -508,7 +508,7 @@ La Guaira (peor afectado — 1,400+ edificios destruidos), Caracas (Chacao, Baru
 - Puente Caraballeda–La Guaira: colapsado (réplica 26 junio)
 
 **Líneas de emergencia verificadas:**
-- 🚨 0800-RESCATE: 0800-7372282 (gobierno venezolano)
+- 🚨 [former rescue-coordination label]: [removed-hotline] (gobierno venezolano)
 - Cruz Roja Venezolana: +58-212-781-2974
 - OCHA Venezuela: twitter/x @OCHAVenezuela
 

@@ -60,7 +60,7 @@ Contact Directory block:
 - Link to Starlink's Venezuela earthquake support page
 - Link to starlink.com/activate (account creation/management)
 - One line distinguishing the two paths: "ya tengo un kit" vs. "no tengo un kit"
-- 0800-RESCATE
+- [former rescue-coordination label]
 - Note that carrier-based free access is rolling out by provider (Movistar confirmed
   first; Digitel/Movilnet status changes — do not hardcode a claim that will go stale,
   phrase as "confirma con tu operador")
@@ -110,6 +110,6 @@ submission flow — green `ResourceLayer` treated all resources identically.
 **Shipped:**
 - `CommsLayer` — amber dashed CircleMarker + WiFi glyph in popup; shown under Recursos toggle
 - `/conectividad` citizen submission form + `/api/connectivity/submit` (type=resource, category=comms)
-- `ConnectivityInfoCard` on `/informacion` with verified Starlink URLs + 0800-RESCATE + carrier disclaimer
+- `ConnectivityInfoCard` on `/informacion` with verified Starlink URLs + [former rescue-coordination label] + carrier disclaimer
 - i18n across all 8 locales; nav link in Más menu
 - No new DB migration (uses existing `map_markers.description`)

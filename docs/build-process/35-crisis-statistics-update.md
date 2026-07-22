@@ -18,7 +18,7 @@ manually-updated block described in the Vigil Bible (section 5, Information Hub)
 - Última verificación: 2026-07-01
 
 **Desaparecidos**
-- Change: 45,000–68,900 → ~50,000 (estimado)
+- Change: prior static missing-person estimate → live DTV federated figures (prompt 63)
 - Fuente: IRC / ABC News
 - Última verificación: 2026-07-01
 - Add a short qualifier line under this stat only (not the others): "Cifra en revisión —

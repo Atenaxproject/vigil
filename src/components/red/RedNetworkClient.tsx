@@ -62,6 +62,12 @@ export function RedNetworkClient() {
               | 'platforms.redQuipu'
               | 'platforms.mapaDanosVenezuela'
               | 'platforms.mapaNecesidadesVzla'
+              | 'platforms.encuentrameVzla'
+              | 'platforms.venezuelaEarthquakeMap'
+              | 'platforms.yummySos'
+              | 'platforms.centrosAyudaVenezuela'
+              | 'platforms.ayudaVenezuela'
+              | 'platforms.tiltelyVenezuela'
             return (
               <a
                 key={platform.url}

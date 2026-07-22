@@ -115,7 +115,7 @@ Page sections, in this order:
 4. **Infrastructure status** — static admin-editable block (electricity %, water %, 
    roads %, airport status) — pull this from a new Supabase table `infrastructure_status` 
    so Orlando can update it from Supabase Studio without a code deploy
-5. **Verified emergency contacts** — 0800-RESCATE, Cruz Roja phone, OCHA Twitter — static
+5. **Verified emergency contacts** — [former rescue-coordination label], Cruz Roja phone, OCHA Twitter — static
 6. **Trusted sources to follow** — external links list — static
 
 ### A3. Create the infrastructure_status table

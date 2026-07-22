@@ -146,7 +146,7 @@ No. They are volunteer field opinions following ATC-20 guidelines, not governmen
 
 ### What is the emergency hotline?
 
-0800-RESCATE — always shown in the site banner. Vigil supplements but does not replace official emergency services.
+[former rescue-coordination label] — always shown in the site banner. Vigil supplements but does not replace official emergency services.
 
 ---
 

@@ -1,14 +1,16 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { formatDistanceToNow } from 'date-fns'
-import { es, enUS } from 'date-fns/locale'
 import { ExternalLink } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { PRIORITY_ESTADOS, VENEZUELA_ESTADOS } from '@/lib/venezuela-geo'
 import { StatCard } from '@/components/stats/StatCard'
+import { StatsRefreshTimestamp } from '@/components/stats/SourcedFigureCard'
+import { SourcedFigureCard } from '@/components/stats/SourcedFigureCard'
+import type { SourcedFigureRow } from '@/types/vigil.types'
 
 interface EstadoCount {
   estado: string
@@ -16,10 +18,23 @@ interface EstadoCount {
   found_alive: number
 }
 
+interface DtvEstadoBreakdown {
+  estado: string
+  count: number
+  percent: number
+}
+
 interface DtvMetricsResponse {
   totalPersonas: number
+  sinContacto: number
+  localizados: number
+  localizadosSinCentro: number
+  localizadosConCentro: number
   totalCentros: number
+  totalHospitales: number
+  totalCentrosAcopio: number
   totalListas: number
+  byEstado: DtvEstadoBreakdown[]
   lastUpdated: string
   source: string
   available: boolean
@@ -34,13 +49,12 @@ export function EstadisticasClient() {
   const [loading, setLoading] = useState(true)
   const [vigilTotal, setVigilTotal] = useState(0)
   const [dtvMetrics, setDtvMetrics] = useState<DtvMetricsResponse | null>(null)
+  const [figures, setFigures] = useState<SourcedFigureRow[]>([])
   const [locale, setLocale] = useState('es')
 
   useEffect(() => {
     setLocale(document.documentElement.lang || 'es')
   }, [])
-
-  const dateLocale = locale === 'es' ? es : enUS
 
   const displayEstados = useMemo(() => {
     const priority = [...PRIORITY_ESTADOS]
@@ -56,6 +70,15 @@ export function EstadisticasClient() {
       })
       .catch(() => {
         /* graceful fallback */
+      })
+
+    void fetch('/api/sourced-figures')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { figures?: SourcedFigureRow[] } | null) => {
+        if (data?.figures) setFigures(data.figures)
+      })
+      .catch(() => {
+        /* ignore */
       })
   }, [])
 
@@ -112,11 +135,11 @@ export function EstadisticasClient() {
   }, [displayEstados])
 
   const maxMissing = Math.max(...counts.map((c) => c.missing), 1)
-  const dtvUpdatedLabel =
-    dtvMetrics?.lastUpdated &&
-    formatDistanceToNow(new Date(dtvMetrics.lastUpdated), { addSuffix: true, locale: dateLocale })
-
   const numberLocale = locale === 'es' ? 'es-VE' : locale === 'en' ? 'en-US' : locale
+  const sinCentroPct =
+    dtvMetrics && dtvMetrics.localizados > 0
+      ? Math.round((dtvMetrics.localizadosSinCentro / dtvMetrics.localizados) * 100)
+      : 0
 
   return (
     <div className="mx-auto max-w-2xl p-4 pb-24">
@@ -141,6 +164,7 @@ export function EstadisticasClient() {
               ),
             })}
           </p>
+          <p className="mt-2 text-[13px] text-status-unverified">{t('network.attributionPermanent')}</p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
@@ -152,11 +176,30 @@ export function EstadisticasClient() {
               source="dtv"
             />
           )}
+          {dtvMetrics?.available && (dtvMetrics.sinContacto ?? 0) > 0 && (
+            <StatCard
+              value={dtvMetrics.sinContacto.toLocaleString(numberLocale)}
+              label={t('network.dtvSinContacto')}
+              sublabel={t('network.dtvSinContactoSub')}
+              source="dtv"
+            />
+          )}
+          {dtvMetrics?.available && (dtvMetrics.localizados ?? 0) > 0 && (
+            <StatCard
+              value={dtvMetrics.localizados.toLocaleString(numberLocale)}
+              label={t('network.dtvLocalizados')}
+              sublabel={t('network.dtvLocalizadosSub')}
+              source="dtv"
+            />
+          )}
           {dtvMetrics?.available && (dtvMetrics.totalCentros ?? 0) > 0 && (
             <StatCard
               value={dtvMetrics.totalCentros.toLocaleString(numberLocale)}
               label={t('network.dtvCentros')}
-              sublabel={t('network.dtvCentrosSub')}
+              sublabel={t('network.dtvCentrosDetail', {
+                hospitals: dtvMetrics.totalHospitales ?? 0,
+                centers: dtvMetrics.totalCentrosAcopio ?? 0,
+              })}
               source="dtv"
             />
           )}
@@ -178,15 +221,85 @@ export function EstadisticasClient() {
           )}
         </div>
 
-        {dtvMetrics?.available && dtvUpdatedLabel && (
-          <p className="mt-3 text-[13px] text-vigil-muted">
-            {t('network.attribution', { time: dtvUpdatedLabel })}
+        {dtvMetrics?.available && dtvMetrics.lastUpdated && (
+          <StatsRefreshTimestamp lastUpdated={dtvMetrics.lastUpdated} locale={locale} />
+        )}
+        {dtvMetrics?.available && (
+          <p className="mt-2 text-[13px] text-vigil-muted">
+            {t('network.attribution', { source: dtvMetrics.source })}
           </p>
         )}
         {!dtvMetrics?.available && (
           <p className="mt-3 text-[13px] text-vigil-muted">{t('network.dtvUnavailable')}</p>
         )}
       </section>
+
+      {dtvMetrics?.available && (dtvMetrics.localizadosSinCentro ?? 0) > 0 && (
+        <section className="mt-8 rounded-card border border-status-unverified bg-status-unverified-bg p-4">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('noCenter.title')}</h2>
+          <p className="mt-2 text-[16px] text-vigil-body">
+            {t('noCenter.body', {
+              count: dtvMetrics.localizadosSinCentro.toLocaleString(numberLocale),
+              pct: sinCentroPct,
+              total: dtvMetrics.localizados.toLocaleString(numberLocale),
+            })}
+          </p>
+          <p className="mt-2 text-[13px] text-vigil-muted">{t('network.attributionPermanent')}</p>
+          <Link
+            href="/reportar"
+            className="mt-4 inline-flex min-h-[44px] items-center rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white"
+          >
+            {t('noCenter.cta')}
+          </Link>
+        </section>
+      )}
+
+      {dtvMetrics?.available && (dtvMetrics.byEstado?.length ?? 0) > 0 && (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('dtvByEstadoTitle')}</h2>
+          <p className="mt-1 text-[13px] text-vigil-muted">{t('dtvByEstadoSource')}</p>
+          <ul className="mt-4 space-y-2">
+            {dtvMetrics.byEstado.slice(0, 12).map((row) => (
+              <li
+                key={row.estado}
+                className="flex items-center justify-between rounded-card border border-slate-200 bg-white px-4 py-3"
+              >
+                <span className="text-[16px] text-vigil-ink">{row.estado}</span>
+                <span className="font-mono text-[13px] text-vigil-muted">
+                  {row.count.toLocaleString(numberLocale)} · {row.percent}%
+                </span>
+              </li>
+            ))}
+          </ul>
+          {dtvMetrics.lastUpdated && (
+            <StatsRefreshTimestamp lastUpdated={dtvMetrics.lastUpdated} locale={locale} />
+          )}
+        </section>
+      )}
+
+      {figures.length > 0 && (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('officialTitle')}</h2>
+          <p className="mt-1 text-[13px] text-status-unverified">{t('officialFraming')}</p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {figures.map((fig) => (
+              <SourcedFigureCard
+                key={fig.key}
+                locale={locale}
+                figure={{
+                  key: fig.key,
+                  label: locale === 'en' ? fig.label_en : fig.label_es,
+                  value: fig.value,
+                  source: fig.source,
+                  source_url: fig.source_url,
+                  verified_at: fig.verified_at,
+                  is_official: fig.is_official,
+                }}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{t('byEstadoTitle')}</h2>

@@ -56,31 +56,16 @@ This does not block the listing. It does mean:
 ## PART 1 — SAFETY: FIX BEFORE ANYTHING ELSE
 
 ### 1.1 — The emergency number contradiction
-**Severity: physical safety. [SHIPPED 2026-07-21 prompt 60] footer/header both use 911.** Orlando must still verify 0800-RESCATE activity and Part C directory lines.
-
-Your header bar correctly shows **911** with carrier routing (Movistar 911 · Digitel 112 · Movilnet \*1 · Cantv 171). This matches all four peer platforms.
-
-Your footer, on every single page, still reads:
-
-> ~~0800-RESCATE in footer~~ → now: llama al 911 (shipped prompt 60).
-
-Two different emergency numbers on the same screen, in the same viewport. A person in crisis reads one of them. This has been carried on the flagged-items list as the only physical-safety item and it is still shipped to production.
-
-Fix: footer references 911 and the carrier variants, consistent with the header. `0800-RESCATE` is either removed or explicitly relabeled as a secondary/rescue-coordination line if it is still active — **verify that it is still active before keeping it anywhere.**
+**Severity: physical safety. [SHIPPED 2026-07-21 prompts 60 + 64]** Footer/header use 911; former uncorroborated rescue-coordination line removed globally under the two-source rule.
 
 ### 1.2 — Emergency directory completeness
-**Unverified — check `/informacion` yourself.**
+**[SHIPPED 2026-07-21 prompt 64]** National lines (911, PC 0800-PCIVIL1, 166, 167, Cruz Roja, FUNVISIS, TAP), `service_type`, state selector defaulting to La Guaira, bad-number reporting. Orlando should still spot-check against live org channels when able.
 
-Present on peer platforms, confirm present on Vigil:
+### 1.2b — Data provenance and statistics
+**[SHIPPED 2026-07-21 prompt 63]** Sourced figures table, staleness rules, live DTV person-search metrics with field-semantic labels, dual epicenters, electricity 90%.
 
-| Line | Number | Purpose |
-|---|---|---|
-| Emergencias nacional | 911 (Movistar 911 · Digitel 112 · Movilnet \*1 · Cantv 171) | Trapped persons, collapses, ambulance |
-| Protección Civil nacional | 0800-5588427 (alt. 0800-266-8446 · 0800-262-4368) | Disaster coordination, evacuations, shelters |
-| Cruz Roja Venezolana | 0212-578-2516 (alt. 0212-571-2411) | Medical, first aid, Caracas |
-| FUNVISIS | 0212-257-5153 · free 0800-836-2567 | Official seismic information |
-
-Sourced from peer platform public listings. **Every one of these needs human verification against an official source before shipping** — that is the standing rule for `critical: true` strings and it does not relax because the numbers came from a credible-looking peer site.
+### 1.2c — Press page
+**[SHIPPED 2026-07-21 prompt 65]** `/prensa` enhanced with boilerplate copy, provenance fact sheet, kit ZIP, coverage section hidden while empty.
 
 ### 1.3 — Minors protection policy
 **Gap. Vigil has no equivalent page.**
@@ -218,7 +203,7 @@ If YouTheWave wants that space later, it goes through the same discipline as eve
 2. Send the Vercel sponsorship letter with the traffic-event sentence added.
 3. Send the Supabase sponsorship letter, same addition.
 4. Send the Anthropic humanitarian credits letter — this is the cost-risk mitigation and it has been drafted and unsent since the V2 round.
-5. Confirm `0800-RESCATE` is still an active line, or authorize its removal.
+5. ~~Confirm former rescue-coordination line~~ → **removed globally** (prompt 64, two-source rule).
 
 **This week:**
 6. Enable 2FA on GitHub, Vercel, Supabase, Cloudflare, Anthropic. Before the traffic, not after. A public humanitarian platform about to get attention is a target.

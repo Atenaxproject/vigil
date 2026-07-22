@@ -5,6 +5,26 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-21 (launch readiness P1: 63–65)
+
+### Added
+- **Sourced figures system** — migration 015 `sourced_figures` (Studio-editable); staleness fresh/stale/expired; DTV-style refresh timestamp under stats blocks.
+- **Live DTV person-search metrics** — personas / sin-contacto / localizados / by `ubicacion.estado` / localizados-sin-centro CTA; field-semantic labels (not DTV UI labels).
+- **Emergency directory v2** — Part A final list, `service_type` público|privado, state selector (La Guaira default), bad-number reports → `feedback`, auto-mark threshold.
+- **Psychosocial link-out** — PsicoLínea (Venezuela-only stated) + Venemergencia on `/informacion`; link from `/buscar` empty state.
+- **Network** — ayudavenezuela.app + venezuela.tiltely.com on `/red`; Movistar/O2/MasOrange free calls on `/conectividad`.
+- **`/prensa` kit** — boilerplate copy button, provenance fact sheet, MVV + story, asset downloads, ZIP kit (`/api/press-kit/download`), coverage hidden while empty; `docs/press/` sources.
+- **Dual epicenters** — Mw 7.2 San Felipe + Mw 7.5 Yumare labeled on informacion/prensa.
+
+### Changed
+- Removed former uncorroborated rescue-coordination hotline and do-not-ship PC alts globally.
+- La Guaira electricity seed → 90%; infra rows carry `verified_at` / source; stale infra suppressed.
+- Retired static ~50k / prior person-search estimates — live DTV only.
+- `/prensa` enhanced (not duplicated) from prompt 46 shell.
+
+### Archived
+- Root `63`–`65` prompts → `docs/build-process/63-data-provenance-and-statistics.md`, `64-directory-psychosocial-network.md`, `65-press-page-and-kit.md`.
+
 ## [Unreleased] — 2026-07-21 (launch readiness P0: 60–62)
 
 ### Added
@@ -15,7 +35,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **`docs/build-process/60`–`62`** — archived launch-readiness prompts.
 
 ### Changed
-- **Emergency primary line** — footer, config `emergency.hotline`, global-error, and locales use **911** (matches header). `0800-RESCATE` kept only as rescue-coordination directory entry with `TODO(orlando-verify)`.
+- **Emergency primary line** — footer, config `emergency.hotline`, global-error, and locales use **911** (matches header). Former rescue-coordination directory entry removed in prompt 64.
 - **AI rate limits** — photo search 3/IP-hash/hour, assistant 15/IP-hash/hour (from `crisis.config.aiLimits`).
 - **Counters** — suppress headline `0` on evaluacion-estructural, estadisticas, informacion quakes, apoyo-usa, organizaciones count, prensa DTV stats.
 
@@ -188,7 +208,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 ### Changed
 - **`/informacion` redundancy** â€” removed duplicate DTV metrics widget and sister-platform
   list; replaced with cross-links to `/estadisticas`, `/red`, and `/conectividad`.
-- **`ConnectivityInfoCard`** â€” removed duplicate 0800-RESCATE block (already in emergency
+- **`ConnectivityInfoCard`** â€” removed duplicate [former rescue-coordination label] block (already in emergency
   banner + hotlines section); added link to report connectivity on `/conectividad`.
 - **Manual crisis statistics** â€” deaths 2,295, injured 11,267, missing ~50,000 (est.) with
   contested-data qualifier; verified date 2026-07-01; sources updated per Asamblea Nacional /
@@ -207,7 +227,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **`/api/connectivity/submit`** â€” validates GPS bounds, stores `type=resource`,
   `category=comms` in existing `map_markers` schema (no migration).
 - **`ConnectivityInfoCard`** on `/informacion` â€” verified Starlink support, activate, and
-  emergency-response links; 0800-RESCATE; carrier free-access disclaimer.
+  emergency-response links; [former rescue-coordination label]; carrier free-access disclaimer.
 - **i18n** â€” `connectivity` and `connectivityInfo` namespaces in all 8 locales; nav link
   in MÃ¡s menu.
 

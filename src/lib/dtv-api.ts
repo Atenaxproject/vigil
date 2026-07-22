@@ -18,10 +18,21 @@ export interface DTVPersona {
   nombre: string
   edad?: number
   sexo?: string
+  /** Free-text location from ubicacion.texto */
   ubicacion?: string
+  /**
+   * Contact-status field from API `estado` (e.g. sin-contacto | localizado).
+   * NOT geographic — see estado_geo / DTV_FIELD_MAPPING_DOC in provenance.ts.
+   */
   estado?: string
+  /** Geographic state from ubicacion.estado */
+  estado_geo?: string
+  municipio?: string
+  parroquia?: string
   foto_url?: string
   localizado: boolean
+  /** True when API centro is non-null */
+  has_centro: boolean
   created_at: string
   _source: 'dtv'
 }
@@ -59,13 +70,37 @@ export interface DTVPagination {
   total?: number
 }
 
+export interface DTVEstadoBreakdown {
+  estado: string
+  count: number
+  percent: number
+}
+
 export interface DTVMetrics {
+  /** GET /personas record count (unique federated persons — not "reportes"). */
   totalPersonas: number
+  /** persona.estado === 'sin-contacto' */
+  sinContacto: number
+  /** persona.estado === 'localizado' */
+  localizados: number
+  /** localizado && centro == null */
+  localizadosSinCentro: number
+  localizadosConCentro: number
   totalCentros: number
+  totalHospitales: number
+  totalCentrosAcopio: number
   totalListas: number
+  byEstado: DTVEstadoBreakdown[]
   lastUpdated: string
   source: string
   available: boolean
+  /** Documented so UI never copies DTV homepage label collisions. */
+  fieldMapping: {
+    totalPersonas: string
+    sinContacto: string
+    localizados: string
+    estadoGeo: string
+  }
 }
 
 const DTV_SOURCE = 'desaparecidosterremotovenezuela.com'
@@ -183,14 +218,24 @@ export function mapRawDTVPersona(p: Record<string, unknown>): DTVPersona {
 
 function mapPersona(p: Record<string, unknown>): DTVPersona {
   const ubicacionRaw = p.ubicacion
-  const ubicacionText =
-    typeof ubicacionRaw === 'string'
-      ? ubicacionRaw
-      : typeof ubicacionRaw === 'object' &&
-          ubicacionRaw !== null &&
-          typeof (ubicacionRaw as Record<string, unknown>).texto === 'string'
-        ? String((ubicacionRaw as Record<string, unknown>).texto)
-        : undefined
+  let ubicacionText: string | undefined
+  let estadoGeo: string | undefined
+  let municipio: string | undefined
+  let parroquia: string | undefined
+
+  if (typeof ubicacionRaw === 'string') {
+    ubicacionText = ubicacionRaw
+  } else if (typeof ubicacionRaw === 'object' && ubicacionRaw !== null) {
+    const u = ubicacionRaw as Record<string, unknown>
+    if (typeof u.texto === 'string') ubicacionText = u.texto
+    if (typeof u.estado === 'string') estadoGeo = u.estado
+    if (typeof u.municipio === 'string') municipio = u.municipio
+    if (typeof u.parroquia === 'string') parroquia = u.parroquia
+  }
+
+  const estadoContacto = typeof p.estado === 'string' ? p.estado : undefined
+  const localizado = estadoContacto === 'localizado' || Boolean(p.localizado)
+  const hasCentro = p.centro != null && p.centro !== ''
 
   return {
     id: String(p.id ?? ''),
@@ -198,9 +243,13 @@ function mapPersona(p: Record<string, unknown>): DTVPersona {
     edad: typeof p.edad === 'number' ? p.edad : undefined,
     sexo: typeof p.sexo === 'string' ? p.sexo : undefined,
     ubicacion: ubicacionText,
-    estado: typeof p.estado === 'string' ? p.estado : undefined,
+    estado: estadoContacto,
+    estado_geo: estadoGeo,
+    municipio,
+    parroquia,
     foto_url: typeof p.foto === 'string' ? p.foto : typeof p.foto_url === 'string' ? p.foto_url : undefined,
-    localizado: p.estado === 'localizado' || Boolean(p.localizado),
+    localizado,
+    has_centro: hasCentro,
     created_at:
       typeof p.created_at === 'string'
         ? p.created_at
@@ -273,39 +322,69 @@ export async function getAllDTVCentros(): Promise<DTVCentro[]> {
   return allCentros
 }
 
+const EMPTY_FIELD_MAPPING = {
+  totalPersonas: 'GET /personas item count',
+  sinContacto: "persona.estado === 'sin-contacto'",
+  localizados: "persona.estado === 'localizado'",
+  estadoGeo: 'persona.ubicacion.estado',
+} as const
+
 export async function getDTVMetrics(): Promise<DTVMetrics> {
   const fallback: DTVMetrics = {
     totalPersonas: 0,
+    sinContacto: 0,
+    localizados: 0,
+    localizadosSinCentro: 0,
+    localizadosConCentro: 0,
     totalCentros: 0,
+    totalHospitales: 0,
+    totalCentrosAcopio: 0,
     totalListas: 0,
+    byEstado: [],
     lastUpdated: new Date().toISOString(),
     source: DTV_SOURCE,
     available: false,
+    fieldMapping: { ...EMPTY_FIELD_MAPPING },
   }
 
   if (!DTV_BASE || !DTV_KEY) return fallback
 
   try {
-    // Personas count comes from the cached search index (~120 pages walked at
-    // most once per 30 min) instead of a fresh full walk per metrics call —
-    // the triple walk here was tripping DTV's 429 rate limit and knocking out
-    // federated search for everyone. Centros/listas stay as walks (1-2 pages).
-    const { getDTVPersonaCount } = await import('@/lib/dtv-index')
-    const [totalPersonas, totalCentros, totalListas] = await Promise.all([
-      getDTVPersonaCount(),
-      countDTVItems('centros'),
+    // Persona stats from cached index (avoids re-walking /personas on every call).
+    // Centros/listas remain short walks (1–2 pages).
+    const { getDTVPersonaStats } = await import('@/lib/dtv-index')
+    const [personaStats, centros, totalListas] = await Promise.all([
+      getDTVPersonaStats(),
+      getAllDTVCentros(),
       countDTVItems('listas'),
     ])
 
-    const available = totalPersonas > 0 || totalCentros > 0 || totalListas > 0
+    let totalHospitales = 0
+    let totalCentrosAcopio = 0
+    for (const c of centros) {
+      if (inferCentroMarkerType(c) === 'hospital') totalHospitales++
+      else totalCentrosAcopio++
+    }
+    const totalCentros = centros.length
+
+    const available =
+      personaStats.totalPersonas > 0 || totalCentros > 0 || totalListas > 0
 
     return {
-      totalPersonas,
+      totalPersonas: personaStats.totalPersonas,
+      sinContacto: personaStats.sinContacto,
+      localizados: personaStats.localizados,
+      localizadosSinCentro: personaStats.localizadosSinCentro,
+      localizadosConCentro: personaStats.localizadosConCentro,
       totalCentros,
+      totalHospitales,
+      totalCentrosAcopio,
       totalListas,
+      byEstado: personaStats.byEstado,
       lastUpdated: new Date().toISOString(),
       source: DTV_SOURCE,
       available,
+      fieldMapping: { ...EMPTY_FIELD_MAPPING },
     }
   } catch (error) {
     console.error('DTV metrics count failed:', error)

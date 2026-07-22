@@ -159,7 +159,7 @@ INSERT INTO organizations (
 ('Protección Civil Venezuela', 'rescue', 'Venezuela',
  'Organismo oficial de protección civil de Venezuela. Coordinando operaciones de rescate nacionales.',
  'Official Venezuelan civil protection agency. Coordinating national rescue operations.',
- 'https://www.proteccioncivil.gob.ve', '0800-RESCATE', NULL,
+ 'https://www.proteccioncivil.gob.ve', '[former rescue-coordination label]', NULL,
  NULL, NULL,
  10.4806, -66.9036, 'Caracas, Venezuela', true, true, true, true),
 

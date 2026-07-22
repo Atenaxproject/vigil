@@ -176,3 +176,68 @@ export async function getDTVPersonaCount(): Promise<number> {
   const index = await getIndex()
   return index?.personas.length ?? 0
 }
+
+export interface DTVPersonaStats {
+  totalPersonas: number
+  sinContacto: number
+  localizados: number
+  localizadosSinCentro: number
+  localizadosConCentro: number
+  byEstado: { estado: string; count: number; percent: number }[]
+  partial: boolean
+}
+
+/**
+ * Aggregate person-search figures from the federated /personas index.
+ * Labels must follow API field semantics (see provenance.ts DTV_FIELD_MAPPING_DOC).
+ */
+export async function getDTVPersonaStats(): Promise<DTVPersonaStats> {
+  const empty: DTVPersonaStats = {
+    totalPersonas: 0,
+    sinContacto: 0,
+    localizados: 0,
+    localizadosSinCentro: 0,
+    localizadosConCentro: 0,
+    byEstado: [],
+    partial: false,
+  }
+
+  const index = await getIndex()
+  if (!index || index.personas.length === 0) return empty
+
+  let localizados = 0
+  let localizadosSinCentro = 0
+  let localizadosConCentro = 0
+  const geoCounts = new Map<string, number>()
+
+  for (const p of index.personas) {
+    if (p.localizado || p.estado === 'localizado') {
+      localizados++
+      if (p.has_centro) localizadosConCentro++
+      else localizadosSinCentro++
+    }
+
+    const geo = p.estado_geo?.trim() || 'Sin estado asignado'
+    geoCounts.set(geo, (geoCounts.get(geo) ?? 0) + 1)
+  }
+
+  const total = index.personas.length
+  const sinContacto = total - localizados
+  const byEstado = Array.from(geoCounts.entries())
+    .map(([estado, count]) => ({
+      estado,
+      count,
+      percent: total > 0 ? Math.round((count / total) * 100) : 0,
+    }))
+    .sort((a, b) => b.count - a.count)
+
+  return {
+    totalPersonas: total,
+    sinContacto,
+    localizados,
+    localizadosSinCentro,
+    localizadosConCentro,
+    byEstado,
+    partial: index.partial,
+  }
+}

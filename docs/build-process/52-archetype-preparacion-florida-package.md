@@ -148,7 +148,7 @@ type PrepBlock = {
 ### Content authoring rules (CRITICAL)
 - Adapt content ONLY from: Ready.gov, FEMA (fema.gov), NWS/NOAA (weather.gov, nhc.noaa.gov), American Red Cross (redcross.org), PAHO (paho.org), Cruz Roja. Cite every guide's sources in the `sources` array AND render them visibly at the bottom of each guide page ("Fuentes oficiales").
 - Do NOT generate novel safety advice. If official sources conflict, use FEMA/NWS as tiebreaker.
-- Venezuela earthquake guide must include: Triángulo de vida MYTH DEBUNK (Drop/Cover/Hold On is the official guidance — this misinformation is widespread in Latin America and correcting it is a life-safety matter), aftershock behavior, and 0800-RESCATE routing.
+- Venezuela earthquake guide must include: Triángulo de vida MYTH DEBUNK (Drop/Cover/Hold On is the official guidance — this misinformation is widespread in Latin America and correcting it is a life-safety matter), aftershock behavior, and [former rescue-coordination label] routing.
 - Write ES first, natural Venezuelan-neutral Spanish. Then EN. Mark every string that contains an emergency number, dosage-like instruction, or imperative safety action with `"critical": true` — these are the human-review gate before any generated locale ships.
 - v1 archetypes: **earthquake, hurricane, flood.** Tornado, wildfire, tsunami, volcanic are P1 (structure supports them; content comes later).
 

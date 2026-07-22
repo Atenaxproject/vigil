@@ -304,6 +304,12 @@ export function MissingPersonSearch({
               </a>
             </div>
             <p className="mt-4 text-[13px] text-vigil-muted">{t('search.noResultsBothHint')}</p>
+            <p className="mt-6 border-t border-slate-200 pt-4 text-[16px] text-vigil-body">
+              {t('search.psychosocialPrompt')}{' '}
+              <Link href="/informacion#apoyo-psicosocial" className="font-medium text-vigil-blue hover:underline">
+                {t('search.psychosocialLink')}
+              </Link>
+            </p>
           </div>
         )}
         {!loading && hasResults && (

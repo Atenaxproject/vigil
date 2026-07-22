@@ -98,9 +98,12 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `49-codeql-setup.md` - CodeQL workflow for JavaScript/TypeScript
 - `50-github-actions-secrets.md` - GitHub Actions secrets inventory (set vs pending)
 - `51-zoho-dns-cloudflare.md` - Zoho Mail DNS on Cloudflare (pending DKIM/API)
-- `60-emergency-number-consistency.md` — footer/header 911 reconciliation; 0800-RESCATE directory-only
+- `60-emergency-number-consistency.md` — footer/header 911 reconciliation; [former rescue-coordination label] directory-only
 - `61-ai-cost-circuit-breaker.md` — AI rate limits, spend-proxy breaker, honest degrade UX
 - `62-zero-state-counters.md` — suppress zero headline stats; CTA empty states
+- `63-data-provenance-and-statistics.md` — sourced figures, staleness, live DTV metrics, dual epicenters
+- `64-directory-psychosocial-network.md` — emergency directory v2, psychosocial link-out, bad-number reports
+- `65-press-page-and-kit.md` — `/prensa` kit, boilerplate, provenance fact sheet, downloadable ZIP
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

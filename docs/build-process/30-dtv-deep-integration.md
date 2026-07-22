@@ -298,7 +298,7 @@ Update to reflect active integration status:
 ## TASK F — UX Deduplication Cleanup
 
 ### F1. Remove duplicated emergency numbers
-The emergency hotline (0800-RESCATE) appears in:
+The emergency hotline ([former rescue-coordination label]) appears in:
 - The top emergency banner ✓ (keep — this is primary)
 - The footer "Vigil NO es un servicio de emergencias" ✓ (keep — legal/safety)
 - Potentially inside /informacion and /como-ayudar pages
