@@ -2,7 +2,7 @@
 
 import { Circle } from 'react-leaflet'
 import type { SeismicEvent } from '@/types/vigil.types'
-import { getMagnitudeColor } from '@/lib/usgs'
+import { getMagnitudeColor } from '@/lib/usgs-colors'
 
 interface AftershockLayerProps {
   events: SeismicEvent[]

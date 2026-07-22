@@ -1,7 +1,15 @@
 import { CRISIS_CONFIG, getDataFeed } from '@/config/crisis.config'
 import { usgsSourceUrl } from '@/lib/feed-health'
-import { recordFeedHealth } from '@/lib/feed-health-server'
 import type { SeismicEvent } from '@/types/vigil.types'
+
+export { getMagnitudeColor } from '@/lib/usgs-colors'
+
+async function recordFeedHealth(
+  ...args: Parameters<(typeof import('@/lib/feed-health-server'))['recordFeedHealth']>
+) {
+  const { recordFeedHealth: record } = await import('@/lib/feed-health-server')
+  return record(...args)
+}
 
 const USGS_FEED = getDataFeed('usgs')
 const BASE = USGS_FEED?.url ?? 'https://earthquake.usgs.gov/fdsnws/event/1/query'
@@ -36,14 +44,6 @@ export interface SeismicFetchResult {
   windowDays: number
   ok: boolean
   sourceUrl: string
-}
-
-export function getMagnitudeColor(mag: number): string {
-  if (mag < 2.5) return '#22c55e'
-  if (mag < 4.0) return '#f59e0b'
-  if (mag < 5.5) return '#f97316'
-  if (mag < 7.0) return '#ef4444'
-  return '#7c3aed'
 }
 
 function rollingStartIso(windowDays: number): string {
