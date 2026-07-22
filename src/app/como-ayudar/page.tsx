@@ -30,6 +30,24 @@ const FALLBACK_ORGS = [
     donation_link: 'https://www.directrelief.org/emergency/venezuela-earthquakes-2026/',
     verified: true,
   },
+  {
+    name: 'Global Empowerment Mission (GEM)',
+    description_es:
+      'Socio privado oficial del Departamento de Estado de EE.UU. para la respuesta al terremoto. Distribuciones diarias, sede GEM LATAM en La Guaira, y centro logístico en Doral, Florida.',
+    description_en:
+      'Official U.S. State Department private partner for the earthquake response. Daily distributions, GEM LATAM HQ in La Guaira, and logistics hub in Doral, Florida.',
+    donation_link: 'https://www.globalempowermentmission.org/donate',
+    verified: true,
+  },
+  {
+    name: 'We Love Foundation (I Love Venezuela)',
+    description_es:
+      'Fundación de la diáspora venezolana, socio operativo de GEM en cada distribución de ayuda en Venezuela.',
+    description_en:
+      "Venezuelan diaspora foundation and GEM's operating partner on every aid distribution in Venezuela.",
+    donation_link: 'https://www.welove.foundation',
+    verified: true,
+  },
 ]
 
 const COUNTRIES = {
@@ -79,7 +97,7 @@ const COLLECTION_POINTS = [
   },
   {
     name: 'Global Empowerment Mission (GEM)',
-    note: 'Sede Doral FL + operaciones LATAM en La Guaira. Ver globalempowermentmission.org — un solo canal de donación.',
+    noteKey: 'gem' as const,
     verifiedAt: '2026-07-11',
   },
 ]
@@ -183,6 +201,28 @@ export default async function ComoAyudarPage() {
         </div>
       </section>
 
+      <section className="mt-10">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('usaDiaspora.title')}</h2>
+        <p className="mt-2 text-[16px] text-slate-600">{t('usaDiaspora.gemDoral')}</p>
+        <div className="mt-3 flex flex-wrap gap-3">
+          <a
+            href="https://www.globalempowermentmission.org/donate"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[44px] items-center rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white"
+          >
+            {t('usaDiaspora.gemDonateCta')}
+          </a>
+          <Link
+            href="/apoyo-usa"
+            className="inline-flex min-h-[44px] items-center text-[16px] font-medium text-vigil-blue underline-offset-2 hover:underline"
+          >
+            {t('usaDiaspora.hubLink')} →
+          </Link>
+        </div>
+        <p className="mt-3 text-[13px] text-vigil-muted">{t('usaDiaspora.hoursNote')}</p>
+      </section>
+
       {teamsDisposition.disposition === 'show' ? (
         <section className="mt-10">
           <h2 className="text-[20px] font-semibold text-vigil-ink">{t('teams.title')}</h2>
@@ -266,7 +306,9 @@ export default async function ComoAyudarPage() {
                 <p className="mt-1 text-[16px] text-slate-600">
                   {'noteKey' in point && point.noteKey === 'ucv'
                     ? t('collection.ucvNote')
-                    : point.note}
+                    : 'noteKey' in point && point.noteKey === 'gem'
+                      ? t('collection.gemNote')
+                      : point.note}
                 </p>
               </div>
             ))}

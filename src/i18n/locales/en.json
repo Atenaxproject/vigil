@@ -614,7 +614,15 @@
     },
     "collection": {
       "title": "Physical collection points",
-      "ucvNote": "Historical: collection point reported active 27 June — confirm current status before traveling."
+      "ucvNote": "Historical: collection point reported active 27 June — confirm current status before traveling.",
+      "gemNote": "Doral FL supply intake + permanent GEM LATAM HQ in La Guaira. Single official channel: globalempowermentmission.org/donate."
+    },
+    "usaDiaspora": {
+      "title": "U.S. support — GEM Doral intake",
+      "gemDoral": "GEM’s Doral, Florida warehouse accepts supply donations for the Venezuela response. Confirm hours before traveling; use their official donate page for current intake options.",
+      "gemDonateCta": "Donate / supplies (GEM)",
+      "hubLink": "Open U.S. support hub",
+      "hoursNote": "⚠️ Intake hours: confirm directly with GEM. Vigil does not publish unverified hours."
     },
     "volunteerLink": "Register as a volunteer",
     "ofac": {

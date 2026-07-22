@@ -13,17 +13,29 @@ INSERT INTO organizations (
 SELECT
   'Global Empowerment Mission (GEM) — Doral',
   'diaspora', 'USA',
-  'Organización humanitaria líder en la respuesta desde EE.UU.; aliada con la Ciudad de Doral, el Departamento de Estado y Walmart. ⚠️ Verificar horarios de recepción antes de trasladarse.',
-  'Lead U.S. humanitarian org for Venezuela earthquake response; partnered with City of Doral, U.S. State Department, and Walmart. ⚠️ Confirm intake hours before traveling.',
+  'Centro logístico GEM en Doral, Florida — recepción de suministros donados desde EE.UU. para la respuesta en Venezuela. ⚠️ Verificar horarios de recepción antes de trasladarse.',
+  'GEM logistics hub in Doral, Florida — aid intake for supplies donated from the U.S. for the Venezuela response. ⚠️ Confirm intake hours before traveling.',
   'https://www.globalempowermentmission.org', '+1-786-763-4367', NULL,
-  'https://www.globalempowermentmission.org',
-  '1850 NW 84th Ave, Suite 100, Doral, FL 33126 — confirm current intake hours with GEM directly.',
+  'https://www.globalempowermentmission.org/donate',
+  '1850 NW 84th Ave, Suite 100, Doral, FL 33126 — confirm current intake hours with GEM directly. Use their /donate page for supply donation options.',
   25.8075, -80.3360, '1850 NW 84th Ave, Suite 100, Doral, FL 33126',
   true, true, true, false, 'usa_diaspora'
 WHERE NOT EXISTS (
   SELECT 1 FROM organizations
   WHERE name = 'Global Empowerment Mission (GEM) — Doral' AND region_scope = 'usa_diaspora'
 );
+
+-- Keep existing Doral row in sync on re-seed (idempotent refresh)
+UPDATE organizations SET
+  description_es = 'Centro logístico GEM en Doral, Florida — recepción de suministros donados desde EE.UU. para la respuesta en Venezuela. ⚠️ Verificar horarios de recepción antes de trasladarse.',
+  description_en = 'GEM logistics hub in Doral, Florida — aid intake for supplies donated from the U.S. for the Venezuela response. ⚠️ Confirm intake hours before traveling.',
+  donation_link = 'https://www.globalempowermentmission.org/donate',
+  donation_instructions = '1850 NW 84th Ave, Suite 100, Doral, FL 33126 — confirm current intake hours with GEM directly. Use their /donate page for supply donation options.',
+  approved_by_admin = true,
+  verified = true,
+  active = true
+WHERE name = 'Global Empowerment Mission (GEM) — Doral'
+  AND region_scope = 'usa_diaspora';
 
 INSERT INTO organizations (
   name, type, country, description_es, description_en,

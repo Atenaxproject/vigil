@@ -618,7 +618,15 @@
     },
     "collection": {
       "title": "Puntos de acopio físicos",
-      "ucvNote": "Historial: punto reportado activo el 27 de junio — confirma estado actual antes de trasladarte."
+      "ucvNote": "Historial: punto reportado activo el 27 de junio — confirma estado actual antes de trasladarte.",
+      "gemNote": "Sede Doral FL (recepción de suministros) + sede permanente GEM LATAM en La Guaira. Un solo canal oficial: globalempowermentmission.org/donate."
+    },
+    "usaDiaspora": {
+      "title": "Apoyo desde EE.UU. — acopio GEM Doral",
+      "gemDoral": "El almacén de GEM en Doral, Florida, recibe donaciones de suministros para la respuesta en Venezuela. Confirma horarios antes de trasladarte; usa su página oficial de donación para opciones actuales.",
+      "gemDonateCta": "Donar / suministros (GEM)",
+      "hubLink": "Ver hub Apoyo EE.UU.",
+      "hoursNote": "⚠️ Horarios de recepción: verificar directamente con GEM. Vigil no publica horarios no confirmados."
     },
     "volunteerLink": "Registrarse como voluntario",
     "expiredBadge": "Esta promoción ya venció — verifica condiciones actuales en la fuente."

@@ -35,6 +35,8 @@ Living specs and operational guides:
 - `build-process/70-services-status-and-hazard-prediction.md` — `/servicios` + `/amenazas` (2026-07-22)
 - `build-process/71-contested-figures-policy.md` — contested casualty figures (2026-07-22)
 - `build-process/72-navigation-ia-and-accessibility.md` — nav IA + WCAG (2026-07-22)
+- `build-process/59-gem-welove-organizations-seed.md` — GEM + We Love verified orgs + LATAM marker (2026-07-22)
+- `build-process/73-gem-welove-execution-report.md` — prompt 59 QC / orchestrator report (2026-07-22)
 - `accessibility/VPAT-SUMMARY.md` — VPAT-style summary for procurement
 
 ## Reference index
@@ -120,6 +122,8 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `70-services-status-and-hazard-prediction.md` — servicios + amenazas
 - `71-contested-figures-policy.md` — contested figures
 - `72-navigation-ia-and-accessibility.md` — nav IA + WCAG AA
+- `59-gem-welove-organizations-seed.md` — GEM + We Love seed + LATAM approx marker
+- `73-gem-welove-execution-report.md` — prompt 59 execution / QC report
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

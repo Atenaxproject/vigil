@@ -5,6 +5,22 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-22 (prompt 59)
+
+### Added
+- **We Love Foundation (I Love Venezuela)** — verified org directory entry (`approved_by_admin`), welove.foundation; no Vigil partnership claim.
+- **GEM LATAM La Guaira marker** — approximate city-center `collection_point` with honest “ubicación exacta vía…” label.
+- **Seed `005_gem_welove.sql`** — idempotent production/local refresh for GEM + We Love + LATAM marker.
+- **`/como-ayudar` USA diaspora section** — GEM Doral supply intake CTA → official `/donate`; ES/EN i18n.
+
+### Changed
+- **GEM directory + Doral diaspora rows** — refreshed ES/EN copy; `donation_link` → `globalempowermentmission.org/donate`; Doral hours-verify warning retained.
+- Venezuela map bounds **untouched** (Doral stays on usa_diaspora / copy surfaces only).
+
+### Docs
+- Archived prompt `59` → `docs/build-process/59-gem-welove-organizations-seed.md`.
+- Execution report `docs/build-process/73-gem-welove-execution-report.md`.
+
 ## [Unreleased] — 2026-07-22 (prompts 69–72)
 
 ### Added

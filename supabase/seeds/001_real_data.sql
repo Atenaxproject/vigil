@@ -57,13 +57,22 @@ INSERT INTO organizations (
  34.4208, -119.6982, 'Santa Barbara, USA', true, true, true, true),
 
 -- GLOBAL EMPOWERMENT MISSION (GEM)
-('Global Empowerment Mission (GEM)', 'food', 'USA',
- 'ONG con sede en Doral, Florida. Socia oficial del Departamento de Estado de EE.UU. y Walmart para entrega de suministros. Opera centros de donación en Miami. Aliada con I Love Venezuela.',
- 'South Florida-based humanitarian org, official partner of US State Dept and Walmart for supply delivery. Operating multiple donation collection points across greater Miami. Deep Venezuelan community roots.',
+('Global Empowerment Mission (GEM)', 'donation', 'USA',
+ 'Socio privado oficial del Departamento de Estado de EE.UU. para la respuesta al terremoto. Distribuciones diarias de ayuda en los estados más afectados, sede permanente GEM LATAM en La Guaira, y centro logístico en Doral, Florida. Más de 55.000 sobrevivientes atendidos con kits completos.',
+ 'Official U.S. State Department private partner for the earthquake response. Daily aid distributions across the hardest-hit states, permanent GEM LATAM headquarters in La Guaira, and logistics hub in Doral, Florida. 55,000+ survivors served with full kits.',
  'https://www.globalempowermentmission.org', '+1-786-763-4367', NULL,
- 'https://www.globalempowermentmission.org',
- 'Accepts goods donations at Miami collection points. Check website for locations.',
+ 'https://www.globalempowermentmission.org/donate',
+ 'Donate online or check supply intake options on the official /donate page. Confirm hours before traveling to Doral.',
  25.8617, -80.2230, 'Doral, Florida, USA', true, true, true, true),
+
+-- WE LOVE FOUNDATION (I Love Venezuela) — GEM operating partner; not a Vigil partnership claim
+('We Love Foundation (I Love Venezuela)', 'donation', 'USA',
+ 'Fundación de la diáspora venezolana, socio operativo de GEM en cada distribución de ayuda en Venezuela. Canaliza el apoyo de la comunidad venezolana en EE.UU. hacia las familias afectadas.',
+ 'Venezuelan diaspora foundation and GEM''s operating partner on every aid distribution in Venezuela. Channels U.S. Venezuelan community support to affected families.',
+ 'https://www.welove.foundation', NULL, NULL,
+ 'https://www.welove.foundation',
+ 'Donate via the official We Love Foundation website. Verify the URL before giving.',
+ NULL, NULL, 'Diaspora — operating with GEM in Venezuela', true, true, true, false),
 
 -- CONVOY OF HOPE
 ('Convoy of Hope', 'food', 'USA',
@@ -248,7 +257,12 @@ INSERT INTO map_markers (
 -- AIRPORT (critical logistics)
 ('resource', 'transport', 'Aeropuerto Internacional Simón Bolívar — Maiquetía',
  'Una de las pistas operativa (confirmado 27 junio). Punto de entrada de ayuda internacional. Fuerte logístico para equipos de rescate. Comunicar con OCHA para coordinación de vuelos.',
- 10.6031, -66.9911, false, 'active', true, 'CNN/US Official');
+ 10.6031, -66.9911, false, 'active', true, 'CNN/US Official'),
+
+-- GEM LATAM HQ (approximate city-center — not a street address; no past distribution sites)
+('collection_point', 'other', 'GEM LATAM — Sede La Guaira (aprox.)',
+ 'Sede permanente GEM LATAM — ubicación exacta vía globalempowermentmission.org. Marcador aproximado al centro de La Guaira (no es dirección de calle).',
+ 10.5994, -66.9346, false, 'active', true, 'GEM public communications');
 
 -- ============================================================
 -- UPDATE README to acknowledge Claude as contributor
