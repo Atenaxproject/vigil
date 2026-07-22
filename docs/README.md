@@ -30,6 +30,12 @@ Living specs and operational guides:
 - `build-process/66-full-platform-audit.md` — content/UX audit + expiry mechanism (2026-07-22)
 - `build-process/67-live-data-freshness-map.md` — USGS rolling-window freshness fix (2026-07-22)
 - `build-process/68-vigil-watch-global-monitor.md` — global hazard monitor `/monitor` (2026-07-22)
+- `reference/MONITOR-AND-AUDIT-DELIVERABLES.md` — Part A answers for 66–68 (root cause, inventories, cost/rights)
+- `build-process/69-emergency-depth-and-seismic.md` — directory depth + EMSC (2026-07-22)
+- `build-process/70-services-status-and-hazard-prediction.md` — `/servicios` + `/amenazas` (2026-07-22)
+- `build-process/71-contested-figures-policy.md` — contested casualty figures (2026-07-22)
+- `build-process/72-navigation-ia-and-accessibility.md` — nav IA + WCAG (2026-07-22)
+- `accessibility/VPAT-SUMMARY.md` — VPAT-style summary for procurement
 
 ## Reference index
 
@@ -107,6 +113,13 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `63-data-provenance-and-statistics.md` — sourced figures, staleness, live DTV metrics, dual epicenters
 - `64-directory-psychosocial-network.md` — emergency directory v2, psychosocial link-out, bad-number reports
 - `65-press-page-and-kit.md` — `/prensa` kit, boilerplate, provenance fact sheet, downloadable ZIP
+- `66-full-platform-audit.md` — dated claims inventory + route audit
+- `67-live-data-freshness-map.md` — USGS rolling windows + feed health
+- `68-vigil-watch-global-monitor.md` — `/monitor` hazard relay
+- `69-emergency-depth-and-seismic.md` — directory depth + EMSC
+- `70-services-status-and-hazard-prediction.md` — servicios + amenazas
+- `71-contested-figures-policy.md` — contested figures
+- `72-navigation-ia-and-accessibility.md` — nav IA + WCAG AA
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

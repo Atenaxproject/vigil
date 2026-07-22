@@ -138,6 +138,26 @@
   }
 }
 
+/* High contrast — light variant only (prompt 72). Not dark mode. */
+html.vigil-high-contrast {
+  --vigil-ink: #000000;
+  --vigil-body: #0a0a0a;
+  --vigil-muted: #333333;
+  --vigil-blue: #0033cc;
+  --vigil-cloud: #ffffff;
+  --vigil-border: #000000;
+  --vigil-surface: #ffffff;
+}
+
+html.vigil-high-contrast body {
+  background: #ffffff;
+  color: #000000;
+}
+
+html.vigil-high-contrast a {
+  text-decoration: underline;
+}
+
 /* Print styles — preparedness guides, family plan, and checklist print
    black-on-white with sources visible; app chrome hidden. */
 @media print {

@@ -10,7 +10,7 @@ export async function GET() {
     const { data, error } = await supabase
       .from('sourced_figures')
       .select(
-        'key, label_es, label_en, value, source, source_url, verified_at, is_official, category, sort_order'
+        'key, label_es, label_en, value, source, source_url, verified_at, is_official, category, sort_order, is_contested, disputes'
       )
       .eq('active', true)
       .order('sort_order')

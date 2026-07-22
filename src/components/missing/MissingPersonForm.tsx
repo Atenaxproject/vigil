@@ -86,6 +86,20 @@ export function MissingPersonForm() {
       if (!res.ok) throw new Error('submit failed')
       if (json.claimUrl) {
         setClaimUrl(json.claimUrl)
+        try {
+          const token = json.claimUrl.split('/').pop()
+          if (token) {
+            const { saveClaim } = await import('@/components/claim/MisReportesClient')
+            saveClaim({
+              kind: 'reporte',
+              token,
+              label: data.full_name,
+              savedAt: new Date().toISOString(),
+            })
+          }
+        } catch {
+          /* ignore storage failures */
+        }
       } else {
         toast.success(t('success'))
         reset()

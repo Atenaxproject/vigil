@@ -33,7 +33,44 @@
     "help": "Help Center",
     "helpShort": "Help",
     "preparedness": "Подготовка",
-    "monitor": "Глобальный монитор"
+    "monitor": "Глобальный монитор",
+    "emergencyNav": "Чрезвычайная",
+    "menu": "Меню",
+    "groupFindSomeone": "Найти человека",
+    "groupNeedHelp": "Мне нужна помощь",
+    "groupWantToHelp": "Хочу помочь",
+    "groupEmergencyStatus": "Состояние ЧС",
+    "groupInfo": "Информация",
+    "groupSettings": "Настройки",
+    "myReports": "Мои сообщения",
+    "services": "Услуги",
+    "hazards": "Дождь и склоны",
+    "press": "Пресса",
+    "accessibility": "Доступность",
+    "sub_search": "Search by name on the network",
+    "sub_report": "Report a missing person",
+    "sub_network": "Federated search network",
+    "sub_myReports": "What you submitted, no account",
+    "sub_needHelp": "Pin a need on the map",
+    "sub_connectivity": "WiFi, signal and Starlink",
+    "sub_propertyAssessment": "Assess structural damage",
+    "sub_preparedness": "Preparedness guides",
+    "sub_services": "Power, water, fuel by zone",
+    "sub_howToHelp": "Donations and remittances",
+    "sub_volunteers": "Register your skills",
+    "sub_exchange": "Exchange resources",
+    "sub_collectionPoint": "Collection points",
+    "sub_organizations": "Verified directories",
+    "sub_map": "Live crisis map",
+    "sub_stats": "Figures and citizen reports",
+    "sub_activeTeam": "Teams on the ground",
+    "sub_hazards": "Observed rain — check INAMEH",
+    "sub_info": "Numbers and verified data",
+    "sub_help": "Help center",
+    "sub_calendar": "Events and drives",
+    "sub_wall": "Community wall",
+    "sub_press": "Press kit",
+    "sub_accessibility": "Text and contrast"
   },
   "a11y": {
     "skipToContent": "Перейти к основному содержимому"
@@ -651,7 +688,8 @@
       "reportBad": "Didn't work",
       "reportThanks": "Thanks",
       "reportError": "Error — retry",
-      "reportedUnavailable": "Reported as unavailable"
+      "reportedUnavailable": "Reported as unavailable",
+      "offlineAvailable": "Доступны офлайн · нажмите, чтобы позвонить."
     },
     "telecomFreeCallsSource": "Source: carrier announcements · editorial verification 2026-07"
   },
@@ -1560,5 +1598,42 @@
     "attribution": "Sources: USGS, GDACS, NOAA NHC, NWS, NASA FIRMS, NOAA Tsunami, USGS Water, ReliefWeb, Open-Meteo.",
     "disabled": "The public monitor is temporarily disabled (kill switch).",
     "backHome": "Back to home"
+  },
+  "servicios": {
+    "title": "Estado de servicios",
+    "subtitle": "Reportes comunitarios por zona — sin cuenta.",
+    "zoneLabel": "Zona",
+    "noRecent": "Sin datos recientes",
+    "reportTitle": "Reportar estado",
+    "reportHint": "Tres toques. Varios reportes antes de cambiar una zona.",
+    "reportCta": "Reportar ahora",
+    "thanks": "Gracias — tu reporte quedó registrado.",
+    "error": "No se pudo guardar. Intenta de nuevo.",
+    "disabled": "Esta función está desactivada temporalmente."
+  },
+  "amenazas": {
+    "title": "Condiciones de lluvia y ladera",
+    "subtitle": "Lluvia observada. Vigil no emite alertas.",
+    "boundary": "Vigil retransmite condiciones — no pronostica ni alerta.",
+    "boundaryDetail": "Fuentes autorizadas: INAMEH y Protección Civil.",
+    "inameh": "INAMEH",
+    "proteccionCivil": "Protección Civil",
+    "rainfallTitle": "Precipitación acumulada",
+    "rainfallSource": "Fuente: Open-Meteo (observado/pronóstico).",
+    "unavailable": "Datos de lluvia no disponibles",
+    "slopeNote": "Lluvia acumulada alta en zona de ladera — consulta INAMEH.",
+    "prepLink": "Guías de preparación",
+    "disabled": "Esta página está desactivada temporalmente."
+  },
+  "misReportes": {
+    "title": "Mis reportes",
+    "subtitle": "Guardados en este dispositivo con tokens. Sin cuenta.",
+    "empty": "Aún no hay reportes guardados en este dispositivo.",
+    "reporte": "Reporte de persona",
+    "intercambio": "Intercambio",
+    "evaluacion": "Evaluación estructural",
+    "remove": "Quitar",
+    "addLabel": "Pega un token de reclamo",
+    "add": "Agregar"
   }
 }

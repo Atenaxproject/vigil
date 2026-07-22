@@ -9,7 +9,7 @@ import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { PRIORITY_ESTADOS, VENEZUELA_ESTADOS } from '@/lib/venezuela-geo'
 import { StatCard } from '@/components/stats/StatCard'
 import { StatsRefreshTimestamp } from '@/components/stats/SourcedFigureCard'
-import { SourcedFigureCard } from '@/components/stats/SourcedFigureCard'
+import { SourcedFigureCard, ContestedFiguresContext } from '@/components/stats/SourcedFigureCard'
 import type { SourcedFigureRow } from '@/types/vigil.types'
 
 interface EstadoCount {
@@ -294,10 +294,13 @@ export function EstadisticasClient() {
                   source_url: fig.source_url,
                   verified_at: fig.verified_at,
                   is_official: fig.is_official,
+                  is_contested: fig.is_contested,
+                  disputes: fig.disputes,
                 }}
               />
             ))}
           </div>
+          <ContestedFiguresContext locale={locale} />
         </section>
       )}
 

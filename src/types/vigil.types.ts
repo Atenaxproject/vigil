@@ -53,7 +53,7 @@ export type VolunteerSkill =
   | 'fundraising_event'
 
 export type RegionScope = 'venezuela' | 'usa_diaspora'
-export type SeismicSource = 'USGS' | 'FUNVISIS'
+export type SeismicSource = 'USGS' | 'FUNVISIS' | 'EMSC'
 
 /** Disaster-archetype schema (VIGIL-EXPANSION-ROADMAP): pick archetype(s) →
  *  feeds, map layers, knowledge guides, and notification triggers come with it. */
@@ -372,6 +372,13 @@ export interface SourcedFigureRow {
   category: 'casualty' | 'infrastructure' | 'operational' | 'other'
   sort_order?: number
   active?: boolean
+  is_contested?: boolean
+  disputes?: Array<{
+    party: string
+    claim: string
+    source_url: string
+    dated: string
+  }>
 }
 
 export type RescuerPresenceType = 'rescue_team' | 'volunteer' | 'medical' | 'individual'

@@ -16,7 +16,7 @@ export const MINI_GUIDE_DISMISS_PREFIX = 'vigil_mini_guide_dismissed_'
 export const ALWAYS_VISIBLE_PATHS = new Set([
   '/ayuda',
   '/preparacion', // preparedness serves every mode — visible always
-  '/monitor', // Vigil Watch public relay — always visible when enabled
+  // /monitor omitted from mode-visible nav until redistribution rights cleared (Part A §68)
   '/prensa',
   '/privacidad',
   '/privacy',

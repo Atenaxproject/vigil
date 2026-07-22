@@ -18,6 +18,7 @@ import { VigilAssistant } from '@/components/ai/VigilAssistant'
 import { IOSInstallBanner } from '@/components/pwa/IOSInstallBanner'
 import { NetworkStatusBanner } from '@/components/layout/NetworkStatusBanner'
 import { OfflineQueueProvider } from '@/components/providers/OfflineQueueProvider'
+import { AccessibilityProvider } from '@/components/a11y/AccessibilityControls'
 import { DeploymentSuggestion } from '@/components/layout/DeploymentSuggestion'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { getAlertAftershockCount } from '@/lib/seismic'
@@ -105,6 +106,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-screen font-sans">
         <SkipToContent />
         <NextIntlClientProvider messages={messages}>
+          <AccessibilityProvider>
           <ViewModeProvider>
           <EmergencyBanner
             aftershockCount={aftershock.count}
@@ -210,6 +212,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <VigilAssistant />
           <IOSInstallBanner />
           </ViewModeProvider>
+          </AccessibilityProvider>
         </NextIntlClientProvider>
       </body>
     </html>

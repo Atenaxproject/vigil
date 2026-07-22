@@ -1,20 +1,22 @@
 import { CrisisMap } from '@/components/map/CrisisMap'
 import { MapAccessibleList } from '@/components/map/MapAccessibleList'
 import { AftershockAlert } from '@/components/feed/AftershockAlert'
+import { SeismicEventList } from '@/components/feed/SeismicEventList'
 import { RegionScopeTabs } from '@/components/map/RegionScopeTabs'
 import { getMapMarkers, getMissingPersonsForMap, getPublicPropertyAssessments } from '@/lib/data'
-import { getMergedSeismicFetch } from '@/lib/seismic'
+import { getLiveAftershockTotal, getMergedSeismicFetch } from '@/lib/seismic'
 import { getTranslations } from 'next-intl/server'
 
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   const t = await getTranslations('map')
-  const [seismic, markers, propertyAssessments, missingPersons] = await Promise.all([
+  const [seismic, markers, propertyAssessments, missingPersons, totals] = await Promise.all([
     getMergedSeismicFetch(),
     getMapMarkers(),
     getPublicPropertyAssessments(),
     getMissingPersonsForMap(),
+    getLiveAftershockTotal(),
   ])
   const events = seismic.events
 
@@ -32,6 +34,7 @@ export default async function HomePage() {
             missingPersons={missingPersons}
           />
         </div>
+        <SeismicEventList events={events} totalCount={totals.ok ? totals.total : undefined} />
         <MapAccessibleList markers={markers} events={events} />
       </div>
     </div>

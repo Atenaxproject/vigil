@@ -13,6 +13,7 @@ interface DirectoryEntry {
   numbers: readonly string[]
   service_type: ServiceType
   carrierAccess?: string
+  label_short?: string
   source: string
   verified_at?: string
   note?: string
@@ -29,6 +30,35 @@ const ALL_STATES = [
   'Bolívar',
   'Otros',
 ] as const
+
+function telHref(num: string): string {
+  return `tel:${encodeURIComponent(num.replace(/[^\d*+#]/g, ''))}`
+}
+
+function mapContact(
+  c: (typeof CRISIS_CONFIG.emergencyContacts)[number],
+  locale: string
+): DirectoryEntry {
+  return {
+    id: c.id,
+    label: locale === 'en' ? c.label_en : c.label_es,
+    numbers: c.numbers,
+    service_type: c.service_type,
+    carrierAccess: 'carrierAccess' in c ? c.carrierAccess : undefined,
+    label_short: 'label_short' in c ? c.label_short : undefined,
+    source: c.source,
+    verified_at: 'verified_at' in c ? c.verified_at : undefined,
+    note:
+      locale === 'en'
+        ? 'note_en' in c
+          ? c.note_en
+          : undefined
+        : 'note_es' in c
+          ? c.note_es
+          : undefined,
+    states: c.states,
+  }
+}
 
 export function EmergencyDirectory({ locale = 'es' }: { locale?: string }) {
   const t = useTranslations('crisisInfo.directory')
@@ -50,43 +80,17 @@ export function EmergencyDirectory({ locale = 'es' }: { locale?: string }) {
 
   const national = useMemo(() => {
     return CRISIS_CONFIG.emergencyContacts
-      .filter((c) => c.states.includes('nacional'))
-      .map((c): DirectoryEntry => ({
-        id: c.id,
-        label: locale === 'en' ? c.label_en : c.label_es,
-        numbers: c.numbers,
-        service_type: c.service_type,
-        carrierAccess: 'carrierAccess' in c ? c.carrierAccess : undefined,
-        source: c.source,
-        verified_at: 'verified_at' in c ? c.verified_at : undefined,
-        note:
-          locale === 'en'
-            ? 'note_en' in c
-              ? c.note_en
-              : undefined
-            : 'note_es' in c
-              ? c.note_es
-              : undefined,
-        states: c.states,
-      }))
+      .filter((c) => (c.states as readonly string[]).includes('nacional'))
+      .map((c) => mapContact(c, locale))
   }, [locale])
 
   const stateLocal = useMemo(() => {
     return CRISIS_CONFIG.emergencyContacts
       .filter((c) => (c.states as readonly string[]).includes(selectedState))
       .filter((c) => !(c.states as readonly string[]).includes('nacional') || c.states.length > 1)
-      .map((c): DirectoryEntry => ({
-        id: c.id,
-        label: locale === 'en' ? c.label_en : c.label_es,
-        numbers: c.numbers,
-        service_type: c.service_type,
-        source: c.source,
-        verified_at: 'verified_at' in c ? c.verified_at : undefined,
-        states: c.states,
-      }))
+      .map((c) => mapContact(c, locale))
   }, [locale, selectedState])
 
-  // Deduplicate: if a contact is both national and state-tagged, show once in national
   const stateOnly = stateLocal.filter((e) => !national.some((n) => n.id === e.id))
 
   const renderEntry = useCallback(
@@ -105,6 +109,9 @@ export function EmergencyDirectory({ locale = 'es' }: { locale?: string }) {
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div>
               <p className="text-[16px] font-medium text-vigil-ink">{entry.label}</p>
+              {entry.label_short && (
+                <p className="mt-0.5 font-mono text-[13px] text-vigil-muted">{entry.label_short}</p>
+              )}
               <p
                 className={`mt-1 inline-block rounded-badge px-2 py-0.5 text-[13px] font-medium ${
                   isPrivate
@@ -117,9 +124,19 @@ export function EmergencyDirectory({ locale = 'es' }: { locale?: string }) {
             </div>
             <ReportBadNumberButton entryId={entry.id} />
           </div>
-          <p className="mt-2 font-mono text-[17px] text-vigil-blue">{entry.numbers.join(' · ')}</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {entry.numbers.map((num) => (
+              <a
+                key={num}
+                href={telHref(num)}
+                className="inline-flex min-h-[44px] items-center rounded-input border border-vigil-blue/30 bg-vigil-blue-light px-3 font-mono text-[17px] font-medium text-vigil-blue"
+              >
+                {num}
+              </a>
+            ))}
+          </div>
           {entry.carrierAccess && (
-            <p className="mt-1 text-[13px] text-vigil-muted">{entry.carrierAccess}</p>
+            <p className="mt-2 text-[13px] text-vigil-muted">{entry.carrierAccess}</p>
           )}
           {entry.note && <p className="mt-1 text-[13px] text-vigil-muted">{entry.note}</p>}
           <p className="mt-1 font-mono text-[13px] text-vigil-muted">
@@ -138,7 +155,10 @@ export function EmergencyDirectory({ locale = 'es' }: { locale?: string }) {
   return (
     <div>
       <h2 className="text-[20px] font-semibold text-vigil-ink">{t('title')}</h2>
-      <p className="mt-1 text-[13px] text-vigil-muted">{t('subtitle')}</p>
+      <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
+      <p className="mt-2 rounded-card border border-status-alive/30 bg-status-alive-bg px-3 py-2 text-[16px] text-status-alive">
+        {t('offlineAvailable')}
+      </p>
 
       <h3 className="mt-6 text-[17px] font-medium text-vigil-ink">{t('nationalTitle')}</h3>
       <div className="mt-3 space-y-3">{national.map(renderEntry)}</div>

@@ -10,6 +10,15 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   workboxOptions: {
     runtimeCaching: [
       {
+        // Emergency directory + info hub — CacheFirst so tel: links work offline (prompt 69 A7).
+        urlPattern: /\/informacion/,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'emergency-directory-pages',
+          expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 30 },
+        },
+      },
+      {
         // Preparedness hub — CacheFirst so guides open offline (the content
         // itself ships in the JS bundle; this covers the page documents).
         urlPattern: /\/preparacion/,

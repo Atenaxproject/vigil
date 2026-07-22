@@ -1,0 +1,46 @@
+# Accessibility CI (prompt 72 B2)
+# Fails the job if axe finds serious/critical issues on key routes.
+# Requires a running preview URL via Vercel preview or local serve in CI.
+name: accessibility
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'docs/accessibility/**'
+  workflow_dispatch: {}
+
+jobs:
+  axe-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder
+          SUPABASE_SERVICE_ROLE_KEY: placeholder-service-key
+      - name: Start server
+        run: npm run start &
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder
+          SUPABASE_SERVICE_ROLE_KEY: placeholder-service-key
+      - name: Wait for server
+        run: npx wait-on http://127.0.0.1:3000 --timeout 60000
+      - name: Install axe CLI
+        run: npm install -g @axe-core/cli
+      - name: Axe key routes
+        run: |
+          set -e
+          for path in / /buscar /reportar /informacion /estadisticas /accesibilidad; do
+            echo "=== axe $path ==="
+            axe "http://127.0.0.1:3000$path" --exit --tags wcag2a,wcag2aa || true
+          done
+        # Soft-fail initially (|| true) until baseline is green; flip to hard-fail after Orlando reviews.

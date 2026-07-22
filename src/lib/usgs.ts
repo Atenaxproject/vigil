@@ -52,10 +52,14 @@ function rollingStartIso(windowDays: number): string {
   return new Date(Date.now() - windowDays * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
 }
 
-async function fetchUsgsWindow(windowDays: number): Promise<SeismicFetchResult> {
+async function fetchUsgsWindow(
+  windowDays: number,
+  options?: { limit?: number }
+): Promise<SeismicFetchResult> {
   const fetchedAt = new Date().toISOString()
   const sourceUrl = usgsSourceUrl()
   const starttime = rollingStartIso(windowDays)
+  const limit = String(options?.limit ?? 300)
 
   try {
     const { mapBounds, seismic } = CRISIS_CONFIG
@@ -66,7 +70,7 @@ async function fetchUsgsWindow(windowDays: number): Promise<SeismicFetchResult> 
       minlongitude: String(mapBounds.minLng),
       maxlongitude: String(mapBounds.maxLng),
       orderby: 'time',
-      limit: '300',
+      limit,
       starttime,
       minmagnitude: String(seismic.minMagnitudeDisplay),
     })
@@ -130,9 +134,10 @@ export async function getVenezuelaSeismicEvents(): Promise<SeismicEvent[]> {
 
 /** Full result with freshness metadata for banner / staleness UI. */
 export async function getVenezuelaSeismicFetch(
-  windowDays: number = MAP_WINDOW_DAYS
+  windowDays: number = MAP_WINDOW_DAYS,
+  options?: { limit?: number }
 ): Promise<SeismicFetchResult> {
-  return fetchUsgsWindow(windowDays)
+  return fetchUsgsWindow(windowDays, options)
 }
 
 /**

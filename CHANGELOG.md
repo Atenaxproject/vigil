@@ -5,6 +5,23 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-22 (prompts 69–72)
+
+### Added
+- **Emergency directory depth** — VEN 9-1-1 carrier variants, PC Caracas lines, FUNVISIS 0-800-TEMBLOR, 15 fire stations, private ambulances labeled, offline precache + tel: links.
+- **Multi-source seismic** — EMSC + USGS merge; display M2.5+; live sequence total; event list with magnitude / locality / relative time / source.
+- **`/servicios`** — community luz/agua/gasolina/gas/señal status with aggregation thresholds + kill switch (migration `018`).
+- **`/amenazas`** — rain conditions via Open-Meteo; no Vigil risk score; INAMEH / Protección Civil lead.
+- **Contested figures policy** — `is_contested` + disputes; component guard; July 21 official balance seed; context block on `/estadisticas`.
+- **Nav IA** — grouped menu (user questions), bottom **Emergencia** slot, Mis reportes (claim tokens), text-size + high-contrast controls, `/accesibilidad` + VPAT summary.
+- **Part A deliverable** — `docs/reference/MONITOR-AND-AUDIT-DELIVERABLES.md` (§66–68).
+
+### Changed
+- **`/monitor` removed from public nav** until FIRMS/GDACS redistribution confirmed (route still URL-reachable with kill switch).
+
+### Docs
+- Archived prompts `69`–`72` under `docs/build-process/`.
+
 ## [Unreleased] — 2026-07-22 (prompts 66–68)
 
 ### Fixed
@@ -15,7 +32,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 ### Added
 - **Feed health** — migration `016_feed_health`; last-success timestamps; stale/unavailable seismic UI; Admin feed panel.
 - **Content expiry helper** — `content-expiry.ts` (`expiresAt` / `verifiedAt` / suppress + donation org dedupe).
-- **Vigil Watch /monitor** — nine hazard adapters, EQ cross-source clustering, migration `017_hazard_events` + kill switch (`platform_settings` / `VIGIL_MONITOR_PUBLIC_ENABLED`), cron `/api/cron/hazards`, nav entry.
+- **Vigil Watch /monitor** — nine hazard adapters, EQ cross-source clustering, migration `017_hazard_events` + kill switch (`platform_settings` / `VIGIL_MONITOR_PUBLIC_ENABLED`), cron `/api/cron/hazards` (nav deferred pending rights).
 - Watch regions: Canada wildfire belt, East/SE Asia.
 
 ### Archived
