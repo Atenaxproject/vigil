@@ -16,9 +16,13 @@ const REQUEST_TYPES = ['inspection', 'relocation_assistance', 'both'] as const
 
 interface PropertyAssessmentFormProps {
   stats: { assessedThisWeek: number; activeProfessionals: number }
+  nlAssistAvailable?: boolean
 }
 
-export function PropertyAssessmentForm({ stats }: PropertyAssessmentFormProps) {
+export function PropertyAssessmentForm({
+  stats,
+  nlAssistAvailable = true,
+}: PropertyAssessmentFormProps) {
   const t = useTranslations('propertyAssessment')
   const [lat, setLat] = useState<number>(CRISIS_CONFIG.mapBounds.centerLat)
   const [lng, setLng] = useState<number>(CRISIS_CONFIG.mapBounds.centerLng)
@@ -116,23 +120,48 @@ export function PropertyAssessmentForm({ stats }: PropertyAssessmentFormProps) {
       </div>
       <p className="mt-2 text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 rounded-card border border-slate-200 bg-white p-4 text-center">
-        <div>
-          <p className="font-mono text-[22px] font-semibold text-vigil-ink">{stats.assessedThisWeek}</p>
-          <p className="text-[13px] text-vigil-muted">{t('stats.assessedWeek')}</p>
+      {/* Counters: real non-zero only — never render a headline 0 */}
+      {(stats.assessedThisWeek > 0 || stats.activeProfessionals > 0) && (
+        <div className="mt-4 grid grid-cols-2 gap-3 rounded-card border border-slate-200 bg-white p-4 text-center">
+          {stats.assessedThisWeek > 0 && (
+            <div>
+              <p className="font-mono text-[22px] font-semibold text-vigil-ink">
+                {stats.assessedThisWeek}
+              </p>
+              <p className="text-[13px] text-vigil-muted">{t('stats.assessedWeek')}</p>
+            </div>
+          )}
+          {stats.activeProfessionals > 0 && (
+            <div>
+              <p className="font-mono text-[22px] font-semibold text-vigil-ink">
+                {stats.activeProfessionals}
+              </p>
+              <p className="text-[13px] text-vigil-muted">{t('stats.professionals')}</p>
+            </div>
+          )}
         </div>
-        <div>
-          <p className="font-mono text-[22px] font-semibold text-vigil-ink">{stats.activeProfessionals}</p>
-          <p className="text-[13px] text-vigil-muted">{t('stats.professionals')}</p>
+      )}
+
+      {stats.assessedThisWeek === 0 && stats.activeProfessionals === 0 && (
+        <div className="mt-4 rounded-card border border-slate-200 bg-vigil-cloud p-4">
+          <p className="text-[16px] text-vigil-body">{t('emptyState.body')}</p>
+          <div className="mt-3 flex flex-wrap gap-3 text-[15px]">
+            <a href="#solicitud" className="font-medium text-vigil-blue underline-offset-2 hover:underline">
+              {t('emptyState.requestCta')}
+            </a>
+            <Link href="/voluntarios" className="font-medium text-vigil-blue underline-offset-2 hover:underline">
+              {t('emptyState.volunteerCta')}
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="mt-4 flex gap-2 rounded-card border border-amber-200 bg-status-unverified-bg p-4 text-[15px] text-amber-900">
         <AlertTriangle className="h-5 w-5 shrink-0" aria-hidden />
         <p>{t('disclaimer')}</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+      <form id="solicitud" onSubmit={handleSubmit} className="mt-6 space-y-4">
         <GeoSelect
           estado={estado}
           municipio={municipio}
@@ -218,6 +247,9 @@ export function PropertyAssessmentForm({ stats }: PropertyAssessmentFormProps) {
             className={inputClass}
             placeholder={t('form.descriptionPlaceholder')}
           />
+          {!nlAssistAvailable && (
+            <p className="mt-1 text-[13px] text-vigil-muted">{t('form.nlAssistOffNote')}</p>
+          )}
         </div>
 
         <div>

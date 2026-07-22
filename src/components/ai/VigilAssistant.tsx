@@ -59,7 +59,7 @@ export function VigilAssistant() {
         body: JSON.stringify({ message: trimmed, language: locale }),
       })
 
-      if (res.status === 503) {
+      if (res.status === 503 || res.status === 429) {
         setUnavailable(true)
         return
       }
@@ -165,9 +165,9 @@ export function VigilAssistant() {
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {unavailable ? (
-                <div className="rounded-input bg-vigil-blue-light p-4 text-[16px] text-vigil-body">
-                  <p className="font-medium text-vigil-ink">{t('comingSoonTitle')}</p>
-                  <p className="mt-2">{t('comingSoonBody')}</p>
+                <div className="rounded-input border border-status-unverified bg-status-unverified-bg p-4 text-[16px] text-vigil-body">
+                  <p className="font-medium text-vigil-ink">{t('unavailableTitle')}</p>
+                  <p className="mt-2">{t('unavailableBody')}</p>
                 </div>
               ) : (
                 <>

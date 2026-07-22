@@ -191,9 +191,13 @@ export function InformacionLive() {
         <p className="mt-2 font-mono text-[13px] text-vigil-muted">
           {t('liveStatus.lastUpdate', { time: lastUpdatedLabel })}
         </p>
-        <p className="mt-1 text-[16px] text-slate-600">
-          {t('liveStatus.quakesTracked', { count: liveData?.recentSignificantQuakes.length ?? 0 })}
-        </p>
+        {(liveData?.recentSignificantQuakes.length ?? 0) > 0 && (
+          <p className="mt-1 text-[16px] text-slate-600">
+            {t('liveStatus.quakesTracked', {
+              count: liveData!.recentSignificantQuakes.length,
+            })}
+          </p>
+        )}
         <a
           href="https://earthquake.usgs.gov/earthquakes/map/"
           target="_blank"

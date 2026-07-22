@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { User } from '@supabase/supabase-js'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { isAdminUser } from '@/lib/supabase/auth'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { updateSession } from '@/lib/supabase/middleware'
+
+const AI = CRISIS_CONFIG.aiLimits
 
 const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/missing-persons/submit': { max: 5, windowMs: 60 * 60 * 1000 },
@@ -21,13 +24,15 @@ const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/collection-points/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/community-wall/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/community-wall/flag': { max: 20, windowMs: 60 * 60 * 1000 },
-  '/api/assistant': { max: 30, windowMs: 60 * 60 * 1000 },
-  '/api/photo-search': { max: 10, windowMs: 60 * 60 * 1000 },
+  '/api/assistant': { max: AI.assistantPerHour, windowMs: 60 * 60 * 1000 },
+  '/api/photo-search': { max: AI.photoSearchPerHour, windowMs: 60 * 60 * 1000 },
   '/api/property-assessments/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/dtv-metrics': { max: 120, windowMs: 60 * 60 * 1000 },
   '/api/admin/sync-dtv-centers': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/admin/sync-cav-centers': { max: 5, windowMs: 60 * 60 * 1000 },
 }
+
+const AI_PATHS = new Set(['/api/assistant', '/api/photo-search'])
 
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>()
 
@@ -97,6 +102,19 @@ export async function middleware(request: NextRequest) {
     } else {
       entry.count++
       if (entry.count > limit.max) {
+        // AI paths: honest degrade payload (not a bare 500 / silent failure)
+        if (AI_PATHS.has(pathname)) {
+          return NextResponse.json(
+            {
+              unavailable: true,
+              degraded: true,
+              code: 'rate_limited',
+              error:
+                'Demasiadas solicitudes. Por favor intente más tarde. / Too many requests. Please try again later.',
+            },
+            { status: 429, headers: { 'Retry-After': String(Math.ceil(limit.windowMs / 1000)) } }
+          )
+        }
         return NextResponse.json(
           {
             error:

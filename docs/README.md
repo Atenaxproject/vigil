@@ -26,6 +26,7 @@ Living specs and operational guides:
 - `architecture/DESIGN-SYSTEM.md` — UI tokens, typography, and component rules
 - `architecture/DEPLOYMENT.md` — Supabase, Vercel, DNS, Resend, and local dev setup
 - `architecture/DEPLOYMENT-PLAYBOOK.md` — new-crisis rollout: go/no-go, archetypes, config-driven deployment
+- `architecture/VIGIL-LAUNCH-READINESS.md` — DTV listing launch checklist (P0/P1 gaps; living)
 
 ## Reference index
 
@@ -97,6 +98,9 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `49-codeql-setup.md` - CodeQL workflow for JavaScript/TypeScript
 - `50-github-actions-secrets.md` - GitHub Actions secrets inventory (set vs pending)
 - `51-zoho-dns-cloudflare.md` - Zoho Mail DNS on Cloudflare (pending DKIM/API)
+- `60-emergency-number-consistency.md` — footer/header 911 reconciliation; 0800-RESCATE directory-only
+- `61-ai-cost-circuit-breaker.md` — AI rate limits, spend-proxy breaker, honest degrade UX
+- `62-zero-state-counters.md` — suppress zero headline stats; CTA empty states
 - `AGENTS.md` — agent operating notes
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)

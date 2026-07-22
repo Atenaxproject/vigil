@@ -4,6 +4,11 @@ import {
   HAIKU_MODEL,
   isAnthropicConfigured,
 } from '@/lib/ai/client'
+import {
+  getBreakerState,
+  isHaikuFeatureAllowed,
+  recordAiUsage,
+} from '@/lib/ai/circuit-breaker'
 
 /** Internal queue flag only — never assign green/yellow/red. */
 export async function flagPropertyPhotoPriority(
@@ -11,6 +16,9 @@ export async function flagPropertyPhotoPriority(
   mediaType: 'image/jpeg' | 'image/png' | 'image/webp'
 ): Promise<boolean> {
   if (!isAnthropicConfigured()) return false
+
+  const breaker = await getBreakerState()
+  if (!isHaikuFeatureAllowed(breaker)) return false
 
   const anthropic = createAnthropicClient()
   if (!anthropic) return false
@@ -38,6 +46,7 @@ Do NOT use green, yellow, or red. Do NOT assess safety for occupants.`,
         },
       ],
     })
+    await recordAiUsage('haiku', 'property_triage')
 
     const text = extractTextContent(response.content).toLowerCase()
     return text.includes('priority')
@@ -46,13 +55,25 @@ Do NOT use green, yellow, or red. Do NOT assess safety for occupants.`,
   }
 }
 
-export async function structurePropertyDescription(description: string): Promise<string> {
-  if (!isAnthropicConfigured() || description.trim().length < 20) {
-    return description.trim()
+/**
+ * NL intake structuring — falls back silently to raw text when AI is halted
+ * or unavailable. Never blocks a family from submitting.
+ */
+export async function structurePropertyDescription(
+  description: string
+): Promise<{ text: string; assisted: boolean }> {
+  const trimmed = description.trim()
+  if (!isAnthropicConfigured() || trimmed.length < 20) {
+    return { text: trimmed, assisted: false }
+  }
+
+  const breaker = await getBreakerState()
+  if (!isHaikuFeatureAllowed(breaker)) {
+    return { text: trimmed, assisted: false }
   }
 
   const anthropic = createAnthropicClient()
-  if (!anthropic) return description.trim()
+  if (!anthropic) return { text: trimmed, assisted: false }
 
   try {
     const response = await anthropic.messages.create({
@@ -69,9 +90,10 @@ ${description}`,
         },
       ],
     })
+    await recordAiUsage('haiku', 'nl_intake')
     const structured = extractTextContent(response.content).trim()
-    return structured || description.trim()
+    return { text: structured || trimmed, assisted: Boolean(structured) }
   } catch {
-    return description.trim()
+    return { text: trimmed, assisted: false }
   }
 }

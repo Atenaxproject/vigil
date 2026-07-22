@@ -7,6 +7,12 @@ import {
   HAIKU_MODEL,
   isAnthropicConfigured,
 } from '@/lib/ai/client'
+import {
+  aiUnavailableResponse,
+  getBreakerState,
+  isHaikuFeatureAllowed,
+  recordAiUsage,
+} from '@/lib/ai/circuit-breaker'
 import { getVenezuelaSeismicEvents } from '@/lib/usgs'
 import { getGuideIndex } from '@/content/preparedness'
 
@@ -31,7 +37,18 @@ export async function POST(request: NextRequest) {
   if (!isAnthropicConfigured()) {
     return new Response(
       JSON.stringify({
-        unavailable: true,
+        ...aiUnavailableResponse('assistant'),
+        reply: null,
+      }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
+    )
+  }
+
+  const breaker = await getBreakerState()
+  if (!isHaikuFeatureAllowed(breaker)) {
+    return new Response(
+      JSON.stringify({
+        ...aiUnavailableResponse('assistant'),
         reply: null,
       }),
       { status: 503, headers: { 'Content-Type': 'application/json' } }
@@ -41,7 +58,7 @@ export async function POST(request: NextRequest) {
   const anthropic = createAnthropicClient()
   if (!anthropic) {
     return new Response(
-      JSON.stringify({ unavailable: true, reply: null }),
+      JSON.stringify({ ...aiUnavailableResponse('assistant'), reply: null }),
       { status: 503, headers: { 'Content-Type': 'application/json' } }
     )
   }
@@ -147,6 +164,7 @@ ${JSON.stringify(eventsRes.data ?? [])}`
           stream: true,
           messages: [{ role: 'user', content: parsed.message }],
         })
+        await recordAiUsage('haiku', 'assistant')
 
         for await (const event of response) {
           if (

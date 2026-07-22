@@ -22,8 +22,8 @@ export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
   const sheetRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
-  const rescate = CRISIS_CONFIG.emergencyContacts.find((c) => c.id === 'rescate')
-  const carrierCodes = rescate && 'carrierCodes' in rescate ? rescate.carrierCodes : []
+  const nacional = CRISIS_CONFIG.emergencyContacts.find((c) => c.id === 'nacional')
+  const carrierCodes = nacional && 'carrierCodes' in nacional ? nacional.carrierCodes : []
   const hasUnverified = CRISIS_CONFIG.emergencyContacts.some((c) => !c.verified)
 
   useEffect(() => {
@@ -173,7 +173,7 @@ export function EmergencyBanner({ aftershockCount = 0 }: EmergencyBannerProps) {
                       </li>
                     ))}
                   </ul>
-                  {contact.id === 'rescate' && contact.carrierAccess && (
+                  {contact.id === 'nacional' && contact.carrierAccess && (
                     <p className="mt-1.5 font-mono text-[13px] text-vigil-muted">{contact.carrierAccess}</p>
                   )}
                 </section>

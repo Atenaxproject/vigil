@@ -48,8 +48,8 @@
   },
   "banner": {
     "emergency": "紧急情况:",
-    "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
+    "hotline": "911",
+    "hotlineNumber": "911",
     "fullDirectory": "Full directory",
     "moreNumbers": "More contacts",
     "verifyBeforeCalling": "拨打前请核实",
@@ -167,7 +167,11 @@
       "dtvViewFullPlatform": "查看完整平台 →",
       "aiDescription": "AI description",
       "comingSoonTitle": "Coming soon",
-      "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server."
+      "comingSoonBody": "Photo search requires ANTHROPIC_API_KEY on the server.",
+      "unavailableTitle": "Photo search unavailable",
+      "unavailableBody": "Photo search is not available right now. You can search by name, or report the person so they appear in the records.",
+      "linkSearch": "Search by name",
+      "linkReport": "Report a person"
     },
     "recentTitle": "Recent",
     "recentEmpty": "Vigil 上暂无最新记录。按姓名搜索时，我们还会包含 Desaparecidos Terremoto Venezuela 的公开记录。"
@@ -427,7 +431,7 @@
     "creditsByPrefix": "一个项目由 Orlando Toro —",
     "creditsByLink": "YouTheWave",
     "builtWith": "由 Claude + Cursor 构建",
-    "notEmergency": "Vigil 不是紧急服务。若需立即救援，请致电：{{hotline}}",
+    "notEmergency": "Vigil 不是紧急服务。若需立即救援，请致电 {hotline}。",
     "otherRegions": "其他地区"
   },
   "exchange": {
@@ -923,8 +927,10 @@
     "send": "Send",
     "close": "Close",
     "comingSoonTitle": "Coming soon",
-    "comingSoonBody": "The AI assistant requires ANTHROPIC_API_KEY. Meanwhile, use the map, /buscar, or call 0800-RESCATE.",
-    "errorFallback": "I can't respond right now. Call {hotline} ({number})."
+    "comingSoonBody": "The assistant is not available right now. For emergencies call 911. You can keep using the map, search, and directories as usual.",
+    "errorFallback": "I can't respond right now. Call {hotline} ({number}).",
+    "unavailableTitle": "Assistant unavailable",
+    "unavailableBody": "The assistant is not available right now. For emergencies call 911. You can keep using the map, search, and directories as usual."
   },
   "estadisticas": {
     "title": "Statistics by State",
@@ -1021,7 +1027,8 @@
       "submit": "Submit request",
       "submitting": "Submitting…",
       "success": "Request registered. Save your private tracking link.",
-      "error": "Submit failed. Try again."
+      "error": "Submit failed. Try again.",
+      "nlAssistOffNote": "AI-assisted entry is temporarily off. Complete the structured form as usual."
     },
     "map": {
       "approxLocation": "Approximate map location",
@@ -1053,6 +1060,11 @@
       "relocationLinked": "Your relocation request is linked to resource exchange.",
       "relocationLink": "View shelter posts in Exchange",
       "privacyNote": "Your exact address and contact are never shown publicly."
+    },
+    "emptyState": {
+      "body": "Request an assessment and we will match you with a volunteer professional when one is available.",
+      "requestCta": "Request an assessment",
+      "volunteerCta": "I am an engineer or architect — register"
     }
   },
   "viewMode": {
@@ -1074,7 +1086,7 @@
         "title": "You need help now",
         "tips": [
           "Use I Need Help to drop your location on the map — rescue teams see it in real time.",
-          "Call 911 or 0800-RESCATE before relying on the app alone.",
+          "Call 911 before relying on the app alone.",
           "Report connectivity if you find WiFi or signal — it helps others communicate."
         ]
       },
@@ -1269,7 +1281,7 @@
         },
         "hotline": {
           "q": "What is the emergency hotline?",
-          "a": "0800-RESCATE — always shown in the site banner."
+          "a": "911 — always shown in the site banner."
         }
       },
       "connectivity": {

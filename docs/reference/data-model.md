@@ -22,8 +22,10 @@
 | 010 | `010_property_assessments.sql` | property_assessments + public view |
 | 011 | `011_diaspora_region.sql` | `region_scope` on map_markers, organizations, events, etc. |
 | 012 | `012_missing_persons_map_coords.sql` | jittered map coords on missing_persons; parroquia in public view |
+| 013 | `013_vigil_watch_state.sql` | Vigil Watch durable state |
+| 014 | `014_ai_usage_log.sql` | AI call log for spend-proxy circuit breaker |
 
-> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Production requires **001–012** — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
+> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Production requires **001–014** — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
 
 ---
 
@@ -52,6 +54,7 @@ needs_offers
 moderation_queue
 erasure_requests
 rate_limit_log
+ai_usage_log
 profiles
 ```
 

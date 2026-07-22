@@ -48,8 +48,8 @@
   },
   "banner": {
     "emergency": "Emergencias:",
-    "hotline": "0800-RESCATE",
-    "hotlineNumber": "0800-7372282",
+    "hotline": "911",
+    "hotlineNumber": "911",
     "moreNumbers": "Más contactos",
     "fullDirectory": "Directorio completo",
     "verifyBeforeCalling": "Verifica antes de llamar",
@@ -133,7 +133,11 @@
       "dtvViewFullPlatform": "Ver plataforma completa →",
       "aiDescription": "Descripción de la IA",
       "comingSoonTitle": "Próximamente",
-      "comingSoonBody": "La búsqueda por foto requiere configurar ANTHROPIC_API_KEY en el servidor."
+      "comingSoonBody": "La búsqueda por foto requiere configurar ANTHROPIC_API_KEY en el servidor.",
+      "unavailableTitle": "Búsqueda por foto no disponible",
+      "unavailableBody": "La búsqueda por foto no está disponible en este momento. Puedes buscar por nombre, o reportar a la persona para que aparezca en los registros.",
+      "linkSearch": "Buscar por nombre",
+      "linkReport": "Reportar persona"
     },
     "status": {
       "missing": "Desaparecido/a",
@@ -457,7 +461,7 @@
     "creditsByPrefix": "Un proyecto de Orlando Toro —",
     "creditsByLink": "YouTheWave",
     "builtWith": "Construido con Claude + Cursor",
-    "notEmergency": "Vigil NO es un servicio de emergencias. Para rescate inmediato llama al: {hotline}",
+    "notEmergency": "Vigil NO es un servicio de emergencias. Para rescate inmediato llama al {hotline}.",
     "press": "Prensa",
     "otherRegions": "Otras regiones"
   },
@@ -602,7 +606,7 @@
     "hotlines": {
       "title": "Líneas de emergencia",
       "verifyNote": "⚠️ Números de segunda mano — verifica antes de llamar.",
-      "rescate": "0800-RESCATE",
+      "rescate": "0800-RESCATE (Coordinación de rescate)",
       "redCross": "Cruz Roja Venezolana",
       "additionalTitle": "Líneas de emergencia adicionales",
       "additionalSource": "venezuelatebusca.com/resources",
@@ -704,8 +708,10 @@
     "send": "Enviar",
     "close": "Cerrar",
     "comingSoonTitle": "Próximamente",
-    "comingSoonBody": "El asistente con IA requiere ANTHROPIC_API_KEY. Mientras tanto, usa el mapa, /buscar o llama al 0800-RESCATE.",
-    "errorFallback": "En este momento no puedo responder. Llama al {hotline} ({number})."
+    "comingSoonBody": "El asistente no está disponible en este momento. Para emergencias llama al 911. Puedes seguir usando el mapa, la búsqueda y los directorios con normalidad.",
+    "errorFallback": "En este momento no puedo responder. Llama al {hotline} ({number}).",
+    "unavailableTitle": "Asistente no disponible",
+    "unavailableBody": "El asistente no está disponible en este momento. Para emergencias llama al 911. Puedes seguir usando el mapa, la búsqueda y los directorios con normalidad."
   },
   "estadisticas": {
     "title": "Estadísticas",
@@ -1052,7 +1058,8 @@
       "submit": "Enviar solicitud",
       "submitting": "Enviando…",
       "success": "Solicitud registrada. Guarda tu enlace privado de seguimiento.",
-      "error": "Error al enviar. Intenta de nuevo."
+      "error": "Error al enviar. Intenta de nuevo.",
+      "nlAssistOffNote": "La entrada asistida por IA está temporalmente desactivada. Completa el formulario estructurado con normalidad."
     },
     "map": {
       "approxLocation": "Ubicación aproximada en el mapa",
@@ -1084,6 +1091,11 @@
       "relocationLinked": "Tu solicitud de reubicación está vinculada al intercambio de recursos.",
       "relocationLink": "Ver refugios en Intercambio",
       "privacyNote": "Tu dirección exacta y contacto nunca se muestran públicamente."
+    },
+    "emptyState": {
+      "body": "Solicita una evaluación y te conectamos con un profesional voluntario cuando haya disponibilidad.",
+      "requestCta": "Solicitar evaluación",
+      "volunteerCta": "Soy ingeniero o arquitecto — registrarme"
     }
   },
   "viewMode": {
@@ -1105,7 +1117,7 @@
         "title": "Necesitas ayuda ahora",
         "tips": [
           "Usa Necesito ayuda para marcar tu ubicación en el mapa — los equipos de rescate lo ven en tiempo real.",
-          "Llama al 911 o 0800-RESCATE antes de depender solo de la app.",
+          "Llama al 911 antes de depender solo de la app.",
           "Reporta conectividad si encuentras WiFi o señal — ayuda a otros a comunicarse."
         ]
       },
@@ -1300,7 +1312,7 @@
         },
         "hotline": {
           "q": "¿Cuál es la línea de emergencia?",
-          "a": "0800-RESCATE — siempre visible en el banner del sitio. Vigil complementa pero no reemplaza servicios de emergencia oficiales."
+          "a": "911 — siempre visible en el banner del sitio. Vigil complementa pero no reemplaza servicios de emergencia oficiales."
         }
       },
       "connectivity": {

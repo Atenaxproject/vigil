@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { Camera, ExternalLink, Loader2 } from 'lucide-react'
 import type { FederatedPerson } from '@/lib/dtv-mapper'
@@ -44,7 +45,7 @@ export function PhotoSearch({ aiAvailable = true }: PhotoSearchProps) {
         description?: string | null
       }
 
-      if (data.unavailable || res.status === 503) {
+      if (data.unavailable || res.status === 503 || res.status === 429) {
         setUnavailable(true)
         return
       }
@@ -63,9 +64,17 @@ export function PhotoSearch({ aiAvailable = true }: PhotoSearchProps) {
 
   if (!aiAvailable) {
     return (
-      <div className="mt-4 rounded-input border border-dashed border-slate-300 bg-vigil-cloud p-4 text-center">
-        <p className="text-[13px] font-medium text-vigil-ink">{t('comingSoonTitle')}</p>
-        <p className="mt-1 text-[13px] text-vigil-muted">{t('comingSoonBody')}</p>
+      <div className="mt-4 rounded-input border border-status-unverified bg-status-unverified-bg p-4 text-center">
+        <p className="text-[13px] font-medium text-vigil-ink">{t('unavailableTitle')}</p>
+        <p className="mt-1 text-[13px] text-vigil-muted">{t('unavailableBody')}</p>
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-[13px]">
+          <Link href="/buscar" className="font-medium text-vigil-blue underline-offset-2 hover:underline">
+            {t('linkSearch')}
+          </Link>
+          <Link href="/reportar" className="font-medium text-vigil-blue underline-offset-2 hover:underline">
+            {t('linkReport')}
+          </Link>
+        </div>
       </div>
     )
   }
@@ -108,9 +117,17 @@ export function PhotoSearch({ aiAvailable = true }: PhotoSearchProps) {
       <p className="mt-2 text-[13px] text-vigil-muted">{t('privacyNotice')}</p>
 
       {unavailable && (
-        <div className="mt-3 rounded-input bg-vigil-blue-light p-3 text-[13px] text-vigil-body">
-          <p className="font-medium">{t('comingSoonTitle')}</p>
-          <p className="mt-1">{t('comingSoonBody')}</p>
+        <div className="mt-3 rounded-input border border-status-unverified bg-status-unverified-bg p-3 text-[13px] text-vigil-body">
+          <p className="font-medium">{t('unavailableTitle')}</p>
+          <p className="mt-1">{t('unavailableBody')}</p>
+          <div className="mt-2 flex flex-wrap gap-3">
+            <Link href="/buscar" className="font-medium text-vigil-blue underline-offset-2 hover:underline">
+              {t('linkSearch')}
+            </Link>
+            <Link href="/reportar" className="font-medium text-vigil-blue underline-offset-2 hover:underline">
+              {t('linkReport')}
+            </Link>
+          </div>
         </div>
       )}
 

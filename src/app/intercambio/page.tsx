@@ -306,7 +306,16 @@ export default function IntercambioPage() {
           </div>
         )}
         {!loading && filtered.length === 0 && (
-          <p className="py-12 text-center text-[16px] text-vigil-muted">{t('noResults')}</p>
+          <div className="py-12 text-center">
+            <p className="text-[16px] text-vigil-muted">{t('noResults')}</p>
+            <button
+              type="button"
+              onClick={() => setShowForm(true)}
+              className="mt-3 text-[16px] font-medium text-vigil-blue underline-offset-2 hover:underline"
+            >
+              {t('publish')}
+            </button>
+          </div>
         )}
         {filtered.map((entry) => {
           const Icon = CATEGORY_ICONS[entry.category]

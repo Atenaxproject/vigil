@@ -1,5 +1,6 @@
 import { PropertyAssessmentForm } from '@/components/property/PropertyAssessmentForm'
 import { getPropertyAssessmentStats } from '@/lib/data'
+import { getBreakerState, isHaikuFeatureAllowed } from '@/lib/ai/circuit-breaker'
 
 export const metadata = {
   title: 'Evaluación de Seguridad Estructural — Vigil',
@@ -10,6 +11,14 @@ export const metadata = {
 export const dynamic = 'force-dynamic'
 
 export default async function EvaluacionEstructuralPage() {
-  const stats = await getPropertyAssessmentStats()
-  return <PropertyAssessmentForm stats={stats} />
+  const [stats, breaker] = await Promise.all([
+    getPropertyAssessmentStats(),
+    getBreakerState(),
+  ])
+  return (
+    <PropertyAssessmentForm
+      stats={stats}
+      nlAssistAvailable={isHaikuFeatureAllowed(breaker)}
+    />
+  )
 }

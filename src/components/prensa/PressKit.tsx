@@ -88,21 +88,25 @@ export function PressKit() {
         <h2 className="text-[20px] font-semibold text-vigil-ink">{t('stats.title')}</h2>
         <p className="mt-1 text-[16px] text-vigil-muted">{t('stats.subtitle')}</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-card border border-slate-200 bg-white p-4">
-            <p className="text-[13px] text-vigil-muted">{t('stats.searchablePersons')}</p>
-            <p className="mt-1 font-display text-[34px] font-bold tracking-tight text-vigil-ink">
-              {(metrics?.totalPersonas ?? 0).toLocaleString(locale)}
-            </p>
-            <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-              {t('stats.source', { source: metrics?.source ?? 'desaparecidosterremotovenezuela.com' })}
-            </p>
-          </div>
-          <div className="rounded-card border border-slate-200 bg-white p-4">
-            <p className="text-[13px] text-vigil-muted">{t('stats.centros')}</p>
-            <p className="mt-1 font-display text-[34px] font-bold tracking-tight text-vigil-ink">
-              {(metrics?.totalCentros ?? 0).toLocaleString(locale)}
-            </p>
-          </div>
+          {metrics?.available && (metrics.totalPersonas ?? 0) > 0 && (
+            <div className="rounded-card border border-slate-200 bg-white p-4">
+              <p className="text-[13px] text-vigil-muted">{t('stats.searchablePersons')}</p>
+              <p className="mt-1 font-display text-[34px] font-bold tracking-tight text-vigil-ink">
+                {metrics.totalPersonas.toLocaleString(locale)}
+              </p>
+              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                {t('stats.source', { source: metrics.source ?? 'desaparecidosterremotovenezuela.com' })}
+              </p>
+            </div>
+          )}
+          {metrics?.available && (metrics.totalCentros ?? 0) > 0 && (
+            <div className="rounded-card border border-slate-200 bg-white p-4">
+              <p className="text-[13px] text-vigil-muted">{t('stats.centros')}</p>
+              <p className="mt-1 font-display text-[34px] font-bold tracking-tight text-vigil-ink">
+                {metrics.totalCentros.toLocaleString(locale)}
+              </p>
+            </div>
+          )}
         </div>
         {!metrics?.available && (
           <p className="mt-3 text-[13px] text-vigil-muted">{t('stats.unavailable')}</p>

@@ -46,7 +46,8 @@ export async function POST(request: NextRequest) {
     }
 
     const approx = jitterCoordinates(body.exact_lat, body.exact_lng)
-    const structuredDescription = await structurePropertyDescription(body.description)
+    const structured = await structurePropertyDescription(body.description)
+    const structuredDescription = structured.text
 
     let photoUrl: string | null = null
     let aiPriorityFlag = false
@@ -159,6 +160,8 @@ export async function POST(request: NextRequest) {
       record: data,
       claimUrl,
       relocationExchangeId,
+      /** False when NL assist was off (halted / unconfigured) — form still accepted. */
+      nlAssistUsed: structured.assisted,
     })
   } catch {
     return NextResponse.json({ error: 'Datos inválidos' }, { status: 400 })

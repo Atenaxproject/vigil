@@ -144,30 +144,38 @@ export function EstadisticasClient() {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <StatCard
-            value={(dtvMetrics?.totalPersonas ?? 0).toLocaleString(numberLocale)}
-            label={t('network.dtvPersonas')}
-            sublabel={t('network.dtvPersonasSub')}
-            source="dtv"
-          />
-          <StatCard
-            value={(dtvMetrics?.totalCentros ?? 0).toLocaleString(numberLocale)}
-            label={t('network.dtvCentros')}
-            sublabel={t('network.dtvCentrosSub')}
-            source="dtv"
-          />
-          <StatCard
-            value={(dtvMetrics?.totalListas ?? 0).toLocaleString(numberLocale)}
-            label={t('network.dtvListas')}
-            sublabel={t('network.dtvListasSub')}
-            source="dtv"
-          />
-          <StatCard
-            value={vigilTotal.toLocaleString(numberLocale)}
-            label={t('network.vigilPersonas')}
-            sublabel={t('network.vigilPersonasSub')}
-            source="vigil"
-          />
+          {dtvMetrics?.available && (dtvMetrics.totalPersonas ?? 0) > 0 && (
+            <StatCard
+              value={dtvMetrics.totalPersonas.toLocaleString(numberLocale)}
+              label={t('network.dtvPersonas')}
+              sublabel={t('network.dtvPersonasSub')}
+              source="dtv"
+            />
+          )}
+          {dtvMetrics?.available && (dtvMetrics.totalCentros ?? 0) > 0 && (
+            <StatCard
+              value={dtvMetrics.totalCentros.toLocaleString(numberLocale)}
+              label={t('network.dtvCentros')}
+              sublabel={t('network.dtvCentrosSub')}
+              source="dtv"
+            />
+          )}
+          {dtvMetrics?.available && (dtvMetrics.totalListas ?? 0) > 0 && (
+            <StatCard
+              value={dtvMetrics.totalListas.toLocaleString(numberLocale)}
+              label={t('network.dtvListas')}
+              sublabel={t('network.dtvListasSub')}
+              source="dtv"
+            />
+          )}
+          {vigilTotal > 0 && (
+            <StatCard
+              value={vigilTotal.toLocaleString(numberLocale)}
+              label={t('network.vigilPersonas')}
+              sublabel={t('network.vigilPersonasSub')}
+              source="vigil"
+            />
+          )}
         </div>
 
         {dtvMetrics?.available && dtvUpdatedLabel && (

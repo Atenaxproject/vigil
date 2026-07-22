@@ -26,8 +26,9 @@ export const CRISIS_CONFIG = {
   },
 
   emergency: {
-    hotline: '0800-7372282',
-    hotlineLabel: '0800-RESCATE',
+    // Primary national emergency line — matches header banner and peer platforms.
+    hotline: '911',
+    hotlineLabel: '911',
     // VenApp intentionally excluded — see Vigil Privacy Policy section on
     // government data non-cooperation. VenApp has documented human rights concerns.
   },
@@ -193,16 +194,44 @@ export const CRISIS_CONFIG = {
   },
 
   /**
+   * AI rate limits and circuit-breaker defaults.
+   * Thresholds are spend proxies (Anthropic does not expose live spend).
+   * Override at request time via AI_DEGRADE_THRESHOLD / AI_HALT_THRESHOLD env vars.
+   *
+   * Load reasoning (approx, $50 Anthropic console hard cap):
+   * - Photo search ≈ Sonnet vision + Haiku match ≈ $0.03–0.08 / call
+   * - Assistant ≈ Haiku ≈ $0.001–0.002 / call
+   * - Unit weights: sonnet=10, haiku=1 → ~800 units ≈ early photo burn,
+   *   ~2000 units ≈ remaining budget under mixed traffic.
+   * At ~400 concurrent DTV referral searchers / hour with 20% using photo,
+   * degrade trips within ~2–4 hours; halt protects the rest of the day.
+   */
+  aiLimits: {
+    photoSearchPerHour: 3,
+    assistantPerHour: 15,
+    nlIntakePerHour: 10,
+    sonnetUnitCost: 10,
+    haikuUnitCost: 1,
+    /** Rolling window for usage aggregation (hours). */
+    usageWindowHours: 24,
+    degradeThresholdDefault: 800,
+    haltThresholdDefault: 2000,
+  },
+
+  /**
    * Emergency contacts — secondhand from sos.yummyrides.com (NOT independently verified).
    * Orlando must verify each number before treating as authoritative.
    * UI surfaces verify-before-calling language when verified === false.
+   *
+   * Part C gated lines (Protección Civil, Cruz Roja, FUNVISIS) stay listed with
+   * verified:false until Orlando signs off per-line against an official source.
    */
   emergencyContacts: [
     {
-      id: 'rescate',
-      label_es: '0800-RESCATE (Emergencias nacional)',
-      label_en: '0800-RESCATE (National emergencies)',
-      numbers: ['0800-7372282', '911'],
+      id: 'nacional',
+      label_es: 'Emergencias nacional (911)',
+      label_en: 'National emergencies (911)',
+      numbers: ['911'],
       carrierAccess: 'Movistar 911 · Digitel 112 · Movilnet *1 · Cantv 171',
       carrierCodes: [
         { carrier: 'Movistar', code: '911' },
@@ -210,6 +239,17 @@ export const CRISIS_CONFIG = {
         { carrier: 'Movilnet', code: '*1' },
         { carrier: 'Cantv', code: '171' },
       ],
+      verified: false,
+      source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
+    },
+    // TODO(orlando-verify): Confirm 0800-RESCATE (0800-7372282) is still an
+    // active rescue-coordination line. If inactive or unverifiable, remove this
+    // entry and grep the repo for remaining 0800-RESCATE / 7372282 references.
+    {
+      id: 'rescate',
+      label_es: '0800-RESCATE (Coordinación de rescate)',
+      label_en: '0800-RESCATE (Rescue coordination)',
+      numbers: ['0800-7372282'],
       verified: false,
       source: 'sos.yummyrides.com (secondhand — Orlando must verify)',
     },

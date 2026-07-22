@@ -62,8 +62,8 @@ export default function GlobalError({
             Reintentar / Retry
           </button>
           <p style={{ fontSize: 13, marginTop: 24 }}>
-            <a href="tel:0800-7372282" style={{ color: '#DC2626', fontWeight: 600 }}>
-              Emergencias: 0800-RESCATE (0800-7372282)
+            <a href="tel:911" style={{ color: '#DC2626', fontWeight: 600 }}>
+              Emergencias: 911
             </a>
           </p>
         </div>

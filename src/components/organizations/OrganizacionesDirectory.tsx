@@ -84,13 +84,23 @@ export function OrganizacionesDirectory({
         ))}
       </div>
 
-      <p className="mt-4 font-mono text-[13px] text-vigil-muted">
-        {t('count', { count: filtered.length })}
-      </p>
+      {filtered.length > 0 && (
+        <p className="mt-4 font-mono text-[13px] text-vigil-muted">
+          {t('count', { count: filtered.length })}
+        </p>
+      )}
 
       <div className="mt-4 space-y-3">
         {filtered.length === 0 && (
-          <p className="py-8 text-center text-[16px] text-vigil-muted">{t('empty')}</p>
+          <div className="py-8 text-center">
+            <p className="text-[16px] text-vigil-muted">{t('empty')}</p>
+            <Link
+              href="/como-ayudar"
+              className="mt-3 inline-block text-[16px] font-medium text-vigil-blue underline-offset-2 hover:underline"
+            >
+              {t('register')}
+            </Link>
+          </div>
         )}
         {filtered.map((org) => {
           const desc =

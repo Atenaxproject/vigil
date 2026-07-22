@@ -118,9 +118,11 @@ export function ApoyoUsaHub({ markers, organizations }: ApoyoUsaHubProps) {
         >
           <h2 className="text-[17px] font-medium text-vigil-ink">{t('exchange.title')}</h2>
           <p className="mt-1 text-[13px] text-vigil-muted">{t('exchange.desc')}</p>
-          <p className="mt-2 font-mono text-[13px] text-vigil-muted">
-            {t('exchange.count', { count: exchangeCount })}
-          </p>
+          {exchangeCount > 0 && (
+            <p className="mt-2 font-mono text-[13px] text-vigil-muted">
+              {t('exchange.count', { count: exchangeCount })}
+            </p>
+          )}
         </Link>
         <Link
           href="/calendario?region=usa_diaspora"
@@ -128,9 +130,11 @@ export function ApoyoUsaHub({ markers, organizations }: ApoyoUsaHubProps) {
         >
           <h2 className="text-[17px] font-medium text-vigil-ink">{t('events.title')}</h2>
           <p className="mt-1 text-[13px] text-vigil-muted">{t('events.desc')}</p>
-          <p className="mt-2 font-mono text-[13px] text-vigil-muted">
-            {t('events.count', { count: events.length })}
-          </p>
+          {events.length > 0 && (
+            <p className="mt-2 font-mono text-[13px] text-vigil-muted">
+              {t('events.count', { count: events.length })}
+            </p>
+          )}
         </Link>
       </section>
 

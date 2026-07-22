@@ -5,6 +5,23 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-21 (launch readiness P0: 60–62)
+
+### Added
+- **AI circuit breaker** — `ai_usage_log` migration 014; weighted Haiku/Sonnet spend proxy; `AI_DEGRADE_THRESHOLD` / `AI_HALT_THRESHOLD` env overrides; `/api/admin/ai-breaker` status endpoint.
+- **Honest AI degrade UX** — photo search and assistant unavailable states with Spanish-first copy and links to `/buscar` / `/reportar`; NL intake falls back to structured form.
+- **Zero-state empty CTAs** — `/evaluacion-estructural` recruitment state; voluntarios / intercambio / organizaciones empty CTAs.
+- **`docs/architecture/VIGIL-LAUNCH-READINESS.md`** — living DTV listing checklist (moved from repo root).
+- **`docs/build-process/60`–`62`** — archived launch-readiness prompts.
+
+### Changed
+- **Emergency primary line** — footer, config `emergency.hotline`, global-error, and locales use **911** (matches header). `0800-RESCATE` kept only as rescue-coordination directory entry with `TODO(orlando-verify)`.
+- **AI rate limits** — photo search 3/IP-hash/hour, assistant 15/IP-hash/hour (from `crisis.config.aiLimits`).
+- **Counters** — suppress headline `0` on evaluacion-estructural, estadisticas, informacion quakes, apoyo-usa, organizaciones count, prensa DTV stats.
+
+### Archived
+- Root `60-emergency-number-consistency.md`, `61-ai-cost-circuit-breaker.md`, `62-zero-state-counters.md` deleted after archive.
+
 ## [Unreleased] — 2026-07-06 (infrastructure ops 47–51)
 
 ### Added

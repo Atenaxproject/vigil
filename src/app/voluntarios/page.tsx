@@ -233,7 +233,16 @@ export default function VoluntariosPage() {
           <div className="mt-6 space-y-3">
             {loading && <div className="skeleton h-24 rounded-card" />}
             {!loading && filtered.length === 0 && (
-              <p className="py-8 text-center text-[16px] text-vigil-muted">{td('noResults')}</p>
+              <div className="py-8 text-center">
+                <p className="text-[16px] text-vigil-muted">{td('noResults')}</p>
+                <button
+                  type="button"
+                  onClick={() => setTab('register')}
+                  className="mt-3 text-[16px] font-medium text-vigil-blue underline-offset-2 hover:underline"
+                >
+                  {t('form.submit')}
+                </button>
+              </div>
             )}
             {filtered.map((v) => (
               <article key={v.id} className="rounded-card border border-slate-200 bg-white p-4">

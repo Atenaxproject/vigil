@@ -8,6 +8,12 @@ import {
   parseJsonFromText,
   SONNET_MODEL,
 } from '@/lib/ai/client'
+import {
+  aiUnavailableResponse,
+  getBreakerState,
+  isPhotoSearchAllowed,
+  recordAiUsage,
+} from '@/lib/ai/circuit-breaker'
 import { identifyByPhotoDTV } from '@/lib/dtv-api'
 import { mapDTVPersonaToFederated } from '@/lib/dtv-mapper'
 
@@ -24,7 +30,15 @@ interface MatchResult {
 export async function POST(request: NextRequest) {
   if (!isAnthropicConfigured()) {
     return NextResponse.json(
-      { unavailable: true, matches: [], dtvMatches: [], description: null },
+      { ...aiUnavailableResponse('photo_search'), matches: [], dtvMatches: [], description: null },
+      { status: 503 }
+    )
+  }
+
+  const breaker = await getBreakerState()
+  if (!isPhotoSearchAllowed(breaker)) {
+    return NextResponse.json(
+      { ...aiUnavailableResponse('photo_search'), matches: [], dtvMatches: [], description: null },
       { status: 503 }
     )
   }
@@ -46,7 +60,7 @@ export async function POST(request: NextRequest) {
     const anthropic = createAnthropicClient()
     if (!anthropic) {
       return NextResponse.json(
-        { unavailable: true, matches: [], dtvMatches: [], description: null },
+        { ...aiUnavailableResponse('photo_search'), matches: [], dtvMatches: [], description: null },
         { status: 503 }
       )
     }
@@ -81,6 +95,7 @@ If no person is clearly visible, say "No se puede identificar una persona en est
         },
       ],
     })
+    await recordAiUsage('sonnet', 'photo_search')
 
     const description = extractTextContent(visionResponse.content)
     if (!description || description.includes('No se puede identificar')) {
@@ -126,6 +141,7 @@ ${JSON.stringify(
         },
       ],
     })
+    await recordAiUsage('haiku', 'photo_search')
 
     const matchText = extractTextContent(matchResponse.content)
     const result = parseJsonFromText<MatchResult>(matchText, { matches: [], confidence: 'baja' })
