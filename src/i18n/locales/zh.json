@@ -432,19 +432,6 @@
     "goods": "捐赠物资",
     "time": "贡献你的时间"
   },
-  "news": {
-    "title": "官方更新",
-    "subtitle": "来自 OCHA、ReliefWeb、UNICEF 和官方来源的已验证信息",
-    "officialTier": "官方来源（已验证）",
-    "officialTierNote": "ReliefWeb、OCHA、GDACS 及人道主义机构",
-    "rssTier": "委内瑞拉媒体（未验证）",
-    "rssDisclaimer": "这些新闻来自独立媒体。Vigil 不验证其内容。",
-    "rssEmpty": "目前没有可用新闻。",
-    "source": "来源：",
-    "readMore": "阅读完整报告",
-    "lastUpdated": "最后更新：{{time}}",
-    "disclaimer": "所有内容来自官方人道主义来源。Vigil 不编辑这些报告。"
-  },
   "common": {
     "loading": "加载中...",
     "error": "发生了错误。请重试。",
@@ -615,7 +602,7 @@
   "crisisInfo": {
     "title": "已验证的危机信息",
     "subtitle": "来自官方来源的确认数据",
-    "updated": "更新时间：2026 年 6 月 29 日",
+    "updated": "更新时间：{date}",
     "source": "来源",
     "stats": {
       "title": "Crisis statistics",
@@ -642,7 +629,7 @@
       "title": "最受影响的州"
     },
     "infra": {
-      "title": "基础设施（截至 6 月 29 日）",
+      "title": "基础设施",
       "power": "La Guaira 电力",
       "water": "La Guaira 饮用水",
       "roads": "道路基础设施",
@@ -988,7 +975,7 @@
     "subtitle": "社区公开留言 — 无聊天或回复功能",
     "unverifiedNote": "所有留言在审核前均为未验证状态。",
     "writeMessage": "写留言",
-    "empty": "暂无留言。成为第一个发帖的人。",
+    "empty": "这里显示社区留言：通知、声援和提问。目前还没有。",
     "categories": {
       "general": "一般",
       "aviso": "公告",
@@ -1637,6 +1624,8 @@
     "evaluacion": "Evaluación estructural",
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
-    "add": "Agregar"
+    "add": "Agregar",
+    "emptyExplainer": "当你提交报告、交换请求或评估请求时，它会保存在此设备上——无需账户——以便你日后查看。你还没有保存任何内容。",
+    "emptyCta": "创建报告"
   }
 }

@@ -20,13 +20,12 @@ import { CRISIS_CONFIG } from '@/config/crisis.config'
 const DTV_SLUG = 'desaparecidosTerremoto'
 
 // Person-search platforms only — the zero-result state routes a searcher, not a
-// donor. Curated from partnerLinks sister platforms whose core function is a
-// missing-persons database (74 B2).
-const PERSON_SEARCH_SLUGS = [DTV_SLUG, 'venezuelaTeBusca', 'encuentrameVzla', 'civisVenezuela'] as const
-
+// donor. The criterion is a config flag (`personSearch`), not a list kept here,
+// so the set stays correct when platforms are added/removed in crisis.config
+// (see the personSearch RULE note there). 74 B2 / R4.
 const PERSON_SEARCH_PLATFORMS = CRISIS_CONFIG.partnerLinks.filter(
-  (p): p is (typeof CRISIS_CONFIG.partnerLinks)[number] & { slug: string } =>
-    'slug' in p && (PERSON_SEARCH_SLUGS as readonly string[]).includes((p as { slug?: string }).slug ?? '')
+  (p): p is (typeof CRISIS_CONFIG.partnerLinks)[number] & { slug: string; personSearch: true } =>
+    'personSearch' in p && p.personSearch === true && 'slug' in p
 )
 
 const GEO_FILTERS = [

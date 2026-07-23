@@ -432,19 +432,6 @@
     "goods": "Gegenstände spenden",
     "time": "Ihre Zeit spenden"
   },
-  "news": {
-    "title": "Offizielle Meldungen",
-    "subtitle": "Verifizierte Informationen von OCHA, ReliefWeb, UNICEF und offiziellen Quellen",
-    "officialTier": "Offizielle Quellen (verifiziert)",
-    "officialTierNote": "ReliefWeb, OCHA, GDACS und humanitäre Organisationen",
-    "rssTier": "Venezolanische Presse (nicht verifiziert)",
-    "rssDisclaimer": "Diese Nachrichten stammen von unabhängigen Medien. Vigil überprüft den Inhalt nicht.",
-    "rssEmpty": "Derzeit keine Nachrichten verfügbar.",
-    "source": "Quelle:",
-    "readMore": "Vollständigen Bericht lesen",
-    "lastUpdated": "Zuletzt aktualisiert: {{time}}",
-    "disclaimer": "Alle Inhalte stammen von offiziellen humanitären Quellen. Vigil bearbeitet diese Berichte nicht."
-  },
   "common": {
     "loading": "Wird geladen...",
     "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
@@ -615,7 +602,7 @@
   "crisisInfo": {
     "title": "Verifizierte Krisieninformationen",
     "subtitle": "Bestätigte Daten aus offiziellen Quellen",
-    "updated": "Aktualisiert: 29. Juni 2026",
+    "updated": "Aktualisiert: {date}",
     "source": "Quelle",
     "stats": {
       "title": "Crisis statistics",
@@ -642,7 +629,7 @@
       "title": "Am stärksten betroffene Bundesstaaten"
     },
     "infra": {
-      "title": "Infrastruktur (stand 29. Juni)",
+      "title": "Infrastruktur",
       "power": "Stromversorgung La Guaira",
       "water": "Trinkwasser La Guaira",
       "roads": "Straßeninfrastruktur",
@@ -988,7 +975,7 @@
     "subtitle": "Öffentliche Community-Nachrichten — kein Chat oder Antworten",
     "unverifiedNote": "Alle Nachrichten sind bis zur Überprüfung unverifiziert.",
     "writeMessage": "Nachricht schreiben",
-    "empty": "Noch keine Nachrichten. Seien Sie der Erste.",
+    "empty": "Hier erscheinen die Nachrichten der Gemeinschaft — Hinweise, Solidarität und Fragen. Noch sind keine da.",
     "categories": {
       "general": "Allgemein",
       "aviso": "Hinweis",
@@ -1637,6 +1624,8 @@
     "evaluacion": "Evaluación estructural",
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
-    "add": "Agregar"
+    "add": "Agregar",
+    "emptyExplainer": "Wenn Sie eine Meldung, eine Tausch- oder eine Bewertungsanfrage absenden, wird sie hier auf diesem Gerät gespeichert — ohne Konto — damit Sie sie wiederfinden. Sie haben noch keine gespeichert.",
+    "emptyCta": "Meldung erstellen"
   }
 }

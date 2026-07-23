@@ -462,19 +462,6 @@
     "goods": "Donate Goods",
     "time": "Donate Your Time"
   },
-  "news": {
-    "title": "Official Updates",
-    "subtitle": "Verified information from OCHA, ReliefWeb, UNICEF and official sources",
-    "officialTier": "Official Sources (verified)",
-    "officialTierNote": "ReliefWeb, OCHA, GDACS and humanitarian agencies",
-    "rssTier": "Venezuelan Press (unverified)",
-    "rssDisclaimer": "These stories come from independent media. Vigil does not verify their content.",
-    "rssEmpty": "No news available at this time.",
-    "source": "Source:",
-    "readMore": "Read full report",
-    "lastUpdated": "Last updated: {time}",
-    "disclaimer": "All content from official humanitarian sources. Vigil does not edit these reports."
-  },
   "common": {
     "loading": "Loading...",
     "error": "An error occurred. Please try again.",
@@ -645,7 +632,7 @@
   "crisisInfo": {
     "title": "Verified Crisis Information",
     "subtitle": "Confirmed data from official sources",
-    "updated": "Updated: June 29, 2026",
+    "updated": "Updated: {date}",
     "source": "Source",
     "stats": {
       "title": "Crisis statistics",
@@ -672,7 +659,7 @@
       "title": "Most affected states"
     },
     "infra": {
-      "title": "Infrastructure (as of June 29)",
+      "title": "Infrastructure",
       "power": "La Guaira electricity",
       "water": "La Guaira drinking water",
       "roads": "Road infrastructure",
@@ -1098,7 +1085,7 @@
     "subtitle": "Public community messages — no chat or replies",
     "unverifiedNote": "All messages are unverified until reviewed.",
     "writeMessage": "Write a message",
-    "empty": "No messages yet. Be the first to post.",
+    "empty": "This is where community messages appear — notices, solidarity, and questions. There are none yet.",
     "categories": {
       "general": "General",
       "aviso": "Announcement",
@@ -1637,6 +1624,8 @@
     "evaluacion": "Property assessment",
     "remove": "Remove",
     "addLabel": "Paste a claim token",
-    "add": "Add"
+    "add": "Add",
+    "emptyExplainer": "When you file a report, an exchange request, or an assessment request, it is saved here on this device — no account — so you can return to it. You have not saved any yet.",
+    "emptyCta": "Create a report"
   }
 }
