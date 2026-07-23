@@ -335,5 +335,41 @@ theme: {
 
 ---
 
+## Icon system (75D §3)
+
+**No emoji as UI, ever.** Emoji read as prototype, render inconsistently across
+platforms, and are announced unpredictably by screen readers. Every glyph that
+functions as UI — a status marker, a category chip, a button affix, a map
+popup — is a `lucide-react` icon component with `aria-hidden` (the adjacent text
+carries the meaning). Emoji inside prose content (e.g. a country flag in a
+credit line) is a separate question and allowed.
+
+**Semantic correctness over decoration.** Domestic gas in Venezuela is a
+**bombona** — a cylinder you carry and refill, not piped service. Use
+`Cylinder`, never a flame. Pick the icon for what the user is actually asking
+(*"¿llegó la bombona?"*), not the nearest pretty glyph.
+
+**Three states per status icon (WCAG 1.4.1 — Use of Color).** Information must
+never be carried by hue alone. Any icon that encodes a status carries a
+non-color differentiator — a shape or fill variant — under this contract:
+
+```
+icon-{name}-{full|partial|none}
+```
+
+- **full** — filled: operational / covered / available
+- **partial** — half-filled: degraded / partial / intermittent
+- **none** — slashed or hollow: unavailable / critical / out of service
+
+A text label alone also satisfies 1.4.1 and is the cheapest fix where the layout
+has room — use it there; use the shape variants where space is tight. The
+current app already labels status in text on `/servicios`, GDACS alerts,
+freshness stamps, and property-tag popups; map markers additionally vary stroke
+dash pattern by tag. The naming contract above is library-agnostic on purpose:
+swapping in a bespoke drawn set later touches only the icon module, not any
+consumer.
+
+---
+
 *DESIGN-SYSTEM.md — Vigil v1.0 | Bbluestudios LLC | 2026*
 *This document is law. Claude reads it before every UI session.*

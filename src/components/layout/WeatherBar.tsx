@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { ChevronDown, ChevronUp, Cloud, CloudLightning, CloudRain, Sun } from 'lucide-react'
+import { ChevronDown, ChevronUp, Clock, Cloud, CloudLightning, CloudRain, Sun } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface WeatherLocation {
@@ -84,8 +84,9 @@ export function WeatherBar() {
         className="flex w-full items-center justify-between gap-2 lg:cursor-default lg:pointer-events-none"
         aria-expanded={expanded}
       >
-        <span className="truncate">
-          🕐 {t('venezuela')}: {time}
+        <span className="flex items-center gap-1 truncate">
+          <Clock className="h-3.5 w-3.5 shrink-0" aria-hidden />
+          {t('venezuela')}: {time}
           <span className={cn('lg:inline', expanded ? 'inline' : 'hidden')}>
             {data?.error && (
               <span className="text-status-unverified"> · {t('unavailable')}</span>

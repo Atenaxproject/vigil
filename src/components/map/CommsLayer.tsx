@@ -2,6 +2,7 @@
 
 import { CircleMarker, Popup } from 'react-leaflet'
 import { useTranslations } from 'next-intl'
+import { Signal } from 'lucide-react'
 import { MapMarkerSourceBadge } from '@/components/map/MapMarkerSourceBadge'
 import type { MapMarker } from '@/types/vigil.types'
 
@@ -33,9 +34,7 @@ export function CommsLayer({ markers }: CommsLayerProps) {
         >
           <Popup>
             <div className="flex items-center gap-1">
-              <span aria-hidden className="text-amber-600">
-                📶
-              </span>
+              <Signal className="h-4 w-4 shrink-0 text-amber-600" aria-hidden />
               <strong>{marker.title}</strong>
             </div>
             {marker.description && <p className="text-sm">{marker.description}</p>}

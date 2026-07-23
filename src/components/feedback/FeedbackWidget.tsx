@@ -4,17 +4,17 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { MessageCircle, X } from 'lucide-react'
+import { Bug, ClipboardList, HelpCircle, Lightbulb, MessageCircle, X, type LucideIcon } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { cn } from '@/lib/utils'
 
 type FeedbackCategory = 'bug' | 'feature_request' | 'missing_info' | 'question'
 
-const CATEGORIES: Array<{ key: FeedbackCategory; emoji: string }> = [
-  { key: 'bug', emoji: '🐛' },
-  { key: 'feature_request', emoji: '💡' },
-  { key: 'missing_info', emoji: '📋' },
-  { key: 'question', emoji: '❓' },
+const CATEGORIES: Array<{ key: FeedbackCategory; icon: LucideIcon }> = [
+  { key: 'bug', icon: Bug },
+  { key: 'feature_request', icon: Lightbulb },
+  { key: 'missing_info', icon: ClipboardList },
+  { key: 'question', icon: HelpCircle },
 ]
 
 export function FeedbackWidget() {
@@ -142,19 +142,20 @@ export function FeedbackWidget() {
               ) : (
                 <form onSubmit={handleSubmit} className="mt-4 space-y-4" noValidate>
                   <div className="flex flex-wrap gap-2">
-                    {CATEGORIES.map(({ key, emoji }) => (
+                    {CATEGORIES.map(({ key, icon: Icon }) => (
                       <button
                         key={key}
                         type="button"
                         onClick={() => setCategory(key)}
                         className={cn(
-                          'min-h-[36px] rounded-full border px-3 text-[13px]',
+                          'inline-flex min-h-[36px] items-center gap-1.5 rounded-full border px-3 text-[13px]',
                           category === key
                             ? 'border-vigil-blue bg-vigil-blue-light text-vigil-blue'
                             : 'border-slate-200 text-slate-600'
                         )}
                       >
-                        {emoji} {t(`categories.${key}`)}
+                        <Icon className="h-4 w-4 shrink-0" aria-hidden />
+                        {t(`categories.${key}`)}
                       </button>
                     ))}
                   </div>
