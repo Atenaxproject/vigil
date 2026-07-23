@@ -754,16 +754,6 @@
       "airport": "Flughafen",
       "telecom": "Telekommunikation",
       "fuel": "Brennstoff"
-    },
-    "dtvNetwork": {
-      "title": "Sister platform network · Combined data",
-      "badge": "Active integration",
-      "personas": "People reported (DTV)",
-      "centros": "Collection centers (DTV)",
-      "listas": "Active lists (DTV)",
-      "attribution": "DTV data · source desaparecidosterremotovenezuela.com",
-      "unavailable": "DTV metrics unavailable right now.",
-      "viewPlatform": "View Desaparecidos Terremoto Venezuela"
     }
   },
   "feedback": {
