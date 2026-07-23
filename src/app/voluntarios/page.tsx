@@ -232,7 +232,10 @@ export default function VoluntariosPage() {
 
           <div className="mt-6 space-y-3">
             {loading && <div className="skeleton h-24 rounded-card" />}
-            {!loading && filtered.length === 0 && (
+            {/* Empty-state policy: only report "no matches" when the user
+                actively filtered. An unfiltered empty directory renders nothing
+                rather than announcing that no one is here yet. */}
+            {!loading && filtered.length === 0 && Boolean(skillFilter || langFilter || locationFilter) && (
               <div className="py-8 text-center">
                 <p className="text-[16px] text-vigil-muted">{td('noResults')}</p>
                 <button

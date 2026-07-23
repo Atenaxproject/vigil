@@ -305,7 +305,9 @@ export default function IntercambioPage() {
             ))}
           </div>
         )}
-        {!loading && filtered.length === 0 && (
+        {/* Empty-state policy: "no results" only when the user actively
+            filtered or searched. An unfiltered empty board renders nothing. */}
+        {!loading && filtered.length === 0 && Boolean(category !== 'all' || search.trim()) && (
           <div className="py-12 text-center">
             <p className="text-[16px] text-vigil-muted">{t('noResults')}</p>
             <button

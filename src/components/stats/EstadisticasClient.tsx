@@ -293,18 +293,17 @@ export function EstadisticasClient() {
         </section>
       )}
 
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('byEstadoTitle')}</h2>
-        <p className="mt-1 text-[13px] text-vigil-muted">{t('source')}</p>
+      {/* Show-only-when-real: Vigil's own by-estado breakdown appears only once
+          it has data. While the platform is early, no "not enough data" line. */}
+      {(loading || counts.length > 0) && (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('byEstadoTitle')}</h2>
+          <p className="mt-1 text-[13px] text-vigil-muted">{t('source')}</p>
 
-        {loading && <div className="skeleton mt-6 h-48 rounded-card" />}
+          {loading && <div className="skeleton mt-6 h-48 rounded-card" />}
 
-        {!loading && counts.length === 0 && (
-          <p className="mt-8 text-center text-[16px] text-vigil-muted">{t('empty')}</p>
-        )}
-
-        {!loading && counts.length > 0 && (
-          <ul className="mt-6 space-y-4" aria-label={t('byEstadoTitle')}>
+          {!loading && counts.length > 0 && (
+            <ul className="mt-6 space-y-4" aria-label={t('byEstadoTitle')}>
             {counts.map((row) => (
               <li key={row.estado} className="rounded-card border border-slate-200 bg-white p-4">
                 <div className="flex items-center justify-between gap-4">
@@ -327,10 +326,11 @@ export function EstadisticasClient() {
                   />
                 </div>
               </li>
-            ))}
-          </ul>
-        )}
-      </section>
+              ))}
+            </ul>
+          )}
+        </section>
+      )}
     </div>
   )
 }

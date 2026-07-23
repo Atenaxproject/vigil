@@ -32,6 +32,10 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
     collection.length > 0 ||
     significantEvents.length > 0
 
+  // Empty-state policy: the "view as list" affordance only exists when the map
+  // actually has markers to list. No toggle that opens onto "nothing here."
+  if (!hasContent) return null
+
   return (
     <section
       aria-label={t('listHeading')}
@@ -60,8 +64,6 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
 
       {open && (
         <div id={panelId} className="border-t border-slate-200 px-4 py-3 text-[16px] text-slate-700">
-          {!hasContent && <p className="text-vigil-muted">{t('listEmpty')}</p>}
-
           {significantEvents.length > 0 && (
             <div className="mb-4">
               <h3 className="text-[17px] font-medium text-vigil-ink">{t('layers.aftershocks')}</h3>

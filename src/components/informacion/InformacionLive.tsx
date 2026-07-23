@@ -64,7 +64,6 @@ export function InformacionLive() {
   const [infra, setInfra] = useState<InfrastructureStatus[]>([])
   const [figures, setFigures] = useState<SourcedFigureRow[]>([])
   const [figuresUpdated, setFiguresUpdated] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
   const [clock, setClock] = useState(Date.now())
   const [locale, setLocale] = useState('es')
 
@@ -96,8 +95,6 @@ export function InformacionLive() {
       }
     } catch {
       /* keep previous data */
-    } finally {
-      setLoading(false)
     }
   }, [])
 
@@ -304,36 +301,37 @@ export function InformacionLive() {
         <p className="mt-2 font-mono text-[13px] text-vigil-muted">{tc('telecomFreeCallsSource')}</p>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('gdacs.title')}</h2>
-        <p className="mt-1 text-[13px] text-vigil-muted">{t('gdacs.subtitle')}</p>
-        {loading && <div className="skeleton mt-4 h-24 rounded-card" />}
-        {!loading && (liveData?.gdacsEvents?.length ?? 0) === 0 && (
-          <p className="mt-3 text-[16px] text-vigil-muted">{t('gdacs.empty')}</p>
-        )}
-        <div className="mt-4 space-y-3">
-          {liveData?.gdacsEvents?.map((event) => (
-            <a
-              key={`${event.url}-${event.date}`}
-              href={event.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
-            >
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-[16px] font-medium text-vigil-ink">{event.title}</p>
-                <span className={`font-mono text-[13px] font-semibold ${gdacsAlertColor(event.alertLevel)}`}>
-                  {event.alertLevel}
-                </span>
-              </div>
-              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                GDACS · {event.severity != null ? `M${event.severity}` : event.eventType} ·{' '}
-                {event.date ? new Date(event.date).toLocaleDateString(locale) : '—'}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
+      {/* Show-only-when-real (empty-state policy): a data section renders only
+          when it has content. No idle "no alerts" line — GDACS having nothing
+          for Venezuela is the normal, good case and shouldn't occupy the page. */}
+      {(liveData?.gdacsEvents?.length ?? 0) > 0 && (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('gdacs.title')}</h2>
+          <p className="mt-1 text-[13px] text-vigil-muted">{t('gdacs.subtitle')}</p>
+          <div className="mt-4 space-y-3">
+            {liveData?.gdacsEvents?.map((event) => (
+              <a
+                key={`${event.url}-${event.date}`}
+                href={event.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-[16px] font-medium text-vigil-ink">{event.title}</p>
+                  <span className={`font-mono text-[13px] font-semibold ${gdacsAlertColor(event.alertLevel)}`}>
+                    {event.alertLevel}
+                  </span>
+                </div>
+                <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                  GDACS · {event.severity != null ? `M${event.severity}` : event.eventType} ·{' '}
+                  {event.date ? new Date(event.date).toLocaleDateString(locale) : '—'}
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Official updates (ReliefWeb). Suppress the whole section — heading
           included — when the source returns nothing, so a dead/degraded feed
@@ -361,40 +359,36 @@ export function InformacionLive() {
         </section>
       )}
 
-      <section className="mt-10 border-t border-slate-200 pt-8">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('rssTier')}</h2>
-        <p className="mt-1 text-[13px] text-status-unverified">{t('rssDisclaimer')}</p>
-        {loading && <div className="skeleton mt-4 h-24 rounded-card" />}
-        {!loading && rssItems.length === 0 && (
-          <p className="mt-3 text-[16px] text-vigil-muted">{t('rssEmpty')}</p>
-        )}
-        <div className="mt-4 space-y-3">
-          {rssItems.slice(0, 8).map((item) => (
-            <a
-              key={`${item.source}-${item.link}`}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
-            >
-              <p className="text-[16px] font-medium text-vigil-ink">{item.title}</p>
-              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                {item.source}
-                {item.pubDate && ` · ${new Date(item.pubDate).toLocaleDateString(locale)}`}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
+      {rssItems.length > 0 && (
+        <section className="mt-10 border-t border-slate-200 pt-8">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('rssTier')}</h2>
+          <p className="mt-1 text-[13px] text-status-unverified">{t('rssDisclaimer')}</p>
+          <div className="mt-4 space-y-3">
+            {rssItems.slice(0, 8).map((item) => (
+              <a
+                key={`${item.source}-${item.link}`}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
+              >
+                <p className="text-[16px] font-medium text-vigil-ink">{item.title}</p>
+                <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                  {item.source}
+                  {item.pubDate && ` · ${new Date(item.pubDate).toLocaleDateString(locale)}`}
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('infra.title')}</h2>
-        <p className="mt-1 text-[13px] text-vigil-muted">{t('infraLive')}</p>
-        <div className="mt-4 space-y-3">
-          {visibleInfra.length === 0 && (
-            <p className="text-[16px] text-vigil-muted">{t('infraEmpty')}</p>
-          )}
-          {visibleInfra.map((item) => {
+      {visibleInfra.length > 0 && (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('infra.title')}</h2>
+          <p className="mt-1 text-[13px] text-vigil-muted">{t('infraLive')}</p>
+          <div className="mt-4 space-y-3">
+            {visibleInfra.map((item) => {
             const freshness = getFigureFreshness(item.verified_at ?? item.updated_at)
             return (
               <div
@@ -426,10 +420,11 @@ export function InformacionLive() {
                   {item.status_percent != null ? `${item.status_percent}%` : '—'}
                 </span>
               </div>
-            )
-          })}
-        </div>
-      </section>
+              )
+            })}
+          </div>
+        </section>
+      )}
 
       <section className="mt-10" id="emergency-contacts">
         <EmergencyDirectory locale={locale} />
