@@ -91,7 +91,10 @@ export function OrganizacionesDirectory({
       )}
 
       <div className="mt-4 space-y-3">
-        {filtered.length === 0 && (
+        {/* Empty-state policy: only speak up when the user actively filtered to
+            a type with no matches (that's useful feedback). A truly empty
+            directory renders nothing rather than "no organizations yet." */}
+        {filtered.length === 0 && typeFilter !== 'all' && (
           <div className="py-8 text-center">
             <p className="text-[16px] text-vigil-muted">{t('empty')}</p>
             <Link

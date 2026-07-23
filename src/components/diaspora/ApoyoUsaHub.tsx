@@ -78,6 +78,7 @@ export function ApoyoUsaHub({ markers, organizations }: ApoyoUsaHubProps) {
       </div>
       <MapAccessibleList markers={markers} />
 
+      {orgPreview.length > 0 && (
       <section className="mt-10">
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-[20px] font-semibold text-vigil-ink">{t('orgs.title')}</h2>
@@ -105,11 +106,9 @@ export function ApoyoUsaHub({ markers, organizations }: ApoyoUsaHubProps) {
               )}
             </article>
           ))}
-          {orgPreview.length === 0 && (
-            <p className="text-[16px] text-vigil-muted">{t('orgs.empty')}</p>
-          )}
         </div>
       </section>
+      )}
 
       <section className="mt-10 grid gap-4 sm:grid-cols-2">
         <Link
