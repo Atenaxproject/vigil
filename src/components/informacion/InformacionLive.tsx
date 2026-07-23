@@ -335,29 +335,31 @@ export function InformacionLive() {
         </div>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('officialUpdates')}</h2>
-        {loading && <div className="skeleton mt-4 h-24 rounded-card" />}
-        {!loading && (liveData?.officialReports.length ?? 0) === 0 && (
-          <p className="mt-3 text-[16px] text-vigil-muted">{t('noReports')}</p>
-        )}
-        <div className="mt-4 space-y-3">
-          {liveData?.officialReports.map((report) => (
-            <a
-              key={report.url}
-              href={report.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
-            >
-              <p className="text-[16px] font-medium text-vigil-ink">{report.title}</p>
-              <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                {report.source} · {new Date(report.date).toLocaleDateString(locale)}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
+      {/* Official updates (ReliefWeb). Suppress the whole section — heading
+          included — when the source returns nothing, so a dead/degraded feed
+          reads as "unavailable," never as "this platform is broken" (75C §1).
+          The hub reads as complete on USGS + GDACS + RSS alone. */}
+      {(liveData?.officialReports.length ?? 0) > 0 && (
+        <section className="mt-10">
+          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('officialUpdates')}</h2>
+          <div className="mt-4 space-y-3">
+            {liveData?.officialReports.map((report) => (
+              <a
+                key={report.url}
+                href={report.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-card border border-slate-200 bg-white p-4 hover:border-vigil-blue"
+              >
+                <p className="text-[16px] font-medium text-vigil-ink">{report.title}</p>
+                <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+                  {report.source} · {new Date(report.date).toLocaleDateString(locale)}
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mt-10 border-t border-slate-200 pt-8">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{t('rssTier')}</h2>
