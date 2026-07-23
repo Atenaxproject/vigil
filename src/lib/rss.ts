@@ -1,6 +1,13 @@
 import Parser from 'rss-parser'
 
-const parser = new Parser()
+// Some outlets (e.g. Prodavinci) 403 the default rss-parser agent. Send a real
+// UA so every configured feed resolves (75C §3).
+const parser = new Parser({
+  headers: {
+    'User-Agent':
+      'Mozilla/5.0 (compatible; VigilCrisis/1.0; +https://vigil.youthewave.org)',
+  },
+})
 
 export interface RssNewsItem {
   source: string

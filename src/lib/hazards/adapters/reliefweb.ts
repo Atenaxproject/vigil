@@ -1,15 +1,20 @@
 import type { HazardEvent } from '@/lib/hazards/types'
+import { reliefwebUrl } from '@/lib/reliefweb'
 
 /**
  * ReliefWeb recent disaster reports (headline relay only — no commentary).
- * Upstream may return 410; adapter fails soft and records empty.
+ * Uses the shared v2 client (75C). Fails soft to [] on 403 (appname not yet
+ * approved), 410, or any error — the monitor merges hazard sources, so an empty
+ * ReliefWeb contributes nothing rather than an empty labelled section.
  */
 export async function pollReliefwebHazards(): Promise<HazardEvent[]> {
   const fetched_at = new Date().toISOString()
   try {
-    const url =
-      'https://api.reliefweb.int/v1/disasters?appname=vigil-crisis&limit=15&sort[]=date.created:desc' +
-      '&fields[include][]=name&fields[include][]=date&fields[include][]=url&fields[include][]=country&fields[include][]=status'
+    const url = reliefwebUrl(
+      'disasters',
+      'limit=15&sort[]=date.created:desc' +
+        '&fields[include][]=name&fields[include][]=date&fields[include][]=url&fields[include][]=country&fields[include][]=status'
+    )
     const res = await fetch(url, { next: { revalidate: 3600 } })
     if (!res.ok) return []
     const data = (await res.json()) as {

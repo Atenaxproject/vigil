@@ -199,7 +199,10 @@ export const CRISIS_CONFIG = {
     {
       id: 'reliefweb',
       label: 'feeds.reliefweb',
-      url: 'https://api.reliefweb.int/v1/reports',
+      // v2 (75C). Requires an approved appname (RELIEFWEB_APPNAME env) — see
+      // src/lib/reliefweb.ts. The URL is informational; the client builds the
+      // request with the appname attached.
+      url: 'https://api.reliefweb.int/v2/reports',
       tier: 'secondary',
       cacheSeconds: 3600,
       enabled: true,

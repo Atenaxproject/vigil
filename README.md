@@ -214,7 +214,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ### 🔧 In Progress
 
-- **ReliefWeb v2 migration** — the public ReliefWeb `v1` API was decommissioned (returns HTTP 410); the feed reads empty and degrades gracefully. Migration to `v2` (new response envelope) is pending.
+- **ReliefWeb v2 (appname pending)** — the public `v1` API was decommissioned (HTTP 410). The code is migrated to `v2`, but ReliefWeb now requires a **pre-approved `appname`** (enforced since 1 Nov 2025); until one is registered and set as `RELIEFWEB_APPNAME`, the feed returns HTTP 403 and the Official-Updates section is cleanly suppressed. Request an appname: <https://apidoc.reliefweb.int/parameters#appname>
 - WhatsApp intake via Make.com (code ready, scenario not built)
 - Telegram bot (TELEGRAM_BOT_TOKEN needed)
 - Resend email notifications (RESEND_API_KEY needed)
