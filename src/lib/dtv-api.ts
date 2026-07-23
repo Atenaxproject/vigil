@@ -77,15 +77,18 @@ export interface DTVEstadoBreakdown {
 }
 
 export interface DTVMetrics {
-  /** GET /personas record count (unique federated persons — not "reportes"). */
+  /**
+   * Complete GET /personas enumeration (unique federated persons — not
+   * "reportes"). 0 with available=false whenever the walk was partial: a
+   * capped count is never published (75 §1).
+   */
   totalPersonas: number
   /** persona.estado === 'sin-contacto' */
   sinContacto: number
   /** persona.estado === 'localizado' */
   localizados: number
-  /** localizado && centro == null */
-  localizadosSinCentro: number
-  localizadosConCentro: number
+  // localizadosSinCentro / localizadosConCentro removed 2026-07-22 (75 §1d):
+  // API `centro` is universally null — an unpopulated column, not a finding.
   totalCentros: number
   totalHospitales: number
   totalCentrosAcopio: number
@@ -94,6 +97,8 @@ export interface DTVMetrics {
   lastUpdated: string
   source: string
   available: boolean
+  /** Why persona figures are absent, when they are. UI renders the honest unavailable state. */
+  personaStatsSuppressed?: 'partial_walk' | 'suspect_round_total'
   /** Documented so UI never copies DTV homepage label collisions. */
   fieldMapping: {
     totalPersonas: string
@@ -323,19 +328,17 @@ export async function getAllDTVCentros(): Promise<DTVCentro[]> {
 }
 
 const EMPTY_FIELD_MAPPING = {
-  totalPersonas: 'GET /personas item count',
+  totalPersonas: 'GET /personas complete enumeration (suppressed when the walk is partial)',
   sinContacto: "persona.estado === 'sin-contacto'",
   localizados: "persona.estado === 'localizado'",
   estadoGeo: 'persona.ubicacion.estado',
 } as const
 
-export async function getDTVMetrics(): Promise<DTVMetrics> {
-  const fallback: DTVMetrics = {
+function emptyMetrics(): DTVMetrics {
+  return {
     totalPersonas: 0,
     sinContacto: 0,
     localizados: 0,
-    localizadosSinCentro: 0,
-    localizadosConCentro: 0,
     totalCentros: 0,
     totalHospitales: 0,
     totalCentrosAcopio: 0,
@@ -346,9 +349,9 @@ export async function getDTVMetrics(): Promise<DTVMetrics> {
     available: false,
     fieldMapping: { ...EMPTY_FIELD_MAPPING },
   }
+}
 
-  if (!DTV_BASE || !DTV_KEY) return fallback
-
+async function computeDTVMetrics(): Promise<DTVMetrics> {
   try {
     // Persona stats from cached index (avoids re-walking /personas on every call).
     // Centros/listas remain short walks (1–2 pages).
@@ -374,8 +377,6 @@ export async function getDTVMetrics(): Promise<DTVMetrics> {
       totalPersonas: personaStats.totalPersonas,
       sinContacto: personaStats.sinContacto,
       localizados: personaStats.localizados,
-      localizadosSinCentro: personaStats.localizadosSinCentro,
-      localizadosConCentro: personaStats.localizadosConCentro,
       totalCentros,
       totalHospitales,
       totalCentrosAcopio,
@@ -384,11 +385,34 @@ export async function getDTVMetrics(): Promise<DTVMetrics> {
       lastUpdated: new Date().toISOString(),
       source: DTV_SOURCE,
       available,
+      personaStatsSuppressed: personaStats.suppressedReason,
       fieldMapping: { ...EMPTY_FIELD_MAPPING },
     }
   } catch (error) {
     console.error('DTV metrics count failed:', error)
-    return fallback
+    return emptyMetrics()
+  }
+}
+
+/**
+ * Single shared aggregate for every surface (/estadisticas, /prensa, press-kit
+ * fact sheet, feed health). Cached in the Next data cache so one computation
+ * serves all visitors for the revalidation window (matches DTV's stated 5-min
+ * cadence) and every surface reads the same snapshot — per-surface fetch logic
+ * is how /estadisticas and /prensa came to disagree (75 §1c).
+ */
+export async function getDTVMetrics(): Promise<DTVMetrics> {
+  if (!DTV_BASE || !DTV_KEY) return emptyMetrics()
+
+  try {
+    const { unstable_cache } = await import('next/cache')
+    const cached = unstable_cache(computeDTVMetrics, ['dtv-metrics-aggregate'], {
+      revalidate: DTV_REVALIDATE_SECONDS,
+    })
+    return await cached()
+  } catch {
+    // unstable_cache unavailable (e.g. unit tests) — compute directly.
+    return computeDTVMetrics()
   }
 }
 

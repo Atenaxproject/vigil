@@ -11,10 +11,23 @@ import { PRIORITY_ESTADOS } from '@/lib/venezuela-geo'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
 import { DtvSourceHeader } from '@/components/dtv/DtvSourceHeader'
+import { DtvReferralNotice } from '@/components/dtv/DtvReferralNotice'
+import { useDtvReferral } from '@/hooks/useDtvReferral'
 import { GeoSelect } from '@/components/missing/GeoSelect'
 import { PhotoSearch } from '@/components/missing/PhotoSearch'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 
-const DTV_PLATFORM_URL = 'https://desaparecidosterremotovenezuela.com'
+const DTV_SLUG = 'desaparecidosTerremoto'
+
+// Person-search platforms only — the zero-result state routes a searcher, not a
+// donor. Curated from partnerLinks sister platforms whose core function is a
+// missing-persons database (74 B2).
+const PERSON_SEARCH_SLUGS = [DTV_SLUG, 'venezuelaTeBusca', 'encuentrameVzla', 'civisVenezuela'] as const
+
+const PERSON_SEARCH_PLATFORMS = CRISIS_CONFIG.partnerLinks.filter(
+  (p): p is (typeof CRISIS_CONFIG.partnerLinks)[number] & { slug: string } =>
+    'slug' in p && (PERSON_SEARCH_SLUGS as readonly string[]).includes((p as { slug?: string }).slug ?? '')
+)
 
 const GEO_FILTERS = [
   { key: 'all', labelKey: 'allCountry' as const },
@@ -55,6 +68,13 @@ export function MissingPersonSearch({
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
   const [searchError, setSearchError] = useState(false)
+  const { referred } = useDtvReferral()
+
+  // Referred users just came from DTV — never lead the sister-platform list
+  // with it (74 C3). Otherwise DTV goes first.
+  const sisterPlatforms = referred
+    ? [...PERSON_SEARCH_PLATFORMS.filter((p) => p.slug !== DTV_SLUG), ...PERSON_SEARCH_PLATFORMS.filter((p) => p.slug === DTV_SLUG)]
+    : [...PERSON_SEARCH_PLATFORMS.filter((p) => p.slug === DTV_SLUG), ...PERSON_SEARCH_PLATFORMS.filter((p) => p.slug !== DTV_SLUG)]
 
   useEffect(() => {
     if (!isSupabaseConfigured()) return
@@ -189,6 +209,7 @@ export function MissingPersonSearch({
   return (
     <div className="flex h-full flex-col">
       <div className="border-b border-slate-200 p-4">
+        <DtvReferralNotice photoSearchAvailable={aiAvailable} />
         <h2 className="font-display text-[20px] font-semibold text-vigil-ink">{t('title')}</h2>
         <p className="text-[16px] text-vigil-muted">{t('subtitle')}</p>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-stretch">
@@ -282,29 +303,63 @@ export function MissingPersonSearch({
             </button>
           </div>
         )}
+        {/* Zero-result recovery (74 Part B) — the highest-traffic emotional
+            moment on the platform. Copy is the deliverable: no apology
+            language, no false hope, no exclamation marks, never a rendered 0. */}
         {!loading && !searchError && searched && !hasResults && (
-          <div className="rounded-card border border-slate-200 bg-vigil-cloud p-6 text-center">
-            <p className="text-[16px] font-medium text-vigil-ink">{t('search.noResultsBothTitle')}</p>
-            <p className="mt-4 text-[16px] text-vigil-body">{t('search.noResultsReportBoth')}</p>
-            <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Link
-                href="/reportar"
-                className="inline-flex min-h-[44px] items-center justify-center rounded-input bg-vigil-blue px-5 text-[16px] font-medium text-white"
-              >
-                {t('search.reportCta')}
-              </Link>
-              <a
-                href={DTV_PLATFORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center justify-center gap-1 rounded-input border border-slate-200 bg-white px-5 text-[16px] font-medium text-vigil-blue hover:border-vigil-blue"
-              >
-                {t('search.noResultsReportDtv')}
-                <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
-              </a>
+          <div className="rounded-card border border-slate-200 bg-vigil-cloud p-6">
+            <h3 className="text-[20px] font-semibold text-vigil-ink">{t('search.empty.title')}</h3>
+            <p className="mt-2 text-[16px] leading-relaxed text-vigil-body">{t('search.empty.intro')}</p>
+            <p className="mt-4 text-[16px] font-semibold text-vigil-ink">{t('search.empty.actionsTitle')}</p>
+
+            <div className="mt-3 space-y-4">
+              <div>
+                <p className="text-[16px] leading-relaxed text-vigil-body">
+                  <strong className="text-vigil-ink">{t('search.empty.step1Title')}</strong>{' '}
+                  {t('search.empty.step1Body')}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-[16px] leading-relaxed text-vigil-body">
+                  <strong className="text-vigil-ink">{t('search.empty.step2Title')}</strong>{' '}
+                  {t('search.empty.step2Body')}
+                </p>
+                <Link
+                  href="/reportar"
+                  className="mt-3 inline-flex min-h-[44px] items-center justify-center rounded-input bg-vigil-blue px-5 text-[16px] font-medium text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+                >
+                  {t('search.empty.step2Cta')}
+                </Link>
+              </div>
+
+              <div>
+                <p className="text-[16px] leading-relaxed text-vigil-body">
+                  <strong className="text-vigil-ink">{t('search.empty.step3Title')}</strong>{' '}
+                  {referred ? t('search.empty.step3BodyReferred') : t('search.empty.step3Body')}
+                </p>
+                <ul className="mt-2 space-y-1">
+                  {sisterPlatforms.map((platform) => (
+                    <li key={platform.slug}>
+                      <a
+                        href={platform.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-vigil-blue underline-offset-2 hover:underline"
+                      >
+                        {platform.name}
+                        <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <p className="mt-4 text-[13px] text-vigil-muted">{t('search.noResultsBothHint')}</p>
-            <p className="mt-6 border-t border-slate-200 pt-4 text-[16px] text-vigil-body">
+
+            <p className="mt-6 border-t border-slate-200 pt-4 text-[13px] leading-relaxed text-vigil-muted">
+              {t('search.empty.federationNote')}
+            </p>
+            <p className="mt-3 text-[16px] text-vigil-body">
               {t('search.psychosocialPrompt')}{' '}
               <Link href="/informacion#apoyo-psicosocial" className="font-medium text-vigil-blue hover:underline">
                 {t('search.psychosocialLink')}

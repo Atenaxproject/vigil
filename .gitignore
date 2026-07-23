@@ -47,3 +47,10 @@ public/fallback-*.js
 
 .vercel
 .env*
+
+# Guard against generator/design exports landing at repo root (75 §6).
+# Shipping icons live in public/; prompts live in docs/build-process/.
+/vigil-*.png
+/vigil-*.ico
+/*.tmp.pdf
+/vigil-press-kit.zip

@@ -1,7 +1,7 @@
 {
   "name": "vigil",
   "version": "0.1.0",
-  "description": "Vigil — Open-source humanitarian crisis platform. Real-time missing persons, Claude AI assistant, photo search, crisis map, and post-disaster property safety assessment. Live at vigil.youthewave.org.",
+  "description": "Vigil \u2014 Open-source humanitarian crisis platform. Real-time missing persons, Claude AI assistant, photo search, crisis map, and post-disaster property safety assessment. Live at vigil.youthewave.org.",
   "homepage": "https://vigil.youthewave.org",
   "repository": {
     "type": "git",
@@ -22,7 +22,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:press-kit": "node scripts/build-press-kit.mjs",
+    "check:i18n": "node scripts/check-i18n-parity.mjs",
+    "prebuild": "node scripts/check-i18n-parity.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.107.0",

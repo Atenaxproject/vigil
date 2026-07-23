@@ -10,8 +10,6 @@ const unavailable = () =>
     totalPersonas: 0,
     sinContacto: 0,
     localizados: 0,
-    localizadosSinCentro: 0,
-    localizadosConCentro: 0,
     totalCentros: 0,
     totalHospitales: 0,
     totalCentrosAcopio: 0,
@@ -21,7 +19,7 @@ const unavailable = () =>
     source: 'desaparecidosterremotovenezuela.com',
     available: false,
     fieldMapping: {
-      totalPersonas: 'GET /personas item count',
+      totalPersonas: 'GET /personas complete enumeration (suppressed when the walk is partial)',
       sinContacto: "persona.estado === 'sin-contacto'",
       localizados: "persona.estado === 'localizado'",
       estadoGeo: 'persona.ubicacion.estado',
@@ -44,8 +42,11 @@ export async function GET() {
     await recordFeedHealth({
       feedId: 'dtv-metrics',
       label: 'DTV federation metrics',
-      ok: metrics.available !== false,
+      ok: metrics.available !== false && !metrics.personaStatsSuppressed,
       itemCount: metrics.totalPersonas,
+      error: metrics.personaStatsSuppressed
+        ? `persona stats suppressed: ${metrics.personaStatsSuppressed}`
+        : undefined,
       meta: { source: metrics.source },
     })
     return NextResponse.json(metrics, {

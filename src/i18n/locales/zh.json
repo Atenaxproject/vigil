@@ -5,8 +5,6 @@
     "needHelp": "我需要帮助",
     "volunteers": "志愿者",
     "organizations": "组织机构",
-    "donate": "捐赠",
-    "news": "官方更新",
     "map": "危机地图",
     "exchange": "资源交换",
     "howToHelp": "如何帮助",
@@ -70,7 +68,8 @@
     "sub_calendar": "Events and drives",
     "sub_wall": "Community wall",
     "sub_press": "Press kit",
-    "sub_accessibility": "Text and contrast"
+    "sub_accessibility": "Text and contrast",
+    "menuFullSite": "完整站点，始终齐全——所选模式只影响快捷入口的排列。"
   },
   "a11y": {
     "skipToContent": "跳到主要内容"
@@ -109,10 +108,6 @@
     "search": {
       "placeholder": "Search by name...",
       "button": "Search",
-      "noResults": "No results found. Try a different name.",
-      "noResultsTitle": "We haven't found this person on Vigil yet.",
-      "sisterPlatformsIntro": "You can also search these sister platforms:",
-      "sisterPlatformsReport": "Please consider reporting here too — every report helps.",
       "reportCta": "Report Missing Person",
       "externalLink": "opens in new tab",
       "loading": "Searching...",
@@ -126,15 +121,25 @@
       "trustNote": "搜索结果包含 Vigil 和 Desaparecidos Terremoto Venezuela 的记录。两个来源均为经过核实的非营利公民倡议。",
       "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
       "dtvSectionNote": "经核实的公开数据 · desaparecidosterremotovenezuela.com",
-      "noResultsBothTitle": "We didn't find this person on either platform.",
-      "noResultsReportBoth": "Consider reporting them:",
-      "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
-      "noResultsBothHint": "Reporting on both platforms expands the search network.",
       "errorTitle": "搜索未能完成",
       "errorBody": "连接出现问题，请重试。",
       "retry": "重试",
       "psychosocialPrompt": "If you need emotional support now:",
-      "psychosocialLink": "psychosocial support lines"
+      "psychosocialLink": "psychosocial support lines",
+      "empty": {
+        "title": "我们尚未找到这个人",
+        "intro": "没有出现在这里并不代表任何定论。这只意味着此人还不在这个数据库中。",
+        "actionsTitle": "你现在可以做的三件事：",
+        "step1Title": "1. 扩大搜索范围。",
+        "step1Body": "试试只输入姓氏，或只输入名字。报告的拼写往往是家属在压力下写出的——一个重音符号、一个字母、第二个姓氏都可能改变结果。",
+        "step2Title": "2. 创建报告。",
+        "step2Body": "如果还没有报告，请创建一个。这能让寻找同一个人的两个人找到彼此。无需账户，两分钟内即可完成。",
+        "step2Cta": "报告此人",
+        "step3Title": "3. 在其他平台搜索。",
+        "step3Body": "没有任何数据库囊括一切。以下是在本次紧急事件中运作的平台：",
+        "step3BodyReferred": "你已经在 DTV 搜索过。以下是本次紧急事件中运作的其他平台：",
+        "federationNote": "Vigil 同时查询 Desaparecidos Terremoto Venezuela 的联合网络。如果此人出现在那里，也会出现在这里。"
+      }
     },
     "status": {
       "missing": "失踪",
@@ -220,7 +225,13 @@
       "linkReport": "Report a person"
     },
     "recentTitle": "Recent",
-    "recentEmpty": "Vigil 上暂无最新记录。按姓名搜索时，我们还会包含 Desaparecidos Terremoto Venezuela 的公开记录。"
+    "recentEmpty": "Vigil 上暂无最新记录。按姓名搜索时，我们还会包含 Desaparecidos Terremoto Venezuela 的公开记录。",
+    "dtvReferral": {
+      "title": "你来自 Desaparecidos Terremoto Venezuela。",
+      "bodyFull": "Vigil 查询同一个数据库，因此你会看到相同的报告——以及在这里创建的报告。Vigil 另外提供：照片搜索、按州、市镇和教区的细分，以及带实时余震的危机地图。",
+      "bodyNoPhoto": "Vigil 查询同一个数据库，因此你会看到相同的报告——以及在这里创建的报告。Vigil 另外提供：按州、市镇和教区的细分，以及带实时余震的危机地图。",
+      "cta": "在此搜索"
+    }
   },
   "map": {
     "title": "危机地图",
@@ -482,7 +493,8 @@
     "creditsByLink": "YouTheWave",
     "builtWith": "由 Claude + Cursor 构建",
     "notEmergency": "Vigil 不是紧急服务。若需立即救援，请致电 {hotline}。",
-    "otherRegions": "其他地区"
+    "otherRegions": "其他地区",
+    "press": "媒体"
   },
   "exchange": {
     "title": "资源交换",
@@ -572,7 +584,8 @@
     },
     "collection": {
       "title": "物资收集点",
-      "ucvNote": "Historical: collection point reported active 27 June — confirm current status before traveling."
+      "ucvNote": "Historical: collection point reported active 27 June — confirm current status before traveling.",
+      "gemNote": "佛罗里达州多拉尔站点（物资接收）+ GEM LATAM 位于拉瓜伊拉的常设总部。唯一官方渠道：globalempowermentmission.org/donate。"
     },
     "volunteerLink": "注册为志愿者",
     "familySearch": {
@@ -590,7 +603,14 @@
       "title": "OFAC 第60号通用许可证（美国）",
       "note": "美国财政部（OFAC）于2026年6月25日签发第60号通用许可证，尽管制裁仍然有效，仍授权与委内瑞拉地震人道主义援助相关的交易。该许可证于2026年10月23日到期。来源：state.gov。Vigil 不提供法律咨询——请查阅官方来源。"
     },
-    "expiredBadge": "This promotion has ended — verify current terms at the source."
+    "expiredBadge": "This promotion has ended — verify current terms at the source.",
+    "usaDiaspora": {
+      "title": "来自美国的支持——GEM 多拉尔接收点",
+      "gemDoral": "GEM 位于佛罗里达州多拉尔的仓库接收用于委内瑞拉救援的物资捐赠。前往前请确认时间；最新方式请见其官方捐赠页面。",
+      "gemDonateCta": "捐赠/物资（GEM）",
+      "hubLink": "打开美国支持中心",
+      "hoursNote": "⚠️ 接收时间：请直接向 GEM 确认。Vigil 不发布未经确认的时间。"
+    }
   },
   "crisisInfo": {
     "title": "已验证的危机信息",
@@ -1043,12 +1063,7 @@
     "dtvByEstadoTitle": "Geographic breakdown (DTV network)",
     "dtvByEstadoSource": "API field: ubicacion.estado · Desaparecidos Terremoto Venezuela network",
     "officialTitle": "Official and independent figures",
-    "officialFraming": "Official figures attributed to the issuer. Independent analysis labeled separately.",
-    "noCenter": {
-      "title": "Located without a registered center",
-      "body": "Of {total} located people in the DTV network, {count} ({pct}%) have no hospital or collection center registered. If you know where someone is, report the sighting.",
-      "cta": "Report a sighting or location"
-    }
+    "officialFraming": "Official figures attributed to the issuer. Independent analysis labeled separately."
   },
   "red": {
     "title": "Search network",
@@ -1059,7 +1074,7 @@
       "visit": "Visit platform →",
       "capabilities": {
         "federated": "✓ Active federated search",
-        "facial": "✓ Facial recognition",
+        "facial": "✓ 人脸识别（仅在其平台上——不经联合网络传输）",
         "centers": "✓ Centers and hospitals",
         "refresh": "✓ Updates every 5 min"
       }
@@ -1068,8 +1083,6 @@
     "platforms": {
       "venezuelaTeBusca": "Citizen missing persons search platform for Venezuela.",
       "civisVenezuela": "Missing persons, damage maps, and supply points.",
-      "sosVenezuela2026": "Live collaborative crisis mapping.",
-      "redVenezuelaActiva": "Volunteer coordination.",
       "desaparecidosTerremoto": "Large earthquake missing persons registry — verified public data.",
       "redQuipu": "Community aid and crisis coordination network.",
       "mapaDanosVenezuela": "Collaborative damage and infrastructure map.",

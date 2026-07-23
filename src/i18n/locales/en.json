@@ -5,8 +5,6 @@
     "needHelp": "I Need Help",
     "volunteers": "Volunteers",
     "organizations": "Organizations",
-    "donate": "Donate",
-    "news": "Official Updates",
     "map": "Crisis Map",
     "exchange": "Exchange",
     "howToHelp": "How to Help",
@@ -70,7 +68,8 @@
     "sub_calendar": "Events and drives",
     "sub_wall": "Community wall",
     "sub_press": "Press kit",
-    "sub_accessibility": "Text and contrast"
+    "sub_accessibility": "Text and contrast",
+    "menuFullSite": "The whole site, always complete — your chosen mode only organizes your shortcuts."
   },
   "a11y": {
     "skipToContent": "Skip to main content"
@@ -141,10 +140,6 @@
     "search": {
       "placeholder": "Search by name...",
       "button": "Search",
-      "noResults": "No results found. Try a different name.",
-      "noResultsTitle": "We haven't found this person on Vigil yet.",
-      "sisterPlatformsIntro": "You can also search these sister platforms:",
-      "sisterPlatformsReport": "Please consider reporting here too — every report helps.",
       "reportCta": "Report Missing Person",
       "externalLink": "opens in new tab",
       "loading": "Searching...",
@@ -158,15 +153,25 @@
       "trustNote": "Results include records from Vigil and Desaparecidos Terremoto Venezuela. Both sources are verified nonprofit citizen initiatives.",
       "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
       "dtvSectionNote": "Verified public data · desaparecidosterremotovenezuela.com",
-      "noResultsBothTitle": "We didn't find this person on either platform.",
-      "noResultsReportBoth": "Consider reporting them:",
-      "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
-      "noResultsBothHint": "Reporting on both platforms expands the search network.",
       "errorTitle": "Search couldn't be completed",
       "errorBody": "There was a connection problem. Try again.",
       "retry": "Retry",
       "psychosocialPrompt": "If you need emotional support now:",
-      "psychosocialLink": "psychosocial support lines"
+      "psychosocialLink": "psychosocial support lines",
+      "empty": {
+        "title": "We haven't found that person yet",
+        "intro": "Not appearing here means nothing definitive. It means they are not in this database yet.",
+        "actionsTitle": "Three things you can do now:",
+        "step1Title": "1. Widen the search.",
+        "step1Body": "Try only the last name, or only the first name. Reports arrive with whatever spelling a relative managed under pressure — an accent, a single letter, a second surname can change the result.",
+        "step2Title": "2. Create a report.",
+        "step2Body": "If it doesn't exist, create it. That is what lets two people searching for the same person find each other. No account needed, and it takes under two minutes.",
+        "step2Cta": "Report this person",
+        "step3Title": "3. Search the other platforms.",
+        "step3Body": "No database has everything. These are the ones operating in this emergency:",
+        "step3BodyReferred": "You already searched DTV. These are the others operating in this emergency:",
+        "federationNote": "Vigil also queries the federated network of Desaparecidos Terremoto Venezuela. If the person appears there, they appear here."
+      }
     },
     "photoSearch": {
       "divider": "or search by photo",
@@ -250,6 +255,12 @@
       "justNow": "Just now",
       "dtvSourceBadge": "Source: Desaparecidos Terremoto Venezuela",
       "dtvViewPlatform": "View on platform"
+    },
+    "dtvReferral": {
+      "title": "You've come from Desaparecidos Terremoto Venezuela.",
+      "bodyFull": "Vigil queries that same database, so you will see the same reports — plus the ones created here. What Vigil adds: photo search, breakdown by state, municipality and parish, and a crisis map with live aftershocks.",
+      "bodyNoPhoto": "Vigil queries that same database, so you will see the same reports — plus the ones created here. What Vigil adds: breakdown by state, municipality and parish, and a crisis map with live aftershocks.",
+      "cta": "Search here"
     }
   },
   "map": {
@@ -831,12 +842,7 @@
     "dtvByEstadoTitle": "Geographic breakdown (DTV network)",
     "dtvByEstadoSource": "API field: ubicacion.estado · Desaparecidos Terremoto Venezuela network",
     "officialTitle": "Official and independent figures",
-    "officialFraming": "Official figures attributed to the issuer. Independent analysis labeled separately.",
-    "noCenter": {
-      "title": "Located without a registered center",
-      "body": "Of {total} located people in the DTV network, {count} ({pct}%) have no hospital or collection center registered. If you know where someone is, report the sighting.",
-      "cta": "Report a sighting or location"
-    }
+    "officialFraming": "Official figures attributed to the issuer. Independent analysis labeled separately."
   },
   "red": {
     "title": "Search network",
@@ -847,7 +853,7 @@
       "visit": "Visit platform →",
       "capabilities": {
         "federated": "✓ Active federated search",
-        "facial": "✓ Facial recognition",
+        "facial": "✓ Facial recognition (on their platform only — never carried over the federation)",
         "centers": "✓ Centers and hospitals",
         "refresh": "✓ Updates every 5 min"
       }
@@ -856,8 +862,6 @@
     "platforms": {
       "venezuelaTeBusca": "Citizen missing persons search platform for Venezuela.",
       "civisVenezuela": "Missing persons, damage maps, and supply points.",
-      "sosVenezuela2026": "Live collaborative crisis mapping.",
-      "redVenezuelaActiva": "Volunteer coordination.",
       "desaparecidosTerremoto": "Large earthquake missing persons registry — verified public data.",
       "redQuipu": "Community aid and crisis coordination network.",
       "mapaDanosVenezuela": "Collaborative damage and infrastructure map.",

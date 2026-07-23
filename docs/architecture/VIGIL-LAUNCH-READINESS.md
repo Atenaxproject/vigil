@@ -89,13 +89,15 @@ This is a policy page plus a data rule, not a feature:
 This is where the listing succeeds or wastes itself.
 
 ### 2.1 — Zero-state counters
-**[SHIPPED 2026-07-21 prompt 62].** Rule: non-zero or not rendered; CTA empty states applied.
+**[SHIPPED 2026-07-21 prompt 62; verified against live code 2026-07-22 prompt 74 Part A].**
+Rule in force everywhere: a counter either shows a real non-zero number or it is not rendered.
+`/evaluacion-estructural` suppresses both counters at zero and renders the forward-looking
+request state instead (`PropertyAssessmentForm.tsx` — conditional render, queries intact so
+figures reappear automatically when real data exists).
 
-`/evaluacion-estructural` currently displays **0 propiedades evaluadas esta semana** and **0 profesionales voluntarios activos.**
-
-A user arriving from DTV — which displays live operational counters — hits a page announcing that nothing has happened and nobody is here. That is worse than showing no number at all.
-
-Rule to apply across every surface: a counter either shows a real non-zero number or it is not rendered. Audit every page for this, not just the one I could verify.
+*Process note: status markers in this document come from execution reports only. This
+section drifted twice (stale "0/0" paragraph retained after the SHIPPED marker); corrected
+under 74 A3.*
 
 ### 2.2 — Referral landing behavior
 **New build.**
