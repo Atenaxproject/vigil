@@ -8,7 +8,12 @@ import { AccessibilityControls } from '@/components/a11y/AccessibilityControls'
 import { Menu } from 'lucide-react'
 
 export function AppHeader() {
-  const { mode, setMode, ready } = useViewModeContext()
+  const { mode, setMode, ready, sidebarCollapsed, sidebarReady } = useViewModeContext()
+
+  // Exactly one grouped navigation reachable at any time (R1): the grouped menu
+  // lives in the desktop rail when expanded, so the desktop header button
+  // appears only when the rail is collapsed to icons. Mobile always uses it.
+  const showDesktopMenu = sidebarReady && sidebarCollapsed
 
   return (
     <header className="flex items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3 md:px-6">
@@ -29,17 +34,19 @@ export function AppHeader() {
         <AccessibilityControls compact />
         {ready && <ModeSwitcher mode={mode} onChange={setMode} />}
         <LanguageSwitcher />
-        <button
-          type="button"
-          className="hidden min-h-[44px] items-center gap-2 rounded-input border border-slate-200 px-3 text-[16px] lg:inline-flex"
-          aria-label="Menú"
-          onClick={() => {
-            document.getElementById('vigil-open-nav-menu')?.click()
-          }}
-        >
-          <Menu className="h-5 w-5" aria-hidden />
-          Menú
-        </button>
+        {showDesktopMenu && (
+          <button
+            type="button"
+            className="hidden min-h-[44px] items-center gap-2 rounded-input border border-slate-200 px-3 text-[16px] lg:inline-flex"
+            aria-label="Menú"
+            onClick={() => {
+              document.getElementById('vigil-open-nav-menu')?.click()
+            }}
+          >
+            <Menu className="h-5 w-5" aria-hidden />
+            Menú
+          </button>
+        )}
       </div>
     </header>
   )

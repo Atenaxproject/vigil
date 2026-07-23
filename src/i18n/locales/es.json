@@ -462,19 +462,6 @@
     "goods": "Donar Bienes",
     "time": "Donar Tu Tiempo"
   },
-  "news": {
-    "title": "Actualizaciones Oficiales",
-    "subtitle": "Información verificada de OCHA, ReliefWeb, UNICEF y fuentes oficiales",
-    "officialTier": "Fuentes Oficiales (verificadas)",
-    "officialTierNote": "ReliefWeb, OCHA, GDACS y organismos humanitarios",
-    "rssTier": "Prensa Venezolana (no verificado)",
-    "rssDisclaimer": "Estas noticias provienen de medios independientes. Vigil no verifica su contenido.",
-    "rssEmpty": "No hay noticias disponibles en este momento.",
-    "source": "Fuente:",
-    "readMore": "Leer informe completo",
-    "lastUpdated": "Actualizado: {time}",
-    "disclaimer": "Todo el contenido proviene de fuentes humanitarias oficiales. Vigil no edita estos reportes."
-  },
   "common": {
     "loading": "Cargando...",
     "error": "Ocurrió un error. Intenta de nuevo.",
@@ -645,7 +632,7 @@
   "crisisInfo": {
     "title": "Información de Crisis Verificada",
     "subtitle": "Datos confirmados de fuentes oficiales",
-    "updated": "Actualizado: 29 junio 2026",
+    "updated": "Actualizado: {date}",
     "source": "Fuente",
     "stats": {
       "title": "Estadísticas de la crisis",
@@ -672,7 +659,7 @@
       "title": "Estados más afectados"
     },
     "infra": {
-      "title": "Infraestructura (al 29 junio)",
+      "title": "Infraestructura",
       "power": "Electricidad La Guaira",
       "water": "Agua potable La Guaira",
       "roads": "Infraestructura vial",
@@ -1098,7 +1085,7 @@
     "subtitle": "Mensajes públicos de la comunidad — sin chat ni respuestas",
     "unverifiedNote": "Todos los mensajes son no verificados hasta revisión.",
     "writeMessage": "Escribir un mensaje",
-    "empty": "Aún no hay mensajes. Sé el primero en escribir.",
+    "empty": "Aquí aparecen los mensajes de la comunidad: avisos, solidaridad y preguntas. Todavía no hay ninguno.",
     "categories": {
       "general": "General",
       "aviso": "Aviso",
@@ -1637,6 +1624,8 @@
     "evaluacion": "Evaluación estructural",
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
-    "add": "Agregar"
+    "add": "Agregar",
+    "emptyExplainer": "Cuando envías un reporte, una solicitud de intercambio o de evaluación, se guarda aquí en este dispositivo — sin cuenta — para que puedas volver a consultarlo. Todavía no has guardado ninguno.",
+    "emptyCta": "Crear un reporte"
   }
 }

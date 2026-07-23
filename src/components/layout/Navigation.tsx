@@ -34,13 +34,12 @@ import {
   AlertTriangle,
   Accessibility,
   ClipboardList,
+  ChevronDown,
 } from 'lucide-react'
 import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { useViewModeContext } from '@/components/onboarding/ViewModeProvider'
 import { isRouteVisibleForMode, type ViewModeId } from '@/config/viewMode.config'
 import { cn } from '@/lib/utils'
-
-const SIDEBAR_STORAGE_KEY = 'vigil-sidebar-collapsed'
 
 type NavLabelKey =
   | 'search'
@@ -148,10 +147,8 @@ export function Navigation() {
   const t = useTranslations('nav')
   const tCommon = useTranslations('common')
   const pathname = usePathname()
-  const { mode } = useViewModeContext()
+  const { mode, sidebarCollapsed: collapsed, toggleSidebar, sidebarReady } = useViewModeContext()
   const [moreOpen, setMoreOpen] = useState(false)
-  const [collapsed, setCollapsed] = useState(false)
-  const [sidebarReady, setSidebarReady] = useState(false)
   const sheetRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -167,9 +164,11 @@ export function Navigation() {
     (item) => !item.more && !item.alwaysVisible && !item.center && !item.sheetOnly
   )
   const mobilePrimary = mobilePrimaryCandidates.slice(0, 2)
-  const sidebarItems = visibleItems.filter((item) => !item.sheetOnly)
+  // Collapsed rail is an icon quick-strip of the active mode's items — the
+  // grouped menu itself moves to the header sheet while collapsed (R1).
+  const collapsedRailItems = visibleItems.filter((item) => !item.sheetOnly)
 
-  // Full-site sheet, active mode's group pinned first (75 §4).
+  // One grouping model everywhere (R1 / 75 §4): active mode's group first.
   const primaryGroup = MODE_PRIMARY_GROUP[mode]
   const orderedGroups = primaryGroup
     ? [...SHEET_GROUPS].sort((a, b) =>
@@ -177,29 +176,20 @@ export function Navigation() {
       )
     : [...SHEET_GROUPS]
 
+  // Sidebar group folding: the mode's group is open, the rest are named but
+  // folded. Hiding a category's existence has a real cost on a crisis platform,
+  // so headers always show — only contents fold. Keyed override on top of the
+  // mode default so a user can open any group and it survives a mode change.
+  const [groupOverrides, setGroupOverrides] = useState<Record<string, boolean>>({})
+  // In "ver todo" there is no single mode group, and the intent is to see
+  // everything — so every group defaults open. In a specific mode, only that
+  // mode's group is open; the rest are named but folded.
+  const isGroupOpen = (titleKey: string) =>
+    groupOverrides[titleKey] ?? (primaryGroup === null ? true : titleKey === primaryGroup)
+  const toggleGroup = (titleKey: string) =>
+    setGroupOverrides((prev) => ({ ...prev, [titleKey]: !isGroupOpen(titleKey) }))
+
   const closeMore = useCallback(() => setMoreOpen(false), [])
-
-  const toggleSidebar = useCallback(() => {
-    setCollapsed((prev) => {
-      const next = !prev
-      try {
-        localStorage.setItem(SIDEBAR_STORAGE_KEY, String(next))
-      } catch {
-        /* ignore quota / private mode */
-      }
-      return next
-    })
-  }, [])
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(SIDEBAR_STORAGE_KEY)
-      if (stored === 'true') setCollapsed(true)
-    } catch {
-      /* ignore */
-    }
-    setSidebarReady(true)
-  }, [])
 
   useEffect(() => {
     setMoreOpen(false)
@@ -277,32 +267,80 @@ export function Navigation() {
           className="flex flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden p-2"
           aria-label={t('desktopNav')}
         >
-          {sidebarItems.map((item) => {
-            const Icon = item.icon
-            const active = pathname === item.href
-            const label = t(item.labelKey)
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? 'page' : undefined}
-                aria-label={label}
-                title={collapsed ? label : undefined}
-                className={cn(
-                  'flex min-h-[44px] items-center rounded-input text-[16px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40',
-                  collapsed ? 'justify-center px-2' : 'gap-3 px-3',
-                  active
-                    ? 'border-l-4 border-vigil-blue bg-vigil-blue-light font-medium text-vigil-blue'
-                    : 'text-slate-600 hover:bg-vigil-cloud'
-                )}
-              >
-                <Icon className="h-5 w-5 shrink-0" aria-hidden />
-                <span className={cn(collapsed && 'sr-only', !collapsed && 'whitespace-nowrap')}>
-                  {label}
-                </span>
-              </Link>
-            )
-          })}
+          {collapsed
+            ? // Icon quick-strip of the active mode's items. The grouped menu is
+              // reached via the header button while collapsed (R1).
+              collapsedRailItems.map((item) => {
+                const Icon = item.icon
+                const active = pathname === item.href
+                const label = t(item.labelKey)
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? 'page' : undefined}
+                    aria-label={label}
+                    title={label}
+                    className={cn(
+                      'flex min-h-[44px] items-center justify-center rounded-input px-2 text-[16px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40',
+                      active
+                        ? 'border-l-4 border-vigil-blue bg-vigil-blue-light font-medium text-vigil-blue'
+                        : 'text-slate-600 hover:bg-vigil-cloud'
+                    )}
+                  >
+                    <Icon className="h-5 w-5 shrink-0" aria-hidden />
+                    <span className="sr-only">{label}</span>
+                  </Link>
+                )
+              })
+            : // Grouped, full-site nav: mode's group open, others named + folded.
+              orderedGroups.map((group) => {
+                const open = isGroupOpen(group.titleKey)
+                return (
+                  <div key={group.titleKey} className="mb-1">
+                    <button
+                      type="button"
+                      onClick={() => toggleGroup(group.titleKey)}
+                      aria-expanded={open}
+                      className="flex min-h-[36px] w-full items-center justify-between gap-2 rounded-input px-3 text-[13px] font-semibold uppercase tracking-wide text-vigil-muted hover:bg-vigil-cloud focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+                    >
+                      <span>{t(group.titleKey)}</span>
+                      <ChevronDown
+                        className={cn('h-4 w-4 shrink-0 transition-transform', !open && '-rotate-90')}
+                        aria-hidden
+                      />
+                    </button>
+                    {open && (
+                      <ul className="mt-0.5">
+                        {group.items.map((href) => {
+                          const item = navItems.find((n) => n.href === href)
+                          if (!item) return null
+                          const Icon = item.icon
+                          const active = pathname === href
+                          const label = t(item.labelKey)
+                          return (
+                            <li key={href}>
+                              <Link
+                                href={href}
+                                aria-current={active ? 'page' : undefined}
+                                className={cn(
+                                  'flex min-h-[44px] items-center gap-3 rounded-input px-3 text-[16px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40',
+                                  active
+                                    ? 'border-l-4 border-vigil-blue bg-vigil-blue-light font-medium text-vigil-blue'
+                                    : 'text-slate-600 hover:bg-vigil-cloud'
+                                )}
+                              >
+                                <Icon className="h-5 w-5 shrink-0" aria-hidden />
+                                <span className="whitespace-nowrap">{label}</span>
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                )
+              })}
         </nav>
 
         <div className="border-t border-slate-200 p-2">

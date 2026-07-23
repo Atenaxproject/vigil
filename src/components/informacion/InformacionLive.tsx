@@ -145,6 +145,18 @@ export function InformacionLive() {
     })
   }, [infra])
 
+  // Self-maintaining freshness stamp (R3): derive from the newest infra item
+  // rather than a hardcoded date. A stale hardcoded "Actualizado" reads as
+  // abandonment — worse than none — same defect class as a hardcoded DTV total.
+  const infraUpdatedAt = useMemo(() => {
+    const times = visibleInfra
+      .map((i) => i.verified_at ?? i.updated_at)
+      .filter((t): t is string => Boolean(t))
+      .map((t) => new Date(t).getTime())
+      .filter((n) => !Number.isNaN(n))
+    return times.length ? new Date(Math.max(...times)) : null
+  }, [visibleInfra])
+
   const officialSources = CRISIS_CONFIG.partnerLinks.filter((p) => p.type !== 'sister-platform')
 
   const gdacsAlertColor = (level: string) => {
@@ -385,7 +397,14 @@ export function InformacionLive() {
 
       {visibleInfra.length > 0 && (
         <section className="mt-10">
-          <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('infra.title')}</h2>
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+            <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('infra.title')}</h2>
+            {infraUpdatedAt && (
+              <p className="font-mono text-[13px] text-vigil-muted">
+                {tc('updated', { date: infraUpdatedAt.toLocaleDateString(locale) })}
+              </p>
+            )}
+          </div>
           <p className="mt-1 text-[13px] text-vigil-muted">{t('infraLive')}</p>
           <div className="mt-4 space-y-3">
             {visibleInfra.map((item) => {

@@ -70,7 +70,15 @@ export function MisReportesClient() {
       <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
 
       {claims.length === 0 ? (
-        <p className="mt-6 text-[16px] text-vigil-body">{t('empty')}</p>
+        <div className="mt-6 rounded-card border border-slate-200 bg-vigil-cloud p-5">
+          <p className="text-[16px] text-vigil-body">{t('emptyExplainer')}</p>
+          <Link
+            href="/reportar"
+            className="mt-4 inline-flex min-h-[44px] items-center rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+          >
+            {t('emptyCta')}
+          </Link>
+        </div>
       ) : (
         <ul className="mt-6 space-y-3">
           {claims.map((c) => (

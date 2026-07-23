@@ -40,17 +40,25 @@ export const CRISIS_CONFIG = {
     { name: 'UNICEF Venezuela', url: 'https://www.unicef.org/venezuela', type: 'official' as const },
     { name: 'Cruz Roja Venezolana', url: 'https://cruzrojavenezolana.org', type: 'ngo' as const },
     { name: 'HDX — Datos Humanitarios', url: 'https://data.humdata.org/group/ven', type: 'data' as const },
+    // personSearch RULE (74 B2 / R4): set true ONLY for platforms where a user
+    // can search for a specific missing person — by name, photo, or hospital
+    // admission record. The /buscar zero-result recovery lists exactly these
+    // (a searcher who found nothing needs somewhere else to search, not a
+    // donation or damage-map site). Adding a new person-search platform to this
+    // list is how it opts into that surface; omitting the flag keeps it out.
     {
       name: 'Venezuela Te Busca',
       url: 'https://venezuelatebusca.com',
       type: 'sister-platform' as const,
       slug: 'venezuelaTeBusca' as const,
+      personSearch: true as const,
     },
     {
       name: 'CIVIS Venezuela',
       url: 'https://civisvenezuela.com',
       type: 'sister-platform' as const,
       slug: 'civisVenezuela' as const,
+      personSearch: true as const,
     },
     // Retired 2026-07-22 (74 Part D link check): domains no longer resolve.
     // Restore only after verifying the platform is live again.
@@ -62,6 +70,7 @@ export const CRISIS_CONFIG = {
       type: 'sister-platform' as const,
       slug: 'desaparecidosTerremoto' as const,
       integrated: true,
+      personSearch: true as const,
     },
     {
       name: 'RedQuipu',
@@ -86,6 +95,8 @@ export const CRISIS_CONFIG = {
       url: 'https://encuentramevzla.com',
       type: 'sister-platform' as const,
       slug: 'encuentrameVzla' as const,
+      // Hospital admissions locator — a searcher can look up a specific person.
+      personSearch: true as const,
     },
     {
       name: 'Venezuela Earthquake Map',

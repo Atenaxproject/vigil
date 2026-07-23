@@ -432,19 +432,6 @@
     "goods": "Dona Beni",
     "time": "Dona il Tuo Tempo"
   },
-  "news": {
-    "title": "Aggiornamenti Ufficiali",
-    "subtitle": "Informazioni verificate da OCHA, ReliefWeb, UNICEF e fonti ufficiali",
-    "officialTier": "Fonti ufficiali (verificate)",
-    "officialTierNote": "ReliefWeb, OCHA, GDACS e agenzie umanitarie",
-    "rssTier": "Stampa venezuelana (non verificata)",
-    "rssDisclaimer": "Queste notizie provengono da media indipendenti. Vigil non ne verifica il contenuto.",
-    "rssEmpty": "Nessuna notizia disponibile al momento.",
-    "source": "Fonte:",
-    "readMore": "Leggi il rapporto completo",
-    "lastUpdated": "Ultimo aggiornamento: {{time}}",
-    "disclaimer": "Tutti i contenuti provengono da fonti umanitarie ufficiali. Vigil non modifica questi rapporti."
-  },
   "common": {
     "loading": "Caricamento...",
     "error": "Si è verificato un errore. Riprova.",
@@ -615,7 +602,7 @@
   "crisisInfo": {
     "title": "Informazioni sulla Crisi Verificate",
     "subtitle": "Dati confermati da fonti ufficiali",
-    "updated": "Aggiornato: 29 giugno 2026",
+    "updated": "Aggiornato: {date}",
     "source": "Fonte",
     "stats": {
       "title": "Crisis statistics",
@@ -642,7 +629,7 @@
       "title": "Stati più colpiti"
     },
     "infra": {
-      "title": "Infrastrutture (al 29 giugno)",
+      "title": "Infrastrutture",
       "power": "Elettricità La Guaira",
       "water": "Acqua potabile La Guaira",
       "roads": "Infrastrutture stradali",
@@ -988,7 +975,7 @@
     "subtitle": "Messaggi pubblici della comunità — niente chat né risposte",
     "unverifiedNote": "Tutti i messaggi sono non verificati fino alla revisione.",
     "writeMessage": "Scrivi un messaggio",
-    "empty": "Nessun messaggio ancora. Sii il primo a pubblicare.",
+    "empty": "Qui compaiono i messaggi della comunità: avvisi, solidarietà e domande. Non ce ne sono ancora.",
     "categories": {
       "general": "Generale",
       "aviso": "Avviso",
@@ -1637,6 +1624,8 @@
     "evaluacion": "Evaluación estructural",
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
-    "add": "Agregar"
+    "add": "Agregar",
+    "emptyExplainer": "Quando invii una segnalazione, una richiesta di scambio o di valutazione, viene salvata qui su questo dispositivo — senza account — così puoi ritrovarla. Non ne hai ancora salvata nessuna.",
+    "emptyCta": "Crea una segnalazione"
   }
 }

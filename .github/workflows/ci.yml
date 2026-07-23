@@ -1,0 +1,25 @@
+name: CI
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# No path filters: a required check that never reports on a skipped PR blocks
+# that PR forever. This runs on every PR to main, docs-only changes included.
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run lint
+      # `npm run build` runs the prebuild i18n-parity gate, so key drift fails CI too.
+      # The app is designed to build without secrets (no Supabase/Anthropic keys needed).
+      - run: npm run build

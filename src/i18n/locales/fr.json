@@ -432,19 +432,6 @@
     "goods": "Donner des biens",
     "time": "Donner de votre temps"
   },
-  "news": {
-    "title": "Mises à jour officielles",
-    "subtitle": "Informations vérifiées provenant de l'OCHA, ReliefWeb, l'UNICEF et des sources officielles",
-    "officialTier": "Sources officielles (vérifiées)",
-    "officialTierNote": "ReliefWeb, OCHA, GDACS et agences humanitaires",
-    "rssTier": "Presse vénézuélienne (non vérifiée)",
-    "rssDisclaimer": "Ces articles proviennent de médias indépendants. Vigil ne vérifie pas leur contenu.",
-    "rssEmpty": "Aucune actualité disponible pour le moment.",
-    "source": "Source :",
-    "readMore": "Lire le rapport complet",
-    "lastUpdated": "Dernière mise à jour : {{time}}",
-    "disclaimer": "Tout le contenu provient de sources humanitaires officielles. Vigil n'édite pas ces rapports."
-  },
   "common": {
     "loading": "Chargement...",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
@@ -615,7 +602,7 @@
   "crisisInfo": {
     "title": "Informations de crise vérifiées",
     "subtitle": "Données confirmées de sources officielles",
-    "updated": "Mise à jour : 29 juin 2026",
+    "updated": "Mis à jour : {date}",
     "source": "Source",
     "stats": {
       "title": "Crisis statistics",
@@ -642,7 +629,7 @@
       "title": "États les plus affectés"
     },
     "infra": {
-      "title": "Infrastructure (au 29 juin)",
+      "title": "Infrastructure",
       "power": "Électricité La Guaira",
       "water": "Eau potable La Guaira",
       "roads": "Infrastructure routière",
@@ -988,7 +975,7 @@
     "subtitle": "Messages publics de la communauté — pas de chat ni de réponses",
     "unverifiedNote": "Tous les messages sont non vérifiés jusqu'à examen.",
     "writeMessage": "Écrire un message",
-    "empty": "Pas encore de messages. Soyez le premier à publier.",
+    "empty": "C'est ici qu'apparaissent les messages de la communauté — avis, solidarité et questions. Il n'y en a pas encore.",
     "categories": {
       "general": "Général",
       "aviso": "Avis",
@@ -1637,6 +1624,8 @@
     "evaluacion": "Evaluación estructural",
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
-    "add": "Agregar"
+    "add": "Agregar",
+    "emptyExplainer": "Lorsque vous déposez un signalement, une demande d'échange ou d'évaluation, il est enregistré ici sur cet appareil — sans compte — pour que vous puissiez le retrouver. Vous n'en avez encore enregistré aucun.",
+    "emptyCta": "Créer un signalement"
   }
 }
