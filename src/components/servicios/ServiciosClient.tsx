@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { Zap, Droplet, Fuel, Cylinder, Signal, type LucideIcon } from 'lucide-react'
 
 const ZONES = [
   'La Guaira',
@@ -14,12 +15,20 @@ const ZONES = [
   'Zulia',
 ] as const
 
-const SERVICES = [
-  { id: 'electricidad', label_es: 'Luz', label_en: 'Power', emoji: '⚡' },
-  { id: 'agua', label_es: 'Agua', label_en: 'Water', emoji: '💧' },
-  { id: 'gasolina', label_es: 'Gasolina', label_en: 'Gasoline', emoji: '⛽' },
-  { id: 'gas', label_es: 'Gas', label_en: 'Gas', emoji: '🔥' },
-  { id: 'senal', label_es: 'Señal', label_en: 'Signal', emoji: '📶' },
+// Icons, not emoji (75D §3a): emoji read as prototype and render/announce
+// inconsistently. Gas is a Cylinder — Venezuelan domestic gas is a bombona you
+// carry and refill, not piped service, so a flame is semantically wrong (§3b).
+const SERVICES: ReadonlyArray<{
+  id: string
+  label_es: string
+  label_en: string
+  icon: LucideIcon
+}> = [
+  { id: 'electricidad', label_es: 'Luz', label_en: 'Power', icon: Zap },
+  { id: 'agua', label_es: 'Agua', label_en: 'Water', icon: Droplet },
+  { id: 'gasolina', label_es: 'Gasolina', label_en: 'Gasoline', icon: Fuel },
+  { id: 'gas', label_es: 'Gas', label_en: 'Gas', icon: Cylinder },
+  { id: 'senal', label_es: 'Señal', label_en: 'Signal', icon: Signal },
 ] as const
 
 const STATUSES = [
@@ -146,9 +155,7 @@ export function ServiciosClient() {
               key={s.id}
               className="flex items-center gap-3 rounded-card border border-slate-200 bg-white p-4"
             >
-              <span className="text-2xl" aria-hidden>
-                {s.emoji}
-              </span>
+              <s.icon className="h-6 w-6 shrink-0 text-vigil-blue" aria-hidden />
               <div className="min-w-0 flex-1">
                 <p className="text-[16px] font-medium text-vigil-ink">
                   {locale === 'en' ? s.label_en : s.label_es}
@@ -189,9 +196,9 @@ export function ServiciosClient() {
                   setPickedService(s.id)
                   setStep('status')
                 }}
-                className="min-h-[44px] rounded-input border border-slate-200 bg-white px-4 text-left text-[16px]"
+                className="flex min-h-[44px] items-center gap-2 rounded-input border border-slate-200 bg-white px-4 text-left text-[16px]"
               >
-                <span aria-hidden>{s.emoji} </span>
+                <s.icon className="h-5 w-5 shrink-0 text-vigil-blue" aria-hidden />
                 {locale === 'en' ? s.label_en : s.label_es}
               </button>
             ))}

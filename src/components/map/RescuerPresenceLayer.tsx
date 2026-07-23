@@ -1,6 +1,7 @@
 'use client'
 
 import { CircleMarker, Popup } from 'react-leaflet'
+import { AlertTriangle } from 'lucide-react'
 import type { PublicRescuerPresence } from '@/types/vigil.types'
 
 const TYPE_COLORS: Record<PublicRescuerPresence['presence_type'], string> = {
@@ -42,7 +43,10 @@ export function RescuerPresenceLayer({ presence }: RescuerPresenceLayerProps) {
               {p.team_or_org && <p className="text-sm">{p.team_or_org}</p>}
               {p.notes && <p className="text-sm">{p.notes}</p>}
               {isSos && (
-                <p className="text-sm font-bold text-red-600">⚠ NECESITA ASISTENCIA</p>
+                <p className="flex items-center gap-1 text-sm font-bold text-red-600">
+                  <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden />
+                  NECESITA ASISTENCIA
+                </p>
               )}
             </Popup>
           </CircleMarker>
