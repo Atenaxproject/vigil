@@ -10,7 +10,6 @@ import {
   HandHelping,
   Users,
   Building2,
-  Heart,
   Newspaper,
   Map,
   Plus,
@@ -31,10 +30,14 @@ import {
   LifeBuoy,
   BookOpen,
   Phone,
+  Activity,
+  AlertTriangle,
+  Accessibility,
+  ClipboardList,
 } from 'lucide-react'
 import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { useViewModeContext } from '@/components/onboarding/ViewModeProvider'
-import { isRouteVisibleForMode } from '@/config/viewMode.config'
+import { isRouteVisibleForMode, type ViewModeId } from '@/config/viewMode.config'
 import { cn } from '@/lib/utils'
 
 const SIDEBAR_STORAGE_KEY = 'vigil-sidebar-collapsed'
@@ -45,8 +48,6 @@ type NavLabelKey =
   | 'needHelp'
   | 'volunteers'
   | 'organizations'
-  | 'donate'
-  | 'news'
   | 'map'
   | 'exchange'
   | 'howToHelp'
@@ -74,7 +75,8 @@ const navItems: Array<{
   icon: typeof Map
   center?: boolean
   more?: boolean
-  sidebarHidden?: boolean
+  /** Reachable only through the menu sheet — never sidebar or mobile bar. */
+  sheetOnly?: boolean
   alwaysVisible?: boolean
 }> = [
   { href: '/ayuda', labelKey: 'help', shortKey: 'helpShort', icon: LifeBuoy, alwaysVisible: true },
@@ -85,6 +87,8 @@ const navItems: Array<{
   { href: '/preparacion', labelKey: 'preparedness', icon: BookOpen, more: true, alwaysVisible: true },
   // /monitor intentionally omitted from public nav until §68 FIRMS/GDACS redistribution confirmed
   // (docs/reference/MONITOR-AND-AUDIT-DELIVERABLES.md). Route remains URL-reachable when kill switch allows.
+  // /donaciones and /noticias are retired redirects (75 §3) — never re-add here;
+  // see the compliance note in src/config/viewMode.config.ts.
   { href: '/calendario', labelKey: 'calendar', icon: Calendar, more: true },
   { href: '/muro', labelKey: 'wall', icon: MessageSquare, more: true },
   { href: '/red', labelKey: 'network', icon: ExternalLink, more: true },
@@ -98,9 +102,47 @@ const navItems: Array<{
   { href: '/como-ayudar', labelKey: 'howToHelp', icon: HelpCircle, more: true },
   { href: '/equipo-activo', labelKey: 'activeTeam', icon: Shield, more: true },
   { href: '/informacion', labelKey: 'info', icon: Info, more: true },
-  { href: '/donaciones', labelKey: 'donate', icon: Heart, more: true, sidebarHidden: true },
-  { href: '/noticias', labelKey: 'news', icon: Newspaper, more: true, sidebarHidden: true },
+  // Sheet-only destinations — one list defines the whole IA (75 §4); the sheet
+  // no longer carries its own ad-hoc entries.
+  { href: '/mis-reportes', labelKey: 'myReports', icon: ClipboardList, more: true, sheetOnly: true },
+  { href: '/servicios', labelKey: 'services', icon: Activity, more: true, sheetOnly: true },
+  { href: '/amenazas', labelKey: 'hazards', icon: AlertTriangle, more: true, sheetOnly: true },
+  { href: '/prensa', labelKey: 'press', icon: Newspaper, more: true, sheetOnly: true, alwaysVisible: true },
+  { href: '/accesibilidad', labelKey: 'accessibility', icon: Accessibility, more: true, sheetOnly: true, alwaysVisible: true },
 ]
+
+/**
+ * Menu-sheet IA (prompt 72), pinned by mode (75 §4): the sheet is always the
+ * FULL site — the active mode's group simply surfaces first. Hiding a route
+ * from someone who already knows what they want costs more than showing too
+ * many.
+ */
+const SHEET_GROUPS = [
+  { titleKey: 'groupFindSomeone', items: ['/buscar', '/reportar', '/red', '/mis-reportes'] },
+  {
+    titleKey: 'groupNeedHelp',
+    items: ['/necesito-ayuda', '/conectividad', '/evaluacion-estructural', '/preparacion', '/servicios'],
+  },
+  {
+    titleKey: 'groupWantToHelp',
+    items: ['/como-ayudar', '/voluntarios', '/intercambio', '/punto-de-acopio', '/organizaciones'],
+  },
+  { titleKey: 'groupEmergencyStatus', items: ['/', '/estadisticas', '/equipo-activo', '/amenazas'] },
+  { titleKey: 'groupInfo', items: ['/informacion', '/ayuda', '/calendario', '/muro', '/prensa'] },
+  { titleKey: 'groupSettings', items: ['/accesibilidad'] },
+] as const
+
+type SheetGroupKey = (typeof SHEET_GROUPS)[number]['titleKey']
+
+const MODE_PRIMARY_GROUP: Record<ViewModeId, SheetGroupKey | null> = {
+  busco_a_alguien: 'groupFindSomeone',
+  necesito_ayuda: 'groupNeedHelp',
+  quiero_ayudar: 'groupWantToHelp',
+  soy_organizacion: 'groupWantToHelp',
+  equipo_rescate: 'groupEmergencyStatus',
+  solo_informacion: 'groupInfo',
+  ver_todo: null,
+}
 
 export function Navigation() {
   const t = useTranslations('nav')
@@ -122,10 +164,18 @@ export function Navigation() {
   const helpItem = visibleItems.find((item) => item.href === '/ayuda')
   const reportItem = visibleItems.find((item) => item.center)
   const mobilePrimaryCandidates = visibleItems.filter(
-    (item) => !item.more && !item.alwaysVisible && !item.center
+    (item) => !item.more && !item.alwaysVisible && !item.center && !item.sheetOnly
   )
   const mobilePrimary = mobilePrimaryCandidates.slice(0, 2)
-  const sidebarItems = visibleItems.filter((item) => !item.sidebarHidden)
+  const sidebarItems = visibleItems.filter((item) => !item.sheetOnly)
+
+  // Full-site sheet, active mode's group pinned first (75 §4).
+  const primaryGroup = MODE_PRIMARY_GROUP[mode]
+  const orderedGroups = primaryGroup
+    ? [...SHEET_GROUPS].sort((a, b) =>
+        a.titleKey === primaryGroup ? -1 : b.titleKey === primaryGroup ? 1 : 0
+      )
+    : [...SHEET_GROUPS]
 
   const closeMore = useCallback(() => setMoreOpen(false), [])
 
@@ -394,82 +444,32 @@ export function Navigation() {
             onClick={(e) => e.stopPropagation()}
             className="absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto rounded-t-card border-t border-slate-200 bg-white pb-[env(safe-area-inset-bottom)] shadow-lg lg:bottom-auto lg:left-auto lg:right-4 lg:top-16 lg:max-h-[80vh] lg:w-[380px] lg:rounded-card lg:border"
           >
-            <div className="sticky top-0 flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3">
-              <span className="text-[16px] font-semibold text-vigil-ink">{t('menu')}</span>
-              <button
-                ref={closeButtonRef}
-                type="button"
-                onClick={closeMore}
-                aria-label={tCommon('close')}
-                className="flex h-11 w-11 items-center justify-center rounded-full text-vigil-muted hover:bg-vigil-cloud focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
-              >
-                <X className="h-5 w-5" aria-hidden />
-              </button>
+            <div className="sticky top-0 border-b border-slate-200 bg-white px-4 py-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[16px] font-semibold text-vigil-ink">{t('menu')}</span>
+                <button
+                  ref={closeButtonRef}
+                  type="button"
+                  onClick={closeMore}
+                  aria-label={tCommon('close')}
+                  className="flex h-11 w-11 items-center justify-center rounded-full text-vigil-muted hover:bg-vigil-cloud focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+                >
+                  <X className="h-5 w-5" aria-hidden />
+                </button>
+              </div>
+              {/* Full-site semantics stated, not implied (75 §4). */}
+              <p className="text-[13px] text-vigil-muted">{t('menuFullSite')}</p>
             </div>
             <div className="space-y-4 p-3">
               <PwaInstallButton onInstalled={closeMore} />
-              {(
-                [
-                  {
-                    titleKey: 'groupFindSomeone',
-                    items: ['/buscar', '/reportar', '/red', '/mis-reportes'],
-                  },
-                  {
-                    titleKey: 'groupNeedHelp',
-                    items: ['/necesito-ayuda', '/conectividad', '/evaluacion-estructural', '/preparacion', '/servicios'],
-                  },
-                  {
-                    titleKey: 'groupWantToHelp',
-                    items: ['/como-ayudar', '/voluntarios', '/intercambio', '/punto-de-acopio', '/organizaciones'],
-                  },
-                  {
-                    titleKey: 'groupEmergencyStatus',
-                    items: ['/', '/estadisticas', '/equipo-activo', '/amenazas'],
-                  },
-                  {
-                    titleKey: 'groupInfo',
-                    items: ['/informacion', '/ayuda', '/calendario', '/muro', '/prensa'],
-                  },
-                  {
-                    titleKey: 'groupSettings',
-                    items: ['/accesibilidad'],
-                  },
-                ] as const
-              ).map((group) => (
+              {orderedGroups.map((group) => (
                 <div key={group.titleKey}>
                   <p className="px-2 text-[13px] font-semibold uppercase tracking-wide text-vigil-muted">
                     {t(group.titleKey)}
                   </p>
                   <ul className="mt-1">
                     {group.items.map((href) => {
-                      const item = [
-                        ...navItems,
-                        {
-                          href: '/mis-reportes',
-                          labelKey: 'myReports' as NavLabelKey,
-                          icon: FilePlus,
-                        },
-                        {
-                          href: '/servicios',
-                          labelKey: 'services' as NavLabelKey,
-                          icon: Wifi,
-                        },
-                        {
-                          href: '/amenazas',
-                          labelKey: 'hazards' as NavLabelKey,
-                          icon: Shield,
-                        },
-                        {
-                          href: '/prensa',
-                          labelKey: 'press' as NavLabelKey,
-                          icon: Newspaper,
-                        },
-                        {
-                          href: '/accesibilidad',
-                          labelKey: 'accessibility' as NavLabelKey,
-                          icon: HelpCircle,
-                        },
-                      ].find((n) => n.href === href)
+                      const item = navItems.find((n) => n.href === href)
                       if (!item) return null
                       const Icon = item.icon
                       const active = pathname === href

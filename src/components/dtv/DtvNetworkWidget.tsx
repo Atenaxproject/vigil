@@ -17,13 +17,26 @@ interface DtvMetricsResponse {
 export function DtvNetworkWidget() {
   const t = useTranslations('liveInfo.dtvNetwork')
   const [metrics, setMetrics] = useState<DtvMetricsResponse | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     void fetch('/api/dtv-metrics')
       .then((res) => (res.ok ? res.json() : null))
       .then((data: DtvMetricsResponse | null) => setMetrics(data))
       .catch(() => setMetrics(null))
+      .finally(() => setLoading(false))
   }, [])
+
+  // Zero-suppression rule (74 A2 / 75 §1): each tile renders only for a real
+  // non-zero value. Never a literal 0 as a headline stat, and loading reads as
+  // loading — not as an all-zero board.
+  const tiles = metrics?.available
+    ? ([
+        ['personas', metrics.totalPersonas],
+        ['centros', metrics.totalCentros],
+        ['listas', metrics.totalListas],
+      ] as const).filter(([, value]) => value > 0)
+    : []
 
   return (
     <section className="mt-10 rounded-card border border-status-unverified/30 bg-status-unverified-bg p-4">
@@ -33,27 +46,26 @@ export function DtvNetworkWidget() {
           {t('badge')}
         </span>
       </div>
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        <div className="rounded-card border border-slate-200 bg-white p-3">
-          <p className="text-[13px] text-vigil-muted">{t('personas')}</p>
-          <p className="mt-1 font-display text-xl font-semibold text-vigil-ink">
-            {(metrics?.totalPersonas ?? 0).toLocaleString()}
-          </p>
+      {loading && (
+        <div className="mt-4 grid gap-3 sm:grid-cols-3" aria-hidden>
+          <div className="skeleton h-[68px] rounded-card" />
+          <div className="skeleton h-[68px] rounded-card" />
+          <div className="skeleton h-[68px] rounded-card" />
         </div>
-        <div className="rounded-card border border-slate-200 bg-white p-3">
-          <p className="text-[13px] text-vigil-muted">{t('centros')}</p>
-          <p className="mt-1 font-display text-xl font-semibold text-vigil-ink">
-            {(metrics?.totalCentros ?? 0).toLocaleString()}
-          </p>
+      )}
+      {!loading && tiles.length > 0 && (
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          {tiles.map(([key, value]) => (
+            <div key={key} className="rounded-card border border-slate-200 bg-white p-3">
+              <p className="text-[13px] text-vigil-muted">{t(key)}</p>
+              <p className="mt-1 font-display text-xl font-semibold text-vigil-ink">
+                {value.toLocaleString()}
+              </p>
+            </div>
+          ))}
         </div>
-        <div className="rounded-card border border-slate-200 bg-white p-3">
-          <p className="text-[13px] text-vigil-muted">{t('listas')}</p>
-          <p className="mt-1 font-display text-xl font-semibold text-vigil-ink">
-            {(metrics?.totalListas ?? 0).toLocaleString()}
-          </p>
-        </div>
-      </div>
-      {!metrics?.available && (
+      )}
+      {!loading && tiles.length === 0 && (
         <p className="mt-3 text-[13px] text-vigil-muted">{t('unavailable')}</p>
       )}
       <a

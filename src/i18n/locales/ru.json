@@ -5,8 +5,6 @@
     "needHelp": "Мне нужна помощь",
     "volunteers": "Волонтеры",
     "organizations": "Организации",
-    "donate": "Помочь",
-    "news": "Официальные обновления",
     "map": "Карта кризиса",
     "exchange": "Обмен ресурсами",
     "howToHelp": "Как помочь",
@@ -70,7 +68,8 @@
     "sub_calendar": "Events and drives",
     "sub_wall": "Community wall",
     "sub_press": "Press kit",
-    "sub_accessibility": "Text and contrast"
+    "sub_accessibility": "Text and contrast",
+    "menuFullSite": "Весь сайт, всегда полностью — выбранный режим лишь упорядочивает ваши ярлыки."
   },
   "a11y": {
     "skipToContent": "Перейти к основному содержимому"
@@ -109,10 +108,6 @@
     "search": {
       "placeholder": "Search by name...",
       "button": "Search",
-      "noResults": "No results found. Try a different name.",
-      "noResultsTitle": "We haven't found this person on Vigil yet.",
-      "sisterPlatformsIntro": "You can also search these sister platforms:",
-      "sisterPlatformsReport": "Please consider reporting here too — every report helps.",
       "reportCta": "Report Missing Person",
       "externalLink": "opens in new tab",
       "loading": "Searching...",
@@ -126,15 +121,25 @@
       "trustNote": "Результаты включают записи Vigil и Desaparecidos Terremoto Venezuela. Оба источника — проверенные некоммерческие гражданские инициативы.",
       "dtvSectionBadge": "Source: Desaparecidos Terremoto Venezuela",
       "dtvSectionNote": "Проверенные открытые данные · desaparecidosterremotovenezuela.com",
-      "noResultsBothTitle": "We didn't find this person on either platform.",
-      "noResultsReportBoth": "Consider reporting them:",
-      "noResultsReportDtv": "On Desaparecidos Terremoto Venezuela",
-      "noResultsBothHint": "Reporting on both platforms expands the search network.",
       "errorTitle": "Не удалось выполнить поиск",
       "errorBody": "Возникла проблема с соединением. Попробуйте ещё раз.",
       "retry": "Повторить",
       "psychosocialPrompt": "If you need emotional support now:",
-      "psychosocialLink": "psychosocial support lines"
+      "psychosocialLink": "psychosocial support lines",
+      "empty": {
+        "title": "Мы пока не нашли этого человека",
+        "intro": "Отсутствие здесь не означает ничего окончательного. Это означает, что его ещё нет в этой базе данных.",
+        "actionsTitle": "Три вещи, которые можно сделать сейчас:",
+        "step1Title": "1. Расширьте поиск.",
+        "step1Body": "Попробуйте только фамилию или только имя. Записи приходят с той орфографией, которую родственник смог написать в стрессе — диакритический знак, одна буква, вторая фамилия могут изменить результат.",
+        "step2Title": "2. Создайте заявку.",
+        "step2Body": "Если записи нет, создайте её. Именно так двое людей, ищущих одного человека, находят друг друга. Аккаунт не нужен, это занимает меньше двух минут.",
+        "step2Cta": "Сообщить об этом человеке",
+        "step3Title": "3. Поищите на других платформах.",
+        "step3Body": "Ни одна база данных не содержит всего. Вот те, что работают в этой чрезвычайной ситуации:",
+        "step3BodyReferred": "Вы уже искали в DTV. Вот остальные платформы, работающие в этой чрезвычайной ситуации:",
+        "federationNote": "Vigil также запрашивает федеративную сеть Desaparecidos Terremoto Venezuela. Если человек есть там, он появится здесь."
+      }
     },
     "status": {
       "missing": "Пропал",
@@ -220,7 +225,13 @@
       "linkReport": "Report a person"
     },
     "recentTitle": "Recent",
-    "recentEmpty": "На Vigil пока нет свежих записей. При поиске по имени мы также включаем открытые записи Desaparecidos Terremoto Venezuela."
+    "recentEmpty": "На Vigil пока нет свежих записей. При поиске по имени мы также включаем открытые записи Desaparecidos Terremoto Venezuela.",
+    "dtvReferral": {
+      "title": "Вы пришли с Desaparecidos Terremoto Venezuela.",
+      "bodyFull": "Vigil запрашивает ту же базу данных, поэтому вы увидите те же записи — плюс созданные здесь. Что добавляет Vigil: поиск по фотографии, разбивку по штату, муниципалитету и приходу и карту кризиса с афтершоками в реальном времени.",
+      "bodyNoPhoto": "Vigil запрашивает ту же базу данных, поэтому вы увидите те же записи — плюс созданные здесь. Что добавляет Vigil: разбивку по штату, муниципалитету и приходу и карту кризиса с афтершоками в реальном времени.",
+      "cta": "Искать здесь"
+    }
   },
   "map": {
     "title": "Карта кризиса",
@@ -482,7 +493,8 @@
     "creditsByLink": "YouTheWave",
     "builtWith": "Создано с помощью Claude и Cursor",
     "notEmergency": "Vigil НЕ является службой экстренной помощи. Для немедленного спасения звоните {hotline}.",
-    "otherRegions": "Другие регионы"
+    "otherRegions": "Другие регионы",
+    "press": "Пресса"
   },
   "exchange": {
     "title": "Обмен ресурсами",
@@ -572,7 +584,8 @@
     },
     "collection": {
       "title": "Физические пункты сбора",
-      "ucvNote": "Historical: collection point reported active 27 June — confirm current status before traveling."
+      "ucvNote": "Historical: collection point reported active 27 June — confirm current status before traveling.",
+      "gemNote": "Пункт в Дорале, Флорида (приём грузов) + постоянная штаб-квартира GEM LATAM в Ла-Гуайре. Единственный официальный канал: globalempowermentmission.org/donate."
     },
     "volunteerLink": "Зарегистрироваться волонтёром",
     "familySearch": {
@@ -590,7 +603,14 @@
       "title": "Генеральная лицензия OFAC 60 (США)",
       "note": "Министерство финансов США (OFAC) выпустило Генеральную лицензию 60 25 июня 2026 года, разрешающую операции, связанные с гуманитарной помощью после землетрясения в Венесуэле, несмотря на действующие санкции. Лицензия действует до 23 октября 2026 года. Источник: state.gov. Vigil не предоставляет юридических консультаций — обращайтесь к официальному источнику."
     },
-    "expiredBadge": "This promotion has ended — verify current terms at the source."
+    "expiredBadge": "This promotion has ended — verify current terms at the source.",
+    "usaDiaspora": {
+      "title": "Поддержка из США — приём GEM в Дорале",
+      "gemDoral": "Склад GEM в Дорале, Флорида, принимает пожертвования припасов для помощи Венесуэле. Уточните часы работы перед поездкой; актуальные варианты — на официальной странице пожертвований.",
+      "gemDonateCta": "Пожертвовать / припасы (GEM)",
+      "hubLink": "Открыть хаб «Поддержка США»",
+      "hoursNote": "⚠️ Часы приёма: уточняйте напрямую у GEM. Vigil не публикует неподтверждённые часы."
+    }
   },
   "crisisInfo": {
     "title": "Проверенная информация о кризисе",
@@ -1043,12 +1063,7 @@
     "dtvByEstadoTitle": "Geographic breakdown (DTV network)",
     "dtvByEstadoSource": "API field: ubicacion.estado · Desaparecidos Terremoto Venezuela network",
     "officialTitle": "Official and independent figures",
-    "officialFraming": "Official figures attributed to the issuer. Independent analysis labeled separately.",
-    "noCenter": {
-      "title": "Located without a registered center",
-      "body": "Of {total} located people in the DTV network, {count} ({pct}%) have no hospital or collection center registered. If you know where someone is, report the sighting.",
-      "cta": "Report a sighting or location"
-    }
+    "officialFraming": "Official figures attributed to the issuer. Independent analysis labeled separately."
   },
   "red": {
     "title": "Search network",
@@ -1059,7 +1074,7 @@
       "visit": "Visit platform →",
       "capabilities": {
         "federated": "✓ Active federated search",
-        "facial": "✓ Facial recognition",
+        "facial": "✓ Распознавание лиц (только на их платформе — не передаётся через федерацию)",
         "centers": "✓ Centers and hospitals",
         "refresh": "✓ Updates every 5 min"
       }
@@ -1068,8 +1083,6 @@
     "platforms": {
       "venezuelaTeBusca": "Citizen missing persons search platform for Venezuela.",
       "civisVenezuela": "Missing persons, damage maps, and supply points.",
-      "sosVenezuela2026": "Live collaborative crisis mapping.",
-      "redVenezuelaActiva": "Volunteer coordination.",
       "desaparecidosTerremoto": "Large earthquake missing persons registry — verified public data.",
       "redQuipu": "Community aid and crisis coordination network.",
       "mapaDanosVenezuela": "Collaborative damage and infrastructure map.",

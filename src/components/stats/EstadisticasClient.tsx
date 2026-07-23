@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { ExternalLink } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
@@ -28,8 +27,6 @@ interface DtvMetricsResponse {
   totalPersonas: number
   sinContacto: number
   localizados: number
-  localizadosSinCentro: number
-  localizadosConCentro: number
   totalCentros: number
   totalHospitales: number
   totalCentrosAcopio: number
@@ -49,6 +46,7 @@ export function EstadisticasClient() {
   const [loading, setLoading] = useState(true)
   const [vigilTotal, setVigilTotal] = useState(0)
   const [dtvMetrics, setDtvMetrics] = useState<DtvMetricsResponse | null>(null)
+  const [dtvLoading, setDtvLoading] = useState(true)
   const [figures, setFigures] = useState<SourcedFigureRow[]>([])
   const [locale, setLocale] = useState('es')
 
@@ -71,6 +69,7 @@ export function EstadisticasClient() {
       .catch(() => {
         /* graceful fallback */
       })
+      .finally(() => setDtvLoading(false))
 
     void fetch('/api/sourced-figures')
       .then((res) => (res.ok ? res.json() : null))
@@ -136,10 +135,6 @@ export function EstadisticasClient() {
 
   const maxMissing = Math.max(...counts.map((c) => c.missing), 1)
   const numberLocale = locale === 'es' ? 'es-VE' : locale === 'en' ? 'en-US' : locale
-  const sinCentroPct =
-    dtvMetrics && dtvMetrics.localizados > 0
-      ? Math.round((dtvMetrics.localizadosSinCentro / dtvMetrics.localizados) * 100)
-      : 0
 
   return (
     <div className="mx-auto max-w-2xl p-4 pb-24">
@@ -166,6 +161,16 @@ export function EstadisticasClient() {
           </p>
           <p className="mt-2 text-[13px] text-status-unverified">{t('network.attributionPermanent')}</p>
         </div>
+
+        {/* Loading must read as loading — never as the unavailable state (75 §1c). */}
+        {dtvLoading && (
+          <div className="grid gap-3 sm:grid-cols-2" aria-hidden>
+            <div className="skeleton h-[104px] rounded-card" />
+            <div className="skeleton h-[104px] rounded-card" />
+            <div className="skeleton h-[104px] rounded-card" />
+            <div className="skeleton h-[104px] rounded-card" />
+          </div>
+        )}
 
         <div className="grid gap-3 sm:grid-cols-2">
           {dtvMetrics?.available && (dtvMetrics.totalPersonas ?? 0) > 0 && (
@@ -229,30 +234,14 @@ export function EstadisticasClient() {
             {t('network.attribution', { source: dtvMetrics.source })}
           </p>
         )}
-        {!dtvMetrics?.available && (
+        {!dtvLoading && !dtvMetrics?.available && (
           <p className="mt-3 text-[13px] text-vigil-muted">{t('network.dtvUnavailable')}</p>
         )}
       </section>
 
-      {dtvMetrics?.available && (dtvMetrics.localizadosSinCentro ?? 0) > 0 && (
-        <section className="mt-8 rounded-card border border-status-unverified bg-status-unverified-bg p-4">
-          <h2 className="text-[20px] font-semibold text-vigil-ink">{t('noCenter.title')}</h2>
-          <p className="mt-2 text-[16px] text-vigil-body">
-            {t('noCenter.body', {
-              count: dtvMetrics.localizadosSinCentro.toLocaleString(numberLocale),
-              pct: sinCentroPct,
-              total: dtvMetrics.localizados.toLocaleString(numberLocale),
-            })}
-          </p>
-          <p className="mt-2 text-[13px] text-vigil-muted">{t('network.attributionPermanent')}</p>
-          <Link
-            href="/reportar"
-            className="mt-4 inline-flex min-h-[44px] items-center rounded-input bg-vigil-blue px-4 text-[16px] font-medium text-white"
-          >
-            {t('noCenter.cta')}
-          </Link>
-        </section>
-      )}
+      {/* "Localizados sin centro" panel removed 2026-07-22 (75 §1d): the DTV
+          `centro` field is universally null — an unpopulated column, not a
+          finding. Do not rebuild a figure or CTA on top of it. */}
 
       {dtvMetrics?.available && (dtvMetrics.byEstado?.length ?? 0) > 0 && (
         <section className="mt-10">

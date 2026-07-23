@@ -30,15 +30,31 @@ export interface ViewModeDefinition {
   helpSectionId: string
 }
 
+// /donaciones is RETIRED from every mode list (75 §3). This is a compliance
+// position, not a UX call: YouTheWave Inc. is not incorporated, holds no
+// 501(c)(3) determination and no FDACS charitable solicitation registration.
+// The route file remains as a redirect to /como-ayudar. Do not re-wire it into
+// navigation or any mode list without BOTH incorporation and FDACS registration.
+//
+// /noticias is likewise a redirect (→ /informacion) and appears in no list.
+
 export const VIEW_MODES: ViewModeDefinition[] = [
   {
     id: 'busco_a_alguien',
-    routes: ['/buscar', '/reportar', '/red', '/estadisticas'],
+    routes: ['/buscar', '/reportar', '/mis-reportes', '/red', '/estadisticas'],
     helpSectionId: 'personas-desaparecidas',
   },
   {
     id: 'necesito_ayuda',
-    routes: ['/necesito-ayuda', '/reportar', '/conectividad', '/informacion', '/'],
+    routes: [
+      '/necesito-ayuda',
+      '/reportar',
+      '/mis-reportes',
+      '/conectividad',
+      '/servicios',
+      '/informacion',
+      '/',
+    ],
     helpSectionId: 'mapa-necesidades',
   },
   {
@@ -48,25 +64,35 @@ export const VIEW_MODES: ViewModeDefinition[] = [
       '/intercambio',
       '/evaluacion-estructural',
       '/punto-de-acopio',
-      '/donaciones',
       '/como-ayudar',
       '/calendario',
     ],
     helpSectionId: 'voluntarios-intercambio',
   },
   {
+    // Orgs are the audience for the wall, the statistics page, and the
+    // collection-point registry (they hold coverage-transition authority in
+    // the upcoming needs-lifecycle work) — 75 §4.
     id: 'soy_organizacion',
-    routes: ['/organizaciones', '/intercambio', '/calendario', '/donaciones', '/red'],
+    routes: [
+      '/organizaciones',
+      '/intercambio',
+      '/calendario',
+      '/red',
+      '/muro',
+      '/estadisticas',
+      '/punto-de-acopio',
+    ],
     helpSectionId: 'donaciones-organizaciones',
   },
   {
     id: 'equipo_rescate',
-    routes: ['/', '/equipo-activo', '/conectividad', '/necesito-ayuda', '/informacion'],
+    routes: ['/', '/equipo-activo', '/conectividad', '/necesito-ayuda', '/informacion', '/amenazas'],
     helpSectionId: 'mapa-necesidades',
   },
   {
     id: 'solo_informacion',
-    routes: ['/informacion', '/noticias', '/estadisticas', '/red', '/muro', '/calendario'],
+    routes: ['/informacion', '/estadisticas', '/red', '/muro', '/calendario', '/amenazas'],
     helpSectionId: 'conectividad-infraestructura',
   },
 ]

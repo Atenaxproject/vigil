@@ -56,8 +56,6 @@ export function RedNetworkClient() {
             const descriptionKey = `platforms.${slug}` as
               | 'platforms.venezuelaTeBusca'
               | 'platforms.civisVenezuela'
-              | 'platforms.sosVenezuela2026'
-              | 'platforms.redVenezuelaActiva'
               | 'platforms.desaparecidosTerremoto'
               | 'platforms.redQuipu'
               | 'platforms.mapaDanosVenezuela'

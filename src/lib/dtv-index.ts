@@ -17,8 +17,16 @@ const DTV_KEY = process.env.DTV_API_KEY
 
 const INDEX_TTL_MS = 30 * 60 * 1000
 const PAGE_REVALIDATE_SECONDS = 1800 // page fetches shared via Vercel data cache
-const PAGE_LIMIT = '100'
-const MAX_PAGES = 250
+// DTV clamps limit at 200 server-side (verified 2026-07-22: limit=1000 → 200 returned).
+const PAGE_LIMIT = '200'
+// Capacity ceiling, not an expected size. DTV reported ~44k unique persons at
+// 2026-07-22; 400 × 200 = 80k headroom. A walk that ends here is CAPPED and the
+// index must say so — publishing a capped length as a total is how the
+// "25.000 personas" defect shipped (75 §1).
+const MAX_PAGES = 400
+// Soft wall-clock budget for one walk. Past it the walk stops and the index is
+// marked partial rather than risking the lambda timeout publishing nothing.
+const WALK_BUDGET_MS = 45_000
 
 interface IndexedPersona extends DTVPersona {
   /** Pre-normalized (lowercase, diacritics stripped) name for matching. */
@@ -28,7 +36,11 @@ interface IndexedPersona extends DTVPersona {
 interface PersonaIndex {
   builtAt: number
   personas: IndexedPersona[]
-  /** True if the pagination walk hit a rate limit and the index is partial. */
+  /**
+   * True whenever the walk did NOT reach the end of the dataset — rate limit,
+   * fetch failure, page cap, or time budget. A partial index is fine for search
+   * (best-effort, labeled) and NEVER fine for aggregate statistics.
+   */
   partial: boolean
 }
 
@@ -69,6 +81,7 @@ async function fetchPage(cursor?: string, retryOn429 = true): Promise<Record<str
 
 async function buildIndex(): Promise<PersonaIndex> {
   const personas: IndexedPersona[] = []
+  const startedAt = Date.now()
   let cursor: string | undefined
   let pages = 0
   let partial = false
@@ -76,7 +89,7 @@ async function buildIndex(): Promise<PersonaIndex> {
   do {
     const data = await fetchPage(cursor)
     if (!data) {
-      partial = personas.length > 0
+      partial = true
       break
     }
 
@@ -89,9 +102,23 @@ async function buildIndex(): Promise<PersonaIndex> {
 
     const pagination = (data.pagination ?? {}) as Record<string, unknown>
     cursor = typeof pagination.nextCursor === 'string' ? pagination.nextCursor : undefined
-    if (pagination.hasMore === false) break
+    if (pagination.hasMore === false) {
+      cursor = undefined
+      break
+    }
     pages++
-  } while (cursor && pages < MAX_PAGES)
+
+    if (cursor && pages >= MAX_PAGES) {
+      console.warn(`DTV index walk capped at ${MAX_PAGES} pages (${personas.length} records) — index marked partial`)
+      partial = true
+      break
+    }
+    if (cursor && Date.now() - startedAt > WALK_BUDGET_MS) {
+      console.warn(`DTV index walk hit ${WALK_BUDGET_MS}ms budget at ${personas.length} records — index marked partial`)
+      partial = true
+      break
+    }
+  } while (cursor)
 
   return { builtAt: Date.now(), personas, partial }
 }
@@ -181,23 +208,31 @@ export interface DTVPersonaStats {
   totalPersonas: number
   sinContacto: number
   localizados: number
-  localizadosSinCentro: number
-  localizadosConCentro: number
   byEstado: { estado: string; count: number; percent: number }[]
   partial: boolean
+  /** Set when figures were withheld; the UI must render the unavailable state, never a number. */
+  suppressedReason?: 'partial_walk' | 'suspect_round_total'
 }
+
+// NOTE on centro/hospital (75 §1d): the API `centro` field exists in the schema
+// but is universally null — 0 of 200 sampled `estado=localizado` records carried
+// a value (verified 2026-07-22). DTV does not populate it. Aggregates derived
+// from it (localizadosSinCentro et al.) were removed; do not reintroduce a
+// user-facing figure on top of an unpopulated column.
 
 /**
  * Aggregate person-search figures from the federated /personas index.
  * Labels must follow API field semantics (see provenance.ts DTV_FIELD_MAPPING_DOC).
+ *
+ * Integrity rule (75 §1): aggregates are published ONLY from a complete
+ * enumeration. A partial/capped walk suppresses every figure — a plausible
+ * wrong total attributed to a federation partner is worse than none.
  */
 export async function getDTVPersonaStats(): Promise<DTVPersonaStats> {
   const empty: DTVPersonaStats = {
     totalPersonas: 0,
     sinContacto: 0,
     localizados: 0,
-    localizadosSinCentro: 0,
-    localizadosConCentro: 0,
     byEstado: [],
     partial: false,
   }
@@ -205,17 +240,18 @@ export async function getDTVPersonaStats(): Promise<DTVPersonaStats> {
   const index = await getIndex()
   if (!index || index.personas.length === 0) return empty
 
+  if (index.partial) {
+    console.warn(
+      `DTV stats suppressed: index is partial (${index.personas.length} records walked, end of dataset not reached)`
+    )
+    return { ...empty, partial: true, suppressedReason: 'partial_walk' }
+  }
+
   let localizados = 0
-  let localizadosSinCentro = 0
-  let localizadosConCentro = 0
   const geoCounts = new Map<string, number>()
 
   for (const p of index.personas) {
-    if (p.localizado || p.estado === 'localizado') {
-      localizados++
-      if (p.has_centro) localizadosConCentro++
-      else localizadosSinCentro++
-    }
+    if (p.localizado || p.estado === 'localizado') localizados++
 
     const geo = p.estado_geo?.trim() || 'Sin estado asignado'
     geoCounts.set(geo, (geoCounts.get(geo) ?? 0) + 1)
@@ -223,6 +259,16 @@ export async function getDTVPersonaStats(): Promise<DTVPersonaStats> {
 
   const total = index.personas.length
   const sinContacto = total - localizados
+
+  // Guard (75 §1): an exact round total is the signature of a fetch cap, not a
+  // dataset (sinContacto is derived from total, so the sub-figures always sum —
+  // the round total itself is the tell). Suppress and warn; a real count lands
+  // here at most once per thousand records and heals on the next walk.
+  if (total > 0 && total % 1000 === 0) {
+    console.warn(`DTV stats suppressed: suspect round total ${total} — verify the walk is truly complete`)
+    return { ...empty, partial: index.partial, suppressedReason: 'suspect_round_total' }
+  }
+
   const byEstado = Array.from(geoCounts.entries())
     .map(([estado, count]) => ({
       estado,
@@ -235,8 +281,6 @@ export async function getDTVPersonaStats(): Promise<DTVPersonaStats> {
     totalPersonas: total,
     sinContacto,
     localizados,
-    localizadosSinCentro,
-    localizadosConCentro,
     byEstado,
     partial: index.partial,
   }

@@ -52,18 +52,10 @@ export const CRISIS_CONFIG = {
       type: 'sister-platform' as const,
       slug: 'civisVenezuela' as const,
     },
-    {
-      name: 'SOS Venezuela 2026',
-      url: 'https://sosvenezuela2026.com',
-      type: 'sister-platform' as const,
-      slug: 'sosVenezuela2026' as const,
-    },
-    {
-      name: 'Red Venezuela Activa',
-      url: 'https://redvenezuelaactiva.com',
-      type: 'sister-platform' as const,
-      slug: 'redVenezuelaActiva' as const,
-    },
+    // Retired 2026-07-22 (74 Part D link check): domains no longer resolve.
+    // Restore only after verifying the platform is live again.
+    //   SOS Venezuela 2026 — https://sosvenezuela2026.com (DNS NXDOMAIN)
+    //   Red Venezuela Activa — https://redvenezuelaactiva.com (DNS NXDOMAIN)
     {
       name: 'Desaparecidos Terremoto Venezuela',
       url: 'https://desaparecidosterremotovenezuela.com',
