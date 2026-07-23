@@ -150,6 +150,35 @@ Not background work. This is the file every Cursor session reads. It currently d
 
 Also complete **74 Part A3**: `VIGIL-LAUNCH-READINESS.md` §2.1 still says `[SHIPPED]` above a contradictory "currently displays 0/0" paragraph. Third documented drift in that file. Status markers in that document come from execution reports only.
 
+### README claim audit
+
+`README.md` is the public front door — the file DTV, journalists, Cloudflare, and any prospective deployer read first. It carries the same staleness risk as `CLAUDE.md` and has not been audited. Check and correct every factual claim:
+
+- **Any hardcoded DTV figure.** The number has moved 55,000+ → 44,295 → 25,000 across a few weeks, and §1 shows the current one is probably a fetch cap. The README must either omit network totals entirely or state them with an explicit as-of date and attribution to DTV. Prefer omitting — link to `/estadisticas` instead of duplicating a moving number into a file nobody remembers to update.
+- **Route and feature counts.** Verify against the actual route inventory from prompt 66.
+- **Model references.** Confirm the stated Claude model matches what is deployed.
+- **Feature list.** Must include what shipped since the README was last touched: `/prensa`, `/monitor`, PFIF endpoint, contested-figures policy, 8 locales, accessibility toggles. Must exclude anything retired — `/donaciones` per §3.
+- **No facial-recognition claim.** AI text description of features, not biometrics.
+- **Deployment instructions** must actually work from a clean clone. If they don't, fix them — this is the single most load-bearing claim in the entire open-source positioning.
+
+---
+
+## §10 — RELEASE ASSET PREP
+
+Repo currently shows "No releases published." Orlando will cut the release; prepare the asset.
+
+Assemble `vigil-deployment-kit.zip` for upload to a tagged release:
+
+- `crisis.config.ts` template with every deployment-specific value documented inline
+- Deployment playbook (from `docs/`)
+- Supabase schema + migrations
+- Locale file structure with a note on which strings are `critical: true` and require human review before any deployment goes live
+- `.env.example`
+
+**Why an uploaded asset and not the auto-generated source zip:** GitHub reports `download_count` for assets you upload, and reports nothing for the auto-generated "Source code (zip)". This converts an untrackable download into a measurable one — and it hands a responder in another country the thing they actually need instead of a raw source tree.
+
+Do not include: secrets, Venezuela-specific seed data, or anything under `vigil-backups`.
+
 ---
 
 ## §8 — CIVIS FINDINGS: WHAT WE'RE TAKING AND WHAT WE'RE NOT

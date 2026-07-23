@@ -784,16 +784,6 @@
       "airport": "Aeropuerto",
       "telecom": "Telecomunicaciones",
       "fuel": "Combustible"
-    },
-    "dtvNetwork": {
-      "title": "Red de plataformas hermanas · Datos combinados",
-      "badge": "Integración activa",
-      "personas": "Personas reportadas (DTV)",
-      "centros": "Centros de acopio (DTV)",
-      "listas": "Listas activas (DTV)",
-      "attribution": "Datos de DTV · fuente desaparecidosterremotovenezuela.com",
-      "unavailable": "Métricas de DTV no disponibles en este momento.",
-      "viewPlatform": "Ver Desaparecidos Terremoto Venezuela"
     }
   },
   "assistant": {

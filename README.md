@@ -19,7 +19,8 @@ A unified, open-source humanitarian crisis platform — real-time missing person
 
 <br />
 
-![Next.js 14](https://img.shields.io/badge/Next.js-14-0F172A?logo=next.js&logoColor=white)
+![Next.js 15](https://img.shields.io/badge/Next.js-15-0F172A?logo=next.js&logoColor=white)
+![React 19](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-Realtime-3ECF8E?logo=supabase&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-Offline--ready-2563EB)
@@ -67,6 +68,8 @@ One config file change redeploys the whole platform for **any country, any disas
 - Results from both platforms shown side by side with clear source attribution
 - Photo-based search: upload a photo, Claude Vision analyzes features, matched against both databases — no biometric data stored
 - Geographic filters: estado, municipio, parroquia across all 24 Venezuelan states
+- Zero-result recovery: a careful three-action state (widen the search, create a report, check sister platforms) instead of a dead end — never a rendered "0"
+- DTV referral awareness: visitors arriving from Desaparecidos Terremoto Venezuela get a contextual orientation, detected client-side only and never persisted or logged
 - PFIF 1.4 compatible — interoperable with Google Person Finder
 - Real-time updates across all open browser tabs (Supabase Realtime)
 
@@ -104,7 +107,7 @@ Production captures from [vigil.youthewave.org](https://vigil.youthewave.org). R
 
 ## What's live now
 
-Verified against source and production as of **2026-07-03**. Optional integrations degrade gracefully when API keys are missing — they never crash the app.
+Verified against source and production as of **2026-07-23**. Optional integrations degrade gracefully when API keys are missing — they never crash the app.
 
 ### Core crisis tools
 
@@ -113,7 +116,8 @@ Verified against source and production as of **2026-07-03**. Optional integratio
 | **Missing persons board** | `/buscar`, `/reportar` | Realtime feed on home; estado/municipio/parroquia on report form; state filter chips on search |
 | **Photo search (AI vision)** | `/buscar` | Claude Vision describes traits, matches public records — no biometric storage; needs `ANTHROPIC_API_KEY` |
 | **Claude AI assistant** | all pages (widget) | Live-data Q&A in 8 languages; streams from `/api/assistant`; degrades gracefully without API key |
-| **Statistics by state** | `/estadisticas` | Real-time missing/found-alive counts per estado |
+| **Statistics by state** | `/estadisticas` | Vigil's own missing/found-alive counts per estado (Supabase Realtime); federated DTV figures shown only when a complete enumeration is available, suppressed otherwise |
+| **Contested figures** | `/estadisticas` | Official casualty figures published with issuer attribution and independent counterpoints (Provea, USGS PAGER, UN, academic) stacked beneath — never averaged into one number |
 | **Person detail + public notes** | `/buscar/[id]` | Sightings thread; privacy-preserving contact flow |
 | **PFIF export** | `/api/pfif` | [Google Person Finder](https://github.com/google/personfinder) XML interoperability |
 | **Claim-token inbox** | `/mi-reporte/[token]`, `/mi-intercambio/[token]` | Passwordless management; claim URL on submit |
@@ -131,17 +135,18 @@ Verified against source and production as of **2026-07-03**. Optional integratio
 
 | Feature | Route | Notes |
 |---|---|---|
-| **Live information hub** | `/informacion` | USGS significant quakes, ReliefWeb, manual stats, infrastructure status |
-| **Official updates** | `/noticias` | ReliefWeb feed (no API key) |
+| **Live information hub** | `/informacion` | USGS significant quakes, GDACS alerts, manual stats, infrastructure status, emergency directory |
+| **Press kit** | `/prensa` | Boilerplate, provenance fact sheet, downloadable ZIP (markdown + design-system PDFs) |
+| **Operator hazard monitor** | `/monitor` | Global early-warning relay (USGS/GDACS/hazards) with DB-level kill switch; URL-reachable only, intentionally not in public nav pending FIRMS/GDACS redistribution confirmation |
 | **Events calendar** | `/calendario` | Category filters, Venezuela timezone labels |
 | **Rescuer field presence** | `/equipo-activo` | Check-in, SOS, 4-hour auto-expire, map layer |
-| **How to help** | `/como-ayudar` | 26 verified donation orgs from production seed |
-| **Partner links** | `/organizaciones` | Curated NGOs from `crisis.config.ts` |
+| **How to help** | `/como-ayudar` | Curated, source-dated donation organizations; overseas-logistics honesty guidance |
+| **Partner links** | `/organizaciones` | Verified NGO directory (admin-approved), sourced from the production `organizations` table |
 | **Weather & time bar** | all pages | Open-Meteo below emergency banner (no API key) |
 
 ### Trust, access & resilience
 
-- 🚨 **Emergency banner** — Always-visible hotline ([former rescue-coordination label]), Intérpretes, Cruz Roja. Government-operated intake tools intentionally excluded.
+- 🚨 **Emergency banner** — Always-visible **911** call button plus verified carrier access codes (Movistar 911 / \*1, Digitel 112 / \*112, Movilnet \*1 / \*911, Cantv 171) and a full emergency directory sheet. Government-operated intake tools intentionally excluded.
 - 📬 **Official contact** — `vigil@youthewave.org`, `vigil.support@youthewave.org`, and `support@youthewave.org` via Cloudflare Email Routing.
 - 💬 **Feedback widget** — Floating support button on all pages; admin review at `/admin/feedback`.
 - 🔐 **Admin auth** — Supabase OTP + `VIGIL_ADMIN_EMAILS` allowlist.
@@ -152,7 +157,9 @@ Verified against source and production as of **2026-07-03**. Optional integratio
 
 ### Desktop UX & accessibility
 
+- **Global accessibility controls** — Header type-scale toggle (**A / A+ / A++**) and high-contrast mode, available from every page; preference persisted.
 - **Collapsible sidebar** — `lg+` toggles between **280px** (icon + label) and **64px** (icon-only); preference in `localStorage`.
+- **View-mode navigation** — Six audience modes filter the sidebar and mobile bar; the menu sheet always exposes the full site, labeled as such, with the active mode's group pinned first.
 - **Skip-to-content link** — First focusable element; targets `#main-content`.
 - **WCAG AA type scale** — 16px body floor, contrast-safe muted tokens.
 - **Map accessible list** — Collapsible “Ver como lista” text alternative for map markers.
@@ -179,7 +186,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ### ✅ Live Now
 
-- **Federated missing persons search** — Vigil DB + a cached DTV index (~12,000 records via their public API), accent-insensitive ranked name matching
+- **Federated missing persons search** — Vigil DB + a cached, short-lived DTV index queried in real time, accent-insensitive ranked name matching (no network-wide total is published — see [Data Partnership](#data-partnership))
 - **Photo-based search** — Claude Vision analysis + DTV facial recognition
 - **Claude AI assistant** — live database Q&A in 8 languages, never invents information
 - **Crisis map** — USGS aftershocks (source-labeled), GDACS alerts, needs, resources, shelters, hospitals, rescue zones, collection points (including DTV-sourced centers); **USA diaspora hub** at `/apoyo-usa` (South Florida, separate `region_scope`)
@@ -187,19 +194,19 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Rescuer safety system** — GPS check-in, 4-hour auto-expiry, SOS button
 - **Resource exchange (Intercambio)** — 7 categories, claim-token, 7-day auto-expiry
 - **Volunteer registry** — skills-based, public directory (name privacy protected)
-- **Organization directory** — 26 verified NGOs seeded (including Hogar Bambi Venezuela, child protection), admin approval gate
+- **Organization directory** — verified NGOs from the production seed (including Hogar Bambi Venezuela child protection, GEM, and We Love Foundation), admin approval gate
 - **Property safety assessment** — `/evaluacion-estructural`, ATC-20 green/yellow/red tagging, volunteer-assigned (structural_engineer/architect/surveyor), never AI-assigned, ToS §4 liability language
 - **Events calendar** — donation drives, meetups, distributions, memorials
 - **Citizen collection point registry** — self-registration, map display
 - **Community wall (Muro)** — append-only, categorized, rate-limited
-- **Real-time information hub** — USGS, GDACS, ReliefWeb, Venezuelan news RSS
+- **Real-time information hub** — USGS, GDACS, Venezuelan news RSS (ReliefWeb feed temporarily offline — see note under In Progress)
 - **Infrastructure status tracker** — electricity, water, roads, airport (admin-editable)
 - **Feedback system** — floating widget, admin-only access
 - **8-language interface** — ES/EN handcrafted, PT/FR/IT/ZH/DE/RU generated
 - **PWA** — 2G-optimized, offline form queue, iOS/Android install support
 - **Hourly duplicate detection** — Claude Haiku cron, flags to moderation queue
 - **PFIF 1.4 endpoint** — `/api/pfif`, Google Person Finder compatible
-- **Sister platform network** — 8 citizen platforms linked at `/red`
+- **Sister platform network** — 12 citizen platforms linked at `/red`
 - **DTV active integration** — Desaparecidos Terremoto Venezuela federated API (live when `DTV_API_KEY` configured)
 - **Social share images** — Open Graph + Twitter Card auto-generated
 - **Geographic breakdown** — estado/municipio/parroquia across 24 Venezuelan states
@@ -207,18 +214,17 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ### 🔧 In Progress
 
+- **ReliefWeb v2 migration** — the public ReliefWeb `v1` API was decommissioned (returns HTTP 410); the feed reads empty and degrades gracefully. Migration to `v2` (new response envelope) is pending.
 - WhatsApp intake via Make.com (code ready, scenario not built)
 - Telegram bot (TELEGRAM_BOT_TOKEN needed)
 - Resend email notifications (RESEND_API_KEY needed)
 - Vercel AI Gateway (cost observability optimization)
-- DTV statistics widget on `/estadisticas` (API integration, UI in progress)
-
 - Vigil Hurricane (Florida) archetype — diaspora hub's `region_scope` + bounds pattern is designed for reuse
 
 ### 🔜 Coming Soon
 
 - Voice intake via OpenAI Whisper (field accessibility)
-- PFIF bidirectional sync with DTV (partnership in validation)
+- PFIF bidirectional sync with DTV (proposed — not yet agreed)
 - Vigil Field variant (specialized for rescue teams, in design phase)
 - Vigil Family variant (specialized for victims/families, in design phase)
 - Vigil Command variant (organizational coordinators, planned)
@@ -233,17 +239,22 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 Vigil links honestly to every citizen-run platform responding to this crisis.
 If you don't find someone here, check these too:
 
+The 12 platforms below are the sister platforms carried in `crisis.config.ts` and shown on [`/red`](https://vigil.youthewave.org/red). Desaparecidos Terremoto Venezuela is the federated integration partner; the rest are honest outbound links.
+
 | Platform | Focus |
 |---|---|
-| [Desaparecidos Terremoto Venezuela](https://desaparecidosterremotovenezuela.com) | Missing persons, facial recognition, geographic breakdown |
+| [Desaparecidos Terremoto Venezuela](https://desaparecidosterremotovenezuela.com) | Missing persons, facial recognition, geographic breakdown — **federated integration partner** |
 | [Venezuela Te Busca](https://venezuelatebusca.com) | Missing persons search and resources |
-| [CIVIS Venezuela](https://civisvenezuela.com) | Missing persons, damage maps, supply points |
-| [SOS Venezuela 2026](https://sosvenezuela2026.com) | Live collaborative crisis mapping |
-| [Red Venezuela Activa](https://redvenezuelaactiva.com) | Volunteer coordination |
-| [Mapa de Daños Venezuela](https://terremotovenezuela.com) | Structural damage mapping |
+| [CIVIS Venezuela](https://civisvenezuela.com) | Missing persons, damage maps, supply points, service status |
 | [RedQuipu](https://redquipu.com) | Multi-organization coordination |
-| [Encuéntrame VZLA](https://encuentramevzla.com) | Hospital admissions locator (distinct from general missing-persons search) |
+| [Mapa de Daños Venezuela](https://terremotovenezuela.com) | Structural damage mapping |
 | [Mapa de Necesidades VZLA](https://mapadenecesidadesvzla.com/) | Zone-based live needs map (critical/partial/covered) |
+| [Encuéntrame VZLA](https://encuentramevzla.com) | Hospital admissions locator (distinct from general missing-persons search) |
+| [Venezuela Earthquake Map](https://venezuela-earthquake-map.vercel.app) | Crisis mapping |
+| [Yummy SOS](https://sos.yummyrides.com) | Rides and logistics SOS |
+| [Centros de Ayuda Venezuela](https://centrosayudavenezuela.org) | Diaspora collection points |
+| [Ayuda Venezuela](https://ayudavenezuela.app) | Aid coordination |
+| [Tiltely Venezuela](https://venezuela.tiltely.com) | Fundraising / donations |
 
 ---
 
@@ -261,11 +272,11 @@ If you don't find someone here, check these too:
 
 ## Tech stack
 
-**Frontend:** Next.js 14 App Router · Tailwind CSS · next-intl (8 languages) · PWA (next-pwa)
+**Frontend:** Next.js 15 App Router · React 19 · Tailwind CSS · next-intl (8 languages) · PWA (@ducanh2912/next-pwa)
 
 **Database:** Supabase (Postgres + Realtime + RLS) · PFIF 1.4 schema
 
-**AI:** Claude Sonnet 4.6 (vision + photo search) · Claude Haiku 3.5 (assistant + dedup)
+**AI:** Claude Sonnet 4.6 (vision + photo search) · Claude Haiku 4.5 (assistant + dedup + property triage), all metered through a spend-aware circuit breaker
 
 **Map:** Leaflet.js + OpenStreetMap · Supabase Realtime subscriptions
 
@@ -280,18 +291,26 @@ Desaparecidos Terremoto Venezuela API (federated search + centers)
 
 ## Data Partnership
 
-Vigil integrates with **[Desaparecidos Terremoto Venezuela](https://desaparecidosterremotovenezuela.com)**
-as a registered integrator. Their platform reports 55,000+ total citizen
-reports; their public API currently exposes ~12,000 person records, all of
-which are searchable through Vigil's federated search — results appear
-alongside Vigil's own records with full source attribution and a direct link
-back to their platform.
+Vigil federates with **[Desaparecidos Terremoto Venezuela](https://desaparecidosterremotovenezuela.com)**
+as a registered integrator. Their records are searchable through Vigil alongside
+Vigil's own, with full source attribution and a direct link back to their
+platform.
 
-**Integration approach:** nothing is stored in Vigil's database. Because the
-DTV API has no server-side search, Vigil keeps a short-lived in-memory index
-(refreshed at most every 30 minutes) and runs accent-insensitive ranked name
-matching against it. Their facial recognition endpoint powers Vigil's photo
-search.
+**Vigil does not publish a total record count for the DTV network.** Their
+public API exposes no count endpoint, so any total derived by paginating would
+be a partial walk rather than a count — and publishing that as a network total
+would misrepresent their data. Current figures live on their platform.
+
+**Integration approach:** nothing is stored in Vigil's database. Because the DTV
+API has no server-side search, Vigil keeps a short-lived in-memory name index
+(30-minute TTL) and runs accent-insensitive ranked matching against it;
+federated aggregate figures shown on `/estadisticas` are cached separately (~5
+minutes) and suppressed entirely unless a complete enumeration is available.
+
+**Biometrics stay on their side of the boundary.** DTV's facial-recognition
+endpoint powers Vigil's photo search, but **no biometric data is ever stored by
+Vigil and none crosses the federation boundary** — Vigil's own contribution is
+Claude Vision *text description* of features, not biometric matching.
 
 This partnership is part of Vigil's commitment to building a network,
 not competing with the other citizen platforms serving the same families.
@@ -369,4 +388,8 @@ For the people of Venezuela. For anyone who needs it next.
 
 ## License
 
-**MIT License** — Free to use, modify, and deploy for humanitarian purposes. Commercial use of the data is prohibited. See [Terms](https://vigil.youthewave.org/terminos).
+**Code: MIT License.** Free to use, modify, fork, and deploy — commercially or otherwise, for any purpose. See [LICENSE](./LICENSE).
+
+**Data: not covered by the MIT license.** Records submitted to a Vigil deployment by the people it serves are governed by that deployment's Terms of Service and Privacy Policy. Nothing in the MIT license grants rights to personal data held in any Vigil instance. Scraping and commercial use of platform data are prohibited under the [Terms](https://vigil.youthewave.org/terminos).
+
+**Federated data** from partner platforms remains theirs. Attribution and usage terms follow the originating platform.
