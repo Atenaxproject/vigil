@@ -22,6 +22,9 @@ const schema = z.object({
   verification_url: z.string().url().max(500).optional().or(z.literal('')),
   credential_note: z.string().max(300).optional(),
   public_display: z.boolean().default(true),
+  // Age gate enforced server-side (76 §9): a client checkbox alone is bypassable
+  // by a direct POST. Volunteers must attest they are adults.
+  age_attestation: z.literal(true),
 })
 
 export async function POST(request: NextRequest) {

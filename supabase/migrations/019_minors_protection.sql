@@ -56,7 +56,10 @@ SELECT
   CASE WHEN is_minor THEN NULL ELSE approx_last_seen_lng END AS approx_last_seen_lng,
   last_seen_at,
   status,
-  notes,
+  -- Free-text notes are unbounded like last_seen_location and can carry a
+  -- street, school, or shelter — locating info. Null for minors too, or the
+  -- structured reduction is defeated through this field.
+  CASE WHEN is_minor THEN NULL ELSE notes END AS notes,
   source,
   verified,
   created_at,
