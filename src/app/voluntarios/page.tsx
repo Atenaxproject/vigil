@@ -118,6 +118,7 @@ export default function VoluntariosPage() {
       verification_url: (form.get('verification_url') as string) || undefined,
       credential_note: (form.get('credential_note') as string) || undefined,
       public_display: form.get('public_display') !== 'off',
+      age_attestation: form.get('age_attestation') === 'on',
     }
 
     try {
