@@ -29,8 +29,8 @@ export default async function ProteccionDeMenoresPage() {
       </p>
 
       <div className="mt-8 space-y-8">
-        {sections.map((s) => (
-          <section key={s.title}>
+        {sections.map((s, i) => (
+          <section key={i}>
             <h2 className="text-[20px] font-semibold text-vigil-ink">{s.title}</h2>
             <p className="mt-2 whitespace-pre-line text-[16px] leading-relaxed text-vigil-body">{s.body}</p>
           </section>
