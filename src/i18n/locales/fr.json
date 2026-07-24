@@ -191,7 +191,9 @@
       "crossReport": {
         "body": "If you already reported this person on <link>Desaparecidos Terremoto Venezuela</link>, reporting here too expands their reach across the search network. If you haven't yet, we recommend reporting on both platforms.",
         "dismiss": "Dismiss notice"
-      }
+      },
+      "isMinor": "C’est un mineur",
+      "isMinorHint": "Cochez pour protéger la localisation de l’enfant. Cela ne restreint pas la recherche : nom, photo et État restent publics."
     },
     "card": {
       "lastSeen": "Dernière observation :",
@@ -364,7 +366,8 @@
       "success": "Merci. Vous serez contacté lorsqu'il y aura une correspondance.",
       "error": "L'enregistrement a échoué. Veuillez réessayer.",
       "credentialNote": "Professional credential (optional)",
-      "credentialNotePlaceholder": "E.g. license, association, registration number"
+      "credentialNotePlaceholder": "E.g. license, association, registration number",
+      "ageAttestation": "Je confirme être majeur."
     },
     "directory": {
       "directory": "Annuaire",
@@ -481,7 +484,8 @@
     "builtWith": "Construit avec Claude + Cursor",
     "notEmergency": "Vigil N'EST PAS un service d'urgence. Pour un sauvetage immédiat, appelez le {hotline}.",
     "otherRegions": "Autres régions",
-    "press": "Presse"
+    "press": "Presse",
+    "minorsProtection": "Protection des mineurs"
   },
   "exchange": {
     "title": "Échange de ressources",
@@ -991,7 +995,8 @@
       "locationPlaceholder": "Ex. : Caracas, La Guaira",
       "submit": "Publier le message",
       "success": "Message publié.",
-      "error": "Échec de la publication. Veuillez réessayer."
+      "error": "Échec de la publication. Veuillez réessayer.",
+      "minorLocationGuidance": "Par sécurité, ne publiez pas la localisation actuelle d’un mineur."
     }
   },
   "assistant": {
@@ -1072,7 +1077,8 @@
       "tiltelyVenezuela": "Search and aid coordination with safety guidance."
     },
     "reportHint": "Each report on multiple platforms expands the search network.",
-    "reportLink": "Report on Vigil"
+    "reportLink": "Report on Vigil",
+    "minorsProtectionLink": "Comment nous protégeons les informations des mineurs"
   },
   "propertyAssessment": {
     "title": "Structural Safety Assessment",
@@ -1627,5 +1633,24 @@
     "add": "Agregar",
     "emptyExplainer": "Lorsque vous déposez un signalement, une demande d'échange ou d'évaluation, il est enregistré ici sur cet appareil — sans compte — pour que vous puissiez le retrouver. Vous n'en avez encore enregistré aucun.",
     "emptyCta": "Créer un signalement"
+  },
+  "proteccionMenores": {
+    "title": "Protection des mineurs",
+    "intro": "Vigil publie un tableau public de personnes disparues qui inclut des enfants et des adolescents. Leurs informations suivent une règle claire.",
+    "principle": "Nous publions ce qui aide un inconnu à reconnaître l’enfant. Nous masquons ce qui aiderait un inconnu à l’atteindre.",
+    "publishTitle": "Ce qui est publié",
+    "publishBody": "Pour un signalement marqué comme mineur, Vigil affiche le nom, la photographie, l’âge, le sexe, l’État et la municipalité. Cela aide à reconnaître l’enfant sans révéler où le trouver.",
+    "locationTitle": "Localisation réduite",
+    "locationBody": "La précision de localisation est réduite au niveau de la municipalité sur les surfaces publiques. La paroisse, l’adresse et les coordonnées approximatives du dernier lieu vu ne sont pas publiées. La localisation précise reste dans la base de données, accessible uniquement à la personne détenant le lien de réclamation du signalement.",
+    "federationTitle": "Fédération et export",
+    "federationBody": "La même réduction s’applique à la fédération et à l’export. Les plateformes partenaires et le standard PFIF reçoivent l’ensemble réduit : données de reconnaissance et localisation au niveau municipal, jamais la localisation précise. Les signalements de mineurs restent dans l’export afin de ne pas réduire les chances de correspondance entre plateformes.",
+    "photoTitle": "Photographies",
+    "photoBody": "Vigil n’héberge pas les photographies des personnes disparues — elles sont servies depuis les plateformes d’origine (par exemple le réseau fédéré). Vigil ne peut donc pas retirer les métadonnées de ces images, qui relèvent de la responsabilité de la plateforme qui les publie à l’origine. Nous soulevons ce point directement auprès des plateformes sources.",
+    "removalTitle": "Correction ou suppression",
+    "removalBody": "Un parent ou tuteur peut demander la correction ou la suppression d’un signalement via notre canal de contact. Nous répondons sous 72 heures.",
+    "governmentTitle": "Aucune donnée au gouvernement",
+    "governmentBody": "Vigil ne partage pas les données des utilisateurs avec le gouvernement vénézuélien, ce qui inclut expressément les informations concernant les mineurs.",
+    "privacyLink": "Consultez aussi notre",
+    "privacyLinkCta": "Politique de confidentialité"
   }
 }

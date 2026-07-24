@@ -16,6 +16,7 @@ import { queueSubmission } from '@/lib/offline-queue'
 const formSchema = z.object({
   full_name: z.string().min(1, 'required').min(2, 'tooShort').max(200, 'tooLong'),
   age: z.number({ message: 'invalidAge' }).min(0, 'invalidAge').max(150, 'invalidAge').optional(),
+  is_minor: z.boolean().optional(),
   gender: z.enum(['male', 'female', 'other', 'unknown']).optional(),
   last_seen_location: z.string().min(1, 'required').min(2, 'tooShort').max(500, 'tooLong'),
   estado: z.string().min(1, 'required').min(2, 'tooShort').max(100, 'tooLong'),
@@ -188,6 +189,23 @@ export function MissingPersonForm() {
             <option value="unknown">{t('genderOptions.unknown')}</option>
           </select>
         </div>
+      </div>
+
+      {/* Minor flag (76 §6): protects the child's location, does not restrict
+          the search. Settable without an age. */}
+      <div className="rounded-card border border-slate-200 bg-vigil-cloud p-4">
+        <label htmlFor="is_minor" className="flex items-start gap-3">
+          <input
+            id="is_minor"
+            type="checkbox"
+            {...register('is_minor')}
+            className="mt-1 h-4 w-4 shrink-0"
+          />
+          <span>
+            <span className="text-[16px] font-medium text-vigil-ink">{t('isMinor')}</span>
+            <span className="mt-0.5 block text-[13px] text-vigil-muted">{t('isMinorHint')}</span>
+          </span>
+        </label>
       </div>
 
       <div>
