@@ -91,6 +91,14 @@ export function RedNetworkClient() {
           {t('reportLink')}
         </Link>
       </p>
+
+      {/* Minors-protection reciprocity (76 §7): DTV publishes an equivalent page
+          and links to Vigil. */}
+      <p className="mt-4 text-[13px] text-vigil-muted">
+        <Link href="/proteccion-de-menores" className="font-medium text-vigil-blue hover:underline">
+          {t('minorsProtectionLink')}
+        </Link>
+      </p>
     </div>
   )
 }

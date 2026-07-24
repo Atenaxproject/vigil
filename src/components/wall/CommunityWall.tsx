@@ -216,7 +216,13 @@ export function CommunityWall() {
               onChange={(e) => setLocationLabel(e.target.value)}
               placeholder={t('form.locationPlaceholder')}
               className={inputClass}
+              aria-describedby="wall-location-guidance"
             />
+            {/* Minors guidance (76 §9): append-only free text can't be filtered,
+                so guide instead. */}
+            <p id="wall-location-guidance" className="mt-1 text-[13px] text-status-unverified">
+              {t('form.minorLocationGuidance')}
+            </p>
           </div>
           <div className="mt-4 flex gap-2">
             <button

@@ -48,7 +48,12 @@ export default async function MissingPersonDetailPage({ params }: PageProps) {
           )}
           <div>
             <dt className="text-[13px] text-vigil-muted">{t('form.lastSeen')}</dt>
-            <dd>{person.last_seen_location}</dd>
+            {/* Municipio-level fallback when the free-text location is absent
+                (minor records — the view nulls it, 76 §3). */}
+            <dd>
+              {person.last_seen_location ??
+                ([person.municipio, person.estado].filter(Boolean).join(', ') || '—')}
+            </dd>
           </div>
           {person.notes && (
             <div>

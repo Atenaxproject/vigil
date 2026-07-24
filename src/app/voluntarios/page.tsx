@@ -118,6 +118,7 @@ export default function VoluntariosPage() {
       verification_url: (form.get('verification_url') as string) || undefined,
       credential_note: (form.get('credential_note') as string) || undefined,
       public_display: form.get('public_display') !== 'off',
+      age_attestation: form.get('age_attestation') === 'on',
     }
 
     try {
@@ -421,6 +422,11 @@ export default function VoluntariosPage() {
             <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             {tf('privacyNote')}
           </p>
+          {/* Age attestation (76 §9): volunteers must be adults. Required gate. */}
+          <label className="flex items-start gap-2 text-[16px]">
+            <input type="checkbox" name="age_attestation" required className="mt-1 rounded" />
+            {tf('ageAttestation')}
+          </label>
           <button
             type="submit"
             disabled={submitting}
