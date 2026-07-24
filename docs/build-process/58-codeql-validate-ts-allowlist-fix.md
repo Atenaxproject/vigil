@@ -1,4 +1,4 @@
-# 58 — Fix two CodeQL High findings in src/security/validate.ts
+# 58 — Fix two CodeQL High findings in src/lib/security/validate.ts
 
 > **Status:** ✅ Resolved. Both alerts are `fixed` on `main` (0 open
 > code-scanning alerts). This doc's requirements were checked retroactively;
@@ -7,7 +7,7 @@
 
 ## Context
 
-Two open CodeQL High alerts on `main`, both in `src/security/validate.ts` at/around
+Two open CodeQL High alerts on `main`, both in `src/lib/security/validate.ts` at/around
 line 38:
 
 - **Alert #2 — Incomplete URL scheme check.** A dangerous-scheme check is missing
@@ -23,7 +23,7 @@ free-text. An XSS bypass here is a real risk, not theoretical.
 
 ## Task — read first, then fix at the root
 
-1. **Read `src/security/validate.ts` in full** and identify:
+1. **Read `src/lib/security/validate.ts` in full** and identify:
    - What line 38 actually validates (URL scheme? HTML/text sanitization? both?)
    - Every call site of the exported functions in this file — what submitted data
      flows through here (grep for imports of the module).

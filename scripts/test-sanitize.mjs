@@ -1,6 +1,9 @@
 // Security sanitizer bypass-vector tests — run: node scripts/test-sanitize.mjs
 // No test framework dependency by design (repo convention, see test-feeds.mjs);
 // exits non-zero on failure.
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
 //
 // The two functions below MIRROR src/lib/security/validate.ts — keep them in
 // sync with that file (it can't be imported here: it pulls in the path-aliased
@@ -42,8 +45,9 @@ const check = (name, ok, detail = '') => {
 }
 
 // --- isSafeHttpUrl: allowlist must reject every non-http(s)/mailto/tel scheme,
-//     immune to case, embedded whitespace, and leading/trailing spaces
-//     (the URL parser normalizes these — the reason to parse, not regex). ---
+//     immune to case and surrounding whitespace. Surrounding whitespace is
+//     handled by the explicit url.trim(); the URL parser then normalizes case
+//     and extracts the protocol — the reason to parse rather than regex. ---
 console.log('isSafeHttpUrl — dangerous schemes rejected')
 for (const bad of [
   'JavaScript:alert(1)', // mixed case
@@ -86,6 +90,28 @@ console.log('sanitizeText — legitimate text preserved')
 check('accented name intact', sanitizeText('María José Ñáñez') === 'María José Ñáñez')
 check('address intact', sanitizeText('Calle 5 con Av. Bolívar, Caracas') === 'Calle 5 con Av. Bolívar, Caracas')
 check('whitespace collapsed + trimmed', sanitizeText('  hola   mundo  ') === 'hola mundo')
+
+// --- Drift guard: the functions above MIRROR src/lib/security/validate.ts (it
+//     can't be imported here — it loads the path-aliased crisis.config). A
+//     mirror is only trustworthy if it can't silently drift, so assert the
+//     security-critical constants in the real source still match this mirror.
+//     If production changes a regex or the allowlist, this fails loudly. ---
+const validateSrc = readFileSync(
+  join(dirname(fileURLToPath(import.meta.url)), '..', 'src', 'lib', 'security', 'validate.ts'),
+  'utf8'
+)
+console.log('drift guard — mirror matches src/lib/security/validate.ts')
+check(
+  'DANGEROUS_SCHEME regex unchanged',
+  validateSrc.includes(DANGEROUS_SCHEME.source) && validateSrc.includes(DANGEROUS_SCHEME.flags),
+  `expected /${DANGEROUS_SCHEME.source}/${DANGEROUS_SCHEME.flags}`
+)
+check('ANGLE_BRACKETS regex unchanged', validateSrc.includes(ANGLE_BRACKETS.source))
+check(
+  'URL scheme allowlist unchanged',
+  validateSrc.includes(`['http:', 'https:', 'mailto:', 'tel:']`),
+  'allowlist in validate.ts diverged from this test'
+)
 
 console.log(failures === 0 ? '\nALL PASS' : `\n${failures} FAILURE(S)`)
 process.exit(failures === 0 ? 0 : 1)
