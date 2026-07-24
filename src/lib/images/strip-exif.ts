@@ -15,9 +15,16 @@ export type UploadMime = 'image/jpeg' | 'image/png' | 'image/webp'
  */
 export async function stripExif(
   input: Buffer,
-  mime: UploadMime
+  mime: UploadMime,
+  maxDim = 3000
 ): Promise<{ buffer: Buffer; mime: UploadMime }> {
-  const pipeline = sharp(input, { failOn: 'none' }).rotate()
+  // Bound the pixel dimensions before re-encoding. Re-encoding can otherwise
+  // produce a buffer LARGER than the original (PNG especially), which would
+  // slip past the caller's byte-size validation on the original; capping
+  // dimensions bounds the output and doubles as a display-resolution ceiling.
+  const pipeline = sharp(input, { failOn: 'none' })
+    .rotate()
+    .resize({ width: maxDim, height: maxDim, fit: 'inside', withoutEnlargement: true })
   if (mime === 'image/png') {
     return { buffer: await pipeline.png().toBuffer(), mime: 'image/png' }
   }
