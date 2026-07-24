@@ -30,8 +30,14 @@ CREATE TRIGGER trg_set_is_minor
   BEFORE INSERT OR UPDATE OF age ON missing_persons
   FOR EACH ROW EXECUTE FUNCTION set_is_minor_from_age();
 
--- One-time backfill for existing rows with a known minor age.
-UPDATE missing_persons SET is_minor = true WHERE age IS NOT NULL AND age < 18;
+-- One-time backfill for existing rows with a known minor age. Disable the
+-- updated_at trigger around it so flagging a record does not bump updated_at
+-- and reorder the public feed — only is_minor is changing here. Limited to rows
+-- that still need it (idempotent).
+ALTER TABLE missing_persons DISABLE TRIGGER missing_persons_updated_at;
+UPDATE missing_persons SET is_minor = true
+  WHERE age IS NOT NULL AND age < 18 AND is_minor = false;
+ALTER TABLE missing_persons ENABLE TRIGGER missing_persons_updated_at;
 
 -- §3 / §5 — Rebuild the public view with the minor reduction.
 -- For a minor: keep name, photo, age, gender, estado, municipio (recognition).
