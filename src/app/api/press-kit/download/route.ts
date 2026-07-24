@@ -34,8 +34,10 @@ export async function GET() {
     }
   }
 
-  if (files.length === 0) {
-    return NextResponse.json({ error: 'Press kit assets unavailable' }, { status: 503 })
+  // Distribute the full kit or none — a silently partial press kit is worse than
+  // an honest 503. Each doc contributes 2 files (.md + .pdf).
+  if (files.length < KIT_DOCS.length * 2) {
+    return NextResponse.json({ error: 'Press kit assets incomplete' }, { status: 503 })
   }
 
   const zip = buildZip(files)

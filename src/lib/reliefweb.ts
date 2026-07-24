@@ -79,7 +79,11 @@ export async function getVenezuelaUpdates(limit = 10): Promise<ReliefWebReport[]
       id: item.id,
       title: item.fields.title ?? 'Sin título',
       date: item.fields.date?.created ?? '',
-      url: item.fields.url ?? item.fields.url_alias ?? '#',
+      // url_alias is a RELATIVE path (e.g. /report/...) — absolutize it so it
+      // never resolves against vigil.youthewave.org as a broken link.
+      url:
+        item.fields.url ??
+        (item.fields.url_alias ? `https://reliefweb.int${item.fields.url_alias}` : '#'),
       source: item.fields.source?.[0]?.name ?? 'ReliefWeb',
     }))
 
