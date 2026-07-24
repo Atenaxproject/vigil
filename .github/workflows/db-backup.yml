@@ -16,23 +16,32 @@ permissions:
 
 jobs:
   backup:
-    runs-on: ubuntu-latest
+    # Pinned, not ubuntu-latest: the PGDG apt suite is Ubuntu-codename-specific,
+    # so a floating runner image can outrun PGDG's published suites and break
+    # backups silently (PR #7 review).
+    runs-on: ubuntu-24.04
     steps:
       - name: Install PostgreSQL 17 client + age
         run: |
-          # Supabase runs Postgres 17; the ubuntu-latest default client is 16,
-          # and pg_dump refuses to dump from a newer server ("server version
+          # Supabase runs Postgres 17; the runner's default client is 16, and
+          # pg_dump refuses to dump from a newer server ("server version
           # mismatch"). Install the matching pg17 client from the official PGDG
           # apt repo so dumps actually succeed once the secrets are set.
           sudo apt-get update -qq
+          sudo apt-get install -y -qq curl ca-certificates
           sudo install -d /usr/share/postgresql-common/pgdg
           sudo curl -fsSL -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc \
             https://www.postgresql.org/media/keys/ACCC4CF8.asc
-          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" \
+          # Codename from /etc/os-release — lsb_release is not guaranteed present.
+          . /etc/os-release
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt ${VERSION_CODENAME}-pgdg main" \
             | sudo tee /etc/apt/sources.list.d/pgdg.list >/dev/null
           sudo apt-get update -qq
           sudo apt-get install -y -qq postgresql-client-17 age
-          pg_dump --version
+          # Invoke the versioned binary directly (P1): with both pg16 and pg17
+          # installed, pg_wrapper resolves unqualified `pg_dump` to the 16 binary,
+          # which would still hit the version mismatch. Pin the path to pg17.
+          /usr/lib/postgresql/17/bin/pg_dump --version
 
       - name: Dump database
         env:
@@ -42,7 +51,7 @@ jobs:
             echo "SUPABASE_DB_URL secret not set — see MANUAL TASKS in docs/build-process/56-security-hardening.md"
             exit 1
           fi
-          pg_dump "$SUPABASE_DB_URL" --format=custom --no-owner --file="vigil-$(date +%F).dump"
+          /usr/lib/postgresql/17/bin/pg_dump "$SUPABASE_DB_URL" --format=custom --no-owner --file="vigil-$(date +%F).dump"
 
       - name: Encrypt dump (age) and shred plaintext
         env:
