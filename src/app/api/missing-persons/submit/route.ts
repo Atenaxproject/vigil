@@ -11,6 +11,7 @@ export const dynamic = 'force-dynamic'
 const schema = z.object({
   full_name: z.string().min(2).max(200),
   age: z.number().min(0).max(150).optional(),
+  is_minor: z.boolean().optional(),
   gender: z.enum(['male', 'female', 'other', 'unknown']).optional(),
   last_seen_location: z.string().min(2).max(500),
   estado: z.string().min(2).max(100),
@@ -51,6 +52,9 @@ export async function POST(request: NextRequest) {
       .insert({
         full_name: sanitizeText(body.full_name),
         age: body.age ?? null,
+        // Explicit minor flag (76 §6): settable without an age. The DB trigger
+        // upgrades it to true when age < 18; neither app nor trigger clears it.
+        is_minor: body.is_minor === true,
         gender: body.gender ?? null,
         last_seen_location: sanitizeText(body.last_seen_location),
         estado: sanitizeText(body.estado),

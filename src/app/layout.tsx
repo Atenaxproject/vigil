@@ -147,6 +147,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   </Link>
                   <span aria-hidden="true">·</span>
                   <Link
+                    href="/proteccion-de-menores"
+                    className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
+                  >
+                    {t('minorsProtection')}
+                  </Link>
+                  <span aria-hidden="true">·</span>
+                  <Link
                     href="/prensa"
                     className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
                   >

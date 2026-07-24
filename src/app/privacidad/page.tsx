@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 export const metadata = {
@@ -172,6 +173,21 @@ export default function PrivacidadPage() {
             >
               {CRISIS_CONFIG.legal.contactEmail}
             </a>
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">
+            6b. Protección de Menores
+          </h2>
+          <p className="text-slate-700">
+            La información de niños, niñas y adolescentes recibe protecciones adicionales: la
+            precisión de ubicación se reduce a nivel de municipio en las superficies públicas, en la
+            federación y en la exportación. Consulta{' '}
+            <Link href="/proteccion-de-menores" className="text-blue-600 underline">
+              Protección de Menores
+            </Link>{' '}
+            para el detalle.
           </p>
         </section>
 

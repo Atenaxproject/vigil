@@ -191,7 +191,9 @@
       "crossReport": {
         "body": "If you already reported this person on <link>Desaparecidos Terremoto Venezuela</link>, reporting here too expands their reach across the search network. If you haven't yet, we recommend reporting on both platforms.",
         "dismiss": "Dismiss notice"
-      }
+      },
+      "isMinor": "是未成年人",
+      "isMinorHint": "勾选以保护孩子的位置。这不会限制搜索——姓名、照片和州仍然公开。"
     },
     "card": {
       "lastSeen": "最后见到:",
@@ -364,7 +366,8 @@
       "success": "感谢。当有匹配时我们会联系你。",
       "error": "注册失败。请重试。",
       "credentialNote": "Professional credential (optional)",
-      "credentialNotePlaceholder": "E.g. license, association, registration number"
+      "credentialNotePlaceholder": "E.g. license, association, registration number",
+      "ageAttestation": "我确认我已成年。"
     },
     "directory": {
       "directory": "目录",
@@ -481,7 +484,8 @@
     "builtWith": "由 Claude + Cursor 构建",
     "notEmergency": "Vigil 不是紧急服务。若需立即救援，请致电 {hotline}。",
     "otherRegions": "其他地区",
-    "press": "媒体"
+    "press": "媒体",
+    "minorsProtection": "未成年人保护"
   },
   "exchange": {
     "title": "资源交换",
@@ -991,7 +995,8 @@
       "locationPlaceholder": "例如：加拉加斯、拉瓜伊拉",
       "submit": "发布留言",
       "success": "留言已发布。",
-      "error": "发布失败。请重试。"
+      "error": "发布失败。请重试。",
+      "minorLocationGuidance": "为安全起见，请勿发布未成年人的当前位置。"
     }
   },
   "assistant": {
@@ -1072,7 +1077,8 @@
       "tiltelyVenezuela": "Search and aid coordination with safety guidance."
     },
     "reportHint": "Each report on multiple platforms expands the search network.",
-    "reportLink": "Report on Vigil"
+    "reportLink": "Report on Vigil",
+    "minorsProtectionLink": "我们如何保护未成年人信息"
   },
   "propertyAssessment": {
     "title": "Structural Safety Assessment",
@@ -1627,5 +1633,24 @@
     "add": "Agregar",
     "emptyExplainer": "当你提交报告、交换请求或评估请求时，它会保存在此设备上——无需账户——以便你日后查看。你还没有保存任何内容。",
     "emptyCta": "创建报告"
+  },
+  "proteccionMenores": {
+    "title": "未成年人保护",
+    "intro": "Vigil 发布一个包含儿童和青少年的公开失踪人员看板。他们的信息遵循一条明确的规则处理。",
+    "principle": "我们公布有助于陌生人辨认孩子的信息，隐藏有助于陌生人接近孩子的信息。",
+    "publishTitle": "公布哪些内容",
+    "publishBody": "对于标记为未成年人的记录，Vigil 显示姓名、照片、年龄、性别、州和市镇。这有助于辨认孩子，而不透露在哪里能找到他们。",
+    "locationTitle": "位置精度降低",
+    "locationBody": "在公开界面上，位置精度降低到市镇级别。不公布教区、街道地址或最后出现地点的近似坐标。精确位置保留在数据库中，仅对持有该报告认领链接的人可见。",
+    "federationTitle": "联合与导出",
+    "federationBody": "同样的降级适用于联合和导出。合作平台和 PFIF 标准接收降级后的数据集：辨认数据和市镇级位置，绝不包含精确位置。未成年人记录仍保留在导出中，以免降低跨平台匹配的机会。",
+    "photoTitle": "照片",
+    "photoBody": "Vigil 不托管失踪人员照片——它们由来源平台（例如联合网络）提供。因此 Vigil 无法去除这些图像的元数据，这是最初发布它们的平台的责任。我们正直接向来源平台提出这一问题。",
+    "removalTitle": "更正或删除",
+    "removalBody": "父母或监护人可通过我们的联系渠道申请更正或删除报告。我们会在 72 小时内回复。",
+    "governmentTitle": "不向政府提供数据",
+    "governmentBody": "Vigil 不与委内瑞拉政府共享用户数据，这明确包括未成年人的信息。",
+    "privacyLink": "另请参阅我们的",
+    "privacyLinkCta": "隐私政策"
   }
 }

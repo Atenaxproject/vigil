@@ -118,7 +118,9 @@ export interface PublicMissingPerson {
   age: number | null
   gender: string | null
   photo_url: string | null
-  last_seen_location: string
+  // Nulled by the public view for minors (76 §3); UI renders a municipio-level
+  // fallback from estado/municipio.
+  last_seen_location: string | null
   estado: string | null
   municipio: string | null
   parroquia: string | null

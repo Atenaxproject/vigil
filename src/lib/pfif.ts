@@ -15,6 +15,11 @@ function mapStatus(status: PublicMissingPerson['status']): PFIFPerson['status'] 
 }
 
 export function toPfifPerson(record: PublicMissingPerson): PFIFPerson {
+  // For a minor the view has nulled the free-text location; PFIF keeps city +
+  // state only (76 §4), reconstructed from municipio/estado so cross-platform
+  // matching still works at municipio granularity. is_minor is never in the
+  // record (not a view column) and never emitted (76 §5).
+  const municipioLevel = [record.municipio, record.estado].filter(Boolean).join(', ')
   return {
     personRecordId: record.id,
     sourceDate: record.updated_at,
@@ -22,7 +27,7 @@ export function toPfifPerson(record: PublicMissingPerson): PFIFPerson {
     sex: record.gender ?? undefined,
     age: record.age?.toString(),
     photoUrl: record.photo_url ?? undefined,
-    lastKnownLocation: record.last_seen_location,
+    lastKnownLocation: record.last_seen_location ?? (municipioLevel || undefined),
     status: mapStatus(record.status),
   }
 }

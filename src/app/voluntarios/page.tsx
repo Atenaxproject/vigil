@@ -421,6 +421,11 @@ export default function VoluntariosPage() {
             <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             {tf('privacyNote')}
           </p>
+          {/* Age attestation (76 §9): volunteers must be adults. Required gate. */}
+          <label className="flex items-start gap-2 text-[16px]">
+            <input type="checkbox" name="age_attestation" required className="mt-1 rounded" />
+            {tf('ageAttestation')}
+          </label>
           <button
             type="submit"
             disabled={submitting}
