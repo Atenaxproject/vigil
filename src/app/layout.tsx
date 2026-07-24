@@ -130,7 +130,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 {children}
               </main>
               <footer className="relative z-[1] bg-[color:var(--vigil-surface)] text-[13px] text-[color:var(--vigil-muted)]">
-                {/* Group 1 — Open source / legal */}
+                {/* Tier 1 — navigation. No sentiment, no build-credit — those
+                    live on /prensa and in the README (77 §3). */}
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-t border-[color:var(--vigil-border)] px-4 py-4 text-center">
                   <Link
                     href={privacyHref}
@@ -183,27 +184,33 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     {t('otherRegions')}
                   </Link>
                   <span aria-hidden="true">·</span>
-                  <span>{t('madeFor')}</span>
+                  <Link
+                    href={isSpanish ? '/terminos#descargo' : '/terms#disclaimer'}
+                    className="inline-flex min-h-[44px] items-center transition-colors hover:text-vigil-blue"
+                  >
+                    {t('disclaimer')}
+                  </Link>
                 </div>
 
-                {/* Group 2 — Credits */}
+                {/* Tier 2 — attribution. One line: operator + license, the two
+                    things a procurement/emergency-management reader looks for
+                    here. No emoji (75D §3a). */}
                 <div className="border-t border-[color:var(--vigil-border)] px-4 py-4 text-center">
-                  <p className="text-[16px] text-[color:var(--vigil-body)]">{t('credits')} 🇻🇪</p>
-                  <p className="mt-1">
-                    {t('creditsByPrefix')}{' '}
+                  <p className="text-[16px] text-[color:var(--vigil-body)]">
+                    {t('attributionPrefix')}{' '}
                     <a
                       href="https://youthewave.org"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-vigil-blue underline-offset-2 transition-colors hover:underline"
                     >
-                      {t('creditsByLink')}
-                    </a>
+                      {t('attributionOrg')}
+                    </a>{' '}
+                    · {t('attributionOperator')} · {t('attributionLicense')}
                   </p>
-                  <p className="mt-1">{t('builtWith')}</p>
                 </div>
 
-                {/* Group 3 — Emergency disclaimer (quiet, but scannable) */}
+                {/* Tier 3 — emergency disclaimer (quiet, but scannable). Unchanged. */}
                 <div className="border-t border-[color:var(--vigil-border)] px-4 py-4">
                   <p className="flex items-center justify-center gap-2 text-center text-[16px] font-medium text-[color:var(--vigil-body)]">
                     <AlertTriangle className="h-4 w-4 shrink-0 text-[color:var(--vigil-body)]" aria-hidden="true" />

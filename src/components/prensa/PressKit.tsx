@@ -209,6 +209,16 @@ export function PressKit() {
         </a>
       </section>
 
+      {/* How it was built — the AI-collaboration credit and the sentiment
+          behind the project. Moved here from the footer (77 §3): honest and
+          part of the story, but this is where a reader looking for "how" goes,
+          not the footer every page carries. */}
+      <section className="mt-10">
+        <h2 className="text-[20px] font-semibold text-vigil-ink">{t('builtWith.title')}</h2>
+        <p className="mt-3 text-[16px] leading-relaxed text-vigil-body">{t('builtWith.body')}</p>
+        <p className="mt-2 text-[13px] text-vigil-muted">{t('builtWith.sentiment')}</p>
+      </section>
+
       <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{t('assets.title')}</h2>
         <ul className="mt-3 space-y-2">

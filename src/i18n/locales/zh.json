@@ -475,17 +475,17 @@
     "learnMore": "隐私政策"
   },
   "footer": {
-    "madeFor": "为委内瑞拉人民而建",
     "openSource": "开源 — MIT 许可证",
     "contact": "联系",
-    "credits": "为委内瑞拉而以希望和爱而制作",
-    "creditsByPrefix": "一个项目由 Orlando Toro —",
-    "creditsByLink": "YouTheWave",
-    "builtWith": "由 Claude + Cursor 构建",
     "notEmergency": "Vigil 不是紧急服务。若需立即救援，请致电 {hotline}。",
     "otherRegions": "其他地区",
     "press": "媒体",
-    "minorsProtection": "未成年人保护"
+    "minorsProtection": "未成年人保护",
+    "disclaimer": "免责声明",
+    "attributionPrefix": "由",
+    "attributionOrg": "YouTheWave 发起",
+    "attributionOperator": "Orlando Toro",
+    "attributionLicense": "基于 MIT 许可的开源项目"
   },
   "exchange": {
     "title": "资源交换",
@@ -1580,7 +1580,12 @@
       "title": "Press contact",
       "note": "We reply in Spanish and English. Include your deadline and outlet. Vigil does not solicit donations."
     },
-    "informacionLink": "See live information hub"
+    "informacionLink": "See live information hub",
+    "builtWith": {
+      "title": "构建方式",
+      "body": "Vigil 由 Claude（Anthropic）担任 AI 联合架构师进行设计与构建——数据库架构、数据保护、多语言支持、设计系统和法律文件——并由 Cursor Agent 担任代码生成代理。",
+      "sentiment": "怀着希望与爱为委内瑞拉而作。"
+    }
   },
   "monitor": {
     "title": "Vigil Watch — Global monitor",

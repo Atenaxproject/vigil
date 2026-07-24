@@ -42,6 +42,39 @@ export default function TermsPage() {
           </li>
         </ul>
 
+        <div
+          id="disclaimer"
+          className="scroll-mt-20 p-5 bg-amber-50 border-2 border-amber-300 rounded"
+        >
+          <h2 className="text-xl font-semibold text-slate-900 mt-0 mb-3">Disclaimer</h2>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>
+              <strong>Vigil is NOT an emergency service.</strong> For immediate rescue, call{' '}
+              <strong>
+                {CRISIS_CONFIG.emergency.hotline} ({CRISIS_CONFIG.emergency.hotlineLabel})
+              </strong>
+              .
+            </li>
+            <li>
+              Information on Vigil is contributed by citizens and third-party sources. Vigil does not
+              verify everything that is posted; records display their verification status visibly.
+            </li>
+            <li>
+              Structural safety assessments are <strong>volunteer opinions</strong> from people with
+              professional training, not official inspections. They do not override local authorities&apos;
+              instructions.
+            </li>
+            <li>
+              Official figures published on Vigil are attributed to their issuer. Vigil does not
+              endorse them or verify them independently.
+            </li>
+            <li>
+              Users must call 911 for immediate rescue. Vigil does not dispatch or coordinate rescue
+              operations.
+            </li>
+          </ul>
+        </div>
+
         <div className="p-4 bg-blue-50 border border-blue-200 rounded">
           <p className="font-medium text-slate-800 mb-2">Full terms available in Spanish</p>
           <p className="text-slate-700 mb-4">

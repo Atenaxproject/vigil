@@ -475,17 +475,17 @@
     "learnMore": "Politique de confidentialité"
   },
   "footer": {
-    "madeFor": "Construit pour le peuple du Venezuela",
     "openSource": "Open source — Licence MIT",
     "contact": "Contact",
-    "credits": "Fait avec espoir et amour pour le Venezuela",
-    "creditsByPrefix": "Un projet de Orlando Toro —",
-    "creditsByLink": "YouTheWave",
-    "builtWith": "Construit avec Claude + Cursor",
     "notEmergency": "Vigil N'EST PAS un service d'urgence. Pour un sauvetage immédiat, appelez le {hotline}.",
     "otherRegions": "Autres régions",
     "press": "Presse",
-    "minorsProtection": "Protection des mineurs"
+    "minorsProtection": "Protection des mineurs",
+    "disclaimer": "Avertissement",
+    "attributionPrefix": "Un projet de",
+    "attributionOrg": "YouTheWave",
+    "attributionOperator": "Orlando Toro",
+    "attributionLicense": "Open source sous licence MIT"
   },
   "exchange": {
     "title": "Échange de ressources",
@@ -1580,7 +1580,12 @@
       "title": "Press contact",
       "note": "We reply in Spanish and English. Include your deadline and outlet. Vigil does not solicit donations."
     },
-    "informacionLink": "See live information hub"
+    "informacionLink": "See live information hub",
+    "builtWith": {
+      "title": "Comment il a été construit",
+      "body": "Vigil a été conçu et construit avec Claude (Anthropic) comme co-architecte IA — schéma de base de données, protection des données, i18n, système de design et documents juridiques — et Cursor Agent comme agent de génération de code.",
+      "sentiment": "Fait avec espoir et amour pour le Venezuela."
+    }
   },
   "monitor": {
     "title": "Vigil Watch — Global monitor",

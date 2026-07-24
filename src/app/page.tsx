@@ -26,7 +26,7 @@ export default async function HomePage() {
   const photoSearchAvailable = isAnthropicConfigured() && isPhotoSearchAllowed(breaker)
 
   return (
-    <div className="flex flex-col lg:h-[calc(100vh-44px-48px)]">
+    <div className="flex flex-col lg:min-h-[calc(100vh-44px-48px)]">
       <h1 className="sr-only">{t('title')}</h1>
       <div className="flex min-h-0 flex-1 flex-col gap-3 p-4">
         <DtvReferralNotice showCta photoSearchAvailable={photoSearchAvailable} />

@@ -475,17 +475,17 @@
     "learnMore": "Политика приватности"
   },
   "footer": {
-    "madeFor": "Создано для народа Венесуэлы",
     "openSource": "Открытый исходный код — лицензия MIT",
     "contact": "Контакт",
-    "credits": "Сделано с надеждой и любовью к Венесуэле",
-    "creditsByPrefix": "Проект —",
-    "creditsByLink": "YouTheWave",
-    "builtWith": "Создано с помощью Claude и Cursor",
     "notEmergency": "Vigil НЕ является службой экстренной помощи. Для немедленного спасения звоните {hotline}.",
     "otherRegions": "Другие регионы",
     "press": "Пресса",
-    "minorsProtection": "Защита несовершеннолетних"
+    "minorsProtection": "Защита несовершеннолетних",
+    "disclaimer": "Отказ от ответственности",
+    "attributionPrefix": "Проект",
+    "attributionOrg": "YouTheWave",
+    "attributionOperator": "Орландо Торо",
+    "attributionLicense": "Открытый исходный код по лицензии MIT"
   },
   "exchange": {
     "title": "Обмен ресурсами",
@@ -1580,7 +1580,12 @@
       "title": "Press contact",
       "note": "We reply in Spanish and English. Include your deadline and outlet. Vigil does not solicit donations."
     },
-    "informacionLink": "See live information hub"
+    "informacionLink": "See live information hub",
+    "builtWith": {
+      "title": "Как это было создано",
+      "body": "Vigil был спроектирован и создан с Claude (Anthropic) в роли ИИ-соархитектора — схема базы данных, защита данных, i18n, система дизайна и юридические документы — и Cursor Agent в роли агента генерации кода.",
+      "sentiment": "Сделано с надеждой и любовью для Венесуэлы."
+    }
   },
   "monitor": {
     "title": "Vigil Watch — Global monitor",
