@@ -7,6 +7,7 @@ import {
   structurePropertyDescription,
 } from '@/lib/ai/property-triage'
 import { jitterCoordinates } from '@/lib/property-assessment'
+import { stripExif, type UploadMime } from '@/lib/images/strip-exif'
 import { getClientIp, hashIp, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 
@@ -60,19 +61,23 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Archivo demasiado grande' }, { status: 400 })
       }
 
-      const bytes = await photo.arrayBuffer()
-      const base64 = Buffer.from(bytes).toString('base64')
-      aiPriorityFlag = await flagPropertyPhotoPriority(
-        base64,
-        photo.type as 'image/jpeg' | 'image/png' | 'image/webp'
+      // Strip EXIF (GPS included) before the bytes touch storage OR the AI —
+      // a property photo is taken at the property, so its EXIF is the address
+      // (76A). Orientation is baked into pixels first, see stripExif.
+      const rawBytes = Buffer.from(await photo.arrayBuffer())
+      const { buffer: cleanBytes, mime: cleanMime } = await stripExif(
+        rawBytes,
+        photo.type as UploadMime
       )
+      const base64 = cleanBytes.toString('base64')
+      aiPriorityFlag = await flagPropertyPhotoPriority(base64, cleanMime)
 
       try {
         const admin = createAdminClient()
-        const path = `${crypto.randomUUID()}.${photo.type === 'image/png' ? 'png' : photo.type === 'image/webp' ? 'webp' : 'jpg'}`
+        const path = `${crypto.randomUUID()}.${cleanMime === 'image/png' ? 'png' : cleanMime === 'image/webp' ? 'webp' : 'jpg'}`
         const { error: uploadError } = await admin.storage
           .from('property-assessment-photos')
-          .upload(path, bytes, { contentType: photo.type, upsert: false })
+          .upload(path, cleanBytes, { contentType: cleanMime, upsert: false })
         if (!uploadError) {
           const { data: signed } = await admin.storage
             .from('property-assessment-photos')
