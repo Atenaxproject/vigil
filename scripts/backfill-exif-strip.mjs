@@ -52,12 +52,21 @@ async function strip(buffer, mime) {
   return p.jpeg({ quality: 85 }).toBuffer()
 }
 
-async function listAll(sb, bucket) {
+// Supabase Storage list() is NOT recursive: folders come back as entries with a
+// null id. Recurse into them so images under prefixes are covered too.
+async function listAll(sb, bucket, prefix = '') {
   const all = []
   for (let offset = 0; ; offset += 100) {
-    const { data, error } = await sb.storage.from(bucket).list('', { limit: 100, offset })
-    if (error) throw new Error(`list ${bucket}: ${error.message}`)
-    all.push(...data.filter((o) => o.id && IMAGE_EXT.test(o.name)))
+    const { data, error } = await sb.storage.from(bucket).list(prefix, { limit: 100, offset })
+    if (error) throw new Error(`list ${bucket}/${prefix}: ${error.message}`)
+    for (const o of data) {
+      const path = prefix ? `${prefix}/${o.name}` : o.name
+      if (o.id) {
+        if (IMAGE_EXT.test(o.name)) all.push({ name: path })
+      } else {
+        all.push(...(await listAll(sb, bucket, path))) // folder → recurse
+      }
+    }
     if (data.length < 100) break
   }
   return all
