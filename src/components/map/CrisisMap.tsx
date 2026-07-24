@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { CRISIS_CONFIG, diasporaSupportConfig } from '@/config/crisis.config'
+import { BASEMAP_URL, BASEMAP_ATTRIBUTION } from '@/lib/basemap'
 import type { SeismicEvent, RegionScope } from '@/types/vigil.types'
 import type { MapMarker, PublicPropertyAssessment, PublicMissingPerson } from '@/types/vigil.types'
 import { MapLayers, type MapLayerState } from '@/components/map/MapLayers'
@@ -169,10 +170,7 @@ export function CrisisMap({
         className="h-full min-h-[240px] w-full lg:min-h-[400px]"
         scrollWheelZoom
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer attribution={BASEMAP_ATTRIBUTION} url={BASEMAP_URL} />
         {layers.aftershocks && <AftershockLayer events={events} />}
         {layers.needs && <NeedsLayer markers={markers} />}
         {layers.resources && (

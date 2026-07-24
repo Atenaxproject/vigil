@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
+import { BASEMAP_URL, BASEMAP_ATTRIBUTION } from '@/lib/basemap'
 
 const MapContainer = dynamic(() => import('react-leaflet').then((m) => m.MapContainer), { ssr: false })
 const TileLayer = dynamic(() => import('react-leaflet').then((m) => m.TileLayer), { ssr: false })
@@ -47,10 +48,7 @@ export function PinDropMap({ lat, lng, onChange, ariaLabel }: PinDropMapProps) {
         ]}
         scrollWheelZoom={false}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer attribution={BASEMAP_ATTRIBUTION} url={BASEMAP_URL} />
         <ClickHandler onPick={onChange} />
         <Marker position={[lat, lng]} />
       </MapContainer>

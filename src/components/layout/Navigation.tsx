@@ -38,7 +38,7 @@ import {
 } from 'lucide-react'
 import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { useViewModeContext } from '@/components/onboarding/ViewModeProvider'
-import { isRouteVisibleForMode, type ViewModeId } from '@/config/viewMode.config'
+import { isRouteVisibleForMode, VIEW_MODES, type ViewModeId } from '@/config/viewMode.config'
 import { cn } from '@/lib/utils'
 
 type NavLabelKey =
@@ -133,14 +133,31 @@ const SHEET_GROUPS = [
 
 type SheetGroupKey = (typeof SHEET_GROUPS)[number]['titleKey']
 
-const MODE_PRIMARY_GROUP: Record<ViewModeId, SheetGroupKey | null> = {
-  busco_a_alguien: 'groupFindSomeone',
-  necesito_ayuda: 'groupNeedHelp',
-  quiero_ayudar: 'groupWantToHelp',
-  soy_organizacion: 'groupWantToHelp',
-  equipo_rescate: 'groupEmergencyStatus',
-  solo_informacion: 'groupInfo',
-  ver_todo: null,
+/**
+ * Which sheet group auto-opens for a mode is DERIVED from viewMode.config's
+ * per-mode route list — never hand-maintained here (77 §2). A mode's routes
+ * can span several groups (e.g. soy_organizacion touches groupWantToHelp,
+ * groupInfo, groupFindSomeone, groupEmergencyStatus); the group with the most
+ * overlap opens. This was previously a second, separately-maintained mapping
+ * that could silently disagree with viewMode.config — the exact drift this
+ * derivation makes structurally impossible. ver_todo has no mode route list
+ * (isRouteVisibleForMode always true for it), so it opens every group.
+ */
+function computeModePrimaryGroup(mode: ViewModeId): SheetGroupKey | null {
+  const modeDef = VIEW_MODES.find((m) => m.id === mode)
+  if (!modeDef) return null
+
+  const routeSet = new Set(modeDef.routes)
+  let best: SheetGroupKey | null = null
+  let bestCount = 0
+  for (const group of SHEET_GROUPS) {
+    const count = group.items.filter((href) => routeSet.has(href)).length
+    if (count > bestCount) {
+      bestCount = count
+      best = group.titleKey
+    }
+  }
+  return best
 }
 
 export function Navigation() {
@@ -169,7 +186,7 @@ export function Navigation() {
   const collapsedRailItems = visibleItems.filter((item) => !item.sheetOnly)
 
   // One grouping model everywhere (R1 / 75 §4): active mode's group first.
-  const primaryGroup = MODE_PRIMARY_GROUP[mode]
+  const primaryGroup = computeModePrimaryGroup(mode)
   const orderedGroups = primaryGroup
     ? [...SHEET_GROUPS].sort((a, b) =>
         a.titleKey === primaryGroup ? -1 : b.titleKey === primaryGroup ? 1 : 0

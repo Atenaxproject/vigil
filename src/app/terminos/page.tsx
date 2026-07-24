@@ -22,6 +22,37 @@ export default function TerminosPage() {
           </p>
         </div>
 
+        <section id="descargo" className="scroll-mt-20 border-2 border-amber-300 bg-amber-50 rounded p-5">
+          <h2 className="text-xl font-semibold text-slate-900 mt-0 mb-3">Descargo de responsabilidad</h2>
+          <ul className="list-disc pl-6 text-slate-700 space-y-2">
+            <li>
+              <strong>Vigil NO es un servicio de emergencias.</strong> Para rescate inmediato, llama al{' '}
+              <strong>
+                {CRISIS_CONFIG.emergency.hotline} ({CRISIS_CONFIG.emergency.hotlineLabel})
+              </strong>
+              .
+            </li>
+            <li>
+              La información en Vigil es contribuida por ciudadanos y fuentes de terceros. Vigil no
+              verifica la totalidad de lo que se publica; los registros muestran su estado de
+              verificación de forma visible.
+            </li>
+            <li>
+              Las evaluaciones de seguridad estructural son <strong>opiniones de voluntarios</strong> con
+              formación profesional, no inspecciones oficiales. No sustituyen instrucciones de las
+              autoridades locales.
+            </li>
+            <li>
+              Las cifras oficiales publicadas en Vigil se atribuyen a quien las emite. Vigil no las
+              respalda ni las verifica de forma independiente.
+            </li>
+            <li>
+              Los usuarios deben llamar al 911 para rescate inmediato. Vigil no despacha ni coordina
+              operaciones de rescate.
+            </li>
+          </ul>
+        </section>
+
         <section>
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">1. Propósito de Vigil</h2>
           <p className="text-slate-700 leading-relaxed">

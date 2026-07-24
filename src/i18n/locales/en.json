@@ -505,17 +505,17 @@
     "learnMore": "Privacy Policy"
   },
   "footer": {
-    "madeFor": "Built for the people of Venezuela",
     "openSource": "Open source — MIT License",
     "contact": "Contact",
-    "credits": "Made with hope and love for Venezuela",
-    "creditsByPrefix": "A project by Orlando Toro —",
-    "creditsByLink": "YouTheWave",
-    "builtWith": "Built with Claude + Cursor",
     "notEmergency": "Vigil is NOT an emergency service. For immediate rescue call {hotline}.",
     "press": "Press",
     "otherRegions": "Other regions",
-    "minorsProtection": "Protection of minors"
+    "minorsProtection": "Protection of minors",
+    "disclaimer": "Disclaimer",
+    "attributionPrefix": "A project by",
+    "attributionOrg": "YouTheWave",
+    "attributionOperator": "Orlando Toro",
+    "attributionLicense": "Open source under the MIT license"
   },
   "exchange": {
     "title": "Resource Exchange",
@@ -1545,7 +1545,12 @@
       "title": "Press contact",
       "note": "We reply in Spanish and English. Include your deadline and outlet. Vigil does not solicit donations."
     },
-    "informacionLink": "See live information hub"
+    "informacionLink": "See live information hub",
+    "builtWith": {
+      "title": "How it was built",
+      "body": "Vigil was designed and built with Claude (Anthropic) as AI co-architect — database schema, data protection, i18n, design system, and legal documents — and Cursor Agent as the code-generation agent.",
+      "sentiment": "Made with hope and love for Venezuela."
+    }
   },
   "deploymentSuggestion": {
     "question": "Are you in another region? {label} is available.",
