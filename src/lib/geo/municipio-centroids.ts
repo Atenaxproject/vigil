@@ -443,7 +443,7 @@ function normalizeEstado(s: string): string {
  * app's own municipio list already carries this duplication (see
  * venezuela-geo.ts), so this table mirrors it rather than relitigating which
  * estado is "correct" — that question is out of scope for a centroid lookup.
- * Keyed by .
+ * Keyed by "normalized-estado|normalized-short-name", e.g. "aragua|zamora".
  */
 const ALIASES: Record<string, { estado: string; municipio: string }> = {
   'distrito capital|sucre': { estado: 'Miranda', municipio: 'Sucre' },
@@ -469,6 +469,12 @@ const ALIASES: Record<string, { estado: string; municipio: string }> = {
   // La Guaira state has exactly one municipio (officially "Vargas"); the
   // stored value is sometimes the estado's own former name.
   'la guaira|vargas': { estado: 'La Guaira', municipio: 'Vargas' },
+  // OCHA's source data spells this "Santa Babara" (missing the second "r") —
+  // verified against the raw ven_admin2.geojson, not a transcription error on
+  // our side. The array entry is left exactly as sourced (see file header:
+  // names are OCHA's official names); this alias lets the correctly-spelled
+  // "Santa Bárbara" — what a person would actually type — still resolve.
+  'monagas|santa barbara': { estado: 'Monagas', municipio: 'Santa Babara' },
 }
 
 /**

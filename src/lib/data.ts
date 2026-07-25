@@ -29,11 +29,17 @@ function sortOrganizations(orgs: Organization[]): Organization[] {
 export async function getMissingPersonsForMap(limit = 300): Promise<PublicMissingPerson[]> {
   try {
     const supabase = await createClient()
+    // Do NOT require approx_last_seen_lat/lng here: the public view nulls both
+    // for records flagged as a minor (76 REV2 §2/§3), so that filter silently
+    // discarded every minor before MissingPersonsLayer's centroid-fallback
+    // path could ever run (PR #14 review). `estado` is a required field at
+    // submit time, so filtering on it still excludes any truly locationless
+    // row while letting minor records (coords null, estado/municipio present)
+    // reach the client for centroid rendering.
     const { data, error } = await supabase
       .from('public_missing_persons')
       .select('*')
-      .not('approx_last_seen_lat', 'is', null)
-      .not('approx_last_seen_lng', 'is', null)
+      .not('estado', 'is', null)
       .eq('status', 'missing')
       .order('created_at', { ascending: false })
       .limit(limit)
