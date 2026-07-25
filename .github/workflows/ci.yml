@@ -20,6 +20,9 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm run lint
+      # Offline fixture / sanitizer guards — no secrets, no network.
+      - run: node scripts/test-sanitize.mjs
+      - run: node scripts/test-feeds.mjs
       # `npm run build` runs the prebuild i18n-parity gate, so key drift fails CI too.
       # The app is designed to build without secrets (no Supabase/Anthropic keys needed).
       - run: npm run build

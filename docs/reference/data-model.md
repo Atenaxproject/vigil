@@ -25,7 +25,7 @@
 | 013 | `013_vigil_watch_state.sql` | Vigil Watch durable state |
 | 014 | `014_ai_usage_log.sql` | AI call log for spend-proxy circuit breaker |
 
-> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Production requires **001–014** — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
+> **Note:** `docs/architecture/DEPLOYMENT.md` covers setup. Production requires migrations **001–020** (including `020_rls_contact_lockdown` public views) — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
 
 ---
 

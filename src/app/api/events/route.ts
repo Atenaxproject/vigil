@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 import { isWithinRegionBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
 import type { RegionScope } from '@/types/vigil.types'
@@ -36,11 +37,10 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = await createClient()
     let query = supabase
-      .from('events')
+      .from('public_events')
       .select(
         'id, title, description, category, starts_at, ends_at, location_label, lat, lng, organizer_name, verified, created_at'
       )
-      .eq('flagged', false)
       .eq('region_scope', regionScope)
       .order('starts_at', { ascending: true })
       .limit(100)
@@ -80,7 +80,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const supabase = await createClient()
+    // Service role: INSERT…RETURNING needs SELECT on the row; anon SELECT on
+    // base events is denied so organizer_contact cannot leak via PostgREST.
+    const supabase = createAdminClient()
     const { data, error } = await supabase
       .from('events')
       .insert({

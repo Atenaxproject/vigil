@@ -1,6 +1,6 @@
 # Vigil — Deployment Guide
 
-> **New crisis deployment:** start with [`DEPLOYMENT-PLAYBOOK.md`](./DEPLOYMENT-PLAYBOOK.md) for go/no-go, archetype feeds, and config-driven rollout — then use this guide for Supabase/Vercel/DNS steps.
+> **New crisis deployment:** change `src/config/crisis.config.ts` and follow this guide for Supabase/Vercel/DNS. See [`DEPLOYMENT-PLAYBOOK.md`](./DEPLOYMENT-PLAYBOOK.md) for a high-level multi-country pointer (detailed operator gates are private).
 
 > Architecture and design constraints: [`CLAUDE.md`](./CLAUDE.md), [`DESIGN-SYSTEM.md`](./DESIGN-SYSTEM.md)
 
@@ -66,17 +66,19 @@ supabase db push
 
 **Option C — Incremental migrations (existing production project)**
 
-If the project already has migrations `001`–`010` applied, run only the new files
-in **SQL Editor**, in order:
+If the project already has earlier migrations applied, run only the **missing** files
+in **SQL Editor**, in order through the latest:
 
-1. `006_missing_persons_rls_fix.sql` through `010_property_assessments.sql` (if not yet applied)
-2. `011_diaspora_region.sql` — adds `region_scope` for USA diaspora hub (`/apoyo-usa`)
+1. `006`–`019` as needed (geographic fields, minors protection, feed health, etc.)
+2. `011_diaspora_region.sql` — `region_scope` for USA diaspora hub (`/apoyo-usa`)
+3. **`020_rls_contact_lockdown.sql`** — public views for exchange / volunteers / presence / markers / events / needs; blocks anon SELECT of contact/claim columns (required before multi-country live)
 
 Then seed diaspora organizations (after Orlando confirms GEM/AFE hours):
 
-3. `supabase/seeds/004_diaspora_orgs.sql`
+4. `supabase/seeds/004_diaspora_orgs.sql`
 
 Without `011`, `/apoyo-usa` and region-scoped filters degrade gracefully (empty data).
+Without `020`, treat contact fields on those tables as **not** privacy-safe via PostgREST.
 
 ### 4. Enable Auth providers
 

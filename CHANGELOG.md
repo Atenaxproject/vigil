@@ -5,6 +5,20 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-25 (Phase 0 RLS)
+
+### Security
+- **Harden public RLS for contact fields** — migration `020_rls_contact_lockdown`: anon/authenticated clients read `public_*` views only for resource exchange, volunteers, rescuer presence, map markers, events, and needs/offers; rescuer public UPDATE removed (check-in via server/service-role).
+
+### Changed
+- List/submit API paths updated to public views or service-role writes where INSERT…RETURNING would otherwise require table SELECT.
+- Branded `not-found.tsx` with Buscar + Emergencia recovery CTAs.
+- CI runs `scripts/test-sanitize.mjs` and `scripts/test-feeds.mjs`.
+
+### Docs
+- Living docs synced to Next.js 15, migrations through 020, and existing CI workflows.
+- **Public/private docs split** — sensitive ops material (launch checklists, admin SOPs, build-prompt encyclopedia, outreach packages) removed from the public tree; stubs + short “how we ship” remain. Added `CONTRIBUTING.md` / `CONTRIBUTORS.md`; README contributor and privacy framing tightened for open-source presence.
+
 ## [Unreleased] — 2026-07-22 (prompt 59)
 
 ### Added

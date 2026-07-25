@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { isWithinRegionBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
@@ -46,9 +47,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Contacto requerido' }, { status: 400 })
     }
 
-    const supabase = await createClient()
+    // Service role returns claim_token once to the submitter; anon cannot SELECT it.
+    const admin = createAdminClient()
 
-    const { data, error } = await supabase
+    const { data, error } = await admin
       .from('resource_exchange')
       .insert({
         entry_type: body.entry_type,
@@ -81,14 +83,14 @@ export async function POST(request: NextRequest) {
 
     let matchCount = 0
     if (body.entry_type === 'requesting') {
+      const supabase = await createClient()
       const oppositeType = 'offering'
       const { count } = await supabase
-        .from('resource_exchange')
+        .from('public_resource_exchange')
         .select('id', { count: 'exact', head: true })
         .eq('entry_type', oppositeType)
         .eq('category', body.category)
         .eq('status', 'active')
-        .eq('flagged', false)
 
       matchCount = count ?? 0
     }

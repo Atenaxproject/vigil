@@ -2,14 +2,16 @@
 
 **Agent instruction document. Read before every session. Rewritten 2026-07-22 (prompt 75 §7) to describe the system that exists — the previous version described the 9-route Phase-0 plan and had become a cause of docs-vs-code drift.**
 
-Canonical companions (this file is the agent contract; those are the encyclopedia):
+Canonical companions (this file is the agent contract):
 
-- `docs/reference/VIGIL-COMPLETE-GUIDE.md` — product surface, feature by feature
+- `docs/reference/VIGIL-COMPLETE-GUIDE.md` — short public product overview
 - `docs/reference/api-reference.md` + `docs/reference/data-model.md` — API and schema truth
-- `docs/architecture/VIGIL-LAUNCH-READINESS.md` — living launch checklist (status markers come from execution reports only)
 - `docs/architecture/DESIGN-SYSTEM.md` — tokens, type scale, components
-- `docs/architecture/DEPLOYMENT-PLAYBOOK.md` — multi-country deployment gates
-- `docs/build-process/NN-*.md` — numbered execution prompts; the changelog of intent
+- `docs/architecture/DEPLOYMENT.md` — setup for local/production
+- `docs/build-process/README.md` — how we ship (short); historical prompts are private
+- `CONTRIBUTING.md` + `CONTRIBUTORS.md` — contributor workflow and roles
+
+Internal launch checklists, SOPs, and build-prompt archives live only under gitignored `docs/evaluations/` (operator machine). Do not re-publish them to the public tree.
 
 ---
 
@@ -27,7 +29,7 @@ Vigil aggregates proven humanitarian tools rather than reinventing them. Six use
 
 ## Tech Stack — no deviations
 
-Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime + RLS) · Vercel · Leaflet/OSM (Venezuela-locked bounds) · next-intl (**8 locales**: es default, en, pt, fr, it, de, ru, zh) · Claude API (Haiku 4.5 batch/moderation, Sonnet vision for photo search only) · Make.com intake bridge · Cloudflare DNS · PWA (`@ducanh2912/next-pwa`).
+Next.js 15 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime + RLS) · Vercel · Leaflet/OSM (Venezuela-locked bounds) · next-intl (**8 locales**: es default, en, pt, fr, it, de, ru, zh) · Claude API (Haiku 4.5 batch/moderation, Sonnet vision for photo search only) · Make.com intake bridge · Cloudflare DNS · PWA (`@ducanh2912/next-pwa`).
 
 **Do not suggest:** Firebase, MongoDB, GraphQL, Prisma, paid SaaS, anything needing >15 min setup.
 
@@ -57,14 +59,15 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 
 ### Migrations
 
-`supabase/migrations/001–018` applied. Schema truth is `docs/reference/data-model.md` + the migration files — not this document.
+`supabase/migrations/001–020` (apply through `020_rls_contact_lockdown` on each live project). Schema truth is `docs/reference/data-model.md` + the migration files — not this document. Public listings read `public_*` views; anon must not SELECT contact/claim columns on base tables.
 
 ### Scripts & checks
 
 - `npm run check:i18n` (also `prebuild` — **build fails if any locale drifts from `es.json` key parity**)
+- `npm run test:sanitize` / `npm run test:feeds` — offline guards (also wired in `.github/workflows/ci.yml`)
 - `npm run build:press-kit` — renders `docs/press/*.md` → styled PDFs in `public/press-kit/` (Playwright Chromium). PDFs are committed; `/api/press-kit/download` zips static files only. Re-run after editing any press markdown.
 - `scripts/visual-check.mjs` — mobile + desktop proof for every changed route
-- CI: CodeQL, accessibility workflow, nightly db-backup (secrets pending — issue #2), vigil-watch
+- CI: `.github/workflows/ci.yml` (tsc, lint, sanitize/feeds tests, build + i18n prebuild), CodeQL, accessibility workflow, nightly db-backup, vigil-watch
 
 ---
 
@@ -86,9 +89,9 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 ## Process rules
 
 - Numbered prompts live in `docs/build-process/` — never at repo root. Generated assets never at repo root (`.gitignore` guards exist; extend them if a new generator appears).
-- Status markers in `VIGIL-LAUNCH-READINESS.md` change only from execution reports.
 - Keep this file honest: when the architecture changes, update this description in the same PR. This document drifting is how the platform accumulated config-vs-nav incoherence once already.
+- Public docs: smallest safe surface. Gap inventories, exploit narratives, and pending-secret checklists stay private.
 
 ---
 
-*Last updated: 2026-07-22 · prompt 75 §7 · Venezuela deployment live*
+*Last updated: 2026-07-25 · docs public/private split · Phase 0 RLS lockdown (020) · Venezuela deployment live*

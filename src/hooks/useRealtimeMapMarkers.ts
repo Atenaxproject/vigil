@@ -16,12 +16,11 @@ export function useRealtimeMapMarkers(initialMarkers: MapMarker[], regionScope: 
     if (!isSupabaseConfigured()) return
     const supabase = createClient()
     const { data } = await supabase
-      .from('map_markers')
+      .from('public_map_markers')
       .select(
         'id, type, category, title, description, lat, lng, estado, municipio, urgent, status, verified, source, created_at, hours_schedule, accepts_categories, organizer_name, region_scope'
       )
       .eq('status', 'active')
-      .eq('flagged', false)
       .eq('region_scope', regionScope)
       .limit(200)
 

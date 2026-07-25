@@ -116,7 +116,7 @@
 | Approve pending organizations | Supabase → `organizations` |
 | Verify crons ran | Vercel dashboard → Cron logs (dedup 08:00 UTC, DTV sync 06:00 UTC) |
 
-See [sops.md](./sops.md) for step-by-step procedures.
+Detailed admin SOPs are maintained privately by the operator ([sops.md](./sops.md) is a public stub).
 
 ### Emergency contacts
 
@@ -132,7 +132,8 @@ See [sops.md](./sops.md) for step-by-step procedures.
 1. `docs/architecture/CLAUDE.md` — stack, constraints, privacy rules
 2. `docs/architecture/DESIGN-SYSTEM.md` — UI before any component work
 3. `docs/architecture/DEPLOYMENT.md` — env vars and deploy steps
-4. `docs/reference/VIGIL-COMPLETE-GUIDE.md` — full operational picture
+4. `CONTRIBUTING.md` + `docs/reference/VIGIL-COMPLETE-GUIDE.md` — contribute + product overview
+5. `docs/reference/api-reference.md` + `data-model.md` — API and schema
 
 ### Local setup
 
@@ -146,7 +147,7 @@ npm run dev
 
 1. App runs at http://localhost:3000 without Supabase — USGS map and static pages work.
 2. Add Supabase keys to `.env.local` for live data features.
-3. Apply migrations 001–010 in order (see [data-model.md](./data-model.md)).
+3. Apply migrations through the latest in `supabase/migrations/` (see [data-model.md](./data-model.md)).
 4. Optional seeds: `supabase/seeds/001_real_data.sql`, `002_resources_venezuelatebusca.sql`.
 
 ### Development rules
