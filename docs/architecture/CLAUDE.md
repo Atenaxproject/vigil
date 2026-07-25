@@ -62,10 +62,12 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 ### Scripts & checks
 
 - `npm run check:i18n` (also `prebuild` — **build fails if any locale drifts from `es.json` key parity**)
-- `npm run test:sanitize` / `npm run test:feeds` / `npm run test:rate-limit` — offline guards (also wired in `.github/workflows/ci.yml`)
+- `npm test` — Vitest unit tests (circuit breaker, contested figures, sanitize, content-expiry)
+- `npm run test:sanitize` / `npm run test:feeds` / `npm run test:rate-limit` / `npm run test:deployments` — offline guards (also wired in `.github/workflows/ci.yml`)
+- `npm run test:uptime` — public synthetic probes; optional `CRON_SECRET`
 - `npm run build:press-kit` — renders `docs/press/*.md` → styled PDFs in `public/press-kit/` (Playwright Chromium). PDFs are committed; `/api/press-kit/download` zips static files only. Re-run after editing any press markdown.
 - `scripts/visual-check.mjs` — mobile + desktop proof for every changed route
-- CI: CodeQL, accessibility workflow, nightly db-backup (secrets pending — issue #2), vigil-watch
+- CI: `.github/workflows/ci.yml` (tsc, lint, offline guards, vitest, build + i18n prebuild), CodeQL, accessibility (axe hard-fail), synthetic-uptime, nightly db-backup, vigil-watch
 
 ---
 
@@ -104,4 +106,4 @@ The GitHub repo is public. Treat documentation as a security surface.
 
 ---
 
-*Last updated: 2026-07-26 · Phase 1 app (photo + durable RL + coverage) · migration reconcile pending #18 · Venezuela deployment live*
+*Last updated: 2026-07-26 · Phase 2/3 app (moderation + flags + Vitest/axe) · migration reconcile pending #18 · Venezuela deployment live*

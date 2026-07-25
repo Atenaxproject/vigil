@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { formatDistanceToNow } from 'date-fns'
-import { es, enUS } from 'date-fns/locale'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { ExternalLink, RefreshCw } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
@@ -133,7 +133,7 @@ export function InformacionLive() {
     }
   }, [fetchInfra, fetchLive])
 
-  const dateLocale = locale === 'es' ? es : enUS
+  const dateLocale = getDateFnsLocale(locale)
   const lastUpdatedLabel = liveData?.lastUpdated
     ? formatDistanceToNow(new Date(liveData.lastUpdated), { addSuffix: true, locale: dateLocale })
     : '—'

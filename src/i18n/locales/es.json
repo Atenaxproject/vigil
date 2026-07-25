@@ -510,7 +510,8 @@
       "invalidEmail": "Correo electrónico no válido",
       "invalidAge": "Edad no válida",
       "mustAccept": "Debes aceptar para continuar"
-    }
+    },
+    "flagError": "No se pudo enviar el reporte. Intente de nuevo."
   },
   "privacy": {
     "shortNotice": "Tu información de contacto nunca se muestra públicamente. No compartimos datos con el gobierno venezolano.",
@@ -1089,13 +1090,14 @@
       "contactNote": "Tu contacto no se muestra públicamente.",
       "gpsOk": "Ubicación GPS detectada",
       "gpsPending": "Esperando ubicación GPS…",
-      "gpsRequired": "Se requiere ubicación GPS dentro de Venezuela.",
+      "gpsRequired": "Se requiere ubicación GPS en Venezuela o Sur de Florida.",
       "categoriesRequired": "Selecciona al menos una categoría.",
       "submit": "Registrar punto",
       "submitting": "Registrando...",
       "success": "Punto de acopio registrado.",
       "error": "Error al registrar."
-    }
+    },
+    "boundsNoteDiaspora": "Se aceptan ubicaciones en Venezuela o en el hub de diáspora (Sur de Florida). Las necesidades y personas desaparecidas siguen limitadas al área de crisis."
   },
   "wall": {
     "title": "Muro Comunitario",
@@ -1213,7 +1215,8 @@
         "tips": [
           "Busca por nombre o sube una foto — comparamos con Vigil y con Desaparecidos Terremoto Venezuela a la vez.",
           "Guarda tu link de reclamo si reportas a alguien — es la única forma de gestionar tu reporte sin cuenta.",
-          "Revisa las notas públicas en cada perfil — pueden tener avistamientos recientes."
+          "Revisa las notas públicas en cada perfil — pueden tener avistamientos recientes.",
+          "Si pierdes el link de reclamo, revisa el correo de confirmación o pégalo en Mis reportes — no hay recuperación por nombre."
         ]
       },
       "necesito_ayuda": {
@@ -1407,7 +1410,7 @@
         },
         "flag": {
           "q": "¿Cómo reporto contenido inapropiado?",
-          "a": "Muro comunitario: usa el botón de reportar en /muro (se oculta automáticamente tras 3 reportes). Personas desaparecidas: aún no hay API pública de reporte — contacta support@youthewave.org."
+          "a": "Muro y personas desaparecidas: usa el botón de reportar (se oculta automáticamente tras 3 reportes). También puedes escribir a support@youthewave.org."
         },
         "structural": {
           "q": "¿Las evaluaciones estructurales son oficiales?",
@@ -1649,14 +1652,17 @@
     "addLabel": "Pega un token de reclamo",
     "add": "Agregar",
     "emptyExplainer": "Cuando envías un reporte, una solicitud de intercambio o de evaluación, se guarda aquí en este dispositivo — sin cuenta — para que puedas volver a consultarlo. Todavía no has guardado ninguno.",
-    "emptyCta": "Crear un reporte"
+    "emptyCta": "Crear un reporte",
+    "claimRecoveryTitle": "Si perdiste tu enlace de reclamo",
+    "claimRecoveryEmail": "Si dejaste un correo al enviar el reporte, busca el mensaje de Vigil con el enlace único — ese token no se puede regenerar desde aquí.",
+    "claimRecoveryDevice": "Los tokens de este dispositivo se guardan solo en este navegador (sin cuenta). Cambiar de teléfono o borrar datos los pierde.",
+    "claimRecoveryPaste": "Si conservas el token o la URL /mi-reporte/…, pégalo arriba para volver a abrirlo.",
+    "claimRecoveryNoLookup": "Por privacidad, Vigil no busca reportes por nombre o teléfono. El token es la llave."
   },
   "proteccionMenores": {
     "title": "Protección de menores",
     "intro": "Vigil publica un tablero público de personas desaparecidas que incluye a niños, niñas y adolescentes. Su información se maneja bajo una regla clara.",
     "principle": "Publicamos lo que ayuda a un desconocido a reconocer al menor. Ocultamos lo que ayudaría a un desconocido a llegar hasta él.",
-    "legalBasisTitle": "Base legal",
-    "legalBasisBody": "La imagen y los datos de niños, niñas y adolescentes tienen protección reforzada en Venezuela. El artículo 65 de la Ley Orgánica para la Protección de Niños, Niñas y Adolescentes (LOPNNA) restringe la divulgación de la imagen de un menor sin el consentimiento de su padre, madre, representante o responsable. El artículo 78 de la Constitución ordena su protección integral con prioridad absoluta y conforme a su interés superior.\n\nVigil reduce la precisión de ubicación de los registros de menores a nivel de municipio, nunca publica el estado de acompañamiento, y aplica esta misma reducción a los datos que comparte con plataformas asociadas. Las fotografías de menores que aparecen en Vigil provienen de plataformas asociadas; Vigil no las aloja ni las modifica. Este texto es informativo y no constituye asesoría legal.",
     "publishTitle": "Qué se publica",
     "publishBody": "Para un registro marcado como menor de edad, Vigil muestra nombre, fotografía, edad, sexo, estado y municipio. Estos datos ayudan a reconocer al menor sin revelar dónde encontrarlo.",
     "locationTitle": "Ubicación reducida",
@@ -1664,12 +1670,11 @@
     "federationTitle": "Federación y exportación",
     "federationBody": "La misma reducción se aplica a la federación y a la exportación. Las plataformas asociadas y el formato estándar PFIF reciben el conjunto reducido: datos de reconocimiento y ubicación a nivel de municipio, nunca la ubicación precisa. Los registros de menores permanecen en la exportación para no reducir las probabilidades de coincidencia entre plataformas.",
     "photoTitle": "Fotografías",
-    "photoBody": "Las fotografías de menores que aparecen en Vigil provienen de plataformas asociadas; Vigil no las aloja ni las modifica. Los metadatos de esas imágenes son responsabilidad de la plataforma de origen.",
+    "photoBody": "Vigil no aloja las fotografías de personas desaparecidas: se muestran desde las plataformas de origen (por ejemplo, la red federada). Por eso Vigil no puede eliminar los metadatos de esas imágenes, que son responsabilidad de la plataforma que las publica originalmente. Estamos planteando este punto directamente a las plataformas de origen.",
     "removalTitle": "Corrección o eliminación",
-    "removalBody": "Cualquier persona puede solicitar la corrección o eliminación de un registro desde la ficha de la persona o escribiendo a vigil@youthewave.org. Un padre, madre, representante o responsable puede solicitar la baja o corrección de un registro de menor. Las solicitudes se revisan y se actúa sobre ellas lo antes posible.",
+    "removalBody": "Un padre, madre o representante puede solicitar la corrección o eliminación de un reporte escribiendo a nuestro canal de contacto. Respondemos en un plazo de 72 horas.",
     "governmentTitle": "Sin datos al gobierno",
     "governmentBody": "Vigil no comparte datos de usuarios con el gobierno venezolano, y esto incluye de forma expresa la información de menores.",
-    "notLegalAdvice": "Este descargo es informativo y no constituye asesoría legal.",
     "privacyLink": "Consulta también nuestra",
     "privacyLinkCta": "Política de Privacidad"
   },
@@ -1693,5 +1698,27 @@
     "reviewedNote": "Las solicitudes se revisan y se actúa sobre ellas lo antes posible.",
     "emailAlternative": "También puedes escribir a",
     "emailSubject": "Solicitud de baja o corrección — Vigil"
+  },
+  "auth": {
+    "loginTitle": "Iniciar sesión",
+    "loginTitleMeta": "Iniciar sesión — Vigil",
+    "loginSubtitle": "Verificación por correo o SMS. No se requiere contraseña.",
+    "loading": "Cargando...",
+    "email": "Correo electrónico",
+    "phone": "Teléfono SMS",
+    "emailLabel": "Correo electrónico",
+    "phoneLabel": "Número de teléfono",
+    "phoneHint": "Incluya código de país (ej. +58)",
+    "sendCode": "Enviar código de verificación",
+    "sending": "Enviando...",
+    "otpLabel": "Código de verificación",
+    "verify": "Verificar e iniciar sesión",
+    "verifying": "Verificando...",
+    "back": "Volver",
+    "footer": "Sin contraseñas — solo verificación por código. Sus datos están protegidos.",
+    "emailSent": "Revise su correo electrónico. Haga clic en el enlace o ingrese el código de verificación.",
+    "smsSent": "Se envió un código SMS. Ingréselo a continuación.",
+    "authRequired": "Debe iniciar sesión para acceder a esta sección.",
+    "adminRequired": "Esta sección es solo para administradores de Vigil."
   }
 }
