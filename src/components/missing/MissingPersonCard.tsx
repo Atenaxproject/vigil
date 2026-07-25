@@ -3,15 +3,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatDistanceToNow } from 'date-fns'
-import { es, enUS } from 'date-fns/locale'
 import { ExternalLink } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import type { FederatedPerson } from '@/lib/dtv-mapper'
 import { tagVigilPerson } from '@/lib/dtv-mapper'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { StatusBadge } from '@/components/missing/StatusBadge'
 import { VerifiedBadge } from '@/components/ui/VerifiedBadge'
 import { UnverifiedBadge } from '@/components/ui/UnverifiedBadge'
+import toast from 'react-hot-toast'
 import { FlagButton } from '@/components/ui/FlagButton'
 
 interface MissingPersonCardProps {
@@ -57,8 +58,9 @@ function PersonAvatar({ name, photoUrl }: { name: string; photoUrl: string | nul
 
 export function MissingPersonCard({ person, onContact }: MissingPersonCardProps) {
   const t = useTranslations('missing')
+  const tc = useTranslations('common')
   const locale = useLocale()
-  const dateLocale = locale === 'es' ? es : enUS
+  const dateLocale = getDateFnsLocale(locale)
   const federated: FederatedPerson =
     '_source' in person && person._source ? person : tagVigilPerson(person)
   const isDtv = federated._source === 'dtv'
@@ -66,6 +68,22 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
   const timeAgo = federated.created_at
     ? formatDistanceToNow(new Date(federated.created_at), { addSuffix: true, locale: dateLocale })
     : t('card.justNow')
+
+  async function handleFlag(e: React.MouseEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+    try {
+      const res = await fetch('/api/missing-persons/flag', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: federated.id }),
+      })
+      if (!res.ok) throw new Error()
+      toast.success(tc('flagSuccess'))
+    } catch {
+      toast.error(tc('flagError'))
+    }
+  }
 
   const cardContent = (
     <article className="relative rounded-card border border-slate-200 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-colors hover:border-slate-300">
@@ -107,7 +125,7 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
           )}
         </div>
         <div className="flex items-center gap-2">
-          {!isDtv && <FlagButton />}
+          {!isDtv && <FlagButton onClick={(e) => void handleFlag(e)} />}
           {isDtv ? (
             <span
               className="inline-flex items-center gap-1 rounded-input border border-amber-300 bg-status-unverified px-3 py-1.5 text-[13px] font-medium text-white"

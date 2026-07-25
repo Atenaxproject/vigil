@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { getClientIp, hashIp, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import {
+  getClientIp,
+  hashIp,
+  resolveGeoForRecord,
+  sanitizePhone,
+  sanitizeText,
+} from '@/lib/security/validate'
 
 export const dynamic = 'force-dynamic'
 
@@ -30,8 +36,9 @@ export async function POST(request: NextRequest) {
   try {
     const body = schema.parse(await request.json())
 
-    if (!isWithinBounds(body.lat, body.lng)) {
-      return NextResponse.json({ error: 'Coordenadas fuera de Venezuela' }, { status: 400 })
+    const geo = resolveGeoForRecord('collection_point', body.lat, body.lng)
+    if (!geo.ok) {
+      return NextResponse.json({ error: geo.error }, { status: 400 })
     }
 
     const supabase = createAdminClient()
@@ -53,6 +60,7 @@ export async function POST(request: NextRequest) {
         verified: true,
         source: 'citizen',
         reporter_ip_hash: ipHash,
+        region_scope: geo.regionScope,
       })
       .select('id, title, lat, lng, created_at')
       .single()

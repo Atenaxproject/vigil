@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { formatDistanceToNow } from 'date-fns'
-import { es, enUS } from 'date-fns/locale'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import {
   ArrowLeftRight,
   Briefcase,
@@ -320,7 +320,7 @@ export default function IntercambioPage() {
         )}
         {filtered.map((entry) => {
           const Icon = CATEGORY_ICONS[entry.category]
-          const dateLocale = locale.startsWith('es') ? es : enUS
+          const dateLocale = getDateFnsLocale(locale)
           return (
             <article
               key={entry.id}

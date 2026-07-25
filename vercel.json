@@ -9,6 +9,10 @@
       "schedule": "0 7 * * *"
     },
     {
+      "path": "/api/cron/retention",
+      "schedule": "0 2 * * *"
+    },
+    {
       "path": "/api/admin/sync-dtv-centers",
       "schedule": "0 6 * * *"
     },

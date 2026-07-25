@@ -1,0 +1,22 @@
+# Public-route synthetic uptime — no secrets required for page probes.
+# Optional CRON_SECRET repository secret enables authenticated cron check.
+name: synthetic-uptime
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Probe public routes
+        env:
+          BASE_URL: https://vigil.youthewave.org
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: node scripts/synthetic-uptime.mjs

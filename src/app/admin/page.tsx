@@ -3,7 +3,9 @@ import { isAdminUser } from '@/lib/supabase/auth'
 import { SignOutButton } from '@/components/auth/SignOutButton'
 import { PropertyAssessmentAdmin } from '@/components/admin/PropertyAssessmentAdmin'
 import { FeedHealthPanel } from '@/components/admin/FeedHealthPanel'
+import { ModerationQueue } from '@/components/admin/ModerationQueue'
 import { redirect } from 'next/navigation'
+import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,8 +20,8 @@ export default async function AdminPage() {
   }
 
   return (
-    <div className="mx-auto max-w-xl p-8">
-      <div className="flex items-start justify-between">
+    <div className="mx-auto max-w-2xl p-8 pb-24">
+      <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="font-display text-[26px] font-semibold text-vigil-ink">Admin</h1>
           <p className="mt-2 text-[16px] text-vigil-muted">
@@ -28,9 +30,14 @@ export default async function AdminPage() {
         </div>
         <SignOutButton />
       </div>
-      <p className="mt-8 text-sm text-slate-600">
-        Moderación completa próximamente. Use Supabase Studio para revisar la cola de moderación.
-      </p>
+
+      <nav className="mt-6 flex flex-wrap gap-3 text-sm">
+        <Link href="/admin/feedback" className="text-vigil-blue hover:underline">
+          Feedback
+        </Link>
+      </nav>
+
+      <ModerationQueue />
       <FeedHealthPanel />
       <PropertyAssessmentAdmin />
     </div>

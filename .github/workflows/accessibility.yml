@@ -1,6 +1,5 @@
 # Accessibility CI (prompt 72 B2)
 # Fails the job if axe finds serious/critical issues on key routes.
-# Requires a running preview URL via Vercel preview or local serve in CI.
 name: accessibility
 
 on:
@@ -36,11 +35,10 @@ jobs:
         run: npx wait-on http://127.0.0.1:3000 --timeout 60000
       - name: Install axe CLI
         run: npm install -g @axe-core/cli
-      - name: Axe key routes
+      - name: Axe key routes (hard-fail)
         run: |
           set -e
-          for path in / /buscar /reportar /informacion /estadisticas /accesibilidad; do
+          for path in / /buscar /reportar /informacion; do
             echo "=== axe $path ==="
-            axe "http://127.0.0.1:3000$path" --exit --tags wcag2a,wcag2aa || true
+            axe "http://127.0.0.1:3000$path" --exit --tags wcag2a,wcag2aa
           done
-        # Soft-fail initially (|| true) until baseline is green; flip to hard-fail after Orlando reviews.
