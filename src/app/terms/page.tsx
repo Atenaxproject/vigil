@@ -69,8 +69,11 @@ export default function TermsPage() {
               endorse them or verify them independently.
             </li>
             <li>
-              Users must call 911 for immediate rescue. Vigil does not dispatch or coordinate rescue
-              operations.
+              Users must call{' '}
+              <strong>
+                {CRISIS_CONFIG.emergency.hotline} ({CRISIS_CONFIG.emergency.hotlineLabel})
+              </strong>{' '}
+              for immediate rescue. Vigil does not dispatch or coordinate rescue operations.
             </li>
           </ul>
         </div>

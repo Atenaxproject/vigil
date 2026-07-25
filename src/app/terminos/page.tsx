@@ -47,7 +47,11 @@ export default function TerminosPage() {
               respalda ni las verifica de forma independiente.
             </li>
             <li>
-              Los usuarios deben llamar al 911 para rescate inmediato. Vigil no despacha ni coordina
+              Los usuarios deben llamar al{' '}
+              <strong>
+                {CRISIS_CONFIG.emergency.hotline} ({CRISIS_CONFIG.emergency.hotlineLabel})
+              </strong>{' '}
+              para rescate inmediato. Vigil no despacha ni coordina
               operaciones de rescate.
             </li>
           </ul>
