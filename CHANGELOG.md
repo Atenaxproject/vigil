@@ -5,6 +5,35 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-25 (Phase 2/3 platform)
+
+### Added
+- **In-app admin moderation queue** — AI duplicates, pending orgs, flagged wall + missing-person flags (`/admin` + `/api/admin/moderation`).
+- **Missing-person community flag** — `POST /api/missing-persons/flag` + migration `022_missing_person_flag_rpc` (auto-hide at 3); wired on cards.
+- **Per-record-type geo** — collection points accept Venezuela **or** USA diaspora hub; persons/needs stay crisis bounds.
+- **Vitest** — circuit breaker, contested figures, content-expiry, sanitize (real modules); `npm test` in CI.
+- **Playwright smoke** — `e2e/smoke.spec.ts` (runs when `PLAYWRIGHT=1`).
+- **Retention cron** — `/api/cron/retention` (90-day archive; `vercel.json` schedule).
+- **Make webhook** — `POST /api/make/webhook` behind `MAKE_WEBHOOK_SECRET`.
+- **Client error sink** — `POST /api/log-client-error` (rate-limited, no SaaS).
+- **Synthetic uptime** — `scripts/synthetic-uptime.mjs` + scheduled workflow.
+- **Deployment pack CI** — `scripts/validate-deployments.mjs` (FL/MX stay prebuilt).
+- **Map list ↔ map focus sync** — accessible list rows fly the map to the marker.
+- **date-fns locale map** — all 8 Vigil languages.
+- Staging/rollback summary + public incident stub in deployment docs.
+
+### Changed
+- Axe accessibility CI **hard-fails** on `/`, `/buscar`, `/reportar`, `/informacion`.
+- Auth login copy moved into next-intl (`auth.*`); claim-recovery education on Mis reportes + mini-guide.
+- Collection-point honesty copy for diaspora-capable GPS.
+
+### Removed
+- Unused `next-themes` dependency; DESIGN-SYSTEM dark-mode drift corrected (light only).
+
+### Ops / restore points
+- After push: annotated tag `restore/phase2-3-YYYYMMDD` on branch tip (not on `main` until merge).
+- Rollback: Vercel previous production deploy + checkout restore tag. Schema reverse requires Orlando approval.
+
 ## [Unreleased] — 2026-07-25 (Phase 1 hardening)
 
 ### Added

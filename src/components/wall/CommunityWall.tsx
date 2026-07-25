@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
-import { es, enUS } from 'date-fns/locale'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { useLocale, useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { AlertTriangle, Heart, HelpCircle, MessageSquare, MapPin } from 'lucide-react'
@@ -31,7 +31,7 @@ export function CommunityWall() {
   const t = useTranslations('wall')
   const tc = useTranslations('common')
   const locale = useLocale()
-  const dateLocale = locale === 'es' ? es : enUS
+  const dateLocale = getDateFnsLocale(locale)
   const [messages, setMessages] = useState<CommunityWallMessage[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)

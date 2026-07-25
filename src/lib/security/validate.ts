@@ -21,6 +21,45 @@ export function isWithinRegionBounds(
   return isWithinBounds(lat, lng)
 }
 
+/**
+ * Per-record-type geo policy:
+ * - persons / needs / volunteers / property → crisis (Venezuela) bounds only
+ * - collection points → Venezuela OR USA diaspora hub (South Florida)
+ */
+export type GeoRecordKind =
+  | 'person'
+  | 'need'
+  | 'resource'
+  | 'collection_point'
+  | 'volunteer'
+  | 'property'
+  | 'event'
+
+export function resolveGeoForRecord(
+  kind: GeoRecordKind,
+  lat: number,
+  lng: number
+): { ok: true; regionScope: RegionScope } | { ok: false; error: string } {
+  if (kind === 'collection_point') {
+    if (isWithinBounds(lat, lng)) {
+      return { ok: true, regionScope: 'venezuela' }
+    }
+    if (isWithinDiasporaBounds(lat, lng)) {
+      return { ok: true, regionScope: 'usa_diaspora' }
+    }
+    return {
+      ok: false,
+      error:
+        'Coordenadas fuera de las zonas permitidas (Venezuela o Sur de Florida / diáspora)',
+    }
+  }
+
+  if (!isWithinBounds(lat, lng)) {
+    return { ok: false, error: 'Coordenadas fuera de Venezuela' }
+  }
+  return { ok: true, regionScope: 'venezuela' }
+}
+
 export function hashIp(ip: string): string {
   const secret = process.env.VIGIL_ADMIN_SECRET ?? 'vigil-dev-secret'
   return createHash('sha256').update(ip + secret).digest('hex').slice(0, 16)

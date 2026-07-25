@@ -59,15 +59,17 @@ Next.js 15 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 
 ### Migrations
 
-`supabase/migrations/001–021` (apply through `021_needs_coverage_and_photo_storage` on each live project; `020` RLS lockdown first). Schema truth is `docs/reference/data-model.md` + the migration files — not this document. Public listings read `public_*` views; anon must not SELECT contact/claim columns on base tables.
+`supabase/migrations/001–022` (apply through `022_missing_person_flag_rpc` on each live project; `020` RLS lockdown first, then `021`, then `022`). Schema truth is `docs/reference/data-model.md` + the migration files — not this document. Public listings read `public_*` views; anon must not SELECT contact/claim columns on base tables.
 
 ### Scripts & checks
 
 - `npm run check:i18n` (also `prebuild` — **build fails if any locale drifts from `es.json` key parity**)
-- `npm run test:sanitize` / `npm run test:feeds` / `npm run test:rate-limit` — offline guards (also wired in `.github/workflows/ci.yml`)
+- `npm test` — Vitest unit tests (circuit breaker, contested figures, sanitize, content-expiry)
+- `npm run test:sanitize` / `npm run test:feeds` / `npm run test:rate-limit` / `npm run test:deployments` — offline guards (also wired in `.github/workflows/ci.yml`)
+- `npm run test:uptime` — public synthetic probes; optional `CRON_SECRET`
 - `npm run build:press-kit` — renders `docs/press/*.md` → styled PDFs in `public/press-kit/` (Playwright Chromium). PDFs are committed; `/api/press-kit/download` zips static files only. Re-run after editing any press markdown.
 - `scripts/visual-check.mjs` — mobile + desktop proof for every changed route
-- CI: `.github/workflows/ci.yml` (tsc, lint, sanitize/feeds tests, build + i18n prebuild), CodeQL, accessibility workflow, nightly db-backup, vigil-watch
+- CI: `.github/workflows/ci.yml` (tsc, lint, offline guards, vitest, build + i18n prebuild), CodeQL, accessibility (axe hard-fail), synthetic-uptime, nightly db-backup, vigil-watch
 
 ---
 
@@ -94,4 +96,4 @@ Next.js 15 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 
 ---
 
-*Last updated: 2026-07-25 · Phase 1 photo + durable rate limits + coverage (021) · Phase 0 RLS (020) · Venezuela deployment live*
+*Last updated: 2026-07-25 · Phase 2/3 moderation + flag RPC (022) + Vitest/axe · Phase 1 photo/coverage (021) · Phase 0 RLS (020) · Venezuela deployment live*

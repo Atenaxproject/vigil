@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
-import { es, enUS } from 'date-fns/locale'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { useLocale, useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
@@ -33,7 +33,7 @@ interface MissingPersonNotesProps {
 export function MissingPersonNotes({ personId }: MissingPersonNotesProps) {
   const t = useTranslations('notes')
   const locale = useLocale()
-  const dateLocale = locale === 'es' ? es : enUS
+  const dateLocale = getDateFnsLocale(locale)
   const [notes, setNotes] = useState<MissingPersonNote[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)

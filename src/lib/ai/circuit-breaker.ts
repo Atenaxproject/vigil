@@ -48,6 +48,17 @@ function unitsFromCounts(haiku: number, sonnet: number): number {
   return haiku * haikuUnitCost + sonnet * sonnetUnitCost
 }
 
+/** Pure state machine — exported for unit tests. */
+export function deriveBreakerState(
+  units: number,
+  degrade: number,
+  halt: number
+): BreakerState {
+  if (units >= halt) return 'halted'
+  if (units >= degrade) return 'degraded'
+  return 'ok'
+}
+
 /**
  * Record one AI call for the spend-proxy counter.
  * Failures are swallowed — breaker must never block a user path by throwing.
@@ -102,9 +113,7 @@ export async function getAiBreakerSnapshot(): Promise<AiBreakerSnapshot> {
   const units = unitsFromCounts(haiku, sonnet)
   const { degrade, halt } = getAiThresholds()
 
-  let state: BreakerState = 'ok'
-  if (units >= halt) state = 'halted'
-  else if (units >= degrade) state = 'degraded'
+  const state = deriveBreakerState(units, degrade, halt)
 
   return {
     state,
