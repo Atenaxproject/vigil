@@ -20,6 +20,8 @@ export type MarkerCategory =
   | 'transport'
   | 'other'
 export type MarkerStatus = 'active' | 'resolved' | 'unverified'
+/** Coverage lifecycle for map_markers type=need (migration 021). */
+export type CoverageState = 'uncovered' | 'partial' | 'covered' | 'needs_reconfirmation'
 export type OrgType =
   | 'rescue'
   | 'medical'
@@ -185,6 +187,10 @@ export interface MapMarker {
   hours_schedule?: string | null
   accepts_categories?: string[]
   organizer_name?: string | null
+  region_scope?: RegionScope
+  coverage_state?: CoverageState
+  coverage_updated_at?: string | null
+  resolved_at?: string | null
 }
 
 export interface Organization {

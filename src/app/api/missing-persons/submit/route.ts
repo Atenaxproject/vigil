@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 import { getClientIp, hashIp, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
 import { notifyClaimLink } from '@/lib/email/notify'
 import { jitterCoordinates } from '@/lib/property-assessment'
+import { stripExif, type UploadMime } from '@/lib/images/strip-exif'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 export const dynamic = 'force-dynamic'
+
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
+const MAX_BYTES = 5 * 1024 * 1024
 
 const schema = z.object({
   full_name: z.string().min(2).max(200),
@@ -29,9 +34,58 @@ const schema = z.object({
   data_accuracy_confirmed: z.literal(true),
 })
 
+async function parseBody(request: NextRequest): Promise<{
+  body: z.infer<typeof schema>
+  photo: File | null
+}> {
+  const contentType = request.headers.get('content-type') ?? ''
+  if (contentType.includes('multipart/form-data')) {
+    const formData = await request.formData()
+    const raw = formData.get('payload')
+    if (typeof raw !== 'string') throw new Error('invalid_payload')
+    const body = schema.parse(JSON.parse(raw))
+    const photo = formData.get('photo')
+    return {
+      body,
+      photo: photo instanceof File && photo.size > 0 ? photo : null,
+    }
+  }
+  return { body: schema.parse(await request.json()), photo: null }
+}
+
+async function uploadPhoto(photo: File): Promise<string | null> {
+  if (!ALLOWED_TYPES.includes(photo.type as (typeof ALLOWED_TYPES)[number])) {
+    throw new Error('invalid_photo_type')
+  }
+  if (photo.size > MAX_BYTES) {
+    throw new Error('photo_too_large')
+  }
+
+  const rawBytes = Buffer.from(await photo.arrayBuffer())
+  const { buffer: cleanBytes, mime: cleanMime } = await stripExif(
+    rawBytes,
+    photo.type as UploadMime
+  )
+  const ext = cleanMime === 'image/png' ? 'png' : cleanMime === 'image/webp' ? 'webp' : 'jpg'
+  const path = `${crypto.randomUUID()}.${ext}`
+
+  try {
+    const admin = createAdminClient()
+    const { error: uploadError } = await admin.storage
+      .from('missing-person-photos')
+      .upload(path, cleanBytes, { contentType: cleanMime, upsert: false })
+    if (uploadError) return null
+
+    const { data } = admin.storage.from('missing-person-photos').getPublicUrl(path)
+    return data.publicUrl ?? null
+  } catch {
+    return null
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const body = schema.parse(await request.json())
+    const { body, photo } = await parseBody(request)
 
     if (body.last_seen_lat !== undefined && body.last_seen_lng !== undefined) {
       if (!isWithinBounds(body.last_seen_lat, body.last_seen_lng)) {
@@ -39,7 +93,30 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const supabase = await createClient()
+    let photoUrl: string | null = null
+    if (photo) {
+      try {
+        photoUrl = await uploadPhoto(photo)
+      } catch (err) {
+        const code = err instanceof Error ? err.message : 'photo_error'
+        if (code === 'invalid_photo_type') {
+          return NextResponse.json({ error: 'Tipo de archivo no válido' }, { status: 400 })
+        }
+        if (code === 'photo_too_large') {
+          return NextResponse.json({ error: 'Archivo demasiado grande' }, { status: 400 })
+        }
+      }
+    }
+
+    // Service role when returning claim_token after RLS lockdown; fall back to
+    // anon client if service role is unset (local/dev without admin key).
+    let supabase
+    try {
+      supabase = createAdminClient()
+    } catch {
+      supabase = await createClient()
+    }
+
     const ipHash = hashIp(getClientIp(request.headers))
 
     const approxCoords =
@@ -50,6 +127,7 @@ export async function POST(request: NextRequest) {
     // Pre-generate id + claim_token so we can Prefer: return=minimal.
     // Anon has INSERT (with consent RLS) but not SELECT on the base table —
     // contact fields stay locked; public reads use public_missing_persons.
+    // photo_url is set only via service-role client (not in anon column grant).
     const id = crypto.randomUUID()
     const claim_token = crypto.randomUUID()
     const created_at = new Date().toISOString()
@@ -64,6 +142,7 @@ export async function POST(request: NextRequest) {
       // upgrades it to true when age < 18; neither app nor trigger clears it.
       is_minor: body.is_minor === true,
       gender: body.gender ?? null,
+      ...(photoUrl ? { photo_url: photoUrl } : {}),
       last_seen_location: sanitizeText(body.last_seen_location),
       estado: sanitizeText(body.estado),
       municipio: body.municipio ? sanitizeText(body.municipio) : null,
@@ -106,7 +185,12 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    return NextResponse.json({ success: true, record, claimUrl })
+    return NextResponse.json({
+      success: true,
+      record,
+      claimUrl,
+      photoStored: Boolean(photoUrl),
+    })
   } catch {
     return NextResponse.json({ error: 'Datos inválidos' }, { status: 400 })
   }
