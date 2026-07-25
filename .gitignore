@@ -38,6 +38,10 @@ next-env.d.ts
 # vigil
 build.log
 
+# Internal security/ops evaluations (local-only until Critical RLS remediated)
+# See docs/README.md one-liner — do not commit raw audit findings.
+/docs/evaluations/
+
 # PWA service worker (generated at build)
 public/sw.js
 public/sw.js.map

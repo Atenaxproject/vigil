@@ -83,11 +83,10 @@ export default function IntercambioPage() {
     try {
       const supabase = createClient()
       const { data, error } = await supabase
-        .from('resource_exchange')
+        .from('public_resource_exchange')
         .select(PUBLIC_SELECT)
         .eq('entry_type', tab)
         .eq('status', 'active')
-        .eq('flagged', false)
         .order('urgent', { ascending: false })
         .order('created_at', { ascending: false })
         .limit(100)

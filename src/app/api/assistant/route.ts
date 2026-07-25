@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
   const supabase = await createClient()
   const [markersRes, orgsRes, eventsRes, seismicEvents] = await Promise.all([
     supabase
-      .from('map_markers')
+      .from('public_map_markers')
       .select('type, category, title, description, estado, status, urgent')
       .eq('status', 'active')
       .limit(50),
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
       .eq('active', true)
       .limit(30),
     supabase
-      .from('events')
+      .from('public_events')
       .select('title, category, starts_at, location_label, description')
       .gte('starts_at', new Date().toISOString())
       .limit(10),

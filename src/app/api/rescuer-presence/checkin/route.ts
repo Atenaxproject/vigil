@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,7 +12,8 @@ const schema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = schema.parse(await request.json())
-    const supabase = await createClient()
+    // Service role only — public UPDATE on rescuer_presence was removed (020).
+    const supabase = createAdminClient()
     const expireAt = new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString()
 
     const updates: Record<string, string> = {

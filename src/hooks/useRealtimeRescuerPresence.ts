@@ -15,10 +15,8 @@ export function useRealtimeRescuerPresence() {
     if (!isSupabaseConfigured()) return
     const supabase = createClient()
     const { data } = await supabase
-      .from('rescuer_presence')
+      .from('public_rescuer_presence')
       .select(SELECT)
-      .neq('status', 'signed_off')
-      .gt('auto_expire_at', new Date().toISOString())
 
     if (data) {
       setPresence(
