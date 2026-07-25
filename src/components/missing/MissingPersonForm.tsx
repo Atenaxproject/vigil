@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -10,6 +10,7 @@ import { Lock } from 'lucide-react'
 import { ClaimLinkSuccess } from '@/components/ui/ClaimLinkSuccess'
 import { DtvCrossReportBanner } from '@/components/dtv/DtvCrossReportBanner'
 import { GeoSelect } from '@/components/missing/GeoSelect'
+import { compressImageForUpload } from '@/lib/images/compress-client'
 import { queueSubmission } from '@/lib/offline-queue'
 
 // Message strings are i18n keys under common.validation, translated at render.
@@ -37,11 +38,16 @@ type FormValues = z.infer<typeof formSchema>
 const VALIDATION_KEYS = ['required', 'tooShort', 'tooLong', 'invalidEmail', 'invalidAge', 'mustAccept'] as const
 type ValidationKey = (typeof VALIDATION_KEYS)[number]
 
+const MAX_PHOTO_BYTES = 5 * 1024 * 1024
+const ALLOWED_PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+
 export function MissingPersonForm() {
   const t = useTranslations('missing.form')
   const tCommon = useTranslations('common')
   const [submitting, setSubmitting] = useState(false)
   const [claimUrl, setClaimUrl] = useState<string | null>(null)
+  const [photoName, setPhotoName] = useState<string | null>(null)
+  const photoRef = useRef<HTMLInputElement>(null)
 
   // Zod messages carry i18n key names (see formSchema); translate them here so
   // an invalid email says "invalid email", not a generic "required".
@@ -71,18 +77,37 @@ export function MissingPersonForm() {
   async function onSubmit(data: FormValues) {
     setSubmitting(true)
     try {
+      const rawPhoto = photoRef.current?.files?.[0] ?? null
+
+      // Offline queue is JSON-only — skip photo until reconnect (storage path needs online).
       if (!navigator.onLine) {
         queueSubmission('missing-person', data)
         toast.success(t('queuedOffline'))
         reset()
+        setPhotoName(null)
+        if (photoRef.current) photoRef.current.value = ''
         return
       }
 
-      const res = await fetch('/api/missing-persons/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
+      let photo: File | null = rawPhoto
+      if (photo) {
+        if (!ALLOWED_PHOTO_TYPES.includes(photo.type)) {
+          toast.error(t('photoInvalidType'))
+          return
+        }
+        if (photo.size > MAX_PHOTO_BYTES) {
+          toast.error(t('photoTooLarge'))
+          return
+        }
+        const compressed = await compressImageForUpload(photo)
+        photo = compressed.file
+      }
+
+      const body = new FormData()
+      body.append('payload', JSON.stringify(data))
+      if (photo) body.append('photo', photo)
+
+      const res = await fetch('/api/missing-persons/submit', { method: 'POST', body })
       const json = (await res.json()) as { claimUrl?: string }
       if (!res.ok) throw new Error('submit failed')
       if (json.claimUrl) {
@@ -104,6 +129,8 @@ export function MissingPersonForm() {
       } else {
         toast.success(t('success'))
         reset()
+        setPhotoName(null)
+        if (photoRef.current) photoRef.current.value = ''
       }
     } catch {
       toast.error(t('error'))
@@ -206,6 +233,32 @@ export function MissingPersonForm() {
             <span className="mt-0.5 block text-[13px] text-vigil-muted">{t('isMinorHint')}</span>
           </span>
         </label>
+      </div>
+
+      <div>
+        <label htmlFor="mp-photo" className={labelClass}>
+          {t('photo')}
+        </label>
+        <input
+          id="mp-photo"
+          ref={photoRef}
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          className="mt-1 block w-full text-[16px] text-vigil-muted file:mr-3 file:rounded-input file:border-0 file:bg-vigil-blue file:px-3 file:py-2 file:text-[14px] file:font-medium file:text-white"
+          onChange={(e) => {
+            const f = e.target.files?.[0]
+            setPhotoName(f?.name ?? null)
+          }}
+          aria-describedby="mp-photo-help"
+        />
+        <p id="mp-photo-help" className="mt-1 text-[13px] text-vigil-muted">
+          {t('photoHelp')} {t('photoPrivacy')}
+        </p>
+        {photoName && (
+          <p className="mt-1 text-[13px] text-slate-600" aria-live="polite">
+            {photoName}
+          </p>
+        )}
       </div>
 
       <div>

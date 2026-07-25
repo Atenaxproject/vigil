@@ -193,7 +193,10 @@
         "dismiss": "Dismiss notice"
       },
       "isMinor": "Ist minderjährig",
-      "isMinorHint": "Ankreuzen, um den Standort des Kindes zu schützen. Es schränkt die Suche nicht ein — Name, Foto und Bundesstaat bleiben öffentlich."
+      "isMinorHint": "Ankreuzen, um den Standort des Kindes zu schützen. Es schränkt die Suche nicht ein — Name, Foto und Bundesstaat bleiben öffentlich.",
+      "photoPrivacy": "GPS metadata is stripped before storage. We do not use facial recognition.",
+      "photoInvalidType": "Use JPG, PNG, or WebP.",
+      "photoTooLarge": "Photo exceeds 5 MB. Compress or choose another."
     },
     "card": {
       "lastSeen": "Zuletzt gesehen:",
@@ -308,6 +311,13 @@
     "seismicFreshness": {
       "stale": "Seismische Daten älter als 30 Min. Prüfen unter",
       "unavailable": "Live-Seismik nicht verfügbar. Offizielle Quelle:"
+    },
+    "coverage": {
+      "uncovered": "Uncovered",
+      "partial": "Partial",
+      "covered": "Covered",
+      "needs_reconfirmation": "Needs reconfirmation",
+      "staleHint": "may be outdated"
     }
   },
   "volunteers": {

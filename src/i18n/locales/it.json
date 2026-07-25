@@ -193,7 +193,10 @@
         "dismiss": "Dismiss notice"
       },
       "isMinor": "È un minore",
-      "isMinorHint": "Seleziona per proteggere la posizione del minore. Non limita la ricerca: nome, foto e stato restano pubblici."
+      "isMinorHint": "Seleziona per proteggere la posizione del minore. Non limita la ricerca: nome, foto e stato restano pubblici.",
+      "photoPrivacy": "GPS metadata is stripped before storage. We do not use facial recognition.",
+      "photoInvalidType": "Use JPG, PNG, or WebP.",
+      "photoTooLarge": "Photo exceeds 5 MB. Compress or choose another."
     },
     "card": {
       "lastSeen": "Ultimo avvistamento:",
@@ -308,6 +311,13 @@
     "seismicFreshness": {
       "stale": "Dati sismici più vecchi di 30 min. Verifica su",
       "unavailable": "Dati sismici in tempo reale non disponibili. Consulta la fonte ufficiale:"
+    },
+    "coverage": {
+      "uncovered": "Uncovered",
+      "partial": "Partial",
+      "covered": "Covered",
+      "needs_reconfirmation": "Needs reconfirmation",
+      "staleHint": "may be outdated"
     }
   },
   "volunteers": {

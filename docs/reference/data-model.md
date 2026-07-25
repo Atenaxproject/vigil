@@ -24,8 +24,11 @@
 | 012 | `012_missing_persons_map_coords.sql` | jittered map coords on missing_persons; parroquia in public view |
 | 013 | `013_vigil_watch_state.sql` | Vigil Watch durable state |
 | 014 | `014_ai_usage_log.sql` | AI call log for spend-proxy circuit breaker |
+| 015–019 | (see migration files) | sourced figures, feed health, hazards, contested figures, minors |
+| 020 | `020_rls_contact_lockdown.sql` | Public views; drop broad anon SELECT on PII tables |
+| 021 | `021_needs_coverage_and_photo_storage.sql` | `coverage_state` on need markers; `missing-person-photos` bucket |
 
-> **Note:** `docs/architecture/DEPLOYMENT.md` covers setup. Production requires migrations **001–020** (including `020_rls_contact_lockdown` public views) — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
+> **Note:** `docs/architecture/DEPLOYMENT.md` covers setup. Production requires migrations **001–021** (apply `020` then `021`) — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
 
 ---
 
@@ -104,7 +107,9 @@ Unified map pin table for multiple layer types.
 | dtv_center | Synced from DTV API |
 | property | Property assessment (via separate table + view) |
 
-Key fields: `lat`, `lng`, `title`, `description`, `active`, `flagged`, `external_id` (DTV dedup).
+Key fields: `lat`, `lng`, `title`, `description`, `status`, `flagged`, `external_id` (DTV dedup).
+
+Need pins also carry `coverage_state` (`uncovered` | `partial` | `covered` | `needs_reconfirmation`) and `coverage_updated_at`. Public reads use `public_map_markers` (no `contact`). Admin/API transitions + daily decay cron mark stale needs.
 
 ### organizations
 

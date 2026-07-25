@@ -5,6 +5,10 @@
       "schedule": "0 8 * * *"
     },
     {
+      "path": "/api/cron/coverage-decay",
+      "schedule": "0 7 * * *"
+    },
+    {
       "path": "/api/admin/sync-dtv-centers",
       "schedule": "0 6 * * *"
     },

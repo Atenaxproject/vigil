@@ -5,6 +5,19 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-25 (Phase 1 hardening)
+
+### Added
+- **Missing-person photo loop** — optional photo on `/reportar`; client compress; server EXIF strip; public `missing-person-photos` storage; card/detail display with initials fallback (no facial recognition claim).
+- **Durable rate limits** — optional Upstash Redis REST (`UPSTASH_REDIS_REST_*`); in-memory fallback when unset; claim + admin verify + AI paths covered.
+- **Needs coverage lifecycle** — migration `021_needs_coverage_and_photo_storage` (`coverage_state` on need markers); admin coverage API; daily decay cron; map colors + stale label.
+
+### Changed
+- CI runs `scripts/test-rate-limit.mjs` alongside sanitize/feeds guards.
+
+### Docs
+- `.env.example` documents optional Upstash vars; data-model / CLAUDE migrations through 021.
+
 ## [Unreleased] — 2026-07-25 (Phase 0 RLS)
 
 ### Security

@@ -210,6 +210,9 @@
       },
       "photo": "Fotografía (recomendado)",
       "photoHelp": "Una foto clara ayuda a la identificación. Máximo 5MB.",
+      "photoPrivacy": "Se eliminan metadatos GPS antes de guardar. No usamos reconocimiento facial.",
+      "photoInvalidType": "Usa JPG, PNG o WebP.",
+      "photoTooLarge": "La foto supera 5 MB. Comprime o elige otra.",
       "lastSeen": "Última Ubicación Conocida",
       "lastSeenPlaceholder": "Ciudad, sector, dirección...",
       "lastSeenDate": "Fecha en que fue visto/a por última vez",
@@ -337,6 +340,13 @@
     "submitError": "Error al enviar",
     "exchangeHint": "¿Buscas intercambiar bienes o servicios con otra persona?",
     "exchangeLink": "Ir a Intercambio",
+    "coverage": {
+      "uncovered": "Sin cubrir",
+      "partial": "Parcial",
+      "covered": "Cubierto",
+      "needs_reconfirmation": "Requiere confirmación",
+      "staleHint": "puede estar desactualizado"
+    },
     "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela",
     "cavSourceBadge": "vía Centros de Ayuda Venezuela"
   },

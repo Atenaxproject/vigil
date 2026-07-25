@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
@@ -10,6 +11,15 @@ export const dynamic = 'force-dynamic'
 
 interface PageProps {
   params: Promise<{ id: string }>
+}
+
+function initials(name: string): string {
+  return name
+    .split(' ')
+    .slice(0, 2)
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
 }
 
 export default async function MissingPersonDetailPage({ params }: PageProps) {
@@ -29,9 +39,32 @@ export default async function MissingPersonDetailPage({ params }: PageProps) {
         ← {t('title')}
       </Link>
       <article className="mt-4 rounded-card border border-slate-200 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-        <div className="flex items-start justify-between gap-4">
-          <h1 className="font-display text-xl font-semibold text-vigil-ink">{person.full_name}</h1>
-          <StatusBadge status={person.status} label={t(`status.${person.status}`)} />
+        <div className="flex items-start gap-4">
+          {person.photo_url ? (
+            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-slate-100">
+              <Image
+                src={person.photo_url}
+                alt=""
+                width={96}
+                height={96}
+                className="h-full w-full object-cover"
+                unoptimized
+              />
+            </div>
+          ) : (
+            <div
+              className="flex h-24 w-24 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 text-xl font-semibold text-slate-600"
+              aria-hidden
+            >
+              {initials(person.full_name)}
+            </div>
+          )}
+          <div className="min-w-0 flex-1">
+            <div className="flex items-start justify-between gap-4">
+              <h1 className="font-display text-xl font-semibold text-vigil-ink">{person.full_name}</h1>
+              <StatusBadge status={person.status} label={t(`status.${person.status}`)} />
+            </div>
+          </div>
         </div>
         <dl className="mt-4 space-y-2 text-[16px]">
           {person.age && (

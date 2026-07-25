@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { formatDistanceToNow } from 'date-fns'
 import { es, enUS } from 'date-fns/locale'
@@ -29,6 +30,31 @@ function getInitials(name: string): string {
     .toUpperCase()
 }
 
+function PersonAvatar({ name, photoUrl }: { name: string; photoUrl: string | null }) {
+  if (photoUrl) {
+    return (
+      <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-slate-100">
+        <Image
+          src={photoUrl}
+          alt=""
+          width={44}
+          height={44}
+          className="h-full w-full object-cover"
+          unoptimized
+        />
+      </div>
+    )
+  }
+  return (
+    <div
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 text-sm font-semibold text-slate-600"
+      aria-hidden
+    >
+      {getInitials(name)}
+    </div>
+  )
+}
+
 export function MissingPersonCard({ person, onContact }: MissingPersonCardProps) {
   const t = useTranslations('missing')
   const locale = useLocale()
@@ -47,12 +73,7 @@ export function MissingPersonCard({ person, onContact }: MissingPersonCardProps)
         <StatusBadge status={federated.status} label={t(`status.${federated.status}`)} />
       </div>
       <div className="flex gap-3">
-        <div
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 text-sm font-semibold text-slate-600"
-          aria-hidden
-        >
-          {getInitials(federated.full_name)}
-        </div>
+        <PersonAvatar name={federated.full_name} photoUrl={federated.photo_url} />
         <div className="min-w-0 flex-1 pr-16">
           <h3 className="text-[14px] font-medium text-vigil-ink">{federated.full_name}</h3>
           <p className="mt-0.5 text-[13px] text-vigil-muted">
