@@ -260,7 +260,9 @@
       "propertyAssessments": "Structural assessments",
       "missingPersons": "Missing persons",
       "missingPersonsApprox": "Approximate location (privacy)",
-      "missingPersonsView": "View profile"
+      "missingPersonsView": "View profile",
+      "missingPersonsMunicipioApprox": "大致位置——市镇级别",
+      "missingPersonsEstadoApprox": "大致位置——州级别"
     },
     "magnitude": "震级",
     "depth": "深度",

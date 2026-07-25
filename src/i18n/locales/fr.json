@@ -260,7 +260,9 @@
       "propertyAssessments": "Structural assessments",
       "missingPersons": "Missing persons",
       "missingPersonsApprox": "Approximate location (privacy)",
-      "missingPersonsView": "View profile"
+      "missingPersonsView": "View profile",
+      "missingPersonsMunicipioApprox": "Localisation approximative — niveau municipalité",
+      "missingPersonsEstadoApprox": "Localisation approximative — niveau État"
     },
     "magnitude": "Magnitude",
     "depth": "Profondeur",

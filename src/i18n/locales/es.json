@@ -290,7 +290,9 @@
       "propertyAssessments": "Evaluaciones estructurales",
       "missingPersons": "Personas Desaparecidas",
       "missingPersonsApprox": "Ubicación aproximada (privacidad)",
-      "missingPersonsView": "Ver perfil"
+      "missingPersonsView": "Ver perfil",
+      "missingPersonsMunicipioApprox": "Ubicación aproximada — nivel de municipio",
+      "missingPersonsEstadoApprox": "Ubicación aproximada — nivel de estado"
     },
     "magnitude": "Magnitud",
     "depth": "Profundidad",
