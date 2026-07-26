@@ -202,7 +202,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                       href="https://youthewave.org"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-vigil-blue underline-offset-2 transition-colors hover:underline"
+                      className="text-vigil-blue underline underline-offset-2 transition-colors"
                     >
                       {t('attributionOrg')}
                     </a>{' '}

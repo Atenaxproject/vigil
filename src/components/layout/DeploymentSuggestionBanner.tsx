@@ -50,7 +50,7 @@ export function DeploymentSuggestionBanner({
         {t('question', { label })}{' '}
         <a
           href={url}
-          className="font-medium text-vigil-blue underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+          className="font-medium text-vigil-blue underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
         >
           {t('go')}
         </a>
