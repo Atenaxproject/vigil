@@ -5,6 +5,26 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-26 (prompt 80 mobile portrait order)
+
+### Fixed
+- **Weather bar (mobile)** — chevron expands a full wrapped panel (time, temp, precip, locations); collapsed state no longer clips the full status string mid-word.
+- **Emergency carrier chips** — horizontal `scroll-snap` row with right-edge fade; `911` pinned leftmost and always fully visible; carrier chips ≥44px tall.
+- **Home map / shell height** — `dvh`-aware map and shell mins so tall/narrow viewports do not leave oversized voids; footer sits at natural content end.
+- **FAB vs footer** — Feedback + Assistant FABs respect `safe-area-inset-bottom` above the bottom nav; footer gains clearance so credit/links are not covered.
+- **Header control density** — header/controls wrap before overlapping at 320–390px; language + mode controls keep ≥44px tap targets.
+
+### Docs
+- Public stubs `79-stack-reconciliation-and-land.md` / `80-mobile-portrait-order.md`; full prompts private under `docs/evaluations/`.
+
+## [Unreleased] — 2026-07-26 (prompt 79 stack reconciliation)
+
+### Security / Ops
+- **Migration fork plan frozen** (private) — canonical apply order `020` restore → `021` contact lockdown → `022` coverage/photos → `023` flag RPC → `024` insert lockdown.
+- **Landed** `#15` → `#16` → `#17` (app) then `#18` (SQL `021`–`024`). Restore tags `restore/phase2-3-20260725` / `restore/phase2-3-20260726`.
+- **#17 CI** — lockfile + ChromeDriver + Playwright gate + axe core-route hard-fail (`/informacion` contrast debt deferred).
+- **Upstash** unset in Vercel Production — durable RL falls back to in-memory (Orlando decision). **Prod SQL apply** still operator/Codex — not done from the agent.
+
 ## [Unreleased] — 2026-07-26 (RLS insert lockdown — aligned with #22)
 
 ### Security
@@ -13,6 +33,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 
 ### Docs
 - `data-model.md` lists 020–024; `CLAUDE.md` and `024` header state apply order `020` → `021` → `022` → `023` → `024`.
+
 
 ## [Unreleased] — 2026-07-26 (missing_persons public INSERT restore)
 

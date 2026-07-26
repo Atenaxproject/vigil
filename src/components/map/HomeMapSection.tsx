@@ -26,7 +26,8 @@ export function HomeMapSection({
 
   return (
     <>
-      <div className="min-h-[min(50vh,400px)] flex-1">
+      {/* Viewport-relative map height — dvh tracks iOS toolbar collapse; no fixed px void */}
+      <div className="h-[min(50vh,400px)] w-full [@supports(height:100dvh)]:h-[min(50dvh,400px)] lg:h-auto lg:min-h-0 lg:flex-1">
         <CrisisMap
           events={events}
           markers={markers}

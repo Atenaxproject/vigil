@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ChevronDown, ChevronUp, Clock, Cloud, CloudLightning, CloudRain, Sun } from 'lucide-react'
-import { cn } from '@/lib/utils'
 
 interface WeatherLocation {
   name: string
@@ -42,6 +41,22 @@ function WeatherIcon({ condition }: { condition: WeatherLocation['condition'] })
   }
 }
 
+function LocationLine({ loc, rainLabel }: { loc: WeatherLocation; rainLabel: string }) {
+  return (
+    <span className="inline-flex flex-wrap items-center gap-x-1">
+      <span>
+        {loc.name} {loc.temp}°C
+      </span>
+      <WeatherIcon condition={loc.condition} />
+      {loc.precipProbability > 0 && (
+        <span className="text-vigil-muted">
+          ({loc.precipProbability}% {rainLabel})
+        </span>
+      )}
+    </span>
+  )
+}
+
 export function WeatherBar() {
   const t = useTranslations('weather')
   // Local Caracas clock immediately — never ship "—" while waiting on Open-Meteo.
@@ -72,6 +87,12 @@ export function WeatherBar() {
     return () => clearInterval(interval)
   }, [])
 
+  const hasLocations = Boolean(data?.locations?.length)
+  const summaryHint =
+    hasLocations && !expanded
+      ? ` · ${data!.locations[0].name} ${data!.locations[0].temp}°C`
+      : ''
+
   return (
     <div
       className="border-b border-slate-200 bg-white px-4 py-1 text-[13px] text-vigil-muted"
@@ -81,31 +102,46 @@ export function WeatherBar() {
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
-        className="flex w-full items-center justify-between gap-2 lg:cursor-default lg:pointer-events-none"
+        className="flex w-full min-h-[44px] items-center justify-between gap-2 text-left lg:min-h-0 lg:cursor-default lg:pointer-events-none"
         aria-expanded={expanded}
       >
-        <span className="flex items-center gap-1 truncate">
+        <span className="flex min-w-0 items-center gap-1">
           <Clock className="h-3.5 w-3.5 shrink-0" aria-hidden />
-          {t('venezuela')}: {time}
-          <span className={cn('lg:inline', expanded ? 'inline' : 'hidden')}>
-            {data?.error && (
-              <span className="text-status-unverified"> · {t('unavailable')}</span>
-            )}
-            {data?.locations.map((loc) => (
-              <span key={loc.name}>
-                {' '}
-                · {loc.name} {loc.temp}°C <WeatherIcon condition={loc.condition} />
-                {loc.precipProbability > 0 && (
-                  <span className="text-vigil-muted"> ({loc.precipProbability}% {t('rain')})</span>
-                )}
-              </span>
-            ))}
+          <span className="min-w-0 truncate lg:overflow-visible lg:whitespace-normal">
+            {t('venezuela')}: {time}
+            {/* Collapsed mobile: one full first location, never mid-word clip of the full string */}
+            <span className="lg:hidden">{summaryHint}</span>
           </span>
         </span>
-        <span className="shrink-0 lg:hidden">
+        <span className="shrink-0 lg:hidden" aria-hidden>
           {expanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
         </span>
       </button>
+
+      {/* Desktop: always show full wrapped locations */}
+      <div className="hidden flex-wrap items-center gap-x-2 gap-y-1 pb-1 pl-5 lg:flex">
+        {data?.error && <span className="text-status-unverified">{t('unavailable')}</span>}
+        {data?.locations.map((loc) => (
+          <span key={loc.name} className="inline-flex items-center gap-1">
+            <span aria-hidden>·</span>
+            <LocationLine loc={loc} rainLabel={t('rain')} />
+          </span>
+        ))}
+      </div>
+
+      {/* Mobile: expand to a full wrapped panel — no truncated single line */}
+      {expanded && (
+        <div className="flex flex-col gap-1 pb-2 pl-5 lg:hidden">
+          {data?.error && <span className="text-status-unverified">{t('unavailable')}</span>}
+          {hasLocations ? (
+            data!.locations.map((loc) => (
+              <LocationLine key={loc.name} loc={loc} rainLabel={t('rain')} />
+            ))
+          ) : (
+            !data?.error && <span className="text-vigil-muted">{t('unavailable')}</span>
+          )}
+        </div>
+      )}
     </div>
   )
 }
