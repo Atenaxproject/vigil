@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { isSafeHttpUrl, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
 
 export const dynamic = 'force-dynamic'
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const supabase = await createClient()
+    const supabase = createAdminClient()
 
     const { data, error } = await supabase
       .from('volunteers')

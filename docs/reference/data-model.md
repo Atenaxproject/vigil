@@ -30,8 +30,12 @@
 | 018 | `018_contested_figures_and_services.sql` | contested figures + service_reports |
 | 019 | `019_minors_protection.sql` | `is_minor` + public view masking |
 | 020 | `020_restore_missing_persons_public_insert.sql` | restore anon/authenticated INSERT + consent RLS (no SELECT) |
+| 021 | `021_rls_contact_lockdown.sql` | Public `public_*` views; drop broad anon SELECT on PII tables (#18) |
+| 022 | `022_needs_coverage_and_photo_storage.sql` | `coverage_state` on need markers; `missing-person-photos` bucket (#18) |
+| 023 | `023_missing_person_flag_rpc.sql` | `flag_missing_person` RPC (#18) |
+| 024 | `024_rls_insert_lockdown.sql` | Revoke anon INSERT on intake tables; preserve missing_persons submit (#18) |
 
-> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Production requires **001–020** — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
+> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Canonical apply order after `020` is **021 → 022 → 023 → 024** (prompt 79). See also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
 
 ---
 
@@ -110,7 +114,9 @@ Unified map pin table for multiple layer types.
 | dtv_center | Synced from DTV API |
 | property | Property assessment (via separate table + view) |
 
-Key fields: `lat`, `lng`, `title`, `description`, `active`, `flagged`, `external_id` (DTV dedup).
+Key fields: `lat`, `lng`, `title`, `description`, `status`, `flagged`, `external_id` (DTV dedup).
+
+Need pins also carry `coverage_state` (`uncovered` | `partial` | `covered` | `needs_reconfirmation`) and `coverage_updated_at`. Public reads use `public_map_markers` (no `contact`). Admin/API transitions + daily decay cron mark stale needs.
 
 ### organizations
 

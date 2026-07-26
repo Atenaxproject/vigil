@@ -8,9 +8,11 @@
 
 ### We stand watch when it matters most.
 
-A unified, open-source humanitarian crisis platform — real-time missing persons, crisis mapping, resource exchange, and volunteer coordination in one accessible interface.
+An open-source humanitarian crisis PWA — federated missing-persons search, crisis mapping, resource exchange, and volunteer coordination in one calm, Spanish-first interface.
 
-**Live deployment:** Venezuela 2026 Earthquake Response · June 24, 2026 onward
+**Live deployment:** Venezuela 2026 Earthquake Response · [vigil.youthewave.org](https://vigil.youthewave.org) · June 24, 2026 onward
+
+**What Vigil is not:** an emergency dispatcher, a donations processor, a government intake tool, or a biometric identification system.
 
 <br />
 
@@ -66,7 +68,7 @@ One config file change redeploys the whole platform for **any country, any disas
 
 - Search Vigil's own database AND Desaparecidos Terremoto Venezuela simultaneously
 - Results from both platforms shown side by side with clear source attribution
-- Photo-based search: upload a photo, Claude Vision analyzes features, matched against both databases — no biometric data stored
+- Photo-based search: upload a photo; Claude Vision produces a *text description* of visible features for matching — Vigil stores no biometric templates
 - Geographic filters: estado, municipio, parroquia across all 24 Venezuelan states
 - Zero-result recovery: a careful three-action state (widen the search, create a report, check sister platforms) instead of a dead end — never a rendered "0"
 - DTV referral awareness: visitors arriving from Desaparecidos Terremoto Venezuela get a contextual orientation, detected client-side only and never persisted or logged
@@ -86,7 +88,7 @@ One config file change redeploys the whole platform for **any country, any disas
 
 - Live Q&A assistant: answers questions using real database data, never invents
 - Natural language intake: describe a person in plain text, Claude structures it
-- Photo-based identification: Claude Vision + DTV facial recognition
+- Photo-assisted search via vision text descriptions (no Vigil-side biometrics)
 - Hourly duplicate detection (Claude Haiku cron)
 
 ---
@@ -114,7 +116,7 @@ Verified against source and production as of **2026-07-23**. Optional integratio
 | Feature | Route | Notes |
 |---|---|---|
 | **Missing persons board** | `/buscar`, `/reportar` | Realtime feed on home; estado/municipio/parroquia on report form; state filter chips on search |
-| **Photo search (AI vision)** | `/buscar` | Claude Vision describes traits, matches public records — no biometric storage; needs `ANTHROPIC_API_KEY` |
+| **Photo search (AI vision)** | `/buscar` | Claude Vision describes traits as text, matches public records — no biometric storage; needs `ANTHROPIC_API_KEY` |
 | **Claude AI assistant** | all pages (widget) | Live-data Q&A in 8 languages; streams from `/api/assistant`; degrades gracefully without API key |
 | **Statistics by state** | `/estadisticas` | Vigil's own missing/found-alive counts per estado (Supabase Realtime); federated DTV figures shown only when a complete enumeration is available, suppressed otherwise |
 | **Contested figures** | `/estadisticas` | Official casualty figures published with issuer attribution and independent counterpoints (Provea, USGS PAGER, UN, academic) stacked beneath — never averaged into one number |
@@ -170,15 +172,15 @@ Verified against source and production as of **2026-07-23**. Optional integratio
 
 Privacy is architecture, not an afterthought:
 
-- **Contact information is never displayed publicly.** All contact routes through Vigil's internal request flow.
-- **RLS hardening (migration 006)** — Dropped `public_read_missing` on `missing_persons`; public reads use `public_missing_persons` view only. Anon-key direct contact queries return empty.
-- **Rate limiting** — Per-IP limits on API routes via edge middleware.
-- **Coordinate bounds validation** — Submissions outside crisis map bounds rejected.
-- **IP hashing** — Stored as salted SHA-256 only; never in clear text.
-- **Server key isolation** — `SUPABASE_SERVICE_ROLE_KEY` and `ANTHROPIC_API_KEY` in server-only modules; zero matches in client bundles.
-- **Government exclusion** — Venezuelan government data sharing explicitly prohibited; VenApp not linked.
+- **Contact information is never displayed publicly.** Contact goes through Vigil’s request and claim-token flows.
+- **Public listings use stripped database views** so contact and claim columns are not part of the public read surface.
+- **Rate limiting** on submission and search API routes.
+- **Coordinate bounds validation** — submissions outside the configured crisis map bounds are rejected.
+- **IP hashing** — stored as salted hashes only; never clear text.
+- **Server key isolation** — service-role and AI keys stay in server-only modules.
+- **Government exclusion** — government intake tools are intentionally not linked.
 
-See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](https://vigil.youthewave.org/terminos).
+See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](https://vigil.youthewave.org/terminos). Report sensitive security issues privately to `vigil@youthewave.org` — please do not file public exploit detail.
 
 ---
 
@@ -187,8 +189,8 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 ### ✅ Live Now
 
 - **Federated missing persons search** — Vigil DB + a cached, short-lived DTV index queried in real time, accent-insensitive ranked name matching (no network-wide total is published — see [Data Partnership](#data-partnership))
-- **Photo-based search** — Claude Vision analysis + DTV facial recognition
-- **Claude AI assistant** — live database Q&A in 8 languages, never invents information
+- **Photo-based search** — Claude Vision text descriptions; no Vigil biometric storage
+- **Claude AI assistant** — live database Q&A in 8 languages; does not invent figures
 - **Crisis map** — USGS aftershocks (source-labeled), GDACS alerts, needs, resources, shelters, hospitals, rescue zones, collection points (including DTV-sourced centers); **USA diaspora hub** at `/apoyo-usa` (South Florida, separate `region_scope`)
 - **Connectivity / comms layer** — WiFi, Starlink, cell signal points on map; citizen submission at `/conectividad`
 - **Rescuer safety system** — GPS check-in, 4-hour auto-expiry, SOS button
@@ -212,25 +214,20 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Geographic breakdown** — estado/municipio/parroquia across 24 Venezuelan states
 - **Privacy** — contact info never public, Venezuelan government explicitly excluded
 
-### 🔧 In Progress
+### 🔧 In progress / optional integrations
 
-- **ReliefWeb v2 (appname pending)** — the public `v1` API was decommissioned (HTTP 410). The code is migrated to `v2`, but ReliefWeb now requires a **pre-approved `appname`** (enforced since 1 Nov 2025); until one is registered and set as `RELIEFWEB_APPNAME`, the feed returns HTTP 403 and the Official-Updates section is cleanly suppressed. Request an appname: <https://apidoc.reliefweb.int/parameters#appname>
-- WhatsApp intake via Make.com (code ready, scenario not built)
-- Telegram bot (TELEGRAM_BOT_TOKEN needed)
-- Resend email notifications (RESEND_API_KEY needed)
-- Vercel AI Gateway (cost observability optimization)
-- Vigil Hurricane (Florida) archetype — diaspora hub's `region_scope` + bounds pattern is designed for reuse
+Optional feeds and messaging bridges degrade gracefully when not configured — the core map and search stay usable.
 
-### 🔜 Coming Soon
+- ReliefWeb official-updates feed (v2 `appname` registration)
+- WhatsApp / Telegram intake bridges
+- Transactional email notifications
+- Additional crisis archetypes (config-driven reuse of the diaspora `region_scope` pattern)
 
-- Voice intake via OpenAI Whisper (field accessibility)
-- PFIF bidirectional sync with DTV (proposed — not yet agreed)
-- Vigil Field variant (specialized for rescue teams, in design phase)
-- Vigil Family variant (specialized for victims/families, in design phase)
-- Vigil Command variant (organizational coordinators, planned)
-- Predictive aftershock visualization
-- Satellite imagery damage assessment
-- youthewave.org main site (Astro-based, design stage)
+### 🔜 Exploring
+
+- Voice intake for low-literacy / field use
+- Deeper PFIF exchange with partners (by agreement)
+- Specialized Field / Family surfaces (design phase)
 
 ---
 
@@ -263,10 +260,12 @@ The 12 platforms below are the sister platforms carried in `crisis.config.ts` an
 | Resource | Description |
 |---|---|
 | [`docs/README.md`](./docs/README.md) | Documentation index |
-| [`docs/architecture/CLAUDE.md`](./docs/architecture/CLAUDE.md) | Tech stack, constraints, agent instructions |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | How to contribute |
+| [`CONTRIBUTORS.md`](./CONTRIBUTORS.md) | People and AI collaborators |
+| [`docs/architecture/CLAUDE.md`](./docs/architecture/CLAUDE.md) | Tech stack, ethics constraints, agent contract |
 | [`docs/architecture/DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) | UI tokens, typography, component rules |
-| [`docs/architecture/DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md) | Supabase, Vercel, DNS, Resend, local dev |
-| [`docs/build-process/`](./docs/build-process/) | Sequential build prompts (historical record) |
+| [`docs/architecture/DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md) | Supabase, Vercel, DNS, local dev |
+| [`docs/build-process/README.md`](./docs/build-process/README.md) | How we ship (short) |
 
 ---
 
@@ -307,10 +306,10 @@ API has no server-side search, Vigil keeps a short-lived in-memory name index
 federated aggregate figures shown on `/estadisticas` are cached separately (~5
 minutes) and suppressed entirely unless a complete enumeration is available.
 
-**Biometrics stay on their side of the boundary.** DTV's facial-recognition
-endpoint powers Vigil's photo search, but **no biometric data is ever stored by
-Vigil and none crosses the federation boundary** — Vigil's own contribution is
-Claude Vision *text description* of features, not biometric matching.
+**No biometrics on Vigil.** Photo search uses Claude Vision *text description*
+of features. Partner platforms may offer their own identification tools on
+their sites; Vigil does not store biometric templates and does not claim
+facial-recognition capability.
 
 This partnership is part of Vigil's commitment to building a network,
 not competing with the other citizen platforms serving the same families.
@@ -363,26 +362,15 @@ Update country bounds, emergency hotline, partner links, languages, and seismic 
 
 ## Built by
 
-Made with hope and love for Venezuela 🇻🇪
+**[Orlando Toro](https://github.com/Orlando7oro)** — Founder & Director (Bbluestudios LLC). Product judgment, crisis operations, and final say on scope and ethics.
 
-[Orlando Toro](https://youthewave.org) — Founder, Bbluestudios LLC  
-For the people of Venezuela. For anyone who needs it next.
+Built with **AI engineering collaborators** under that direction — see [`CONTRIBUTORS.md`](./CONTRIBUTORS.md) for accurate roles (Architect-Orchestrator via Cursor; Claude for design/reasoning assistance). Agents execute against specs; they do not replace human accountability for privacy or go-live decisions.
 
----
+For Venezuela. For whoever needs it next.
 
-## Contributors & acknowledgments
+**Methodology inspiration:** [Ushahidi](https://ushahidi.com) · [Google Person Finder](https://google.org/personfinder) · [Los Topos](https://www.lostopos.org) · [OCHA](https://www.unocha.org)
 
-| Role | Who |
-|---|---|
-| **Human** | [Orlando Toro](https://github.com/Orlando7oro) — Founder, architect, operator |
-| **AI co-architect** | Claude (Anthropic) — Strategic co-design, system architecture, database schema, data protection, i18n, design system, legal documents |
-| **AI build agent** | Cursor Agent — Code generation and file implementation |
-
-**Humanitarian tech partners (methodology):** [Ushahidi](https://ushahidi.com) · [Google Person Finder](https://google.org/personfinder) · [Los Topos](https://www.lostopos.org) · [OCHA](https://www.unocha.org)
-
-**Real-time data sources:** [USGS](https://earthquake.usgs.gov) · [ReliefWeb](https://reliefweb.int) · [HDX](https://data.humdata.org)
-
-**For Venezuela. For whoever needs it next.**
+**Public data feeds:** [USGS](https://earthquake.usgs.gov) · [ReliefWeb](https://reliefweb.int) · [HDX](https://data.humdata.org)
 
 ---
 

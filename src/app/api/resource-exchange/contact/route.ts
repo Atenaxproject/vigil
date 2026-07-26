@@ -18,11 +18,9 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
 
     const { data: entry } = await supabase
-      .from('resource_exchange')
+      .from('public_resource_exchange')
       .select('id')
       .eq('id', body.resource_exchange_id)
-      .eq('flagged', false)
-      .neq('status', 'expired')
       .single()
 
     if (!entry) {

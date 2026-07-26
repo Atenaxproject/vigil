@@ -14,10 +14,9 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = await createClient()
     const { data, error } = await supabase
-      .from('resource_exchange')
+      .from('public_resource_exchange')
       .select(PUBLIC_SELECT)
       .eq('status', 'active')
-      .eq('flagged', false)
       .eq('region_scope', regionScope)
       .order('created_at', { ascending: false })
       .limit(100)

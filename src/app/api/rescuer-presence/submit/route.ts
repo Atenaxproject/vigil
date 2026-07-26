@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
 
 export const dynamic = 'force-dynamic'
@@ -23,7 +23,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Coordenadas fuera de Venezuela' }, { status: 400 })
     }
 
-    const supabase = await createClient()
+    // Service role so RETURNING works without granting anon SELECT on contact_phone.
+    const supabase = createAdminClient()
     const expireAt = new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString()
 
     const { data, error } = await supabase

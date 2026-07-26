@@ -210,6 +210,9 @@
       },
       "photo": "Photo (recommended)",
       "photoHelp": "Clear photo helps identification. Max 5MB.",
+      "photoPrivacy": "GPS metadata is stripped before storage. We do not use facial recognition.",
+      "photoInvalidType": "Use JPG, PNG, or WebP.",
+      "photoTooLarge": "Photo exceeds 5 MB. Compress or choose another.",
       "lastSeen": "Last Known Location",
       "lastSeenPlaceholder": "City, neighborhood, address...",
       "lastSeenDate": "Date Last Seen",
@@ -333,6 +336,13 @@
     "submitError": "Failed to submit",
     "exchangeHint": "Looking to exchange goods or services with another person?",
     "exchangeLink": "Go to Exchange",
+    "coverage": {
+      "uncovered": "Uncovered",
+      "partial": "Partial",
+      "covered": "Covered",
+      "needs_reconfirmation": "Needs reconfirmation",
+      "staleHint": "may be outdated"
+    },
     "dtvSourceBadge": "DTV — Desaparecidos Terremoto Venezuela",
     "cavSourceBadge": "via Centros de Ayuda Venezuela",
     "seismicFreshness": {

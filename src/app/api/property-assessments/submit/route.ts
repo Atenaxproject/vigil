@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import {
   flagPropertyPhotoPriority,
@@ -89,7 +88,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const supabase = await createClient()
+    // Service role: claim_token RETURNING + resource_exchange link after RLS lockdown.
+    const supabase = createAdminClient()
     const ipHash = hashIp(getClientIp(request.headers))
 
     const { data, error } = await supabase

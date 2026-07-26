@@ -25,6 +25,9 @@
     "lint": "next lint",
     "build:press-kit": "node scripts/build-press-kit.mjs",
     "check:i18n": "node scripts/check-i18n-parity.mjs",
+    "test:sanitize": "node scripts/test-sanitize.mjs",
+    "test:feeds": "node scripts/test-feeds.mjs",
+    "test:rate-limit": "node scripts/test-rate-limit.mjs",
     "prebuild": "node scripts/check-i18n-parity.mjs"
   },
   "dependencies": {
