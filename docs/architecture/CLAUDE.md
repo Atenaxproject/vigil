@@ -106,4 +106,4 @@ The GitHub repo is public. Treat documentation as a security surface.
 
 ---
 
-*Last updated: 2026-07-26 · migrations 020–024 on main; prod apply 022–023 pending verify ship · Venezuela deployment live*
+*Last updated: 2026-07-26 · migrations 020–024 on main and applied on prod (022–023 ship) · Venezuela deployment live*

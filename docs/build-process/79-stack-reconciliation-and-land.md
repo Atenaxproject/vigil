@@ -24,5 +24,5 @@ Full lineage tables, prod-unknown markers, and the Codex apply checklist live in
 ## Status
 
 **Repo land complete 2026-07-26:** recon doc frozen; `#15` → `#16` → `#17` merged; `#18` merged with canonical SQL `021`–`024`.  
-**Prod SQL (2026-07-26 ship):** live verify found **020 + 021 + 024 effects present**; **022 coverage columns + 023 `flag_missing_person` still missing** (photo bucket already present). Apply path: one-shot Actions workflow using `SUPABASE_DB_URL` (see private eval note).  
+**Prod SQL (2026-07-26 ship):** live verify found 020 + 021 + 024 effects present; **022 + 023 applied** via Actions (`SUPABASE_DB_URL`) — post-probe: `coverage_state` + `flag_missing_person` OK. One-shot workflow removed after green run.  
 **Upstash:** still unset in Vercel Production — durable RL remains in-memory fail-open until REST URL + token are added and the app is redeployed.

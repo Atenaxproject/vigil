@@ -12,7 +12,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **`/informacion` axe color-contrast** — darker `--vigil-muted` (`#475569`) for AA on vigil-cloud; caution/badge text uses amber-800 / green-800 instead of status tokens that fail at 13px; accessibility CI hard-fails `/informacion` again.
 
 ### Ops
-- **Prod SQL verify** — live: 020 + 021 + 024 effects present; **022 coverage cols + 023 flag RPC missing** (photo bucket already existed). One-shot Actions workflow applies 022→023 via `SUPABASE_DB_URL`.
+- **Prod SQL verify + apply** — live: 020 + 021 + 024 effects present; **022 + 023 applied** via Actions (`SUPABASE_DB_URL`); post-probe confirms `coverage_state` + `flag_missing_person`.
 - **Upstash** — still unset on Vercel Production (no REST URL/token). Durable RL remains in-memory fail-open until Orlando adds Upstash env + redeploy.
 
 ### Docs
