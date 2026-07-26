@@ -61,7 +61,7 @@ export function ConnectivityInfoCard() {
       </Link>
 
       <p className="mt-4 text-[13px] text-vigil-muted">{t('carrierNote')}</p>
-      <p className="mt-2 text-[13px] text-status-unverified">{t('mapNote')}</p>
+      <p className="mt-2 text-[13px] font-medium text-amber-800">{t('mapNote')}</p>
     </section>
   )
 }

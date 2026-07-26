@@ -53,7 +53,7 @@ Mono:     13px / 400                      → Coordinates, IDs, codes
 --vigil-surface:     #FFFFFF   /* Primary background */
 --vigil-cloud:       #F8FAFC   /* Secondary surfaces, input backgrounds */
 --vigil-border:      #E2E8F0   /* All borders — 0.5px only */
---vigil-muted:       #64748B   /* Secondary text, icons at rest — WCAG AA ~4.6:1 on white */
+--vigil-muted:       #475569   /* Secondary text — WCAG AA ≥4.5:1 on white and vigil-cloud */
 --vigil-body:        #334155   /* Body text */
 --vigil-heading:     #0F172A   /* Heading text */
 ```

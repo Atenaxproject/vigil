@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { AlertTriangle, ChevronRight, Phone, X } from 'lucide-react'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
@@ -32,6 +32,8 @@ export function EmergencyBanner({
   const [directoryOpen, setDirectoryOpen] = useState(false)
   const sheetRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const chipScrollRef = useRef<HTMLDivElement>(null)
+  const [chipEdges, setChipEdges] = useState({ left: false, right: false })
 
   const freshness = aftershockOk
     ? getFeedFreshness(aftershockFetchedAt)
@@ -40,6 +42,36 @@ export function EmergencyBanner({
 
   const nacional = CRISIS_CONFIG.emergencyContacts.find((c) => c.id === 'nacional')
   const carrierCodes = nacional && 'carrierCodes' in nacional ? nacional.carrierCodes : []
+
+  const updateChipEdges = useCallback(() => {
+    const el = chipScrollRef.current
+    if (!el) return
+    const maxScroll = el.scrollWidth - el.clientWidth
+    if (maxScroll <= 1) {
+      setChipEdges({ left: false, right: false })
+      return
+    }
+    setChipEdges({
+      left: el.scrollLeft > 2,
+      right: el.scrollLeft < maxScroll - 2,
+    })
+  }, [])
+
+  useEffect(() => {
+    updateChipEdges()
+    const el = chipScrollRef.current
+    if (!el) return
+    const onScroll = () => updateChipEdges()
+    el.addEventListener('scroll', onScroll, { passive: true })
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(updateChipEdges) : null
+    ro?.observe(el)
+    window.addEventListener('resize', updateChipEdges)
+    return () => {
+      el.removeEventListener('scroll', onScroll)
+      ro?.disconnect()
+      window.removeEventListener('resize', updateChipEdges)
+    }
+  }, [updateChipEdges, carrierCodes.length])
 
   useEffect(() => {
     if (!directoryOpen) return
@@ -81,44 +113,56 @@ export function EmergencyBanner({
   return (
     <>
       <div
-        className="sticky top-0 z-[100] border-b border-slate-800 bg-vigil-ink px-3 py-1 text-[13px] text-slate-200 sm:px-4"
+        className="sticky top-0 z-[100] border-b border-slate-800 bg-vigil-ink px-2 py-1 text-[13px] text-slate-200 sm:px-4"
         role="banner"
       >
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex w-full min-w-0 max-w-full items-center gap-1.5 sm:gap-3">
           <AlertTriangle className="hidden h-4 w-4 shrink-0 text-amber-400 sm:block" aria-hidden />
 
           {/* 911 stays pinned leftmost — always fully visible */}
           <a
             href="tel:911"
-            className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-input bg-status-missing px-3 font-mono text-[15px] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-input bg-status-missing px-2.5 font-mono text-[15px] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:px-3"
           >
             <Phone className="h-3.5 w-3.5" aria-hidden />
             911
           </a>
 
-          <div className="relative min-w-0 flex-1">
+          {/* basis-0 + flex-1 forces the scroller to take leftover width so chips pan
+              inside this box instead of pushing Directorio off-screen */}
+          <div className="relative min-w-0 flex-1 basis-0 overflow-hidden">
             <div
-              className="flex snap-x snap-mandatory items-center gap-1.5 overflow-x-auto motion-safe:scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              ref={chipScrollRef}
+              className="flex w-full touch-pan-x snap-x snap-mandatory items-center gap-1.5 overflow-x-scroll overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] motion-safe:scroll-smooth [&::-webkit-scrollbar]:hidden"
               role="list"
               aria-label={t('carrierCodes')}
+              tabIndex={0}
             >
               {carrierCodes.map(({ carrier, code }) => (
                 <a
-                  key={carrier}
+                  key={`${carrier}-${code}`}
                   role="listitem"
                   href={telHref(code)}
-                  className="inline-flex min-h-[44px] shrink-0 snap-start items-center gap-1.5 rounded-badge border border-slate-700 bg-slate-800 px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/60"
+                  className="inline-flex min-h-[44px] shrink-0 snap-start items-center gap-1 rounded-badge border border-slate-700 bg-slate-800 px-2.5 focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-vigil-blue/70 sm:gap-1.5 sm:px-3"
                 >
-                  <span className="text-[11px] text-slate-400">{carrier}</span>
-                  <span className="font-mono text-[13px] font-semibold text-slate-100">{code}</span>
+                  <span className="text-[11px] font-medium text-slate-300">{carrier}</span>
+                  <span className="font-mono text-[13px] font-semibold text-white">{code}</span>
                 </a>
               ))}
-              {/* Trailing spacer so the last chip can snap fully into view */}
-              <span className="w-6 shrink-0 snap-end" aria-hidden />
+              {/* Trailing spacer so the last chip can snap fully past the fade */}
+              <span className="w-10 shrink-0 snap-end" aria-hidden />
             </div>
-            {/* Right-edge fade: signals more chips without half-clipping one at rest */}
+            {/* Edge fades: signal more chips + that the strip pans horizontally */}
             <div
-              className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-vigil-ink to-transparent"
+              className={`pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-vigil-ink to-transparent transition-opacity ${
+                chipEdges.left ? 'opacity-100' : 'opacity-0'
+              }`}
+              aria-hidden
+            />
+            <div
+              className={`pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-vigil-ink to-transparent transition-opacity ${
+                chipEdges.right ? 'opacity-100' : 'opacity-0'
+              }`}
               aria-hidden
             />
           </div>
@@ -129,7 +173,7 @@ export function EmergencyBanner({
             aria-haspopup="dialog"
             aria-expanded={directoryOpen}
             aria-controls="emergency-directory"
-            className="inline-flex min-h-[44px] shrink-0 items-center gap-0.5 whitespace-nowrap px-1 font-medium text-blue-300 hover:text-blue-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/60"
+            className="inline-flex min-h-[44px] shrink-0 items-center gap-0.5 whitespace-nowrap px-1 font-medium text-sky-300 hover:text-sky-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/60"
           >
             {t('directory')}
             <ChevronRight className="h-3.5 w-3.5" aria-hidden />
@@ -200,14 +244,14 @@ export function EmergencyBanner({
               {CRISIS_CONFIG.emergencyContacts.map((contact) => (
                 <section key={contact.id}>
                   <div className="flex items-center justify-between gap-2">
-                    <h3 className="text-[11px] font-semibold uppercase tracking-wider text-vigil-muted">
+                    <h3 className="text-[11px] font-semibold uppercase tracking-wider text-slate-600">
                       {contact.label_es}
                     </h3>
                     <span
-                      className={`shrink-0 rounded-badge px-2 py-0.5 text-[11px] font-medium ${
+                      className={`shrink-0 rounded-badge px-2 py-0.5 text-[11px] font-semibold ${
                         (contact.service_type as string) === 'privado'
-                          ? 'bg-status-unverified-bg text-status-unverified'
-                          : 'bg-status-alive-bg text-status-alive'
+                          ? 'bg-status-unverified-bg text-amber-800'
+                          : 'bg-status-alive-bg text-green-800'
                       }`}
                     >
                       {(contact.service_type as string) === 'privado' ? t('servicePrivate') : t('servicePublic')}
@@ -227,10 +271,10 @@ export function EmergencyBanner({
                     ))}
                   </ul>
                   {contact.id === 'nacional' && 'carrierAccess' in contact && contact.carrierAccess && (
-                    <p className="mt-1.5 font-mono text-[13px] text-vigil-muted">{contact.carrierAccess}</p>
+                    <p className="mt-1.5 font-mono text-[13px] text-slate-600">{contact.carrierAccess}</p>
                   )}
                   {'verified_at' in contact && contact.verified_at && (
-                    <p className="mt-1 font-mono text-[11px] text-vigil-muted">
+                    <p className="mt-1 font-mono text-[11px] text-slate-600">
                       {contact.source} · {contact.verified_at}
                     </p>
                   )}

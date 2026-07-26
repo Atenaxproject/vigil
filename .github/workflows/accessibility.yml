@@ -42,9 +42,7 @@ jobs:
       - name: Axe key routes (hard-fail)
         run: |
           set -e
-          # /informacion has pre-existing color-contrast debt (muted meta lines);
-          # hard-fail the core intake/search shell first. Expand after contrast pass.
-          for path in / /buscar /reportar; do
+          for path in / /buscar /reportar /informacion; do
             echo "=== axe $path ==="
             axe "http://127.0.0.1:3000$path" --exit --tags wcag2a,wcag2aa
           done

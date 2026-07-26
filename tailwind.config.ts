@@ -15,7 +15,8 @@ const config: Config = {
           blue: '#2563EB',
           'blue-light': '#EFF6FF',
           cloud: '#F8FAFC',
-          muted: '#64748B',
+          // Keep in sync with --vigil-muted in globals.css (AA on white + cloud)
+          muted: '#475569',
         },
         status: {
           missing: '#DC2626',
