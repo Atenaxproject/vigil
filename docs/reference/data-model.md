@@ -30,12 +30,12 @@
 | 018 | `018_contested_figures_and_services.sql` | contested figures + service_reports |
 | 019 | `019_minors_protection.sql` | `is_minor` + public view masking |
 | 020 | `020_restore_missing_persons_public_insert.sql` | restore anon/authenticated INSERT + consent RLS (no SELECT) |
-| 021 | `021_rls_contact_lockdown.sql` | Public `public_*` views; drop broad anon SELECT on PII tables (#18) |
-| 022 | `022_needs_coverage_and_photo_storage.sql` | `coverage_state` on need markers; `missing-person-photos` bucket (#18) |
-| 023 | `023_missing_person_flag_rpc.sql` | `flag_missing_person` RPC (#18) |
-| 024 | `024_rls_insert_lockdown.sql` | Revoke anon INSERT on intake tables; preserve missing_persons submit (#18) |
+| 021 | `021_rls_contact_lockdown.sql` | public_* SELECT views; deny direct anon SELECT on contact-bearing tables |
+| 022 | `022_needs_coverage_and_photo_storage.sql` | map_markers coverage_* cols; missing-person-photos storage bucket |
+| 023 | `023_missing_person_flag_rpc.sql` | `flag_missing_person` SECURITY DEFINER RPC (threshold 3) |
+| 024 | `024_rls_insert_lockdown.sql` | Service-role INSERT lockdown on 10 tables; missing_persons keeps column-scoped INSERT; contact INSERT-only; FK indexes; profiles initplan |
 
-> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Canonical apply order after `020` is **021 → 022 → 023 → 024** (prompt 79). See also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
+> **Note:** `docs/architecture/DEPLOYMENT.md` covers setup. Fresh envs and production parity require migrations **001–024 in order** (`020` → `021` → `022` → `023` → `024`). See also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
 
 ---
 
@@ -201,19 +201,21 @@ Supabase Auth user profiles linked to admin access.
 
 ## RLS summary
 
-| Table | Public SELECT | Public INSERT | Admin UPDATE |
-|-------|---------------|---------------|--------------|
-| missing_persons | **Blocked** (use view) | Yes (consent required) | Yes |
-| public_missing_persons (view) | Yes | — | — |
-| map_markers | Non-flagged, active | Yes | Yes |
-| organizations | approved + active only | Yes (pending approval) | Yes |
-| volunteers | public_display only | Yes | Yes |
-| resource_exchange | non-flagged, not expired | Yes | — |
-| community_wall | non-flagged | Yes | — |
-| moderation_queue | Admin only | Service role | Admin |
-| property_assessments | Via public view | Yes | Yes (assignment) |
+After migration `024_rls_insert_lockdown`, anon/authenticated clients cannot INSERT into most intake tables directly — those writes go through the Next.js API with the **service role**. Exception: `missing_persons` keeps **column-scoped** INSERT + `public_insert_missing` for `/api/missing-persons/submit` (migration `020`; re-asserted in `024`). Public listings read `public_*` views; base-table SELECT/UPDATE/DELETE on `missing_persons` stay revoked.
 
-Admin check: `is_vigil_admin()` function (migration 002) + `VIGIL_ADMIN_EMAILS` env.
+| Table / view | Public SELECT | Public INSERT (anon/auth) | Admin UPDATE |
+|--------------|---------------|---------------------------|--------------|
+| missing_persons | **Blocked** (SELECT revoked) | **Yes** (column-scoped + consent RLS; no SELECT) | Yes |
+| public_missing_persons (view) | Yes | — | — |
+| map_markers, volunteers, resource_exchange, rescuer_presence, property_assessments, events, organizations, needs_offers, erasure_requests, service_reports | Via `public_*` views where defined; base SELECT often blocked | **No** (API / service role) | Yes (admin policies) |
+| contact_requests, resource_exchange_contact_requests, volunteer_contact_requests | **No** (SELECT revoked) | **Yes** (INSERT kept) | Admin |
+| feedback, community_wall, missing_person_notes | Per existing policies/views | **Yes** (INSERT kept) | — |
+| vigil_watch_state | **No** | **No** | Service role only |
+| moderation_queue | Admin only | Service role | Admin |
+
+**Anon INSERT kept on:** `missing_persons` (column-scoped), `feedback`, `community_wall`, `contact_requests`, `resource_exchange_contact_requests`, `volunteer_contact_requests`, `missing_person_notes`.
+
+Admin check: `is_vigil_admin()` (migration 002; EXECUTE granted to anon/authenticated in 024) + `VIGIL_ADMIN_EMAILS` env. `handle_new_user()` is not client-callable (EXECUTE revoked; auth trigger still runs).
 
 ---
 

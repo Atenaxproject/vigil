@@ -5,6 +5,15 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-26 (RLS insert lockdown — aligned with #22)
+
+### Security
+- **Bring Phase 0–2/3 migrations onto main chain** — contact lockdown / coverage / flag RPC as **`021` → `022` → `023`** (SQL-only). Numbering starts at **021** because main already has `020_restore_missing_persons_public_insert` (#22).
+- **Capture production RLS/grant INSERT lockdown** — migration `024_rls_insert_lockdown`: revoke anon/authenticated INSERT on ten intake tables; drop matching public INSERT policies; revoke SELECT/UPDATE/DELETE on `missing_persons` but **preserve** column-scoped INSERT + `public_insert_missing` (consistent with `020`); contact-request tables keep INSERT but lose SELECT/UPDATE/DELETE; revoke all client access to `vigil_watch_state`; grant `is_vigil_admin()` EXECUTE to clients and revoke `handle_new_user()`; add FK indexes; fix profiles own-row policies to `(select auth.uid())` initplan form.
+
+### Docs
+- `data-model.md` lists 020–024; `CLAUDE.md` and `024` header state apply order `020` → `021` → `022` → `023` → `024`.
+
 ## [Unreleased] — 2026-07-26 (missing_persons public INSERT restore)
 
 ### Fixed
