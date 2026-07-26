@@ -20,4 +20,4 @@ Full issue write-ups and acceptance checklist live under `docs/evaluations/archi
 ## Status
 
 Implementation + visual-check proof on `fix/mobile-portrait-order` / PR #24 (2026-07-26). Screenshots under `screenshots/` + `public/screenshots/` (`home-*`, `buscar-*`).  
-**Follow-up (same day):** emergency carrier chip strip hardened for real mobile touch pan + scroll-edge fades (ship PR after #24).
+**Follow-up shipped (#26):** emergency carrier chip strip hardened for real mobile touch pan + scroll-edge fades; `/informacion` axe contrast fixed.
