@@ -8,11 +8,13 @@ All notable changes to Vigil are documented here. Format loosely follows
 ## [Unreleased] — 2026-07-26 (missing_persons public INSERT restore)
 
 ### Fixed
-- **Public `/api/missing-persons/submit`** — restore `GRANT INSERT` + `public_insert_missing` RLS for `anon`/`authenticated` (migration `020`). Phase-0 advisor lockdown had revoked INSERT and broken the designed consent-gated public report path.
+- **Public `/api/missing-persons/submit`** — restore column-scoped `GRANT INSERT` + `public_insert_missing` RLS for `anon`/`authenticated` (migration `020`). Phase-0 advisor lockdown had revoked INSERT and broken the designed consent-gated public report path.
 - Submit handler no longer uses INSERT…RETURNING / `.select()` — pre-generates `id` + `claim_token` so the path works without restoring base-table `SELECT` (contact fields stay locked; reads via `public_missing_persons`).
 
 ### Security
-- Does **not** restore SELECT/UPDATE/DELETE on `missing_persons` for anon/authenticated. INSERT remains gated by `consent_given` + `data_accuracy_confirmed`.
+- Does **not** restore SELECT/UPDATE/DELETE on `missing_persons` for anon/authenticated.
+- INSERT grant is **column-scoped** (submission fields only) — no privilege on `verified*`, `status`, `flagged*`, lifecycle, or `photo_url`.
+- RLS WITH CHECK still requires consent flags and blocks self-verified / non-`web` / archived rows.
 
 ## [Unreleased] — 2026-07-26 (prompt 78 archive + docs visibility)
 
