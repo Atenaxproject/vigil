@@ -117,7 +117,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
           <DeploymentSuggestion />
           <WeatherBar />
-          <div className="flex min-h-[calc(100vh-44px)]">
+          {/* dvh-aware shell: grow with content; avoid fixed vh spacers that leave dead voids */}
+          <div className="flex min-h-[calc(100vh-44px)] [@supports(height:100dvh)]:min-h-[calc(100dvh-44px)]">
             <Navigation />
             <div className="flex min-w-0 flex-1 flex-col">
               <AppHeader />
@@ -129,7 +130,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               >
                 {children}
               </main>
-              <footer className="relative z-[1] bg-[color:var(--vigil-surface)] text-[13px] text-[color:var(--vigil-muted)]">
+              {/* Extra clearance above bottom nav for FAB stack so credit/links never sit under FABs */}
+              <footer className="relative z-[1] bg-[color:var(--vigil-surface)] pb-[calc(5.5rem+env(safe-area-inset-bottom))] text-[13px] text-[color:var(--vigil-muted)] lg:pb-0">
                 {/* Tier 1 — navigation. No sentiment, no build-credit — those
                     live on /prensa and in the README (77 §3). */}
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-t border-[color:var(--vigil-border)] px-4 py-4 text-center">

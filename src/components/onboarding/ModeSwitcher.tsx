@@ -43,11 +43,11 @@ export function ModeSwitcher({ mode, onChange }: ModeSwitcherProps) {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className="flex min-h-[44px] items-center gap-1.5 rounded-input border border-slate-200 bg-vigil-cloud px-3 py-1.5 text-[13px] font-medium text-vigil-ink hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
+        className="flex min-h-[44px] max-w-[11rem] items-center gap-1.5 rounded-input border border-slate-200 bg-vigil-cloud px-2 py-1.5 text-[13px] font-medium text-vigil-ink hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40 sm:max-w-none sm:px-3"
       >
         <LayoutGrid className="h-4 w-4 shrink-0 text-vigil-muted" aria-hidden />
         <span className="hidden sm:inline">{t('switcherPrefix')}</span>
-        <span>{t(`modes.${mode}.short`)}</span>
+        <span className="truncate">{t(`modes.${mode}.short`)}</span>
         <ChevronDown className={cn('h-4 w-4 text-vigil-muted transition-transform', open && 'rotate-180')} aria-hidden />
       </button>
 

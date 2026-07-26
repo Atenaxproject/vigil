@@ -16,10 +16,10 @@ export function AppHeader() {
   const showDesktopMenu = sidebarReady && sidebarCollapsed
 
   return (
-    <header className="flex items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3 md:px-6">
+    <header className="flex flex-wrap items-center justify-between gap-x-2 gap-y-2 border-b border-slate-200 bg-white px-3 py-2 sm:gap-3 sm:px-4 sm:py-3 md:px-6">
       <button
         type="button"
-        className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-input border border-slate-200 text-vigil-ink lg:hidden"
+        className="flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-input border border-slate-200 text-vigil-ink lg:hidden"
         aria-label="Menú"
         onClick={() => {
           document.getElementById('vigil-open-nav-menu')?.click()
@@ -30,7 +30,8 @@ export function AppHeader() {
       <p className="hidden min-w-0 truncate text-[13px] text-vigil-muted md:block">
         {CRISIS_CONFIG.crisis} · {CRISIS_CONFIG.country}
       </p>
-      <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+      {/* Wrap before overlap at 320–390px; every control keeps ≥44px tap target */}
+      <div className="ml-auto flex max-w-full flex-wrap items-center justify-end gap-2">
         <AccessibilityControls compact />
         {ready && <ModeSwitcher mode={mode} onChange={setMode} />}
         <LanguageSwitcher />

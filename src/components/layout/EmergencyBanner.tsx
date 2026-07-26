@@ -87,6 +87,7 @@ export function EmergencyBanner({
         <div className="flex items-center gap-2 sm:gap-3">
           <AlertTriangle className="hidden h-4 w-4 shrink-0 text-amber-400 sm:block" aria-hidden />
 
+          {/* 911 stays pinned leftmost — always fully visible */}
           <a
             href="tel:911"
             className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-input bg-status-missing px-3 font-mono text-[15px] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
@@ -95,22 +96,31 @@ export function EmergencyBanner({
             911
           </a>
 
-          <div
-            className="flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            role="list"
-            aria-label={t('carrierCodes')}
-          >
-            {carrierCodes.map(({ carrier, code }) => (
-              <a
-                key={carrier}
-                role="listitem"
-                href={telHref(code)}
-                className="inline-flex min-h-[36px] shrink-0 items-center gap-1.5 rounded-badge border border-slate-700 bg-slate-800 px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/60"
-              >
-                <span className="text-[11px] text-slate-400">{carrier}</span>
-                <span className="font-mono text-[13px] font-semibold text-slate-100">{code}</span>
-              </a>
-            ))}
+          <div className="relative min-w-0 flex-1">
+            <div
+              className="flex snap-x snap-mandatory items-center gap-1.5 overflow-x-auto motion-safe:scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              role="list"
+              aria-label={t('carrierCodes')}
+            >
+              {carrierCodes.map(({ carrier, code }) => (
+                <a
+                  key={carrier}
+                  role="listitem"
+                  href={telHref(code)}
+                  className="inline-flex min-h-[44px] shrink-0 snap-start items-center gap-1.5 rounded-badge border border-slate-700 bg-slate-800 px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/60"
+                >
+                  <span className="text-[11px] text-slate-400">{carrier}</span>
+                  <span className="font-mono text-[13px] font-semibold text-slate-100">{code}</span>
+                </a>
+              ))}
+              {/* Trailing spacer so the last chip can snap fully into view */}
+              <span className="w-6 shrink-0 snap-end" aria-hidden />
+            </div>
+            {/* Right-edge fade: signals more chips without half-clipping one at rest */}
+            <div
+              className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-vigil-ink to-transparent"
+              aria-hidden
+            />
           </div>
 
           <button

@@ -29,8 +29,8 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <Globe className="h-4 w-4 text-vigil-muted" aria-hidden />
+    <div className="flex min-h-[44px] items-center gap-2">
+      <Globe className="h-4 w-4 shrink-0 text-vigil-muted" aria-hidden />
       <label htmlFor="locale-select" className="sr-only">
         {t('language')}
       </label>
@@ -39,7 +39,7 @@ export function LanguageSwitcher() {
         value={locale}
         disabled={isPending}
         onChange={(e) => setLocale(e.target.value as SupportedLang)}
-        className="rounded-input border border-slate-200 bg-white px-2 py-1 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20"
+        className="min-h-[44px] rounded-input border border-slate-200 bg-white px-2 py-1 text-[16px] focus:outline-none focus:ring-2 focus:ring-vigil-blue/20"
       >
         {CRISIS_CONFIG.supportedLangs.map((code) => (
           <option key={code} value={code}>

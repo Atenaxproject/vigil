@@ -120,7 +120,7 @@ export function VigilAssistant() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-32 right-4 z-40 flex min-h-[44px] items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-[13px] font-medium text-vigil-blue shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40 lg:bottom-20"
+        className="fixed bottom-[calc(8rem+env(safe-area-inset-bottom))] right-4 z-40 flex min-h-[44px] items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-[13px] font-medium text-vigil-blue shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40 lg:bottom-20"
         aria-label={t('triggerLabel')}
       >
         <Sparkles className="h-4 w-4" aria-hidden />
