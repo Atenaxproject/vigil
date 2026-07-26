@@ -143,7 +143,7 @@ export function EmergencyBanner({
                   key={`${carrier}-${code}`}
                   role="listitem"
                   href={telHref(code)}
-                  className="inline-flex min-h-[44px] shrink-0 snap-start items-center gap-1 rounded-badge border border-slate-700 bg-slate-800 px-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/60 sm:gap-1.5 sm:px-3"
+                  className="inline-flex min-h-[44px] shrink-0 snap-start items-center gap-1 rounded-badge border border-slate-700 bg-slate-800 px-2.5 focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-vigil-blue/70 sm:gap-1.5 sm:px-3"
                 >
                   <span className="text-[11px] font-medium text-slate-300">{carrier}</span>
                   <span className="font-mono text-[13px] font-semibold text-white">{code}</span>

@@ -31,9 +31,11 @@
     --seismic-major: #7c3aed;
   }
 
-  /* clip (not hidden) so nested horizontal pans (emergency chips) still work on iOS */
+  /* Prefer clip so nested horizontal pans (emergency chips) still work on iOS;
+     fall back to hidden where clip is unsupported. */
   html,
   body {
+    overflow-x: hidden;
     overflow-x: clip;
   }
 
