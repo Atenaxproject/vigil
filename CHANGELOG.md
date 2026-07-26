@@ -13,6 +13,17 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **Standing process** in `docs/architecture/CLAUDE.md` — public vs private docs handling so agents relocate/redact without re-asking; `.gitignore` covers `/docs/evaluations/` and root `NN-*.md` drafts.
 - **Numbering fix:** client-side image compression reassigned to **prompt 79** (was colliding with 78); updated `CLAUDE.md`, `76A-exif-stripping.md`, and the queue table in `75-coherence-and-integrity.md`.
 
+## [Unreleased] — 2026-07-26 (prompt 78 §2–§4 product)
+
+### Added
+- **Legal basis** section on `/proteccion-de-menores` citing LOPNNA Art. 65 and Constitution Art. 78 (descriptive only; no compliance claim); on-page “not legal advice” notice.
+- **“Solicitar baja o corrección”** action on `/buscar/[id]` for every native person record; more prominent guardian-standing copy when age &lt; 18 (public heuristic — `is_minor` remains unexposed per 76 §5).
+- Reuses the existing feedback admin queue via `/api/removal-request` with a distinct `[removal_request]` marker (no schema change); admin list sorts these first. Alternative contact: `vigil@youthewave.org`. No fabricated response-time SLA.
+- Terms cross-link: `/terminos#descargo` and `/terms#disclaimer` point to minors protection + hábeas data (Art. 28).
+
+### Changed
+- Minors photo copy locked to federated-origin facts only (Vigil does not host or modify). Photo-display behavior unchanged; §1 counsel flag remains open.
+
 ## [Unreleased] — 2026-07-22 (prompt 59)
 
 ### Added

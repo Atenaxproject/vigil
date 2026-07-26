@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import type { FeedbackItem, FeedbackStatus } from '@/types/vigil.types'
+import { isRemovalRequestMessage } from '@/lib/removal-request'
 
 export function FeedbackAdminClient() {
   const [secret, setSecret] = useState('')
@@ -25,6 +26,14 @@ export function FeedbackAdminClient() {
       setLoading(false)
     }
   }, [])
+
+  // Removal / correction requests (prompt 78 §3) sort ahead of general feedback.
+  const sortedItems = [...items].sort((a, b) => {
+    const aRem = isRemovalRequestMessage(a.message) ? 0 : 1
+    const bRem = isRemovalRequestMessage(b.message) ? 0 : 1
+    if (aRem !== bRem) return aRem - bRem
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  })
 
   useEffect(() => {
     void loadItems()
@@ -80,11 +89,21 @@ export function FeedbackAdminClient() {
       <h1 className="font-display text-[26px] font-semibold text-vigil-ink">Feedback ({items.length})</h1>
       {loading && <p className="mt-4 text-[16px] text-vigil-muted">Cargando...</p>}
       <div className="mt-6 space-y-4">
-        {items.map((item) => (
-          <div key={item.id} className="rounded-card border border-slate-200 bg-white p-4">
+        {sortedItems.map((item) => {
+          const removal = isRemovalRequestMessage(item.message)
+          return (
+          <div
+            key={item.id}
+            className={
+              removal
+                ? 'rounded-card border border-amber-300 bg-amber-50 p-4'
+                : 'rounded-card border border-slate-200 bg-white p-4'
+            }
+          >
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="font-mono text-[13px] text-vigil-muted">
-                {item.category} · {new Date(item.created_at).toLocaleString()}
+                {removal ? 'removal_request' : item.category} ·{' '}
+                {new Date(item.created_at).toLocaleString()}
               </span>
               <select
                 value={item.status}
@@ -105,7 +124,8 @@ export function FeedbackAdminClient() {
               <p className="mt-1 text-[13px] text-vigil-muted">Email: {item.contact_email}</p>
             )}
           </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )

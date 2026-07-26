@@ -23,4 +23,4 @@ Counsel-open questions, peer-platform comparison detail, and admin triage intern
 
 ## Status
 
-Prompt content finished 2026-07-26. Product implementation not started from this archive step.
+Prompt content finished 2026-07-26. Product §2–§4 shipped (legal basis, removal action, terms cross-link). §1 counsel photo-policy question remains open — photo display unchanged.

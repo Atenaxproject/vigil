@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { MissingPersonNotes } from '@/components/missing/MissingPersonNotes'
+import { RemovalRequestAction } from '@/components/missing/RemovalRequestAction'
 import { StatusBadge } from '@/components/missing/StatusBadge'
 import { createClient } from '@/lib/supabase/server'
 import type { PublicMissingPerson } from '@/types/vigil.types'
@@ -22,6 +23,10 @@ export default async function MissingPersonDetailPage({ params }: PageProps) {
   if (error || !data) notFound()
 
   const person = data as PublicMissingPerson
+  // is_minor is intentionally absent from the public view (76 §5). Age is a
+  // published recognition field — use it only for UI prominence, not as a
+  // legal/compliance signal.
+  const likelyMinor = typeof person.age === 'number' && person.age < 18
 
   return (
     <div className="mx-auto max-w-2xl p-4 pb-24">
@@ -63,6 +68,7 @@ export default async function MissingPersonDetailPage({ params }: PageProps) {
           )}
         </dl>
       </article>
+      <RemovalRequestAction personId={person.id} likelyMinor={likelyMinor} />
       <MissingPersonNotes personId={person.id} />
     </div>
   )

@@ -75,6 +75,14 @@ export default function TermsPage() {
               </strong>{' '}
               for immediate rescue. Vigil does not dispatch or coordinate rescue operations.
             </li>
+            <li>
+              Records of minors receive additional protection. See{' '}
+              <Link href="/proteccion-de-menores" className="text-blue-600 underline">
+                Minors protection
+              </Link>
+              . Anyone may request correction or deletion of a record under the right of habeas
+              data (Article 28 of the Venezuelan Constitution).
+            </li>
           </ul>
         </div>
 

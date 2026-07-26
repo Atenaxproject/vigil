@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 export const metadata = {
@@ -53,6 +54,14 @@ export default function TerminosPage() {
               </strong>{' '}
               para rescate inmediato. Vigil no despacha ni coordina
               operaciones de rescate.
+            </li>
+            <li>
+              Los registros de personas menores de edad reciben protección adicional. Consulta{' '}
+              <Link href="/proteccion-de-menores" className="text-blue-600 underline">
+                Protección de menores
+              </Link>
+              . Cualquier persona puede solicitar la corrección o eliminación de un registro
+              conforme al derecho de hábeas data (artículo 28 de la Constitución).
             </li>
           </ul>
         </section>
