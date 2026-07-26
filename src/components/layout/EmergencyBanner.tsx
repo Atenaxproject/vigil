@@ -116,7 +116,7 @@ export function EmergencyBanner({
         className="sticky top-0 z-[100] border-b border-slate-800 bg-vigil-ink px-2 py-1 text-[13px] text-slate-200 sm:px-4"
         role="banner"
       >
-        <div className="flex items-center gap-1.5 sm:gap-3">
+        <div className="flex w-full min-w-0 max-w-full items-center gap-1.5 sm:gap-3">
           <AlertTriangle className="hidden h-4 w-4 shrink-0 text-amber-400 sm:block" aria-hidden />
 
           {/* 911 stays pinned leftmost — always fully visible */}
@@ -128,10 +128,12 @@ export function EmergencyBanner({
             911
           </a>
 
-          <div className="relative min-w-0 flex-1 overflow-hidden">
+          {/* basis-0 + flex-1 forces the scroller to take leftover width so chips pan
+              inside this box instead of pushing Directorio off-screen */}
+          <div className="relative min-w-0 flex-1 basis-0 overflow-hidden">
             <div
               ref={chipScrollRef}
-              className="flex touch-pan-x snap-x snap-mandatory items-center gap-1.5 overflow-x-scroll overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] motion-safe:scroll-smooth [&::-webkit-scrollbar]:hidden"
+              className="flex w-full touch-pan-x snap-x snap-mandatory items-center gap-1.5 overflow-x-scroll overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] motion-safe:scroll-smooth [&::-webkit-scrollbar]:hidden"
               role="list"
               aria-label={t('carrierCodes')}
               tabIndex={0}
