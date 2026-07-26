@@ -77,7 +77,7 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 5. **No donations solicitation** until 501(c)(3) determination + FDACS registration (Florida Ch. 496).
 6. **Vigil is not a dispatcher.** Rescue needs route to 911 messaging, never intake.
 7. **No government data cooperation.** VenApp intentionally excluded. Referrer values and contact info never logged or exposed.
-8. **Performance budget is law:** functional at 2G/512kbps, no above-fold image >50KB, uploads compressed client-side (prompt 78 pending), lazy-loading, indexed queries only.
+8. **Performance budget is law:** functional at 2G/512kbps, no above-fold image >50KB, uploads compressed client-side (prompt 79 pending), lazy-loading, indexed queries only.
 9. **Design system:** light mode only, Geist/Inter, 4px radius, minimal motion, existing tokens only. No dark mode under any framing.
 10. **PR routing:** anything touching `src/lib/security/`, auth, RLS, contact-info handling, or sanitization goes through a PR so CodeQL + Copilot review run pre-merge. Schema changes always PR.
 11. **Claude API:** Haiku for all automated/batch paths; Sonnet only for photo-search vision. Everything AI passes through the circuit breaker.
@@ -85,10 +85,22 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 
 ## Process rules
 
-- Numbered prompts live in `docs/build-process/` — never at repo root. Generated assets never at repo root (`.gitignore` guards exist; extend them if a new generator appears).
+- Numbered prompts live in `docs/build-process/` — never at repo root. Generated assets never at repo root (`.gitignore` guards exist; extend them if a new generator appears). Root `NN-*.md` / `NNA-*.md` drafts are gitignored so they cannot be committed by accident.
 - Status markers in `VIGIL-LAUNCH-READINESS.md` change only from execution reports.
 - Keep this file honest: when the architecture changes, update this description in the same PR. This document drifting is how the platform accumulated config-vs-nav incoherence once already.
 
+### Public vs private docs (standing — do not ask Orlando each time)
+
+The GitHub repo is public. Treat documentation as a security surface.
+
+1. **Never leave finished numbered prompts at repo root.** Relocate in the same session.
+2. **Default archive path for full prompts:** `docs/evaluations/archive-from-public/docs/build-process/NN-….md` (gitignored, operator machine only).
+3. **Public tree:** only what a good-faith open-source contributor needs. Prefer a short **redacted stub** at `docs/build-process/NN-….md` (title, safe summary, hard constraints, pointer that the full prompt is private) over publishing counsel questions, exploit narratives, peer competitive analysis, admin triage internals, secret runbooks, or launch gap inventories.
+4. **Always private / never re-publish:** security evaluations, RLS/probe results, pending-secret checklists, outreach packages with personal targeting, admin SOPs, full launch-readiness gap lists, legal/counsel-open questions, and anything that helps an adversary more than a contributor.
+5. **Safe to keep public:** mission/ethics, architecture agent contract (`CLAUDE.md`), design system, deploy-how-to, API/data-model overviews, help/onboarding/glossary, press kit, accessibility summary.
+6. **When unsure:** stub publicly + full copy under `docs/evaluations/`. Do not invent a parallel process — update this section if the rule must change.
+7. Internal launch checklists, SOPs, and build-prompt archives live only under gitignored `docs/evaluations/`. Do not re-publish them to the public tree.
+
 ---
 
-*Last updated: 2026-07-22 · prompt 75 §7 · Venezuela deployment live*
+*Last updated: 2026-07-26 · docs public/private standing rule · Venezuela deployment live*

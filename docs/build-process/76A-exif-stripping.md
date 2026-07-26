@@ -41,7 +41,7 @@ Run against a staging copy first if one exists. If not, process a small batch, v
 
 **Client-side direct-to-storage path:** the client controls what is uploaded, so a client-side strip alone is bypassable. For this threat model — ordinary users accidentally leaking their own location, not adversaries deliberately embedding it — client-side re-encode covers effectively all real cases. But do both:
 
-- Client-side re-encode before upload. This also delivers most of prompt 78's compression benefit, so build it as the shared path rather than duplicating later.
+- Client-side re-encode before upload. This also delivers most of prompt 79's compression benefit, so build it as the shared path rather than duplicating later.
 - Server-side verification or strip as defense in depth. If direct-to-storage makes server-side interception impossible, either route uploads through a server endpoint or add a storage trigger that post-processes. **Report which approach the current architecture allows** rather than assuming.
 
 ---
@@ -73,7 +73,7 @@ On a missing-persons platform, a sideways face is not a cosmetic bug. It degrade
 - Do not delete originals until replacements are verified.
 - Do not log or store the GPS values discovered during the backfill. They are the thing being removed.
 - No change to display behavior, layout, or the design system.
-- Keep the client-side re-encode structured so prompt 78 extends it rather than replacing it.
+- Keep the client-side re-encode structured so prompt 79 extends it rather than replacing it.
 
 ## Report back
 

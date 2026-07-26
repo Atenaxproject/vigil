@@ -3,9 +3,11 @@
 **Live:** [vigil.youthewave.org](https://vigil.youthewave.org) · **Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)
 
 This folder contains the architecture decisions, build process, and
-development prompts used to create Vigil. Kept public intentionally —
-if you're deploying Vigil for a different crisis or contributing code,
-this shows the reasoning behind every major decision.
+development prompts used to create Vigil. Sensitive ops material,
+counsel-open legal prompts, and full historical prompt archives are
+**not** published — see `architecture/CLAUDE.md` (Process rules →
+Public vs private docs). Contributors get the safe surface needed to
+deploy or improve the platform.
 
 ## Structure
 

@@ -5,6 +5,14 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-26 (prompt 78 archive + docs visibility)
+
+### Docs
+- **Finished** prompt `78` (minors legal grounding & removal mechanism): photo sentence locked to federated-origin facts only; counsel flag preserved; ready for product execution.
+- **Public stub** at `docs/build-process/78-minors-legal-grounding.md`; **full prompt** private under gitignored `docs/evaluations/archive-from-public/` (counsel questions, peer comparison, triage internals omitted from public tree).
+- **Standing process** in `docs/architecture/CLAUDE.md` — public vs private docs handling so agents relocate/redact without re-asking; `.gitignore` covers `/docs/evaluations/` and root `NN-*.md` drafts.
+- **Numbering fix:** client-side image compression reassigned to **prompt 79** (was colliding with 78); updated `CLAUDE.md`, `76A-exif-stripping.md`, and the queue table in `75-coherence-and-integrity.md`.
+
 ## [Unreleased] — 2026-07-22 (prompt 59)
 
 ### Added
