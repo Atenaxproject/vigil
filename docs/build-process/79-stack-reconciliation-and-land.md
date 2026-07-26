@@ -23,4 +23,4 @@ Full lineage tables, prod-unknown markers, and the Codex apply checklist live in
 
 ## Status
 
-In progress 2026-07-26: recon doc frozen; #15 rebased MERGEABLE; #17 lockfile + ChromeDriver CI fixes pushed; land blocked on `main protection` review-thread resolution. Upstash unset in prod (Orlando decision).
+**Repo land complete 2026-07-26:** recon doc frozen; `#15` → `#16` → `#17` merged; `#18` merged with canonical SQL `021`–`024`. Upstash still unset in prod (Orlando decision). **Production SQL apply** remains operator/Codex — not done from the agent.

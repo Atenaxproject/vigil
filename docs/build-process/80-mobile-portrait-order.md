@@ -19,4 +19,4 @@ Full issue write-ups and acceptance checklist live under `docs/evaluations/archi
 
 ## Status
 
-Implementation on `fix/mobile-portrait-order` (2026-07-26).
+Implementation + visual-check proof on `fix/mobile-portrait-order` / PR #24 (2026-07-26). Screenshots under `screenshots/` + `public/screenshots/` (`home-*`, `buscar-*`).
