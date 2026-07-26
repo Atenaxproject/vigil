@@ -5,6 +5,20 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-26 (ship: emergency strip + contrast + prod SQL)
+
+### Fixed
+- **Emergency carrier chips (mobile)** — real touch pan (`touch-pan-x`, `overflow-x-scroll`, overscroll contain); dual edge fades that track scroll position; 911 stays pinned; body `overflow-x: clip` so nested horizontal pans work on iOS.
+- **`/informacion` axe color-contrast** — darker `--vigil-muted` (`#475569`) for AA on vigil-cloud; caution/badge text uses amber-800 / green-800 instead of status tokens that fail at 13px; accessibility CI hard-fails `/informacion` again.
+
+### Ops
+- **Prod SQL verify** — live: 020 + 021 + 024 effects present; **022 coverage cols + 023 flag RPC missing** (photo bucket already existed). One-shot Actions workflow applies 022→023 via `SUPABASE_DB_URL`.
+- **Upstash** — still unset on Vercel Production (no REST URL/token). Durable RL remains in-memory fail-open until Orlando adds Upstash env + redeploy.
+
+### Docs
+- DESIGN-SYSTEM muted token aligned; prompt 79/80 stubs updated for this ship.
+
+
 ## [Unreleased] — 2026-07-26 (prompt 80 mobile portrait order)
 
 ### Fixed

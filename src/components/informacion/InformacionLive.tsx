@@ -160,9 +160,9 @@ export function InformacionLive() {
   const officialSources = CRISIS_CONFIG.partnerLinks.filter((p) => p.type !== 'sister-platform')
 
   const gdacsAlertColor = (level: string) => {
-    if (level === 'Red') return 'text-status-missing'
-    if (level === 'Orange') return 'text-status-unverified'
-    return 'text-status-alive'
+    if (level === 'Red') return 'text-red-700'
+    if (level === 'Orange') return 'text-amber-800'
+    return 'text-green-800'
   }
 
   const metricLabel = (metric: string) => {
@@ -259,7 +259,7 @@ export function InformacionLive() {
 
       <section className="mt-10">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('stats.title')}</h2>
-        <p className="mt-1 text-[13px] text-status-unverified">{tc('stats.officialFraming')}</p>
+        <p className="mt-1 text-[13px] font-medium text-amber-800">{tc('stats.officialFraming')}</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {figures.map((fig) => (
             <SourcedFigureCard
@@ -283,7 +283,7 @@ export function InformacionLive() {
 
       <section className="mt-10 rounded-card border border-slate-200 bg-white p-4" id="apoyo-psicosocial">
         <h2 className="text-[20px] font-semibold text-vigil-ink">{tc('psychosocial.title')}</h2>
-        <p className="mt-1 text-[13px] text-status-unverified">{tc('psychosocial.verifyNote')}</p>
+        <p className="mt-1 text-[13px] font-medium text-amber-800">{tc('psychosocial.verifyNote')}</p>
         <p className="mt-2 text-[13px] text-vigil-muted">{tc('psychosocial.scopeNote')}</p>
         <div className="mt-4 space-y-3">
           {psychosocial.map((line) => (
@@ -296,7 +296,7 @@ export function InformacionLive() {
                 {locale === 'en' ? line.note_en : line.note_es}
               </p>
               {line.venezuela_only && (
-                <p className="mt-2 text-[13px] font-medium text-status-unverified">
+                <p className="mt-2 text-[13px] font-medium text-amber-800">
                   {tc('psychosocial.venezuelaOnly')}
                 </p>
               )}
@@ -374,7 +374,7 @@ export function InformacionLive() {
       {rssItems.length > 0 && (
         <section className="mt-10 border-t border-slate-200 pt-8">
           <h2 className="text-[20px] font-semibold text-vigil-ink">{t('rssTier')}</h2>
-          <p className="mt-1 text-[13px] text-status-unverified">{t('rssDisclaimer')}</p>
+          <p className="mt-1 text-[13px] font-medium text-amber-800">{t('rssDisclaimer')}</p>
           <div className="mt-4 space-y-3">
             {rssItems.slice(0, 8).map((item) => (
               <a
@@ -430,7 +430,7 @@ export function InformacionLive() {
                     </p>
                   )}
                   {freshness === 'stale' && (
-                    <p className="mt-1 text-[13px] text-status-unverified">
+                    <p className="mt-1 text-[13px] font-medium text-amber-800">
                       {locale === 'en' ? 'May be outdated' : 'Puede estar desactualizado'}
                     </p>
                   )}

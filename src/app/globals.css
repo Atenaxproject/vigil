@@ -14,7 +14,8 @@
     --vigil-cloud: #f8fafc;
     --vigil-border: #e2e8f0;
     --vigil-body: #334155;
-    --vigil-muted: #64748b;
+    /* Slate-600: ≥4.5:1 on white and vigil-cloud (slate-500 fails on cloud) */
+    --vigil-muted: #475569;
     --status-missing: #dc2626;
     --status-missing-bg: #fef2f2;
     --status-alive: #16a34a;
@@ -30,9 +31,10 @@
     --seismic-major: #7c3aed;
   }
 
+  /* clip (not hidden) so nested horizontal pans (emergency chips) still work on iOS */
   html,
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {

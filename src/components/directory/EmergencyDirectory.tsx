@@ -113,10 +113,10 @@ export function EmergencyDirectory({ locale = 'es' }: { locale?: string }) {
                 <p className="mt-0.5 font-mono text-[13px] text-vigil-muted">{entry.label_short}</p>
               )}
               <p
-                className={`mt-1 inline-block rounded-badge px-2 py-0.5 text-[13px] font-medium ${
+                className={`mt-1 inline-block rounded-badge px-2 py-0.5 text-[13px] font-semibold ${
                   isPrivate
-                    ? 'bg-status-unverified/15 text-status-unverified'
-                    : 'bg-status-alive-bg text-status-alive'
+                    ? 'bg-status-unverified-bg text-amber-800'
+                    : 'bg-status-alive-bg text-green-800'
                 }`}
               >
                 {isPrivate ? t('servicePrivate') : t('servicePublic')}
@@ -156,7 +156,7 @@ export function EmergencyDirectory({ locale = 'es' }: { locale?: string }) {
     <div>
       <h2 className="text-[20px] font-semibold text-vigil-ink">{t('title')}</h2>
       <p className="mt-1 text-[16px] text-vigil-muted">{t('subtitle')}</p>
-      <p className="mt-2 rounded-card border border-status-alive/30 bg-status-alive-bg px-3 py-2 text-[16px] text-status-alive">
+      <p className="mt-2 rounded-card border border-status-alive/30 bg-status-alive-bg px-3 py-2 text-[16px] font-medium text-green-800">
         {t('offlineAvailable')}
       </p>
 

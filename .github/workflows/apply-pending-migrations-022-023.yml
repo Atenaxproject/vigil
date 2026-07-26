@@ -1,0 +1,45 @@
+# ONE-SHOT — apply pending prod migrations 022 + 023 (prompt 79 follow-up).
+# Uses SUPABASE_DB_URL repo secret. Delete this workflow after a green run.
+name: apply-pending-migrations-022-023
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+      - name: Apply 022 then 023 (idempotent)
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SUPABASE_DB_URL:-}" ]; then
+            echo "SUPABASE_DB_URL secret not set"
+            exit 1
+          fi
+          # Live verify (2026-07-26): 020 restore + 021 contact lockdown already present;
+          # coverage columns + flag_missing_person missing; photo bucket already exists.
+          # 024 insert lockdown effects already observed (anon INSERT denied on map_markers).
+          echo "Applying 022_needs_coverage_and_photo_storage.sql"
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 \
+            -f supabase/migrations/022_needs_coverage_and_photo_storage.sql
+          echo "Applying 023_missing_person_flag_rpc.sql"
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 \
+            -f supabase/migrations/023_missing_person_flag_rpc.sql
+          echo "OK: 022 and 023 applied"
+      - name: Post-apply smoke probes
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          set -euo pipefail
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -c \
+            "SELECT column_name FROM information_schema.columns WHERE table_name='map_markers' AND column_name LIKE 'coverage%' ORDER BY 1;"
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -c \
+            "SELECT proname FROM pg_proc WHERE proname='flag_missing_person';"
