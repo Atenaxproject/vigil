@@ -13,10 +13,10 @@ All notable changes to Vigil are documented here. Format loosely follows
 
 ### Ops
 - **Prod SQL verify + apply** — live: 020 + 021 + 024 effects present; **022 + 023 applied** via Actions (`SUPABASE_DB_URL`); post-probe confirms `coverage_state` + `flag_missing_person`.
-- **Upstash** — still unset on Vercel Production (no REST URL/token). Durable RL remains in-memory fail-open until Orlando adds Upstash env + redeploy.
+- **Upstash** — `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` set on Vercel Production and redeployed (operator 2026-07-26). Durable rate limits use Redis REST.
 
 ### Docs
-- DESIGN-SYSTEM muted token aligned; prompt 79/80 stubs updated for this ship.
+- DESIGN-SYSTEM muted token aligned; prompt 79/80 stubs + Upstash status corrected for phase closeout (operator confirmed Production env).
 
 
 ## [Unreleased] — 2026-07-26 (prompt 80 mobile portrait order)
