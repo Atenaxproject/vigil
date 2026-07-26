@@ -190,7 +190,7 @@ export function InformacionLive() {
             {t('liveStatus.refresh')}
           </button>
         </div>
-        <p className="mt-2 font-mono text-[13px] text-vigil-muted">
+        <p className="mt-2 font-mono text-[13px] text-slate-700">
           {t('liveStatus.lastUpdate', { time: lastUpdatedLabel })}
         </p>
         {(liveData?.recentSignificantQuakes.length ?? 0) > 0 && (
@@ -221,7 +221,7 @@ export function InformacionLive() {
           <p className="mt-2 text-[16px] text-slate-700">
             {t('liveStatus.latest')}:{' '}
             {liveData.recentSignificantQuakes[0].source && (
-              <span className="font-mono text-[13px] text-vigil-muted">
+              <span className="font-mono text-[13px] text-slate-700">
                 [{liveData.recentSignificantQuakes[0].source}]{' '}
               </span>
             )}
