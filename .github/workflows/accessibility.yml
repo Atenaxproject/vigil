@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/**'
       - 'docs/accessibility/**'
+      - '.github/workflows/accessibility.yml'
   workflow_dispatch: {}
 
 jobs:
@@ -33,12 +34,24 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: placeholder-service-key
       - name: Wait for server
         run: npx wait-on http://127.0.0.1:3000 --timeout 60000
+      - name: Setup matched Chrome + ChromeDriver
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
+          install-chromedriver: true
       - name: Install axe CLI
         run: npm install -g @axe-core/cli
       - name: Axe key routes (hard-fail)
+        env:
+          CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
+          CHROMEDRIVER_PATH: ${{ steps.setup-chrome.outputs.chromedriver-path }}
         run: |
           set -e
+          # Prefer the matched Chrome binary from setup-chrome over the runner default.
+          export PATH="$(dirname "$CHROME_BIN"):$PATH"
           for path in / /buscar /reportar /informacion; do
             echo "=== axe $path ==="
-            axe "http://127.0.0.1:3000$path" --exit --tags wcag2a,wcag2aa
+            axe "http://127.0.0.1:3000$path" --exit --tags wcag2a,wcag2aa \
+              --chromedriver-path "$CHROMEDRIVER_PATH"
           done
