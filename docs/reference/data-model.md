@@ -24,8 +24,14 @@
 | 012 | `012_missing_persons_map_coords.sql` | jittered map coords on missing_persons; parroquia in public view |
 | 013 | `013_vigil_watch_state.sql` | Vigil Watch durable state |
 | 014 | `014_ai_usage_log.sql` | AI call log for spend-proxy circuit breaker |
+| 015 | `015_sourced_figures_and_directory.sql` | sourced_figures + org directory |
+| 016 | `016_feed_health.sql` | feed_health staleness |
+| 017 | `017_hazard_events.sql` | hazard_events |
+| 018 | `018_contested_figures_and_services.sql` | contested figures + service_reports |
+| 019 | `019_minors_protection.sql` | `is_minor` + public view masking |
+| 020 | `020_restore_missing_persons_public_insert.sql` | restore anon/authenticated INSERT + consent RLS (no SELECT) |
 
-> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Production requires **001–014** — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
+> **Note:** `docs/architecture/DEPLOYMENT.md` documents migrations 001–005 in detail. Production requires **001–020** — see also [`DEPLOYMENT-PLAYBOOK.md`](../architecture/DEPLOYMENT-PLAYBOOK.md).
 
 ---
 

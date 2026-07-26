@@ -57,7 +57,7 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 
 ### Migrations
 
-`supabase/migrations/001–018` applied. Schema truth is `docs/reference/data-model.md` + the migration files — not this document.
+`supabase/migrations/001–020` applied. Schema truth is `docs/reference/data-model.md` + the migration files — not this document.
 
 ### Scripts & checks
 

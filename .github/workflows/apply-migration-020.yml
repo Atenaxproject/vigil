@@ -1,0 +1,46 @@
+# One-shot: apply migration 020 (restore missing_persons public INSERT).
+# Remove this workflow after successful run — not for ongoing use.
+name: apply-migration-020
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+
+      - name: Apply 020_restore_missing_persons_public_insert.sql
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "SUPABASE_DB_URL secret not set"
+            exit 1
+          fi
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 \
+            -f supabase/migrations/020_restore_missing_persons_public_insert.sql
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -c "
+            SELECT grantee, privilege_type
+            FROM information_schema.role_table_grants
+            WHERE table_schema = 'public'
+              AND table_name = 'missing_persons'
+              AND grantee IN ('anon', 'authenticated')
+              AND privilege_type IN ('INSERT', 'SELECT', 'UPDATE', 'DELETE')
+            ORDER BY 1, 2;
+          "
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -c "
+            SELECT policyname, cmd, roles::text, with_check
+            FROM pg_policies
+            WHERE schemaname = 'public' AND tablename = 'missing_persons'
+            ORDER BY policyname;
+          "

@@ -47,53 +47,66 @@ export async function POST(request: NextRequest) {
         ? jitterCoordinates(body.last_seen_lat, body.last_seen_lng)
         : null
 
-    const { data, error } = await supabase
-      .from('missing_persons')
-      .insert({
-        full_name: sanitizeText(body.full_name),
-        age: body.age ?? null,
-        // Explicit minor flag (76 §6): settable without an age. The DB trigger
-        // upgrades it to true when age < 18; neither app nor trigger clears it.
-        is_minor: body.is_minor === true,
-        gender: body.gender ?? null,
-        last_seen_location: sanitizeText(body.last_seen_location),
-        estado: sanitizeText(body.estado),
-        municipio: body.municipio ? sanitizeText(body.municipio) : null,
-        parroquia: body.parroquia ? sanitizeText(body.parroquia) : null,
-        last_seen_lat: body.last_seen_lat ?? null,
-        last_seen_lng: body.last_seen_lng ?? null,
-        approx_last_seen_lat: approxCoords?.lat ?? null,
-        approx_last_seen_lng: approxCoords?.lng ?? null,
-        last_seen_at: body.last_seen_at ?? null,
-        notes: body.notes ? sanitizeText(body.notes) : null,
-        contact_name: sanitizeText(body.contact_name),
-        contact_phone: body.contact_phone ? sanitizePhone(body.contact_phone) : null,
-        contact_whatsapp: body.contact_whatsapp ? sanitizePhone(body.contact_whatsapp) : null,
-        contact_email: body.contact_email ? sanitizeText(body.contact_email) : null,
-        consent_given: true,
-        data_accuracy_confirmed: true,
-        consent_timestamp: new Date().toISOString(),
-        reporter_ip_hash: ipHash,
-        source: 'web',
-      })
-      .select('id, full_name, status, created_at, claim_token')
-      .single()
+    // Pre-generate id + claim_token so we can Prefer: return=minimal.
+    // Anon has INSERT (with consent RLS) but not SELECT on the base table —
+    // contact fields stay locked; public reads use public_missing_persons.
+    const id = crypto.randomUUID()
+    const claim_token = crypto.randomUUID()
+    const created_at = new Date().toISOString()
+    const full_name = sanitizeText(body.full_name)
+
+    const { error } = await supabase.from('missing_persons').insert({
+      id,
+      claim_token,
+      full_name,
+      age: body.age ?? null,
+      // Explicit minor flag (76 §6): settable without an age. The DB trigger
+      // upgrades it to true when age < 18; neither app nor trigger clears it.
+      is_minor: body.is_minor === true,
+      gender: body.gender ?? null,
+      last_seen_location: sanitizeText(body.last_seen_location),
+      estado: sanitizeText(body.estado),
+      municipio: body.municipio ? sanitizeText(body.municipio) : null,
+      parroquia: body.parroquia ? sanitizeText(body.parroquia) : null,
+      last_seen_lat: body.last_seen_lat ?? null,
+      last_seen_lng: body.last_seen_lng ?? null,
+      approx_last_seen_lat: approxCoords?.lat ?? null,
+      approx_last_seen_lng: approxCoords?.lng ?? null,
+      last_seen_at: body.last_seen_at ?? null,
+      notes: body.notes ? sanitizeText(body.notes) : null,
+      contact_name: sanitizeText(body.contact_name),
+      contact_phone: body.contact_phone ? sanitizePhone(body.contact_phone) : null,
+      contact_whatsapp: body.contact_whatsapp ? sanitizePhone(body.contact_whatsapp) : null,
+      contact_email: body.contact_email ? sanitizeText(body.contact_email) : null,
+      consent_given: true,
+      data_accuracy_confirmed: true,
+      consent_timestamp: created_at,
+      reporter_ip_hash: ipHash,
+      source: 'web',
+    })
 
     if (error) {
       return NextResponse.json({ error: 'Error al guardar' }, { status: 500 })
     }
 
-    const claimUrl = `${CRISIS_CONFIG.siteUrl}/mi-reporte/${data.claim_token}`
+    const record = {
+      id,
+      full_name,
+      status: 'missing' as const,
+      created_at,
+      claim_token,
+    }
+    const claimUrl = `${CRISIS_CONFIG.siteUrl}/mi-reporte/${claim_token}`
     if (body.contact_email) {
       void notifyClaimLink({
         to: body.contact_email,
-        personName: data.full_name,
+        personName: full_name,
         claimUrl,
         type: 'missing_person',
       })
     }
 
-    return NextResponse.json({ success: true, record: data, claimUrl })
+    return NextResponse.json({ success: true, record, claimUrl })
   } catch {
     return NextResponse.json({ error: 'Datos inválidos' }, { status: 400 })
   }
