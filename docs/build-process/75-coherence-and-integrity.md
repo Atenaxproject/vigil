@@ -206,7 +206,8 @@ This is not "a policy page plus a field rule." The field-exposure design needs a
 |---|---|
 | **76** | Minors protection — policy page, reduced public field exposure, explicit exclusion from all export/federation endpoints |
 | **77** | Needs coverage lifecycle — `coverage_state` enum, transition authority, auto-decay, map colors. Schema change → PR routing |
-| **78** | Client-side image compression — all upload paths |
+| **78** | Minors legal grounding & removal mechanism (archived; public stub + private full under `docs/evaluations/`) |
+| **79** | Client-side image compression — all upload paths *(was listed as 78 before 78 was assigned to legal grounding)* |
 | **—** | Open from 72 Part B: axe/Lighthouse in CI |
 
 ---

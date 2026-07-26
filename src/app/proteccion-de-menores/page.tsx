@@ -11,6 +11,7 @@ export default async function ProteccionDeMenoresPage() {
   const t = await getTranslations('proteccionMenores')
 
   const sections = [
+    { title: t('legalBasisTitle'), body: t('legalBasisBody') },
     { title: t('publishTitle'), body: t('publishBody') },
     { title: t('locationTitle'), body: t('locationBody') },
     { title: t('federationTitle'), body: t('federationBody') },
@@ -36,6 +37,10 @@ export default async function ProteccionDeMenoresPage() {
           </section>
         ))}
       </div>
+
+      <p className="mt-8 rounded-card border border-amber-200 bg-amber-50 p-4 text-[16px] text-vigil-body">
+        {t('notLegalAdvice')}
+      </p>
 
       <p className="mt-10 border-t border-slate-200 pt-6 text-[13px] text-vigil-muted">
         {t('privacyLink')}{' '}

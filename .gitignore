@@ -48,9 +48,18 @@ public/fallback-*.js
 .vercel
 .env*
 
+# Internal security/ops evaluations + private doc archives (local-only).
+# See docs/architecture/CLAUDE.md Process rules — do not commit raw audit
+# findings, counsel memos, or full build-prompt archives.
+/docs/evaluations/
+
 # Guard against generator/design exports landing at repo root (75 §6).
-# Shipping icons live in public/; prompts live in docs/build-process/.
+# Shipping icons live in public/; prompts live in docs/build-process/ (or
+# private archive under docs/evaluations/ when sensitive).
 /vigil-*.png
 /vigil-*.ico
 /*.tmp.pdf
 /vigil-press-kit.zip
+# Numbered prompt drafts must not linger at repo root.
+/[0-9][0-9]-*.md
+/[0-9][0-9][A-Z]-*.md
