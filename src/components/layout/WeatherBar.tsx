@@ -88,10 +88,9 @@ export function WeatherBar() {
   }, [])
 
   const hasLocations = Boolean(data?.locations?.length)
-  const summaryHint =
-    hasLocations && !expanded
-      ? ` · ${data!.locations[0].name} ${data!.locations[0].temp}°C`
-      : ''
+  // Collapsed: time is always fully visible; first location wraps onto a second
+  // line (no truncate mid-word). Expand panel shows the full set.
+  const firstLocation = hasLocations && !expanded ? data!.locations[0] : null
 
   return (
     <div
@@ -105,12 +104,17 @@ export function WeatherBar() {
         className="flex w-full min-h-[44px] items-center justify-between gap-2 text-left lg:min-h-0 lg:cursor-default lg:pointer-events-none"
         aria-expanded={expanded}
       >
-        <span className="flex min-w-0 items-center gap-1">
-          <Clock className="h-3.5 w-3.5 shrink-0" aria-hidden />
-          <span className="min-w-0 truncate lg:overflow-visible lg:whitespace-normal">
-            {t('venezuela')}: {time}
-            {/* Collapsed mobile: one full first location, never mid-word clip of the full string */}
-            <span className="lg:hidden">{summaryHint}</span>
+        <span className="flex min-w-0 items-start gap-1">
+          <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
+          <span className="min-w-0">
+            <span className="block whitespace-nowrap">
+              {t('venezuela')}: {time}
+            </span>
+            {firstLocation && (
+              <span className="mt-0.5 block whitespace-normal lg:hidden">
+                {firstLocation.name} {firstLocation.temp}°C
+              </span>
+            )}
           </span>
         </span>
         <span className="shrink-0 lg:hidden" aria-hidden>
@@ -138,7 +142,10 @@ export function WeatherBar() {
               <LocationLine key={loc.name} loc={loc} rainLabel={t('rain')} />
             ))
           ) : (
-            !data?.error && <span className="text-vigil-muted">{t('unavailable')}</span>
+            // Only after a completed fetch — not while `data` is still null (in flight)
+            data != null && !data.error && (
+              <span className="text-vigil-muted">{t('unavailable')}</span>
+            )
           )}
         </div>
       )}

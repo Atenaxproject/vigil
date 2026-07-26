@@ -98,7 +98,7 @@ export function EmergencyBanner({
 
           <div className="relative min-w-0 flex-1">
             <div
-              className="flex snap-x snap-mandatory items-center gap-1.5 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex snap-x snap-mandatory items-center gap-1.5 overflow-x-auto motion-safe:scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               role="list"
               aria-label={t('carrierCodes')}
             >
