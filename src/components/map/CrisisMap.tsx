@@ -59,6 +59,10 @@ const MapZoomControls = dynamic(
   () => import('@/components/map/MapZoomControls').then((m) => m.MapZoomControls),
   { ssr: false }
 )
+const MapFocusController = dynamic(
+  () => import('@/components/map/MapFocusController').then((m) => m.MapFocusController),
+  { ssr: false }
+)
 
 // Hurricane/flood archetype layers — dormant for Venezuela (['earthquake']).
 // A hurricane deployment passes data via props; these never mount here.
@@ -81,6 +85,9 @@ interface CrisisMapProps {
   propertyAssessments?: PublicPropertyAssessment[]
   missingPersons?: PublicMissingPerson[]
   regionScope?: RegionScope
+  /** Accessible-list focus sync — fly map when set. */
+  focusLat?: number | null
+  focusLng?: number | null
   /** Hurricane/flood archetype data — only rendered when the deployment's
    *  disasterArchetypes include hurricane/flood (Venezuela: never). */
   nwsAlerts?: import('@/lib/feeds/nws').NwsAlert[]
@@ -94,6 +101,8 @@ export function CrisisMap({
   propertyAssessments = [],
   missingPersons = [],
   regionScope = 'venezuela',
+  focusLat = null,
+  focusLng = null,
   nwsAlerts = [],
   nhcStorms = [],
   waterGauges = [],
@@ -191,6 +200,11 @@ export function CrisisMap({
         {hasHurricaneArchetype && nhcStorms.length > 0 && <NhcStormsLayer storms={nhcStorms} />}
         {hasHurricaneArchetype && waterGauges.length > 0 && <WaterLevelLayer gauges={waterGauges} />}
         <MapZoomControls />
+        <MapFocusController
+          lat={focusLat}
+          lng={focusLng}
+          active={focusLat != null && focusLng != null}
+        />
       </MapContainer>
     </div>
   )

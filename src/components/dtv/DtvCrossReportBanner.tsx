@@ -42,7 +42,7 @@ export function DtvCrossReportBanner() {
               href={DTV_PLATFORM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-vigil-blue underline-offset-2 hover:underline"
+              className="font-medium text-vigil-blue underline underline-offset-2"
             >
               {chunks}
             </a>

@@ -20,10 +20,28 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm run lint
-      # Offline fixture / sanitizer guards — no secrets, no network.
+      # Offline fixture / sanitizer / deployment-pack guards — no secrets, no network.
       - run: node scripts/test-sanitize.mjs
       - run: node scripts/test-feeds.mjs
       - run: node scripts/test-rate-limit.mjs
+      - run: node scripts/validate-deployments.mjs
+      # Vitest unit tests (circuit breaker, contested figures, sanitize, content-expiry)
+      - run: npm test
       # `npm run build` runs the prebuild i18n-parity gate, so key drift fails CI too.
       # The app is designed to build without secrets (no Supabase/Anthropic keys needed).
       - run: npm run build
+      # Playwright smoke: opt-in only via repo variable ENABLE_PLAYWRIGHT=true.
+      # Do not set PLAYWRIGHT in this step's env — that made `if: env.PLAYWRIGHT`
+      # always true and failed CI when browsers were not installed.
+      - name: Playwright smoke (optional)
+        if: ${{ vars.ENABLE_PLAYWRIGHT == 'true' }}
+        env:
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:3000
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder
+          SUPABASE_SERVICE_ROLE_KEY: placeholder-service-key
+        run: |
+          npx playwright install --with-deps chromium
+          npm run start &
+          npx wait-on http://127.0.0.1:3000 --timeout 60000
+          npx playwright test

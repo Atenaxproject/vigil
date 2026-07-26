@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
-import { getClientIp, hashIp, isWithinBounds, sanitizePhone, sanitizeText } from '@/lib/security/validate'
+import {
+  getClientIp,
+  hashIp,
+  resolveGeoForRecord,
+  sanitizePhone,
+  sanitizeText,
+} from '@/lib/security/validate'
 import { notifyClaimLink } from '@/lib/email/notify'
 import { jitterCoordinates } from '@/lib/property-assessment'
 import { stripExif, type UploadMime } from '@/lib/images/strip-exif'
@@ -88,8 +94,9 @@ export async function POST(request: NextRequest) {
     const { body, photo } = await parseBody(request)
 
     if (body.last_seen_lat !== undefined && body.last_seen_lng !== undefined) {
-      if (!isWithinBounds(body.last_seen_lat, body.last_seen_lng)) {
-        return NextResponse.json({ error: 'Coordenadas fuera de Venezuela' }, { status: 400 })
+      const geo = resolveGeoForRecord('person', body.last_seen_lat, body.last_seen_lng)
+      if (!geo.ok) {
+        return NextResponse.json({ error: geo.error }, { status: 400 })
       }
     }
 

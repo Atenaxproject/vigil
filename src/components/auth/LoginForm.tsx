@@ -2,12 +2,14 @@
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { createClient } from '@/lib/supabase/client'
 import { getSupabaseConfigError } from '@/lib/supabase/env'
 
 type AuthMethod = 'email' | 'phone'
 
 export function LoginForm() {
+  const t = useTranslations('auth')
   const router = useRouter()
   const searchParams = useSearchParams()
   const next = searchParams.get('next') ?? '/'
@@ -54,13 +56,7 @@ export function LoginForm() {
       return
     }
 
-    if (method === 'email') {
-      setMessage(
-        'Revise su correo electrónico. Haga clic en el enlace o ingrese el código de verificación.'
-      )
-    } else {
-      setMessage('Se envió un código SMS. Ingréselo a continuación.')
-    }
+    setMessage(method === 'email' ? t('emailSent') : t('smsSent'))
     setStep('verify')
   }
 
@@ -104,12 +100,12 @@ export function LoginForm() {
     <div className="mx-auto w-full max-w-md">
       {reason === 'auth_required' && (
         <p className="mb-4 rounded border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
-          Debe iniciar sesión para acceder a esta sección.
+          {t('authRequired')}
         </p>
       )}
       {reason === 'admin_required' && (
         <p className="mb-4 rounded border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
-          Esta sección es solo para administradores de Vigil.
+          {t('adminRequired')}
         </p>
       )}
       {configError && (
@@ -133,7 +129,7 @@ export function LoginForm() {
               : 'text-slate-600 hover:bg-slate-50'
           }`}
         >
-          Correo electrónico
+          {t('email')}
         </button>
         <button
           type="button"
@@ -149,7 +145,7 @@ export function LoginForm() {
               : 'text-slate-600 hover:bg-slate-50'
           }`}
         >
-          Teléfono SMS
+          {t('phone')}
         </button>
       </div>
 
@@ -158,7 +154,7 @@ export function LoginForm() {
           {method === 'email' ? (
             <div>
               <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-700">
-                Correo electrónico
+                {t('emailLabel')}
               </label>
               <input
                 id="email"
@@ -174,7 +170,7 @@ export function LoginForm() {
           ) : (
             <div>
               <label htmlFor="phone" className="mb-1 block text-sm font-medium text-slate-700">
-                Número de teléfono
+                {t('phoneLabel')}
               </label>
               <input
                 id="phone"
@@ -186,7 +182,7 @@ export function LoginForm() {
                 placeholder="+58 412 1234567"
                 className="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-vigil-blue focus:outline-none focus:ring-1 focus:ring-vigil-blue"
               />
-              <p className="mt-1 text-[13px] text-vigil-muted">Incluya código de país (ej. +58)</p>
+              <p className="mt-1 text-[13px] text-vigil-muted">{t('phoneHint')}</p>
             </div>
           )}
 
@@ -197,7 +193,7 @@ export function LoginForm() {
             disabled={loading || Boolean(configError)}
             className="w-full rounded bg-vigil-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {loading ? 'Enviando...' : 'Enviar código de verificación'}
+            {loading ? t('sending') : t('sendCode')}
           </button>
         </form>
       ) : (
@@ -210,7 +206,7 @@ export function LoginForm() {
 
           <div>
             <label htmlFor="otp" className="mb-1 block text-sm font-medium text-slate-700">
-              Código de verificación
+              {t('otpLabel')}
             </label>
             <input
               id="otp"
@@ -232,7 +228,7 @@ export function LoginForm() {
             disabled={loading}
             className="w-full rounded bg-vigil-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {loading ? 'Verificando...' : 'Verificar e iniciar sesión'}
+            {loading ? t('verifying') : t('verify')}
           </button>
 
           <button
@@ -245,14 +241,12 @@ export function LoginForm() {
             }}
             className="w-full text-sm text-vigil-muted hover:text-slate-700"
           >
-            Volver
+            {t('back')}
           </button>
         </form>
       )}
 
-      <p className="mt-6 text-center text-[13px] text-vigil-muted">
-        Sin contraseñas — solo verificación por código. Sus datos están protegidos.
-      </p>
+      <p className="mt-6 text-center text-[13px] text-vigil-muted">{t('footer')}</p>
     </div>
   )
 }

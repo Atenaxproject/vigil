@@ -79,15 +79,11 @@ Mono:     13px / 400                      → Coordinates, IDs, codes
 --seismic-major:    #7C3AED   /* 7.0+    — violet */
 ```
 
-### Dark Mode (CSS class: .dark applied to :root)
-```css
---dark-bg:       #0A0F1E   /* Primary — slight blue undertone, easier on eyes than pure black */
---dark-surface:  #111827   /* Cards, panels */
---dark-surface2: #1F2937   /* Elevated surfaces */
---dark-border:   #374151   /* Borders */
---dark-text:     #F1F5F9   /* Primary text */
---dark-muted:    #9CA3AF   /* Secondary text */
-```
+### Dark mode — not shipped
+
+Vigil is **light mode only** (see `CLAUDE.md` standing constraint #9). Do not add
+`next-themes`, `.dark` tokens, or dark UI under any framing. Historical dark-token
+notes were removed to stop docs drift.
 
 ---
 

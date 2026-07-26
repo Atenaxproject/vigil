@@ -510,7 +510,8 @@
       "invalidEmail": "Invalid email address",
       "invalidAge": "Invalid age",
       "mustAccept": "You must accept to continue"
-    }
+    },
+    "flagError": "Could not submit the report. Try again."
   },
   "privacy": {
     "shortNotice": "Your contact info is never shown publicly. We do not share data with the Venezuelan government.",
@@ -1089,13 +1090,14 @@
       "contactNote": "Your contact is never shown publicly.",
       "gpsOk": "GPS location detected",
       "gpsPending": "Waiting for GPS location…",
-      "gpsRequired": "GPS location within Venezuela is required.",
+      "gpsRequired": "GPS location in Venezuela or South Florida is required.",
       "categoriesRequired": "Select at least one category.",
       "submit": "Register point",
       "submitting": "Registering...",
       "success": "Collection point registered.",
       "error": "Failed to register."
-    }
+    },
+    "boundsNoteDiaspora": "Locations in Venezuela or the diaspora hub (South Florida) are accepted. Needs and missing persons remain limited to the crisis area."
   },
   "wall": {
     "title": "Community Wall",
@@ -1213,7 +1215,8 @@
         "tips": [
           "Search by name or upload a photo — we compare Vigil and Desaparecidos Terremoto Venezuela at once.",
           "Save your claim link if you report someone — it's the only way to manage your report without an account.",
-          "Check public notes on each profile — they may have recent sightings."
+          "Check public notes on each profile — they may have recent sightings.",
+          "If you lose the claim link, check the confirmation email or paste it in My reports — there is no name-based recovery."
         ]
       },
       "necesito_ayuda": {
@@ -1407,7 +1410,7 @@
         },
         "flag": {
           "q": "How do I report inappropriate content?",
-          "a": "Use the flag button on /muro. For missing persons, contact support@youthewave.org."
+          "a": "Wall and missing persons: use the report button (auto-hidden after 3 reports). You can also email support@youthewave.org."
         },
         "structural": {
           "q": "Are structural assessments official?",
@@ -1649,14 +1652,17 @@
     "addLabel": "Paste a claim token",
     "add": "Add",
     "emptyExplainer": "When you file a report, an exchange request, or an assessment request, it is saved here on this device — no account — so you can return to it. You have not saved any yet.",
-    "emptyCta": "Create a report"
+    "emptyCta": "Create a report",
+    "claimRecoveryTitle": "If you lost your claim link",
+    "claimRecoveryEmail": "If you left an email when submitting, check for Vigil’s message with the unique link — the token cannot be regenerated here.",
+    "claimRecoveryDevice": "Tokens on this device stay in this browser only (no account). Changing phones or clearing data loses them.",
+    "claimRecoveryPaste": "If you still have the token or /mi-reporte/… URL, paste it above to reopen it.",
+    "claimRecoveryNoLookup": "For privacy, Vigil does not look up reports by name or phone. The token is the key."
   },
   "proteccionMenores": {
     "title": "Protection of minors",
     "intro": "Vigil publishes a public missing-persons board that includes children and adolescents. Their information is handled under one clear rule.",
     "principle": "We publish what helps a stranger recognize the child. We suppress what would help a stranger reach them.",
-    "legalBasisTitle": "Legal basis",
-    "legalBasisBody": "Images and data of children and adolescents have reinforced protection in Venezuela. Article 65 of the Organic Law for the Protection of Children and Adolescents (LOPNNA) restricts disclosure of a minor’s image without the consent of their parent, guardian, or responsible adult. Article 78 of the Constitution orders their integral protection with absolute priority and according to their best interest.\n\nVigil reduces location precision for minor records to municipality level, never publishes accompaniment status, and applies the same reduction to data shared with partner platforms. Photographs of minors that appear on Vigil come from partner platforms; Vigil does not host or modify them. This text is informational and is not legal advice.",
     "publishTitle": "What is published",
     "publishBody": "For a record flagged as a minor, Vigil shows name, photograph, age, sex, state and municipality. These help a stranger recognize the child without revealing where to find them.",
     "locationTitle": "Reduced location",
@@ -1664,12 +1670,11 @@
     "federationTitle": "Federation and export",
     "federationBody": "The same reduction applies to federation and export. Partner platforms and the PFIF standard receive the reduced set: recognition data and municipality-level location, never the precise location. Minor records remain in the export so cross-platform match chances are not reduced.",
     "photoTitle": "Photographs",
-    "photoBody": "Photographs of minors that appear on Vigil come from partner platforms; Vigil does not host or modify them. Metadata on those images is the responsibility of the originating platform.",
+    "photoBody": "Vigil does not host missing-person photographs — they are served from the originating platforms (for example, the federated network). Vigil therefore cannot strip metadata from those images, which is the responsibility of the platform that originally publishes them. We are raising this directly with the source platforms.",
     "removalTitle": "Correction or removal",
-    "removalBody": "Anyone may request correction or deletion of a record from the person’s profile or by writing to vigil@youthewave.org. A parent, guardian, or responsible adult may request removal or correction of a minor’s record. Requests are reviewed and acted on as soon as possible.",
+    "removalBody": "A parent or guardian may request correction or removal of a report through our contact channel. We respond within 72 hours.",
     "governmentTitle": "No data to government",
     "governmentBody": "Vigil does not share user data with the Venezuelan government, and this expressly includes information about minors.",
-    "notLegalAdvice": "This notice is informational and does not constitute legal advice.",
     "privacyLink": "See also our",
     "privacyLinkCta": "Privacy Policy"
   },
@@ -1693,5 +1698,27 @@
     "reviewedNote": "Requests are reviewed and acted on as soon as possible.",
     "emailAlternative": "You can also write to",
     "emailSubject": "Removal or correction request — Vigil"
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginTitleMeta": "Sign in — Vigil",
+    "loginSubtitle": "Email or SMS verification. No password required.",
+    "loading": "Loading...",
+    "email": "Email",
+    "phone": "SMS phone",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone number",
+    "phoneHint": "Include country code (e.g. +1)",
+    "sendCode": "Send verification code",
+    "sending": "Sending...",
+    "otpLabel": "Verification code",
+    "verify": "Verify and sign in",
+    "verifying": "Verifying...",
+    "back": "Back",
+    "footer": "No passwords — code verification only. Your data is protected.",
+    "emailSent": "Check your email. Click the link or enter the verification code.",
+    "smsSent": "An SMS code was sent. Enter it below.",
+    "authRequired": "You must sign in to access this section.",
+    "adminRequired": "This section is for Vigil administrators only."
   }
 }

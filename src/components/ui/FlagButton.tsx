@@ -4,7 +4,7 @@ import { Flag } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 interface FlagButtonProps {
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export function FlagButton({ onClick }: FlagButtonProps) {

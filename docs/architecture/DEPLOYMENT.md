@@ -238,4 +238,49 @@ supabase db reset # applies migrations locally
 
 ---
 
-*Archived from root `DEPLOYMENT.md` on 2026-06-30.*
+## Staging & rollback (public summary)
+
+Detailed operator checklists stay private (`docs/evaluations/`). Public-safe steps:
+
+1. **Staging** — Prefer a separate Vercel preview / staging project + Supabase project
+   that has migrations applied through the latest numbered file (currently `022`).
+   Never point staging at production service-role keys.
+2. **Promote** — Merge PR → Vercel production deploy for `vigil.youthewave.org`.
+3. **Rollback (app)** — In Vercel → Deployments → promote the previous successful
+   production deployment. No schema reverse required for most app-only releases.
+4. **Rollback (git)** — Annotated restore tags on feature branches
+   (`restore/phase2-3-YYYYMMDD`). Checkout the tag or redeploy that commit from Vercel.
+   Do **not** force-push `main`.
+5. **Rollback (schema)** — SQL migrations are forward-only on production; reverse
+   requires a written plan and Orlando approval. Ship migrations in-repo first;
+   apply only after review.
+
+## Incident response (public stub)
+
+If the site is down or data is exposed:
+
+1. Confirm scope (Vercel status, Supabase status, DNS).
+2. Use Vercel instant rollback if the last deploy is the cause.
+3. Rotate secrets only if exposure is confirmed (Supabase service role, admin secret).
+4. Full incident SOP (contacts, evidence, postmortem template) is private — see
+   operator evaluations folder on the admin machine.
+
+## Make.com webhook
+
+Optional intake: `POST /api/make/webhook` with `Authorization: Bearer $MAKE_WEBHOOK_SECRET`.
+Same Zod + sanitize path as web missing-person submit. Returns 503 when the secret
+is unset (safe default).
+
+## Synthetic uptime
+
+`scripts/synthetic-uptime.mjs` (and `.github/workflows/synthetic-uptime.yml`) probes
+`/`, `/buscar`, `/reportar`, `/informacion`. Optional `CRON_SECRET` probes retention
+cron; missing secret skips that check without failing the public probes.
+
+## Client error sink
+
+`POST /api/log-client-error` — rate-limited structured console logging. No SaaS SDK.
+
+---
+
+*Archived from root `DEPLOYMENT.md` on 2026-06-30 · updated 2026-07-25 Phase 2/3.*

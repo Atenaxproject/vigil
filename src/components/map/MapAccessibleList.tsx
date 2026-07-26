@@ -4,12 +4,52 @@ import { useId, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import type { MapMarker, SeismicEvent } from '@/types/vigil.types'
+
 interface MapAccessibleListProps {
   markers: MapMarker[]
   events?: SeismicEvent[]
+  /** Sync focus with map fly-to when a list row is activated. */
+  focusedMarkerId?: string | null
+  onFocusMarker?: (marker: MapMarker) => void
 }
 
-export function MapAccessibleList({ markers, events = [] }: MapAccessibleListProps) {
+function AccessibleMarkerRow({
+  marker,
+  focused,
+  onFocus,
+  accentClass = 'border-slate-200',
+}: {
+  marker: MapMarker
+  focused: boolean
+  onFocus?: (marker: MapMarker) => void
+  accentClass?: string
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onFocus?.(marker)}
+      aria-current={focused ? 'true' : undefined}
+      className={`w-full rounded-input border px-3 py-2 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40 ${accentClass} ${
+        focused ? 'ring-2 ring-vigil-blue/50' : ''
+      }`}
+    >
+      <span className="font-medium">{marker.title}</span>
+      {marker.description && (
+        <p className="mt-1 text-[13px] text-vigil-muted">{marker.description}</p>
+      )}
+      <p className="mt-1 font-mono text-[13px] text-vigil-muted">
+        {marker.lat.toFixed(4)}, {marker.lng.toFixed(4)}
+      </p>
+    </button>
+  )
+}
+
+export function MapAccessibleList({
+  markers,
+  events = [],
+  focusedMarkerId = null,
+  onFocusMarker,
+}: MapAccessibleListProps) {
   const t = useTranslations('map')
   const [open, setOpen] = useState(false)
   const panelId = useId()
@@ -59,7 +99,11 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
         className="flex min-h-[44px] w-full items-center justify-between gap-2 px-4 py-2 text-left text-[16px] font-medium text-vigil-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vigil-blue/40"
       >
         <span>{open ? t('hideList') : t('viewAsList')}</span>
-        {open ? <ChevronUp className="h-4 w-4 shrink-0" aria-hidden /> : <ChevronDown className="h-4 w-4 shrink-0" aria-hidden />}
+        {open ? (
+          <ChevronUp className="h-4 w-4 shrink-0" aria-hidden />
+        ) : (
+          <ChevronDown className="h-4 w-4 shrink-0" aria-hidden />
+        )}
       </button>
 
       {open && (
@@ -83,12 +127,12 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
               <h3 className="text-[17px] font-medium text-vigil-ink">{t('layers.needs')}</h3>
               <ul className="mt-2 space-y-2">
                 {needs.slice(0, 15).map((marker) => (
-                  <li key={marker.id} className="rounded-input border border-slate-200 px-3 py-2">
-                    <span className="font-medium">{marker.title}</span>
-                    {marker.description && <p className="mt-1 text-[13px] text-vigil-muted">{marker.description}</p>}
-                    <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                      {marker.lat.toFixed(4)}, {marker.lng.toFixed(4)}
-                    </p>
+                  <li key={marker.id}>
+                    <AccessibleMarkerRow
+                      marker={marker}
+                      focused={focusedMarkerId === marker.id}
+                      onFocus={onFocusMarker}
+                    />
                   </li>
                 ))}
               </ul>
@@ -100,12 +144,13 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
               <h3 className="text-[17px] font-medium text-vigil-ink">{t('layers.comms')}</h3>
               <ul className="mt-2 space-y-2">
                 {comms.slice(0, 15).map((marker) => (
-                  <li key={marker.id} className="rounded-input border border-amber-200 bg-amber-50/30 px-3 py-2">
-                    <span className="font-medium">{marker.title}</span>
-                    {marker.description && <p className="mt-1 text-[13px] text-vigil-muted">{marker.description}</p>}
-                    <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                      {marker.lat.toFixed(4)}, {marker.lng.toFixed(4)}
-                    </p>
+                  <li key={marker.id}>
+                    <AccessibleMarkerRow
+                      marker={marker}
+                      focused={focusedMarkerId === marker.id}
+                      onFocus={onFocusMarker}
+                      accentClass="border-amber-200 bg-amber-50/30"
+                    />
                   </li>
                 ))}
               </ul>
@@ -117,12 +162,12 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
               <h3 className="text-[17px] font-medium text-vigil-ink">{t('layers.resources')}</h3>
               <ul className="mt-2 space-y-2">
                 {resources.slice(0, 15).map((marker) => (
-                  <li key={marker.id} className="rounded-input border border-slate-200 px-3 py-2">
-                    <span className="font-medium">{marker.title}</span>
-                    {marker.description && <p className="mt-1 text-[13px] text-vigil-muted">{marker.description}</p>}
-                    <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                      {marker.lat.toFixed(4)}, {marker.lng.toFixed(4)}
-                    </p>
+                  <li key={marker.id}>
+                    <AccessibleMarkerRow
+                      marker={marker}
+                      focused={focusedMarkerId === marker.id}
+                      onFocus={onFocusMarker}
+                    />
                   </li>
                 ))}
               </ul>
@@ -134,12 +179,12 @@ export function MapAccessibleList({ markers, events = [] }: MapAccessibleListPro
               <h3 className="text-[17px] font-medium text-vigil-ink">{t('layers.collection')}</h3>
               <ul className="mt-2 space-y-2">
                 {collection.slice(0, 15).map((marker) => (
-                  <li key={marker.id} className="rounded-input border border-slate-200 px-3 py-2">
-                    <span className="font-medium">{marker.title}</span>
-                    {marker.description && <p className="mt-1 text-[13px] text-vigil-muted">{marker.description}</p>}
-                    <p className="mt-1 font-mono text-[13px] text-vigil-muted">
-                      {marker.lat.toFixed(4)}, {marker.lng.toFixed(4)}
-                    </p>
+                  <li key={marker.id}>
+                    <AccessibleMarkerRow
+                      marker={marker}
+                      focused={focusedMarkerId === marker.id}
+                      onFocus={onFocusMarker}
+                    />
                   </li>
                 ))}
               </ul>

@@ -1,5 +1,4 @@
-import { CrisisMap } from '@/components/map/CrisisMap'
-import { MapAccessibleList } from '@/components/map/MapAccessibleList'
+import { HomeMapSection } from '@/components/map/HomeMapSection'
 import { DtvReferralNotice } from '@/components/dtv/DtvReferralNotice'
 import { isAnthropicConfigured } from '@/lib/ai/client'
 import { getBreakerState, isPhotoSearchAllowed } from '@/lib/ai/circuit-breaker'
@@ -32,16 +31,13 @@ export default async function HomePage() {
         <DtvReferralNotice showCta photoSearchAvailable={photoSearchAvailable} />
         <RegionScopeTabs />
         <AftershockAlert events={events} fetchedAt={seismic.fetchedAt} ok={seismic.ok} />
-        <div className="min-h-[min(50vh,400px)] flex-1">
-          <CrisisMap
-            events={events}
-            markers={markers}
-            propertyAssessments={propertyAssessments}
-            missingPersons={missingPersons}
-          />
-        </div>
+        <HomeMapSection
+          events={events}
+          markers={markers}
+          propertyAssessments={propertyAssessments}
+          missingPersons={missingPersons}
+        />
         <SeismicEventList events={events} totalCount={totals.ok ? totals.total : undefined} />
-        <MapAccessibleList markers={markers} events={events} />
       </div>
     </div>
   )

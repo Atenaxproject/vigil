@@ -125,6 +125,16 @@ export function MisReportesClient() {
           </button>
         </div>
       </div>
+
+      <aside className="mt-8 rounded-card border border-slate-200 bg-vigil-cloud p-4 text-[13px] text-vigil-body">
+        <p className="font-medium text-vigil-ink">{t('claimRecoveryTitle')}</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>{t('claimRecoveryEmail')}</li>
+          <li>{t('claimRecoveryDevice')}</li>
+          <li>{t('claimRecoveryPaste')}</li>
+        </ul>
+        <p className="mt-2 text-vigil-muted">{t('claimRecoveryNoLookup')}</p>
+      </aside>
     </div>
   )
 }

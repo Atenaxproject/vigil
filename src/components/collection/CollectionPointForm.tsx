@@ -5,8 +5,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { ArrowLeft, Package, MapPin } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { CRISIS_CONFIG } from '@/config/crisis.config'
-import { isWithinBounds } from '@/lib/security/validate'
+import { resolveGeoForRecord } from '@/lib/security/validate'
 import { cn } from '@/lib/utils'
 
 const ACCEPTS_OPTIONS = [
@@ -31,7 +30,8 @@ export function CollectionPointForm() {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords
-        if (isWithinBounds(latitude, longitude)) {
+        const geo = resolveGeoForRecord('collection_point', latitude, longitude)
+        if (geo.ok) {
           setLat(latitude)
           setLng(longitude)
         }
@@ -170,9 +170,7 @@ export function CollectionPointForm() {
         </button>
       </form>
 
-      <p className="mt-4 text-[13px] text-vigil-muted">
-        {t('boundsNote', { country: CRISIS_CONFIG.country })}
-      </p>
+      <p className="mt-4 text-[13px] text-vigil-muted">{t('boundsNoteDiaspora')}</p>
     </div>
   )
 }
