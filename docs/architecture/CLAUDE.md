@@ -57,7 +57,7 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 
 ### Migrations
 
-`supabase/migrations/001–020` on main (`020` = restore public missing_persons INSERT). Canonical post-020 chain is `021` → `022` → `023` → `024` (contact lockdown / coverage+photos / flag RPC / insert lockdown) — lands via #18 after the phase app stack. Schema truth is `docs/reference/data-model.md` + the migration files — not this document. Public listings read `public_*` views; anon must not SELECT contact/claim columns on base tables.
+`supabase/migrations/001–024` — apply in numeric order on each live/fresh project: through `020` (restore public missing_persons INSERT), then **`021` → `022` → `023` → `024`**. Do not apply `024` on a greenfield DB that skipped `021`–`023` (public_* SELECT views + coverage cols + flag RPC). Schema truth is `docs/reference/data-model.md` + the migration files — not this document. Public listings read `public_*` views; anon must not SELECT contact/claim columns on base tables.
 
 ### Scripts & checks
 
@@ -106,4 +106,4 @@ The GitHub repo is public. Treat documentation as a security surface.
 
 ---
 
-*Last updated: 2026-07-26 · Phase 2/3 app (moderation + flags + Vitest/axe) · migration reconcile pending #18 · Venezuela deployment live*
+*Last updated: 2026-07-26 · migrations 020–024 chain (insert lockdown preserves submit) · Venezuela deployment live*
