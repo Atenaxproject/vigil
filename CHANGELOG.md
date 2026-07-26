@@ -5,6 +5,15 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-26 (missing_persons public INSERT restore)
+
+### Fixed
+- **Public `/api/missing-persons/submit`** — restore `GRANT INSERT` + `public_insert_missing` RLS for `anon`/`authenticated` (migration `020`). Phase-0 advisor lockdown had revoked INSERT and broken the designed consent-gated public report path.
+- Submit handler no longer uses INSERT…RETURNING / `.select()` — pre-generates `id` + `claim_token` so the path works without restoring base-table `SELECT` (contact fields stay locked; reads via `public_missing_persons`).
+
+### Security
+- Does **not** restore SELECT/UPDATE/DELETE on `missing_persons` for anon/authenticated. INSERT remains gated by `consent_given` + `data_accuracy_confirmed`.
+
 ## [Unreleased] — 2026-07-26 (prompt 78 archive + docs visibility)
 
 ### Docs
