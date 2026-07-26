@@ -16,6 +16,19 @@ All notable changes to Vigil are documented here. Format loosely follows
 - INSERT grant is **column-scoped** (submission fields only) — no privilege on `verified*`, `status`, `flagged*`, lifecycle, or `photo_url`.
 - RLS WITH CHECK still requires consent flags and blocks self-verified / non-`web` / archived rows.
 
+## [Unreleased] — 2026-07-25 (Phase 1 hardening)
+
+### Added
+- **Missing-person photo loop** — optional photo on `/reportar`; client compress; server EXIF strip; public `missing-person-photos` storage; card/detail display with initials fallback (no facial recognition claim).
+- **Durable rate limits** — optional Upstash Redis REST (`UPSTASH_REDIS_REST_*`); in-memory fallback when unset; claim + admin verify + AI paths covered.
+- **Needs coverage lifecycle** — app + admin coverage API + daily decay cron + map colors; SQL lands as migration `022` via #18 reconciliation (not phase-stack `021` filename).
+
+### Changed
+- CI runs `scripts/test-rate-limit.mjs` alongside sanitize/feeds guards.
+
+### Docs
+- `.env.example` documents optional Upstash vars. Canonical migrations: see prompt 79 reconciliation (`020` restore → `021`–`024` on #18).
+
 ## [Unreleased] — 2026-07-26 (prompt 78 archive + docs visibility)
 
 ### Docs

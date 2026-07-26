@@ -4,16 +4,19 @@ import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { isAdminUser } from '@/lib/supabase/auth'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 import { updateSession } from '@/lib/supabase/middleware'
+import { checkRateLimit } from '@/lib/security/rate-limit'
 
 const AI = CRISIS_CONFIG.aiLimits
 
 const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/missing-persons/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/map-markers/submit': { max: 10, windowMs: 60 * 60 * 1000 },
+  '/api/map-markers/coverage': { max: 30, windowMs: 60 * 60 * 1000 },
   '/api/missing-persons/search': { max: 60, windowMs: 60 * 60 * 1000 },
   '/api/contact-request': { max: 3, windowMs: 60 * 60 * 1000 },
   '/api/resource-exchange/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/resource-exchange/contact': { max: 3, windowMs: 60 * 60 * 1000 },
+  '/api/resource-exchange/claim': { max: 20, windowMs: 60 * 60 * 1000 },
   '/api/volunteers/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/volunteers/contact': { max: 3, windowMs: 60 * 60 * 1000 },
   '/api/feedback/submit': { max: 5, windowMs: 60 * 60 * 1000 },
@@ -22,6 +25,7 @@ const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/rescuer-presence/submit': { max: 10, windowMs: 60 * 60 * 1000 },
   '/api/rescuer-presence/checkin': { max: 20, windowMs: 60 * 60 * 1000 },
   '/api/missing-persons/notes': { max: 20, windowMs: 60 * 60 * 1000 },
+  '/api/missing-persons/claim': { max: 20, windowMs: 60 * 60 * 1000 },
   '/api/events': { max: 10, windowMs: 60 * 60 * 1000 },
   '/api/collection-points/submit': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/community-wall/submit': { max: 5, windowMs: 60 * 60 * 1000 },
@@ -29,14 +33,15 @@ const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/assistant': { max: AI.assistantPerHour, windowMs: 60 * 60 * 1000 },
   '/api/photo-search': { max: AI.photoSearchPerHour, windowMs: 60 * 60 * 1000 },
   '/api/property-assessments/submit': { max: 5, windowMs: 60 * 60 * 1000 },
+  '/api/property-assessments/claim': { max: 20, windowMs: 60 * 60 * 1000 },
   '/api/dtv-metrics': { max: 120, windowMs: 60 * 60 * 1000 },
   '/api/admin/sync-dtv-centers': { max: 5, windowMs: 60 * 60 * 1000 },
   '/api/admin/sync-cav-centers': { max: 5, windowMs: 60 * 60 * 1000 },
+  '/api/admin/verify': { max: 10, windowMs: 60 * 60 * 1000 },
+  '/api/admin/ai-breaker': { max: 30, windowMs: 60 * 60 * 1000 },
 }
 
 const AI_PATHS = new Set(['/api/assistant', '/api/photo-search'])
-
-const rateLimitStore = new Map<string, { count: number; resetAt: number }>()
 
 async function getIpHash(request: NextRequest): Promise<string> {
   const ip =
@@ -91,40 +96,34 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // API rate limiting
+  // API rate limiting (Upstash when configured; in-memory fallback)
   const limit = RATE_LIMITS[pathname]
   if (limit) {
     const ipHash = await getIpHash(request)
     const key = `${ipHash}:${pathname}`
-    const now = Date.now()
-    const entry = rateLimitStore.get(key)
+    const result = await checkRateLimit(key, limit.max, limit.windowMs)
 
-    if (!entry || now > entry.resetAt) {
-      rateLimitStore.set(key, { count: 1, resetAt: now + limit.windowMs })
-    } else {
-      entry.count++
-      if (entry.count > limit.max) {
-        // AI paths: honest degrade payload (not a bare 500 / silent failure)
-        if (AI_PATHS.has(pathname)) {
-          return NextResponse.json(
-            {
-              unavailable: true,
-              degraded: true,
-              code: 'rate_limited',
-              error:
-                'Demasiadas solicitudes. Por favor intente más tarde. / Too many requests. Please try again later.',
-            },
-            { status: 429, headers: { 'Retry-After': String(Math.ceil(limit.windowMs / 1000)) } }
-          )
-        }
+    if (!result.allowed) {
+      const retryAfter = String(Math.max(1, Math.ceil((result.resetAt - Date.now()) / 1000)))
+      if (AI_PATHS.has(pathname)) {
         return NextResponse.json(
           {
+            unavailable: true,
+            degraded: true,
+            code: 'rate_limited',
             error:
               'Demasiadas solicitudes. Por favor intente más tarde. / Too many requests. Please try again later.',
           },
-          { status: 429, headers: { 'Retry-After': String(Math.ceil(limit.windowMs / 1000)) } }
+          { status: 429, headers: { 'Retry-After': retryAfter } }
         )
       }
+      return NextResponse.json(
+        {
+          error:
+            'Demasiadas solicitudes. Por favor intente más tarde. / Too many requests. Please try again later.',
+        },
+        { status: 429, headers: { 'Retry-After': retryAfter } }
+      )
     }
   }
 

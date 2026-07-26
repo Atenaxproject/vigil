@@ -57,11 +57,12 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 
 ### Migrations
 
-`supabase/migrations/001–020` applied. Schema truth is `docs/reference/data-model.md` + the migration files — not this document.
+`supabase/migrations/001–020` on main (`020` = restore public missing_persons INSERT). Canonical post-020 chain is `021` → `022` → `023` → `024` (contact lockdown / coverage+photos / flag RPC / insert lockdown) — lands via #18 after the phase app stack. Schema truth is `docs/reference/data-model.md` + the migration files — not this document. Public listings read `public_*` views; anon must not SELECT contact/claim columns on base tables.
 
 ### Scripts & checks
 
 - `npm run check:i18n` (also `prebuild` — **build fails if any locale drifts from `es.json` key parity**)
+- `npm run test:sanitize` / `npm run test:feeds` / `npm run test:rate-limit` — offline guards (also wired in `.github/workflows/ci.yml`)
 - `npm run build:press-kit` — renders `docs/press/*.md` → styled PDFs in `public/press-kit/` (Playwright Chromium). PDFs are committed; `/api/press-kit/download` zips static files only. Re-run after editing any press markdown.
 - `scripts/visual-check.mjs` — mobile + desktop proof for every changed route
 - CI: CodeQL, accessibility workflow, nightly db-backup (secrets pending — issue #2), vigil-watch
@@ -103,4 +104,4 @@ The GitHub repo is public. Treat documentation as a security surface.
 
 ---
 
-*Last updated: 2026-07-26 · docs public/private standing rule · Venezuela deployment live*
+*Last updated: 2026-07-26 · Phase 1 app (photo + durable RL + coverage) · migration reconcile pending #18 · Venezuela deployment live*
