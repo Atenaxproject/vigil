@@ -67,18 +67,25 @@ supabase db push
 **Option C — Incremental migrations (existing production project)**
 
 If the project already has earlier migrations applied, run only the **missing** files
-in **SQL Editor**, in order through the latest:
+in **SQL Editor**, in **numeric order** through the latest. Canonical filenames (see
+[`data-model.md`](../reference/data-model.md)):
 
 1. `006`–`019` as needed (geographic fields, minors protection, feed health, etc.)
 2. `011_diaspora_region.sql` — `region_scope` for USA diaspora hub (`/apoyo-usa`)
-3. **`020_rls_contact_lockdown.sql`** — public views for exchange / volunteers / presence / markers / events / needs; blocks anon SELECT of contact/claim columns (required before multi-country live)
+3. **`020_restore_missing_persons_public_insert.sql`** — restore anon/authenticated INSERT + consent RLS (no SELECT on contact columns)
+4. **`021_rls_contact_lockdown.sql`** — `public_*` SELECT views; deny direct anon SELECT on contact-bearing tables (required before multi-country live)
+5. **`022_needs_coverage_and_photo_storage.sql`** — coverage columns + missing-person-photos storage
+6. **`023_missing_person_flag_rpc.sql`** — `flag_missing_person` SECURITY DEFINER RPC
+7. **`024_rls_insert_lockdown.sql`** — service-role INSERT lockdown; column-scoped missing_persons INSERT
+
+Do **not** apply `024` on a greenfield DB that skipped `021`–`023`. Do **not** use the obsolete phase-fork name `020_rls_contact_lockdown` — that work lives in `021`.
 
 Then seed diaspora organizations (after Orlando confirms GEM/AFE hours):
 
-4. `supabase/seeds/004_diaspora_orgs.sql`
+8. `supabase/seeds/004_diaspora_orgs.sql`
 
 Without `011`, `/apoyo-usa` and region-scoped filters degrade gracefully (empty data).
-Without `020`, treat contact fields on those tables as **not** privacy-safe via PostgREST.
+Without `021`, treat contact fields on those tables as **not** privacy-safe via PostgREST.
 
 ### 4. Enable Auth providers
 
@@ -243,7 +250,7 @@ supabase db reset # applies migrations locally
 Detailed operator checklists stay private (`docs/evaluations/`). Public-safe steps:
 
 1. **Staging** — Prefer a separate Vercel preview / staging project + Supabase project
-   that has migrations applied through the latest numbered file (currently `022`).
+   that has migrations applied through the latest numbered file (currently `024`).
    Never point staging at production service-role keys.
 2. **Promote** — Merge PR → Vercel production deploy for `vigil.youthewave.org`.
 3. **Rollback (app)** — In Vercel → Deployments → promote the previous successful

@@ -5,6 +5,15 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-27 (VE stable-ops closeout)
+
+### Docs
+- **`DEPLOYMENT.md` Option C** — migration list aligned to canonical `020_restore…` → `021_rls_contact_lockdown` → `022` → `023` → `024` (removes obsolete `020_rls_contact_lockdown` fork name); staging note updated through `024`.
+
+### Chore
+- **Dependabot lockfile repair** — pin `postcss@8.5.18` (explicit override; replaces fragile `$postcss` reference), bump `vitest` to `^3.2.6` (lock resolves `3.2.7`) so `npm ci` stays in sync. Supersedes open Dependabot PRs #20 / #25.
+
+
 ## [Unreleased] — 2026-07-26 (ship: emergency strip + contrast + prod SQL)
 
 ### Fixed
