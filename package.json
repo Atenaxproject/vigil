@@ -1,8 +1,9 @@
 {
   "name": "vigil",
   "version": "0.1.0",
-  "description": "Vigil — Open-source humanitarian crisis platform. Real-time missing persons, Claude AI assistant, photo search, crisis map, and post-disaster property safety assessment. Live at vigil.youthewave.org.",
+  "description": "Vigil — Public-source humanitarian crisis platform (purpose-limited; not for commercial profit). Federated missing persons, crisis map, AI coordination, property safety assessment. Live at vigil.youthewave.org. Formal Launch closed; FL/MX prebuilt.",
   "homepage": "https://vigil.youthewave.org",
+  "license": "LicenseRef-Vigil-Humanitarian",
   "repository": {
     "type": "git",
     "url": "https://github.com/Atenaxproject/vigil.git"

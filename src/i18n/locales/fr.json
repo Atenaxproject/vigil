@@ -488,7 +488,7 @@
     "learnMore": "Politique de confidentialité"
   },
   "footer": {
-    "openSource": "Open source — Licence MIT",
+    "openSource": "Code public — Licence humanitaire Vigil",
     "contact": "Contact",
     "notEmergency": "Vigil N'EST PAS un service d'urgence. Pour un sauvetage immédiat, appelez le {hotline}.",
     "otherRegions": "Autres régions",
@@ -498,7 +498,7 @@
     "attributionPrefix": "Un projet de",
     "attributionOrg": "YouTheWave",
     "attributionOperator": "Orlando Toro",
-    "attributionLicense": "Open source sous licence MIT"
+    "attributionLicense": "Code public sous la licence humanitaire Vigil"
   },
   "exchange": {
     "title": "Échange de ressources",
@@ -1510,7 +1510,7 @@
     "subtitle": "Verifiable material for journalists. No invented zeros. No donation ask.",
     "boilerplate": {
       "title": "Boilerplate",
-      "body": "Vigil is an open-source humanitarian platform built in response to the 24 June 2026 earthquakes in Venezuela. It provides missing-persons search by name and by photograph, a live crisis map with seismic aftershock data, resource coordination between people in need and people who can help, and verified directories of organizations and collection points. It operates in eight languages for international rescue teams and is API-federated with Desaparecidos Terremoto Venezuela. No registration is required, no money is solicited, and the code is public under the MIT license. Vigil is a project of YouTheWave, founded by Orlando Toro.",
+      "body": "Vigil is a public-source humanitarian platform built in response to the 24 June 2026 earthquakes in Venezuela. It provides missing-persons search by name and by photograph, a live crisis map with seismic aftershock data, resource coordination between people in need and people who can help, and verified directories of organizations and collection points. It operates in eight languages for international rescue teams and is API-federated with Desaparecidos Terremoto Venezuela. No registration is required, no money is solicited, and the code is public under the Vigil Humanitarian License (purpose-limited; not for commercial profit). Vigil is a project of YouTheWave, founded by Orlando Toro.",
       "liveLabel": "Live URL",
       "repoLabel": "Repository",
       "copy": "Copy text",
@@ -1550,7 +1550,7 @@
       "federate": "Federate, do not copy",
       "federateBody": "Data from other platforms is integrated by agreement and API, never by scraping.",
       "open": "Open by default",
-      "openBody": "Public code, MIT license, not for profit, no ads.",
+      "openBody": "Public code, Vigil Humanitarian License (non-commercial / purpose-limited), not for profit, no ads.",
       "barrier": "No barriers",
       "barrierBody": "No registration, no account, no app. Works on 2G and offline."
     },

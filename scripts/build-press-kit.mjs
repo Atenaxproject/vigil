@@ -191,7 +191,7 @@ tr { page-break-inside: avoid; }
 </head>
 <body>
 ${bodyHtml}
-<div class="kit-footer"><span>vigil.youthewave.org · Licencia MIT</span><span>${escapeHtml(generatedDate)}</span></div>
+<div class="kit-footer"><span>vigil.youthewave.org · Licencia Humanitaria Vigil</span><span>${escapeHtml(generatedDate)}</span></div>
 </body>
 </html>`
 }

@@ -5,6 +5,16 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-27 (README + license reality)
+
+### Legal
+- **LICENSE** — replace unmodified MIT text with **Vigil Humanitarian License** (purpose-limited humanitarian / public-benefit use; **not** for commercial profit). Aligns code terms with long-standing operator intent and Terms data non-commercial rules. **Counsel flag:** relicensing away from prior MIT publication + contributor grant wording.
+
+### Docs
+- **README / GitHub about** — Formal Launch closed; VE live; YouTheWave ([youthewave.org](https://youthewave.org)) marked live (not “coming soon”); FL/MX prebuilt; public “possible improvements” section; remove false “commercially or otherwise, for any purpose” code grant.
+- **ToS effectiveDate** — set to 2026-07-27 with tosVersion 1.1.0; localize footer license labels; press boilerplate public-source wording; rebuild press-kit PDFs (footer Licencia Humanitaria Vigil).
+- **CONTRIBUTING, package.json, press one-pager/values, glossary, docs/README, terminos §IP, footer/press i18n** — license wording updated off MIT commercial-friendly claims.
+
 ## [Unreleased] — 2026-07-27 (VE stable-ops closeout)
 
 ### Docs

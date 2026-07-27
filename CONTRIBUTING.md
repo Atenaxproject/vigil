@@ -1,6 +1,6 @@
 # Contributing to Vigil
 
-Thank you for helping improve an open-source humanitarian crisis platform. Families searching for missing people — and responders coordinating aid — are the users this code serves.
+Thank you for helping improve a public-source humanitarian crisis platform. Families searching for missing people — and responders coordinating aid — are the users this code serves.
 
 ## Before you write code
 
@@ -38,4 +38,4 @@ Be respectful. This project deals with trauma and missing persons. Do not scrape
 
 ## License
 
-By contributing, you agree your contributions are licensed under the MIT License covering this repository’s code. Submitted personal data in any live deployment is governed by that deployment’s privacy policy — not by MIT.
+By contributing, you agree your contributions are licensed under the [Vigil Humanitarian License](./LICENSE) covering this repository’s code (purpose-limited humanitarian use; **not** for commercial profit). Submitted personal data in any live deployment is governed by that deployment’s privacy policy — not by the code license.

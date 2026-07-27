@@ -1,16 +1,40 @@
-MIT License
-
+Vigil Humanitarian License
 Copyright (c) 2026 Bbluestudios LLC
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Purpose. Vigil is published so humanitarian responders, families, diaspora
+communities, and aligned non-profit operators can study, improve, and deploy
+crisis-response tooling for the purposes defined by the Vigil / YouTheWave
+mission: missing-persons reunification, crisis mapping, verified information,
+and related disaster coordination — not for commercial profit.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use,
+copy, modify, merge, publish, and distribute copies of the Software, subject
+to the following conditions:
+
+1. Purpose limitation. You may use the Software only for non-commercial,
+   humanitarian, and public-benefit crisis-response purposes consistent with
+   the Vigil / YouTheWave mission described above (including deploying your own
+   instance for a disaster response without charging for the Software itself).
+
+2. No commercial profit. You may not sell the Software, offer it as a paid
+   product or paid hosted service, or otherwise exploit the Software primarily
+   for commercial profit. Charging reasonable cost-recovery for infrastructure
+   you operate for a non-profit humanitarian deployment does not, by itself,
+   violate this condition; selling Vigil (or a derivative) as a commercial
+   product does.
+
+3. Notice. The above copyright notice and this permission notice shall be
+   included in all copies or substantial portions of the Software.
+
+4. Data is separate. Personal data, crisis records, and other content processed
+   by any deployment of the Software are not licensed under this License. Those
+   materials remain governed by that deployment's Terms of Use and Privacy
+   Policy. Nothing herein grants rights to scrape, sell, license, or
+   commercially profile platform data.
+
+5. Trademark. This License does not grant rights to the names "Vigil",
+   "YouTheWave", or related marks except as needed to attribute the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -19,3 +43,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Note on prior publication: Earlier public copies of this repository carried an
+unmodified MIT License text. The operator's stated intent (humanitarian use;
+not-for-profit; no commercial exploitation of platform data) is restated here
+as binding license terms for this and future copies. Counsel review of
+relicensing and contributor grant wording is recommended.

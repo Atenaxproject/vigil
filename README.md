@@ -8,16 +8,17 @@
 
 ### We stand watch when it matters most.
 
-An open-source humanitarian crisis PWA — federated missing-persons search, crisis mapping, resource exchange, and volunteer coordination in one calm, Spanish-first interface.
+A public-source humanitarian crisis PWA — federated missing-persons search, crisis mapping, resource exchange, and volunteer coordination in one calm, Spanish-first interface. Source is shared for the Vigil / YouTheWave humanitarian purpose — **not for commercial profit**.
 
-**Live deployment:** Venezuela 2026 Earthquake Response · [vigil.youthewave.org](https://vigil.youthewave.org) · June 24, 2026 onward
+**Live:** Venezuela 2026 Earthquake Response · [vigil.youthewave.org](https://vigil.youthewave.org) · June 24, 2026 onward  
+**Operator brand:** [YouTheWave](https://youthewave.org) ([youthewave.org](https://youthewave.org) is live) · Formal Launching with Improvements phase **closed** (2026-07-26)
 
 **What Vigil is not:** an emergency dispatcher, a donations processor, a government intake tool, or a biometric identification system.
 
 <br />
 
 [![Live Demo](https://img.shields.io/badge/Live-vigil.youthewave.org-2563EB?style=for-the-badge)](https://vigil.youthewave.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge)](./LICENSE)
+[![License: Humanitarian](https://img.shields.io/badge/License-Humanitarian%20(non--commercial)-0F172A?style=for-the-badge)](./LICENSE)
 
 <br />
 
@@ -37,7 +38,7 @@ An open-source humanitarian crisis PWA — federated missing-persons search, cri
 
 <br />
 
-**[vigil.youthewave.org](https://vigil.youthewave.org)** &nbsp;·&nbsp; **[vigil.youthewave.com](https://vigil.youthewave.com)** (redirects) &nbsp;·&nbsp; **[github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)**
+**[vigil.youthewave.org](https://vigil.youthewave.org)** &nbsp;·&nbsp; **[youthewave.org](https://youthewave.org)** &nbsp;·&nbsp; **[vigil.youthewave.com](https://vigil.youthewave.com)** (redirects) &nbsp;·&nbsp; **[github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)**
 
 </div>
 
@@ -186,7 +187,9 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ## Project Status — July 2026
 
-### ✅ Live Now
+**Phase:** Formal Launching with Improvements is **closed** (tag `phase/formal-launch-improvements-20260726`). Venezuela production is live and in stable-ops care. Florida and México configs exist as **prebuilt / held** — activation waits on named local admins and `TODO-BEFORE-LAUNCH` gates (not an open feature sprint).
+
+### ✅ Live now (Venezuela)
 
 - **Federated missing persons search** — Vigil DB + a cached, short-lived DTV index queried in real time, accent-insensitive ranked name matching (no network-wide total is published — see [Data Partnership](#data-partnership))
 - **Photo-based search** — Claude Vision text descriptions; no Vigil biometric storage
@@ -201,20 +204,25 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Events calendar** — donation drives, meetups, distributions, memorials
 - **Citizen collection point registry** — self-registration, map display
 - **Community wall (Muro)** — append-only, categorized, rate-limited
-- **Real-time information hub** — USGS, GDACS, Venezuelan news RSS (ReliefWeb feed temporarily offline — see note under In Progress)
+- **Real-time information hub** — USGS, GDACS, Venezuelan news RSS (ReliefWeb feed optional — see note under Optional integrations)
 - **Infrastructure status tracker** — electricity, water, roads, airport (admin-editable)
+- **Contested figures + provenance** — official casualty figures labeled with issuer and counterpoints (never averaged)
+- **Moderation + public flags** — admin queue; community flag path for missing-person records
 - **Feedback system** — floating widget, admin-only access
 - **8-language interface** — ES/EN handcrafted, PT/FR/IT/ZH/DE/RU generated
 - **PWA** — 2G-optimized, offline form queue, iOS/Android install support
 - **Hourly duplicate detection** — Claude Haiku cron, flags to moderation queue
+- **AI cost circuit breaker** — honest degrade/halt when spend proxies trip
+- **Durable rate limits** — Upstash Redis when configured; in-memory fail-open otherwise
 - **PFIF 1.4 endpoint** — `/api/pfif`, Google Person Finder compatible
 - **Sister platform network** — 12 citizen platforms linked at `/red`
 - **DTV active integration** — Desaparecidos Terremoto Venezuela federated API (live when `DTV_API_KEY` configured)
 - **Social share images** — Open Graph + Twitter Card auto-generated
 - **Geographic breakdown** — estado/municipio/parroquia across 24 Venezuelan states
-- **Privacy** — contact info never public, Venezuelan government explicitly excluded
+- **Privacy** — contact info never public; public listings via stripped views; Venezuelan government intentionally excluded
+- **YouTheWave** — operator brand site live at [youthewave.org](https://youthewave.org) (not “coming soon”)
 
-### 🔧 In progress / optional integrations
+### 🔧 Optional integrations
 
 Optional feeds and messaging bridges degrade gracefully when not configured — the core map and search stay usable.
 
@@ -223,11 +231,15 @@ Optional feeds and messaging bridges degrade gracefully when not configured — 
 - Transactional email notifications
 - Additional crisis archetypes (config-driven reuse of the diaspora `region_scope` pattern)
 
-### 🔜 Exploring
+### Possible improvements / add-ons (next round)
 
-- Voice intake for low-literacy / field use
-- Deeper PFIF exchange with partners (by agreement)
-- Specialized Field / Family surfaces (design phase)
+Public, non-secret backlog grounded in post-launch ops review — **not** Florida/México product build:
+
+- Finish **disaster-recovery proof** (encrypted dumps are running; restore dry-run still operator-owned)
+- Extend **client image compression** to remaining upload paths (property assessment and other file intakes)
+- Resolve open **counsel / product** items before code: photo-display policy (prompt 78), `/monitor` nav visibility (redistribution rights), legal operator-line copy when incorporation lands
+- Keep **multi-country activation** gated: Florida and México stay `prebuilt` until named admins + checklist gates — then DNS, feeds, locale, and privacy stance per country
+- Optional product explorations: voice intake for low-literacy / field use; deeper PFIF exchange with partners **by agreement**; specialized Field / Family surfaces
 
 ---
 
@@ -376,8 +388,10 @@ For Venezuela. For whoever needs it next.
 
 ## License
 
-**Code: MIT License.** Free to use, modify, fork, and deploy — commercially or otherwise, for any purpose. See [LICENSE](./LICENSE).
+**Code: [Vigil Humanitarian License](./LICENSE)** — purpose-limited. You may use, modify, fork, and deploy Vigil for **non-commercial humanitarian / public-benefit crisis response** consistent with the Vigil / YouTheWave mission. **Commercial profit use of the Software is not permitted.** See [LICENSE](./LICENSE).
 
-**Data: not covered by the MIT license.** Records submitted to a Vigil deployment by the people it serves are governed by that deployment's Terms of Service and Privacy Policy. Nothing in the MIT license grants rights to personal data held in any Vigil instance. Scraping and commercial use of platform data are prohibited under the [Terms](https://vigil.youthewave.org/terminos).
+**Data: not covered by the code license.** Records submitted to a Vigil deployment by the people it serves are governed by that deployment's Terms of Service and Privacy Policy. Nothing in the code license grants rights to personal data held in any Vigil instance. Scraping and commercial use of platform data are prohibited under the [Terms](https://vigil.youthewave.org/terminos).
 
 **Federated data** from partner platforms remains theirs. Attribution and usage terms follow the originating platform.
+
+> **Counsel note:** Earlier public copies of this repository carried unmodified MIT license text (which would have allowed commercial use of the code). This file restates the operator’s long-standing intent (humanitarian use; not for profit; data never commercial). Relicensing and contributor-grant wording should be confirmed with counsel.

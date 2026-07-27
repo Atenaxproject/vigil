@@ -21,5 +21,5 @@ Updated README to reflect the DTV (Desaparecidos Terremoto Venezuela) federated 
 - **Federated search** prominently featured as the primary missing persons capability
 - **DTV integration** documented in its own section with integration approach (federated query only, never stored)
 - **Vigil variants** added to Coming Soon (Field, Family, Command)
-- **youthewave.org main site** added to Coming Soon roadmap
+- **youthewave.org main site** was listed on the Coming Soon roadmap in this historical prompt — **superseded:** [youthewave.org](https://youthewave.org) has been live for a long time; do not re-add “coming soon” copy
 - **Claude model versions** made explicit: Sonnet 4.6 for vision/photo search, Haiku 3.5 for assistant/dedup
