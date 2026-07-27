@@ -1,15 +1,28 @@
 /**
  * Client-side image compression for weak-signal uploads (performance budget).
  * Server still strips EXIF via sharp — this only shrinks bytes before the wire.
+ * Wired on `/reportar`, property assessment, and photo search.
  */
 
-const MAX_DIM = 1600
-const JPEG_QUALITY = 0.82
-const MAX_INPUT_BYTES = 5 * 1024 * 1024
+export const MAX_DIM = 1600
+export const JPEG_QUALITY = 0.82
+export const MAX_INPUT_BYTES = 5 * 1024 * 1024
+/** Re-encode when above this size or when PNG (even if already within dim). */
+export const REENCODE_BYTES = 400 * 1024
 
 export type CompressResult = {
   file: File
   compressed: boolean
+}
+
+/** Pure gate — used by forms and unit tests (no DOM). */
+export function shouldAttemptCompress(file: Pick<File, 'type' | 'size'>): boolean {
+  return file.type.startsWith('image/') && file.size > 0 && file.size <= MAX_INPUT_BYTES
+}
+
+export function needsReencode(file: Pick<File, 'type' | 'size'>, width: number, height: number): boolean {
+  const scale = Math.min(1, MAX_DIM / Math.max(width, height))
+  return scale < 1 || file.size > REENCODE_BYTES || file.type === 'image/png'
 }
 
 function loadImage(file: File): Promise<HTMLImageElement> {
@@ -33,22 +46,16 @@ function loadImage(file: File): Promise<HTMLImageElement> {
  * Returns the original File unchanged when compression is unnecessary or fails.
  */
 export async function compressImageForUpload(file: File): Promise<CompressResult> {
-  if (!file.type.startsWith('image/')) {
-    return { file, compressed: false }
-  }
-  if (file.size > MAX_INPUT_BYTES) {
+  if (!shouldAttemptCompress(file)) {
     return { file, compressed: false }
   }
 
   try {
     const img = await loadImage(file)
-    const scale = Math.min(1, MAX_DIM / Math.max(img.width, img.height))
-    const needsResize = scale < 1
-    const needsReencode = file.size > 400 * 1024 || file.type === 'image/png'
-
-    if (!needsResize && !needsReencode) {
+    if (!needsReencode(file, img.width, img.height)) {
       return { file, compressed: false }
     }
+    const scale = Math.min(1, MAX_DIM / Math.max(img.width, img.height))
 
     const w = Math.max(1, Math.round(img.width * scale))
     const h = Math.max(1, Math.round(img.height * scale))

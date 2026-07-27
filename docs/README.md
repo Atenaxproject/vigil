@@ -29,6 +29,7 @@ Living specs and operational guides:
 - `architecture/CLAUDE.md` — tech stack, constraints, and agent instructions
 - `architecture/DESIGN-SYSTEM.md` — UI tokens, typography, and component rules
 - `architecture/DEPLOYMENT.md` — Supabase, Vercel, DNS, Resend, and local dev setup
+- `architecture/CRISIS-ARCHETYPE-EXTENSION.md` — archetype / `region_scope` scaffolding (no FL/MX activation)
 - `architecture/DEPLOYMENT-PLAYBOOK.md` — new-crisis rollout: go/no-go, archetypes, config-driven deployment
 - `architecture/VIGIL-LAUNCH-READINESS.md` — DTV listing launch checklist (P0/P1 gaps; living)
 - `build-process/66-full-platform-audit.md` — content/UX audit + expiry mechanism (2026-07-22)

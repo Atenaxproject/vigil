@@ -145,7 +145,10 @@ Add the following to the Vercel project under **Settings → Environment Variabl
 | `VIGIL_ADMIN_SECRET` | ✅ | Strong random string (rate-limit IP hashing) |
 | `VIGIL_ADMIN_EMAILS` | ✅ | Comma-separated admin allowlist |
 | `ANTHROPIC_API_KEY` | optional | Enables translation / dedup / matching |
-| `RESEND_API_KEY` | optional | Sends feedback alert emails to `vigil.support@youthewave.org` via Resend |
+| `RESEND_API_KEY` | optional | Sends feedback / claim-link emails via Resend |
+| `RESEND_FROM_EMAIL` | optional | From address override (must be on verified domain); default `vigil@youthewave.org` |
+| `MAKE_WEBHOOK_SECRET` | optional | Bearer auth for `POST /api/make/webhook` (WhatsApp/Telegram Make scenarios) |
+| `RELIEFWEB_APPNAME` | optional | Approved ReliefWeb v2 appname; when unset feed is skipped |
 
 > **Production Vigil:** Supabase env vars are set on project `macmlvybpxdnzfviimvl`.
 > As of 2026-07-04, apply **`011_diaspora_region.sql`** and seed **`004_diaspora_orgs.sql`**
@@ -178,6 +181,7 @@ Feedback is always saved in Supabase. To also receive email alerts at
 2. In Resend → **Domains**, add `youthewave.org` and add the DKIM/SPF DNS records
    Resend provides to Cloudflare DNS for `youthewave.org`.
 3. Add `RESEND_API_KEY` to Vercel environment variables (Production) and redeploy.
+   Optional: `RESEND_FROM_EMAIL=vigil@youthewave.org` if you need a non-default From.
 4. Test by submitting feedback on the live site — you should receive an email at
    `vigil.support@youthewave.org`.
 
@@ -272,11 +276,28 @@ If the site is down or data is exposed:
 4. Full incident SOP (contacts, evidence, postmortem template) is private — see
    operator evaluations folder on the admin machine.
 
-## Make.com webhook
+## Make.com webhook (WhatsApp / Telegram intake)
 
 Optional intake: `POST /api/make/webhook` with `Authorization: Bearer $MAKE_WEBHOOK_SECRET`.
-Same Zod + sanitize path as web missing-person submit. Returns 503 when the secret
-is unset (safe default).
+Same Zod + sanitize path as web missing-person submit. Body may include
+`source: "whatsapp" | "telegram" | "partner"` (default `partner`). Returns **503**
+when the secret is unset (safe default). `GET /api/make/webhook` returns only
+`{ configured: boolean }` for ops checks — never the secret.
+
+Typical Make.com flow: WhatsApp Business / Telegram bot module → HTTP module POST
+to this URL with the Bearer header. Keep bot tokens in Make.com / Vercel only.
+
+## ReliefWeb v2
+
+Set `RELIEFWEB_APPNAME` to an **approved** OCHA appname
+(https://apidoc.reliefweb.int/parameters#appname). Until then the shared client
+skips the network call and `/informacion` suppresses the Official Updates block.
+
+## Crisis archetype / region_scope extension
+
+See [`CRISIS-ARCHETYPE-EXTENSION.md`](./CRISIS-ARCHETYPE-EXTENSION.md). Scaffolding
+and diaspora `region_scope` pattern only — **do not** activate Florida/México from
+this doc.
 
 ## Synthetic uptime
 

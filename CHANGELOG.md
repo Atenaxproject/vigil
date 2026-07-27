@@ -5,6 +5,20 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-27 (next-round optional integrations)
+
+### Performance
+- **Client image compression** — wire `compressImageForUpload` on property assessment submit and photo search (same budget as `/reportar`); Vitest covers pure compress gates.
+
+### Integrations
+- **ReliefWeb** — skip network when `RELIEFWEB_APPNAME` unset (no noisy 403); Official Updates stay suppressed.
+- **Make webhook** — accept `source: whatsapp|telegram|partner`; `GET` returns `{ configured }` only; still 503 when secret unset.
+- **Resend** — optional `RESEND_FROM_EMAIL` override; `isTransactionalEmailConfigured()` helper; still no-op without `RESEND_API_KEY`.
+
+### Docs
+- README optional-integrations table + compression backlog marked done; `.env.example` / `DEPLOYMENT.md` env notes; `CRISIS-ARCHETYPE-EXTENSION.md` (scaffolding only — no FL/MX activation).
+- Restore git tag `restore/pre-next-round-improvements-20260727` (app rollback; DB restore dry-run still operator-owned). Operator secret/counsel checklist stays private.
+
 ## [Unreleased] — 2026-07-27 (README + license reality)
 
 ### Legal

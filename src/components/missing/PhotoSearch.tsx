@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { Camera, ExternalLink, Loader2 } from 'lucide-react'
 import type { FederatedPerson } from '@/lib/dtv-mapper'
 import { tagVigilPerson } from '@/lib/dtv-mapper'
+import { compressImageForUpload } from '@/lib/images/compress-client'
 import type { PublicMissingPerson } from '@/types/vigil.types'
 import { MissingPersonCard } from '@/components/missing/MissingPersonCard'
 
@@ -34,8 +35,9 @@ export function PhotoSearch({ aiAvailable = true }: PhotoSearchProps) {
     setUnavailable(false)
 
     try {
+      const compressed = await compressImageForUpload(file)
       const formData = new FormData()
-      formData.append('photo', file)
+      formData.append('photo', compressed.file)
       const res = await fetch('/api/photo-search', { method: 'POST', body: formData })
       const data = (await res.json()) as {
         unavailable?: boolean
