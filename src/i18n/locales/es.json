@@ -518,7 +518,7 @@
     "learnMore": "Política de Privacidad"
   },
   "footer": {
-    "openSource": "Código abierto — Licencia MIT",
+    "openSource": "Código público — Licencia Humanitaria Vigil",
     "contact": "Contacto",
     "notEmergency": "Vigil NO es un servicio de emergencias. Para rescate inmediato llama al {hotline}.",
     "press": "Prensa",
@@ -528,7 +528,7 @@
     "attributionPrefix": "Un proyecto de",
     "attributionOrg": "YouTheWave",
     "attributionOperator": "Orlando Toro",
-    "attributionLicense": "Código abierto bajo licencia MIT"
+    "attributionLicense": "Código público bajo la Licencia Humanitaria Vigil"
   },
   "exchange": {
     "title": "Intercambio de Recursos",
@@ -1475,7 +1475,7 @@
     "subtitle": "Material verificable para medios. Sin ceros inventados. Sin solicitud de donaciones.",
     "boilerplate": {
       "title": "Texto para citar",
-      "body": "Vigil es una plataforma humanitaria de código abierto creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela. Permite buscar personas desaparecidas por nombre y por fotografía, consultar un mapa de crisis con réplicas sísmicas en vivo, coordinar recursos entre quienes necesitan y quienes pueden ayudar, y acceder a directorios verificados de organizaciones y centros de acopio. Opera en ocho idiomas para equipos de rescate internacionales y está federada por API con Desaparecidos Terremoto Venezuela. No requiere registro, no solicita dinero y su código es público bajo licencia MIT. Es un proyecto de YouTheWave, fundado por Orlando Toro.",
+      "body": "Vigil es una plataforma humanitaria de código abierto creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela. Permite buscar personas desaparecidas por nombre y por fotografía, consultar un mapa de crisis con réplicas sísmicas en vivo, coordinar recursos entre quienes necesitan y quienes pueden ayudar, y acceder a directorios verificados de organizaciones y centros de acopio. Opera en ocho idiomas para equipos de rescate internacionales y está federada por API con Desaparecidos Terremoto Venezuela. No requiere registro, no solicita dinero y su código es público bajo la Licencia Humanitaria Vigil (uso con propósito limitado; no con fines de lucro comercial). Es un proyecto de YouTheWave, fundado por Orlando Toro.",
       "liveLabel": "URL en vivo",
       "repoLabel": "Repositorio",
       "copy": "Copiar texto",
@@ -1515,7 +1515,7 @@
       "federate": "Federar, no copiar",
       "federateBody": "Los datos de otras plataformas se integran por acuerdo y API, jamás por scraping.",
       "open": "Abierto por defecto",
-      "openBody": "Código público, licencia MIT, sin fines de lucro, sin publicidad.",
+      "openBody": "Código público, Licencia Humanitaria Vigil (no comercial / con propósito limitado), sin fines de lucro, sin publicidad.",
       "barrier": "Sin barreras",
       "barrierBody": "Sin registro, sin cuenta, sin app. Funciona en 2G y sin conexión."
     },

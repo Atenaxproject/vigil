@@ -56,7 +56,7 @@
 
 | Term | Definition |
 |------|------------|
-| **YouTheWave** | Humanitarian initiative brand under which Vigil is deployed (youthewave.org). |
+| **YouTheWave** | Humanitarian initiative brand under which Vigil is deployed — brand site live at [youthewave.org](https://youthewave.org). |
 | **Bbluestudios LLC** | Legal operator of Vigil platform. |
 | **ReliefWeb** | UN OCHA disaster information service — source for `/noticias`. |
 | **GDACS** | Global Disaster Alert and Coordination System — alerts on `/informacion`. |

@@ -170,8 +170,10 @@ export default function TerminosPage() {
         <section>
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">6. Propiedad Intelectual</h2>
           <p className="text-slate-700 leading-relaxed">
-            El código de Vigil es de código abierto bajo licencia MIT. Puedes usar, modificar y
-            redistribuir el código según los términos de esa licencia.
+            El código de Vigil se publica bajo la Licencia Humanitaria Vigil (ver LICENSE en el
+            repositorio): uso con propósito limitado para respuesta humanitaria / beneficio público,
+            sin fines de lucro comercial. Puedes usar, modificar y redistribuir el código según esos
+            términos — no para explotación comercial con ánimo de lucro.
           </p>
           <p className="text-slate-700 mt-3 leading-relaxed">
             Los datos de usuarios (reportes de personas desaparecidas, etc.) pertenecen a las personas

@@ -1,6 +1,8 @@
 # Vigil Documentation
 
-**Live:** [vigil.youthewave.org](https://vigil.youthewave.org) · **Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)
+**Live:** [vigil.youthewave.org](https://vigil.youthewave.org) · **Brand:** [youthewave.org](https://youthewave.org) · **Repo:** [github.com/Atenaxproject/vigil](https://github.com/Atenaxproject/vigil)
+
+**Phase:** Formal Launching with Improvements closed (2026-07-26). Venezuela is production; Florida / México remain prebuilt until activation gates. Code license: [Vigil Humanitarian License](../LICENSE) (purpose-limited; not for commercial profit).
 
 This folder contains the architecture decisions, build process, and
 development prompts used to create Vigil. Sensitive ops material,

@@ -1,5 +1,7 @@
 # 75B — README Correction
 
+> **SUPERSEDED (2026-07-27):** §1’s instruction to advertise **Code: MIT … commercially or otherwise, for any purpose** is **withdrawn**. Operator intent is purpose-limited / non-commercial for the Software (Vigil Humanitarian License). Do not re-apply the MIT-commercial grant from this historical prompt. Data non-commercial rules under Terms remain.
+
 **Small, surgical, runs before 76.** `README.md` only, plus the two files named in §1. Every item below is a specific defect found by reading the current file, not a general audit instruction.
 
 **Context:** the README is the public front door — the file DTV, journalists, Cloudflare Galileo reviewers, and any prospective deployer read first. It has drifted the same way `CLAUDE.md` did. Two items are serious; the rest are accuracy.
