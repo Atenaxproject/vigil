@@ -243,7 +243,7 @@ export const CRISIS_CONFIG = {
     privacyPolicyVersion: '1.0.0',
     tosVersion: '1.1.0',
     governingLaw: 'Florida, United States',
-    effectiveDate: '2026-06-29',
+    effectiveDate: '2026-07-27',
   },
 
   /**

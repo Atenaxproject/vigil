@@ -502,7 +502,7 @@
     "flagSuccess": "Gracias. Nuestro equipo lo revisará.",
     "notFound": "No encontrado",
     "noData": "Sin datos disponibles",
-    "poweredBy": "Vigil — Plataforma humanitaria de código abierto",
+    "poweredBy": "Vigil — plataforma humanitaria de código público",
     "language": "Idioma",
     "validation": {
       "tooShort": "Demasiado corto — escribe al menos 2 caracteres",
@@ -1475,7 +1475,7 @@
     "subtitle": "Material verificable para medios. Sin ceros inventados. Sin solicitud de donaciones.",
     "boilerplate": {
       "title": "Texto para citar",
-      "body": "Vigil es una plataforma humanitaria de código abierto creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela. Permite buscar personas desaparecidas por nombre y por fotografía, consultar un mapa de crisis con réplicas sísmicas en vivo, coordinar recursos entre quienes necesitan y quienes pueden ayudar, y acceder a directorios verificados de organizaciones y centros de acopio. Opera en ocho idiomas para equipos de rescate internacionales y está federada por API con Desaparecidos Terremoto Venezuela. No requiere registro, no solicita dinero y su código es público bajo la Licencia Humanitaria Vigil (uso con propósito limitado; no con fines de lucro comercial). Es un proyecto de YouTheWave, fundado por Orlando Toro.",
+      "body": "Vigil es una plataforma humanitaria de código público creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela. Permite buscar personas desaparecidas por nombre y por fotografía, consultar un mapa de crisis con réplicas sísmicas en vivo, coordinar recursos entre quienes necesitan y quienes pueden ayudar, y acceder a directorios verificados de organizaciones y centros de acopio. Opera en ocho idiomas para equipos de rescate internacionales y está federada por API con Desaparecidos Terremoto Venezuela. No requiere registro, no solicita dinero y su código es público bajo la Licencia Humanitaria Vigil (uso con propósito limitado; no con fines de lucro comercial). Es un proyecto de YouTheWave, fundado por Orlando Toro.",
       "liveLabel": "URL en vivo",
       "repoLabel": "Repositorio",
       "copy": "Copiar texto",

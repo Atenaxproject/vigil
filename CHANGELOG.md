@@ -12,6 +12,7 @@ All notable changes to Vigil are documented here. Format loosely follows
 
 ### Docs
 - **README / GitHub about** — Formal Launch closed; VE live; YouTheWave ([youthewave.org](https://youthewave.org)) marked live (not “coming soon”); FL/MX prebuilt; public “possible improvements” section; remove false “commercially or otherwise, for any purpose” code grant.
+- **ToS effectiveDate** — set to 2026-07-27 with tosVersion 1.1.0; localize footer license labels; press boilerplate public-source wording; rebuild press-kit PDFs (footer Licencia Humanitaria Vigil).
 - **CONTRIBUTING, package.json, press one-pager/values, glossary, docs/README, terminos §IP, footer/press i18n** — license wording updated off MIT commercial-friendly claims.
 
 ## [Unreleased] — 2026-07-27 (VE stable-ops closeout)
