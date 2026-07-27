@@ -70,19 +70,19 @@ If the project already has earlier migrations applied, run only the **missing** 
 in **SQL Editor**, in **numeric order** through the latest. Canonical filenames (see
 [`data-model.md`](../reference/data-model.md)):
 
-1. `006`–`019` as needed (geographic fields, minors protection, feed health, etc.)
-2. `011_diaspora_region.sql` — `region_scope` for USA diaspora hub (`/apoyo-usa`)
-3. **`020_restore_missing_persons_public_insert.sql`** — restore anon/authenticated INSERT + consent RLS (no SELECT on contact columns)
-4. **`021_rls_contact_lockdown.sql`** — `public_*` SELECT views; deny direct anon SELECT on contact-bearing tables (required before multi-country live)
-5. **`022_needs_coverage_and_photo_storage.sql`** — coverage columns + missing-person-photos storage
-6. **`023_missing_person_flag_rpc.sql`** — `flag_missing_person` SECURITY DEFINER RPC
-7. **`024_rls_insert_lockdown.sql`** — service-role INSERT lockdown; column-scoped missing_persons INSERT
+1. Any missing files in `006`–`019` (includes `011_diaspora_region.sql` for
+   `/apoyo-usa` `region_scope` when that hub is in scope)
+2. **`020_restore_missing_persons_public_insert.sql`** — restore anon/authenticated INSERT + consent RLS (no SELECT on contact columns)
+3. **`021_rls_contact_lockdown.sql`** — `public_*` SELECT views; deny direct anon SELECT on contact-bearing tables (required before multi-country live)
+4. **`022_needs_coverage_and_photo_storage.sql`** — coverage columns + missing-person-photos storage
+5. **`023_missing_person_flag_rpc.sql`** — `flag_missing_person` SECURITY DEFINER RPC
+6. **`024_rls_insert_lockdown.sql`** — service-role INSERT lockdown; column-scoped missing_persons INSERT
 
 Do **not** apply `024` on a greenfield DB that skipped `021`–`023`. Do **not** use the obsolete phase-fork name `020_rls_contact_lockdown` — that work lives in `021`.
 
 Then seed diaspora organizations (after Orlando confirms GEM/AFE hours):
 
-8. `supabase/seeds/004_diaspora_orgs.sql`
+7. `supabase/seeds/004_diaspora_orgs.sql`
 
 Without `011`, `/apoyo-usa` and region-scoped filters degrade gracefully (empty data).
 Without `021`, treat contact fields on those tables as **not** privacy-safe via PostgREST.
