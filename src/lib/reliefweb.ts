@@ -54,6 +54,18 @@ interface ReliefWebResponse {
 }
 
 export async function getVenezuelaUpdates(limit = 10): Promise<ReliefWebReport[]> {
+  // Skip the network when no approved appname is configured — avoids noisy 403s
+  // and lets InformacionLive suppress the Official-Updates section cleanly.
+  if (!RELIEFWEB_ENABLED) {
+    await recordFeedHealth({
+      feedId: 'reliefweb',
+      label: 'ReliefWeb reports',
+      ok: false,
+      error: 'disabled — RELIEFWEB_APPNAME unset',
+    })
+    return []
+  }
+
   const params =
     `filter[field]=country.iso3&filter[value]=VEN&limit=${limit}&sort[]=date:desc` +
     `&fields[include][]=title&fields[include][]=date&fields[include][]=url` +

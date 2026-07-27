@@ -9,6 +9,17 @@ function escapeHtml(text: string): string {
     .replace(/"/g, '&quot;')
 }
 
+/** True when outbound transactional email can be attempted. */
+export function isTransactionalEmailConfigured(): boolean {
+  return Boolean(process.env.RESEND_API_KEY)
+}
+
+function fromAddress(): string {
+  const override = process.env.RESEND_FROM_EMAIL?.trim()
+  const email = override || CRISIS_CONFIG.legal.contactEmail
+  return `Vigil <${email}>`
+}
+
 export async function notifyNewFeedback(feedback: {
   category: string
   message: string
@@ -21,7 +32,7 @@ export async function notifyNewFeedback(feedback: {
 
   try {
     await resend.emails.send({
-      from: `Vigil <${CRISIS_CONFIG.legal.contactEmail}>`,
+      from: fromAddress(),
       to: CRISIS_CONFIG.legal.supportEmail,
       subject: `[Vigil] Nuevo feedback: ${feedback.category}`,
       html: `
@@ -58,7 +69,7 @@ export async function notifyClaimLink(params: {
 
   try {
     await resend.emails.send({
-      from: `Vigil <${CRISIS_CONFIG.legal.contactEmail}>`,
+      from: fromAddress(),
       to: params.to,
       subject,
       html: `

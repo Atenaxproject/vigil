@@ -1,13 +1,15 @@
 import type { HazardEvent } from '@/lib/hazards/types'
-import { reliefwebUrl } from '@/lib/reliefweb'
+import { RELIEFWEB_ENABLED, reliefwebUrl } from '@/lib/reliefweb'
 
 /**
  * ReliefWeb recent disaster reports (headline relay only — no commentary).
- * Uses the shared v2 client (75C). Fails soft to [] on 403 (appname not yet
- * approved), 410, or any error — the monitor merges hazard sources, so an empty
- * ReliefWeb contributes nothing rather than an empty labelled section.
+ * Uses the shared v2 client (75C). Fails soft to [] when RELIEFWEB_APPNAME is
+ * unset, on 403 (appname not yet approved), 410, or any error — the monitor
+ * merges hazard sources, so an empty ReliefWeb contributes nothing rather than
+ * an empty labelled section.
  */
 export async function pollReliefwebHazards(): Promise<HazardEvent[]> {
+  if (!RELIEFWEB_ENABLED) return []
   const fetched_at = new Date().toISOString()
   try {
     const url = reliefwebUrl(

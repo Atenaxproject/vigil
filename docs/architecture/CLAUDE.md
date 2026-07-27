@@ -80,7 +80,7 @@ Next.js 14 App Router + TypeScript + Tailwind · Supabase (Postgres + Realtime +
 5. **No donations solicitation** until 501(c)(3) determination + FDACS registration (Florida Ch. 496).
 6. **Vigil is not a dispatcher.** Rescue needs route to 911 messaging, never intake.
 7. **No government data cooperation.** VenApp intentionally excluded. Referrer values and contact info never logged or exposed.
-8. **Performance budget is law:** functional at 2G/512kbps, no above-fold image >50KB, uploads compressed client-side where wired (`compress-client`; extend remaining upload paths as backlog), lazy-loading, indexed queries only.
+8. **Performance budget is law:** functional at 2G/512kbps, no above-fold image >50KB, uploads compressed client-side on wired paths (`compress-client`: `/reportar`, property assessment, photo search), lazy-loading, indexed queries only.
 9. **Design system:** light mode only, Geist/Inter, 4px radius, minimal motion, existing tokens only. No dark mode under any framing.
 10. **PR routing:** anything touching `src/lib/security/`, auth, RLS, contact-info handling, or sanitization goes through a PR so CodeQL + Copilot review run pre-merge. Schema changes always PR.
 11. **Claude API:** Haiku for all automated/batch paths; Sonnet only for photo-search vision. Everything AI passes through the circuit breaker.
@@ -106,4 +106,4 @@ The GitHub repo is public. Treat documentation as a security surface.
 
 ---
 
-*Last updated: 2026-07-26 · migrations 020–024 on main and applied on prod (022–023 ship) · Venezuela deployment live*
+*Last updated: 2026-07-27 · migrations 020–024 on main and applied on prod · client image compression on reportar + property + photo search · optional integrations degrade when env unset · Venezuela deployment live*

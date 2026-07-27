@@ -9,8 +9,11 @@ import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { PinDropMap } from '@/components/map/PinDropMap'
 import { ClaimLinkSuccess } from '@/components/ui/ClaimLinkSuccess'
 import { GeoSelect } from '@/components/missing/GeoSelect'
+import { compressImageForUpload, MAX_INPUT_BYTES } from '@/lib/images/compress-client'
 import { DANGER_INDICATORS } from '@/lib/property-assessment'
 import { cn } from '@/lib/utils'
+
+const ALLOWED_PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
 const REQUEST_TYPES = ['inspection', 'relocation_assistance', 'both'] as const
 
@@ -74,9 +77,20 @@ export function PropertyAssessmentForm({
 
     const body = new FormData()
     body.append('payload', JSON.stringify(payload))
-    const photo = form.get('photo')
-    if (photo instanceof File && photo.size > 0) {
-      body.append('photo', photo)
+    const rawPhoto = form.get('photo')
+    if (rawPhoto instanceof File && rawPhoto.size > 0) {
+      if (!ALLOWED_PHOTO_TYPES.includes(rawPhoto.type)) {
+        toast.error(t('form.photoInvalidType'))
+        setSubmitting(false)
+        return
+      }
+      if (rawPhoto.size > MAX_INPUT_BYTES) {
+        toast.error(t('form.photoTooLarge'))
+        setSubmitting(false)
+        return
+      }
+      const compressed = await compressImageForUpload(rawPhoto)
+      body.append('photo', compressed.file)
     }
 
     try {

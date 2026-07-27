@@ -224,19 +224,21 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ### 🔧 Optional integrations
 
-Optional feeds and messaging bridges degrade gracefully when not configured — the core map and search stay usable.
+Optional feeds and messaging bridges degrade gracefully when not configured — the core map and search stay usable. Env examples: [`.env.example`](./.env.example); setup notes: [`DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md).
 
-- ReliefWeb official-updates feed (v2 `appname` registration)
-- WhatsApp / Telegram intake bridges
-- Transactional email notifications
-- Additional crisis archetypes (config-driven reuse of the diaspora `region_scope` pattern)
+| Integration | Env / gate | Behavior when unset |
+|-------------|------------|---------------------|
+| **ReliefWeb** official updates (v2) | `RELIEFWEB_APPNAME` (approved OCHA appname) | No network call; Official Updates section suppressed on `/informacion` |
+| **WhatsApp / Telegram** intake | `MAKE_WEBHOOK_SECRET` + Make.com scenario → `POST /api/make/webhook` | Route returns **503** (no open intake). `GET` reports `{ configured: false }` only |
+| **Transactional email** | `RESEND_API_KEY` (+ optional `RESEND_FROM_EMAIL`); verify `youthewave.org` in Resend | Feedback / claim-link emails skipped; data still saved |
+| **Additional crisis archetypes** | Config + docs | Scaffolding only — see [`CRISIS-ARCHETYPE-EXTENSION.md`](./docs/architecture/CRISIS-ARCHETYPE-EXTENSION.md). **No** FL/MX activation |
 
 ### Possible improvements / add-ons (next round)
 
 Public, non-secret backlog grounded in post-launch ops review — **not** Florida/México product build:
 
-- Finish **disaster-recovery proof** (encrypted dumps are running; restore dry-run still operator-owned)
-- Extend **client image compression** to remaining upload paths (property assessment and other file intakes)
+- Finish **disaster-recovery proof** (encrypted dumps are running; restore dry-run still operator-owned — age private key)
+- ~~Extend **client image compression** to remaining upload paths~~ **Done** for property assessment + photo search (same pattern as `/reportar`)
 - Resolve open **counsel / product** items before code: photo-display policy (prompt 78), `/monitor` nav visibility (redistribution rights), legal operator-line copy when incorporation lands
 - Keep **multi-country activation** gated: Florida and México stay `prebuilt` until named admins + checklist gates — then DNS, feeds, locale, and privacy stance per country
 - Optional product explorations: voice intake for low-literacy / field use; deeper PFIF exchange with partners **by agreement**; specialized Field / Family surfaces
@@ -351,7 +353,10 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key   # server-only, never exposed
 ANTHROPIC_API_KEY=your_anthropic_key              # optional, for AI assistant, photo search, dedup cron
 CRON_SECRET=generate_a_strong_random_secret       # optional, secures /api/cron/dedup on Vercel
-RESEND_API_KEY=your_resend_key                    # optional, feedback email alerts
+RESEND_API_KEY=your_resend_key                    # optional, feedback + claim-link emails
+# RESEND_FROM_EMAIL=vigil@youthewave.org          # optional override (default: crisis.config contactEmail)
+MAKE_WEBHOOK_SECRET=                              # optional, WhatsApp/Telegram via Make → /api/make/webhook
+RELIEFWEB_APPNAME=                                # optional, approved OCHA v2 appname
 VIGIL_ADMIN_SECRET=generate_a_strong_random_secret
 VIGIL_ADMIN_EMAILS=vigil@youthewave.org
 ```

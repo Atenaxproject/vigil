@@ -16,6 +16,7 @@ export const dynamic = 'force-dynamic'
 /**
  * Make.com intake bridge — same Zod + sanitize seam as web missing-person submit.
  * Auth: Bearer MAKE_WEBHOOK_SECRET. When secret unset, returns 503 (no open intake).
+ * Intended for WhatsApp / Telegram (or other) channel scenarios that POST here.
  */
 const schema = z.object({
   full_name: z.string().min(2).max(200),
@@ -33,6 +34,8 @@ const schema = z.object({
   contact_email: z.string().email().max(200).optional().or(z.literal('')),
   consent_given: z.literal(true),
   data_accuracy_confirmed: z.literal(true),
+  /** Channel provenance for Make/WhatsApp/Telegram bridges. Defaults to partner. */
+  source: z.enum(['whatsapp', 'telegram', 'partner']).default('partner'),
 })
 
 function isAuthorized(request: NextRequest): boolean {
@@ -40,6 +43,14 @@ function isAuthorized(request: NextRequest): boolean {
   if (!secret) return false
   const auth = request.headers.get('authorization')
   return auth === `Bearer ${secret}`
+}
+
+/** Ops probe — never leaks the secret; only whether intake is configured. */
+export async function GET() {
+  return NextResponse.json({
+    configured: Boolean(process.env.MAKE_WEBHOOK_SECRET),
+    path: '/api/make/webhook',
+  })
 }
 
 export async function POST(request: NextRequest) {
@@ -95,7 +106,7 @@ export async function POST(request: NextRequest) {
         consent_given: true,
         data_accuracy_confirmed: true,
         consent_timestamp: new Date().toISOString(),
-        source: 'partner',
+        source: body.source,
         reporter_ip_hash: ipHash,
       })
       .select('id, claim_token')
