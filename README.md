@@ -110,14 +110,14 @@ Production captures from [vigil.youthewave.org](https://vigil.youthewave.org). R
 
 ## What's live now
 
-Verified against source and production as of **2026-07-23**. Optional integrations degrade gracefully when API keys are missing — they never crash the app.
+Verified against source and production as of **2026-07-27** (after next-round ship [#32](https://github.com/Atenaxproject/vigil/pull/32)). Optional integrations degrade when credentials are unset — they never crash the app.
 
 ### Core crisis tools
 
 | Feature | Route | Notes |
 |---|---|---|
-| **Missing persons board** | `/buscar`, `/reportar` | Realtime feed on home; estado/municipio/parroquia on report form; state filter chips on search |
-| **Photo search (AI vision)** | `/buscar` | Claude Vision describes traits as text, matches public records — no biometric storage; needs `ANTHROPIC_API_KEY` |
+| **Missing persons board** | `/buscar`, `/reportar` | Realtime feed on home; estado/municipio/parroquia on report form; state filter chips on search; client image compression on photo upload |
+| **Photo search (AI vision)** | `/buscar` | Claude Vision describes traits as text, matches public records — no biometric storage; client image compression before upload; needs `ANTHROPIC_API_KEY` |
 | **Claude AI assistant** | all pages (widget) | Live-data Q&A in 8 languages; streams from `/api/assistant`; degrades gracefully without API key |
 | **Statistics by state** | `/estadisticas` | Vigil's own missing/found-alive counts per estado (Supabase Realtime); federated DTV figures shown only when a complete enumeration is available, suppressed otherwise |
 | **Contested figures** | `/estadisticas` | Official casualty figures published with issuer attribution and independent counterpoints (Provea, USGS PAGER, UN, academic) stacked beneath — never averaged into one number |
@@ -131,7 +131,7 @@ Verified against source and production as of **2026-07-23**. Optional integratio
 | **Collection points** | `/punto-de-acopio` | Citizen registration → amber map markers |
 | **Resource exchange** | `/intercambio` | Offer or request goods, shelter, transport, skills, equipment |
 | **Volunteer marketplace** | `/voluntarios` | Skills registration and directory (now includes structural_engineer, architect, surveyor for post-disaster property assessment). |
-| **Property safety assessment** | `/evaluacion-estructural` | ATC-20-style green/yellow/red tagging; volunteer-assigned only (structural_engineer/architect/surveyor roles), never AI-assigned; claim link at `/mi-evaluacion/[token]` |
+| **Property safety assessment** | `/evaluacion-estructural` | ATC-20-style green/yellow/red tagging; volunteer-assigned only (structural_engineer/architect/surveyor roles), never AI-assigned; client image compression on photo upload; claim link at `/mi-evaluacion/[token]` |
 | **I need help** | `/necesito-ayuda` | Drop a need pin on the map |
 
 ### Information & coordination
@@ -187,12 +187,13 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ## Project Status — July 2026
 
-**Phase:** Formal Launching with Improvements is **closed** (tag `phase/formal-launch-improvements-20260726`). Venezuela production is live and in stable-ops care. Florida and México configs exist as **prebuilt / held** — activation waits on named local admins and `TODO-BEFORE-LAUNCH` gates (not an open feature sprint).
+**Phase:** Formal Launching with Improvements is **closed** (tag `phase/formal-launch-improvements-20260726`). Next-round app improvements **shipped** ([#32](https://github.com/Atenaxproject/vigil/pull/32); restore tag `restore/pre-next-round-improvements-20260727`). Venezuela production is live and in stable-ops care. Florida and México configs exist as **prebuilt / held** — activation waits on named local admins and `TODO-BEFORE-LAUNCH` gates (not an open feature sprint).
 
 ### ✅ Live now (Venezuela)
 
 - **Federated missing persons search** — Vigil DB + a cached, short-lived DTV index queried in real time, accent-insensitive ranked name matching (no network-wide total is published — see [Data Partnership](#data-partnership))
 - **Photo-based search** — Claude Vision text descriptions; no Vigil biometric storage
+- **Client image compression** — wired on `/reportar`, property assessment, and photo search (same upload budget)
 - **Claude AI assistant** — live database Q&A in 8 languages; does not invent figures
 - **Crisis map** — USGS aftershocks (source-labeled), GDACS alerts, needs, resources, shelters, hospitals, rescue zones, collection points (including DTV-sourced centers); **USA diaspora hub** at `/apoyo-usa` (South Florida, separate `region_scope`)
 - **Connectivity / comms layer** — WiFi, Starlink, cell signal points on map; citizen submission at `/conectividad`
@@ -221,10 +222,11 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Geographic breakdown** — estado/municipio/parroquia across 24 Venezuelan states
 - **Privacy** — contact info never public; public listings via stripped views; Venezuelan government intentionally excluded
 - **YouTheWave** — operator brand site live at [youthewave.org](https://youthewave.org) (not “coming soon”)
+- **License** — [Vigil Humanitarian License](./LICENSE) (purpose-limited; not for commercial profit)
 
-### 🔧 Optional integrations
+### 🔧 Optional integrations (code ready · credentials operator-owned)
 
-Optional feeds and messaging bridges degrade gracefully when not configured — the core map and search stay usable. Env examples: [`.env.example`](./.env.example); setup notes: [`DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md).
+Code paths are shipped and degrade cleanly when unset — **turning them on is operator work** (register keys / scenarios; never commit secrets). Core map and search stay usable either way. Env examples: [`.env.example`](./.env.example); setup notes: [`DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md).
 
 | Integration | Env / gate | Behavior when unset |
 |-------------|------------|---------------------|
@@ -233,12 +235,11 @@ Optional feeds and messaging bridges degrade gracefully when not configured — 
 | **Transactional email** | `RESEND_API_KEY` (+ optional `RESEND_FROM_EMAIL`); verify `youthewave.org` in Resend | Feedback / claim-link emails skipped; data still saved |
 | **Additional crisis archetypes** | Config + docs | Scaffolding only — see [`CRISIS-ARCHETYPE-EXTENSION.md`](./docs/architecture/CRISIS-ARCHETYPE-EXTENSION.md). **No** FL/MX activation |
 
-### Possible improvements / add-ons (next round)
+### Operator-gated / open backlog
 
-Public, non-secret backlog grounded in post-launch ops review — **not** Florida/México product build:
+Public, non-secret backlog — **not** a Florida/México product sprint:
 
 - Finish **disaster-recovery proof** (encrypted dumps are running; restore dry-run still operator-owned — age private key)
-- ~~Extend **client image compression** to remaining upload paths~~ **Done** for property assessment + photo search (same pattern as `/reportar`)
 - Resolve open **counsel / product** items before code: photo-display policy (prompt 78), `/monitor` nav visibility (redistribution rights), legal operator-line copy when incorporation lands
 - Keep **multi-country activation** gated: Florida and México stay `prebuilt` until named admins + checklist gates — then DNS, feeds, locale, and privacy stance per country
 - Optional product explorations: voice intake for low-literacy / field use; deeper PFIF exchange with partners **by agreement**; specialized Field / Family surfaces

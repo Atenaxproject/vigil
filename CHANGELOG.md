@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-27 (README post-#32 reality pass)
+
+### Docs
+- **README** — verification date → 2026-07-27; mark client image compression live on reportar + property + photo search; optional integrations clarified as code-ready / credentials operator-owned; remove shipped compression from backlog; phase note for [#32](https://github.com/Atenaxproject/vigil/pull/32) + restore tag.
+
 ## [Unreleased] — 2026-07-27 (next-round optional integrations)
 
 ### Performance
