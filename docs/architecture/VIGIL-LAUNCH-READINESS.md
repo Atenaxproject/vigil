@@ -4,7 +4,7 @@ Internal launch checklists and gap inventories are **not published** in this rep
 
 Open-source contributors should use:
 
-- [`CLAUDE.md`](./CLAUDE.md) — product constraints and engineering rules
+- [`../../AGENTS.md`](../../AGENTS.md) — product constraints and engineering rules
 - [`DEPLOYMENT.md`](./DEPLOYMENT.md) — how to run and deploy a Vigil instance
 - [`DESIGN-SYSTEM.md`](./DESIGN-SYSTEM.md) — UI standards
 

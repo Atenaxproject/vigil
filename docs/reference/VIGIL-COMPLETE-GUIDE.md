@@ -14,7 +14,7 @@ Vigil is an open-source humanitarian crisis PWA. It aggregates proven tools (sei
 | [data-model.md](./data-model.md) | Schema and migration index |
 | [help-center-structure.md](./help-center-structure.md) | In-app help outline |
 | [glossary.md](./glossary.md) | Platform terminology |
-| [`../architecture/CLAUDE.md`](../architecture/CLAUDE.md) | Stack and non-negotiable constraints |
+| [`../../AGENTS.md`](../../AGENTS.md) | Stack and non-negotiable constraints |
 | [`../architecture/DESIGN-SYSTEM.md`](../architecture/DESIGN-SYSTEM.md) | Design tokens |
 
 ## Privacy stance (summary)
