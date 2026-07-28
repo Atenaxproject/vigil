@@ -17,7 +17,7 @@ export default function TerminosPage() {
       <div className="prose prose-slate max-w-none space-y-8">
         <div className="p-4 bg-blue-50 border border-blue-200 rounded">
           <p className="text-slate-700 font-medium">
-            Al usar Vigil, aceptas estos términos. Si no estás de acuerdo, por favor no uses la
+            Al usar Vigil™, aceptas estos términos. Si no estás de acuerdo, por favor no uses la
             plataforma. Al enviar información, confirmas que tienes derecho a compartirla y que es
             verídica al mejor de tu conocimiento.
           </p>
@@ -27,7 +27,7 @@ export default function TerminosPage() {
           <h2 className="text-xl font-semibold text-slate-900 mt-0 mb-3">Descargo de responsabilidad</h2>
           <ul className="list-disc pl-6 text-slate-700 space-y-2">
             <li>
-              <strong>Vigil NO es un servicio de emergencias.</strong> Para rescate inmediato, llama al{' '}
+              <strong>Vigil™ NO es un servicio de emergencias.</strong> Para rescate inmediato, llama al{' '}
               <strong>
                 {CRISIS_CONFIG.emergency.hotline} ({CRISIS_CONFIG.emergency.hotlineLabel})
               </strong>

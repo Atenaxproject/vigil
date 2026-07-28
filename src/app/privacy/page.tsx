@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
       <div className="space-y-6 text-slate-700 leading-relaxed">
         <p>
-          Vigil is operated by <strong>{CRISIS_CONFIG.legal.operator}</strong> as an open-source
+          Vigil™ is operated by <strong>{CRISIS_CONFIG.legal.operator}</strong> as an open-source
           humanitarian crisis platform. We collect only the data needed to help reunite families,
           coordinate aid, and connect volunteers — never for advertising or commercial profiling.
         </p>

@@ -16,14 +16,14 @@ export default function TermsPage() {
 
       <div className="space-y-6 text-slate-700 leading-relaxed">
         <p>
-          By using Vigil, you agree to use the platform only for legitimate humanitarian purposes:
+          By using Vigil™, you agree to use the platform only for legitimate humanitarian purposes:
           reporting or searching for missing persons, sharing verified needs and resources, and
           volunteering during crisis response.
         </p>
 
         <ul className="list-disc pl-6 space-y-2">
           <li>
-            <strong>Vigil is NOT an emergency service.</strong> For immediate rescue, call{' '}
+            <strong>Vigil™ is NOT an emergency service.</strong> For immediate rescue, call{' '}
             <strong>
               {CRISIS_CONFIG.emergency.hotline} ({CRISIS_CONFIG.emergency.hotlineLabel})
             </strong>

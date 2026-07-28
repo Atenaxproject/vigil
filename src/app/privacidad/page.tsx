@@ -20,7 +20,7 @@ export default function PrivacidadPage() {
         <section>
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-3">1. Quiénes Somos</h2>
           <p className="text-slate-700 leading-relaxed">
-            Vigil es operado por <strong>{CRISIS_CONFIG.legal.operator}</strong>, con sede en{' '}
+            Vigil™ es operado por <strong>{CRISIS_CONFIG.legal.operator}</strong>, con sede en{' '}
             {CRISIS_CONFIG.legal.operatorLocation}. Vigil es una plataforma humanitaria de código
             abierto diseñada exclusivamente para coordinar respuestas a desastres naturales y crisis
             humanitarias. No somos una organización de rescate, un servicio gubernamental ni una

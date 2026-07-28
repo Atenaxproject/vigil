@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-28 (trademark first-use pass)
+
+### Legal / brand
+- **First-use ™** on Vigil™, YouTheWave™, and Bbluestudios™ across footer (all 8 locales), help/press copy, legal pages, `crisis.config` operator, TRADEMARK.md / NOTICE, and press-kit sources. No ®. Restore tag `restore/pre-tm-pass-20260728`.
+
 ## [Unreleased] — 2026-07-27 (spec 81: Apache-2.0 + trademark)
 
 ### Legal

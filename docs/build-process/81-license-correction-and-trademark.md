@@ -1,6 +1,6 @@
 # 81 — License Correction (Apache-2.0), Trademark Notice, and Brand-Mark Sweep
 
-**Status:** Complete (2026-07-27)  
+**Status:** Complete (2026-07-27); UI first-use ™ follow-up 2026-07-28  
 **Public stub** — full execution prompt is private (operator archive).
 
 ## Summary
@@ -13,6 +13,7 @@ Standardize Vigil’s code license on **Apache-2.0** (OSI, patent grant, tradema
 - Do not use `®` — marks are not federally registered; use `™` only.
 - Do not invent legal language beyond the specified Apache + trademark text.
 - Canonical Apache-2.0 body must remain unmodified; copyright owner line is provisional pending YouTheWave Inc. incorporation.
+- **First-use convention:** ™ on the first meaningful user-facing use of Vigil / YouTheWave / Bbluestudios per surface and locale — not every repetition. No ™ in URLs, code identifiers, or repo paths.
 
 ## Deliverables (shipped)
 
@@ -20,5 +21,6 @@ Standardize Vigil’s code license on **Apache-2.0** (OSI, patent grant, tradema
 - README / CONTRIBUTING / package.json / GitHub About
 - Press kit sources + regenerated PDFs; footer/press locale strings
 - ToS §6 IP paragraph aligned; data §7 unchanged
+- 2026-07-28: first-use ™ pass across footer, help, press, legal pages, operator string (`restore/pre-tm-pass-20260728`)
 
-See `CHANGELOG.md` (2026-07-27 spec 81 entry) and restore tag `restore/pre-license-correction-20260727`.
+See `CHANGELOG.md` (2026-07-27 spec 81 entry + 2026-07-28 TM pass) and restore tags `restore/pre-license-correction-20260727`, `restore/pre-tm-pass-20260728`.

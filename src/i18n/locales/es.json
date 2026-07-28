@@ -502,7 +502,7 @@
     "flagSuccess": "Gracias. Nuestro equipo lo revisará.",
     "notFound": "No encontrado",
     "noData": "Sin datos disponibles",
-    "poweredBy": "Vigil — plataforma humanitaria de código público",
+    "poweredBy": "Vigil™ — plataforma humanitaria de código público",
     "language": "Idioma",
     "validation": {
       "tooShort": "Demasiado corto — escribe al menos 2 caracteres",
@@ -520,13 +520,13 @@
   "footer": {
     "openSource": "Código abierto — Apache-2.0",
     "contact": "Contacto",
-    "notEmergency": "Vigil NO es un servicio de emergencias. Para rescate inmediato llama al {hotline}.",
+    "notEmergency": "Vigil™ NO es un servicio de emergencias. Para rescate inmediato llama al {hotline}.",
     "press": "Prensa",
     "otherRegions": "Otras regiones",
     "minorsProtection": "Protección de menores",
     "disclaimer": "Descargo de responsabilidad",
     "attributionPrefix": "Un proyecto de",
-    "attributionOrg": "YouTheWave",
+    "attributionOrg": "YouTheWave™",
     "attributionOperator": "Orlando Toro",
     "attributionLicense": "Código abierto bajo la Licencia Apache 2.0"
   },
@@ -1312,11 +1312,11 @@
         "title": "Primeros pasos",
         "whatIsVigil": {
           "q": "¿Qué es Vigil?",
-          "a": "Vigil es una plataforma humanitaria de crisis que reúne búsqueda de personas desaparecidas, mapas en vivo, intercambio de recursos y datos oficiales de desastres en una app móvil. Conecta reportes ciudadanos con equipos de rescate, voluntarios y familias en el exterior."
+          "a": "Vigil™ es una plataforma humanitaria de crisis que reúne búsqueda de personas desaparecidas, mapas en vivo, intercambio de recursos y datos oficiales de desastres en una app móvil. Conecta reportes ciudadanos con equipos de rescate, voluntarios y familias en el exterior."
         },
         "government": {
           "q": "¿Es Vigil una app del gobierno?",
-          "a": "No. Vigil es operada por Bbluestudios LLC bajo la iniciativa YouTheWave. No comparte datos de usuarios con el gobierno venezolano. Consulta /privacidad para más detalles."
+          "a": "No. Vigil™ es operada por Bbluestudios™ LLC bajo la iniciativa YouTheWave™. No comparte datos de usuarios con el gobierno venezolano. Consulta /privacidad para más detalles."
         },
         "install": {
           "q": "¿Cómo instalo la app?",
@@ -1465,7 +1465,7 @@
         },
         "operator": {
           "q": "¿Quién opera Vigil?",
-          "a": "Bbluestudios LLC, Delray Beach, FL — iniciativa humanitaria YouTheWave."
+          "a": "Bbluestudios™ LLC, Delray Beach, FL — iniciativa humanitaria YouTheWave™."
         }
       }
     }
@@ -1477,7 +1477,7 @@
     "subtitle": "Material verificable para medios. Sin ceros inventados. Sin solicitud de donaciones.",
     "boilerplate": {
       "title": "Texto para citar",
-      "body": "Vigil es una plataforma humanitaria de código abierto creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela. Permite buscar personas desaparecidas por nombre y por fotografía, consultar un mapa de crisis con réplicas sísmicas en vivo, coordinar recursos entre quienes necesitan y quienes pueden ayudar, y acceder a directorios verificados de organizaciones y centros de acopio. Opera en ocho idiomas para equipos de rescate internacionales y está federada por API con Desaparecidos Terremoto Venezuela. No requiere registro, no solicita dinero y su código es público bajo Apache-2.0 (las marcas Vigil y YouTheWave están marcas protegidas). Es un proyecto de YouTheWave, fundado por Orlando Toro.",
+      "body": "Vigil™ es una plataforma humanitaria de código abierto creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela. Permite buscar personas desaparecidas por nombre y por fotografía, consultar un mapa de crisis con réplicas sísmicas en vivo, coordinar recursos entre quienes necesitan y quienes pueden ayudar, y acceder a directorios verificados de organizaciones y centros de acopio. Opera en ocho idiomas para equipos de rescate internacionales y está federada por API con Desaparecidos Terremoto Venezuela. No requiere registro, no solicita dinero y su código es público bajo Apache-2.0 (las marcas Vigil™ y YouTheWave™ son marcas protegidas). Es un proyecto de YouTheWave™, fundado por Orlando Toro.",
       "liveLabel": "URL en vivo",
       "repoLabel": "Repositorio",
       "copy": "Copiar texto",
@@ -1517,7 +1517,7 @@
       "federate": "Federar, no copiar",
       "federateBody": "Los datos de otras plataformas se integran por acuerdo y API, jamás por scraping.",
       "open": "Abierto por defecto",
-      "openBody": "Código abierto bajo Apache-2.0; marcas Vigil/YouTheWave protegidas; sin fines de lucro en la operación, sin publicidad.",
+      "openBody": "Código abierto bajo Apache-2.0; marcas Vigil™/YouTheWave™ protegidas; sin fines de lucro en la operación, sin publicidad.",
       "barrier": "Sin barreras",
       "barrierBody": "Sin registro, sin cuenta, sin app. Funciona en 2G y sin conexión."
     },
@@ -1551,7 +1551,7 @@
     "screenshotLandscape": "Vigil en iPhone horizontal",
     "founder": {
       "title": "Fundador y contacto",
-      "bio": "Orlando Toro, fundador de YouTheWave. Respuesta habitual en 1–2 días hábiles (español e inglés). YouTheWave es un proyecto pre-constitución — no una organización 501(c)(3) registrada.",
+      "bio": "Orlando Toro, fundador de YouTheWave™. Respuesta habitual en 1–2 días hábiles (español e inglés). YouTheWave es un proyecto pre-constitución — no una organización 501(c)(3) registrada.",
       "responseTime": "Tiempo de respuesta esperado: 1–2 días hábiles."
     },
     "govExclusion": {

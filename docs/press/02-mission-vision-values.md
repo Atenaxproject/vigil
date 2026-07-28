@@ -1,4 +1,4 @@
-# Misión, visión y valores — Vigil
+# Misión, visión y valores — Vigil™
 
 ## Misión
 
