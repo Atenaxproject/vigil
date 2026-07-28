@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-28 (prompt 82: review-automation audit)
+
+### Chore / ops
+- **Review-automation audit (prompt 82)** — full sweep of `.github/` workflows, CODEOWNERS, settings-as-code, PR templates, and Codex configs: **none** request Copilot or Codex reviews. PR #35 drain is platform-side (Copilot auto-request by `Atenaxproject` + Codex connector on open). Public stub `docs/build-process/82-review-automation-audit.md`. **Not fixed by merge** — Orlando must disable Copilot auto-review / “Review new pushes” and Codex auto-on-open (leave `@codex review`). Dependabot, Vercel, CI, CodeQL, axe untouched.
+
 ## [Unreleased] — 2026-07-28 (trademark first-use pass)
 
 ### Legal / brand
