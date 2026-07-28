@@ -20,7 +20,7 @@ Los datos de contacto de las familias nunca son públicos. Nunca se comparten co
 Los datos de otras plataformas se integran por acuerdo y API, jamás por scraping.
 
 ### Abierto por defecto
-Código público, Licencia Humanitaria Vigil (no comercial / con propósito limitado), sin fines de lucro, sin publicidad.
+Código abierto (Apache-2.0); marcas Vigil™ / YouTheWave™ protegidas; sin fines de lucro en la operación, sin publicidad.
 
 ### Sin barreras
 Sin registro, sin cuenta, sin app. Funciona en 2G y sin conexión.

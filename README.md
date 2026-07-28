@@ -4,11 +4,11 @@
   <img src="docs/assets/vigil-banner.svg" alt="Vigil — We stand watch when it matters most" width="100%" />
 </p>
 
-# Vigil
+# Vigil™
 
 ### We stand watch when it matters most.
 
-A public-source humanitarian crisis PWA — federated missing-persons search, crisis mapping, resource exchange, and volunteer coordination in one calm, Spanish-first interface. Source is shared for the Vigil / YouTheWave humanitarian purpose — **not for commercial profit**.
+An open-source humanitarian crisis PWA — federated missing-persons search, crisis mapping, resource exchange, and volunteer coordination in one calm, Spanish-first interface. The code is open under Apache-2.0; the Vigil™ and YouTheWave™ names and brand are protected trademarks (see TRADEMARK.md).
 
 **Live:** Venezuela 2026 Earthquake Response · [vigil.youthewave.org](https://vigil.youthewave.org) · June 24, 2026 onward  
 **Operator brand:** [YouTheWave](https://youthewave.org) ([youthewave.org](https://youthewave.org) is live) · Formal Launching with Improvements phase **closed** (2026-07-26)
@@ -18,7 +18,7 @@ A public-source humanitarian crisis PWA — federated missing-persons search, cr
 <br />
 
 [![Live Demo](https://img.shields.io/badge/Live-vigil.youthewave.org-2563EB?style=for-the-badge)](https://vigil.youthewave.org)
-[![License: Humanitarian](https://img.shields.io/badge/License-Humanitarian%20(non--commercial)-0F172A?style=for-the-badge)](./LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-2563EB?style=for-the-badge)](./LICENSE)
 
 <br />
 
@@ -222,7 +222,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 - **Geographic breakdown** — estado/municipio/parroquia across 24 Venezuelan states
 - **Privacy** — contact info never public; public listings via stripped views; Venezuelan government intentionally excluded
 - **YouTheWave** — operator brand site live at [youthewave.org](https://youthewave.org) (not “coming soon”)
-- **License** — [Vigil Humanitarian License](./LICENSE) (purpose-limited; not for commercial profit)
+- **License** — [Apache-2.0](./LICENSE) (code open; Vigil™/YouTheWave™ brand trademark-protected)
 
 ### 🔧 Optional integrations (code ready · credentials operator-owned)
 
@@ -394,10 +394,10 @@ For Venezuela. For whoever needs it next.
 
 ## License
 
-**Code: [Vigil Humanitarian License](./LICENSE)** — purpose-limited. You may use, modify, fork, and deploy Vigil for **non-commercial humanitarian / public-benefit crisis response** consistent with the Vigil / YouTheWave mission. **Commercial profit use of the Software is not permitted.** See [LICENSE](./LICENSE).
+**Code: [Apache License 2.0](./LICENSE).** You may use, modify, fork, and deploy Vigil for any purpose, including commercially. Apache-2.0 includes a patent grant and does **not** grant rights to the Vigil™ / YouTheWave™ names, logos, or brand — see [TRADEMARK.md](./TRADEMARK.md). Forks must rebrand.
 
 **Data: not covered by the code license.** Records submitted to a Vigil deployment by the people it serves are governed by that deployment's Terms of Service and Privacy Policy. Nothing in the code license grants rights to personal data held in any Vigil instance. Scraping and commercial use of platform data are prohibited under the [Terms](https://vigil.youthewave.org/terminos).
 
 **Federated data** from partner platforms remains theirs. Attribution and usage terms follow the originating platform.
 
-> **Counsel note:** Earlier public copies of this repository carried unmodified MIT license text (which would have allowed commercial use of the code). This file restates the operator’s long-standing intent (humanitarian use; not for profit; data never commercial). Relicensing and contributor-grant wording should be confirmed with counsel.
+> Code is Apache-2.0; brand is trademark-protected (TRADEMARK.md); data is governed by the Terms. Relicensing history: the repo standardized on Apache-2.0 on 2026-07-27.

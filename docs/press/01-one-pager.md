@@ -23,4 +23,4 @@
 ## Contacto de prensa
 vigil@youthewave.org — Orlando Toro, fundador, YouTheWave
 
-Proyecto de YouTheWave (pre-constitución). Sitio de marca: [youthewave.org](https://youthewave.org) (en vivo). Código bajo Licencia Humanitaria Vigil (uso con propósito limitado; no comercial).
+Proyecto de YouTheWave (pre-constitución). Sitio de marca: [youthewave.org](https://youthewave.org) (en vivo). Código bajo Apache-2.0; marcas Vigil™ / YouTheWave™ protegidas (ver TRADEMARK.md).
