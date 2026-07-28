@@ -236,7 +236,7 @@ export const CRISIS_CONFIG = {
   },
 
   legal: {
-    operator: 'Bbluestudios LLC',
+    operator: 'Bbluestudios™ LLC',
     operatorLocation: 'Greenacres, Florida, USA',
     contactEmail: 'vigil@youthewave.org',
     supportEmail: 'support@youthewave.org',

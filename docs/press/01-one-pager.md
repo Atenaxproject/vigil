@@ -1,6 +1,6 @@
-# Vigil — One-pager
+# Vigil™ — One-pager
 
-**Vigil** es una plataforma humanitaria de código abierto creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela.
+**Vigil™** es una plataforma humanitaria de código abierto creada en respuesta a los terremotos del 24 de junio de 2026 en Venezuela.
 
 ## Qué hace
 - Búsqueda de personas desaparecidas por nombre y por fotografía
@@ -21,6 +21,6 @@
 - https://github.com/Atenaxproject/vigil
 
 ## Contacto de prensa
-vigil@youthewave.org — Orlando Toro, fundador, YouTheWave
+vigil@youthewave.org — Orlando Toro, fundador, YouTheWave™
 
-Proyecto de YouTheWave (pre-constitución). Sitio de marca: [youthewave.org](https://youthewave.org) (en vivo). Código bajo Apache-2.0; marcas Vigil™ / YouTheWave™ protegidas (ver TRADEMARK.md).
+Proyecto de YouTheWave™ (pre-constitución). Sitio de marca: [youthewave.org](https://youthewave.org) (en vivo). Código bajo Apache-2.0; marcas Vigil™ / YouTheWave™ protegidas (ver TRADEMARK.md).

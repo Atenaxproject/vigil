@@ -380,7 +380,7 @@ Update country bounds, emergency hotline, partner links, languages, and seismic 
 
 ## Built by
 
-**[Orlando Toro](https://github.com/Orlando7oro)** — Founder & Director (Bbluestudios LLC). Product judgment, crisis operations, and final say on scope and ethics.
+**[Orlando Toro](https://github.com/Orlando7oro)** — Founder & Director (Bbluestudios™ LLC). Product judgment, crisis operations, and final say on scope and ethics.
 
 Built with **AI engineering collaborators** under that direction — see [`CONTRIBUTORS.md`](./CONTRIBUTORS.md) for accurate roles (Architect-Orchestrator via Cursor; Claude for design/reasoning assistance). Agents execute against specs; they do not replace human accountability for privacy or go-live decisions.
 
