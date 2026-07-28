@@ -5,6 +5,17 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-07-27 (spec 81: Apache-2.0 + trademark)
+
+### Legal
+- **LICENSE** — replace same-day custom non-OSI text with canonical **Apache License 2.0** (copyright line: YouTheWave / Orlando Toro). Add root `NOTICE` + `TRADEMARK.md` (Vigil™ / YouTheWave™; no ®). Code may be used commercially; brand is not licensed under Apache-2.0.
+- **ToS §6 (IP)** — describe Apache-2.0 + trademark boundary; `tosVersion` → 1.2.0. Data commercial prohibition (§7) unchanged.
+- **Counsel TODO** — update copyright owner to YouTheWave Inc. on incorporation; confirm rights-holder assignment; federal TM registration when ready (do not use ® until then).
+
+### Docs
+- README badge/blurb/License section + status line; CONTRIBUTING; package.json SPDX `Apache-2.0`; docs/README; press one-pager + values; press-kit footer; footer/press i18n (8 locales); outreach package non-commercial claims corrected.
+- Restore tag `restore/pre-license-correction-20260727`. GitHub About description/topics aligned (remove `non-commercial` / `source-available`; add `apache-2` / `open-source`).
+
 ## [Unreleased] — 2026-07-27 (README post-#32 reality pass)
 
 ### Docs

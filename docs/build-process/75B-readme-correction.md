@@ -1,6 +1,6 @@
 # 75B — README Correction
 
-> **SUPERSEDED (2026-07-27):** §1’s instruction to advertise **Code: MIT … commercially or otherwise, for any purpose** is **withdrawn**. Operator intent is purpose-limited / non-commercial for the Software (Vigil Humanitarian License). Do not re-apply the MIT-commercial grant from this historical prompt. Data non-commercial rules under Terms remain.
+> **SUPERSEDED (2026-07-27):** Historical MIT advertising in this prompt is obsolete. Same-day custom non-OSI license experiment is also withdrawn. Canonical license is **Apache-2.0** with brand protection in `TRADEMARK.md` (spec 81). Data non-commercial rules under Terms remain.
 
 **Small, surgical, runs before 76.** `README.md` only, plus the two files named in §1. Every item below is a specific defect found by reading the current file, not a general audit instruction.
 

@@ -50,7 +50,7 @@ My name is Orlando Toro, a Venezuelan-American developer based in Greenacres, Pa
 
 I am writing because the same architecture is now being configured for Florida hurricanes — NWS and NHC data feeds, shelter and resource coordination, a Spanish/English/Haitian Creole preparedness hub — and I want to build it with the organizations that actually run Florida disaster response, not hand them a finished tool built on assumptions.
 
-The ask is small and specific: a 30-minute structured feedback session with one or two member organizations' field coordinators. What works in current coordination tools, what consistently fails, what has never been built but should exist. Their answers become the roadmap. There is no cost in any direction — the platform is free, open source, and non-commercial.
+The ask is small and specific: a 30-minute structured feedback session with one or two member organizations' field coordinators. What works in current coordination tools, what consistently fails, what has never been built but should exist. Their answers become the roadmap. There is no cost in any direction — the platform is free and open source (Apache-2.0); Vigil / YouTheWave brand marks are protected.
 
 Vigil proved in Venezuela that this architecture works under real crisis conditions. Florida VOAD's member expertise is what would make the Florida configuration right before the season peaks rather than after.
 
@@ -86,7 +86,7 @@ I'm Orlando Toro, a developer in Greenacres and founder of YouTheWave. Vigil (vi
 
 As Florida's lead agency for disaster volunteers and donations, you sit exactly where Vigil's volunteer and resource coordination layers either help or duplicate. Before configuring the platform's Florida hurricane deployment any further, I'd value 30 minutes with someone on your team to understand where citizen-facing coordination tools genuinely help your operation and where they get in the way. That answer shapes what gets built.
 
-The platform is free, open source (github.com/Atenaxproject/vigil), and non-commercial.
+The platform is free and open source (github.com/Atenaxproject/vigil, Apache-2.0); Vigil / YouTheWave brand marks are protected.
 
 Orlando Toro — vigil@youthewave.org
 
@@ -102,7 +102,7 @@ I'm a Greenacres resident and software developer. After the June 2026 Venezuela 
 
 I'm now configuring the platform for Florida hurricanes, consuming official NWS/NHC feeds and always deferring to official sources — the platform links to Know Your Zone rather than republishing zone data, and mirrors NWS severity tiers rather than inventing its own. Two requests: first, a brief conversation about what county EM would want a citizen-facing coordination tool to do — and explicitly not do — during an activation; second, whether the county publishes structured data (shelter status, points of distribution) that a tool like this should consume from you as the authoritative source.
 
-I'm local, this is non-commercial, and the code is public at github.com/Atenaxproject/vigil.
+I'm local, this is open source (Apache-2.0; brand trademark-protected), and the code is public at github.com/Atenaxproject/vigil.
 
 Orlando Toro — vigil@youthewave.org
 
@@ -118,7 +118,7 @@ I'm Orlando Toro, a Greenacres-based developer and founder of YouTheWave. Vigil 
 
 During disasters, 211 is the authoritative local resource database — and Vigil's design principle is to federate with authoritative sources rather than duplicate them. I'd like to understand whether a data relationship is possible: Vigil surfacing 211 resources during an activation, clearly attributed, driving people to your service rather than around it.
 
-Happy to start with a short call. The platform is free and non-commercial; code at github.com/Atenaxproject/vigil.
+Happy to start with a short call. The platform is free and open source (Apache-2.0); code at github.com/Atenaxproject/vigil.
 
 Orlando Toro — vigil@youthewave.org
 
