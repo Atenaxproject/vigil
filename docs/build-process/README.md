@@ -4,7 +4,7 @@ Vigil is built in small, reviewable slices on feature branches. Specs and accept
 
 **Public living docs** (start here):
 
-- [`../architecture/CLAUDE.md`](../architecture/CLAUDE.md) — stack constraints and agent contract
+- [`../../AGENTS.md`](../../AGENTS.md) — canonical agent operating contract
 - [`../architecture/DESIGN-SYSTEM.md`](../architecture/DESIGN-SYSTEM.md) — UI tokens and components
 - [`../architecture/DEPLOYMENT.md`](../architecture/DEPLOYMENT.md) — local and production setup
 - [`../reference/`](../reference/) — API overview, data model, onboarding, glossary

@@ -81,7 +81,7 @@ Mono:     13px / 400                      → Coordinates, IDs, codes
 
 ### Dark mode — not shipped
 
-Vigil is **light mode only** (see `CLAUDE.md` standing constraint #9). Do not add
+Vigil is **light mode only** (see root `AGENTS.md` and this design system). Do not add
 `next-themes`, `.dark` tokens, or dark UI under any framing. Historical dark-token
 notes were removed to stop docs drift.
 

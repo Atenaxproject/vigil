@@ -19,7 +19,7 @@ AI systems assist under Orlando’s direction. They do not replace human account
 | **Cursor Agent (Grok-assisted)** | Architect-Orchestrator — multi-step implementation, security-conscious refactors, docs hygiene, PR-ready slices against written specs |
 | **Claude (Anthropic)** | Design and reasoning collaborator — architecture reviews, schema and privacy patterns, i18n, legal copy drafts, batch moderation tooling |
 
-How this works in practice: Orlando holds concentrated judgment (what to build, what not to ship). Agents execute against specs on feature branches; security-sensitive paths go through pull requests. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) and [`docs/architecture/CLAUDE.md`](./docs/architecture/CLAUDE.md).
+How this works in practice: Orlando holds concentrated judgment (what to build, what not to ship). Agents execute against specs on feature branches; security-sensitive paths go through pull requests. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) and [`AGENTS.md`](./AGENTS.md).
 
 ## Acknowledgments
 
