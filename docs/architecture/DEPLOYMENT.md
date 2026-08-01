@@ -2,7 +2,7 @@
 
 > **New crisis deployment:** change `src/config/crisis.config.ts` and follow this guide for Supabase/Vercel/DNS. See [`DEPLOYMENT-PLAYBOOK.md`](./DEPLOYMENT-PLAYBOOK.md) for a high-level multi-country pointer (detailed operator gates are private).
 
-> Architecture and design constraints: [`CLAUDE.md`](./CLAUDE.md), [`DESIGN-SYSTEM.md`](./DESIGN-SYSTEM.md)
+> Architecture and design constraints: [`AGENTS.md`](../../AGENTS.md), [`DESIGN-SYSTEM.md`](./DESIGN-SYSTEM.md)
 
 ## Supabase Setup (Orlando — manual steps)
 

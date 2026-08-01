@@ -1,3 +1,10 @@
+> **ARCHIVED — historical record only. Not current instructions.**
+> This was the original 48-hour build specification (June 2026). It describes
+> building Vigil from zero and is superseded by AGENTS.md at the repository root.
+> Facts in this document (license, framework version, domain, model routing,
+> schema, legal copy) are stale by design and must not be acted on.
+> Archived 2026-07-28 by prompt 83.
+
 # AGENTS.md — Vigil Crisis Platform
 ## Autonomous Build Agent — Full Repository Creation & Deployment
 **Read this file completely before executing a single command.**

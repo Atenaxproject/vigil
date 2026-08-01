@@ -277,7 +277,7 @@ The 12 platforms below are the sister platforms carried in `crisis.config.ts` an
 | [`docs/README.md`](./docs/README.md) | Documentation index |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | How to contribute |
 | [`CONTRIBUTORS.md`](./CONTRIBUTORS.md) | People and AI collaborators |
-| [`docs/architecture/CLAUDE.md`](./docs/architecture/CLAUDE.md) | Tech stack, ethics constraints, agent contract |
+| [`AGENTS.md`](./AGENTS.md) | Operating contract for agents (constraints, roles, stack) |
 | [`docs/architecture/DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) | UI tokens, typography, component rules |
 | [`docs/architecture/DEPLOYMENT.md`](./docs/architecture/DEPLOYMENT.md) | Supabase, Vercel, DNS, local dev |
 | [`docs/build-process/README.md`](./docs/build-process/README.md) | How we ship (short) |

@@ -10,6 +10,15 @@ All notable changes to Vigil are documented here. Format loosely follows
 ### Security
 - **Dependabot remediation** — npm overrides force `brace-expansion >=5.0.8`, `minimatch ^10.2.5`, and all `sharp` instances (including Next.js optionalDependency) to `>=0.35.2` / `0.35.2`. Regenerated lockfile so `npm ci` stays in sync; `npm audit` reports 0 high/critical. Supersedes draft PRs #31 / #38. Restore tag `restore/pre-dependabot-sharp-brace-20260801`.
 
+## [Unreleased] — 2026-07-28 (prompt 83: agent instruction rewrite)
+
+### Docs
+- **`AGENTS.md` (repo root)** — new canonical operating contract for every agent (live-system status, no autonomous mode, verbatim hard constraints, roles, review expectations, stack, deployment model, authoritative sources, licensing/brand).
+- **`CLAUDE.md` (repo root)** — thin Claude Code notes only; defers all constraints to `AGENTS.md`.
+- **Archived day-one specs** — `docs/build-process/00-original-agents-build.md` and `00-original-claude-spec.md` (historical only; stale facts must not be acted on).
+- **`docs/architecture/CLAUDE.md`** — pointer to root `AGENTS.md` / `CLAUDE.md` (supersedes the prompt-75 living rewrite as a second contract).
+- Cross-reference sweep: README, CONTRIBUTING, CONTRIBUTORS, docs index, design/deployment/onboarding/SOP pointers → `AGENTS.md`. Public stub `docs/build-process/83-agent-instruction-rewrite.md`. Restore tag `restore/pre-agent-instruction-rewrite-20260728`.
+
 ## [Unreleased] — 2026-07-28 (trademark first-use pass)
 
 ### Legal / brand
