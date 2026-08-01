@@ -12,6 +12,7 @@ import { DtvCrossReportBanner } from '@/components/dtv/DtvCrossReportBanner'
 import { GeoSelect } from '@/components/missing/GeoSelect'
 import { compressImageForUpload } from '@/lib/images/compress-client'
 import { queueSubmission } from '@/lib/offline-queue'
+import { sanitizeText } from '@/lib/security/validate'
 
 // Message strings are i18n keys under common.validation, translated at render.
 const formSchema = z.object({
@@ -119,7 +120,7 @@ export function MissingPersonForm() {
             saveClaim({
               kind: 'reporte',
               token,
-              label: data.full_name,
+              label: sanitizeText(data.full_name),
               savedAt: new Date().toISOString(),
             })
           }

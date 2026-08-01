@@ -1653,6 +1653,7 @@
     "remove": "Remove",
     "addLabel": "Paste a claim token",
     "add": "Add",
+    "invalidToken": "That does not look like a valid claim token. Paste the full UUID from your claim link.",
     "emptyExplainer": "When you file a report, an exchange request, or an assessment request, it is saved here on this device — no account — so you can return to it. You have not saved any yet.",
     "emptyCta": "Create a report",
     "claimRecoveryTitle": "If you lost your claim link",
