@@ -5,9 +5,10 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
-## [Unreleased] — 2026-08-01 (Dependabot brace-expansion + sharp)
+## [Unreleased] — 2026-08-01 (security: CodeQL #3 + Dependabot)
 
 ### Security
+- **Mis reportes claim links** — reject non-UUID claim tokens before they reach `Link` `href`; sanitize stored labels with `sanitizeText`. Clears CodeQL `js/xss-through-dom` (alert #3) on `MisReportesClient.tsx`. Restore tag `restore/pre-xss-misreportes-20260801`.
 - **Dependabot remediation** — npm overrides force `brace-expansion >=5.0.8`, `minimatch ^10.2.5`, and all `sharp` instances (including Next.js optionalDependency) to `>=0.35.2` / `0.35.2`. Regenerated lockfile so `npm ci` stays in sync; `npm audit` reports 0 high/critical. Supersedes draft PRs #31 / #38. Restore tag `restore/pre-dependabot-sharp-brace-20260801`.
 
 ## [Unreleased] — 2026-07-28 (prompt 83: agent instruction rewrite)

@@ -97,6 +97,14 @@ export function sanitizeText(text: string): string {
   return out.replace(/\s+/g, ' ').trim().slice(0, 2000)
 }
 
+/** Claim tokens are server-issued UUIDs — reject anything else before href/storage use. */
+const CLAIM_TOKEN_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+
+export function isClaimToken(token: string): boolean {
+  return CLAIM_TOKEN_RE.test(token.trim())
+}
+
 /**
  * Allowlist URL validator for values rendered as links. Only http(s), mailto,
  * and tel schemes pass — blocks javascript:, data:, vbscript:, and anything

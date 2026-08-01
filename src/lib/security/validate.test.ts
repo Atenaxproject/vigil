@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
+  isClaimToken,
   isSafeHttpUrl,
   resolveGeoForRecord,
   sanitizeText,
@@ -21,6 +22,15 @@ describe('isSafeHttpUrl', () => {
   it('allows http(s)/mailto/tel only', () => {
     expect(isSafeHttpUrl('https://example.com')).toBe('https://example.com')
     expect(isSafeHttpUrl('javascript:alert(1)')).toBeNull()
+  })
+})
+
+describe('isClaimToken', () => {
+  it('accepts UUID claim tokens only', () => {
+    expect(isClaimToken('550e8400-e29b-41d4-a716-446655440000')).toBe(true)
+    expect(isClaimToken('javascript:alert(1)')).toBe(false)
+    expect(isClaimToken('../admin')).toBe(false)
+    expect(isClaimToken('<img src=x onerror=alert(1)>')).toBe(false)
   })
 })
 
