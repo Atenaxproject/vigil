@@ -1653,6 +1653,7 @@
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
     "add": "Agregar",
+    "invalidToken": "Cela ne ressemble pas à un jeton de réclamation valide. Collez l’UUID complet de votre lien.",
     "emptyExplainer": "Lorsque vous déposez un signalement, une demande d'échange ou d'évaluation, il est enregistré ici sur cet appareil — sans compte — pour que vous puissiez le retrouver. Vous n'en avez encore enregistré aucun.",
     "emptyCta": "Créer un signalement",
     "claimRecoveryTitle": "If you lost your claim link",

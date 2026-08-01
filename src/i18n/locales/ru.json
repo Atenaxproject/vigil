@@ -1653,6 +1653,7 @@
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
     "add": "Agregar",
+    "invalidToken": "Это не похоже на действительный токен заявки. Вставьте полный UUID из вашей ссылки.",
     "emptyExplainer": "Когда вы отправляете заявку, запрос на обмен или на оценку, она сохраняется здесь на этом устройстве — без аккаунта — чтобы вы могли к ней вернуться. Вы пока ничего не сохранили.",
     "emptyCta": "Создать заявку",
     "claimRecoveryTitle": "If you lost your claim link",

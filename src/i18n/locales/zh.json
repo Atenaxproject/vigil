@@ -1653,6 +1653,7 @@
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
     "add": "Agregar",
+    "invalidToken": "这不像有效的认领令牌。请粘贴认领链接中的完整 UUID。",
     "emptyExplainer": "当你提交报告、交换请求或评估请求时，它会保存在此设备上——无需账户——以便你日后查看。你还没有保存任何内容。",
     "emptyCta": "创建报告",
     "claimRecoveryTitle": "If you lost your claim link",

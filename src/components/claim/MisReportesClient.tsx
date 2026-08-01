@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { isClaimToken, sanitizeText } from '@/lib/security/validate'
 
 const STORAGE_KEY = 'vigil-claim-tokens'
 
@@ -13,27 +14,54 @@ export type StoredClaim = {
   savedAt: string
 }
 
+function normalizeClaim(raw: unknown): StoredClaim | null {
+  if (!raw || typeof raw !== 'object') return null
+  const c = raw as Partial<StoredClaim>
+  if (c.kind !== 'reporte' && c.kind !== 'intercambio' && c.kind !== 'evaluacion') return null
+  if (typeof c.token !== 'string' || !isClaimToken(c.token)) return null
+  const token = c.token.trim()
+  const label =
+    typeof c.label === 'string' && c.label.trim() ? sanitizeText(c.label) : undefined
+  const savedAt = typeof c.savedAt === 'string' ? c.savedAt : new Date().toISOString()
+  return { kind: c.kind, token, label, savedAt }
+}
+
 export function loadClaims(): StoredClaim[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
-    const parsed = JSON.parse(raw) as StoredClaim[]
-    return Array.isArray(parsed) ? parsed : []
+    const parsed = JSON.parse(raw) as unknown
+    if (!Array.isArray(parsed)) return []
+    return parsed.map(normalizeClaim).filter((c): c is StoredClaim => c !== null)
   } catch {
     return []
   }
 }
 
 export function saveClaim(claim: StoredClaim) {
-  const list = loadClaims().filter((c) => !(c.kind === claim.kind && c.token === claim.token))
-  list.unshift(claim)
+  const normalized = normalizeClaim(claim)
+  if (!normalized) return
+  const list = loadClaims().filter(
+    (c) => !(c.kind === normalized.kind && c.token === normalized.token)
+  )
+  list.unshift(normalized)
   localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0, 40)))
+}
+
+function hrefFor(c: StoredClaim): string | null {
+  // Re-check at the Link sink so tainted DOM/localStorage strings never reach href.
+  if (!isClaimToken(c.token)) return null
+  const token = c.token.trim()
+  if (c.kind === 'intercambio') return `/mi-intercambio/${token}`
+  if (c.kind === 'evaluacion') return `/mi-evaluacion/${token}`
+  return `/mi-reporte/${token}`
 }
 
 export function MisReportesClient() {
   const t = useTranslations('misReportes')
   const [claims, setClaims] = useState<StoredClaim[]>([])
   const [manual, setManual] = useState('')
+  const [manualError, setManualError] = useState(false)
 
   useEffect(() => {
     setClaims(loadClaims())
@@ -42,12 +70,16 @@ export function MisReportesClient() {
   function addManual() {
     const token = manual.trim()
     if (!token) return
-    const claim: StoredClaim = {
+    if (!isClaimToken(token)) {
+      setManualError(true)
+      return
+    }
+    setManualError(false)
+    saveClaim({
       kind: 'reporte',
       token,
       savedAt: new Date().toISOString(),
-    }
-    saveClaim(claim)
+    })
     setClaims(loadClaims())
     setManual('')
   }
@@ -56,12 +88,6 @@ export function MisReportesClient() {
     const next = loadClaims().filter((c) => !(c.token === token && c.kind === kind))
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
     setClaims(next)
-  }
-
-  const hrefFor = (c: StoredClaim) => {
-    if (c.kind === 'intercambio') return `/mi-intercambio/${c.token}`
-    if (c.kind === 'evaluacion') return `/mi-evaluacion/${c.token}`
-    return `/mi-reporte/${c.token}`
   }
 
   return (
@@ -81,26 +107,34 @@ export function MisReportesClient() {
         </div>
       ) : (
         <ul className="mt-6 space-y-3">
-          {claims.map((c) => (
-            <li
-              key={`${c.kind}-${c.token}`}
-              className="flex flex-wrap items-center justify-between gap-2 rounded-card border border-slate-200 bg-white p-4"
-            >
-              <div>
-                <Link href={hrefFor(c)} className="text-[16px] font-medium text-vigil-blue hover:underline">
-                  {c.label || t(c.kind)}
-                </Link>
-                <p className="font-mono text-[13px] text-vigil-muted">{c.token.slice(0, 8)}…</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => remove(c.token, c.kind)}
-                className="min-h-[44px] rounded-input border border-slate-200 px-3 text-[13px]"
+          {claims.map((c) => {
+            const href = hrefFor(c)
+            if (!href) return null
+            const label = c.label ? sanitizeText(c.label) : t(c.kind)
+            return (
+              <li
+                key={`${c.kind}-${c.token}`}
+                className="flex flex-wrap items-center justify-between gap-2 rounded-card border border-slate-200 bg-white p-4"
               >
-                {t('remove')}
-              </button>
-            </li>
-          ))}
+                <div>
+                  <Link
+                    href={href}
+                    className="text-[16px] font-medium text-vigil-blue hover:underline"
+                  >
+                    {label}
+                  </Link>
+                  <p className="font-mono text-[13px] text-vigil-muted">{c.token.slice(0, 8)}…</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => remove(c.token, c.kind)}
+                  className="min-h-[44px] rounded-input border border-slate-200 px-3 text-[13px]"
+                >
+                  {t('remove')}
+                </button>
+              </li>
+            )
+          })}
         </ul>
       )}
 
@@ -112,7 +146,10 @@ export function MisReportesClient() {
           <input
             id="claim-token"
             value={manual}
-            onChange={(e) => setManual(e.target.value)}
+            onChange={(e) => {
+              setManual(e.target.value)
+              setManualError(false)
+            }}
             className="min-h-[44px] flex-1 rounded-input border border-slate-200 px-3 text-[16px]"
             autoComplete="off"
           />
@@ -124,6 +161,11 @@ export function MisReportesClient() {
             {t('add')}
           </button>
         </div>
+        {manualError ? (
+          <p className="mt-1 text-[13px] text-red-700" role="alert">
+            {t('invalidToken')}
+          </p>
+        ) : null}
       </div>
 
       <aside className="mt-8 rounded-card border border-slate-200 bg-vigil-cloud p-4 text-[13px] text-vigil-body">

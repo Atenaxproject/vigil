@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-08-01 (CodeQL js/xss-through-dom #3)
+
+### Security
+- **Mis reportes claim links** — reject non-UUID claim tokens before they reach `Link` `href`; sanitize stored labels with `sanitizeText`. Clears CodeQL `js/xss-through-dom` (alert #3) on `MisReportesClient.tsx`. Restore tag `restore/pre-xss-misreportes-20260801`.
+
 ## [Unreleased] — 2026-08-01 (Dependabot brace-expansion + sharp)
 
 ### Security

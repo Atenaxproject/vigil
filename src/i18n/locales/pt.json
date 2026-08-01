@@ -1653,6 +1653,7 @@
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
     "add": "Agregar",
+    "invalidToken": "Isso não parece um token de reivindicação válido. Cole o UUID completo do seu link.",
     "emptyExplainer": "Quando você envia um reporte, um pedido de troca ou de avaliação, ele fica salvo aqui neste dispositivo — sem conta — para você poder consultá-lo de novo. Você ainda não salvou nenhum.",
     "emptyCta": "Criar um reporte",
     "claimRecoveryTitle": "If you lost your claim link",

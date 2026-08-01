@@ -1653,6 +1653,7 @@
     "remove": "Quitar",
     "addLabel": "Pega un token de reclamo",
     "add": "Agregar",
+    "invalidToken": "Das sieht nicht nach einem gültigen Anspruchs-Token aus. Fügen Sie die vollständige UUID aus Ihrem Link ein.",
     "emptyExplainer": "Wenn Sie eine Meldung, eine Tausch- oder eine Bewertungsanfrage absenden, wird sie hier auf diesem Gerät gespeichert — ohne Konto — damit Sie sie wiederfinden. Sie haben noch keine gespeichert.",
     "emptyCta": "Meldung erstellen",
     "claimRecoveryTitle": "If you lost your claim link",
