@@ -20,6 +20,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **`docs/architecture/CLAUDE.md`** — pointer to root `AGENTS.md` / `CLAUDE.md` (supersedes the prompt-75 living rewrite as a second contract).
 - Cross-reference sweep: README, CONTRIBUTING, CONTRIBUTORS, docs index, design/deployment/onboarding/SOP pointers → `AGENTS.md`. Public stub `docs/build-process/83-agent-instruction-rewrite.md`. Restore tag `restore/pre-agent-instruction-rewrite-20260728`.
 
+## [Unreleased] — 2026-07-28 (prompt 82: review-automation audit)
+
+### Chore / ops
+- **Review-automation audit (prompt 82)** — full sweep of `.github/` workflows, CODEOWNERS, settings-as-code, PR templates, and Codex configs: **none** request Copilot or Codex reviews. Auto-review quota drain on PR #35 is platform-side (Copilot auto-request + Codex connector on open); #35 also touched branding/runtime surfaces (`package.json`, legal pages, `crisis.config`, locales), not docs alone. Public stub `docs/build-process/82-review-automation-audit.md`. **Not fixed by merge** — Orlando must disable Copilot auto-review / “Review new pushes” and Codex auto-on-open (leave `@codex review`). Dependabot, Vercel, CI, CodeQL, axe untouched.
+
 ## [Unreleased] — 2026-07-28 (trademark first-use pass)
 
 ### Legal / brand
