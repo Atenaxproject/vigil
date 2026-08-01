@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
 const STORAGE_KEY = 'vigil-claim-tokens'
+const CLAIM_TOKEN_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 export type StoredClaim = {
   kind: 'reporte' | 'intercambio' | 'evaluacion'
@@ -13,20 +14,55 @@ export type StoredClaim = {
   savedAt: string
 }
 
+function normalizeClaimToken(input: string): string | null {
+  const trimmed = input.trim()
+  if (!trimmed) return null
+
+  const withoutQuery = trimmed.split(/[?#]/, 1)[0] ?? trimmed
+  const candidate = withoutQuery.replace(/\/+$/, '').split('/').pop() ?? withoutQuery
+
+  return CLAIM_TOKEN_PATTERN.test(candidate) ? candidate.toLowerCase() : null
+}
+
+function isStoredClaimKind(value: unknown): value is StoredClaim['kind'] {
+  return value === 'reporte' || value === 'intercambio' || value === 'evaluacion'
+}
+
 export function loadClaims(): StoredClaim[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
-    const parsed = JSON.parse(raw) as StoredClaim[]
-    return Array.isArray(parsed) ? parsed : []
+    const parsed = JSON.parse(raw)
+    if (!Array.isArray(parsed)) return []
+
+    return parsed.flatMap((claim) => {
+      if (!claim || typeof claim !== 'object') return []
+      const entry = claim as Partial<StoredClaim>
+
+      const token = normalizeClaimToken(typeof entry.token === 'string' ? entry.token : '')
+      if (!token || !isStoredClaimKind(entry.kind) || typeof entry.savedAt !== 'string') return []
+
+      return [
+        {
+          kind: entry.kind,
+          token,
+          label: typeof entry.label === 'string' ? entry.label : undefined,
+          savedAt: entry.savedAt,
+        } satisfies StoredClaim,
+      ]
+    })
   } catch {
     return []
   }
 }
 
 export function saveClaim(claim: StoredClaim) {
-  const list = loadClaims().filter((c) => !(c.kind === claim.kind && c.token === claim.token))
-  list.unshift(claim)
+  const token = normalizeClaimToken(claim.token)
+  if (!token) return
+
+  const normalizedClaim = { ...claim, token }
+  const list = loadClaims().filter((c) => !(c.kind === normalizedClaim.kind && c.token === normalizedClaim.token))
+  list.unshift(normalizedClaim)
   localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0, 40)))
 }
 
@@ -40,7 +76,7 @@ export function MisReportesClient() {
   }, [])
 
   function addManual() {
-    const token = manual.trim()
+    const token = normalizeClaimToken(manual)
     if (!token) return
     const claim: StoredClaim = {
       kind: 'reporte',
@@ -59,9 +95,10 @@ export function MisReportesClient() {
   }
 
   const hrefFor = (c: StoredClaim) => {
-    if (c.kind === 'intercambio') return `/mi-intercambio/${c.token}`
-    if (c.kind === 'evaluacion') return `/mi-evaluacion/${c.token}`
-    return `/mi-reporte/${c.token}`
+    const token = encodeURIComponent(c.token)
+    if (c.kind === 'intercambio') return `/mi-intercambio/${token}`
+    if (c.kind === 'evaluacion') return `/mi-evaluacion/${token}`
+    return `/mi-reporte/${token}`
   }
 
   return (
