@@ -4,7 +4,7 @@ Thank you for helping improve an open-source humanitarian crisis platform. Famil
 
 ## Before you write code
 
-1. Read [`docs/architecture/CLAUDE.md`](./docs/architecture/CLAUDE.md) — non-negotiable product and stack constraints.
+1. Read [`AGENTS.md`](./AGENTS.md) — canonical operating contract (hard constraints, roles, stack).
 2. Read [`docs/architecture/DESIGN-SYSTEM.md`](./docs/architecture/DESIGN-SYSTEM.md) before UI work.
 3. Prefer a short written scope (issue or PR description) before a large change. Spec before code.
 

@@ -129,7 +129,7 @@ Detailed admin SOPs are maintained privately by the operator ([sops.md](./sops.m
 
 ### Read first
 
-1. `docs/architecture/CLAUDE.md` — stack, constraints, privacy rules
+1. `AGENTS.md` (repo root) — stack, constraints, privacy rules
 2. `docs/architecture/DESIGN-SYSTEM.md` — UI before any component work
 3. `docs/architecture/DEPLOYMENT.md` — env vars and deploy steps
 4. `CONTRIBUTING.md` + `docs/reference/VIGIL-COMPLETE-GUIDE.md` — contribute + product overview

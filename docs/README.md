@@ -7,14 +7,14 @@
 This folder contains the architecture decisions, build process, and
 development prompts used to create Vigil. Sensitive ops material,
 counsel-open legal prompts, and full historical prompt archives are
-**not** published — see `architecture/CLAUDE.md` (Process rules →
-Public vs private docs). Contributors get the safe surface needed to
+**not** published — see root [`AGENTS.md`](../AGENTS.md) (process notes /
+public vs private docs). Contributors get the safe surface needed to
 deploy or improve the platform.
 
 ## Structure
 
-- `architecture/` — Tech stack, design system, deployment guide, and AI agent
-  instructions that govern ongoing development
+- `architecture/` — Design system, deployment guide, and launch pointers
+  (agent operating contract lives at repo-root `AGENTS.md`)
 - `reference/` — Complete operational guide for help content, SOPs, onboarding,
   API reference, and data model (derived from live codebase)
 - `build-process/` — The sequential build prompts used to construct Vigil
@@ -26,7 +26,8 @@ deploy or improve the platform.
 
 Living specs and operational guides:
 
-- `architecture/CLAUDE.md` — tech stack, constraints, and agent instructions
+- [`../AGENTS.md`](../AGENTS.md) — canonical agent operating contract (constraints, roles, stack)
+- `architecture/CLAUDE.md` — thin pointer to root `AGENTS.md` / `CLAUDE.md`
 - `architecture/DESIGN-SYSTEM.md` — UI tokens, typography, and component rules
 - `architecture/DEPLOYMENT.md` — Supabase, Vercel, DNS, Resend, and local dev setup
 - `architecture/CRISIS-ARCHETYPE-EXTENSION.md` — archetype / `region_scope` scaffolding (no FL/MX activation)
@@ -129,7 +130,8 @@ Sequential prompts/specs used to construct Vigil (historical record):
 - `72-navigation-ia-and-accessibility.md` — nav IA + WCAG AA
 - `59-gem-welove-organizations-seed.md` — GEM + We Love seed + LATAM approx marker
 - `73-gem-welove-execution-report.md` — prompt 59 execution / QC report
-- `AGENTS.md` — agent operating notes
+- `00-original-agents-build.md` / `00-original-claude-spec.md` — archived day-one build specs (historical only)
+- `83-agent-instruction-rewrite.md` — public stub for the operating-contract rewrite
 
 > Numbers `06`–`08` were planned (domain diagnostic, typo fix, partner outreach)
 > but those prompts were absorbed into other sessions and never archived as separate files.
@@ -139,7 +141,8 @@ Sequential prompts/specs used to construct Vigil (historical record):
 These files remain at the repository root as thin pointers for Cursor workspace rules
 and common doc links; canonical content lives under `docs/`:
 
-- `CLAUDE.md` → `architecture/CLAUDE.md`
+- `AGENTS.md` — canonical operating contract (lives at repo root)
+- `CLAUDE.md` — Claude Code operational notes; points at `AGENTS.md`
 - `DEPLOYMENT.md` → `architecture/DEPLOYMENT.md`
 
 Historical `CURSOR-*.md` convenience stubs were removed from the root after their
@@ -147,9 +150,9 @@ full content was archived under `docs/build-process/`.
 
 ## For Contributors
 
-Read `architecture/CLAUDE.md` first — it governs the tech stack and
-constraints for any new feature. Read `architecture/DESIGN-SYSTEM.md`
+Read root [`AGENTS.md`](../AGENTS.md) first — it governs hard constraints,
+roles, and stack for any new feature. Read `architecture/DESIGN-SYSTEM.md`
 before touching any UI. For deployment, see `architecture/DEPLOYMENT.md`.
-The `build-process/` files are historical record,
+The `build-process/` files are historical record (plus public stubs),
 useful for understanding why things were built the way they were, but
 are not living specs — check actual code as source of truth.
