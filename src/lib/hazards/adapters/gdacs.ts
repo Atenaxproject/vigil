@@ -1,4 +1,5 @@
 import type { HazardEvent, HazardType } from '@/lib/hazards/types'
+import { feedAbortSignal } from '@/lib/with-timeout'
 
 const GDACS_BASE = 'https://www.gdacs.org/gdacsapi/api/events'
 
@@ -31,6 +32,7 @@ export async function pollGdacsHazards(): Promise<HazardEvent[]> {
   try {
     const res = await fetch(`${GDACS_BASE}/geteventlist/SEARCH?eventtypes=EQ;TC;FL;VO;WF;DR`, {
       next: { revalidate: 600 },
+      signal: feedAbortSignal(),
     })
     if (!res.ok) return []
     const data = (await res.json()) as { features?: GdacsFeature[] }

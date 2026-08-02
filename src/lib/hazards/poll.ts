@@ -11,10 +11,7 @@ import { clusterHazardEvents } from '@/lib/hazards/dedupe'
 import { recordFeedHealth } from '@/lib/feed-health-server'
 import type { HazardEvent, HazardSource } from '@/lib/hazards/types'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { withTimeout } from '@/lib/with-timeout'
-
-/** Cap each feed so one hung upstream cannot burn the whole Vercel invocation. */
-const ADAPTER_TIMEOUT_MS = 15_000
+import { FEED_FETCH_TIMEOUT_MS, withTimeout } from '@/lib/with-timeout'
 
 const ADAPTERS: Array<{
   source: HazardSource
@@ -40,7 +37,7 @@ export async function pollAllHazards(): Promise<{
   const batches = await Promise.all(
     ADAPTERS.map(async (a) => {
       try {
-        const events = await withTimeout(a.poll(), ADAPTER_TIMEOUT_MS, a.source)
+        const events = await withTimeout(a.poll(), FEED_FETCH_TIMEOUT_MS, a.label)
         bySource[a.source] = events.length
         await recordFeedHealth({
           feedId: a.source,

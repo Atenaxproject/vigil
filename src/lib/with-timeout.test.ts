@@ -8,10 +8,13 @@ describe('withTimeout', () => {
 
   it('rejects when the timer wins', async () => {
     vi.useFakeTimers()
-    const pending = withTimeout(new Promise(() => undefined), 50, 'slow-feed')
-    const assertion = expect(pending).rejects.toThrow('slow-feed timed out after 50ms')
-    await vi.advanceTimersByTimeAsync(50)
-    await assertion
-    vi.useRealTimers()
+    try {
+      const pending = withTimeout(new Promise(() => undefined), 50, 'slow-feed')
+      const assertion = expect(pending).rejects.toThrow('slow-feed timed out after 50ms')
+      await vi.advanceTimersByTimeAsync(50)
+      await assertion
+    } finally {
+      vi.useRealTimers()
+    }
   })
 })

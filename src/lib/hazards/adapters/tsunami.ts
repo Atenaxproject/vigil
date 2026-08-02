@@ -1,4 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
+import { feedAbortSignal } from '@/lib/with-timeout'
 
 /**
  * NOAA NWS Tsunami Warning Center atom feed (public).
@@ -10,7 +11,10 @@ const TSUNAMI_ATOM =
 export async function pollTsunamiHazards(): Promise<HazardEvent[]> {
   const fetched_at = new Date().toISOString()
   try {
-    const res = await fetch(TSUNAMI_ATOM, { next: { revalidate: 300 } })
+    const res = await fetch(TSUNAMI_ATOM, {
+      next: { revalidate: 300 },
+      signal: feedAbortSignal(),
+    })
     if (!res.ok) return []
     const xml = await res.text()
     const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)]

@@ -1,4 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
+import { feedAbortSignal } from '@/lib/with-timeout'
 
 /**
  * Open-Meteo severe weather signals for watched cities — not a warning product.
@@ -27,7 +28,10 @@ export async function pollOpenMeteoHazards(): Promise<HazardEvent[]> {
         const url =
           `https://api.open-meteo.com/v1/forecast?latitude=${p.lat}&longitude=${p.lng}` +
           `&current=weather_code&timezone=auto`
-        const res = await fetch(url, { next: { revalidate: 1800 } })
+        const res = await fetch(url, {
+          next: { revalidate: 1800 },
+          signal: feedAbortSignal(),
+        })
         if (!res.ok) return
         const data = await res.json()
         const code = data.current?.weather_code as number

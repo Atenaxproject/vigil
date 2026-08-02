@@ -25,10 +25,11 @@ jobs:
           fi
           # Retry once on transient Vercel 504 / gateway blips.
           for attempt in 1 2; do
+            rm -f response.json
             status=$(curl -sS --max-time 290 -o response.json -w "%{http_code}" \
               -H "Authorization: Bearer $CRON_SECRET" \
               "https://vigil.youthewave.org/api/watch/scan" || echo "000")
-            cat response.json || true
+            if [ -f response.json ]; then cat response.json; else echo "(no response body)"; fi
             if [ "$status" = "200" ]; then
               exit 0
             fi
@@ -44,10 +45,11 @@ jobs:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
           for attempt in 1 2; do
+            rm -f hazards.json
             status=$(curl -sS --max-time 290 -o hazards.json -w "%{http_code}" \
               -H "Authorization: Bearer $CRON_SECRET" \
               "https://vigil.youthewave.org/api/cron/hazards" || echo "000")
-            cat hazards.json || true
+            if [ -f hazards.json ]; then cat hazards.json; else echo "(no response body)"; fi
             if [ "$status" = "200" ]; then
               exit 0
             fi
