@@ -1,6 +1,11 @@
-# Vigil Watch trigger — polling logic lives in /api/watch/scan and
-# /api/cron/hazards (in-repo, testable); this Action is only the scheduler.
+# Vigil Watch + hazard shard scheduler.
+# Polling logic lives in /api/watch/scan and /api/cron/hazards (in-repo, testable).
 # Requires CRON_SECRET repo secret matching the Vercel env var of the same name.
+#
+# Long-term resilience (prompt 85):
+# - watch-scan and hazard shards are independent jobs (one failure ≠ all red)
+# - hazards run as matrix shards (eq / weather / land) so one hung feed class
+#   cannot burn the full serverless budget
 name: vigil-watch
 
 on:
@@ -12,10 +17,11 @@ permissions:
   contents: read
 
 jobs:
-  scan:
+  watch-scan:
+    name: Operator watch scan
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger operator watch scan
+      - name: Trigger /api/watch/scan
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
@@ -23,7 +29,6 @@ jobs:
             echo "CRON_SECRET secret not set in GitHub — cannot authenticate"
             exit 1
           fi
-          # Retry once on transient Vercel 504 / gateway blips.
           for attempt in 1 2; do
             rm -f response.json
             status=$(curl -sS --max-time 290 -o response.json -w "%{http_code}" \
@@ -40,20 +45,33 @@ jobs:
             sleep 20
           done
 
-      - name: Trigger global hazard poll
+  hazards:
+    name: Hazard shard (${{ matrix.shard }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [eq, weather, land]
+    steps:
+      - name: Trigger /api/cron/hazards?shard=${{ matrix.shard }}
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SHARD: ${{ matrix.shard }}
         run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "CRON_SECRET secret not set in GitHub — cannot authenticate"
+            exit 1
+          fi
           for attempt in 1 2; do
             rm -f hazards.json
             status=$(curl -sS --max-time 290 -o hazards.json -w "%{http_code}" \
               -H "Authorization: Bearer $CRON_SECRET" \
-              "https://vigil.youthewave.org/api/cron/hazards" || echo "000")
+              "https://vigil.youthewave.org/api/cron/hazards?shard=${SHARD}" || echo "000")
             if [ -f hazards.json ]; then cat hazards.json; else echo "(no response body)"; fi
             if [ "$status" = "200" ]; then
               exit 0
             fi
-            echo "Hazards poll returned HTTP $status (attempt $attempt)"
+            echo "Hazards shard ${SHARD} returned HTTP $status (attempt $attempt)"
             if [ "$attempt" = "2" ]; then
               exit 1
             fi
