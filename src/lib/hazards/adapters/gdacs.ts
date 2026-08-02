@@ -1,5 +1,5 @@
 import type { HazardEvent, HazardType } from '@/lib/hazards/types'
-import { feedAbortSignal } from '@/lib/with-timeout'
+import { feedAbortSignal, isFeedAbortError } from '@/lib/with-timeout'
 
 const GDACS_BASE = 'https://www.gdacs.org/gdacsapi/api/events'
 
@@ -59,7 +59,8 @@ export async function pollGdacsHazards(): Promise<HazardEvent[]> {
       })
     }
     return out
-  } catch {
+  } catch (err) {
+    if (isFeedAbortError(err)) throw err
     return []
   }
 }

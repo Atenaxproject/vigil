@@ -1,5 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
-import { feedAbortSignal } from '@/lib/with-timeout'
+import { feedAbortSignal, isFeedAbortError } from '@/lib/with-timeout'
 
 /**
  * Open-Meteo severe weather signals for watched cities — not a warning product.
@@ -55,7 +55,8 @@ export async function pollOpenMeteoHazards(): Promise<HazardEvent[]> {
       })
     )
     return out
-  } catch {
+  } catch (err) {
+    if (isFeedAbortError(err)) throw err
     return out
   }
 }

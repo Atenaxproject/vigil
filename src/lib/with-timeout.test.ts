@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { withTimeout } from '@/lib/with-timeout'
+import { isFeedAbortError, withTimeout } from '@/lib/with-timeout'
 
 describe('withTimeout', () => {
   it('resolves when the promise wins the race', async () => {
@@ -16,5 +16,12 @@ describe('withTimeout', () => {
     } finally {
       vi.useRealTimers()
     }
+  })
+
+  it('detects abort/timeout errors for cooldown wiring', () => {
+    expect(isFeedAbortError(Object.assign(new Error('The operation was aborted'), { name: 'AbortError' }))).toBe(
+      true
+    )
+    expect(isFeedAbortError(new Error('HTTP 503'))).toBe(false)
   })
 })

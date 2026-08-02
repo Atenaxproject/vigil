@@ -6,6 +6,18 @@ export function feedAbortSignal(ms = FEED_FETCH_TIMEOUT_MS): AbortSignal {
   return AbortSignal.timeout(ms)
 }
 
+/** True for AbortSignal.timeout / fetch abort — must not be soft-swallowed as empty success. */
+export function isFeedAbortError(err: unknown): boolean {
+  if (!err || typeof err !== 'object') return false
+  const name = 'name' in err ? String((err as { name?: unknown }).name) : ''
+  const message = 'message' in err ? String((err as { message?: unknown }).message) : ''
+  return (
+    name === 'AbortError' ||
+    name === 'TimeoutError' ||
+    /aborted|timed?\s*out/i.test(message)
+  )
+}
+
 /**
  * Reject if `promise` does not settle within `ms`.
  * Prefer pairing with `feedAbortSignal()` on `fetch()` so the request is aborted,
