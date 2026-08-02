@@ -1,4 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
+import { feedAbortSignal } from '@/lib/with-timeout'
 
 /**
  * NASA FIRMS VIIRS 24h CSV — no API key for the public CSV endpoints.
@@ -15,7 +16,10 @@ const MIN_FRP = 50
 export async function pollFirmsHazards(): Promise<HazardEvent[]> {
   const fetched_at = new Date().toISOString()
   try {
-    const res = await fetch(FIRMS_VIIRS, { next: { revalidate: 3600 * 4 } })
+    const res = await fetch(FIRMS_VIIRS, {
+      next: { revalidate: 3600 * 4 },
+      signal: feedAbortSignal(),
+    })
     if (!res.ok) return []
     const text = await res.text()
     const lines = text.trim().split(/\r?\n/)

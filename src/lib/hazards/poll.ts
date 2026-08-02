@@ -11,6 +11,7 @@ import { clusterHazardEvents } from '@/lib/hazards/dedupe'
 import { recordFeedHealth } from '@/lib/feed-health-server'
 import type { HazardEvent, HazardSource } from '@/lib/hazards/types'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { FEED_FETCH_TIMEOUT_MS, withTimeout } from '@/lib/with-timeout'
 
 const ADAPTERS: Array<{
   source: HazardSource
@@ -36,7 +37,7 @@ export async function pollAllHazards(): Promise<{
   const batches = await Promise.all(
     ADAPTERS.map(async (a) => {
       try {
-        const events = await a.poll()
+        const events = await withTimeout(a.poll(), FEED_FETCH_TIMEOUT_MS, a.label)
         bySource[a.source] = events.length
         await recordFeedHealth({
           feedId: a.source,

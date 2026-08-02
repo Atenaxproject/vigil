@@ -6,6 +6,11 @@ import { Resend } from 'resend'
 import { CRISIS_CONFIG, getDataFeed } from '@/config/crisis.config'
 import { createAdminClient } from '@/lib/supabase/admin'
 import {
+  FEED_FETCH_TIMEOUT_MS,
+  feedAbortSignal,
+  withTimeout,
+} from '@/lib/with-timeout'
+import {
   WATCHED_REGIONS,
   isInBounds,
   type GdacsHazard,
@@ -55,7 +60,10 @@ function tropicalSeverity(storm: NhcStorm): TropicalSeverity | null {
 
 async function pollNhc(): Promise<Omit<WatchCrossing, 'isEscalation'>[]> {
   try {
-    const res = await fetch(NHC_CURRENT_STORMS, { cache: 'no-store' })
+    const res = await fetch(NHC_CURRENT_STORMS, {
+      cache: 'no-store',
+      signal: feedAbortSignal(),
+    })
     if (!res.ok) return []
     const data = (await res.json()) as { activeStorms?: NhcStorm[] }
     const out: Omit<WatchCrossing, 'isEscalation'>[] = []
@@ -99,7 +107,10 @@ interface UsgsFeature {
 
 async function pollUsgs(): Promise<Omit<WatchCrossing, 'isEscalation'>[]> {
   try {
-    const res = await fetch(USGS_WEEK_FEED, { cache: 'no-store' })
+    const res = await fetch(USGS_WEEK_FEED, {
+      cache: 'no-store',
+      signal: feedAbortSignal(),
+    })
     if (!res.ok) return []
     const data = (await res.json()) as { features?: UsgsFeature[] }
     const out: Omit<WatchCrossing, 'isEscalation'>[] = []
@@ -151,6 +162,7 @@ async function pollGdacs(): Promise<Omit<WatchCrossing, 'isEscalation'>[]> {
     const base = getDataFeed('gdacs')?.url ?? 'https://www.gdacs.org/gdacsapi/api/events'
     const res = await fetch(`${base}/geteventlist/SEARCH?eventtypes=EQ;TC;FL;VO;WF;DR`, {
       cache: 'no-store',
+      signal: feedAbortSignal(),
     })
     if (!res.ok) return []
     const data = (await res.json()) as { features?: GdacsFeature[] }
@@ -211,7 +223,20 @@ export interface ScanResult {
 }
 
 export async function runWatchScan(): Promise<ScanResult> {
-  const [nhc, usgs, gdacs] = await Promise.all([pollNhc(), pollUsgs(), pollGdacs()])
+  const [nhc, usgs, gdacs] = await Promise.all([
+    withTimeout(pollNhc(), FEED_FETCH_TIMEOUT_MS, 'NHC CurrentStorms').catch((err) => {
+      console.error('[vigil-watch] NHC timed out/failed:', err)
+      return [] as Omit<WatchCrossing, 'isEscalation'>[]
+    }),
+    withTimeout(pollUsgs(), FEED_FETCH_TIMEOUT_MS, 'USGS week feed').catch((err) => {
+      console.error('[vigil-watch] USGS timed out/failed:', err)
+      return [] as Omit<WatchCrossing, 'isEscalation'>[]
+    }),
+    withTimeout(pollGdacs(), FEED_FETCH_TIMEOUT_MS, 'GDACS events').catch((err) => {
+      console.error('[vigil-watch] GDACS timed out/failed:', err)
+      return [] as Omit<WatchCrossing, 'isEscalation'>[]
+    }),
+  ])
   const candidates = [...nhc, ...usgs, ...gdacs]
 
   const supabase = createAdminClient()

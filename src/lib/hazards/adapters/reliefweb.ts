@@ -1,4 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
+import { feedAbortSignal } from '@/lib/with-timeout'
 import { RELIEFWEB_ENABLED, reliefwebUrl } from '@/lib/reliefweb'
 
 /**
@@ -17,7 +18,10 @@ export async function pollReliefwebHazards(): Promise<HazardEvent[]> {
       'limit=15&sort[]=date.created:desc' +
         '&fields[include][]=name&fields[include][]=date&fields[include][]=url&fields[include][]=country&fields[include][]=status'
     )
-    const res = await fetch(url, { next: { revalidate: 3600 } })
+    const res = await fetch(url, {
+      next: { revalidate: 3600 },
+      signal: feedAbortSignal(),
+    })
     if (!res.ok) return []
     const data = (await res.json()) as {
       data?: Array<{
