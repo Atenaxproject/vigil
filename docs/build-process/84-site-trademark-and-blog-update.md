@@ -1,7 +1,7 @@
 # 84 — Site Update: Trademark Notation, Footer Legal Links, New Blog Post
 
 **Status:** Complete (2026-07-28) — shipped on the **youthewave.org** marketing site (separate repo from Vigil)  
-**Public stub.** Full prompt archived privately under `docs/evaluations/`.  
+**Public stub.** The full execution prompt is retained in the operator’s private archive (`docs/evaluations/`, gitignored) and is **not published**.  
 **Numbering note:** This draft was numbered 84 for the org-site workstream. Vigil’s app prompt 84 is [`84-vigil-watch-timeout-hardening.md`](./84-vigil-watch-timeout-hardening.md).
 
 ## Summary
@@ -19,5 +19,3 @@ Content-only update on youthewave.org: first-use ™ on YouTheWave / Vigil, foot
 - Content/markdown (and minimal footer component) only — no Vigil app `src/`, schema, or deps
 - Do not author new Terms/Privacy legal copy; interim Trademark link to the Vigil repo is acceptable
 - First prominent ™ only — not every repetition, not nav/footer copyright
-
-Full prompt: `docs/evaluations/archive-from-public/docs/build-process/84-site-trademark-and-blog-update.md`.
