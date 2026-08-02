@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-08-02 (vigil-watch long-term resilience)
+
+### Fix
+- **Hazard poll sharding + dual scheduler** (prompt 85) — `/api/cron/hazards?shard=eq|weather|land` splits adapters across independent invocations (USGS+GDACS stay together for EQ clustering); 20-minute cooldown after feed timeout via `feed_health`; GitHub Action splits `watch-scan` vs matrixed hazard shards (`fail-fast: false`); Vercel Cron backups at :15/:45. Restore tag `restore/pre-vigil-watch-resilience-20260802`.
+
 ## [Unreleased] — 2026-08-02 (vigil-watch timeout hardening)
 
 ### Fix

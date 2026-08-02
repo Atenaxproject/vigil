@@ -9,6 +9,11 @@ import { pollReliefwebHazards } from '@/lib/hazards/adapters/reliefweb'
 import { pollOpenMeteoHazards } from '@/lib/hazards/adapters/open-meteo'
 import { clusterHazardEvents } from '@/lib/hazards/dedupe'
 import { recordFeedHealth } from '@/lib/feed-health-server'
+import {
+  type HazardShardId,
+  shouldCooldownFeed,
+  sourcesForShard,
+} from '@/lib/hazards/shards'
 import type { HazardEvent, HazardSource } from '@/lib/hazards/types'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { FEED_FETCH_TIMEOUT_MS, withTimeout } from '@/lib/with-timeout'
@@ -29,13 +34,53 @@ const ADAPTERS: Array<{
   { source: 'open-meteo', label: 'Open-Meteo weather', poll: pollOpenMeteoHazards },
 ]
 
-export async function pollAllHazards(): Promise<{
+async function loadTimeoutCooldowns(sources: HazardSource[]): Promise<Set<HazardSource>> {
+  const skipped = new Set<HazardSource>()
+  if (sources.length === 0) return skipped
+  try {
+    const supabase = createAdminClient()
+    const { data, error } = await supabase
+      .from('feed_health')
+      .select('feed_id, last_error, last_attempt_at')
+      .in('feed_id', sources)
+    if (error || !data) return skipped
+    for (const row of data) {
+      if (
+        shouldCooldownFeed({
+          lastError: row.last_error,
+          lastAttemptAt: row.last_attempt_at,
+        })
+      ) {
+        skipped.add(row.feed_id as HazardSource)
+      }
+    }
+  } catch {
+    /* cooldown is best-effort — never block the poll */
+  }
+  return skipped
+}
+
+export async function pollAllHazards(options?: {
+  sources?: HazardSource[]
+}): Promise<{
   events: HazardEvent[]
   bySource: Record<string, number>
+  skipped: string[]
 }> {
+  const allow = options?.sources ? new Set(options.sources) : null
+  const selected = allow ? ADAPTERS.filter((a) => allow.has(a.source)) : ADAPTERS
+  const cooldown = await loadTimeoutCooldowns(selected.map((a) => a.source))
+  const skipped: string[] = []
   const bySource: Record<string, number> = {}
+
   const batches = await Promise.all(
-    ADAPTERS.map(async (a) => {
+    selected.map(async (a) => {
+      if (cooldown.has(a.source)) {
+        // Do not rewrite feed_health here — that would extend the cooldown window.
+        skipped.push(a.source)
+        bySource[a.source] = 0
+        return [] as HazardEvent[]
+      }
       try {
         const events = await withTimeout(a.poll(), FEED_FETCH_TIMEOUT_MS, a.label)
         bySource[a.source] = events.length
@@ -60,7 +105,7 @@ export async function pollAllHazards(): Promise<{
     })
   )
   const events = clusterHazardEvents(batches.flat())
-  return { events, bySource }
+  return { events, bySource, skipped }
 }
 
 export async function persistHazardEvents(events: HazardEvent[]): Promise<number> {
@@ -91,21 +136,29 @@ export async function persistHazardEvents(events: HazardEvent[]): Promise<number
     return 0
   }
 
-  // Archive resolved: mark rows not seen in this poll as inactive if older than 90d handled separately
   return rows.length
 }
 
-export async function runHazardPoll(): Promise<{
+export async function runHazardPoll(options?: {
+  shard?: HazardShardId
+}): Promise<{
   polled: Record<string, number>
   upserted: number
+  skipped: string[]
+  shard: HazardShardId | 'all'
 }> {
-  const { events, bySource } = await pollAllHazards()
+  const sources = options?.shard ? sourcesForShard(options.shard) : undefined
+  const { events, bySource, skipped } = await pollAllHazards({ sources })
   const upserted = await persistHazardEvents(events)
-  return { polled: bySource, upserted }
+  return {
+    polled: bySource,
+    upserted,
+    skipped,
+    shard: options?.shard ?? 'all',
+  }
 }
 
 export async function isMonitorPublicEnabled(): Promise<boolean> {
-  // Env kill switch (no-deploy if flipped in Vercel)
   if (process.env.VIGIL_MONITOR_PUBLIC_ENABLED === 'false') return false
   try {
     const { createClient } = await import('@/lib/supabase/server')

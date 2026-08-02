@@ -1,5 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
-import { feedAbortSignal } from '@/lib/with-timeout'
+import { feedAbortSignal, isFeedAbortError } from '@/lib/with-timeout'
 
 const USGS_SIG =
   'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
@@ -39,7 +39,8 @@ export async function pollUsgsHazards(): Promise<HazardEvent[]> {
           fetched_at,
         }
       })
-  } catch {
+  } catch (err) {
+    if (isFeedAbortError(err)) throw err
     return []
   }
 }

@@ -1,5 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
-import { feedAbortSignal } from '@/lib/with-timeout'
+import { feedAbortSignal, isFeedAbortError } from '@/lib/with-timeout'
 
 /**
  * NOAA NWS Tsunami Warning Center atom feed (public).
@@ -43,7 +43,8 @@ export async function pollTsunamiHazards(): Promise<HazardEvent[]> {
       })
     }
     return out
-  } catch {
+  } catch (err) {
+    if (isFeedAbortError(err)) throw err
     return []
   }
 }

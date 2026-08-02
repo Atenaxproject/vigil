@@ -1,5 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
-import { feedAbortSignal } from '@/lib/with-timeout'
+import { feedAbortSignal, isFeedAbortError } from '@/lib/with-timeout'
 import { RELIEFWEB_ENABLED, reliefwebUrl } from '@/lib/reliefweb'
 
 /**
@@ -50,7 +50,8 @@ export async function pollReliefwebHazards(): Promise<HazardEvent[]> {
       source_url: item.fields.url ?? 'https://reliefweb.int',
       fetched_at,
     }))
-  } catch {
+  } catch (err) {
+    if (isFeedAbortError(err)) throw err
     return []
   }
 }

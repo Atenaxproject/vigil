@@ -1,5 +1,6 @@
 import { getWaterGaugesBySites } from '@/lib/feeds/usgs-water'
 import type { HazardEvent } from '@/lib/hazards/types'
+import { isFeedAbortError } from '@/lib/with-timeout'
 
 /** Priority FL flood gauges — height only; severity = gauge ft (agency observation). */
 const FL_SITES = [
@@ -32,7 +33,8 @@ export async function pollUsgsWaterHazards(): Promise<HazardEvent[]> {
         source_url: `https://waterdata.usgs.gov/monitoring-location/${g.siteCode}/`,
         fetched_at,
       }))
-  } catch {
+  } catch (err) {
+    if (isFeedAbortError(err)) throw err
     return []
   }
 }

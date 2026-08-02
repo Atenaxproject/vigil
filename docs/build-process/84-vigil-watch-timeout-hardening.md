@@ -1,6 +1,6 @@
 # 84 — Vigil Watch timeout hardening
 
-**Status:** In progress (2026-08-02) — production `vigil-watch` schedule was failing with Vercel 504s  
+**Status:** Complete (2026-08-02) — shipped in #42; follow-up structural work in prompt 85  
 **Public stub.** The full execution prompt is retained in the operator’s private archive (`docs/evaluations/`, gitignored) and is **not published**.
 
 ## Summary

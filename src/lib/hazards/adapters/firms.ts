@@ -1,5 +1,5 @@
 import type { HazardEvent } from '@/lib/hazards/types'
-import { feedAbortSignal } from '@/lib/with-timeout'
+import { feedAbortSignal, isFeedAbortError } from '@/lib/with-timeout'
 
 /**
  * NASA FIRMS VIIRS 24h CSV — no API key for the public CSV endpoints.
@@ -64,7 +64,8 @@ export async function pollFirmsHazards(): Promise<HazardEvent[]> {
       fetched_at,
       meta: { frp: r.frp, confidence: r.conf, rank: idx + 1 },
     }))
-  } catch {
+  } catch (err) {
+    if (isFeedAbortError(err)) throw err
     return []
   }
 }
