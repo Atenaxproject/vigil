@@ -3,7 +3,8 @@ import { runWatchScan } from '@/lib/watch'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 
 export const dynamic = 'force-dynamic'
-export const maxDuration = 60
+// NHC + USGS + GDACS + optional Resend digest; allow headroom when upstreams are slow.
+export const maxDuration = 300
 
 /**
  * Vigil Watch scan — operator early-warning monitor.

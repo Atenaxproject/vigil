@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-08-02 (vigil-watch timeout hardening)
+
+### Fix
+- **vigil-watch / hazard cron 504s** — add 15s per-feed timeouts so one hung upstream cannot burn the whole invocation; raise `maxDuration` on `/api/watch/scan` and `/api/cron/hazards` to 300s; GitHub Action retries once on non-200 with curl `--max-time 290`. Restore tag `restore/pre-vigil-watch-timeout-20260802`.
+
 ## [Unreleased] — 2026-08-01 (security: CodeQL #3 + Dependabot)
 
 ### Security

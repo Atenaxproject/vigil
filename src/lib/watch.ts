@@ -5,6 +5,9 @@
 import { Resend } from 'resend'
 import { CRISIS_CONFIG, getDataFeed } from '@/config/crisis.config'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { withTimeout } from '@/lib/with-timeout'
+
+const WATCH_FEED_TIMEOUT_MS = 15_000
 import {
   WATCHED_REGIONS,
   isInBounds,
@@ -211,7 +214,20 @@ export interface ScanResult {
 }
 
 export async function runWatchScan(): Promise<ScanResult> {
-  const [nhc, usgs, gdacs] = await Promise.all([pollNhc(), pollUsgs(), pollGdacs()])
+  const [nhc, usgs, gdacs] = await Promise.all([
+    withTimeout(pollNhc(), WATCH_FEED_TIMEOUT_MS, 'nhc').catch((err) => {
+      console.error('[vigil-watch] NHC timed out/failed:', err)
+      return [] as Omit<WatchCrossing, 'isEscalation'>[]
+    }),
+    withTimeout(pollUsgs(), WATCH_FEED_TIMEOUT_MS, 'usgs').catch((err) => {
+      console.error('[vigil-watch] USGS timed out/failed:', err)
+      return [] as Omit<WatchCrossing, 'isEscalation'>[]
+    }),
+    withTimeout(pollGdacs(), WATCH_FEED_TIMEOUT_MS, 'gdacs').catch((err) => {
+      console.error('[vigil-watch] GDACS timed out/failed:', err)
+      return [] as Omit<WatchCrossing, 'isEscalation'>[]
+    }),
+  ])
   const candidates = [...nhc, ...usgs, ...gdacs]
 
   const supabase = createAdminClient()

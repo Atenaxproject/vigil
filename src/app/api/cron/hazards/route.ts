@@ -3,7 +3,8 @@ import { runHazardPoll } from '@/lib/hazards/poll'
 import { isSupabaseConfigured } from '@/lib/supabase/env'
 
 export const dynamic = 'force-dynamic'
-export const maxDuration = 60
+// Nine parallel feed adapters + upsert; allow headroom when upstreams are slow.
+export const maxDuration = 300
 
 function isAuthorizedCron(request: NextRequest): boolean {
   const secret = process.env.CRON_SECRET
