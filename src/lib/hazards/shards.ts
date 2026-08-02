@@ -21,7 +21,7 @@ export const HAZARD_SHARD_IDS = Object.keys(HAZARD_SHARDS) as HazardShardId[]
 export const FEED_TIMEOUT_COOLDOWN_MS = 20 * 60 * 1000
 
 export function isHazardShardId(value: string | null | undefined): value is HazardShardId {
-  return !!value && value in HAZARD_SHARDS
+  return !!value && Object.prototype.hasOwnProperty.call(HAZARD_SHARDS, value)
 }
 
 export function sourcesForShard(shard: HazardShardId): HazardSource[] {

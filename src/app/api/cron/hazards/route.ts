@@ -28,7 +28,8 @@ export async function GET(request: NextRequest) {
   }
 
   const shardParam = request.nextUrl.searchParams.get('shard')
-  if (shardParam && !isHazardShardId(shardParam)) {
+  const shard = isHazardShardId(shardParam) ? shardParam : null
+  if (shardParam && !shard) {
     return NextResponse.json(
       { error: 'invalid_shard', allowed: ['eq', 'weather', 'land'] },
       { status: 400 }
@@ -36,9 +37,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const result = await runHazardPoll(
-      shardParam && isHazardShardId(shardParam) ? { shard: shardParam } : undefined
-    )
+    const result = await runHazardPoll(shard ? { shard } : undefined)
     return NextResponse.json({ ok: true, ...result })
   } catch (error) {
     console.error('[hazards] cron failed:', error)
