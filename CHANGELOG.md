@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-08-06 (Vercel observability instrumentation)
+
+### Ops
+- **Vercel Analytics + Speed Insights** — add first-party Vercel Web Analytics and Speed Insights instrumentation to the root App Router layout so production and preview deployments can report traffic and Core Web Vitals after project features are enabled. Restore tag `restore/pre-vercel-observability-20260806`.
+
 ## [Unreleased] — 2026-08-02 (vigil-watch long-term resilience)
 
 ### Fix

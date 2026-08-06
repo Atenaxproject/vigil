@@ -5,6 +5,8 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { AlertTriangle } from 'lucide-react'
 import { Toaster } from 'react-hot-toast'
 import { EmergencyBanner } from '@/components/layout/EmergencyBanner'
@@ -227,6 +229,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <FeedbackWidget />
           <VigilAssistant />
           <IOSInstallBanner />
+          <Analytics />
+          <SpeedInsights />
           </ViewModeProvider>
           </AccessibilityProvider>
         </NextIntlClientProvider>
