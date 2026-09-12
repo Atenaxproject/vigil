@@ -10,6 +10,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 ### Fix
 - **`/organizaciones` empty directory** — anon PostgREST SELECT on `organizations` 401'd with `permission denied for function is_vigil_admin` (admin RLS policy evaluated without EXECUTE). Migration `025` re-grants EXECUTE to `anon`/`authenticated`. Public listing no longer selects `phone`/`email`/`whatsapp`. Restore tag `restore/pre-orgs-anon-rls-20260912`.
 
+## [Unreleased] — 2026-09-12 (CARTO basemap key)
+
+### Fix
+- **CARTO map tiles** — append `NEXT_PUBLIC_CARTO_API_KEY` as `?key=` on the shared Positron `BASEMAP_URL` so CrisisMap / PinDropMap tiles are no longer stamped “API KEY REQUIRED”. Value lives in Vercel / `.env.local` only. Restore tag `restore/pre-carto-basemap-key-20260912`.
+
 ## [Unreleased] — 2026-09-12 (production error fixes)
 
 ### Fix
