@@ -81,13 +81,16 @@ export async function getApprovedOrganizations(
     const { data, error } = await supabase
       .from('organizations')
       .select(
-        'id, name, type, country, description_es, description_en, website, phone, email, whatsapp, donation_link, donation_instructions, lat, lng, location_label, verified, active, region_scope'
+        'id, name, type, country, description_es, description_en, website, donation_link, donation_instructions, lat, lng, location_label, verified, active, region_scope'
       )
       .eq('approved_by_admin', true)
       .eq('active', true)
       .eq('region_scope', regionScope)
 
-    if (error) return []
+    if (error) {
+      console.error('getApprovedOrganizations', error.message)
+      return []
+    }
     return sortOrganizations((data ?? []) as Organization[])
   } catch {
     return []
@@ -107,7 +110,10 @@ export async function getDonationOrganizations(): Promise<Organization[]> {
       .or('type.eq.donation,donation_link.not.is.null')
       .order('name')
 
-    if (error) return []
+    if (error) {
+      console.error('getDonationOrganizations', error.message)
+      return []
+    }
     return (data ?? []) as Organization[]
   } catch {
     return []
