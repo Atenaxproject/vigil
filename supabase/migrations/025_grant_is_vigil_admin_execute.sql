@@ -1,0 +1,21 @@
+-- ============================================================
+-- VIGIL — Re-grant EXECUTE on is_vigil_admin() to anon/authenticated
+--
+-- Proven 2026-09-12: GET /organizaciones is empty while 25 approved
+-- Venezuela orgs exist. Anon PostgREST SELECT on public.organizations
+-- returns 401: permission denied for function is_vigil_admin.
+--
+-- organizations still uses table-level RLS (no public_* view).
+-- admin_select_all_orgs calls is_vigil_admin(). Postgres evaluates
+-- every SELECT policy; missing EXECUTE fails the whole query.
+-- getApprovedOrganizations() then returns [] (silent catch).
+--
+-- 024 already contains this GRANT, but production supabase_migrations
+-- stops at minors_protection_notes_reduction (019-era). This file
+-- re-asserts only the GRANT — it does not apply 020–024.
+--
+-- The function is SECURITY DEFINER and returns false for non-admins.
+-- Restore tag: restore/pre-orgs-anon-rls-20260912
+-- ============================================================
+
+GRANT EXECUTE ON FUNCTION public.is_vigil_admin() TO anon, authenticated;
