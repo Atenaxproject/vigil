@@ -12,6 +12,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 - The URL is a new `evacuationZonesUrl` field on `florida.config.ts`, threaded through as an explicit prop (`CrisisMap` → `MapLayers`) rather than read from the generic hurricane/flood archetype flag — `mexico-pacific.config.ts` shares that archetype and the same `evacuation_lookup_link` unique feature but has no equivalent official tool, so gating on the archetype alone would have sent a future Mexico deployment to Florida's lookup. Caught in review (Codex + Copilot) before merge.
 - Locale keys (`map.layers.evacuationZones*`) added to **all 8** locale files, not just EN/ES — `scripts/check-i18n-parity.mjs` runs in `prebuild` and requires every locale to match `es.json` key-for-key, so adding keys to only two locales would have broken every production build. Also caught in review before merge.
 
+## [Unreleased] — 2026-09-12 (Florida feed adapter tests)
+
+### Test
+- **Feed adapter unit coverage** — `nws.ts` / `nhc.ts` / `usgs-water.ts` had recorded fixtures (prompt 52) but nothing exercised the adapters' own parsing against them. Added `src/lib/feeds/{nws,nhc,usgs-water}.test.ts`: mock `fetch` with the recorded and synthetic fixtures, assert on the typed output shape, and cover graceful degradation (non-OK response, rejected fetch) per adapter. Closes prompt 52's "unit-tested against recorded fixtures" acceptance criterion. No production code changed.
+
 ## [Unreleased] — 2026-09-12 (CARTO key at runtime)
 
 ### Fix
