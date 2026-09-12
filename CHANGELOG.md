@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (CARTO key build inline)
+
+### Fix
+- **Homepage map still watermarked after env set** — Next.js does not replace `process.env.NEXT_PUBLIC_*` in function default parameters, so `BASEMAP_URL` shipped without `?key=` even when `NEXT_PUBLIC_CARTO_API_KEY` was on Vercel Production. Read the env at module scope and pass it through `next.config.js` `env`. Restore tag `restore/pre-carto-inline-20260912`.
+
 ## [Unreleased] — 2026-09-12 (organizations directory)
 
 ### Fix
