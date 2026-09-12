@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (Haitian Creole locale prep)
+
+### Chore
+- **Florida `ht` locale — script + activation-gate wiring, no content generated.** `scripts/generate-translations.mjs` didn't know about Haitian Creole; added it as an explicitly-requested-only target (`node scripts/generate-translations.mjs ht`) so it never gets swept into a routine no-args Venezuela locale refresh. Generation itself needs `ANTHROPIC_API_KEY` (not available in this environment) and, per the Florida spec, native-speaker review before it ships — neither happened here. Also documented two latent gaps in `TODO-BEFORE-LAUNCH.md`: `LanguageSwitcher.tsx`'s `localeLabels` map needs an `ht` entry when Florida's `supportedLangs` gets wired in, and `ht.json` must exist before `supportedLangs` ever includes `'ht'` or `src/i18n/request.ts`'s dynamic locale import 404s the request.
+
 ## [Unreleased] — 2026-09-12 (CARTO key at runtime)
 
 ### Fix

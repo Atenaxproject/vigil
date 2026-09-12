@@ -12,8 +12,16 @@ overnight build.
       over. Own reasoned stance, human-reviewed.
 - [ ] FDACS registration check (Florida charitable-solicitation rules) before
       any donation-adjacent feature is exposed
-- [ ] Haitian Creole (ht) locale: generate + native-speaker review of ALL
-      safety-critical strings — never ship machine-only
+- [ ] Haitian Creole (ht) locale: run `node scripts/generate-translations.mjs
+      ht` (needs `ANTHROPIC_API_KEY`), then native-speaker review of ALL
+      strings before it ships — never ship machine-only
+- [ ] `LanguageSwitcher.tsx`'s `localeLabels` map is hardcoded to the current
+      `SupportedLang` union (VE's 8 langs) — add an `ht` entry when Florida's
+      `supportedLangs` gets wired into `crisis.config.ts`, or the switcher
+      renders a blank option label for it
+- [ ] `src/i18n/request.ts` dynamically imports `./locales/${locale}.json` —
+      confirm `ht.json` exists and is reviewed BEFORE `supportedLangs` ever
+      includes `'ht'`, or any `ht` cookie value 404s the whole request
 - [ ] New Supabase project + all migrations applied + RLS verified
 - [ ] Vercel project + DNS (subdomain TBD) — gray-cloud Cloudflare, same as VE
 - [ ] Emergency numbers verified (911 + county EM contacts per covered county)
