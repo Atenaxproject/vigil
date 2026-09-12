@@ -265,7 +265,10 @@
       "missingPersonsApprox": "Approximate location (privacy)",
       "missingPersonsView": "View profile",
       "missingPersonsMunicipioApprox": "大致位置——市镇级别",
-      "missingPersonsEstadoApprox": "大致位置——州级别"
+      "missingPersonsEstadoApprox": "大致位置——州级别",
+      "evacuationZones": "疏散区域",
+      "evacuationZonesLink": "Know Your Zone（官方查询）",
+      "evacuationZonesSource": "来源：floridadisaster.org"
     },
     "magnitude": "震级",
     "depth": "深度",

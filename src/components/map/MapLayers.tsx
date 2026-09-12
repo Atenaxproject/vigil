@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useId, useState } from 'react'
-import { Layers, X } from 'lucide-react'
+import { ExternalLink, Layers, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export interface MapLayerState {
@@ -19,6 +19,13 @@ export interface MapLayerState {
 interface MapLayersProps {
   layers: MapLayerState
   onChange: (layers: MapLayerState) => void
+  /** Deployment-specific official evacuation-zone lookup (e.g. Florida's
+   *  Know Your Zone). Undefined renders nothing — this is NOT gated by the
+   *  generic hurricane/flood archetype flag alone, because more than one
+   *  deployment can share that archetype without sharing an official zone
+   *  tool (Mexico Pacific has no equivalent). Vigil never rebuilds or
+   *  mirrors county zone data — link-out only. */
+  evacuationZonesUrl?: string
 }
 
 const LAYERS_STORAGE_KEY = 'vigil-map-layers-open'
@@ -30,7 +37,7 @@ function readDesktopLayersOpen(): boolean {
   return stored === 'true'
 }
 
-export function MapLayers({ layers, onChange }: MapLayersProps) {
+export function MapLayers({ layers, onChange, evacuationZonesUrl }: MapLayersProps) {
   const t = useTranslations('map.layers')
   const panelId = useId()
   const [desktopOpen, setDesktopOpen] = useState(true)
@@ -71,6 +78,22 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
     </label>
   ))
 
+  const evacuationZonesLink = evacuationZonesUrl && (
+    <div className="mt-1 border-t border-slate-200 px-2 pt-2">
+      <p className="px-2 text-[13px] font-medium text-slate-700">{t('evacuationZones')}</p>
+      <a
+        href={evacuationZonesUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex min-h-[36px] items-center gap-2 px-2 text-[13px] text-vigil-blue underline"
+      >
+        <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+        {t('evacuationZonesLink')}
+      </a>
+      <p className="px-2 pb-1 text-[11px] text-slate-500">{t('evacuationZonesSource')}</p>
+    </div>
+  )
+
   return (
     <>
       {/* Desktop: floating panel when open */}
@@ -91,6 +114,7 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
             </button>
           </div>
           <div className="p-2">{checkboxes}</div>
+          {evacuationZonesLink}
         </div>
       )}
 
@@ -148,6 +172,7 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
               </button>
             </div>
             <div className="px-2 pb-4">{checkboxes}</div>
+            {evacuationZonesLink}
           </div>
         </div>
       )}
