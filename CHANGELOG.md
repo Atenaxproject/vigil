@@ -10,6 +10,12 @@ All notable changes to Vigil are documented here. Format loosely follows
 ### Fix
 - **CARTO map tiles** — append `NEXT_PUBLIC_CARTO_API_KEY` as `?key=` on the shared Positron `BASEMAP_URL` so CrisisMap / PinDropMap tiles are no longer stamped “API KEY REQUIRED”. Value lives in Vercel / `.env.local` only. Restore tag `restore/pre-carto-basemap-key-20260912`.
 
+## [Unreleased] — 2026-09-12 (production error fixes)
+
+### Fix
+- **Minor-protection translations** — restore the legal-basis and legal-advice messages for all supported locales, eliminating `MISSING_MESSAGE` errors on `/proteccion-de-menores`.
+- **RSS URL parsing** — fetch configured feeds with the WHATWG Fetch API before parsing XML, avoiding deprecated Node `url.parse()` usage from the RSS fetch path.
+
 ## [Unreleased] — 2026-08-02 (vigil-watch long-term resilience)
 
 ### Fix
