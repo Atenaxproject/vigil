@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (lockfile sync)
+
+### Chore
+- **`npm ci` / Dependabot** — pin `@swc/helpers@0.5.23` so the `next-intl` / `@swc/core` peer stays in the lockfile (PRs #54 and #55 fail `npm ci` when that optional entry is dropped). Restore tag `restore/pre-lockfile-sync-20260912`.
+
 ## [Unreleased] — 2026-09-12 (CARTO key at runtime)
 
 ### Fix
