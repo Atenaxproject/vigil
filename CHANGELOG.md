@@ -11,6 +11,26 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **Aftershocks (USGS) layer/toggle no longer hardcoded to `!isDiaspora`** — any future non-earthquake, non-diaspora deployment (Florida, Mexico Pacific) would have shown a permanently-empty "Réplicas (USGS)" map layer and checkbox. Now gated behind `disasterArchetypes.includes('earthquake')` as well. No behavior change for Venezuela (`disasterArchetypes: ['earthquake']`).
 - **`LanguageSwitcher.tsx`'s `localeLabels` was `Record<SupportedLang, string>`** — an exact-match Record, so any deployment whose `supportedLangs` differs from Venezuela's 8 (fewer languages, or `'ht'` added) failed `tsc` at compile time. Changed to `Record<string, string>` with an uppercased-code fallback. Also resolves the Haitian Creole compile-time gate noted in `TODO-BEFORE-LAUNCH.md` / PR #62. No behavior change for Venezuela.
 
+## [Unreleased] — 2026-09-12 (Florida evacuation-zones link-out)
+
+### Add
+- **Evacuation-zones link-out on the map layers panel** — `florida.config.ts` declared `evacuation_lookup_link` as a unique feature since prompt 52, but nothing implemented it. Adds a link-out row to `MapLayers.tsx` (desktop panel + mobile sheet) pointing to the official Know Your Zone lookup. Per spec, Vigil never rebuilds or mirrors county evacuation-zone data — link out only. Inert for Venezuela (`disasterArchetypes: ['earthquake']`), so no behavior change there.
+- The URL is a new `evacuationZonesUrl` field on `florida.config.ts`, threaded through as an explicit prop (`CrisisMap` → `MapLayers`) rather than read from the generic hurricane/flood archetype flag — `mexico-pacific.config.ts` shares that archetype and the same `evacuation_lookup_link` unique feature but has no equivalent official tool, so gating on the archetype alone would have sent a future Mexico deployment to Florida's lookup. Caught in review (Codex + Copilot) before merge.
+- Locale keys (`map.layers.evacuationZones*`) added to **all 8** locale files, not just EN/ES — `scripts/check-i18n-parity.mjs` runs in `prebuild` and requires every locale to match `es.json` key-for-key, so adding keys to only two locales would have broken every production build. Also caught in review before merge.
+
+## [Unreleased] — 2026-09-12 (Haitian Creole locale prep)
+
+### Add
+- **`src/lib/date-locale.ts` now maps `ht`** to date-fns's native Haitian Creole locale. Previously `getDateFnsLocale('ht')` fell back to Spanish, so relative timestamps (missing-person cards, the wall, exchange, informacion) would have rendered in Spanish on a Haitian Creole UI. Found in review (Copilot); fixed ahead of Florida activation rather than left as a gate.
+
+### Chore
+- **Florida `ht` locale — script + activation-gate wiring, no content generated.** `scripts/generate-translations.mjs` didn't know about Haitian Creole; added it as an explicitly-requested-only target (`node scripts/generate-translations.mjs ht`) so it never gets swept into a routine no-args Venezuela locale refresh. The script now also warns loudly before generating any deployment-specific locale: `en.json`/`es.json` are the live Venezuela strings (Caracas examples, earthquake copy, Venezuelan-government privacy wording), so translating them wholesale produces a linguistically fine but operationally wrong Florida locale (found in review — Codex) — source content needs adapting first. Generation itself needs `ANTHROPIC_API_KEY` (not available in this environment) and native-speaker review before it ships — neither happened here.
+- Corrected `TODO-BEFORE-LAUNCH.md`: `LanguageSwitcher.tsx`'s `localeLabels` gap is a **compile-time** `tsc` failure the moment Florida's `supportedLangs` (which includes `'ht'`) gets wired into `crisis.config.ts` — not a runtime blank-label bug as originally written (found in review — Copilot). `ht.json` must still exist and be reviewed before `supportedLangs` ever includes `'ht'`, or `src/i18n/request.ts`'s dynamic locale import 404s the request.
+## [Unreleased] — 2026-09-12 (Florida feed adapter tests)
+
+### Test
+- **Feed adapter unit coverage** — `nws.ts` / `nhc.ts` / `usgs-water.ts` had recorded fixtures (prompt 52) but nothing exercised the adapters' own parsing against them. Added `src/lib/feeds/{nws,nhc,usgs-water}.test.ts`: mock `fetch` with the recorded and synthetic fixtures, assert on the typed output shape, and cover graceful degradation (non-OK response, rejected fetch) per adapter. Closes prompt 52's "unit-tested against recorded fixtures" acceptance criterion. No production code changed.
+
 ## [Unreleased] — 2026-09-12 (CARTO key at runtime)
 
 ### Fix

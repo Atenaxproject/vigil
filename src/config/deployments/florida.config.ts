@@ -71,7 +71,13 @@ export const FLORIDA_DEPLOYMENT = {
 
   // Evacuation zones: LINK OUT to the official Know Your Zone lookup
   // (floridadisaster.org) — never rebuild or mirror county zone data
-  // (accuracy liability; the official source is authoritative).
+  // (accuracy liability; the official source is authoritative). Florida-only:
+  // Mexico's config declares the same 'evacuation_lookup_link' unique feature
+  // but has no equivalent official tool, so this URL is NOT read from the
+  // generic hurricane/flood archetype flag anywhere — it must be passed
+  // explicitly (see MapLayers' evacuationZonesUrl prop).
+  evacuationZonesUrl: 'https://www.floridadisaster.org/knowyourzone/',
+
   uniqueFeatures: ['preparedness_hub', 'evacuation_lookup_link', 'shelter_board'] as string[],
 
   notificationConfig: {
