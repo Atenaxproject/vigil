@@ -1679,7 +1679,10 @@
     "governmentTitle": "Nessun dato al governo",
     "governmentBody": "Vigil non condivide i dati degli utenti con il governo venezuelano, e questo include espressamente le informazioni sui minori.",
     "privacyLink": "Consulta anche la nostra",
-    "privacyLinkCta": "Informativa sulla privacy"
+    "privacyLinkCta": "Informativa sulla privacy",
+    "legalBasisTitle": "Base giuridica",
+    "legalBasisBody": "Vigil tratta le informazioni sui minori esclusivamente per contribuire a ritrovarli e proteggere la loro sicurezza. Applichiamo la minimizzazione dei dati e pubblichiamo solo le informazioni necessarie al riconoscimento pubblico.",
+    "notLegalAdvice": "Questa pagina fornisce informazioni generali e non costituisce consulenza legale. Per un caso specifico, rivolgiti a un professionista legale qualificato o all’organizzazione competente per la tutela dei minori."
   },
   "removalRequest": {
     "action": "Richiedi rimozione o correzione",

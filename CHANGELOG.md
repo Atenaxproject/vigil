@@ -5,6 +5,12 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (production error fixes)
+
+### Fix
+- **Minor-protection translations** — restore the legal-basis and legal-advice messages for all supported locales, eliminating `MISSING_MESSAGE` errors on `/proteccion-de-menores`.
+- **RSS URL parsing** — fetch configured feeds with the WHATWG Fetch API before parsing XML, avoiding deprecated Node `url.parse()` usage from the RSS fetch path.
+
 ## [Unreleased] — 2026-08-02 (vigil-watch long-term resilience)
 
 ### Fix

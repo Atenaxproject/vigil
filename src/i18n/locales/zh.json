@@ -1679,7 +1679,10 @@
     "governmentTitle": "不向政府提供数据",
     "governmentBody": "Vigil 不与委内瑞拉政府共享用户数据，这明确包括未成年人的信息。",
     "privacyLink": "另请参阅我们的",
-    "privacyLinkCta": "隐私政策"
+    "privacyLinkCta": "隐私政策",
+    "legalBasisTitle": "法律依据",
+    "legalBasisBody": "Vigil 仅为协助寻找未成年人并保护其安全而处理相关信息。我们遵循数据最小化原则，只公开公众识别所必需的信息。",
+    "notLegalAdvice": "本页面提供一般信息，不构成法律意见。对于具体个案，请咨询合格的法律专业人士或相应的儿童保护机构。"
   },
   "removalRequest": {
     "action": "申请删除或更正",

@@ -1,13 +1,6 @@
 import Parser from 'rss-parser'
 
-// Some outlets (e.g. Prodavinci) 403 the default rss-parser agent. Send a real
-// UA so every configured feed resolves (75C §3).
-const parser = new Parser({
-  headers: {
-    'User-Agent':
-      'Mozilla/5.0 (compatible; VigilCrisis/1.0; +https://vigil.youthewave.org)',
-  },
-})
+const parser = new Parser()
 
 export interface RssNewsItem {
   source: string
@@ -27,7 +20,15 @@ export async function getVenezuelaNews(maxPerSource = 5): Promise<RssNewsItem[]>
   try {
     const results = await Promise.allSettled(
       VENEZUELA_NEWS_FEEDS.map(async (source) => {
-        const feed = await parser.parseURL(source.url)
+        // Some outlets (e.g. Prodavinci) 403 the default rss-parser agent.
+        const response = await fetch(source.url, {
+          headers: {
+            'User-Agent':
+              'Mozilla/5.0 (compatible; VigilCrisis/1.0; +https://vigil.youthewave.org)',
+          },
+        })
+        if (!response.ok) throw new Error(`RSS fetch failed: ${response.status}`)
+        const feed = await parser.parseString(await response.text())
         return feed.items.slice(0, maxPerSource).map((item) => ({
           source: source.name,
           title: item.title ?? 'Sin título',
