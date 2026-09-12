@@ -121,9 +121,10 @@ export function CrisisMap({
   const hasHurricaneArchetype = CRISIS_CONFIG.disasterArchetypes.some(
     (a) => a === 'hurricane' || a === 'flood'
   )
+  const hasEarthquakeArchetype = CRISIS_CONFIG.disasterArchetypes.includes('earthquake')
   const [mounted, setMounted] = useState(false)
   const [layers, setLayers] = useState<MapLayerState>({
-    aftershocks: !isDiaspora,
+    aftershocks: hasEarthquakeArchetype && !isDiaspora,
     needs: true,
     resources: true,
     shelters: false,
@@ -178,7 +179,12 @@ export function CrisisMap({
 
   return (
     <div className="map-wrapper relative h-full min-h-[240px] w-full overflow-hidden rounded-card border border-slate-200 lg:min-h-[400px]">
-      <MapLayers layers={layers} onChange={setLayers} evacuationZonesUrl={evacuationZonesUrl} />
+      <MapLayers
+        layers={layers}
+        onChange={setLayers}
+        showAftershocksToggle={hasEarthquakeArchetype}
+        evacuationZonesUrl={evacuationZonesUrl}
+      />
       <MapContainer
         center={[centerLat, centerLng]}
         zoom={defaultZoom}

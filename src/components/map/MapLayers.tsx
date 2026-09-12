@@ -19,6 +19,9 @@ export interface MapLayerState {
 interface MapLayersProps {
   layers: MapLayerState
   onChange: (layers: MapLayerState) => void
+  /** Earthquake archetype only. Hides the Aftershocks (USGS) checkbox for
+   *  deployments where it can never have data (hurricane/flood). */
+  showAftershocksToggle?: boolean
   /** Deployment-specific official evacuation-zone lookup (e.g. Florida's
    *  Know Your Zone). Undefined renders nothing — this is NOT gated by the
    *  generic hurricane/flood archetype flag alone, because more than one
@@ -37,7 +40,12 @@ function readDesktopLayersOpen(): boolean {
   return stored === 'true'
 }
 
-export function MapLayers({ layers, onChange, evacuationZonesUrl }: MapLayersProps) {
+export function MapLayers({
+  layers,
+  onChange,
+  showAftershocksToggle = true,
+  evacuationZonesUrl,
+}: MapLayersProps) {
   const t = useTranslations('map.layers')
   const panelId = useId()
   const [desktopOpen, setDesktopOpen] = useState(true)
@@ -55,7 +63,7 @@ export function MapLayers({ layers, onChange, evacuationZonesUrl }: MapLayersPro
   }, [])
 
   const toggles: Array<{ key: keyof MapLayerState; label: string }> = [
-    { key: 'aftershocks', label: t('aftershocks') },
+    ...(showAftershocksToggle ? [{ key: 'aftershocks' as const, label: t('aftershocks') }] : []),
     { key: 'needs', label: t('needs') },
     { key: 'resources', label: t('resources') },
     { key: 'activeTeams', label: t('activeTeams') },
