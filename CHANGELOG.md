@@ -11,6 +11,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **Aftershocks (USGS) layer/toggle no longer hardcoded to `!isDiaspora`** — any future non-earthquake, non-diaspora deployment (Florida, Mexico Pacific) would have shown a permanently-empty "Réplicas (USGS)" map layer and checkbox. Now gated behind `disasterArchetypes.includes('earthquake')` as well. No behavior change for Venezuela (`disasterArchetypes: ['earthquake']`).
 - **`LanguageSwitcher.tsx`'s `localeLabels` was `Record<SupportedLang, string>`** — an exact-match Record, so any deployment whose `supportedLangs` differs from Venezuela's 8 (fewer languages, or `'ht'` added) failed `tsc` at compile time. Changed to `Record<string, string>` with an uppercased-code fallback. Also resolves the Haitian Creole compile-time gate noted in `TODO-BEFORE-LAUNCH.md` / PR #62. No behavior change for Venezuela.
 
+## [Unreleased] — 2026-09-12 (lockfile sync)
+
+### Chore
+- **`npm ci` / Dependabot** — pin `@swc/helpers@0.5.23` so the `next-intl` / `@swc/core` peer stays in the lockfile (PRs #54 and #55 fail `npm ci` when that optional entry is dropped). Restore tag `restore/pre-lockfile-sync-20260912`.
+
 ## [Unreleased] — 2026-09-12 (Florida evacuation-zones link-out)
 
 ### Add
