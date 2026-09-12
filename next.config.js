@@ -69,11 +69,6 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Force the CARTO key into the client compile so a missing default-arg
-  // inline cannot ship unkeyed tiles again.
-  env: {
-    NEXT_PUBLIC_CARTO_API_KEY: process.env.NEXT_PUBLIC_CARTO_API_KEY || '',
-  },
   async headers() {
     return [
       {

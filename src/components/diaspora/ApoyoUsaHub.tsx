@@ -13,9 +13,10 @@ import type { MapMarker, Organization, VigilEvent } from '@/types/vigil.types'
 interface ApoyoUsaHubProps {
   markers: MapMarker[]
   organizations: Organization[]
+  tileUrl?: string
 }
 
-export function ApoyoUsaHub({ markers, organizations }: ApoyoUsaHubProps) {
+export function ApoyoUsaHub({ markers, organizations, tileUrl }: ApoyoUsaHubProps) {
   const t = useTranslations('diasporaHub')
   const locale = useLocale()
   const [events, setEvents] = useState<VigilEvent[]>([])
@@ -74,7 +75,7 @@ export function ApoyoUsaHub({ markers, organizations }: ApoyoUsaHubProps) {
       </section>
 
       <div className="mt-6 h-[min(50vh,420px)] min-h-[280px]">
-        <CrisisMap markers={markers} regionScope="usa_diaspora" />
+        <CrisisMap markers={markers} regionScope="usa_diaspora" tileUrl={tileUrl} />
       </div>
       <MapAccessibleList markers={markers} />
 

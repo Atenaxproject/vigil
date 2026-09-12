@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (CARTO key at runtime)
+
+### Fix
+- **Homepage map still unkeyed after #59** — `next.config.js` `env` inlined an empty `NEXT_PUBLIC_CARTO_API_KEY` because that value is not available to `next build` on Vercel. Read `CARTO_API_KEY` on the server, pass the tile URL into CrisisMap / PinDropMap, and expose `GET /api/basemap` as fallback. Restore tag `restore/pre-carto-runtime-20260912`.
+
 ## [Unreleased] — 2026-09-12 (CARTO key build inline)
 
 ### Fix
