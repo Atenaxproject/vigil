@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (Florida evacuation-zones link-out)
+
+### Add
+- **Evacuation-zones link-out on the map layers panel** — `florida.config.ts` declared `evacuation_lookup_link` as a unique feature since prompt 52, but nothing implemented it. Adds a link-out row to `MapLayers.tsx` (desktop panel + mobile sheet), gated behind the same `hasHurricaneArchetype` check `CrisisMap.tsx` already uses for the NWS/NHC/water layers, pointing to the official Know Your Zone lookup (floridadisaster.org). Per spec, Vigil never rebuilds or mirrors county evacuation-zone data — link out only. Inert for Venezuela (`disasterArchetypes: ['earthquake']`), so no behavior change there. EN/ES keys added; other locale files unchanged since Florida's `supportedLangs` is `en`/`es`/`ht` only.
+
 ## [Unreleased] — 2026-09-12 (CARTO key at runtime)
 
 ### Fix

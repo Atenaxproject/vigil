@@ -172,7 +172,7 @@ export function CrisisMap({
 
   return (
     <div className="map-wrapper relative h-full min-h-[240px] w-full overflow-hidden rounded-card border border-slate-200 lg:min-h-[400px]">
-      <MapLayers layers={layers} onChange={setLayers} />
+      <MapLayers layers={layers} onChange={setLayers} showEvacuationZones={hasHurricaneArchetype} />
       <MapContainer
         center={[centerLat, centerLng]}
         zoom={defaultZoom}
