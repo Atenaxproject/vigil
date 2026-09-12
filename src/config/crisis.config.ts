@@ -115,6 +115,13 @@ export const CRISIS_CONFIG = {
     { name: 'American Red Cross — Florida', url: 'https://www.redcross.org/local/florida.html', type: 'ngo' },
   ] satisfies PartnerLinkEntry[] as PartnerLinkEntry[],
 
+  // Pages that are Venezuela-specific in their own component code, not just
+  // config (hardcoded Venezuelan zone names, DTV earthquake integration,
+  // INAMEH rain/landslide monitoring) — hidden from nav rather than shown
+  // broken or fabricated for Florida. Nav-level only: does not block direct
+  // navigation to the URL. See Navigation.tsx.
+  hiddenRoutes: ['/prensa', '/red', '/servicios', '/amenazas', '/estadisticas'] as string[],
+
   seismic: {
     startDate: '2026-06-01',
     minMagnitudeDisplay: 2.5,

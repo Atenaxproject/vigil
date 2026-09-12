@@ -39,7 +39,15 @@ import {
 import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { useViewModeContext } from '@/components/onboarding/ViewModeProvider'
 import { isRouteVisibleForMode, VIEW_MODES, type ViewModeId } from '@/config/viewMode.config'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { cn } from '@/lib/utils'
+
+// Deployment-level hide, distinct from per-mode visibility below: these pages
+// are Venezuela-specific in their own component code (hardcoded zone names,
+// DTV integration, INAMEH monitoring), not just missing config/data.
+const HIDDEN_ROUTES = new Set<string>(
+  'hiddenRoutes' in CRISIS_CONFIG ? (CRISIS_CONFIG.hiddenRoutes as string[]) : []
+)
 
 type NavLabelKey =
   | 'search'
@@ -170,6 +178,7 @@ export function Navigation() {
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
   const isVisible = (item: (typeof navItems)[number]) => {
+    if (HIDDEN_ROUTES.has(item.href)) return false
     if (item.alwaysVisible) return true
     return isRouteVisibleForMode(item.href, mode)
   }
@@ -277,7 +286,9 @@ export function Navigation() {
           >
             {collapsed ? 'V' : 'Vigil'}
           </Link>
-          {!collapsed && <p className="mt-1 text-[13px] text-vigil-muted">Venezuela 2026</p>}
+          {!collapsed && (
+            <p className="mt-1 text-[13px] text-vigil-muted">{CRISIS_CONFIG.crisis}</p>
+          )}
         </div>
 
         <nav
@@ -330,6 +341,7 @@ export function Navigation() {
                     {open && (
                       <ul className="mt-0.5">
                         {group.items.map((href) => {
+                          if (HIDDEN_ROUTES.has(href)) return null
                           const item = navItems.find((n) => n.href === href)
                           if (!item) return null
                           const Icon = item.icon
