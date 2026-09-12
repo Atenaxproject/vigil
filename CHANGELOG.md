@@ -14,6 +14,10 @@ All notable changes to Vigil are documented here. Format loosely follows
 - **Florida `ht` locale — script + activation-gate wiring, no content generated.** `scripts/generate-translations.mjs` didn't know about Haitian Creole; added it as an explicitly-requested-only target (`node scripts/generate-translations.mjs ht`) so it never gets swept into a routine no-args Venezuela locale refresh. The script now also warns loudly before generating any deployment-specific locale: `en.json`/`es.json` are the live Venezuela strings (Caracas examples, earthquake copy, Venezuelan-government privacy wording), so translating them wholesale produces a linguistically fine but operationally wrong Florida locale (found in review — Codex) — source content needs adapting first. Generation itself needs `ANTHROPIC_API_KEY` (not available in this environment) and native-speaker review before it ships — neither happened here.
 - Corrected `TODO-BEFORE-LAUNCH.md`: `LanguageSwitcher.tsx`'s `localeLabels` gap is a **compile-time** `tsc` failure the moment Florida's `supportedLangs` (which includes `'ht'`) gets wired into `crisis.config.ts` — not a runtime blank-label bug as originally written (found in review — Copilot). `ht.json` must still exist and be reviewed before `supportedLangs` ever includes `'ht'`, or `src/i18n/request.ts`'s dynamic locale import 404s the request.
 
+## [Unreleased] — 2026-09-12 (Florida feed adapter tests)
+
+### Test
+- **Feed adapter unit coverage** — `nws.ts` / `nhc.ts` / `usgs-water.ts` had recorded fixtures (prompt 52) but nothing exercised the adapters' own parsing against them. Added `src/lib/feeds/{nws,nhc,usgs-water}.test.ts`: mock `fetch` with the recorded and synthetic fixtures, assert on the typed output shape, and cover graceful degradation (non-OK response, rejected fetch) per adapter. Closes prompt 52's "unit-tested against recorded fixtures" acceptance criterion. No production code changed.
 ## [Unreleased] — 2026-09-12 (CARTO key at runtime)
 
 ### Fix
