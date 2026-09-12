@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (CARTO basemap key)
+
+### Fix
+- **CARTO map tiles** — append `NEXT_PUBLIC_CARTO_API_KEY` as `?key=` on the shared Positron `BASEMAP_URL` so CrisisMap / PinDropMap tiles are no longer stamped “API KEY REQUIRED”. Value lives in Vercel / `.env.local` only. Restore tag `restore/pre-carto-basemap-key-20260912`.
+
 ## [Unreleased] — 2026-09-12 (production error fixes)
 
 ### Fix

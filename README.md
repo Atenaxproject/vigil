@@ -351,6 +351,7 @@ The app runs **without** a configured Supabase instance: static pages render, th
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+NEXT_PUBLIC_CARTO_API_KEY=                          # CARTO Basemaps; required for map tiles
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key   # server-only, never exposed
 ANTHROPIC_API_KEY=your_anthropic_key              # optional, for AI assistant, photo search, dedup cron
 CRON_SECRET=generate_a_strong_random_secret       # optional, secures /api/cron/dedup on Vercel
