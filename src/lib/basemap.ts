@@ -11,14 +11,17 @@
  */
 const CARTO_TILE_URL = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
 
-export function buildBasemapUrl(
-  apiKey: string | undefined = process.env.NEXT_PUBLIC_CARTO_API_KEY
-): string {
-  const key = apiKey?.trim()
+// Direct member access so Next.js inlines this at `next build`. A default
+// parameter (`apiKey = process.env.NEXT_PUBLIC_…`) is not replaced, which left
+// production tiles unkeyed after the env was set.
+const CARTO_API_KEY = process.env.NEXT_PUBLIC_CARTO_API_KEY
+
+export function buildBasemapUrl(apiKey?: string): string {
+  const key = (apiKey ?? CARTO_API_KEY)?.trim()
   if (!key) return CARTO_TILE_URL
   return `${CARTO_TILE_URL}?key=${encodeURIComponent(key)}`
 }
 
-export const BASEMAP_URL = buildBasemapUrl()
+export const BASEMAP_URL = buildBasemapUrl(CARTO_API_KEY)
 export const BASEMAP_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
