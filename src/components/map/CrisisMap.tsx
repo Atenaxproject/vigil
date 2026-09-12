@@ -94,6 +94,11 @@ interface CrisisMapProps {
   nwsAlerts?: import('@/lib/feeds/nws').NwsAlert[]
   nhcStorms?: import('@/lib/feeds/nhc').NhcActiveStorm[]
   waterGauges?: import('@/lib/feeds/usgs-water').WaterGauge[]
+  /** Deployment-specific official evacuation-zone lookup (e.g. Florida's
+   *  Know Your Zone). Not derived from disasterArchetypes here — more than
+   *  one deployment can share the hurricane/flood archetype without sharing
+   *  an official zone tool (Mexico Pacific has none). Undefined → no link. */
+  evacuationZonesUrl?: string
   /** Server-built CARTO tile URL (includes `?key=`). Falls back to `/api/basemap`. */
   tileUrl?: string
 }
@@ -109,6 +114,7 @@ export function CrisisMap({
   nwsAlerts = [],
   nhcStorms = [],
   waterGauges = [],
+  evacuationZonesUrl,
   tileUrl,
 }: CrisisMapProps) {
   const isDiaspora = regionScope === 'usa_diaspora'
@@ -172,7 +178,7 @@ export function CrisisMap({
 
   return (
     <div className="map-wrapper relative h-full min-h-[240px] w-full overflow-hidden rounded-card border border-slate-200 lg:min-h-[400px]">
-      <MapLayers layers={layers} onChange={setLayers} showEvacuationZones={hasHurricaneArchetype} />
+      <MapLayers layers={layers} onChange={setLayers} evacuationZonesUrl={evacuationZonesUrl} />
       <MapContainer
         center={[centerLat, centerLng]}
         zoom={defaultZoom}

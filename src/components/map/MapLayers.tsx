@@ -4,11 +4,6 @@ import { useCallback, useEffect, useId, useState } from 'react'
 import { ExternalLink, Layers, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-// Official Florida Division of Emergency Management evacuation-zone lookup.
-// Never rebuild or mirror county zone data (accuracy liability) — link out
-// only. See docs/build-process/52-archetype-preparacion-florida-package.md.
-const KNOW_YOUR_ZONE_URL = 'https://www.floridadisaster.org/knowyourzone/'
-
 export interface MapLayerState {
   aftershocks: boolean
   needs: boolean
@@ -24,9 +19,13 @@ export interface MapLayerState {
 interface MapLayersProps {
   layers: MapLayerState
   onChange: (layers: MapLayerState) => void
-  /** Hurricane/flood archetype only (Venezuela: never). Link-out, not a
-   *  toggleable layer — Vigil never mirrors official county zone data. */
-  showEvacuationZones?: boolean
+  /** Deployment-specific official evacuation-zone lookup (e.g. Florida's
+   *  Know Your Zone). Undefined renders nothing — this is NOT gated by the
+   *  generic hurricane/flood archetype flag alone, because more than one
+   *  deployment can share that archetype without sharing an official zone
+   *  tool (Mexico Pacific has no equivalent). Vigil never rebuilds or
+   *  mirrors county zone data — link-out only. */
+  evacuationZonesUrl?: string
 }
 
 const LAYERS_STORAGE_KEY = 'vigil-map-layers-open'
@@ -38,7 +37,7 @@ function readDesktopLayersOpen(): boolean {
   return stored === 'true'
 }
 
-export function MapLayers({ layers, onChange, showEvacuationZones = false }: MapLayersProps) {
+export function MapLayers({ layers, onChange, evacuationZonesUrl }: MapLayersProps) {
   const t = useTranslations('map.layers')
   const panelId = useId()
   const [desktopOpen, setDesktopOpen] = useState(true)
@@ -79,11 +78,11 @@ export function MapLayers({ layers, onChange, showEvacuationZones = false }: Map
     </label>
   ))
 
-  const evacuationZonesLink = showEvacuationZones && (
+  const evacuationZonesLink = evacuationZonesUrl && (
     <div className="mt-1 border-t border-slate-200 px-2 pt-2">
       <p className="px-2 text-[13px] font-medium text-slate-700">{t('evacuationZones')}</p>
       <a
-        href={KNOW_YOUR_ZONE_URL}
+        href={evacuationZonesUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="flex min-h-[36px] items-center gap-2 px-2 text-[13px] text-vigil-blue underline"

@@ -265,7 +265,10 @@
       "missingPersonsApprox": "Approximate location (privacy)",
       "missingPersonsView": "View profile",
       "missingPersonsMunicipioApprox": "Localisation approximative — niveau municipalité",
-      "missingPersonsEstadoApprox": "Localisation approximative — niveau État"
+      "missingPersonsEstadoApprox": "Localisation approximative — niveau État",
+      "evacuationZones": "Zones d'évacuation",
+      "evacuationZonesLink": "Know Your Zone (recherche officielle)",
+      "evacuationZonesSource": "Source : floridadisaster.org"
     },
     "magnitude": "Magnitude",
     "depth": "Profondeur",
