@@ -4,6 +4,9 @@ import { useCallback, useState } from 'react'
 import { CrisisMap } from '@/components/map/CrisisMap'
 import { MapAccessibleList } from '@/components/map/MapAccessibleList'
 import type { MapMarker, SeismicEvent, PublicPropertyAssessment, PublicMissingPerson } from '@/types/vigil.types'
+import type { NwsAlert } from '@/lib/feeds/nws'
+import type { NhcActiveStorm } from '@/lib/feeds/nhc'
+import type { WaterGauge } from '@/lib/feeds/usgs-water'
 
 interface HomeMapSectionProps {
   events: SeismicEvent[]
@@ -11,6 +14,10 @@ interface HomeMapSectionProps {
   propertyAssessments: PublicPropertyAssessment[]
   missingPersons: PublicMissingPerson[]
   tileUrl?: string
+  nwsAlerts?: NwsAlert[]
+  nhcStorms?: NhcActiveStorm[]
+  waterGauges?: WaterGauge[]
+  evacuationZonesUrl?: string
 }
 
 export function HomeMapSection({
@@ -19,6 +26,10 @@ export function HomeMapSection({
   propertyAssessments,
   missingPersons,
   tileUrl,
+  nwsAlerts,
+  nhcStorms,
+  waterGauges,
+  evacuationZonesUrl,
 }: HomeMapSectionProps) {
   const [focused, setFocused] = useState<MapMarker | null>(null)
 
@@ -38,6 +49,10 @@ export function HomeMapSection({
           focusLat={focused?.lat ?? null}
           focusLng={focused?.lng ?? null}
           tileUrl={tileUrl}
+          nwsAlerts={nwsAlerts}
+          nhcStorms={nhcStorms}
+          waterGauges={waterGauges}
+          evacuationZonesUrl={evacuationZonesUrl}
         />
       </div>
       <MapAccessibleList

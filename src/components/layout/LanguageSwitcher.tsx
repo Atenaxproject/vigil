@@ -6,7 +6,12 @@ import { useLocale, useTranslations } from 'next-intl'
 import { Globe } from 'lucide-react'
 import { CRISIS_CONFIG, type SupportedLang } from '@/config/crisis.config'
 
-const localeLabels: Record<SupportedLang, string> = {
+// Record<string, string>, not Record<SupportedLang, string>: a deployment's
+// supportedLangs can be a subset (Florida: en/es) or superset (+ht) of
+// Venezuela's 8 — a Record keyed by SupportedLang makes ANY divergence a
+// compile error (missing keys one way, excess keys the other). Falls back
+// to the uppercased code in the render for anything unlisted here.
+const localeLabels: Record<string, string> = {
   es: 'ES',
   en: 'EN',
   pt: 'PT',
@@ -15,6 +20,7 @@ const localeLabels: Record<SupportedLang, string> = {
   zh: 'ZH',
   de: 'DE',
   ru: 'RU',
+  ht: 'HT',
 }
 
 export function LanguageSwitcher() {
@@ -43,7 +49,7 @@ export function LanguageSwitcher() {
       >
         {CRISIS_CONFIG.supportedLangs.map((code) => (
           <option key={code} value={code}>
-            {localeLabels[code]}
+            {localeLabels[code] ?? code.toUpperCase()}
           </option>
         ))}
       </select>

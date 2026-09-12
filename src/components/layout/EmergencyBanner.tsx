@@ -41,7 +41,7 @@ export function EmergencyBanner({
   const usgsHref = aftershockSourceUrl ?? usgsSourceUrl()
 
   const nacional = CRISIS_CONFIG.emergencyContacts.find((c) => c.id === 'nacional')
-  const carrierCodes = nacional && 'carrierCodes' in nacional ? nacional.carrierCodes : []
+  const carrierCodes = nacional?.carrierCodes ?? []
 
   const updateChipEdges = useCallback(() => {
     const el = chipScrollRef.current
