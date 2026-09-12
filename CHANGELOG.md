@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (Florida feed adapter tests)
+
+### Test
+- **Feed adapter unit coverage** — `nws.ts` / `nhc.ts` / `usgs-water.ts` had recorded fixtures (prompt 52) but nothing exercised the adapters' own parsing against them. Added `src/lib/feeds/{nws,nhc,usgs-water}.test.ts`: mock `fetch` with the recorded and synthetic fixtures, assert on the typed output shape, and cover graceful degradation (non-OK response, rejected fetch) per adapter. Closes prompt 52's "unit-tested against recorded fixtures" acceptance criterion. No production code changed.
+
 ## [Unreleased] — 2026-09-12 (CARTO key at runtime)
 
 ### Fix
