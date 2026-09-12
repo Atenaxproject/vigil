@@ -40,6 +40,16 @@ for (const code of targets) {
     console.warn(`Skipping unknown locale: ${code}`)
     continue
   }
+  if (code in DEPLOYMENT_LANGUAGES) {
+    console.warn(
+      `⚠ ${code}.json will be generated from the LIVE VENEZUELA en.json — Caracas ` +
+        'examples, earthquake assessment copy, DTV integration, and Venezuelan-' +
+        'government privacy wording included. A native-speaker review checks the ' +
+        'translation is accurate, not that the underlying content fits the target ' +
+        'deployment. Adapt or fork the source strings for that deployment before ' +
+        'relying on this output.'
+    )
+  }
   console.log(`Translating to ${code}...`)
   const response = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',

@@ -12,13 +12,24 @@ overnight build.
       over. Own reasoned stance, human-reviewed.
 - [ ] FDACS registration check (Florida charitable-solicitation rules) before
       any donation-adjacent feature is exposed
-- [ ] Haitian Creole (ht) locale: run `node scripts/generate-translations.mjs
-      ht` (needs `ANTHROPIC_API_KEY`), then native-speaker review of ALL
-      strings before it ships — never ship machine-only
-- [ ] `LanguageSwitcher.tsx`'s `localeLabels` map is hardcoded to the current
-      `SupportedLang` union (VE's 8 langs) — add an `ht` entry when Florida's
-      `supportedLangs` gets wired into `crisis.config.ts`, or the switcher
-      renders a blank option label for it
+- [ ] Haitian Creole (ht) locale: `en.json`/`es.json` are the live Venezuela
+      strings (Caracas examples, earthquake assessment copy, DTV integration,
+      Venezuelan-government privacy wording included) — do NOT run
+      `node scripts/generate-translations.mjs ht` against them as-is, or the
+      output is linguistically fine but operationally wrong for a Florida
+      hurricane audience. Adapt/fork the Florida-relevant source strings
+      first, generate from that (needs `ANTHROPIC_API_KEY`), then get
+      native-speaker review of ALL strings before it ships — never ship
+      machine-only
+- [x] `src/lib/date-locale.ts`'s `LOCALE_MAP` now includes `ht` (date-fns
+      ships a native Haitian Creole locale) — done ahead of activation, no
+      remaining gate here
+- [ ] `LanguageSwitcher.tsx`'s `localeLabels` is typed
+      `Record<SupportedLang, string>` — this is a **compile-time** gate, not
+      a runtime cosmetic one: the moment Florida's `supportedLangs` (which
+      includes `'ht'`) gets wired into `crisis.config.ts`, `SupportedLang`
+      widens and `tsc` fails on `LanguageSwitcher.tsx` until an `'ht'` entry
+      is added there. It cannot reach runtime broken.
 - [ ] `src/i18n/request.ts` dynamically imports `./locales/${locale}.json` —
       confirm `ht.json` exists and is reviewed BEFORE `supportedLangs` ever
       includes `'ht'`, or any `ht` cookie value 404s the whole request
