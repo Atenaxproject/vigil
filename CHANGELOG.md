@@ -10,6 +10,12 @@ All notable changes to Vigil are documented here. Format loosely follows
 ### Fix
 - **`/organizaciones` empty directory** — anon PostgREST SELECT on `organizations` 401'd with `permission denied for function is_vigil_admin` (admin RLS policy evaluated without EXECUTE). Migration `025` re-grants EXECUTE to `anon`/`authenticated`. Public listing no longer selects `phone`/`email`/`whatsapp`. Restore tag `restore/pre-orgs-anon-rls-20260912`.
 
+## [Unreleased] — 2026-09-12 (production error fixes)
+
+### Fix
+- **Minor-protection translations** — restore the legal-basis and legal-advice messages for all supported locales, eliminating `MISSING_MESSAGE` errors on `/proteccion-de-menores`.
+- **RSS URL parsing** — fetch configured feeds with the WHATWG Fetch API before parsing XML, avoiding deprecated Node `url.parse()` usage from the RSS fetch path.
+
 ## [Unreleased] — 2026-08-02 (vigil-watch long-term resilience)
 
 ### Fix
