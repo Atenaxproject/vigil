@@ -57,17 +57,17 @@ describe('getNwsAlertsByState', () => {
     await getNwsAlertsByState('FL')
 
     const [, init] = fetchMock.mock.calls[0]
-    expect(init.headers['User-Agent']).toContain('vigil.youthewave.org')
+    expect(init.headers['User-Agent']).toBe('Vigil (vigil.youthewave.org, vigil@youthewave.org)')
   })
 
-  it('builds a point query with fixed-precision coordinates', async () => {
+  it('builds a point query, rounding coordinates to fixed precision', async () => {
     const fetchMock = vi.fn().mockResolvedValue(jsonResponse({ features: [] }))
     vi.stubGlobal('fetch', fetchMock)
 
-    await getNwsAlertsByPoint(27.9944, -81.7603)
+    await getNwsAlertsByPoint(27.99441234, -81.76039876)
 
     const [url] = fetchMock.mock.calls[0]
-    expect(url).toContain('point=27.9944,-81.7603')
+    expect(url).toContain('point=27.9944,-81.7604')
   })
 
   it('degrades to an empty array on a non-OK response rather than throwing', async () => {
