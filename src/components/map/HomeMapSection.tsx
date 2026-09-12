@@ -10,6 +10,7 @@ interface HomeMapSectionProps {
   markers: MapMarker[]
   propertyAssessments: PublicPropertyAssessment[]
   missingPersons: PublicMissingPerson[]
+  tileUrl?: string
 }
 
 export function HomeMapSection({
@@ -17,6 +18,7 @@ export function HomeMapSection({
   markers,
   propertyAssessments,
   missingPersons,
+  tileUrl,
 }: HomeMapSectionProps) {
   const [focused, setFocused] = useState<MapMarker | null>(null)
 
@@ -35,6 +37,7 @@ export function HomeMapSection({
           missingPersons={missingPersons}
           focusLat={focused?.lat ?? null}
           focusLng={focused?.lng ?? null}
+          tileUrl={tileUrl}
         />
       </div>
       <MapAccessibleList

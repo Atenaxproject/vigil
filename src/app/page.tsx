@@ -7,6 +7,7 @@ import { SeismicEventList } from '@/components/feed/SeismicEventList'
 import { RegionScopeTabs } from '@/components/map/RegionScopeTabs'
 import { getMapMarkers, getMissingPersonsForMap, getPublicPropertyAssessments } from '@/lib/data'
 import { getLiveAftershockTotal, getMergedSeismicFetch } from '@/lib/seismic'
+import { buildBasemapUrl, readCartoApiKey } from '@/lib/basemap'
 import { getTranslations } from 'next-intl/server'
 
 export const dynamic = 'force-dynamic'
@@ -36,6 +37,7 @@ export default async function HomePage() {
           markers={markers}
           propertyAssessments={propertyAssessments}
           missingPersons={missingPersons}
+          tileUrl={buildBasemapUrl(readCartoApiKey())}
         />
         <SeismicEventList events={events} totalCount={totals.ok ? totals.total : undefined} />
       </div>

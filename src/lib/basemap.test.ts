@@ -1,14 +1,17 @@
 import { afterEach, describe, expect, it } from 'vitest'
-import { buildBasemapUrl } from '@/lib/basemap'
+import { buildBasemapUrl, CARTO_TILE_URL, isBasemapUrl, readCartoApiKey } from '@/lib/basemap'
 
-const TILE = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+const TILE = CARTO_TILE_URL
 
 describe('buildBasemapUrl', () => {
-  const prev = process.env.NEXT_PUBLIC_CARTO_API_KEY
+  const prevPublic = process.env.NEXT_PUBLIC_CARTO_API_KEY
+  const prevServer = process.env.CARTO_API_KEY
 
   afterEach(() => {
-    if (prev === undefined) delete process.env.NEXT_PUBLIC_CARTO_API_KEY
-    else process.env.NEXT_PUBLIC_CARTO_API_KEY = prev
+    if (prevPublic === undefined) delete process.env.NEXT_PUBLIC_CARTO_API_KEY
+    else process.env.NEXT_PUBLIC_CARTO_API_KEY = prevPublic
+    if (prevServer === undefined) delete process.env.CARTO_API_KEY
+    else process.env.CARTO_API_KEY = prevServer
   })
 
   it('omits the query when the key is unset or blank', () => {
@@ -23,5 +26,30 @@ describe('buildBasemapUrl', () => {
 
   it('URL-encodes reserved characters in the key', () => {
     expect(buildBasemapUrl('a+b/c')).toBe(`${TILE}?key=a%2Bb%2Fc`)
+  })
+})
+
+describe('readCartoApiKey', () => {
+  const prevPublic = process.env.NEXT_PUBLIC_CARTO_API_KEY
+  const prevServer = process.env.CARTO_API_KEY
+
+  afterEach(() => {
+    if (prevPublic === undefined) delete process.env.NEXT_PUBLIC_CARTO_API_KEY
+    else process.env.NEXT_PUBLIC_CARTO_API_KEY = prevPublic
+    if (prevServer === undefined) delete process.env.CARTO_API_KEY
+    else process.env.CARTO_API_KEY = prevServer
+  })
+
+  it('prefers CARTO_API_KEY over NEXT_PUBLIC_CARTO_API_KEY', () => {
+    process.env.CARTO_API_KEY = 'server-key'
+    process.env.NEXT_PUBLIC_CARTO_API_KEY = 'public-key'
+    expect(readCartoApiKey()).toBe('server-key')
+  })
+})
+
+describe('isBasemapUrl', () => {
+  it('accepts CARTO Positron templates only', () => {
+    expect(isBasemapUrl(`${TILE}?key=abc`)).toBe(true)
+    expect(isBasemapUrl('https://evil.example/{z}/{x}/{y}.png')).toBe(false)
   })
 })

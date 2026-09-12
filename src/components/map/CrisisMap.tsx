@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { CRISIS_CONFIG, diasporaSupportConfig } from '@/config/crisis.config'
-import { BASEMAP_URL, BASEMAP_ATTRIBUTION } from '@/lib/basemap'
+import { BASEMAP_ATTRIBUTION } from '@/lib/basemap'
+import { useBasemapUrl } from '@/hooks/useBasemapUrl'
 import type { SeismicEvent, RegionScope } from '@/types/vigil.types'
 import type { MapMarker, PublicPropertyAssessment, PublicMissingPerson } from '@/types/vigil.types'
 import { MapLayers, type MapLayerState } from '@/components/map/MapLayers'
@@ -93,6 +94,8 @@ interface CrisisMapProps {
   nwsAlerts?: import('@/lib/feeds/nws').NwsAlert[]
   nhcStorms?: import('@/lib/feeds/nhc').NhcActiveStorm[]
   waterGauges?: import('@/lib/feeds/usgs-water').WaterGauge[]
+  /** Server-built CARTO tile URL (includes `?key=`). Falls back to `/api/basemap`. */
+  tileUrl?: string
 }
 
 export function CrisisMap({
@@ -106,6 +109,7 @@ export function CrisisMap({
   nwsAlerts = [],
   nhcStorms = [],
   waterGauges = [],
+  tileUrl,
 }: CrisisMapProps) {
   const isDiaspora = regionScope === 'usa_diaspora'
   const hasHurricaneArchetype = CRISIS_CONFIG.disasterArchetypes.some(
@@ -125,6 +129,7 @@ export function CrisisMap({
   })
   const markers = useRealtimeMapMarkers(initialMarkers, regionScope)
   const rescuerPresence = useRealtimeRescuerPresence()
+  const basemapUrl = useBasemapUrl(tileUrl)
 
   useEffect(() => {
     setMounted(true)
@@ -179,7 +184,7 @@ export function CrisisMap({
         className="h-full min-h-[240px] w-full lg:min-h-[400px]"
         scrollWheelZoom
       >
-        <TileLayer attribution={BASEMAP_ATTRIBUTION} url={BASEMAP_URL} />
+        <TileLayer attribution={BASEMAP_ATTRIBUTION} url={basemapUrl} />
         {layers.aftershocks && <AftershockLayer events={events} />}
         {layers.needs && <NeedsLayer markers={markers} />}
         {layers.resources && (

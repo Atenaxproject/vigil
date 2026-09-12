@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { CRISIS_CONFIG } from '@/config/crisis.config'
-import { BASEMAP_URL, BASEMAP_ATTRIBUTION } from '@/lib/basemap'
+import { BASEMAP_ATTRIBUTION } from '@/lib/basemap'
+import { useBasemapUrl } from '@/hooks/useBasemapUrl'
 
 const MapContainer = dynamic(() => import('react-leaflet').then((m) => m.MapContainer), { ssr: false })
 const TileLayer = dynamic(() => import('react-leaflet').then((m) => m.TileLayer), { ssr: false })
@@ -18,10 +19,12 @@ interface PinDropMapProps {
   lng: number
   onChange: (lat: number, lng: number) => void
   ariaLabel: string
+  tileUrl?: string
 }
 
-export function PinDropMap({ lat, lng, onChange, ariaLabel }: PinDropMapProps) {
+export function PinDropMap({ lat, lng, onChange, ariaLabel, tileUrl }: PinDropMapProps) {
   const [mounted, setMounted] = useState(false)
+  const basemapUrl = useBasemapUrl(tileUrl)
   const { defaultZoom, minLat, maxLat, minLng, maxLng } = CRISIS_CONFIG.mapBounds
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export function PinDropMap({ lat, lng, onChange, ariaLabel }: PinDropMapProps) {
         ]}
         scrollWheelZoom={false}
       >
-        <TileLayer attribution={BASEMAP_ATTRIBUTION} url={BASEMAP_URL} />
+        <TileLayer attribution={BASEMAP_ATTRIBUTION} url={basemapUrl} />
         <ClickHandler onPick={onChange} />
         <Marker position={[lat, lng]} />
       </MapContainer>
