@@ -19,6 +19,9 @@ export interface MapLayerState {
 interface MapLayersProps {
   layers: MapLayerState
   onChange: (layers: MapLayerState) => void
+  /** Earthquake archetype only. Hides the Aftershocks (USGS) checkbox for
+   *  deployments where it can never have data (hurricane/flood). */
+  showAftershocksToggle?: boolean
 }
 
 const LAYERS_STORAGE_KEY = 'vigil-map-layers-open'
@@ -30,7 +33,7 @@ function readDesktopLayersOpen(): boolean {
   return stored === 'true'
 }
 
-export function MapLayers({ layers, onChange }: MapLayersProps) {
+export function MapLayers({ layers, onChange, showAftershocksToggle = true }: MapLayersProps) {
   const t = useTranslations('map.layers')
   const panelId = useId()
   const [desktopOpen, setDesktopOpen] = useState(true)
@@ -48,7 +51,7 @@ export function MapLayers({ layers, onChange }: MapLayersProps) {
   }, [])
 
   const toggles: Array<{ key: keyof MapLayerState; label: string }> = [
-    { key: 'aftershocks', label: t('aftershocks') },
+    ...(showAftershocksToggle ? [{ key: 'aftershocks' as const, label: t('aftershocks') }] : []),
     { key: 'needs', label: t('needs') },
     { key: 'resources', label: t('resources') },
     { key: 'activeTeams', label: t('activeTeams') },
