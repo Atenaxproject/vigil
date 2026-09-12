@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server'
 import { recordFeedHealth } from '@/lib/feed-health-server'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 
-const LOCATIONS = [
-  { name: 'Caracas', lat: 10.4806, lng: -66.9036 },
-  { name: 'La Guaira', lat: 10.6014, lng: -66.9311 },
-]
+const LOCATIONS = CRISIS_CONFIG.weatherLocations
+const TIME_ZONE = CRISIS_CONFIG.timeZone
 
 export const revalidate = 1800
 
@@ -17,9 +16,9 @@ function mapWeatherCode(code: number): 'clear' | 'cloudy' | 'rain' | 'storm' {
   return 'cloudy'
 }
 
-function venezuelaTimeNow(): string {
-  return new Date().toLocaleString('es-VE', {
-    timeZone: 'America/Caracas',
+function localTimeNow(): string {
+  return new Date().toLocaleString(CRISIS_CONFIG.defaultLang, {
+    timeZone: TIME_ZONE,
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,
@@ -27,7 +26,7 @@ function venezuelaTimeNow(): string {
 }
 
 export async function GET() {
-  const venezuelaTime = venezuelaTimeNow()
+  const localTime = localTimeNow()
   const fetchedAt = new Date().toISOString()
 
   try {
@@ -36,7 +35,7 @@ export async function GET() {
         const url =
           `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lng}` +
           `&current=temperature_2m,precipitation_probability,weather_code` +
-          `&timezone=America/Caracas`
+          `&timezone=${encodeURIComponent(TIME_ZONE)}`
 
         const res = await fetch(url, { next: { revalidate: 1800, tags: ['open-meteo'] } })
         if (!res.ok) throw new Error('weather fetch failed')
@@ -58,7 +57,7 @@ export async function GET() {
       itemCount: results.length,
     })
 
-    return NextResponse.json({ locations: results, venezuelaTime, fetchedAt })
+    return NextResponse.json({ locations: results, localTime, fetchedAt })
   } catch (err) {
     await recordFeedHealth({
       feedId: 'open-meteo',
@@ -69,7 +68,7 @@ export async function GET() {
     return NextResponse.json(
       {
         locations: [],
-        venezuelaTime,
+        localTime,
         fetchedAt,
         error: true,
       },

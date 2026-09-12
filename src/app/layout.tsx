@@ -33,11 +33,17 @@ const inter = Inter({
   display: 'swap',
 })
 
+// Config-driven so a deployment's browser tab / share-card title reflects its
+// own country and crisis, not Venezuela's — was hardcoded here previously.
+const metaTitle = `Vigil — ${CRISIS_CONFIG.country} · ${CRISIS_CONFIG.crisis}`
+const metaDescription =
+  'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.'
+const ogLocale = `${CRISIS_CONFIG.defaultLang}_${CRISIS_CONFIG.countryCode}`
+
 export const metadata: Metadata = {
   metadataBase: new URL(CRISIS_CONFIG.siteUrl),
-  title: 'Vigil — Respuesta a Crisis Venezuela',
-  description:
-    'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
+  title: metaTitle,
+  description: metaDescription,
   applicationName: 'Vigil',
   manifest: '/manifest.json',
   appleWebApp: {
@@ -59,19 +65,17 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'Vigil — Respuesta a Crisis Venezuela',
-    description:
-      'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
+    title: metaTitle,
+    description: metaDescription,
     url: CRISIS_CONFIG.siteUrl,
     siteName: 'Vigil',
-    locale: 'es_VE',
+    locale: ogLocale,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vigil — Respuesta a Crisis Venezuela',
-    description:
-      'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
+    title: metaTitle,
+    description: metaDescription,
   },
 }
 

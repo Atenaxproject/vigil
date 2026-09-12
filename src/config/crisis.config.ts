@@ -97,6 +97,17 @@ export const CRISIS_CONFIG = {
     minZoom: 5,
   },
 
+  // WeatherBar / api/weather were hardcoded to Caracas + two Venezuelan
+  // cities with no config path at all — found while verifying this
+  // deployment (the header showed "Venezuela: <Caracas time>"). Both files
+  // now read from here.
+  timeZone: 'America/New_York',
+  weatherLocations: [
+    { name: 'Miami', lat: 25.7617, lng: -80.1918 },
+    { name: 'Tampa', lat: 27.9506, lng: -82.4572 },
+    { name: 'Orlando', lat: 28.5383, lng: -81.3792 },
+  ] as { name: string; lat: number; lng: number }[],
+
   emergency: {
     hotline: '911',
     hotlineLabel: '911',

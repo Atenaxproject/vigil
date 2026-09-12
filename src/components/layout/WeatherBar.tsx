@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ChevronDown, ChevronUp, Clock, Cloud, CloudLightning, CloudRain, Sun } from 'lucide-react'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 
 interface WeatherLocation {
   name: string
@@ -13,14 +14,16 @@ interface WeatherLocation {
 
 interface WeatherResponse {
   locations: WeatherLocation[]
-  venezuelaTime: string
+  localTime: string
   fetchedAt?: string
   error?: boolean
 }
 
-function caracasClock(): string {
-  return new Date().toLocaleString('es-VE', {
-    timeZone: 'America/Caracas',
+// Was hardcoded to Caracas/es-VE regardless of deployment — found while
+// verifying the Florida deployment (header showed "Venezuela: <time>").
+function localClock(): string {
+  return new Date().toLocaleString(CRISIS_CONFIG.defaultLang, {
+    timeZone: CRISIS_CONFIG.timeZone,
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,
@@ -59,14 +62,14 @@ function LocationLine({ loc, rainLabel }: { loc: WeatherLocation; rainLabel: str
 
 export function WeatherBar() {
   const t = useTranslations('weather')
-  // Local Caracas clock immediately — never ship "—" while waiting on Open-Meteo.
-  const [time, setTime] = useState(caracasClock)
+  // Local clock immediately — never ship "—" while waiting on Open-Meteo.
+  const [time, setTime] = useState(localClock)
   const [data, setData] = useState<WeatherResponse | null>(null)
   const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
-    setTime(caracasClock())
-    const clock = setInterval(() => setTime(caracasClock()), 30_000)
+    setTime(localClock())
+    const clock = setInterval(() => setTime(localClock()), 30_000)
     return () => clearInterval(clock)
   }, [])
 
@@ -76,7 +79,7 @@ export function WeatherBar() {
         const res = await fetch('/api/weather', { cache: 'no-store' })
         const json = (await res.json()) as WeatherResponse
         setData(json)
-        if (json.venezuelaTime) setTime(json.venezuelaTime)
+        if (json.localTime) setTime(json.localTime)
       } catch {
         setData(null)
       }
@@ -108,7 +111,7 @@ export function WeatherBar() {
           <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
           <span className="min-w-0">
             <span className="block whitespace-nowrap">
-              {t('venezuela')}: {time}
+              {CRISIS_CONFIG.country}: {time}
             </span>
             {firstLocation && (
               <span className="mt-0.5 block whitespace-normal lg:hidden">
