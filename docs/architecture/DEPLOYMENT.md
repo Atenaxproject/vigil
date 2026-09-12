@@ -141,6 +141,7 @@ Add the following to the Vercel project under **Settings → Environment Variabl
 |---|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | ✅ | From Supabase → Settings → API |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Public anon key |
+| `NEXT_PUBLIC_CARTO_API_KEY` | ✅ | CARTO Basemaps key for Leaflet tiles (client-visible; do not commit). Already present on Production + Preview for team **Atenax Project** / project **vigil**. Update the existing row — do not add a second key. `NEXT_PUBLIC_*` is inlined at **build** time; Save then **Redeploy**. |
 | `SUPABASE_SERVICE_ROLE_KEY` | ✅ | Server-only — never client-exposed |
 | `VIGIL_ADMIN_SECRET` | ✅ | Strong random string (rate-limit IP hashing) |
 | `VIGIL_ADMIN_EMAILS` | ✅ | Comma-separated admin allowlist |
@@ -149,6 +150,19 @@ Add the following to the Vercel project under **Settings → Environment Variabl
 | `RESEND_FROM_EMAIL` | optional | From address override (must be on verified domain); default `vigil@youthewave.org` |
 | `MAKE_WEBHOOK_SECRET` | optional | Bearer auth for `POST /api/make/webhook` (WhatsApp/Telegram Make scenarios) |
 | `RELIEFWEB_APPNAME` | optional | Approved ReliefWeb v2 appname; when unset feed is skipped |
+
+**CARTO key click-path (production Vigil):** sign in at [vercel.com](https://vercel.com) as the
+account that can see team **Atenax Project** (slug `atenaxproject` — this is a Vercel team,
+not a GitHub org). Open project **vigil** → **Settings → Environment Variables**
+([direct link](https://vercel.com/atenaxproject/vigil/settings/environment-variables)).
+`NEXT_PUBLIC_CARTO_API_KEY` already exists on **Production** and **Preview** (Sensitive /
+encrypted). Click that row to **update** the value after rotating a CARTO token — do not
+create a duplicate. Restrict the key in the CARTO dashboard to `vigil.youthewave.org` if
+the token supports HTTP referrer rules. Then **Redeploy** the Production deployment;
+`NEXT_PUBLIC_*` is compiled in at build time, so Save alone does not update live tiles.
+
+Local: put the same key in gitignored `.env.local` as `NEXT_PUBLIC_CARTO_API_KEY=` and restart
+`npm run dev`.
 
 > **Production Vigil:** Supabase env vars are set on project `macmlvybpxdnzfviimvl`.
 > As of 2026-07-04, apply **`011_diaspora_region.sql`** and seed **`004_diaspora_orgs.sql`**
