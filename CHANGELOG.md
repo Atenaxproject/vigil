@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-30 (prompt 87 — new zone rollout playbook)
+
+### Added
+- **`docs/build-process/87-new-zone-rollout-playbook.md`** — retroactive spec for the Florida zone activation (`deploy/florida-v2`) and a repeatable process for zone #3 onward: branch from current `main` (never an old zone branch), provision infra before config, honest-empty defaults for anything a pre-built `*.config.ts` doesn't cover, per-zone legal/content gate, and an explicit settled access-model policy (geo-suggestion banner only, never blocking, no IP persistence — anti-abuse stays separate via existing hashed-IP rate limiting).
+
 ## [Unreleased] — 2026-09-30 (branch protection + Dependabot auto-merge)
 
 ### Added
