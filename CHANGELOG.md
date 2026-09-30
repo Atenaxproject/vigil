@@ -5,6 +5,13 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-30 (branch protection + Dependabot auto-merge)
+
+### Added
+- **Branch protection on `main`** — `build` (CI) and CodeQL's `Analyze (javascript-typescript)` are now required status checks before any merge, including for repo admins. Closes the gap where nothing technically enforced the existing "never push directly to main" rule.
+- **`.github/workflows/dependabot-automerge.yml`** — auto-approves and enables auto-merge for a Dependabot PR only when every update in it is patch-level (`version-update:semver-patch`). Minor and major bumps are untouched and still wait for manual review. Relies on the new branch protection to actually gate the merge on CI + CodeQL passing.
+- **`dependabot.yml`: `patch-updates` group** — bundles all patch-level npm bumps into one weekly PR instead of one PR per package, cutting most of the Dependabot PR/notification volume. Minor/major bumps stay ungrouped.
+
 ## [Unreleased] — 2026-09-29 (assistant rate limit tightened)
 
 ### Changed

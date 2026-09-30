@@ -5,6 +5,12 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      # Patch-level bumps are bundled into one weekly PR and auto-merged by
+      # .github/workflows/dependabot-automerge.yml once CI + CodeQL pass.
+      # Minor/major bumps stay ungrouped and wait for manual review.
+      patch-updates:
+        update-types: ["patch"]
     ignore:
       # Framework majors are planned migrations, not auto-bumps.
       # Security patches still arrive via minor/patch updates on the current major.
