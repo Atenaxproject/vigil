@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-12 (subdomain router prompt)
+
+### Docs
+- **Prompt 86 — subdomain-per-zone router architecture.** Spec only, no code yet: turns `vigil.youthewave.org` root into a lightweight hub (Americas map, reuses the existing `registry.ts`/`DeploymentSuggestion` foundation from prompt 52), moves Venezuela to `venezuela.vigil.youthewave.org` with a 301 redirect window so existing links keep working, and leaves Florida/future zones on their own subdomains exactly as already planned. Explicitly not bundled with the separate Neon-migration idea. See `docs/build-process/86-subdomain-router-architecture.md`.
+
 ## [Unreleased] — 2026-09-12 (archetype-gated seismic UI)
 
 ### Fix
