@@ -261,7 +261,7 @@ export const CRISIS_CONFIG = {
    */
   aiLimits: {
     photoSearchPerHour: 3,
-    assistantPerHour: 15,
+    assistantPerHour: 5,
     nlIntakePerHour: 10,
     sonnetUnitCost: 10,
     haikuUnitCost: 1,

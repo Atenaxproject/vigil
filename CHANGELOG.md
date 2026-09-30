@@ -5,6 +5,11 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-29 (assistant rate limit tightened)
+
+### Changed
+- **`aiLimits.assistantPerHour` lowered from 15 to 5** in `crisis.config.ts` — reduces per-IP chat-assistant volume/cost exposure. The assistant already calls Haiku exclusively and is already scoped to Vigil's own data via its system prompt (no general-purpose Q&A); this only tightens the existing per-hour cap. `photoSearchPerHour` (Sonnet/Vision, missing-persons photo matching) is unchanged — it is a distinct capability, not the chat agent.
+
 ## [Unreleased] — 2026-09-12 (archetype-gated seismic UI)
 
 ### Fix
