@@ -5,6 +5,13 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-30 (generic page title, OG locale, nav subtitle)
+
+### Fix
+- **`layout.tsx`'s page `<title>`/OpenGraph/Twitter title was hardcoded `'Vigil — Respuesta a Crisis Venezuela'`** — any non-Venezuela deployment (Florida, Mexico Pacific) would have shipped this literal string. Now built from `CRISIS_CONFIG.crisis` + `CRISIS_CONFIG.country`, same pattern already used by `AppHeader.tsx`. No visible change for Venezuela.
+- **`layout.tsx`'s `openGraph.locale` was hardcoded `'es_VE'`** — now derived from `CRISIS_CONFIG.defaultLang` + `CRISIS_CONFIG.countryCode`. No visible change for Venezuela (`es_VE` either way).
+- **`Navigation.tsx`'s sidebar subtitle was hardcoded `'Venezuela 2026'`** — now built from `CRISIS_CONFIG.country` + the year of `CRISIS_CONFIG.crisisDate`. No visible change for Venezuela.
+
 ## [Unreleased] — 2026-09-30 (branch protection + Dependabot auto-merge)
 
 ### Added
