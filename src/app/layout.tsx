@@ -33,11 +33,9 @@ const inter = Inter({
   display: 'swap',
 })
 
-const SITE_TITLE = `Vigil — ${CRISIS_CONFIG.crisis} · ${CRISIS_CONFIG.country}`
-
 export const metadata: Metadata = {
   metadataBase: new URL(CRISIS_CONFIG.siteUrl),
-  title: SITE_TITLE,
+  title: CRISIS_CONFIG.siteTitle,
   description:
     'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
   applicationName: 'Vigil',
@@ -61,7 +59,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: SITE_TITLE,
+    title: CRISIS_CONFIG.siteTitle,
     description:
       'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
     url: CRISIS_CONFIG.siteUrl,
@@ -71,7 +69,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: SITE_TITLE,
+    title: CRISIS_CONFIG.siteTitle,
     description:
       'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
   },

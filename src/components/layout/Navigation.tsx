@@ -279,9 +279,7 @@ export function Navigation() {
             {collapsed ? 'V' : 'Vigil'}
           </Link>
           {!collapsed && (
-            <p className="mt-1 text-[13px] text-vigil-muted">
-              {CRISIS_CONFIG.country} {new Date(CRISIS_CONFIG.crisisDate).getFullYear()}
-            </p>
+            <p className="mt-1 text-[13px] text-vigil-muted">{CRISIS_CONFIG.navSubtitle}</p>
           )}
         </div>
 

@@ -15,9 +15,9 @@ All notable changes to Vigil are documented here. Format loosely follows
 ## [Unreleased] — 2026-09-30 (generic page title, OG locale, nav subtitle)
 
 ### Fix
-- **`layout.tsx`'s page `<title>`/OpenGraph/Twitter title was hardcoded `'Vigil — Respuesta a Crisis Venezuela'`** — any non-Venezuela deployment (Florida, Mexico Pacific) would have shipped this literal string. Now built from `CRISIS_CONFIG.crisis` + `CRISIS_CONFIG.country`, same pattern already used by `AppHeader.tsx`. No visible change for Venezuela.
+- **`layout.tsx`'s page `<title>`/OpenGraph/Twitter title was hardcoded `'Vigil — Respuesta a Crisis Venezuela'`** — any non-Venezuela deployment (Florida, Mexico Pacific) would have shipped this literal string. Moved to a new `CRISIS_CONFIG.siteTitle` field, set per deployment. VE's value is the exact original string — genuinely byte-identical output, not just "shouldn't change." (An earlier version of this fix derived the title from `crisis` + `country` instead; PR review correctly caught that this silently changed VE's live rendered title. Reverted to an explicit field instead of a derived format.)
 - **`layout.tsx`'s `openGraph.locale` was hardcoded `'es_VE'`** — now derived from `CRISIS_CONFIG.defaultLang` + `CRISIS_CONFIG.countryCode`. No visible change for Venezuela (`es_VE` either way).
-- **`Navigation.tsx`'s sidebar subtitle was hardcoded `'Venezuela 2026'`** — now built from `CRISIS_CONFIG.country` + the year of `CRISIS_CONFIG.crisisDate`. No visible change for Venezuela.
+- **`Navigation.tsx`'s sidebar subtitle was hardcoded `'Venezuela 2026'`** — moved to a new `CRISIS_CONFIG.navSubtitle` field, same reasoning as `siteTitle` above (the original derived-from-`crisisDate` version would have broken for any prebuilt deployment config that omits `crisisDate`, which Florida's does).
 
 ## [Unreleased] — 2026-09-30 (branch protection + Dependabot auto-merge)
 

@@ -8,6 +8,12 @@ export const CRISIS_CONFIG = {
   countryCode: 'VE',
   crisis: '2026 Earthquakes',
   crisisDate: '2026-06-24',
+  // Explicit display strings, not derived from crisis/country/crisisDate —
+  // a prebuilt deployment config can omit crisisDate (Florida's does), and
+  // deriving risked silently changing VE's live rendered text (caught in
+  // PR #84 review). Every deployment sets these two directly.
+  siteTitle: 'Vigil — Respuesta a Crisis Venezuela',
+  navSubtitle: 'Venezuela 2026',
   siteUrl: 'https://vigil.youthewave.org',
   activeDeployment: true,
   defaultLang: 'es' as const,
