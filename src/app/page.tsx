@@ -8,6 +8,7 @@ import { RegionScopeTabs } from '@/components/map/RegionScopeTabs'
 import { getMapMarkers, getMissingPersonsForMap, getPublicPropertyAssessments } from '@/lib/data'
 import { getLiveAftershockTotal, getMergedSeismicFetch } from '@/lib/seismic'
 import { buildBasemapUrl, readCartoApiKey } from '@/lib/basemap'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { getTranslations } from 'next-intl/server'
 
 export const dynamic = 'force-dynamic'
@@ -38,6 +39,7 @@ export default async function HomePage() {
           propertyAssessments={propertyAssessments}
           missingPersons={missingPersons}
           tileUrl={buildBasemapUrl(readCartoApiKey())}
+          evacuationZonesUrl={CRISIS_CONFIG.evacuationZonesUrl}
         />
         <SeismicEventList events={events} totalCount={totals.ok ? totals.total : undefined} />
       </div>

@@ -5,6 +5,19 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-30 (Florida deployment activation — deploy/florida-v2 branch)
+
+### Added
+- **`crisis.config.ts` swapped to Florida values** on this standing deployment branch (never merged to `main` — same model as the retired `deploy/florida` branch): hurricane/flood archetype, Florida map bounds, NWS/NHC/USGS-water/GDACS feeds, evacuation-zones link-out (`floridadisaster.org/knowyourzone`), English + Spanish only (Haitian Creole deferred pending native-speaker review per `TODO-BEFORE-LAUNCH.md`).
+- `emergencyContacts`, `psychosocialLines`, `directoryStatePriority`, `orgDisplayPriority` reset to Florida-honest values (a single verified 911 entry; everything else empty rather than fabricated — no unverified county-specific numbers or unvetted partner orgs invented).
+- `legal.governmentDataStance` / `legal.dataRightsBasis` set to **draft** Florida-appropriate text (county/state EM offices as legitimate partners, unlike VE's blanket exclusion) — explicitly marked as pending Orlando's real legal review, not a finished policy.
+- `diasporaSupportConfig.enabled` set `false` — that layer is VE-specific (US support for VE's crisis), not applicable to Florida itself.
+- Added `CRISIS_CONFIG.evacuationZonesUrl` (optional, deployment-specific) and wired it through `page.tsx` → `HomeMapSection` → `CrisisMap` → `MapLayers` (prop already existed, was just never fed).
+
+### Known state
+- Two Vitest geo-bounds tests (`resolveGeoForRecord` — Venezuela bounds, diaspora hub) fail on this branch by design: they assert VE-specific coordinates against whichever config is active. Vercel's build step doesn't run `npm test`, so this doesn't block deployment. Not fixed here — same category as the retired `deploy/florida` branch's approach of not maintaining VE-specific tests on a Florida-active branch.
+- `registry.ts`'s `florida` entry intentionally left `status: 'prebuilt'`, `url: null` — this deployment is reachable by direct link only, not surfaced by the live VE site's geo-suggestion banner, until the real launch gates in `TODO-BEFORE-LAUNCH.md` clear.
+
 ## [Unreleased] — 2026-09-30 (deployment-specific legal text)
 
 ### Fix
