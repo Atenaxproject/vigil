@@ -244,6 +244,17 @@ export const CRISIS_CONFIG = {
     tosVersion: '1.2.0',
     governingLaw: 'Florida, United States',
     effectiveDate: '2026-07-27',
+    // Deployment-specific: the VE stance is a blanket government-agency
+    // exclusion (documented human-rights rationale, see partnerLinks
+    // comment). That stance does NOT copy to other deployments where local
+    // government agencies (e.g. county EM offices) are legitimate partners —
+    // see src/config/deployments/TODO-BEFORE-LAUNCH.md. Each deployment sets
+    // its own reasoned stance here.
+    governmentDataStance:
+      'Vigil does not share user data with the Venezuelan government or any government agency, except as required by a valid Florida court order.',
+    // Same idea for the habeas data / data-rights citation in terms/page.tsx —
+    // a VE-specific constitutional citation does not apply elsewhere.
+    dataRightsBasis: 'the right of habeas data (Article 28 of the Venezuelan Constitution)',
   },
 
   /**
