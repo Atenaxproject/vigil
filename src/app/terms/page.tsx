@@ -80,17 +80,18 @@ export default function TermsPage() {
               <Link href="/proteccion-de-menores" className="text-blue-600 underline">
                 Minors protection
               </Link>
-              . Anyone may request correction or deletion of a record under the right of habeas
-              data (Article 28 of the Venezuelan Constitution).
+              . Anyone may request correction or deletion of a record under{' '}
+              {CRISIS_CONFIG.legal.dataRightsBasis}.
             </li>
           </ul>
         </div>
 
         <div className="p-4 bg-blue-50 border border-blue-200 rounded">
-          <p className="font-medium text-slate-800 mb-2">Full terms available in Spanish</p>
+          <p className="font-medium text-slate-800 mb-2">Also available in Spanish</p>
           <p className="text-slate-700 mb-4">
-            The authoritative terms of use are published in Spanish, the primary language of this
-            deployment.
+            {CRISIS_CONFIG.defaultLang === 'es'
+              ? 'The authoritative terms of use are published in Spanish, the primary language of this deployment.'
+              : 'A Spanish translation of these terms is also available.'}
           </p>
           <Link
             href="/terminos"

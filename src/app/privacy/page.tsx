@@ -27,9 +27,7 @@ export default function PrivacyPage() {
             Vigil&apos;s internal contact request system.
           </li>
           <li>
-            <strong>No government data sharing.</strong> Vigil does not share user data with the
-            Venezuelan government or any government agency, except as required by a valid Florida court
-            order.
+            <strong>No government data sharing.</strong> {CRISIS_CONFIG.legal.governmentDataStance}
           </li>
           <li>
             IP addresses are stored as hashed values only. Photos and records follow a defined retention
@@ -45,10 +43,11 @@ export default function PrivacyPage() {
         </ul>
 
         <div className="p-4 bg-blue-50 border border-blue-200 rounded">
-          <p className="font-medium text-slate-800 mb-2">Full policy available in Spanish</p>
+          <p className="font-medium text-slate-800 mb-2">Also available in Spanish</p>
           <p className="text-slate-700 mb-4">
-            The authoritative privacy policy is published in Spanish, the primary language of this
-            deployment.
+            {CRISIS_CONFIG.defaultLang === 'es'
+              ? 'The authoritative privacy policy is published in Spanish, the primary language of this deployment.'
+              : 'A Spanish translation of this policy is also available.'}
           </p>
           <Link
             href="/privacidad"
