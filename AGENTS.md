@@ -12,7 +12,7 @@ Vigil is live in production, serving the Venezuela 2026 earthquake response at [
 
 ## 2. Operating model
 
-- **Spec before code, no exceptions** (BMAD-Nova). Work is specified in numbered prompt files in `docs/build-process/`, executed by an agent, then reviewed by a human.
+- **Spec before code, no exceptions** (Bblueprint Method). Work is specified in numbered prompt files in `docs/build-process/`, executed by an agent, then reviewed by a human.
 - **No autonomous mode.** Agents do not self-authorize scope. If a task requires work outside the prompt that specified it, stop and flag rather than proceeding.
 - No `--dangerously-skip-permissions` for work on this repository.
 - Every substantive change is branched, PR'd, and reviewed. A restore tag is created before work begins.
