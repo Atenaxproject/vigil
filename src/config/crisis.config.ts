@@ -8,6 +8,12 @@ export const CRISIS_CONFIG = {
   countryCode: 'VE',
   crisis: '2026 Earthquakes',
   crisisDate: '2026-06-24',
+  // Explicit display strings, not derived from crisis/country/crisisDate —
+  // a prebuilt deployment config can omit crisisDate (Florida's does), and
+  // deriving risked silently changing VE's live rendered text (caught in
+  // PR #84 review). Every deployment sets these two directly.
+  siteTitle: 'Vigil — Respuesta a Crisis Venezuela',
+  navSubtitle: 'Venezuela 2026',
   siteUrl: 'https://vigil.youthewave.org',
   activeDeployment: true,
   defaultLang: 'es' as const,
@@ -244,6 +250,17 @@ export const CRISIS_CONFIG = {
     tosVersion: '1.2.0',
     governingLaw: 'Florida, United States',
     effectiveDate: '2026-07-27',
+    // Deployment-specific: the VE stance is a blanket government-agency
+    // exclusion (documented human-rights rationale, see partnerLinks
+    // comment). That stance does NOT copy to other deployments where local
+    // government agencies (e.g. county EM offices) are legitimate partners —
+    // see src/config/deployments/TODO-BEFORE-LAUNCH.md. Each deployment sets
+    // its own reasoned stance here.
+    governmentDataStance:
+      'Vigil does not share user data with the Venezuelan government or any government agency, except as required by a valid Florida court order.',
+    // Same idea for the habeas data / data-rights citation in terms/page.tsx —
+    // a VE-specific constitutional citation does not apply elsewhere.
+    dataRightsBasis: 'the right of habeas data (Article 28 of the Venezuelan Constitution)',
   },
 
   /**
