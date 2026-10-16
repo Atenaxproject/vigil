@@ -5,6 +5,20 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — 2026-09-30 (deployment-specific legal text)
+
+### Fix
+- **`privacy/page.tsx`'s government-data-sharing clause was hardcoded to the Venezuela-specific stance** ("does not share... with the Venezuelan government"). Non-VE deployments (Florida, where county/state EM offices are legitimate partners per `TODO-BEFORE-LAUNCH.md`) need their own stance. Moved to `CRISIS_CONFIG.legal.governmentDataStance`. VE keeps its existing text verbatim; other deployments set their own — still requires human legal review before a deployment launches, per the TODO doc.
+- **`terms/page.tsx`'s habeas data clause cited "Article 28 of the Venezuelan Constitution"** — wrong/nonsensical for a non-VE deployment. Moved to `CRISIS_CONFIG.legal.dataRightsBasis`.
+- **Both pages claimed Spanish is "the primary language of this deployment"** unconditionally — wrong for any deployment where `defaultLang` isn't `'es'` (Florida's is `'en'`). Now conditional on `CRISIS_CONFIG.defaultLang`.
+
+## [Unreleased] — 2026-09-30 (generic page title, OG locale, nav subtitle)
+
+### Fix
+- **`layout.tsx`'s page `<title>`/OpenGraph/Twitter title was hardcoded `'Vigil — Respuesta a Crisis Venezuela'`** — any non-Venezuela deployment (Florida, Mexico Pacific) would have shipped this literal string. Moved to a new `CRISIS_CONFIG.siteTitle` field, set per deployment. VE's value is the exact original string — genuinely byte-identical output, not just "shouldn't change." (An earlier version of this fix derived the title from `crisis` + `country` instead; PR review correctly caught that this silently changed VE's live rendered title. Reverted to an explicit field instead of a derived format.)
+- **`layout.tsx`'s `openGraph.locale` was hardcoded `'es_VE'`** — now derived from `CRISIS_CONFIG.defaultLang` + `CRISIS_CONFIG.countryCode`. No visible change for Venezuela (`es_VE` either way).
+- **`Navigation.tsx`'s sidebar subtitle was hardcoded `'Venezuela 2026'`** — moved to a new `CRISIS_CONFIG.navSubtitle` field, same reasoning as `siteTitle` above (the original derived-from-`crisisDate` version would have broken for any prebuilt deployment config that omits `crisisDate`, which Florida's does).
+
 ## [Unreleased] — 2026-09-30 (branch protection + Dependabot auto-merge)
 
 ### Added

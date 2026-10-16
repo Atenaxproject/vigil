@@ -39,6 +39,7 @@ import {
 import { PwaInstallButton } from '@/components/pwa/PwaInstallButton'
 import { useViewModeContext } from '@/components/onboarding/ViewModeProvider'
 import { isRouteVisibleForMode, VIEW_MODES, type ViewModeId } from '@/config/viewMode.config'
+import { CRISIS_CONFIG } from '@/config/crisis.config'
 import { cn } from '@/lib/utils'
 
 type NavLabelKey =
@@ -277,7 +278,9 @@ export function Navigation() {
           >
             {collapsed ? 'V' : 'Vigil'}
           </Link>
-          {!collapsed && <p className="mt-1 text-[13px] text-vigil-muted">Venezuela 2026</p>}
+          {!collapsed && (
+            <p className="mt-1 text-[13px] text-vigil-muted">{CRISIS_CONFIG.navSubtitle}</p>
+          )}
         </div>
 
         <nav
