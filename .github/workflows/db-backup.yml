@@ -61,7 +61,7 @@ jobs:
           shred -u "vigil-$(date +%F).dump"
 
       - name: Checkout backup repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: Atenaxproject/vigil-backups
           token: ${{ secrets.BACKUP_REPO_TOKEN }}
