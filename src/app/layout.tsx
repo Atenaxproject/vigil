@@ -35,7 +35,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(CRISIS_CONFIG.siteUrl),
-  title: 'Vigil — Respuesta a Crisis Venezuela',
+  title: CRISIS_CONFIG.siteTitle,
   description:
     'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
   applicationName: 'Vigil',
@@ -59,17 +59,17 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'Vigil — Respuesta a Crisis Venezuela',
+    title: CRISIS_CONFIG.siteTitle,
     description:
       'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
     url: CRISIS_CONFIG.siteUrl,
     siteName: 'Vigil',
-    locale: 'es_VE',
+    locale: `${CRISIS_CONFIG.defaultLang}_${CRISIS_CONFIG.countryCode}`,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vigil — Respuesta a Crisis Venezuela',
+    title: CRISIS_CONFIG.siteTitle,
     description:
       'Plataforma humanitaria unificada. Personas desaparecidas, mapa de crisis, voluntarios y información verificada.',
   },
