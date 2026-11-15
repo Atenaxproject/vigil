@@ -1,24 +1,12 @@
 {
   "crons": [
     {
-      "path": "/api/cron/dedup",
-      "schedule": "0 8 * * *"
-    },
-    {
       "path": "/api/cron/coverage-decay",
       "schedule": "0 7 * * *"
     },
     {
       "path": "/api/cron/retention",
       "schedule": "0 2 * * *"
-    },
-    {
-      "path": "/api/admin/sync-dtv-centers",
-      "schedule": "0 6 * * *"
-    },
-    {
-      "path": "/api/admin/sync-cav-centers",
-      "schedule": "0 6 * * 1"
     },
     {
       "path": "/api/cron/hazards?shard=eq",
