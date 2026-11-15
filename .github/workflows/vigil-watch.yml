@@ -1,4 +1,5 @@
-# Vigil Watch + hazard shard scheduler.
+# Manual Vigil Watch + hazard shard ingestion (maintained demo).
+# Automatic polling is disabled; see docs/operations/maintained-demo.md.
 # Polling logic lives in /api/watch/scan and /api/cron/hazards (in-repo, testable).
 # Requires CRON_SECRET repo secret matching the Vercel env var of the same name.
 #
@@ -9,8 +10,6 @@
 name: vigil-watch
 
 on:
-  schedule:
-    - cron: '*/30 * * * *' # every 30 minutes
   workflow_dispatch: {}
 
 permissions:

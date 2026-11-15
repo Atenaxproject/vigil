@@ -5,6 +5,12 @@ All notable changes to Vigil are documented here. Format loosely follows
 [Conventional Commits](https://www.conventionalcommits.org/) style entries.
 
 
+## [Unreleased] — maintained demo (prompt 88)
+
+- Make watch/hazard ingestion manual-only and remove Vercel AI deduplication and partner-center sync schedules. Retain retention, coverage decay, backups, and maintenance/security CI.
+- Restrict synthetic uptime to public-page GETs, without a cron secret or retention invocation.
+- Document manual operation, stale-data limitations, and schedule reactivation. No provider or live-data changes are included.
+
 ## [Unreleased] — 2026-09-30 (branch protection + Dependabot auto-merge)
 
 ### Added
