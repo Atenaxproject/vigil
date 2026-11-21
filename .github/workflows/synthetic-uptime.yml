@@ -1,5 +1,5 @@
 # Public-route synthetic uptime — no secrets required for page probes.
-# Optional CRON_SECRET repository secret enables authenticated cron check.
+# Public pages only; maintenance endpoints must never be used as probes.
 name: synthetic-uptime
 
 on:
@@ -18,5 +18,4 @@ jobs:
       - name: Probe public routes
         env:
           BASE_URL: https://vigil.youthewave.org
-          CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: node scripts/synthetic-uptime.mjs

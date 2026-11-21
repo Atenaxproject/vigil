@@ -10,8 +10,11 @@
 
 An open-source humanitarian crisis PWA — federated missing-persons search, crisis mapping, resource exchange, and volunteer coordination in one calm, Spanish-first interface. The code is open under Apache-2.0; the Vigil™ and YouTheWave™ names and brand are protected trademarks (see TRADEMARK.md).
 
-**Live:** Venezuela 2026 Earthquake Response · [vigil.youthewave.org](https://vigil.youthewave.org) · June 24, 2026 onward  
+**Demo:** Venezuela configuration · [vigil.youthewave.org](https://vigil.youthewave.org)
+
 **Operator brand:** [YouTheWave](https://youthewave.org) ([youthewave.org](https://youthewave.org) is live) · Formal Launching with Improvements phase **closed** (2026-07-26)
+
+**Maintained demo configuration:** this branch disables scheduled watch/hazard ingestion, AI deduplication, and partner-center synchronization. Stored feed data may become stale; request-driven sources can still refresh. The capability descriptions below do not guarantee current emergency coverage. See [operation and reactivation](docs/operations/maintained-demo.md). These changes take effect only after review, merge, and deployment as applicable.
 
 **What Vigil is not:** an emergency dispatcher, a donations processor, a government intake tool, or a biometric identification system.
 
@@ -76,7 +79,7 @@ One config file change redeploys the whole platform for **any country, any disas
 - PFIF 1.4 compatible — interoperable with Google Person Finder
 - Real-time updates across all open browser tabs (Supabase Realtime)
 
-### Crisis map — live data from multiple verified sources
+### Crisis map — multiple verified sources
 
 - USGS aftershock data (real-time, 5-min refresh, magnitude 2.0+, **source-labeled USGS/FUNVISIS** when FUNVISIS feed available)
 - GDACS disaster alerts (United Nations / European Commission)
@@ -108,7 +111,7 @@ Production captures from [vigil.youthewave.org](https://vigil.youthewave.org). R
 
 ---
 
-## What's live now
+## Available capabilities
 
 Verified against source and production as of **2026-07-27** (after next-round ship [#32](https://github.com/Atenaxproject/vigil/pull/32)). Optional integrations degrade when credentials are unset — they never crash the app.
 
@@ -187,7 +190,7 @@ See the [Privacy Policy](https://vigil.youthewave.org/privacidad) and [Terms](ht
 
 ## Project Status — July 2026
 
-**Phase:** Formal Launching with Improvements is **closed** (tag `phase/formal-launch-improvements-20260726`). Next-round app improvements **shipped** ([#32](https://github.com/Atenaxproject/vigil/pull/32); restore tag `restore/pre-next-round-improvements-20260727`). Venezuela production is live and in stable-ops care. Florida and México configs exist as **prebuilt / held** — activation waits on named local admins and `TODO-BEFORE-LAUNCH` gates (not an open feature sprint).
+**Phase:** Formal Launching with Improvements is **closed** (tag `phase/formal-launch-improvements-20260726`). Next-round app improvements **shipped** ([#32](https://github.com/Atenaxproject/vigil/pull/32); restore tag `restore/pre-next-round-improvements-20260727`). The original Venezuela configuration is being maintained as a demo; see the operating note above. Florida and México configs exist as **prebuilt / held** — activation waits on named local admins and `TODO-BEFORE-LAUNCH` gates (not an open feature sprint).
 
 ### ✅ Live now (Venezuela)
 
